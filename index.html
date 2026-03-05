@@ -23,7 +23,7 @@
 
         .mono-text { font-family: 'Space Mono', monospace; }
 
-        /* CRT Scanline Effect */
+        /* CRT Scanline Effect (Digital Art) */
         body::before {
             content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
@@ -63,6 +63,7 @@
         }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
+        /* Dynamic Video backgrounds */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(50%) contrast(120%); }
@@ -87,6 +88,7 @@
         .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--off-white); max-width: 800px; margin-bottom: 20px; }
         
+        /* Member Portal & Dashboard */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
         .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
@@ -101,12 +103,14 @@
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
 
+        /* Sovereign Terminal */
         .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
         .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; direction: ltr; text-align: left;}
         .term-input-line { display: flex; align-items: center; direction: ltr;}
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
+        /* AI ORACLE CHATBOT (Arabic Interface) */
         .ai-btn {
             position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
             background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
@@ -227,7 +231,7 @@ Connection Secure.
                             </div>
                             <div class="term-input-line">
                                 <span class="term-prompt">user@fusam:~#</span>
-                                <input type="text" id="termInput" class="term-input" autocomplete="off" onkeypress="handleTerminal(event)">
+                                <input type="text" id="termInput" class="term-input" autocomplete="off" onkeydown="handleTerminal(event)">
                             </div>
                         </div>
                     </div>
@@ -242,7 +246,7 @@ Connection Secure.
         <div class="ai-header mono-text">أوراكل [مصفوفة عميقة]</div>
         <div class="ai-body" id="chatBody"></div>
         <div class="ai-input-area">
-            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="استفسر عن النظام..." onkeypress="handleChatEnter(event)">
+            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="استفسر عن النظام..." onkeydown="handleChatEnter(event)">
             <button class="ai-send mono-text" onclick="sendChatMessage()">[أدخل]</button>
         </div>
     </div>
@@ -258,7 +262,7 @@ Connection Secure.
             if(breakVideo) { breakVideo.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo.load(); }
         });
 
-        // --- Database & AI Connection ---
+        // --- Database & AI Connection (Updated with your Secret URL) ---
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyzUzoWeVEnerInb-9P6-mJC8fo2RqS6M4x3H4xs_hPWzK4C-XSstoKeS6roYULv1B/exec';
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
         let currentLang = 'ar';
@@ -294,7 +298,6 @@ Connection Secure.
             });
         }
 
-        // إرسال البيانات للحفظ (POST)
         function sendToGoogleSheet(type, message, formElement, onSuccess) {
             const params = new URLSearchParams();
             params.append('Name', currentUser.Name); params.append('Email', currentUser.Email);
@@ -312,9 +315,8 @@ Connection Secure.
             if(serviceId === 'terminal') document.getElementById('termInput').focus();
         }
 
-        // --- GEMINI AI PROXY (تحديث تخطي الحظر بالـ GET) ---
+        // --- GEMINI AI PROXY (GET Method for bypassing CORS) ---
         async function queryDeepMatrix(text, isTerminal = false) {
-            // نستخدم طريقة (GET) الآمنة التي تسمح بقراءة الرد من سيرفرات جوجل
             const url = GOOGLE_SCRIPT_URL + "?Type=AI_Query&Message=" + encodeURIComponent(text);
 
             try {
@@ -331,7 +333,7 @@ Connection Secure.
             }
         }
 
-        // --- Sovereign Terminal ---
+        // --- Sovereign Terminal Logic ---
         const termOutput = document.getElementById('termOutput');
         const termInput = document.getElementById('termInput');
         
@@ -348,7 +350,7 @@ Connection Secure.
                 } else if(cmd.toLowerCase() === '/clear') {
                     termOutput.innerHTML = '';
                 } else {
-                    printTerm(`[Connecting to Deep Matrix...]`);
+                    printTerm(`[جاري فك تشفير البيانات...]`);
                     queryDeepMatrix(cmd, true); 
                 }
             }
@@ -359,7 +361,7 @@ Connection Secure.
             termOutput.scrollTop = termOutput.scrollHeight;
         }
 
-        // --- AI ORACLE CHATBOT ---
+        // --- AI ORACLE CHATBOT Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
