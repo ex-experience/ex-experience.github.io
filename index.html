@@ -92,7 +92,7 @@
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #bbbbbb; max-width: 800px; margin-bottom: 20px; }
         .highlight { color: var(--stark-white); font-weight: bold; }
 
-        /* Custom Lists & Grids for Brand Content */
+        /* Custom Lists & Grids */
         .cyber-list { list-style: none; padding: 0; margin-bottom: 30px; }
         .cyber-list li { position: relative; padding-left: 20px; margin-bottom: 15px; color: #bbbbbb; font-size: 1.05rem;}
         .cyber-list li::before { content: '>'; position: absolute; left: 0; color: var(--stark-white); font-family: 'Space Mono', monospace; }
@@ -126,6 +126,15 @@
         .term-input-line { display: flex; align-items: center; direction: ltr;}
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
+
+        /* Social Media Links */
+        .social-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 30px; }
+        .social-btn {
+            background: transparent; border: 1px solid #333; color: var(--cyber-steel);
+            padding: 10px 20px; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        .social-btn:hover { background: var(--stark-white); color: var(--obsidian-black); border-color: var(--stark-white); }
 
         /* Footer */
         .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
@@ -424,7 +433,7 @@
         </div>
     </section>
 
-    <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
+    <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px; padding-bottom: 20px;">
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">بوابة السيادة</div>
             <div class="section-title mono-text en-only">SOVEREIGN PORTAL</div>
@@ -479,6 +488,20 @@ Connection Secure.
         </div>
     </section>
 
+    <section class="content-section" style="padding: 40px 0 60px 0; background-color: #020202;">
+        <div class="container fade-in" style="text-align: center;">
+            <div class="section-title mono-text ar-only">نقاط الاتصال</div>
+            <div class="section-title mono-text en-only">CONNECTION POINTS</div>
+            
+            <div class="social-container">
+                <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="social-btn mono-text">[ INSTAGRAM ]</a>
+                <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94RVLLttgpw" target="_blank" class="social-btn mono-text">[ TIKTOK ]</a>
+                <a href="https://snapchat.com/t/gW8Az5Ym" target="_blank" class="social-btn mono-text">[ SNAPCHAT: FOUNDER ]</a>
+                <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" target="_blank" class="social-btn mono-text" style="border-color: #25D366; color: #25D366;">[ WHATSAPP ]</a>
+            </div>
+        </div>
+    </section>
+
     <div class="container fade-in" style="text-align: center; padding: 60px 0; border-top: 1px solid #111;">
         <h3 class="mono-text" style="letter-spacing: 3px; margin-bottom: 10px;">フサム | experience™️</h3>
         <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
@@ -510,7 +533,6 @@ Connection Secure.
 
     <script>
         // --- Dynamic Video Injection ---
-        // سيتم تشغيل الفيديوهات عشوائياً في الأماكن الثلاثة
         document.addEventListener("DOMContentLoaded", () => {
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
             const shuffled = videos.sort(() => 0.5 - Math.random());
