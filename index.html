@@ -1,376 +1,472 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EX / 2025 - Engineering Human Experiences</title>
+    <title>フサム | experience™️ - Engineering Human Experiences</title>
     <style>
-        /* الأساسيات والهوية البصرية */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        
         :root {
-            --bg-color: #050505;
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --accent: #333333;
-            --font-mono: 'Courier New', Courier, monospace;
+            --obsidian-black: #020202;
+            --cyber-steel: #8b939c;
+            --stark-white: #ffffff;
+            --terminal-green: #0f0;
+            --panel-bg: #050607;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-mono);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            background-color: var(--obsidian-black); color: var(--stark-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8; margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth;
         }
 
-        /* شريط التنقل العلوي */
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 40px;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            box-sizing: border-box;
-            z-index: 100;
-            background: rgba(5, 5, 5, 0.9);
+        .mono-text { font-family: 'Space Mono', monospace; }
+
+        /* CRT Scanline Effect (Digital Art) */
+        body::before {
+            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none;
         }
 
-        /* الأقسام (Sections) - التمرير الطويل */
-        section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10vw;
-            border-bottom: 1px solid var(--accent);
+        /* Glitch Effect */
+        .glitch { position: relative; display: inline-block; }
+        .glitch:hover::before {
+            content: attr(data-text); position: absolute; left: -2px; text-shadow: 2px 0 red; top: 0;
+            color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse;
         }
+        .glitch:hover::after {
+            content: attr(data-text); position: absolute; left: 2px; text-shadow: -2px 0 blue; top: 0;
+            color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse;
+        }
+        @keyframes noise { 0% { clip-path: inset(10% 0 10% 0); } 100% { clip-path: inset(80% 0 5% 0); } }
 
-        /* القسم الأول (Hero) */
-        .hero {
-            align-items: center;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: normal;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-        }
-        .hero h2 {
-            font-size: 1rem;
-            color: var(--text-dim);
-            letter-spacing: 4px;
-            font-weight: normal;
-            margin-bottom: 40px;
-        }
+        /* Language System */
+        body.lang-ar { direction: rtl; text-align: right; }
+        body.lang-en { direction: ltr; text-align: left; }
+        .ar-only { display: block; } .en-only { display: none; }
+        body.lang-en .ar-only { display: none; } body.lang-en .en-only { display: block; }
 
-        .btn {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-dim);
-            padding: 15px 30px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .btn:hover {
-            border-color: var(--text-main);
-            background: rgba(255,255,255,0.05);
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
-        /* تنسيق النصوص داخل الأقسام */
-        .section-number {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; pointer-events: none;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
         }
-        .section-title {
-            font-size: 2rem;
-            font-weight: normal;
-            margin-bottom: 30px;
-            letter-spacing: 3px;
+        .top-nav > * { pointer-events: auto; }
+        .est-text { font-size: 0.75rem; color: var(--cyber-steel); letter-spacing: 2px; font-weight: bold;}
+        .control-btn {
+            background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel);
+            padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s;
         }
-        .section-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #bbbbbb;
-            max-width: 800px;
-        }
+        .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        /* البوابة (SOVEREIGN PORTAL) */
-        .portal-form {
-            border: 1px solid var(--accent);
-            padding: 40px;
-            max-width: 400px;
-            margin-top: 30px;
-        }
-        .portal-input {
-            width: 100%;
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--text-main);
-            padding: 15px;
-            margin-bottom: 20px;
-            font-family: var(--font-mono);
-            box-sizing: border-box;
-        }
-        .portal-input:focus {
-            outline: none;
-            border-color: var(--text-dim);
-        }
+        /* Dynamic Video backgrounds */
+        .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
+        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(50%) contrast(120%); }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)); z-index: 1; pointer-events: none; }
 
-        /* زر الذكاء الاصطناعي العائم */
+        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
+        .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--stark-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; }
+        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 40px; letter-spacing: 4px; text-transform: uppercase; }
+
+        .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
+        .geometric-bg {
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            background-size: cover; background-position: center; opacity: 0.2; z-index: 0;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); filter: grayscale(80%) contrast(120%);
+        }
+        body.lang-en .geometric-bg { right: auto; left: 0; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease; position: relative; z-index: 2;}
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
+        .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
+        .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--stark-white); max-width: 800px; margin-bottom: 20px; color: #bbbbbb; }
+        
+        /* Member Portal & Dashboard */
+        .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
+        .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
+        .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
+        .cyber-input:focus { outline: none; border-color: var(--cyber-steel); background: rgba(255,255,255,0.05); }
+        .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+        .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
+
+        #dashboard-view { display: none; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); }
+        .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
+        .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
+        .service-form.active { display: block; animation: fadeIn 0.5s; }
+
+        /* Sovereign Terminal */
+        .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
+        .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; direction: ltr; text-align: left;}
+        .term-input-line { display: flex; align-items: center; direction: ltr;}
+        .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
+        .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
+
+        /* AI ORACLE CHATBOT */
         .ai-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--text-main);
-            color: var(--bg-color);
-            border: none;
-            padding: 15px 20px;
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
-            transition: transform 0.2s;
+            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
+            background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
+            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem;
         }
-        .ai-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* نافذة محادثة أوراكل EX */
-        .chat-modal {
-            position: fixed;
-            bottom: 90px;
-            right: 30px;
-            width: 380px;
-            height: 500px;
-            background: rgba(10, 10, 10, 0.95);
-            border: 1px solid var(--accent);
-            display: none; /* مخفي افتراضياً */
-            flex-direction: column;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+        body.lang-en .ai-btn { left: auto; right: 30px; }
+        .ai-window {
+            position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98);
+            border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column;
+            transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        .chat-header {
-            padding: 15px;
-            border-bottom: 1px solid var(--accent);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+        body.lang-en .ai-window { left: auto; right: 30px; }
+        .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .ai-header { 
+            background: #fff; color: #000; padding: 15px; font-size: 0.9rem; letter-spacing: 2px; font-weight: bold;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .close-btn {
-            background: none;
-            border: none;
-            color: var(--text-dim);
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        .close-btn:hover { color: var(--text-main); }
-        
-        .chat-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .message {
-            max-width: 85%;
-            padding: 10px 15px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        .msg-oracle {
-            align-self: flex-start;
-            color: #ccc;
-            border-left: 2px solid var(--text-main);
-            background: rgba(255,255,255,0.02);
-        }
-        .msg-user {
-            align-self: flex-end;
-            color: var(--text-main);
-            border-right: 2px solid var(--text-dim);
-            text-align: right;
-        }
+        .ai-close { background: none; border: none; color: #000; font-size: 1.2rem; cursor: pointer; }
+        .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; }
+        .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
+        body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
+        .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
+        .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
+        .ai-send { background: #fff; color: #000; border: none; cursor: pointer; padding: 0 15px; font-weight: bold;}
+        .typing-indicator { font-style: italic; color: var(--cyber-steel); font-size: 0.8rem; }
 
-        .chat-footer {
-            padding: 15px;
-            border-top: 1px solid var(--accent);
-            display: flex;
-        }
-        .chat-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            outline: none;
-        }
-        .chat-send {
-            background: transparent;
-            border: none;
-            color: var(--text-dim);
-            cursor: pointer;
-            font-family: var(--font-mono);
-        }
-        .chat-send:hover { color: var(--text-main); }
-
-        /* لإنشاء تأثير الكتابة (Loading) */
-        .typing { font-style: italic; color: var(--text-dim); font-size: 0.8rem; }
-
-        /* استجابة للشاشات الصغيرة */
-        @media (max-width: 768px) {
-            section { padding: 0 20px; }
-            .chat-modal { width: 90vw; right: 5vw; bottom: 80px; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body>
+<body class="lang-ar">
 
-    <header>
-        <div>EST EX/2025. SA</div>
-        <div>EN / عربي</div>
-    </header>
+    <div class="top-nav">
+        <div class="est-text mono-text">EST EX/2025. SA</div>
+        <button class="control-btn mono-text" onclick="toggleLanguage()">EN / عربي</button>
+    </div>
 
-    <section class="hero">
-        <h1>フサム | experience™</h1>
-        <h2>ENGINEERING HUMAN EXPERIENCES</h2>
-        <br><br>
-        <a href="#codex" class="btn">INITIALIZE CONNECTION</a>
-    </section>
-
-    <section id="codex">
-        <div class="section-number">01. THE GREAT CODEX</div>
-        <h2 class="section-title">Law of Sensory Sovereignty.</h2>
-        <p class="section-text">
-            There is no objective reality, only sensory inputs. He who controls the stimuli controls perception. 
-            We engineer the void into a sustainable psychological impact.
-            <br><br>
-            Experience is the ultimate currency of this universe. <br>
-            <strong>Proof of Feeling.</strong>
-        </p>
-    </section>
-
-    <section id="architecture">
-        <div class="section-number">02. ARCHITECTURE OF SENSES</div>
-        <h2 class="section-title">The Methodology.</h2>
-        <p class="section-text">
-            We do not design mere aesthetics; we architect human emotion. 
-            By merging spatial awareness, digital realms, and psychological triggers, we construct environments that command attention and alter states of consciousness.
-            <br><br>
-            Every project is a precise calculation of light, shadow, frequency, and form.
-        </p>
-    </section>
-
-    <section id="portal">
-        <div class="section-number">03. TERMINAL</div>
-        <h2 class="section-title">SOVEREIGN PORTAL</h2>
-        <div class="portal-form">
-            <input type="text" class="portal-input" placeholder="ID / Name">
-            <input type="email" class="portal-input" placeholder="Email">
-            <button class="btn" style="width: 100%; border-color: var(--text-main);">CONNECT TO MATRIX</button>
+    <header class="hero">
+        <div class="video-wrapper">
+            <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
         </div>
-    </section>
+        <div class="overlay"></div>
 
-    <button class="ai-btn" onclick="toggleChat()">[ AI ]</button>
-
-    <div class="chat-modal" id="chatModal">
-        <div class="chat-header">
-            <span>ORACLE EX :: INITIALIZED</span>
-            <button class="close-btn" onclick="toggleChat()">×</button>
-        </div>
-        <div class="chat-body" id="chatBody">
-            <div class="message msg-oracle">
-                System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.
+        <div class="hero-content">
+            <div class="interactive-logo mono-text glitch" data-text="フサム | experience™️">フサム | experience™️</div>
+            <div class="interactive-slogan mono-text">Engineering human experiences</div>
+            <div style="margin-top: 40px;">
+                <a href="#portal" class="control-btn mono-text" style="padding: 12px 30px; text-decoration: none;">Initialize Connection</a>
             </div>
         </div>
-        <div class="chat-footer">
-            <input type="text" class="chat-input" id="userInput" placeholder="Enter query..." onkeypress="handleEnter(event)">
-            <button class="chat-send" onclick="sendMessage()">[SEND]</button>
+    </header>
+
+    <section class="content-section">
+        <div class="geometric-bg" style="background-image: url('bg1.jpg');"></div>
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">01. الكوديكس الأعظم</div>
+            <div class="section-title mono-text en-only">01. The Great Codex</div>
+            <h2 class="main-heading ar-only glitch" data-text="قانون السيادة الحسية.">قانون السيادة الحسية.</h2>
+            <h2 class="main-heading en-only glitch" data-text="Law of Sensory Sovereignty.">Law of Sensory Sovereignty.</h2>
+            <p class="body-text ar-only">
+                لا توجد حقيقة موضوعية، بل توجد مدخلات حسية. من يسيطر على المحفزات يسيطر على الإدراك. نحن نهندس الفراغ ونحوله إلى أثر سيكولوجي مستدام.
+                <br><br><span style="color: #fff;">التجربة هي العملة الأسمى في هذا الكون.</span>
+            </p>
+            <p class="body-text en-only">
+                There is no objective reality, only sensory inputs. He who controls the stimuli controls perception. We engineer the void into a sustainable psychological impact.
+                <br><br><span style="color: #fff;">Experience is the ultimate currency of this universe.</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section" style="background-color: #030303;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">02. هندسة الحواس</div>
+            <div class="section-title mono-text en-only">02. Architecture of Senses</div>
+            <h2 class="main-heading ar-only glitch" data-text="المنهجية.">المنهجية.</h2>
+            <h2 class="main-heading en-only glitch" data-text="The Methodology.">The Methodology.</h2>
+            <p class="body-text ar-only">
+                نحن لا نصمم مجرد جماليات؛ بل نهتم بالهندسة المعمارية للمشاعر الإنسانية. من خلال دمج الإدراك المكاني، العوالم الرقمية، والمحفزات النفسية، نقوم ببناء بيئات تأسر الانتباه وتغير حالات الوعي.
+                <br><br>كل مشروع هو عملية حسابية دقيقة للضوء، الظل، التردد، والشكل.
+            </p>
+            <p class="body-text en-only">
+                We do not design mere aesthetics; we architect human emotion. By merging spatial awareness, digital realms, and psychological triggers, we construct environments that command attention and alter states of consciousness.
+                <br><br>Every project is a precise calculation of light, shadow, frequency, and form.
+            </p>
+        </div>
+    </section>
+
+    <section class="hero" style="height: 60vh;">
+        <div class="video-wrapper">
+            <video id="breakVideo" class="video-bg" autoplay loop muted playsinline></video>
+        </div>
+        <div class="overlay" style="background: rgba(0,0,0,0.6);"></div>
+        <div class="interactive-logo mono-text glitch" style="z-index: 2;" data-text="Proof of Feeling">Proof of Feeling</div>
+    </section>
+
+    <section id="portal" class="content-section" style="background-color: #000;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">03. بوابة السيادة</div>
+            <div class="section-title mono-text en-only">03. Sovereign Portal</div>
+            
+            <div class="portal-container">
+                <div id="login-view">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="input-group">
+                            <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="Email" required>
+                        </div>
+                        <button type="submit" class="submit-btn mono-text">Connect to Matrix</button>
+                    </form>
+                </div>
+
+                <div id="dashboard-view">
+                    <div class="dashboard-grid">
+                        <div class="dash-card active" onclick="switchService('consult')">
+                            <h4 class="mono-text">Consult</h4>
+                        </div>
+                        <div class="dash-card" onclick="switchService('terminal')" style="border-color: var(--terminal-green);">
+                            <h4 class="mono-text" style="color: var(--terminal-green);">Terminal_</h4>
+                        </div>
+                    </div>
+
+                    <div id="form-consult" class="service-form active">
+                        <form onsubmit="submitServiceForm(event, 'Request')">
+                            <div class="input-group">
+                                <textarea class="cyber-input" placeholder="State your objective..." required style="height: 100px; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">Transmit</button>
+                        </form>
+                    </div>
+
+                    <div id="form-terminal" class="service-form">
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands. Ask the Deep Matrix anything.</p>
+                        <div class="terminal-container" id="terminalBox" onclick="document.getElementById('termInput').focus()">
+                            <div class="term-output" id="termOutput">
+Initializing Sovereign Terminal v1.0...
+Connection Secure.
+                            </div>
+                            <div class="term-input-line">
+                                <span class="term-prompt">user@fusam:~#</span>
+                                <input type="text" id="termInput" class="term-input" autocomplete="off" onkeydown="handleTerminal(event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">AI</button>
+    
+    <div class="ai-window" id="aiWindow">
+        <div class="ai-header mono-text">
+            <span>ORACLE EX :: ONLINE</span>
+            <button class="ai-close" onclick="toggleChat()">×</button>
+        </div>
+        <div class="ai-body" id="chatBody"></div>
+        <div class="ai-input-area">
+            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="Ask Oracle EX..." onkeydown="handleChatEnter(event)">
+            <button class="ai-send mono-text" onclick="sendChatMessage()">[SEND]</button>
         </div>
     </div>
 
     <script>
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // ضع رابط الـ Web App الخاص بـ Google Apps Script هنا داخل علامتي التنصيص
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQvsFusxP9wYaYqLXzDREk9gK6yWsyfUXWnv9AzzvNintCp320BMCebYedpVsXqLU/exec";
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // --- Dynamic Video Injection ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
+            const shuffled = videos.sort(() => 0.5 - Math.random());
+            const heroVideo = document.getElementById('heroVideo');
+            if(heroVideo) { heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; heroVideo.load(); }
+            const breakVideo = document.getElementById('breakVideo');
+            if(breakVideo) { breakVideo.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo.load(); }
+        });
 
-        const chatModal = document.getElementById('chatModal');
-        const chatBody = document.getElementById('chatBody');
-        const userInput = document.getElementById('userInput');
+        // -------------------------------------------------------------
+        // رابط جوجل آب سكريبت الخاص بك (تأكد أنه الرابط الصحيح الذي ينتهي بـ /exec)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyzUzoWeVEnerInb-9P6-mJC8fo2RqS6M4x3H4xs_hPWzK4C-XSstoKeS6roYULv1B/exec';
+        // -------------------------------------------------------------
 
-        // فتح وإغلاق النافذة
-        function toggleChat() {
-            if (chatModal.style.display === "flex") {
-                chatModal.style.display = "none";
+        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            const body = document.body;
+            body.classList.toggle('lang-ar'); body.classList.toggle('lang-en');
+            currentLang = body.classList.contains('lang-ar') ? 'ar' : 'en';
+            
+            // تحديث نصوص واجهة أوراكل
+            const aiInput = document.getElementById('aiInput');
+            const aiSendBtn = document.querySelector('.ai-send');
+            if(currentLang === 'ar') {
+                aiInput.placeholder = "استفسر من أوراكل EX...";
+                aiSendBtn.innerText = "[إرسال]";
             } else {
-                chatModal.style.display = "flex";
-                userInput.focus();
+                aiInput.placeholder = "Ask Oracle EX...";
+                aiSendBtn.innerText = "[SEND]";
             }
         }
 
-        // إرسال بالضغط على زر Enter
-        function handleEnter(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        }
-
-        // دالة إرسال الرسالة إلى السيرفر
-        function sendMessage() {
-            const message = userInput.value.trim();
-            if (message === "") return;
-
-            // إضافة رسالة المستخدم للنافذة
-            appendMessage(message, "msg-user");
-            userInput.value = "";
-
-            // إظهار حالة التحميل
-            const loadingId = "loading-" + Date.now();
-            appendMessage("Processing data streams...", "msg-oracle typing", loadingId);
-
-            // إرسال الطلب لـ Google Apps Script
-            fetch(`${APPS_SCRIPT_URL}?Message=${encodeURIComponent(message)}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById(loadingId).remove(); // إزالة رسالة التحميل
-                    appendMessage(data.reply, "msg-oracle");
-                })
-                .catch(error => {
-                    document.getElementById(loadingId).remove();
-                    appendMessage("Connection failed. The grid is uncommunicative.", "msg-oracle");
-                    console.error('Error:', error);
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; btn.disabled = true;
+            currentUser.Name = document.getElementById('userName').value;
+            currentUser.Email = document.getElementById('userEmail').value;
+            
+            // إرسال البيانات (اختياري)
+            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: 'Login' });
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
+                .then(() => {
+                    document.getElementById('login-view').style.display = 'none';
+                    document.getElementById('dashboard-view').style.display = 'block';
+                }).catch(() => {
+                    // حتى لو فشل الاتصال، نفتح البوابة
+                    document.getElementById('login-view').style.display = 'none';
+                    document.getElementById('dashboard-view').style.display = 'block';
                 });
         }
 
-        // دالة مساعدة لطباعة الرسائل في الشاشة
-        function appendMessage(text, className, id = null) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `message ${className}`;
-            msgDiv.innerText = text;
-            if (id) msgDiv.id = id;
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight; // النزول التلقائي لأسفل المحادثة
+        function switchService(serviceId) {
+            document.querySelectorAll('.dash-card').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('form-' + serviceId).classList.add('active');
+            if(serviceId === 'terminal') document.getElementById('termInput').focus();
         }
+
+        function submitServiceForm(e, type) {
+            e.preventDefault();
+            const form = e.target;
+            const message = form.querySelector('textarea').value;
+            const btn = form.querySelector('button');
+            btn.innerHTML = 'Transmitting...'; btn.disabled = true;
+            
+            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: type, Message: message });
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
+                .then(() => {
+                    alert(currentLang === 'ar' ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
+                    form.reset(); btn.innerHTML = 'Transmit'; btn.disabled = false;
+                }).catch(() => {
+                    alert(currentLang === 'ar' ? 'حدث خطأ.' : 'Transmission Failed.');
+                    btn.innerHTML = 'Transmit'; btn.disabled = false;
+                });
+        }
+
+        // --- GEMINI AI PROXY (تحديث للاتصال بـ GET) ---
+        async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
+            // نستخدم GET لجلب الردود من دالة doGet في السكريبت
+            const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (loadingElement) loadingElement.remove();
+
+                if(isTerminal) { 
+                    printTerm(`oracle@ex:~# ${data.reply || data.error}`); 
+                } else { 
+                    appendMsg(data.reply || data.error, 'bot'); 
+                }
+            } catch (error) {
+                if (loadingElement) loadingElement.remove();
+                const errText = currentLang === 'ar' ? "انقطع الاتصال بالشبكة العميقة." : "Grid uncommunicative.";
+                if(isTerminal) { printTerm(`oracle@ex:~# ${errText}`); } 
+                else { appendMsg(errText, 'bot'); }
+            }
+        }
+
+        // --- Sovereign Terminal Logic ---
+        const termOutput = document.getElementById('termOutput');
+        const termInput = document.getElementById('termInput');
+        
+        function handleTerminal(e) {
+            if(e.key === 'Enter' || e.keyCode === 13) {
+                e.preventDefault();
+                const cmd = termInput.value.trim();
+                if(cmd === '') return;
+                printTerm(`user@ex:~# ${cmd}`);
+                termInput.value = '';
+                
+                if(cmd.toLowerCase() === 'help') {
+                    printTerm(`Commands:\n- /clear : Clear screen\n- Any text : Query Oracle EX directly`);
+                } else if(cmd.toLowerCase() === '/clear') {
+                    termOutput.innerHTML = '';
+                } else {
+                    printTerm(`[Decrypting data stream...]`);
+                    queryDeepMatrix(cmd, true); 
+                }
+            }
+        }
+        
+        function printTerm(text) {
+            termOutput.innerHTML += `\n${text}`;
+            termOutput.scrollTop = termOutput.scrollHeight;
+        }
+
+        // --- AI ORACLE CHATBOT Logic ---
+        const chatWindow = document.getElementById('aiWindow');
+        const chatBody = document.getElementById('chatBody');
+        const aiInput = document.getElementById('aiInput');
+        
+        function toggleChat() { 
+            chatWindow.classList.toggle('open'); 
+            if(chatWindow.classList.contains('open')) {
+                aiInput.focus();
+                if(chatBody.innerHTML === '') initChat(); // تهيئة رسالة الترحيب عند الفتح لأول مرة
+            }
+        }
+
+        function initChat() {
+            chatBody.innerHTML = '';
+            const welcome = currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. اسألني عن المنهجية، الكون، أو الفراغ." : "System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.";
+            appendMsg(welcome, 'bot');
+        }
+
+        function appendMsg(text, sender, isGlitch = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
+            if(isGlitch) msgDiv.setAttribute('data-text', text);
+            msgDiv.innerText = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msgDiv; // لإرجاع العنصر إذا أردنا حذفه لاحقاً (مثل علامة التحميل)
+        }
+
+        function handleChatEnter(e) { 
+            if(e.key === 'Enter' || e.keyCode === 13) {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const text = aiInput.value.trim();
+            if(!text) return;
+            
+            appendMsg(text, 'user');
+            aiInput.value = '';
+            
+            const loadingText = currentLang === 'ar' ? "[جاري معالجة البيانات...]" : "[Processing data streams...]";
+            const loadingElement = appendMsg(loadingText, 'bot typing-indicator', true);
+
+            queryDeepMatrix(text, false, loadingElement);
+        }
+
+        // --- Intersection Observer for Animations ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
     </script>
 </body>
 </html>
