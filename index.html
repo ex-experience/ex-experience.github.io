@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フサム | experience™ - Human Experience Engineering</title>
+<logo>フサム | experience™</logo>
+    <title>Engineering the Human Experience | هندسة التجربة البشرية</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        
         :root {
-            --bg-color: #050505;
-            --text-main: #f5f5f5;
-            --text-muted: #888;
-            --accent: #ffffff;
-            --card-bg: #111111;
+            --obsidian-black: #050505;
+            --stark-white: #FFFFFF;
+            --concrete-gray: #8E8E8E;
+            --signal-yellow: #FFD300;
         }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--obsidian-black);
+            color: var(--stark-white);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.8;
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
+
+        /* الجماليات الوظيفية الصارمة والخط التقني */
+        .mono-text {
+            font-family: 'Space Mono', monospace;
+            letter-spacing: -0.5px;
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        /* Brand Identity Styles */
-        .brand-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 30px;
-            border: 2px solid #333;
-            box-shadow: 0 0 20px rgba(255,255,255,0.05);
-        }
 
+        /* الفراغ المقدس (The Void) */
         header {
             min-height: 100vh;
             display: flex;
@@ -46,116 +47,155 @@
             align-items: center;
             text-align: center;
             padding: 40px 20px;
+            position: relative;
         }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 40px;
+            border: 1px solid var(--concrete-gray);
+            box-shadow: 0 0 30px rgba(255, 211, 0, 0.05);
+        }
+
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 300;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
             line-height: 1.2;
         }
+
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 400;
-            color: var(--text-muted);
+            color: var(--concrete-gray);
             margin-bottom: 40px;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
         }
-        .subtitle {
-            font-size: 1.2rem;
-            max-width: 600px;
+
+        .manifesto-hook {
+            font-size: 1.5rem;
+            max-width: 700px;
             margin-bottom: 50px;
-            color: #ccc;
+            color: var(--stark-white);
+            border-right: 3px solid var(--signal-yellow);
+            padding-right: 20px;
+            text-align: right;
         }
-        
-        /* Buttons */
+
+        /* أزرار الاستدعاء */
         .btn-group {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
-        }
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            background-color: var(--text-main);
-            color: var(--bg-color);
-            text-decoration: none;
-            letter-spacing: 1px;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        .btn-social {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--text-muted);
-        }
-        .btn:hover {
-            background-color: #ccc;
-            transform: translateY(-2px);
-        }
-        .btn-social:hover {
-            border-color: var(--text-main);
-            background-color: rgba(255,255,255,0.05);
+            margin-top: 30px;
         }
 
-        .section {
-            padding: 100px 0;
-            border-top: 1px solid #222;
-        }
-        .section-title {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-muted);
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        h3 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-        p {
-            color: #b0b0b0;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-        
-        .highlight-box {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 40px 0;
-            border: 1px solid #333;
-        }
-        
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            padding: 80px 20px 40px;
-            border-top: 1px solid #222;
-            color: var(--text-muted);
-        }
-        .footer-social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        .footer-social-links a {
-            color: #fff;
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            background-color: var(--stark-white);
+            color: var(--obsidian-black);
             text-decoration: none;
-            border-bottom: 1px solid #555;
-            padding-bottom: 2px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            border-radius: 0; /* شكل هندسي حاد */
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background-color: var(--signal-yellow);
+            color: var(--obsidian-black);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--stark-white);
+            transform: scale(1.05);
+        }
+
+        .btn-social {
+            background-color: transparent;
+            color: var(--concrete-gray);
+            border: 1px solid var(--concrete-gray);
+        }
+
+        .btn-social:hover {
+            border-color: var(--signal-yellow);
+            color: var(--signal-yellow);
+        }
+
+        /* أقسام العمارة الصامتة */
+        .section {
+            padding: 120px 0;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: var(--signal-yellow);
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+        }
+
+        .equation-box {
+            background: #0a0a0a;
+            padding: 50px;
+            border: 1px solid #222;
+            text-align: left;
+            direction: ltr;
+            margin: 50px 0;
+        }
+
+        .equation-box h3 {
+            color: var(--concrete-gray);
+            font-size: 1rem;
+            margin-top: 0;
+            letter-spacing: 2px;
+        }
+
+        .equation-text {
+            font-size: 1.8rem;
+            color: var(--stark-white);
+        }
+
+        .highlight {
+            color: var(--signal-yellow);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 2.5rem; }
+        }
+
+        .pillar-card {
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border-right: 2px solid #222;
             transition: border-color 0.3s ease;
         }
-        .footer-social-links a:hover {
-            border-color: #fff;
+
+        .pillar-card:hover {
+            border-color: var(--signal-yellow);
+        }
+
+        footer {
+            text-align: center;
+            padding: 100px 20px 50px;
+            border-top: 1px solid #1a1a1a;
         }
     </style>
 </head>
@@ -164,69 +204,71 @@
     <header>
         <img src="logo.png" alt="フサム | experience" class="brand-logo" onerror="this.style.display='none'">
         
-        <h1>The line between ordinary and extraordinary</h1>
-        <h2>Engineering the Human Experience</h2>
-        <p class="subtitle">We do not design products.. We engineer human experience — from first sensation to lasting memory.</p>
+        <h2 class="mono-text">Experience Architecture</h2>
+        <h1>نحن لا نصنع ذكريات،<br>نحن <span class="highlight">نهندس التاريخ الشخصي</span> لكل إنسان.</h1>
         
-        <div class="btn-group">
-            <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="btn" target="_blank">Begin the Conversation</a>
-            <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" class="btn btn-social" target="_blank">Instagram</a>
-            <a href="https://snapchat.com/t/HQa8XAW2" class="btn btn-social" target="_blank">Snapchat</a>
+        <div class="manifesto-hook">
+            "العالم غارق في ضجيج بصري لا معنى له. في フサム نحن لا نبيع منتجات، بل نبيع <strong>معايرة للواقع</strong>. نُفعل الاستجابة اللحظية بمدخلات بصرية عالية التباين، ونرسخ الأثر عبر هندسة ارتباط سيكولوجي دائم."
+        </div>
+        
+        <div class="btn-group mono-text">
+            <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="btn btn-primary" target="_blank">طلب استدعاء للمعايرة</a>
+            <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" class="btn btn-social" target="_blank">النظام البصري (IG)</a>
+            <a href="https://snapchat.com/t/HQa8XAW2" class="btn btn-social" target="_blank">التوجيه السينمائي (SNAP)</a>
         </div>
     </header>
 
     <div class="container">
         
         <section class="section">
-            <div class="section-title">What is フサム | experience ?</div>
-            <h3>フサム | experience™ is a concept house and strategic lab focused on Human Experience Engineering</h3>
-            <p>We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory. Where traditional marketing ends, experience architecture begins..</p>
-            <p style="color: #fff; font-weight: 500; font-size: 1.3rem; margin-top: 30px;">This is not marketing.. This is experience architecture.</p>
-        </section>
-
-        <section class="section">
-            <div class="section-title">The Silent Problem</div>
-            <p>The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint.</p>
-            <p>This gap is not a creative issue, <strong>It is an experience design failure.</strong></p>
+            <div class="section-title mono-text">01. THE SCIENTIFIC ENGINE</div>
+            <h3 style="font-size: 2.2rem; font-weight: 300; margin-bottom: 20px;">السيادة الحسية والحتمية الرياضية</h3>
+            <p style="font-size: 1.2rem; color: var(--concrete-gray);">لا توجد حقيقة موضوعية، بل توجد مدخلات حسية. من يسيطر على المحفزات يسيطر على الإدراك. كل شعور بشري (الرهبة، الأدرينالين، السكينة) هو ناتج معادلة قابلة للحل.</p>
             
-            <div class="highlight-box">
-                <h3 style="margin-top:0;">Human Experience Engineering</h3>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: #888;">>> our work combines <<</p>
-                <p style="color: #fff;">Behavioral Insight — Sensory Design — Ritual Engineering — Cinematic Translation</p>
+            <div class="equation-box mono-text">
+                <h3>THE IMPACT EQUATION</h3>
+                <div class="equation-text">
+                    Impact = &int; (M + P + C + &Psi;) &times; <span class="highlight">E</span>
+                </div>
+                <p style="color: var(--concrete-gray); font-size: 0.9rem; margin-top: 20px; font-family: sans-serif;">
+                    Math (البيانات) + Physics (المحفزات المادية) + Chemistry (الاستجابة العضوية) + Psychology (الذاكرة الإدراكية) &times; <strong>Engineering (هندسة التنفيذ)</strong>.
+                </p>
             </div>
         </section>
 
         <section class="section">
-            <div style="display: flex; flex-wrap: wrap; gap: 40px;">
-                <div style="flex: 1; min-width: 300px;">
-                    <h3>What We Do?</h3>
-                    <p>We execute focused 4–6 week pilots designed to validate experience impact. Each pilot delivers:</p>
-                    <ul style="color: #b0b0b0;">
-                        <li>A designed human experience</li>
-                        <li>Measured emotional and behavioral response</li>
-                        <li>A short cinematic film (60–90 seconds)</li>
-                        <li>A strategic case study</li>
-                    </ul>
+            <div class="section-title mono-text">02. SOVEREIGN VALUE PILLARS</div>
+            <div class="grid-2">
+                <div class="pillar-card">
+                    <h4 class="highlight mono-text">01 / الحصرية المطلقة</h4>
+                    <p style="color: var(--concrete-gray);">الوصول ليس حقاً، بل "استحقاق مبرهن". لا يتم قبول أي عميل عبر شراء مباشر، بل تمر البيانات عبر خوارزمية التوافق لقياس الفجوة بين واقع العميل وإمكانياته.</p>
                 </div>
-                <div style="flex: 1; min-width: 300px;">
-                    <h3>Why Pilots First?</h3>
-                    <p>Ideas are not enough. Promises do not scale.</p>
-                    <p>Pilots create <strong>proof of feeling</strong> before proof of concept. Experience must be demonstrated, not described.</p>
+                <div class="pillar-card">
+                    <h4 class="highlight mono-text">02 / الندرة المهندسة</h4>
+                    <p style="color: var(--concrete-gray);">كل تجربة أو "أداة" تخرج من المختبر هي نقطة تفرد (Singularity) لا تتكرر. التكرار هو موت للعلامة، ونحن نقدس الفراغ والمساحة السلبية.</p>
+                </div>
+                <div class="pillar-card">
+                    <h4 class="highlight mono-text">03 / الدقة الجراحية</h4>
+                    <p style="color: var(--concrete-gray);">الخطأ في معاييرنا يُقاس بالميكرون، وفي المشاعر يُقاس بـ "الاستجابة الجلفانية للجلد". لا توجد ذرة واحدة في التصميم لا تخدم الأثر النهائي.</p>
+                </div>
+                <div class="pillar-card">
+                    <h4 class="highlight mono-text">04 / الأداة (The Artifact)</h4>
+                    <p style="color: var(--concrete-gray);">ليست منتجاً، بل هي حل فيزيائي لمشكلة نفسية. كائن مادي من التيتانيوم والكربون، بارد وثقيل، يعمل كمرساة حسية تذكرك دائماً بحقيقتك الجديدة.</p>
                 </div>
             </div>
         </section>
+
     </div>
 
     <footer>
-        <div style="font-size: 1.5rem; color: #fff; margin-bottom: 10px;">フサム | experience™</div>
-        <p>Engineering the Human Experience</p>
+        <div style="font-size: 2rem; color: var(--stark-white); margin-bottom: 10px;" class="mono-text">フサム | experience™</div>
+        <p style="color: var(--signal-yellow); letter-spacing: 2px; font-size: 0.9rem;">هندسة التجربة البشرية</p>
         
-        <div class="footer-social-links">
-            <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank">Instagram Identity</a>
-            <a href="https://snapchat.com/t/HQa8XAW2" target="_blank">Snapchat Experience</a>
-        </div>
+        <p style="color: var(--concrete-gray); font-size: 0.9rem; margin-top: 40px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            "أقسم أن أحمي دقة المعادلة، وألا أسمح للعاطفة العشوائية بتلويث النتائج العلمية. نحن مهندسو مستقبلك، لسنا بائعي خدمة."
+        </p>
         
-        <p style="font-size: 0.8rem; color: #555;">© 2026 フサム | experience™. All rights reserved.</p>
+        <p style="font-size: 0.75rem; color: #333; margin-top: 60px;" class="mono-text">© 2026 フサム | experience™. ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
