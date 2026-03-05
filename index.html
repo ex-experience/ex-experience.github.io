@@ -12,18 +12,13 @@
             --cyber-steel: #8b939c;
             --stark-white: #ffffff;
             --off-white: #d1d5d8;
+            --panel-bg: #050607;
         }
 
         body {
-            background-color: var(--obsidian-black);
-            color: var(--stark-white);
+            background-color: var(--obsidian-black); color: var(--stark-white);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            line-height: 1.8; margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth;
         }
 
         .mono-text { font-family: 'Space Mono', monospace; }
@@ -31,130 +26,136 @@
         /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
-        
-        .ar-only { display: block; }
-        .en-only { display: none; }
-        body.lang-en .ar-only { display: none; }
-        body.lang-en .en-only { display: block; }
+        .ar-only { display: block; } .en-only { display: none; }
+        body.lang-en .ar-only { display: none; } body.lang-en .en-only { display: block; }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
-        /* Top Navigation Bar */
+        /* Top Navigation */
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; box-sizing: border-box; pointer-events: none;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
         }
         .top-nav > * { pointer-events: auto; }
         .est-text { font-size: 0.75rem; color: var(--cyber-steel); letter-spacing: 2px; font-weight: bold;}
         .nav-controls { display: flex; gap: 10px; }
         .control-btn {
             background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel);
-            padding: 6px 15px; cursor: pointer; font-family: 'Space Mono', monospace;
-            font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s ease; border-radius: 2px;
-            backdrop-filter: blur(5px);
+            padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s;
         }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        /* Hero Section */
-        .hero {
-            position: relative; height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center !important;
-        }
+        /* Silent Video Backgrounds */
+        .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; cursor: pointer; }
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: opacity 0.5s ease; }
-        .video-wrapper:hover .video-bg { opacity: 0.7; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1; pointer-events: none; }
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: opacity 0.5s ease; filter: grayscale(30%) contrast(110%); }
+        .video-wrapper:hover .video-bg { opacity: 0.5; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)); z-index: 1; pointer-events: none; }
 
-        /* Hero Content - Adjusted Sizes for Elegance */
-        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box;}
-        
-        .interactive-logo {
-            font-size: clamp(1.5rem, 4vw, 2.8rem); /* تصغير الشعار ليكون متناسقاً */
-            color: var(--off-white); font-weight: 300;
-            letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; transition: all 0.6s ease;
-        }
+        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
+        .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--off-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; transition: all 0.6s; }
         .interactive-logo:hover { color: var(--stark-white); text-shadow: 0 0 30px rgba(255, 255, 255, 0.4); transform: scale(1.02); letter-spacing: 5px; }
-
-        .interactive-slogan {
-            font-size: clamp(0.9rem, 2vw, 1.1rem); /* تصغير السلوجن */
-            color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px;
-            text-transform: uppercase; cursor: pointer; transition: all 0.4s ease;
-        }
+        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; transition: all 0.4s; }
         .interactive-slogan:hover { color: var(--stark-white); letter-spacing: 6px; }
-
         .static-personality { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--cyber-steel); font-style: italic; margin-bottom: 40px; letter-spacing: 2px; }
 
         .social-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .social-btn {
-            padding: 10px 25px; background: transparent; color: var(--stark-white); text-decoration: none;
-            font-size: 0.8rem; border: 1px solid var(--cyber-steel); transition: all 0.4s ease; text-transform: uppercase; letter-spacing: 2px;
-        }
+        .social-btn { padding: 10px 25px; background: transparent; color: var(--stark-white); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--cyber-steel); transition: all 0.4s; text-transform: uppercase; letter-spacing: 2px; }
         .social-btn:hover { background: var(--stark-white); color: var(--obsidian-black); border-color: var(--stark-white); }
 
-        /* Content Sections */
-        .content-section { padding: 100px 0; background: var(--obsidian-black); position: relative; z-index: 2; border-top: 1px solid #111;}
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        /* Geometric Instagram Image Backgrounds */
+        .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
+        
+        .geometric-bg {
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            background-size: cover; background-position: center; opacity: 0.15; z-index: 0; pointer-events: none;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+            filter: grayscale(80%) contrast(120%); transition: all 0.8s ease;
+        }
+        .content-section:hover .geometric-bg { opacity: 0.25; filter: grayscale(30%) contrast(120%); transform: scale(1.02); }
+        body.lang-en .geometric-bg { right: auto; left: 0; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; position: relative; z-index: 2;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
         .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--off-white); max-width: 800px; margin-bottom: 20px; }
         
-        body.lang-ar .body-text, body.lang-ar .main-heading { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
-
-        /* Grid Layouts */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .grid-card { border-top: 1px solid #222; padding-top: 20px; }
+        .grid-card { border-top: 1px solid #222; padding-top: 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); padding: 20px;}
         .grid-card h4 { font-size: 1.2rem; margin-top: 0; color: var(--stark-white); }
         .grid-card p { color: var(--cyber-steel); font-size: 0.95rem; }
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: 30px;} }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .geometric-bg { width: 100%; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);} }
 
-        /* Second Video Break */
+        /* Video Break */
         .video-break { position: relative; height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* --- MEMBER PORTAL STYLES --- */
-        .portal-container { background: #08090a; padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; border-radius: 4px;}
-        @media (max-width: 768px) { .portal-container { padding: 30px 15px; } }
-        
+        /* Member Portal & Dashboard */
+        .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
         .input-group label { color: var(--cyber-steel); font-size: 0.75rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .cyber-input {
-            background: transparent; border: none; border-bottom: 1px solid #333; color: var(--stark-white);
-            padding: 8px 0; font-family: inherit; font-size: 1rem; transition: all 0.3s ease; border-radius: 0;
-        }
+        .cyber-input { background: transparent; border: none; border-bottom: 1px solid #333; color: var(--stark-white); padding: 8px 0; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
         .cyber-input:focus { outline: none; border-bottom-color: var(--stark-white); }
         textarea.cyber-input { resize: vertical; min-height: 80px; }
-
-        .submit-btn {
-            width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black);
-            border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; transition: all 0.3s ease; margin-top: 10px;
-        }
+        .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
 
-        /* Dashboard specific */
         #dashboard-view { display: none; }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .dash-card {
-            background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 20px; text-align: center;
-            cursor: pointer; transition: all 0.3s ease; color: var(--cyber-steel);
-        }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s; color: var(--cyber-steel); }
         .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); background: rgba(255,255,255,0.05); }
-        .dash-card h4 { margin: 0; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
-        
+        .dash-card h4 { margin: 0; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Cyber Browser */
+        .cyber-browser { width: 100%; height: 400px; border: 1px solid #333; background: #000; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+        .browser-header { background: #111; padding: 10px; display: flex; gap: 10px; border-bottom: 1px solid #333; }
+        .browser-url { flex: 1; background: #000; border: 1px solid #333; color: #fff; padding: 5px 10px; font-family: monospace; font-size: 0.85rem;}
+        .browser-go { background: var(--stark-white); color: #000; border: none; padding: 0 15px; cursor: pointer; font-weight: bold;}
+        .browser-frame { flex: 1; width: 100%; border: none; background: #fff;}
+
+        /* AI ORACLE CHATBOT */
+        .ai-btn {
+            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 50%;
+            background: var(--stark-white); color: var(--obsidian-black); border: none; cursor: pointer;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2); z-index: 9999; display: flex; justify-content: center; align-items: center;
+            transition: all 0.3s ease; font-weight: bold; font-size: 1.2rem;
+        }
+        body.lang-en .ai-btn { left: auto; right: 30px; }
+        .ai-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+        
+        .ai-window {
+            position: fixed; bottom: 90px; left: 30px; width: 320px; height: 450px; background: rgba(5,6,7,0.95);
+            border: 1px solid #333; backdrop-filter: blur(10px); z-index: 9998; border-radius: 8px;
+            display: flex; flex-direction: column; overflow: hidden; transform: translateY(20px); opacity: 0;
+            pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        body.lang-en .ai-window { left: auto; right: 30px; }
+        .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        
+        .ai-header { background: #111; padding: 15px; border-bottom: 1px solid #333; text-align: center; color: var(--off-white); font-size: 0.85rem; letter-spacing: 2px;}
+        .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .ai-msg { max-width: 85%; padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; line-height: 1.5; }
+        .ai-msg.bot { background: rgba(255,255,255,0.05); border-left: 2px solid var(--stark-white); color: var(--off-white); align-self: flex-start; }
+        body.lang-ar .ai-msg.bot { border-left: none; border-right: 2px solid var(--stark-white); }
+        .ai-msg.user { background: var(--stark-white); color: var(--obsidian-black); align-self: flex-end; }
+        
+        .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 5px; font-family: inherit; font-size: 0.85rem; }
+        .ai-input:focus { outline: none; }
+        .ai-send { background: transparent; border: none; color: var(--stark-white); cursor: pointer; padding: 0 10px; font-weight: bold;}
 
         /* Footer */
         footer { text-align: center !important; padding: 60px 20px 40px; border-top: 1px solid #111; background: var(--obsidian-black); position: relative; z-index: 2;}
         .static-footer { font-size: 0.8rem; color: var(--cyber-steel); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;}
         .contact-info { font-size: 0.85rem; color: var(--off-white); letter-spacing: 1px; }
         .contact-info a { color: var(--stark-white); text-decoration: none; margin: 0 10px; transition: color 0.3s ease;}
-        .contact-info a:hover { color: var(--cyber-steel); }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="lang-ar">
@@ -162,8 +163,7 @@
     <div class="top-nav">
         <div class="est-text mono-text">EST EX/2025. SA</div>
         <div class="nav-controls">
-            <button class="control-btn" onclick="toggleAudio()" id="audioBtn">Sound 🔈</button>
-            <button class="control-btn" onclick="toggleLanguage()">EN / عربي</button>
+            <button class="control-btn mono-text" onclick="toggleLanguage()">EN / عربي</button>
         </div>
     </div>
 
@@ -189,6 +189,8 @@
     </header>
 
     <section class="content-section">
+        <div class="geometric-bg" style="background-image: url('ig-image-1.jpg');"></div>
+        
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">01. الفلسفة المعمارية</div>
             <div class="section-title mono-text en-only">01. Architectural Philosophy</div>
@@ -207,7 +209,9 @@
         </div>
     </section>
 
-    <section class="content-section" style="background-color: #050505;">
+    <section class="content-section" style="background-color: #030405;">
+        <div class="geometric-bg" style="background-image: url('ig-image-2.jpg'); clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%); left: 0; right: auto;"></div>
+
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">02. منهجية HX-5™</div>
             <div class="section-title mono-text en-only">02. HX-5™ Methodology</div>
@@ -225,11 +229,6 @@
                     <h4 class="mono-text">2. Stimuli & Interaction</h4>
                     <p class="ar-only">هندسة المدخلات البصرية والسمعية، والتحكم في إيقاع التفاعل لاختراق اللاوعي.</p>
                     <p class="en-only">Engineering sensory inputs and governing engagement rhythm to bypass logical filters.</p>
-                </div>
-                <div class="grid-card" style="grid-column: 1 / -1; border-top: none; padding-top: 0;">
-                    <h4 class="mono-text">3. The Impact</h4>
-                    <p class="ar-only">المقياس النهائي لنجاحنا هو "الراسب العاطفي" الدائم المتبقي في الذاكرة.</p>
-                    <p class="en-only">Our ultimate metric of success is the lasting "emotional residue" in memory.</p>
                 </div>
             </div>
         </div>
@@ -254,19 +253,14 @@
             <div class="portal-container">
                 
                 <div id="login-view">
-                    <p class="ar-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">قم بتسجيل الدخول أو إنشاء هويتك الرقمية للوصول إلى لوحة التحكم، التواصل المباشر، وطلب الاستشارات.</p>
-                    <p class="en-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">Log in or create your digital identity to access the dashboard, direct communication, and consultations.</p>
+                    <p class="ar-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">قم بتسجيل الدخول للوصول إلى لوحة التحكم، المتصفح السيادي، وطلب الاستشارات.</p>
+                    <p class="en-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">Log in to access the dashboard, sovereign browser, and consultations.</p>
                     
                     <form onsubmit="handleLogin(event)">
                         <div class="input-group">
                             <label class="ar-only">البريد الإلكتروني أو رقم المعايرة</label>
                             <label class="en-only">Email or Calibration ID</label>
                             <input type="email" class="cyber-input" required placeholder="you@domain.com">
-                        </div>
-                        <div class="input-group">
-                            <label class="ar-only">كلمة المرور المشفرة (اختياري للأعضاء الجدد)</label>
-                            <label class="en-only">Encrypted Password (Optional for new)</label>
-                            <input type="password" class="cyber-input">
                         </div>
                         <button type="submit" class="submit-btn mono-text">
                             <span class="ar-only">دخول / تسجيل</span>
@@ -278,91 +272,54 @@
                 <div id="dashboard-view">
                     <h3 class="ar-only" style="color: var(--stark-white); font-weight: 300; margin-bottom: 5px;">مرحباً بك في المختبر.</h3>
                     <h3 class="en-only" style="color: var(--stark-white); font-weight: 300; margin-bottom: 5px;">Welcome to the Lab.</h3>
-                    <p style="color: var(--cyber-steel); font-size: 0.85rem; margin-bottom: 30px;">
-                        <span class="ar-only">اختر مسار المعايرة أو الخدمة المطلوبة:</span>
-                        <span class="en-only">Select your calibration path or service:</span>
-                    </p>
 
-                    <div class="dashboard-grid">
+                    <div class="dashboard-grid" style="margin-top:20px;">
                         <div class="dash-card active" onclick="switchService('consult')">
-                            <h4 class="ar-only">الاستشارات والأفراد</h4>
-                            <h4 class="en-only">Consultations</h4>
+                            <h4 class="ar-only">استشارات</h4><h4 class="en-only">Consult</h4>
                         </div>
                         <div class="dash-card" onclick="switchService('corp')">
-                            <h4 class="ar-only">خدمات الشركات</h4>
-                            <h4 class="en-only">Corporate</h4>
+                            <h4 class="ar-only">شركات</h4><h4 class="en-only">Corporate</h4>
                         </div>
                         <div class="dash-card" onclick="switchService('feedback')">
-                            <h4 class="ar-only">التواصل والتقييم</h4>
-                            <h4 class="en-only">Feedback</h4>
+                            <h4 class="ar-only">تواصل</h4><h4 class="en-only">Feedback</h4>
                         </div>
-                        <div class="dash-card" onclick="switchService('news')">
-                            <h4 class="ar-only">النشرة والأخبار</h4>
-                            <h4 class="en-only">The Oracle</h4>
+                        <div class="dash-card" onclick="switchService('browse')" style="border-color: #444;">
+                            <h4 class="ar-only">تصفح الويب 🌐</h4><h4 class="en-only">Web Browser 🌐</h4>
                         </div>
                     </div>
 
                     <div id="form-consult" class="service-form active">
-                        <form onsubmit="event.preventDefault(); alert('تم إرسال طلب الاستشارة بنجاح. / Consultation requested.');">
-                            <div class="input-group">
-                                <label class="ar-only">نوع الاستشارة المطلوبة</label>
-                                <label class="en-only">Type of Consultation</label>
-                                <input type="text" class="cyber-input" placeholder="..." required>
-                            </div>
-                            <div class="input-group">
-                                <label class="ar-only">الهدف النفسي أو المادي (التفاصيل)</label>
-                                <label class="en-only">Psychological or Material Goal</label>
-                                <textarea class="cyber-input" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn mono-text">
-                                <span class="ar-only">تأكيد طلب المختبر</span>
-                                <span class="en-only">Confirm Lab Request</span>
-                            </button>
+                        <form onsubmit="event.preventDefault(); alert('تم إرسال طلب الاستشارة.');">
+                            <div class="input-group"><label class="ar-only">الهدف النفسي أو المادي</label><label class="en-only">Psychological or Material Goal</label><textarea class="cyber-input" required></textarea></div>
+                            <button type="submit" class="submit-btn mono-text"><span class="ar-only">تأكيد طلب المختبر</span><span class="en-only">Confirm Lab Request</span></button>
                         </form>
                     </div>
 
                     <div id="form-corp" class="service-form">
-                        <form onsubmit="event.preventDefault(); alert('تم إرسال طلب الشركات بنجاح. / Corporate request sent.');">
-                            <div class="input-group">
-                                <label class="ar-only">اسم المنظمة / الشركة</label>
-                                <label class="en-only">Organization / Company Name</label>
-                                <input type="text" class="cyber-input" required>
-                            </div>
-                            <div class="input-group">
-                                <label class="ar-only">تحديات العلامة التجارية الحالية</label>
-                                <label class="en-only">Current Brand Challenges</label>
-                                <textarea class="cyber-input" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn mono-text">
-                                <span class="ar-only">طلب هندسة تجربة للشركة</span>
-                                <span class="en-only">Request Corporate Engineering</span>
-                            </button>
+                        <form onsubmit="event.preventDefault(); alert('تم الإرسال.');">
+                            <div class="input-group"><label class="ar-only">اسم المنظمة</label><label class="en-only">Organization</label><input type="text" class="cyber-input" required></div>
+                            <button type="submit" class="submit-btn mono-text"><span class="ar-only">طلب هندسة للشركة</span><span class="en-only">Request Corporate Engineering</span></button>
                         </form>
                     </div>
 
                     <div id="form-feedback" class="service-form">
-                        <form onsubmit="event.preventDefault(); alert('تم استلام ملاحظاتك. / Feedback received.');">
-                            <div class="input-group">
-                                <label class="ar-only">التواصل المباشر، التقييم، أو الملاحظات</label>
-                                <label class="en-only">Direct Comm, Rating, or Notes</label>
-                                <textarea class="cyber-input" required placeholder="..."></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn mono-text">
-                                <span class="ar-only">إرسال للإدارة</span>
-                                <span class="en-only">Send to Management</span>
-                            </button>
+                        <form onsubmit="event.preventDefault(); alert('تم الاستلام.');">
+                            <div class="input-group"><label class="ar-only">الملاحظات</label><label class="en-only">Notes</label><textarea class="cyber-input" required></textarea></div>
+                            <button type="submit" class="submit-btn mono-text"><span class="ar-only">إرسال للإدارة</span><span class="en-only">Send to Management</span></button>
                         </form>
                     </div>
 
-                    <div id="form-news" class="service-form">
-                        <form onsubmit="event.preventDefault(); alert('تم تسجيلك في القائمة الحصرية. / Subscribed to exclusive list.');">
-                            <p class="ar-only" style="color:var(--stark-white); font-size: 0.9rem;">تسجيل بياناتك للحصول على أحدث بروتوكولات المختبر، الأخبار، والتحديثات الحصرية للعلامة.</p>
-                            <p class="en-only" style="color:var(--stark-white); font-size: 0.9rem;">Register to receive the latest lab protocols, news, and exclusive brand updates.</p>
-                            <button type="submit" class="submit-btn mono-text" style="margin-top: 20px;">
-                                <span class="ar-only">تفعيل استلام التحديثات</span>
-                                <span class="en-only">Activate Updates</span>
-                            </button>
-                        </form>
+                    <div id="form-browse" class="service-form">
+                        <p class="ar-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">متصفح آمن مدمج (يدعم المواقع التي تسمح بالـ iframes مثل ويكيبيديا).</p>
+                        <p class="en-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">Secure embedded browser (supports websites that allow iframes).</p>
+                        
+                        <div class="cyber-browser">
+                            <div class="browser-header">
+                                <input type="url" id="browserUrl" class="browser-url" value="https://en.wikipedia.org" placeholder="https://...">
+                                <button class="browser-go mono-text" onclick="loadUrl()">GO</button>
+                            </div>
+                            <iframe id="browserFrame" class="browser-frame" src="https://en.wikipedia.org"></iframe>
+                        </div>
                     </div>
 
                 </div>
@@ -373,80 +330,128 @@
     <footer>
         <div class="static-footer mono-text">Concept house &bull; &copy; 1991. SA</div>
         <div class="contact-info mono-text">
-            <a href="hussambinhassan92@gmail.com">hussambinhassan@hotmail.com</a> | 
-            <a href="tel:+966566716036" dir="ltr">+966 56 671 6036</a>
+            <a href="mailto:info@ex-experience.sa">info@ex-experience.sa</a> | 
+            <a href="tel:+966500000000" dir="ltr">+966 50 000 0000</a>
         </div>
     </footer>
 
+    <button class="ai-btn mono-text" onclick="toggleChat()">AI</button>
+    <div class="ai-window" id="aiWindow">
+        <div class="ai-header mono-text">フサム | ORACLE SYSTEM</div>
+        <div class="ai-body" id="chatBody"></div>
+        <div class="ai-input-area">
+            <input type="text" id="aiInput" class="ai-input" placeholder="..." onkeypress="handleChatEnter(event)">
+            <button class="ai-send mono-text" onclick="sendChatMessage()">></button>
+        </div>
+    </div>
+
     <script>
         // Language System
+        let currentLang = 'ar';
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-ar')) {
-                body.classList.remove('lang-ar');
-                body.classList.add('lang-en');
+                body.classList.remove('lang-ar'); body.classList.add('lang-en'); currentLang = 'en';
             } else {
-                body.classList.remove('lang-en');
-                body.classList.add('lang-ar');
+                body.classList.remove('lang-en'); body.classList.add('lang-ar'); currentLang = 'ar';
             }
+            initChat();
         }
 
-        // Audio System
-        function toggleAudio() {
-            const vids = document.querySelectorAll('video');
-            const btn = document.getElementById('audioBtn');
-            let isMuted = vids[0].muted;
-            vids.forEach(vid => { vid.muted = !isMuted; });
-            if(isMuted) {
-                btn.innerHTML = 'Sound 🔊';
-                btn.style.background = 'var(--stark-white)';
-                btn.style.color = 'var(--obsidian-black)';
-            } else {
-                btn.innerHTML = 'Sound 🔈';
-                btn.style.background = 'transparent';
-                btn.style.color = 'var(--stark-white)';
-            }
-        }
-
-        // Video Play/Pause
+        // Silent Video Play/Pause toggle
         function togglePlayPause(wrapper) {
             const video = wrapper.querySelector('video');
             if (video.paused) { video.play(); wrapper.style.opacity = '1'; } 
             else { video.pause(); wrapper.style.opacity = '0.8'; }
         }
 
-        // Fade-in Animation
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            document.querySelectorAll('.fade-in').forEach(element => { observer.observe(element); });
-        });
-
-        // --- Member Portal Logic ---
+        // Member Portal Logic
         function handleLogin(e) {
             e.preventDefault();
-            // Simulate login transition
             document.getElementById('login-view').style.display = 'none';
             document.getElementById('dashboard-view').style.display = 'block';
             document.getElementById('dashboard-view').style.animation = 'fadeIn 0.8s';
         }
 
         function switchService(serviceId) {
-            // Update Active Tab
             document.querySelectorAll('.dash-card').forEach(card => card.classList.remove('active'));
             event.currentTarget.classList.add('active');
-
-            // Hide all forms, show selected
             document.querySelectorAll('.service-form').forEach(form => form.classList.remove('active'));
             document.getElementById('form-' + serviceId).classList.add('active');
         }
+
+        // Cyber Browser Logic
+        function loadUrl() {
+            let url = document.getElementById('browserUrl').value;
+            if(!url.startsWith('http')) url = 'https://' + url;
+            document.getElementById('browserUrl').value = url;
+            document.getElementById('browserFrame').src = url;
+        }
+
+        // AI CHATBOT LOGIC
+        const chatWindow = document.getElementById('aiWindow');
+        const chatBody = document.getElementById('chatBody');
+        const aiInput = document.getElementById('aiInput');
+
+        function toggleChat() { chatWindow.classList.toggle('open'); }
+
+        const botKnowledge = {
+            ar: {
+                welcome: "مرحباً. أنا أوراكل فُسام. نحن نهندس التاريخ الشخصي. كيف يمكنني إرشادك؟",
+                brand: "نحن لسنا وكالة تسويق. نحن مختبر استراتيجي يدمج الرياضيات بالفيزياء والكيمياء لهندسة تجربة عاطفية لا تُمحى.",
+                contact: "لطلب معايرة أو استشارة، يرجى تسجيل الدخول في (بوابة الأعضاء) أسفل الصفحة.",
+                default: "تم استلام البيانات. للحصول على تحليل دقيق، نرجو استخدام بوابة الأعضاء للتواصل مع الإدارة."
+            },
+            en: {
+                welcome: "System Online. I am the フサム Oracle. We engineer personal history. How may I guide you?",
+                brand: "We are not a marketing agency. We are a strategic lab combining Math, Physics, and Chemistry to engineer indelible experiences.",
+                contact: "To request calibration, please log in via the Sovereign Member Portal below.",
+                default: "Data received. For precise analysis, please use the Member Portal to contact management."
+            }
+        };
+
+        function initChat() {
+            chatBody.innerHTML = '';
+            appendMsg(botKnowledge[currentLang].welcome, 'bot');
+            aiInput.placeholder = currentLang === 'ar' ? "اكتب هنا..." : "Type here...";
+        }
+
+        function appendMsg(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `ai-msg ${sender}`;
+            msgDiv.innerText = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
+
+        function sendChatMessage() {
+            const text = aiInput.value.trim();
+            if(!text) return;
+            appendMsg(text, 'user');
+            aiInput.value = '';
+            
+            setTimeout(() => {
+                let response = botKnowledge[currentLang].default;
+                const lowerText = text.toLowerCase();
+                if(lowerText.includes('من أنتم') || lowerText.includes('فوسام') || lowerText.includes('who') || lowerText.includes('what')) {
+                    response = botKnowledge[currentLang].brand;
+                } else if(lowerText.includes('تواصل') || lowerText.includes('استشارة') || lowerText.includes('contact') || lowerText.includes('consult')) {
+                    response = botKnowledge[currentLang].contact;
+                }
+                appendMsg(response, 'bot');
+            }, 800);
+        }
+
+        // Initialize
+        document.addEventListener("DOMContentLoaded", function() {
+            initChat();
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); } });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
     </script>
 </body>
 </html>
