@@ -23,7 +23,7 @@
 
         .mono-text { font-family: 'Space Mono', monospace; }
 
-        /* CRT Scanline Effect (Digital Art) */
+        /* CRT Scanline Effect */
         body::before {
             content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
@@ -50,7 +50,6 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
-        /* Top Navigation */
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000; pointer-events: none;
@@ -64,7 +63,6 @@
         }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        /* Dynamic Video Backgrounds */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(50%) contrast(120%); }
@@ -74,7 +72,6 @@
         .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--stark-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; }
         .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 40px; letter-spacing: 4px; text-transform: uppercase; }
 
-        /* Fixed Geometric Backgrounds */
         .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
         .geometric-bg {
             position: absolute; top: 0; right: 0; width: 55%; height: 100%;
@@ -90,7 +87,6 @@
         .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--off-white); max-width: 800px; margin-bottom: 20px; }
         
-        /* Member Portal */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
         .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
@@ -105,7 +101,6 @@
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
 
-        /* Sovereign Terminal */
         .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
         .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap;}
         .term-input-line { display: flex; align-items: center; }
@@ -113,7 +108,6 @@
         body.lang-ar .term-prompt { margin-right: 0; margin-left: 10px; }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
-        /* AI ORACLE CHATBOT */
         .ai-btn {
             position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
             background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
@@ -226,7 +220,7 @@
                     </div>
 
                     <div id="form-terminal" class="service-form">
-                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands.</p>
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands. Ask the Deep Matrix anything.</p>
                         <div class="terminal-container" id="terminalBox" onclick="document.getElementById('termInput').focus()">
                             <div class="term-output" id="termOutput">
 Initializing Sovereign Terminal v1.0...
@@ -255,27 +249,20 @@ Connection Secure.
     </div>
 
     <script>
-        // --- Dynamic Video Injection Logic ---
+        // --- Dynamic Video Injection ---
         document.addEventListener("DOMContentLoaded", () => {
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
-            
-            // خلط المصفوفة لاختيار فيديوهين مختلفين
             const shuffled = videos.sort(() => 0.5 - Math.random());
-            
-            // تعيين الفيديو الأول في الواجهة الرئيسية
             const heroVideo = document.getElementById('heroVideo');
-            heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`;
-            heroVideo.load();
-            
-            // تعيين الفيديو الثاني في الفاصل السينمائي
+            if(heroVideo) { heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; heroVideo.load(); }
             const breakVideo = document.getElementById('breakVideo');
-            breakVideo.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`;
-            breakVideo.load();
+            if(breakVideo) { breakVideo.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo.load(); }
         });
 
-        // --- Database Connection ---
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkcm9ZdeeAr20aGJbnCySyyE2zzYfKQmXsP9YkBjE-9A9YUsODaMHIREWlQ4JH3RBI/exec';
-        let currentUser = { Name: '', Email: '', Phone: 'Terminal User' };
+        // --- Database & AI Connection ---
+        // تم حقن الرابط السري الجديد هنا بنجاح:
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyzUzoWeVEnerInb-9P6-mJC8fo2RqS6M4x3H4xs_hPWzK4C-XSstoKeS6roYULv1B/exec';
+        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
         let currentLang = 'ar';
 
         function toggleLanguage() {
@@ -288,11 +275,9 @@ Connection Secure.
         function handleLogin(e) {
             e.preventDefault();
             const btn = e.target.querySelector('button');
-            btn.innerHTML = '<span class="mono-text">Decrypting...</span>';
-            btn.disabled = true;
+            btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; btn.disabled = true;
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
-
             sendToGoogleSheet('Login', 'Portal Accessed', null, () => {
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
@@ -328,27 +313,44 @@ Connection Secure.
             if(serviceId === 'terminal') document.getElementById('termInput').focus();
         }
 
-        // --- Sovereign Terminal Logic ---
+        // --- GEMINI AI PROXY ---
+        async function queryDeepMatrix(text, isTerminal = false) {
+            const params = new URLSearchParams();
+            params.append('Type', 'AI_Query'); // إخبار السيرفر أننا نريد الذكاء الاصطناعي
+            params.append('Message', text);
+
+            try {
+                // نستخدم fetch عادي لكي نتمكن من قراءة الرد القادم من الذكاء الاصطناعي
+                const response = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params });
+                const answer = await response.text();
+                
+                if(isTerminal) { printTerm(`oracle@fusam:~# ${answer}`); } 
+                else { appendMsg(answer, 'bot'); }
+                
+            } catch (error) {
+                const errText = "System Error. Connection to Deep Matrix failed.";
+                if(isTerminal) { printTerm(`oracle@fusam:~# ${errText}`); } 
+                else { appendMsg(errText, 'bot'); }
+            }
+        }
+
+        // --- Sovereign Terminal ---
         const termOutput = document.getElementById('termOutput');
         const termInput = document.getElementById('termInput');
         function handleTerminal(e) {
             if(e.key === 'Enter') {
-                const cmd = termInput.value.trim().toLowerCase();
+                const cmd = termInput.value.trim();
+                if(cmd === '') return;
                 printTerm(`user@fusam:~# ${cmd}`);
                 termInput.value = '';
                 
-                if(cmd === 'help') {
-                    printTerm(`Available Commands:\n- /equation : View the core formula\n- /manifesto : Core beliefs\n- /clear : Clear screen\n- /status : Lab status`);
-                } else if(cmd === '/equation') {
-                    printTerm(`Impact = ∫(M+P+C+Ψ) × E\n[M] Math: Algorithms & Data\n[P] Physics: Sensory Contrast\n[C] Chemistry: Organic Response\n[Ψ] Psychology: Cognitive Memory\n[E] Engineering: Execution Multiplier`);
-                } else if(cmd === '/manifesto') {
-                    printTerm(`We do not design to temporarily satisfy senses.\nWe engineer reality to establish a permanent emotional imprint.\nExperience is the ultimate currency.`);
-                } else if(cmd === '/status') {
-                    printTerm(`Lab Systems: ONLINE.\nTemperature: 20.5 C.\nFrequency: 432Hz.\nProtocol: SOP001 Active.`);
-                } else if(cmd === '/clear') {
+                if(cmd.toLowerCase() === 'help') {
+                    printTerm(`Commands:\n- /clear : Clear screen\n- Any text : Query the Gemini Matrix directly`);
+                } else if(cmd.toLowerCase() === '/clear') {
                     termOutput.innerHTML = '';
-                } else if(cmd !== '') {
-                    printTerm(`Command not found: ${cmd}. Type 'help'.`);
+                } else {
+                    printTerm(`[Connecting to Deep Matrix...]`);
+                    queryDeepMatrix(cmd, true); // إرسال الأمر للذكاء الاصطناعي
                 }
             }
         }
@@ -357,43 +359,15 @@ Connection Secure.
             termOutput.scrollTop = termOutput.scrollHeight;
         }
 
-        // --- Deep Knowledge AI ORACLE ---
+        // --- AI ORACLE CHATBOT ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
         function toggleChat() { chatWindow.classList.toggle('open'); }
 
-        const advancedBotLogic = (query) => {
-            const q = query.toLowerCase();
-            if(q.includes('معادلة') || q.includes('equation')) {
-                return currentLang === 'ar' ? 
-                "معادلة الأثر الخاصة بنا هي: Impact = ∫(M+P+C+Ψ) × E. نقوم بمكاملة الرياضيات، الفيزياء، الكيمياء، وعلم النفس، ونضربها في دقة التنفيذ الهندسي (E) لخلق أثر لا يُمحى." : 
-                "Our Impact Equation is: Impact = ∫(M+P+C+Ψ) × E. We integrate Math, Physics, Chemistry, and Psychology, multiplied by precise Engineering (E) to create an indelible mark.";
-            }
-            if(q.includes('ركائز') || q.includes('pillars') || q.includes('hx-5')) {
-                return currentLang === 'ar' ? 
-                "منهجية HX-5 تعتمد على 5 ركائز: 1. القصد (الهدف الوجودي) 2. السياق (البيئة) 3. المحفزات (الاختراق الحسي) 4. التفاعل (المسار) 5. الأثر (الراسب العاطفي المتبقي)." : 
-                "The HX-5 methodology relies on 5 pillars: 1. Intent (Existential Goal) 2. Context (Environment) 3. Stimuli (Sensory penetration) 4. Interaction (Path) 5. Impact (Emotional residue).";
-            }
-            if(q.includes('قوانين') || q.includes('laws') || q.includes('manifesto')) {
-                return currentLang === 'ar' ? 
-                "الكوديكس الأعظم ينص على 3 قوانين: 1. قانون السيادة الحسية (التحكم بالمحفزات). 2. قانون الحتمية الرياضية (كل شعور هو معادلة). 3. قانون الخلود عبر الأثر." : 
-                "The Great Codex dictates 3 laws: 1. Sensory Sovereignty. 2. Mathematical Determinism. 3. Immortality via Impact.";
-            }
-            if(q.includes('من أنتم') || q.includes('فوسام') || q.includes('who are you')) {
-                return currentLang === 'ar' ? 
-                "نحنフサム | experience™. نحن لسنا وكالة تسويق، بل مختبر استراتيجي يطبق الهندسة المعمارية على التجربة البشرية." : 
-                "We are フサム | experience™. Not a marketing agency, but a strategic lab applying architecture to human experiences.";
-            }
-            
-            return currentLang === 'ar' ? 
-            "تم استلام المعطيات. هذه البيانات تتطلب تحليل مهندس مختص. يرجى إرسال طلب عبر البوابة (Terminal)." : 
-            "Data ingested. This requires analysis by a certified engineer. Please submit a request via the Terminal.";
-        };
-
         function initChat() {
             chatBody.innerHTML = '';
-            const welcome = currentLang === 'ar' ? "أوراكل المختبر متصل. أنا مزود ببيانات الكوديكس الأعظم. اسألني عن (المعادلة، الركائز، أو قوانين الحقيقة)." : "Lab Oracle Online. Ingested data: The Great Codex. Ask me about the Equation, Pillars, or Laws of Reality.";
+            const welcome = currentLang === 'ar' ? "أوراكل المختبر متصل بالشبكة العميقة (Gemini Core). كيف يمكنني هندسة وعيك اليوم؟" : "Lab Oracle Online (Gemini Core). How may I engineer your perception today?";
             appendMsg(welcome, 'bot');
         }
 
@@ -405,22 +379,29 @@ Connection Secure.
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
+        function handleChatEnter(e) { 
+            if(e.key === 'Enter') {
+                const text = aiInput.value.trim();
+                if(!text) return;
+                appendMsg(text, 'user');
+                aiInput.value = '';
+                
+                const thinkingMsg = document.createElement('div');
+                thinkingMsg.className = `ai-msg bot mono-text glitch`;
+                thinkingMsg.innerText = "[Processing...]";
+                chatBody.appendChild(thinkingMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
 
-        function sendChatMessage() {
-            const text = aiInput.value.trim();
-            if(!text) return;
-            appendMsg(text, 'user');
-            aiInput.value = '';
-            
-            setTimeout(() => {
-                const response = advancedBotLogic(text);
-                appendMsg(response, 'bot');
-            }, 600);
+                queryDeepMatrix(text, false).then(() => {
+                    if (chatBody.contains(thinkingMsg)) {
+                        chatBody.removeChild(thinkingMsg);
+                    }
+                });
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            // Initiate Intersection Observer for fade-in elements
+            initChat();
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
             }, { threshold: 0.15 });
