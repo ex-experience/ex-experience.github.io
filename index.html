@@ -37,27 +37,27 @@
         body.lang-en .ar-only { display: none; }
         body.lang-en .en-only { display: block; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; }
 
         /* Top Navigation Bar */
         .top-nav {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 25px 40px;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; box-sizing: border-box; pointer-events: none;
             background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
         }
         .top-nav > * { pointer-events: auto; }
-        .est-text { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 3px; font-weight: bold;}
-        .nav-controls { display: flex; gap: 15px; }
+        .est-text { font-size: 0.75rem; color: var(--cyber-steel); letter-spacing: 2px; font-weight: bold;}
+        .nav-controls { display: flex; gap: 10px; }
         .control-btn {
             background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel);
-            padding: 8px 20px; cursor: pointer; font-family: 'Space Mono', monospace;
-            font-size: 0.8rem; text-transform: uppercase; transition: all 0.3s ease; border-radius: 2px;
+            padding: 6px 15px; cursor: pointer; font-family: 'Space Mono', monospace;
+            font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s ease; border-radius: 2px;
             backdrop-filter: blur(5px);
         }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        /* Hero Section with Video */
+        /* Hero Section */
         .hero {
             position: relative; height: 100vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center !important;
@@ -67,72 +67,93 @@
         .video-wrapper:hover .video-bg { opacity: 0.7; }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1; pointer-events: none; }
 
-        /* Hero Content */
-        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; }
+        /* Hero Content - Adjusted Sizes for Elegance */
+        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box;}
         
         .interactive-logo {
-            font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--off-white); font-weight: 300;
-            letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            font-size: clamp(1.5rem, 4vw, 2.8rem); /* تصغير الشعار ليكون متناسقاً */
+            color: var(--off-white); font-weight: 300;
+            letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; transition: all 0.6s ease;
         }
-        .interactive-logo:hover { color: var(--stark-white); text-shadow: 0 0 40px rgba(255, 255, 255, 0.5); transform: scale(1.03); letter-spacing: 8px; }
+        .interactive-logo:hover { color: var(--stark-white); text-shadow: 0 0 30px rgba(255, 255, 255, 0.4); transform: scale(1.02); letter-spacing: 5px; }
 
         .interactive-slogan {
-            font-size: 1.2rem; color: var(--cyber-steel); margin-bottom: 25px; letter-spacing: 5px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem); /* تصغير السلوجن */
+            color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px;
             text-transform: uppercase; cursor: pointer; transition: all 0.4s ease;
         }
-        .interactive-slogan:hover { color: var(--stark-white); letter-spacing: 7px; }
+        .interactive-slogan:hover { color: var(--stark-white); letter-spacing: 6px; }
 
-        .static-personality { font-size: 0.95rem; color: var(--cyber-steel); font-style: italic; margin-bottom: 50px; letter-spacing: 2px; }
+        .static-personality { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--cyber-steel); font-style: italic; margin-bottom: 40px; letter-spacing: 2px; }
 
-        .social-btns { display: flex; gap: 20px; justify-content: center; }
+        .social-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .social-btn {
-            padding: 12px 35px; background: transparent; color: var(--stark-white); text-decoration: none;
-            font-size: 0.85rem; border: 1px solid var(--cyber-steel); transition: all 0.4s ease; text-transform: uppercase; letter-spacing: 2px;
+            padding: 10px 25px; background: transparent; color: var(--stark-white); text-decoration: none;
+            font-size: 0.8rem; border: 1px solid var(--cyber-steel); transition: all 0.4s ease; text-transform: uppercase; letter-spacing: 2px;
         }
         .social-btn:hover { background: var(--stark-white); color: var(--obsidian-black); border-color: var(--stark-white); }
 
-        /* Content Sections (Exposed Google Site Info) */
-        .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; }
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        /* Content Sections */
+        .content-section { padding: 100px 0; background: var(--obsidian-black); position: relative; z-index: 2; border-top: 1px solid #111;}
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        .section-title { font-size: 1rem; color: var(--cyber-steel); margin-bottom: 30px; letter-spacing: 5px; text-transform: uppercase; }
-        .main-heading { font-size: 2.5rem; font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 40px; }
-        .body-text { font-size: 1.2rem; color: var(--off-white); max-width: 800px; margin-bottom: 30px; }
+        .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
+        .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
+        .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--off-white); max-width: 800px; margin-bottom: 20px; }
         
         body.lang-ar .body-text, body.lang-ar .main-heading { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
 
         /* Grid Layouts */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; }
-        .grid-card { border-top: 1px solid #222; padding-top: 30px; }
-        .grid-card h4 { font-size: 1.5rem; margin-top: 0; color: var(--stark-white); }
-        .grid-card p { color: var(--cyber-steel); font-size: 1rem; }
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: 40px;} }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+        .grid-card { border-top: 1px solid #222; padding-top: 20px; }
+        .grid-card h4 { font-size: 1.2rem; margin-top: 0; color: var(--stark-white); }
+        .grid-card p { color: var(--cyber-steel); font-size: 0.95rem; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: 30px;} }
 
         /* Second Video Break */
-        .video-break { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .video-break { position: relative; height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* Form Section */
-        .form-container { background: #08090a; padding: 60px; border: 1px solid #1a1a1a; margin-top: 40px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .input-group { display: flex; flex-direction: column; }
-        .input-group label { color: var(--cyber-steel); font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        /* --- MEMBER PORTAL STYLES --- */
+        .portal-container { background: #08090a; padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; border-radius: 4px;}
+        @media (max-width: 768px) { .portal-container { padding: 30px 15px; } }
+        
+        .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
+        .input-group label { color: var(--cyber-steel); font-size: 0.75rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
         .cyber-input {
             background: transparent; border: none; border-bottom: 1px solid #333; color: var(--stark-white);
-            padding: 10px 0; font-family: inherit; font-size: 1.1rem; transition: all 0.3s ease; border-radius: 0;
+            padding: 8px 0; font-family: inherit; font-size: 1rem; transition: all 0.3s ease; border-radius: 0;
         }
         .cyber-input:focus { outline: none; border-bottom-color: var(--stark-white); }
-        textarea.cyber-input { resize: vertical; min-height: 100px; }
+        textarea.cyber-input { resize: vertical; min-height: 80px; }
 
         .submit-btn {
-            width: 100%; padding: 20px; background: var(--stark-white); color: var(--obsidian-black);
-            border: none; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px;
-            cursor: pointer; transition: all 0.3s ease; margin-top: 20px;
+            width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black);
+            border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.3s ease; margin-top: 10px;
         }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
 
-        footer { text-align: center !important; padding: 80px 20px 40px; border-top: 1px solid #111; background: var(--obsidian-black); position: relative; z-index: 2;}
-        .static-footer { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 3px; text-transform: uppercase; }
+        /* Dashboard specific */
+        #dashboard-view { display: none; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .dash-card {
+            background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 20px; text-align: center;
+            cursor: pointer; transition: all 0.3s ease; color: var(--cyber-steel);
+        }
+        .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); background: rgba(255,255,255,0.05); }
+        .dash-card h4 { margin: 0; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+        
+        .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
+        .service-form.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Footer */
+        footer { text-align: center !important; padding: 60px 20px 40px; border-top: 1px solid #111; background: var(--obsidian-black); position: relative; z-index: 2;}
+        .static-footer { font-size: 0.8rem; color: var(--cyber-steel); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;}
+        .contact-info { font-size: 0.85rem; color: var(--off-white); letter-spacing: 1px; }
+        .contact-info a { color: var(--stark-white); text-decoration: none; margin: 0 10px; transition: color 0.3s ease;}
+        .contact-info a:hover { color: var(--cyber-steel); }
 
     </style>
 </head>
@@ -160,7 +181,7 @@
             <div class="static-personality">Fearless, Relentless, True to you.</div>
             
             <div class="social-btns mono-text">
-                <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="social-btn" target="_blank">Consultation</a>
+                <a href="#portal" class="social-btn" onclick="document.getElementById('portal').scrollIntoView({behavior: 'smooth'});">Member Portal</a>
                 <a href="https://www.instagram.com/ex_experience.sa" class="social-btn" target="_blank">Instagram</a>
                 <a href="https://www.tiktok.com/@ex_experience.sa" class="social-btn" target="_blank">TikTok</a>
             </div>
@@ -176,72 +197,39 @@
             <h2 class="main-heading en-only">The line between ordinary and extraordinary.</h2>
             
             <p class="body-text ar-only">
-                <strong>フサム | experience™</strong> هي دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة البشرية. نعمل في نقطة التقاء علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة. حيث ينتهي التسويق التقليدي، تبدأ هندسة التجربة.
-                <br><br>
-                <span style="color: #fff;">هذا ليس تسويقاً.. هذه هندسة معمارية للتجربة.</span>
+                <strong>フサム | experience™</strong> هي دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة البشرية. نعمل في نقطة التقاء علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة.
+                <br><br><span style="color: #fff;">هذا ليس تسويقاً.. هذه هندسة معمارية للتجربة.</span>
             </p>
             <p class="body-text en-only">
-                <strong>フサム | experience™</strong> is a concept house and strategic lab focused on Human Experience Engineering. We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory. Where traditional marketing ends, experience architecture begins.
-                <br><br>
-                <span style="color: #fff;">This is not marketing.. This is experience architecture.</span>
+                <strong>フサム | experience™</strong> is a concept house and strategic lab focused on Human Experience Engineering. We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory.
+                <br><br><span style="color: #fff;">This is not marketing.. This is experience architecture.</span>
             </p>
         </div>
     </section>
 
     <section class="content-section" style="background-color: #050505;">
         <div class="container fade-in">
-            <div class="section-title mono-text ar-only">02. المشكلة الصامتة</div>
-            <div class="section-title mono-text en-only">02. The Silent Problem</div>
-
-            <h2 class="main-heading ar-only">تجارب تُرى، ولا تُشعر.</h2>
-            <h2 class="main-heading en-only">Seen, but rarely felt.</h2>
-
-            <p class="body-text ar-only">
-                العالم مليء بالمحتوى، لكن القليل من التجارب تُخلّد في الذاكرة. تتفاعل العلامات والأنظمة والبيئات مع البشر، لكنها نادراً ما تترك بصمة عاطفية دائمة. هذه الفجوة ليست مشكلة إبداعية، <strong>بل هي فشل في تصميم التجربة.</strong>
-                <br><br>
-                عملنا يدمج: <strong>البصيرة السلوكية - التصميم الحسي - هندسة الطقوس - الترجمة السينمائية</strong>؛ لخلق تجارب تُشعر قبل أن تُفهم.
-            </p>
-            <p class="body-text en-only">
-                The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint. This gap is not a creative issue, <strong>It is an experience design failure.</strong>
-                <br><br>
-                Our work combines: <strong>Behavioral Insight - Sensory Design - Ritual Engineering - Cinematic Translation</strong>; to create experiences that are felt, before they are understood.
-            </p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="container fade-in">
-            <div class="section-title mono-text ar-only">03. منهجية HX-5™</div>
-            <div class="section-title mono-text en-only">03. HX-5™ Methodology</div>
+            <div class="section-title mono-text ar-only">02. منهجية HX-5™</div>
+            <div class="section-title mono-text en-only">02. HX-5™ Methodology</div>
 
             <h2 class="main-heading ar-only">خمس ركائز لهندسة الإدراك البشري.</h2>
             <h2 class="main-heading en-only">Five pillars engineering human perception.</h2>
 
             <div class="grid-2">
                 <div class="grid-card">
-                    <h4 class="mono-text">1. Intent</h4>
-                    <p class="ar-only">"لماذا يجب أن توجد هذه التجربة؟" نحدد الغرض الوجودي لضمان أن كل تفاعل يخدم هدفاً أسمى.</p>
-                    <p class="en-only">"Why should this experience exist?" Defining the existential purpose so every interaction serves a higher objective.</p>
+                    <h4 class="mono-text">1. Intent & Context</h4>
+                    <p class="ar-only">تحديد الغرض الوجودي وتحليل الظروف البيئية والزمنية لهندسة استجابة مثالية.</p>
+                    <p class="en-only">Defining existential purpose and analyzing environmental conditions for optimal response.</p>
                 </div>
                 <div class="grid-card">
-                    <h4 class="mono-text">2. Context</h4>
-                    <p class="ar-only">"أين ومتى وتحت أي ظروف؟" نحلل الظروف البيئية والزمنية والنفسية لهندسة استجابة مثالية.</p>
-                    <p class="en-only">"Where, when, and under what conditions?" Analyzing environmental, temporal, and psychological conditions.</p>
+                    <h4 class="mono-text">2. Stimuli & Interaction</h4>
+                    <p class="ar-only">هندسة المدخلات البصرية والسمعية، والتحكم في إيقاع التفاعل لاختراق اللاوعي.</p>
+                    <p class="en-only">Engineering sensory inputs and governing engagement rhythm to bypass logical filters.</p>
                 </div>
-                <div class="grid-card">
-                    <h4 class="mono-text">3. Stimuli</h4>
-                    <p class="ar-only">"ما هي المحفزات التي تفعل العاطفة؟" هندسة المدخلات البصرية والسمعية لاختراق اللاوعي البشري.</p>
-                    <p class="en-only">"Which sensory triggers activate emotion?" Engineering visual and auditory inputs to bypass logical filters.</p>
-                </div>
-                <div class="grid-card">
-                    <h4 class="mono-text">4. Interaction</h4>
-                    <p class="ar-only">"كيف يشارك الإنسان؟" نتحكم في إيقاع التفاعل لتحويل الشخص من مشاهد إلى مشارك نشط.</p>
-                    <p class="en-only">"How does the human participate?" Governing the rhythm of engagement from spectator to active participant.</p>
-                </div>
-                <div class="grid-card">
-                    <h4 class="mono-text">5. Impact</h4>
-                    <p class="ar-only">"ماذا يتبقى بعد انتهاء التجربة؟" المقياس النهائي لنجاحنا هو "الراسب العاطفي" المتبقي في الذاكرة.</p>
-                    <p class="en-only">"What remains after the experience ends?" The ultimate metric of success is the lasting "emotional residue".</p>
+                <div class="grid-card" style="grid-column: 1 / -1; border-top: none; padding-top: 0;">
+                    <h4 class="mono-text">3. The Impact</h4>
+                    <p class="ar-only">المقياس النهائي لنجاحنا هو "الراسب العاطفي" الدائم المتبقي في الذاكرة.</p>
+                    <p class="en-only">Our ultimate metric of success is the lasting "emotional residue" in memory.</p>
                 </div>
             </div>
         </div>
@@ -252,98 +240,146 @@
             <source src="SnapInsta.to_AQMDUdNuwWm_I0S914efb6SceI2ftxQU4UoR5aACJSHeghEexFxN-IBQSVtp3_6cpmq-LwEeniaGBMlI4VrJOSq1.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
-        <div class="interactive-slogan mono-text" style="position: relative; z-index: 2; font-size: 2rem; color: #fff;">Proof of Feeling</div>
+        <div class="interactive-slogan mono-text" style="position: relative; z-index: 2; font-size: clamp(1.2rem, 3vw, 2rem); color: #fff;">Proof of Feeling</div>
     </section>
 
-    <section class="content-section">
+    <section id="portal" class="content-section" style="background-color: #000;">
         <div class="container fade-in">
-            <div class="grid-2" style="margin-top: 0;">
-                <div>
-                    <div class="section-title mono-text ar-only">04. الاستراتيجية التنفيذية</div>
-                    <div class="section-title mono-text en-only">04. Execution Strategy</div>
-                    
-                    <h2 class="main-heading ar-only" style="font-size: 2rem;">لماذا النماذج التجريبية؟</h2>
-                    <h2 class="main-heading en-only" style="font-size: 2rem;">Why Pilots First?</h2>
-                    
-                    <p class="body-text ar-only" style="font-size: 1rem;">
-                        الأفكار لا تكفي، والوعود لا تتوسع. النماذج التجريبية تخلق <strong>دليلاً على الشعور</strong> قبل الدليل على المفهوم. التجربة يجب أن تُثبت، لا أن تُوصف. نحن ننفذ مشاريع تمتد من 4-6 أسابيع لقياس الأثر وتسليمه كفيلم سينمائي وحالة دراسية استراتيجية.
-                    </p>
-                    <p class="body-text en-only" style="font-size: 1rem;">
-                        Ideas are not enough. Promises do not scale. Pilots create <strong>proof of feeling</strong> before proof of concept. Experience must be demonstrated, not described. We execute focused 4-6 week pilots designed to validate experience impact.
-                    </p>
-                </div>
-                <div>
-                    <div class="section-title mono-text ar-only">05. الشراكات</div>
-                    <div class="section-title mono-text en-only">05. Partnerships</div>
-                    
-                    <h2 class="main-heading ar-only" style="font-size: 2rem;">ملاحظة للمستثمرين</h2>
-                    <h2 class="main-heading en-only" style="font-size: 2rem;">Investor Note</h2>
-                    
-                    <p class="body-text ar-only" style="font-size: 1rem;">
-                        فُسام ليست شركة منتجات، وليست وكالة إعلانية. إنها بنية تحتية لفئة جديدة في "اقتصاد التجربة". القيمة تكمن في النظام، قابليته للتكرار، وتطبيقه عبر القطاعات. نحن للمنظمات التي تبحث عن أثر طويل المدى، والمستثمرين الذين يركزون على البنية التحتية، وليس الضجة المؤقتة.
-                    </p>
-                    <p class="body-text en-only" style="font-size: 1rem;">
-                        フサム is not a product company. And not an agency. It is the architecture of a new category within the Experience Economy. The value lies in the system, its repeatability, and its cross-sector application.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background-color: #000; border-top: 1px solid #111;">
-        <div class="container fade-in">
-            <div class="section-title mono-text ar-only">بوابة المعايرة</div>
-            <div class="section-title mono-text en-only">Calibration Portal</div>
+            <div class="section-title mono-text ar-only">بوابة الأعضاء والسيادة</div>
+            <div class="section-title mono-text en-only">Sovereign Member Portal</div>
             
-            <h2 class="main-heading ar-only">تواصل لتصميم تجربتك.</h2>
-            <h2 class="main-heading en-only">Initiate your experience.</h2>
+            <h2 class="main-heading ar-only">الوصول الحصري والتحكم.</h2>
+            <h2 class="main-heading en-only">Exclusive Access & Control.</h2>
 
-            <div class="form-container">
-                <form onsubmit="event.preventDefault(); alert('تم استلام طلب المعايرة. / Calibration request received.');">
-                    <div class="form-grid">
-                        <div class="input-group">
-                            <label class="ar-only">الاسم الكامل</label>
-                            <label class="en-only">Full Name</label>
-                            <input type="text" class="cyber-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label class="ar-only">البريد الإلكتروني</label>
-                            <label class="en-only">Email Address</label>
-                            <input type="email" class="cyber-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label class="ar-only">رقم الجوال (اختياري)</label>
-                            <label class="en-only">Phone Number (Optional)</label>
-                            <input type="tel" class="cyber-input">
-                        </div>
-                        <div class="input-group">
-                            <label class="ar-only">المسمى الوظيفي / الجهة</label>
-                            <label class="en-only">Title / Organization</label>
-                            <input type="text" class="cyber-input">
-                        </div>
-                    </div>
+            <div class="portal-container">
+                
+                <div id="login-view">
+                    <p class="ar-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">قم بتسجيل الدخول أو إنشاء هويتك الرقمية للوصول إلى لوحة التحكم، التواصل المباشر، وطلب الاستشارات.</p>
+                    <p class="en-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">Log in or create your digital identity to access the dashboard, direct communication, and consultations.</p>
                     
-                    <div class="input-group">
-                        <label class="ar-only">الملاحظات والطلبات الاستراتيجية</label>
-                        <label class="en-only">Notes & Strategic Requests</label>
-                        <textarea class="cyber-input" required></textarea>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="input-group">
+                            <label class="ar-only">البريد الإلكتروني أو رقم المعايرة</label>
+                            <label class="en-only">Email or Calibration ID</label>
+                            <input type="email" class="cyber-input" required placeholder="you@domain.com">
+                        </div>
+                        <div class="input-group">
+                            <label class="ar-only">كلمة المرور المشفرة (اختياري للأعضاء الجدد)</label>
+                            <label class="en-only">Encrypted Password (Optional for new)</label>
+                            <input type="password" class="cyber-input">
+                        </div>
+                        <button type="submit" class="submit-btn mono-text">
+                            <span class="ar-only">دخول / تسجيل</span>
+                            <span class="en-only">Login / Register</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="dashboard-view">
+                    <h3 class="ar-only" style="color: var(--stark-white); font-weight: 300; margin-bottom: 5px;">مرحباً بك في المختبر.</h3>
+                    <h3 class="en-only" style="color: var(--stark-white); font-weight: 300; margin-bottom: 5px;">Welcome to the Lab.</h3>
+                    <p style="color: var(--cyber-steel); font-size: 0.85rem; margin-bottom: 30px;">
+                        <span class="ar-only">اختر مسار المعايرة أو الخدمة المطلوبة:</span>
+                        <span class="en-only">Select your calibration path or service:</span>
+                    </p>
+
+                    <div class="dashboard-grid">
+                        <div class="dash-card active" onclick="switchService('consult')">
+                            <h4 class="ar-only">الاستشارات والأفراد</h4>
+                            <h4 class="en-only">Consultations</h4>
+                        </div>
+                        <div class="dash-card" onclick="switchService('corp')">
+                            <h4 class="ar-only">خدمات الشركات</h4>
+                            <h4 class="en-only">Corporate</h4>
+                        </div>
+                        <div class="dash-card" onclick="switchService('feedback')">
+                            <h4 class="ar-only">التواصل والتقييم</h4>
+                            <h4 class="en-only">Feedback</h4>
+                        </div>
+                        <div class="dash-card" onclick="switchService('news')">
+                            <h4 class="ar-only">النشرة والأخبار</h4>
+                            <h4 class="en-only">The Oracle</h4>
+                        </div>
                     </div>
 
-                    <button type="submit" class="submit-btn mono-text">
-                        <span class="ar-only">إرسال للمختبر</span>
-                        <span class="en-only">Submit to Lab</span>
-                    </button>
-                </form>
+                    <div id="form-consult" class="service-form active">
+                        <form onsubmit="event.preventDefault(); alert('تم إرسال طلب الاستشارة بنجاح. / Consultation requested.');">
+                            <div class="input-group">
+                                <label class="ar-only">نوع الاستشارة المطلوبة</label>
+                                <label class="en-only">Type of Consultation</label>
+                                <input type="text" class="cyber-input" placeholder="..." required>
+                            </div>
+                            <div class="input-group">
+                                <label class="ar-only">الهدف النفسي أو المادي (التفاصيل)</label>
+                                <label class="en-only">Psychological or Material Goal</label>
+                                <textarea class="cyber-input" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">
+                                <span class="ar-only">تأكيد طلب المختبر</span>
+                                <span class="en-only">Confirm Lab Request</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="form-corp" class="service-form">
+                        <form onsubmit="event.preventDefault(); alert('تم إرسال طلب الشركات بنجاح. / Corporate request sent.');">
+                            <div class="input-group">
+                                <label class="ar-only">اسم المنظمة / الشركة</label>
+                                <label class="en-only">Organization / Company Name</label>
+                                <input type="text" class="cyber-input" required>
+                            </div>
+                            <div class="input-group">
+                                <label class="ar-only">تحديات العلامة التجارية الحالية</label>
+                                <label class="en-only">Current Brand Challenges</label>
+                                <textarea class="cyber-input" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">
+                                <span class="ar-only">طلب هندسة تجربة للشركة</span>
+                                <span class="en-only">Request Corporate Engineering</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="form-feedback" class="service-form">
+                        <form onsubmit="event.preventDefault(); alert('تم استلام ملاحظاتك. / Feedback received.');">
+                            <div class="input-group">
+                                <label class="ar-only">التواصل المباشر، التقييم، أو الملاحظات</label>
+                                <label class="en-only">Direct Comm, Rating, or Notes</label>
+                                <textarea class="cyber-input" required placeholder="..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">
+                                <span class="ar-only">إرسال للإدارة</span>
+                                <span class="en-only">Send to Management</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="form-news" class="service-form">
+                        <form onsubmit="event.preventDefault(); alert('تم تسجيلك في القائمة الحصرية. / Subscribed to exclusive list.');">
+                            <p class="ar-only" style="color:var(--stark-white); font-size: 0.9rem;">تسجيل بياناتك للحصول على أحدث بروتوكولات المختبر، الأخبار، والتحديثات الحصرية للعلامة.</p>
+                            <p class="en-only" style="color:var(--stark-white); font-size: 0.9rem;">Register to receive the latest lab protocols, news, and exclusive brand updates.</p>
+                            <button type="submit" class="submit-btn mono-text" style="margin-top: 20px;">
+                                <span class="ar-only">تفعيل استلام التحديثات</span>
+                                <span class="en-only">Activate Updates</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="static-footer mono-text">Concept house &bull; &copy; 1991. SA</div>
+        <div class="contact-info mono-text">
+            <a href="hussambinhassan92@gmail.com">hussambinhassan@hotmail.com</a> | 
+            <a href="tel:+966566716036" dir="ltr">+966 56 671 6036</a>
+        </div>
     </footer>
 
     <script>
-        // Language Toggle System (Switches layout and text completely)
+        // Language System
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-ar')) {
@@ -355,14 +391,12 @@
             }
         }
 
-        // Global Audio Control for Videos
+        // Audio System
         function toggleAudio() {
             const vids = document.querySelectorAll('video');
             const btn = document.getElementById('audioBtn');
             let isMuted = vids[0].muted;
-            
             vids.forEach(vid => { vid.muted = !isMuted; });
-            
             if(isMuted) {
                 btn.innerHTML = 'Sound 🔊';
                 btn.style.background = 'var(--stark-white)';
@@ -374,19 +408,14 @@
             }
         }
 
-        // Interactive Video Play/Pause on click
+        // Video Play/Pause
         function togglePlayPause(wrapper) {
             const video = wrapper.querySelector('video');
-            if (video.paused) {
-                video.play();
-                wrapper.style.opacity = '1';
-            } else {
-                video.pause();
-                wrapper.style.opacity = '0.8';
-            }
+            if (video.paused) { video.play(); wrapper.style.opacity = '1'; } 
+            else { video.pause(); wrapper.style.opacity = '0.8'; }
         }
 
-        // Fade-in Animation on Scroll (Tesla Effect)
+        // Fade-in Animation
         document.addEventListener("DOMContentLoaded", function() {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
             const observer = new IntersectionObserver((entries, observer) => {
@@ -397,11 +426,27 @@
                     }
                 });
             }, observerOptions);
-
-            document.querySelectorAll('.fade-in').forEach(element => {
-                observer.observe(element);
-            });
+            document.querySelectorAll('.fade-in').forEach(element => { observer.observe(element); });
         });
+
+        // --- Member Portal Logic ---
+        function handleLogin(e) {
+            e.preventDefault();
+            // Simulate login transition
+            document.getElementById('login-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            document.getElementById('dashboard-view').style.animation = 'fadeIn 0.8s';
+        }
+
+        function switchService(serviceId) {
+            // Update Active Tab
+            document.querySelectorAll('.dash-card').forEach(card => card.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            // Hide all forms, show selected
+            document.querySelectorAll('.service-form').forEach(form => form.classList.remove('active'));
+            document.getElementById('form-' + serviceId).classList.add('active');
+        }
     </script>
 </body>
 </html>
