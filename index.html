@@ -8,11 +8,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         
         :root {
-            --obsidian-black: #050505;
+            --obsidian-black: #000000;
             --cyber-steel: #8b939c;
             --stark-white: #ffffff;
-            --dark-panel: rgba(15, 17, 18, 0.85);
-            --glass-bg: rgba(0, 0, 0, 0.6);
+            --off-white: #d1d5d8;
         }
 
         body {
@@ -24,157 +23,130 @@
             padding: 0;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            transition: all 0.4s ease;
+            scroll-behavior: smooth;
         }
 
-        .mono-text { font-family: 'Space Mono', monospace; letter-spacing: -0.5px; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+        .mono-text { font-family: 'Space Mono', monospace; }
 
         /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
-        .content-ar { display: block; }
-        .content-en { display: none; }
-        body.lang-en .content-ar { display: none; }
-        body.lang-en .content-en { display: block; }
+        
+        .ar-only { display: block; }
+        .en-only { display: none; }
+        body.lang-en .ar-only { display: none; }
+        body.lang-en .en-only { display: block; }
 
-        /* Top Bar & Toggles */
-        .top-bar {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px;
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 25px 40px;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; box-sizing: border-box; pointer-events: none;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
         }
-        .top-bar > * { pointer-events: auto; }
-        
-        .static-top-text { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 2px; }
+        .top-nav > * { pointer-events: auto; }
+        .est-text { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 3px; font-weight: bold;}
+        .nav-controls { display: flex; gap: 15px; }
+        .control-btn {
+            background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel);
+            padding: 8px 20px; cursor: pointer; font-family: 'Space Mono', monospace;
+            font-size: 0.8rem; text-transform: uppercase; transition: all 0.3s ease; border-radius: 2px;
+            backdrop-filter: blur(5px);
+        }
+        .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        .control-btns { display: flex; gap: 15px; }
-        .cyber-btn {
-            background: rgba(0,0,0,0.5); color: var(--stark-white); border: 1px solid var(--cyber-steel);
-            padding: 8px 16px; cursor: pointer; font-family: 'Space Mono', monospace;
-            font-size: 0.8rem; backdrop-filter: blur(5px); transition: all 0.3s ease; text-transform: uppercase;
-        }
-        .cyber-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
-
-        /* Video Backgrounds & Interactivity */
-        .video-wrapper {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
-            cursor: pointer; /* يدل على أن الفيديو تفاعلي */
-        }
-        .video-bg {
-            width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: opacity 0.5s ease;
-        }
-        .video-wrapper:hover .video-bg { opacity: 0.8; }
-        
-        .overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.2) 0%, rgba(5,5,5,0.95) 100%); z-index: 1; pointer-events: none;
-        }
-
-        /* Sound Toggle Floating Button */
-        .sound-toggle-float {
-            position: absolute; bottom: 40px; right: 40px; z-index: 10;
-            background: rgba(255,255,255,0.1); border: 1px solid var(--stark-white); color: var(--stark-white);
-            padding: 12px 24px; cursor: pointer; backdrop-filter: blur(10px); border-radius: 50px;
-            display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;
-        }
-        .sound-toggle-float:hover { background: var(--stark-white); color: var(--obsidian-black); transform: scale(1.05); }
-        .sound-icon { width: 15px; height: 15px; fill: currentColor; }
-
-        /* Hero Section (Tesla Style) */
-        header {
+        /* Hero Section with Video */
+        .hero {
             position: relative; height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center !important; overflow: hidden;
+            justify-content: center; align-items: center; text-align: center !important;
         }
+        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; cursor: pointer; }
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: opacity 0.5s ease; }
+        .video-wrapper:hover .video-bg { opacity: 0.7; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1; pointer-events: none; }
 
+        /* Hero Content */
+        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; }
+        
         .interactive-logo {
-            font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--stark-white); font-weight: 300;
+            font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--off-white); font-weight: 300;
             letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            position: relative; z-index: 2; pointer-events: auto;
         }
-        .interactive-logo:hover {
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.6); transform: scale(1.05); letter-spacing: 6px;
-        }
+        .interactive-logo:hover { color: var(--stark-white); text-shadow: 0 0 40px rgba(255, 255, 255, 0.5); transform: scale(1.03); letter-spacing: 8px; }
 
         .interactive-slogan {
-            font-size: 1.2rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px;
-            text-transform: uppercase; cursor: pointer; transition: all 0.4s ease; position: relative; z-index: 2; pointer-events: auto;
+            font-size: 1.2rem; color: var(--cyber-steel); margin-bottom: 25px; letter-spacing: 5px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.4s ease;
         }
-        .interactive-slogan:hover { color: var(--stark-white); letter-spacing: 6px; }
+        .interactive-slogan:hover { color: var(--stark-white); letter-spacing: 7px; }
 
-        .static-personality {
-            font-size: 0.9rem; color: var(--cyber-steel); font-style: italic; margin-bottom: 50px;
-            letter-spacing: 1px; position: relative; z-index: 2; pointer-events: none;
+        .static-personality { font-size: 0.95rem; color: var(--cyber-steel); font-style: italic; margin-bottom: 50px; letter-spacing: 2px; }
+
+        .social-btns { display: flex; gap: 20px; justify-content: center; }
+        .social-btn {
+            padding: 12px 35px; background: transparent; color: var(--stark-white); text-decoration: none;
+            font-size: 0.85rem; border: 1px solid var(--cyber-steel); transition: all 0.4s ease; text-transform: uppercase; letter-spacing: 2px;
         }
+        .social-btn:hover { background: var(--stark-white); color: var(--obsidian-black); border-color: var(--stark-white); }
 
-        /* Hero Buttons */
-        .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2; pointer-events: auto; }
-        .hero-btn {
-            padding: 12px 30px; background: transparent; color: var(--stark-white);
-            text-decoration: none; font-size: 0.9rem; border: 1px solid var(--stark-white);
-            transition: all 0.4s ease; text-transform: uppercase; letter-spacing: 2px; backdrop-filter: blur(5px); cursor: pointer;
-        }
-        .hero-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
+        /* Content Sections (Exposed Google Site Info) */
+        .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* Sections */
-        .section { position: relative; padding: 100px 0; border-top: 1px solid #1a1a1a; background: var(--obsidian-black); z-index: 2;}
-        .section-title { font-size: 0.9rem; color: var(--cyber-steel); margin-bottom: 40px; letter-spacing: 4px; text-transform: uppercase; }
-
-        /* Forms / Inputs */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
-        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+        .section-title { font-size: 1rem; color: var(--cyber-steel); margin-bottom: 30px; letter-spacing: 5px; text-transform: uppercase; }
+        .main-heading { font-size: 2.5rem; font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 40px; }
+        .body-text { font-size: 1.2rem; color: var(--off-white); max-width: 800px; margin-bottom: 30px; }
         
-        .input-group { display: flex; flex-direction: column; text-align: start; }
-        .input-group label { color: var(--cyber-steel); font-size: 0.8rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;}
+        body.lang-ar .body-text, body.lang-ar .main-heading { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; }
+        .grid-card { border-top: 1px solid #222; padding-top: 30px; }
+        .grid-card h4 { font-size: 1.5rem; margin-top: 0; color: var(--stark-white); }
+        .grid-card p { color: var(--cyber-steel); font-size: 1rem; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: 40px;} }
+
+        /* Second Video Break */
+        .video-break { position: relative; height: 70vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+        /* Form Section */
+        .form-container { background: #08090a; padding: 60px; border: 1px solid #1a1a1a; margin-top: 40px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group label { color: var(--cyber-steel); font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
         .cyber-input {
-            background: rgba(255,255,255,0.03); border: none; border-bottom: 1px solid var(--cyber-steel);
-            color: var(--stark-white); padding: 15px; font-family: inherit; font-size: 1rem; transition: all 0.3s ease;
+            background: transparent; border: none; border-bottom: 1px solid #333; color: var(--stark-white);
+            padding: 10px 0; font-family: inherit; font-size: 1.1rem; transition: all 0.3s ease; border-radius: 0;
         }
-        .cyber-input:focus { outline: none; border-bottom-color: var(--stark-white); background: rgba(255,255,255,0.08); }
-        textarea.cyber-input { resize: vertical; min-height: 120px; }
+        .cyber-input:focus { outline: none; border-bottom-color: var(--stark-white); }
+        textarea.cyber-input { resize: vertical; min-height: 100px; }
 
-        .security-check {
-            display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.02);
-            padding: 15px; border: 1px dashed var(--cyber-steel); margin-bottom: 30px; cursor: pointer;
+        .submit-btn {
+            width: 100%; padding: 20px; background: var(--stark-white); color: var(--obsidian-black);
+            border: none; font-size: 1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px;
+            cursor: pointer; transition: all 0.3s ease; margin-top: 20px;
         }
-        .security-check input { width: 20px; height: 20px; accent-color: var(--stark-white); cursor: pointer;}
-        
-        .submit-btn { width: 100%; background: var(--stark-white); color: var(--obsidian-black); border: none; font-weight: bold; }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
 
-        /* Interactive Accordion (Database) */
-        .accordion { border-top: 1px solid #333; margin-top: 40px; }
-        .accordion-item { border-bottom: 1px solid #333; }
-        .accordion-header {
-            width: 100%; text-align: start; background: transparent; border: none; color: var(--stark-white);
-            padding: 25px 0; font-size: 1.2rem; cursor: pointer; display: flex; justify-content: space-between;
-            align-items: center; transition: color 0.3s ease; font-family: inherit;
-        }
-        .accordion-header:hover { color: var(--cyber-steel); }
-        .accordion-header::after { content: '+'; font-size: 1.5rem; color: var(--cyber-steel); font-family: 'Space Mono'; }
-        .accordion-item.active .accordion-header::after { content: '-'; }
-        .accordion-content {
-            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #a0a0a0; font-size: 1rem;
-        }
-        .accordion-content-inner { padding-bottom: 25px; }
-        .accordion-content ul { padding-inline-start: 20px; }
-        .accordion-content li { margin-bottom: 10px; }
-
-        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #1a1a1a; background: var(--obsidian-black); position: relative; z-index: 2;}
-        .static-footer { font-size: 0.8rem; color: var(--cyber-steel); letter-spacing: 2px; text-transform: uppercase; }
+        footer { text-align: center !important; padding: 80px 20px 40px; border-top: 1px solid #111; background: var(--obsidian-black); position: relative; z-index: 2;}
+        .static-footer { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 3px; text-transform: uppercase; }
 
     </style>
 </head>
 <body class="lang-ar">
 
-    <div class="top-bar">
-        <div class="static-top-text mono-text">EST EX/2025. SA</div>
-        <div class="control-btns">
-            <button class="cyber-btn" onclick="toggleLanguage()">EN / عربي</button>
+    <div class="top-nav">
+        <div class="est-text mono-text">EST EX/2025. SA</div>
+        <div class="nav-controls">
+            <button class="control-btn" onclick="toggleAudio()" id="audioBtn">Sound 🔈</button>
+            <button class="control-btn" onclick="toggleLanguage()">EN / عربي</button>
         </div>
     </div>
 
-    <header>
+    <header class="hero">
         <div class="video-wrapper" onclick="togglePlayPause(this)">
             <video id="heroVideo" class="video-bg" autoplay loop muted playsinline>
                 <source src="SnapInsta.to_AQNNXfsHpE3hPCFdMkoyLHEbCMQ6ayO8F7NXSwmDz7u82ndaR0mN7jPnSe0aqdd8ZsTRGVUl_432B376HVSC_TsL.mp4" type="video/mp4">
@@ -182,182 +154,186 @@
         </div>
         <div class="overlay"></div>
 
-        <button class="sound-toggle-float mono-text" onclick="toggleAudio('heroVideo', this)">
-            <svg class="sound-icon" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <span class="content-ar">تفعيل الصوت</span>
-            <span class="content-en">Unmute Experience</span>
-        </button>
-
-        <div class="interactive-logo mono-text">フサム | experience™</div>
-        <div class="interactive-slogan mono-text">Engineering human experiences</div>
-        <div class="static-personality">Fearless, Relentless, True to you.</div>
-        
-        <div class="hero-btns mono-text">
-            <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="hero-btn" target="_blank">Consultation | استشارة</a>
-            <a href="https://www.instagram.com/ex_experience.sa" class="hero-btn" target="_blank">Instagram</a>
-            <a href="https://www.tiktok.com/@ex_experience.sa" class="hero-btn" target="_blank">TikTok</a>
+        <div class="hero-content">
+            <div class="interactive-logo mono-text">フサム | experience™</div>
+            <div class="interactive-slogan mono-text">Engineering human experiences</div>
+            <div class="static-personality">Fearless, Relentless, True to you.</div>
+            
+            <div class="social-btns mono-text">
+                <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="social-btn" target="_blank">Consultation</a>
+                <a href="https://www.instagram.com/ex_experience.sa" class="social-btn" target="_blank">Instagram</a>
+                <a href="https://www.tiktok.com/@ex_experience.sa" class="social-btn" target="_blank">TikTok</a>
+            </div>
         </div>
     </header>
 
-    <section class="section">
-        <div class="container">
-            <div class="content-ar">
-                <div class="section-title mono-text">01. بوابة الاستدعاء والوصول</div>
-                <h3 style="margin-top:0; font-weight: 300;">تسجيل بيانات المعايرة</h3>
-            </div>
-            <div class="content-en">
-                <div class="section-title mono-text">01. Summoning & Access Portal</div>
-                <h3 style="margin-top:0; font-weight: 300;">Calibration Data Entry</h3>
-            </div>
-
-            <form onsubmit="event.preventDefault(); alert('تم تشفير البيانات وإرسالها بنجاح / Data Encrypted & Sent.');">
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label class="content-ar">الاسم الكامل</label>
-                        <label class="content-en">Full Name</label>
-                        <input type="text" class="cyber-input" required>
-                    </div>
-                    <div class="input-group">
-                        <label class="content-ar">البريد الإلكتروني</label>
-                        <label class="content-en">Email Address</label>
-                        <input type="email" class="cyber-input" required>
-                    </div>
-                    <div class="input-group" style="grid-column: 1 / -1;">
-                        <label class="content-ar">رقم الجوال (اختياري)</label>
-                        <label class="content-en">Phone Number (Optional)</label>
-                        <input type="tel" class="cyber-input">
-                    </div>
-                </div>
-
-                <div class="input-group" style="margin-bottom: 30px;">
-                    <label class="content-ar">الملاحظات، الطلبات الاستراتيجية، أو الاقتراحات</label>
-                    <label class="content-en">Notes, Strategic Requests, or Suggestions</label>
-                    <textarea class="cyber-input" placeholder="..."></textarea>
-                </div>
-
-                <label class="security-check">
-                    <input type="checkbox" required>
-                    <span class="content-ar mono-text">تأكيد الأمان: أقر بأنني أطلب هندسة لتجربتي ولست أبحث عن منتج تقليدي.</span>
-                    <span class="content-en mono-text">Security Check: I acknowledge I seek experience engineering, not a traditional product.</span>
-                </label>
-
-                <button type="submit" class="hero-btn submit-btn mono-text">
-                    <span class="content-ar">إرسال البيانات للمختبر</span>
-                    <span class="content-en">Submit Data to Lab</span>
-                </button>
-            </form>
+    <section class="content-section">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">01. الفلسفة المعمارية</div>
+            <div class="section-title mono-text en-only">01. Architectural Philosophy</div>
+            
+            <h2 class="main-heading ar-only">الخط الفاصل بين العادي والاستثنائي.</h2>
+            <h2 class="main-heading en-only">The line between ordinary and extraordinary.</h2>
+            
+            <p class="body-text ar-only">
+                <strong>フサム | experience™</strong> هي دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة البشرية. نعمل في نقطة التقاء علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة. حيث ينتهي التسويق التقليدي، تبدأ هندسة التجربة.
+                <br><br>
+                <span style="color: #fff;">هذا ليس تسويقاً.. هذه هندسة معمارية للتجربة.</span>
+            </p>
+            <p class="body-text en-only">
+                <strong>フサム | experience™</strong> is a concept house and strategic lab focused on Human Experience Engineering. We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory. Where traditional marketing ends, experience architecture begins.
+                <br><br>
+                <span style="color: #fff;">This is not marketing.. This is experience architecture.</span>
+            </p>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="content-ar">
-                <div class="section-title mono-text">02. الأرشيف السيادي (The Grand Codex)</div>
-                <h3 style="margin-top:0; font-weight: 300;">قاعدة بيانات المختبر</h3>
+    <section class="content-section" style="background-color: #050505;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">02. المشكلة الصامتة</div>
+            <div class="section-title mono-text en-only">02. The Silent Problem</div>
+
+            <h2 class="main-heading ar-only">تجارب تُرى، ولا تُشعر.</h2>
+            <h2 class="main-heading en-only">Seen, but rarely felt.</h2>
+
+            <p class="body-text ar-only">
+                العالم مليء بالمحتوى، لكن القليل من التجارب تُخلّد في الذاكرة. تتفاعل العلامات والأنظمة والبيئات مع البشر، لكنها نادراً ما تترك بصمة عاطفية دائمة. هذه الفجوة ليست مشكلة إبداعية، <strong>بل هي فشل في تصميم التجربة.</strong>
+                <br><br>
+                عملنا يدمج: <strong>البصيرة السلوكية - التصميم الحسي - هندسة الطقوس - الترجمة السينمائية</strong>؛ لخلق تجارب تُشعر قبل أن تُفهم.
+            </p>
+            <p class="body-text en-only">
+                The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint. This gap is not a creative issue, <strong>It is an experience design failure.</strong>
+                <br><br>
+                Our work combines: <strong>Behavioral Insight - Sensory Design - Ritual Engineering - Cinematic Translation</strong>; to create experiences that are felt, before they are understood.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">03. منهجية HX-5™</div>
+            <div class="section-title mono-text en-only">03. HX-5™ Methodology</div>
+
+            <h2 class="main-heading ar-only">خمس ركائز لهندسة الإدراك البشري.</h2>
+            <h2 class="main-heading en-only">Five pillars engineering human perception.</h2>
+
+            <div class="grid-2">
+                <div class="grid-card">
+                    <h4 class="mono-text">1. Intent</h4>
+                    <p class="ar-only">"لماذا يجب أن توجد هذه التجربة؟" نحدد الغرض الوجودي لضمان أن كل تفاعل يخدم هدفاً أسمى.</p>
+                    <p class="en-only">"Why should this experience exist?" Defining the existential purpose so every interaction serves a higher objective.</p>
+                </div>
+                <div class="grid-card">
+                    <h4 class="mono-text">2. Context</h4>
+                    <p class="ar-only">"أين ومتى وتحت أي ظروف؟" نحلل الظروف البيئية والزمنية والنفسية لهندسة استجابة مثالية.</p>
+                    <p class="en-only">"Where, when, and under what conditions?" Analyzing environmental, temporal, and psychological conditions.</p>
+                </div>
+                <div class="grid-card">
+                    <h4 class="mono-text">3. Stimuli</h4>
+                    <p class="ar-only">"ما هي المحفزات التي تفعل العاطفة؟" هندسة المدخلات البصرية والسمعية لاختراق اللاوعي البشري.</p>
+                    <p class="en-only">"Which sensory triggers activate emotion?" Engineering visual and auditory inputs to bypass logical filters.</p>
+                </div>
+                <div class="grid-card">
+                    <h4 class="mono-text">4. Interaction</h4>
+                    <p class="ar-only">"كيف يشارك الإنسان؟" نتحكم في إيقاع التفاعل لتحويل الشخص من مشاهد إلى مشارك نشط.</p>
+                    <p class="en-only">"How does the human participate?" Governing the rhythm of engagement from spectator to active participant.</p>
+                </div>
+                <div class="grid-card">
+                    <h4 class="mono-text">5. Impact</h4>
+                    <p class="ar-only">"ماذا يتبقى بعد انتهاء التجربة؟" المقياس النهائي لنجاحنا هو "الراسب العاطفي" المتبقي في الذاكرة.</p>
+                    <p class="en-only">"What remains after the experience ends?" The ultimate metric of success is the lasting "emotional residue".</p>
+                </div>
             </div>
-            <div class="content-en">
-                <div class="section-title mono-text">02. The Grand Codex Archive</div>
-                <h3 style="margin-top:0; font-weight: 300;">Laboratory Database</h3>
+        </div>
+    </section>
+
+    <section class="video-break" onclick="togglePlayPause(this)" style="cursor: pointer;">
+        <video id="secondVideo" class="video-bg" autoplay loop muted playsinline style="opacity: 0.6;">
+            <source src="SnapInsta.to_AQMDUdNuwWm_I0S914efb6SceI2ftxQU4UoR5aACJSHeghEexFxN-IBQSVtp3_6cpmq-LwEeniaGBMlI4VrJOSq1.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        <div class="interactive-slogan mono-text" style="position: relative; z-index: 2; font-size: 2rem; color: #fff;">Proof of Feeling</div>
+    </section>
+
+    <section class="content-section">
+        <div class="container fade-in">
+            <div class="grid-2" style="margin-top: 0;">
+                <div>
+                    <div class="section-title mono-text ar-only">04. الاستراتيجية التنفيذية</div>
+                    <div class="section-title mono-text en-only">04. Execution Strategy</div>
+                    
+                    <h2 class="main-heading ar-only" style="font-size: 2rem;">لماذا النماذج التجريبية؟</h2>
+                    <h2 class="main-heading en-only" style="font-size: 2rem;">Why Pilots First?</h2>
+                    
+                    <p class="body-text ar-only" style="font-size: 1rem;">
+                        الأفكار لا تكفي، والوعود لا تتوسع. النماذج التجريبية تخلق <strong>دليلاً على الشعور</strong> قبل الدليل على المفهوم. التجربة يجب أن تُثبت، لا أن تُوصف. نحن ننفذ مشاريع تمتد من 4-6 أسابيع لقياس الأثر وتسليمه كفيلم سينمائي وحالة دراسية استراتيجية.
+                    </p>
+                    <p class="body-text en-only" style="font-size: 1rem;">
+                        Ideas are not enough. Promises do not scale. Pilots create <strong>proof of feeling</strong> before proof of concept. Experience must be demonstrated, not described. We execute focused 4-6 week pilots designed to validate experience impact.
+                    </p>
+                </div>
+                <div>
+                    <div class="section-title mono-text ar-only">05. الشراكات</div>
+                    <div class="section-title mono-text en-only">05. Partnerships</div>
+                    
+                    <h2 class="main-heading ar-only" style="font-size: 2rem;">ملاحظة للمستثمرين</h2>
+                    <h2 class="main-heading en-only" style="font-size: 2rem;">Investor Note</h2>
+                    
+                    <p class="body-text ar-only" style="font-size: 1rem;">
+                        فُسام ليست شركة منتجات، وليست وكالة إعلانية. إنها بنية تحتية لفئة جديدة في "اقتصاد التجربة". القيمة تكمن في النظام، قابليته للتكرار، وتطبيقه عبر القطاعات. نحن للمنظمات التي تبحث عن أثر طويل المدى، والمستثمرين الذين يركزون على البنية التحتية، وليس الضجة المؤقتة.
+                    </p>
+                    <p class="body-text en-only" style="font-size: 1rem;">
+                        フサム is not a product company. And not an agency. It is the architecture of a new category within the Experience Economy. The value lies in the system, its repeatability, and its cross-sector application.
+                    </p>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="content-ar">قوانين الحقيقة الثلاثة (The Manifesto)</span>
-                        <span class="content-en">The Three Laws of Reality (Manifesto)</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-content-inner">
-                            <div class="content-ar">
-                                <ul>
-                                    <li><strong>قانون السيادة الحسية:</strong> لا توجد حقيقة موضوعية، بل توجد مدخلات حسية. [span_0](start_span)من يسيطر على المحفزات يسيطر على الإدراك[span_0](end_span).</li>
-                                    <li><strong>قانون الحتمية الرياضية:</strong> كل شعور بشري هو ناتج معادلة قابلة للحل.</li>
-                                    <li><strong>قانون الخلود عبر الأثر:</strong> الأجساد تتلاشى والمباني تنهار، لكن الارتباط السيكولوجي المحفور في الذاكرة العصبية هو المادة الوحيدة التي لا تفنى.</li>
-                                </ul>
-                            </div>
-                            <div class="content-en">
-                                <ul>
-                                    <li><strong>Law of Sensory Sovereignty:</strong> There is no objective reality, only sensory inputs. [span_1](start_span)He who controls the stimuli controls perception[span_1](end_span).</li>
-                                    <li><strong>Law of Mathematical Determinism:</strong> Every human emotion is the result of a solvable equation.</li>
-                                    <li><strong>Law of Immortality via Impact:</strong> Bodies fade, buildings crumble, but psychological connection carved into neural memory is the only indestructible matter.</li>
-                                </ul>
-                            </div>
+    <section class="content-section" style="background-color: #000; border-top: 1px solid #111;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">بوابة المعايرة</div>
+            <div class="section-title mono-text en-only">Calibration Portal</div>
+            
+            <h2 class="main-heading ar-only">تواصل لتصميم تجربتك.</h2>
+            <h2 class="main-heading en-only">Initiate your experience.</h2>
+
+            <div class="form-container">
+                <form onsubmit="event.preventDefault(); alert('تم استلام طلب المعايرة. / Calibration request received.');">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label class="ar-only">الاسم الكامل</label>
+                            <label class="en-only">Full Name</label>
+                            <input type="text" class="cyber-input" required>
+                        </div>
+                        <div class="input-group">
+                            <label class="ar-only">البريد الإلكتروني</label>
+                            <label class="en-only">Email Address</label>
+                            <input type="email" class="cyber-input" required>
+                        </div>
+                        <div class="input-group">
+                            <label class="ar-only">رقم الجوال (اختياري)</label>
+                            <label class="en-only">Phone Number (Optional)</label>
+                            <input type="tel" class="cyber-input">
+                        </div>
+                        <div class="input-group">
+                            <label class="ar-only">المسمى الوظيفي / الجهة</label>
+                            <label class="en-only">Title / Organization</label>
+                            <input type="text" class="cyber-input">
                         </div>
                     </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="content-ar">معادلة هندسة الأثر (The Equation)</span>
-                        <span class="content-en">The Impact Equation</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-content-inner">
-                            <p class="mono-text" style="font-size: 1.2rem; color: var(--stark-white); direction: ltr; text-align: left;">Impact = &int; (M + P + C + &Psi;) &times; E</p>
-                            <div class="content-ar">
-                                [span_2](start_span)<p><strong>الرياضيات (M):</strong> تحويل احتياجات العميل إلى بيانات وخوارزميات تحدد المسار بدقة[span_2](end_span).</p>
-                                [span_3](start_span)<p><strong>الفيزياء (P):</strong> استخدام المحفزات المادية بتباين حاد لاختراق الحواس[span_3](end_span).</p>
-                                [span_4](start_span)<p><strong>الكيمياء (C):</strong> تصميم التجربة لتحفيز استجابات بيولوجية كالأدرينالين والدوبامين[span_4](end_span).</p>
-                                [span_5](start_span)<p><strong>علم النفس (&Psi;):</strong> ربط النشوة الكيميائية بشعار العلامة لترسيخ ارتباط أبدي[span_5](end_span).</p>
-                                [span_6](start_span)<p><strong>الهندسة (E):</strong> المعامل الذي يضاعف النتائج ويضمن دقة التنفيذ[span_6](end_span).</p>
-                            </div>
-                            <div class="content-en">
-                                [span_7](start_span)<p><strong>Math (M):</strong> Converting client needs into data and path-defining algorithms[span_7](end_span).</p>
-                                [span_8](start_span)<p><strong>Physics (P):</strong> Utilizing physical stimuli with high contrast to penetrate senses[span_8](end_span).</p>
-                                [span_9](start_span)<p><strong>Chemistry (C):</strong> Designing experiences to trigger biological responses like Adrenaline[span_9](end_span).</p>
-                                [span_10](start_span)<p><strong>Psychology (&Psi;):</strong> Linking chemical euphoria to the brand for permanent connection[span_10](end_span).</p>
-                                [span_11](start_span)<p><strong>Engineering (E):</strong> The multiplier ensuring extreme precision of execution[span_11](end_span).</p>
-                            </div>
-                        </div>
+                    
+                    <div class="input-group">
+                        <label class="ar-only">الملاحظات والطلبات الاستراتيجية</label>
+                        <label class="en-only">Notes & Strategic Requests</label>
+                        <textarea class="cyber-input" required></textarea>
                     </div>
-                </div>
 
-                <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="content-ar">إجراءات التشغيل القياسية السيادية (SOPs)</span>
-                        <span class="content-en">Sovereign Standard Operating Procedures</span>
+                    <button type="submit" class="submit-btn mono-text">
+                        <span class="ar-only">إرسال للمختبر</span>
+                        <span class="en-only">Submit to Lab</span>
                     </button>
-                    <div class="accordion-content">
-                        <div class="accordion-content-inner">
-                            <div class="content-ar">
-                                <ul>
-                                    [span_12](start_span)<li><strong>بروتوكول الاستدعاء (SOP001):</strong> إرسال رسائل مشفرة خالية من الترويج، الاعتماد على الصدمة المعرفية[span_12](end_span).</li>
-                                    <li><strong>ممر العزل (SOP002):</strong> تجريد العميل مادياً لإيصاله إلى "نقطة الصفر السيكولوجية".</li>
-                                    [span_13](start_span)<li><strong>إدارة البيئة (SOP003):</strong> حرارة 20.5 مئوية، إضاءة موجهة حادة، وترددات صوتية (432Hz)[span_13](end_span).</li>
-                                    [span_14](start_span)<li><strong>هندسة الأداة (SOP004):</strong> تسليم كائن مادي من فولاذ أو تيتانيوم يكون بمثابة العهد الملموس[span_14](end_span).</li>
-                                </ul>
-                            </div>
-                            <div class="content-en">
-                                <ul>
-                                    [span_15](start_span)<li><strong>Summoning Protocol (SOP001):</strong> Sending encrypted, non-promotional messages relying on cognitive shock[span_15](end_span).</li>
-                                    <li><strong>Isolation Corridor (SOP002):</strong> Physically stripping the client to reach 'psychological zero'.</li>
-                                    [span_16](start_span)<li><strong>Lab Environment (SOP003):</strong> Strict 20.5°C temp, sharp spotlights, and 432Hz frequencies[span_16](end_span).</li>
-                                    [span_17](start_span)<li><strong>Artifact Engineering (SOP004):</strong> Delivery of a physical object (Steel/Titanium) acting as the tangible covenant[span_17](end_span).</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <button class="accordion-header" onclick="toggleAccordion(this)">
-                        <span class="content-ar">الهوية البصرية والسينمائية</span>
-                        <span class="content-en">Visual & Cinematic Identity</span>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="accordion-content-inner">
-                            <div class="content-ar">
-                                [span_18](start_span)<p><strong>لوحة الألوان:</strong> أسود الأوبسيديان (للسيادة والفراغ)، رمادي خرساني (للموثوقية)، أبيض ستارك (للبيانات)، وأصفر الإشارة (للتحفيز اللحظي)[span_18](end_span).</p>
-                                <p><strong>التوجيه السينمائي:</strong> إضاءة "ريمبرانت" بتباين عالٍ، 70% لقطات مقربة (Macro) للتفاصيل الفيزيائية والمحركات.</p>
-                            </div>
-                            <div class="content-en">
-                                [span_19](start_span)<p><strong>Palette:</strong> Obsidian Black (Sovereignty/Void), Concrete Gray (Reliability), Stark White (Data), Signal Yellow (Instant Trigger)[span_19](end_span).</p>
-                                <p><strong>Cinematic Direction:</strong> High-contrast Rembrandt lighting, 70% Macro shots of physical details and mechanics.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                </form>
             </div>
         </div>
     </section>
@@ -367,7 +343,7 @@
     </footer>
 
     <script>
-        // Language Toggle System
+        // Language Toggle System (Switches layout and text completely)
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-ar')) {
@@ -379,7 +355,26 @@
             }
         }
 
-        // Interactive Video Play/Pause
+        // Global Audio Control for Videos
+        function toggleAudio() {
+            const vids = document.querySelectorAll('video');
+            const btn = document.getElementById('audioBtn');
+            let isMuted = vids[0].muted;
+            
+            vids.forEach(vid => { vid.muted = !isMuted; });
+            
+            if(isMuted) {
+                btn.innerHTML = 'Sound 🔊';
+                btn.style.background = 'var(--stark-white)';
+                btn.style.color = 'var(--obsidian-black)';
+            } else {
+                btn.innerHTML = 'Sound 🔈';
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--stark-white)';
+            }
+        }
+
+        // Interactive Video Play/Pause on click
         function togglePlayPause(wrapper) {
             const video = wrapper.querySelector('video');
             if (video.paused) {
@@ -391,51 +386,22 @@
             }
         }
 
-        // Toggle Audio specifically for the active video
-        function toggleAudio(videoId, btn) {
-            const video = document.getElementById(videoId);
-            const iconSvg = btn.querySelector('.sound-icon');
-            const arText = btn.querySelector('.content-ar');
-            const enText = btn.querySelector('.content-en');
+        // Fade-in Animation on Scroll (Tesla Effect)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
 
-            if (video.muted) {
-                video.muted = false;
-                // تغيير الأيقونة والنص عند التشغيل
-                iconSvg.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
-                arText.innerText = "كتم الصوت";
-                enText.innerText = "Mute Experience";
-                btn.style.background = "var(--stark-white)";
-                btn.style.color = "var(--obsidian-black)";
-            } else {
-                video.muted = true;
-                // العودة لوضع الصامت
-                iconSvg.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
-                arText.innerText = "تفعيل الصوت";
-                enText.innerText = "Unmute Experience";
-                btn.style.background = "rgba(255,255,255,0.1)";
-                btn.style.color = "var(--stark-white)";
-            }
-        }
-
-        // Accordion Logic
-        function toggleAccordion(button) {
-            const item = button.parentElement;
-            const content = button.nextElementSibling;
-            
-            document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
-                }
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
             });
-
-            item.classList.toggle('active');
-            if (item.classList.contains('active')) {
-                content.style.maxHeight = content.scrollHeight + "px";
-            } else {
-                content.style.maxHeight = null;
-            }
-        }
+        });
     </script>
 </body>
 </html>
