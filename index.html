@@ -102,10 +102,9 @@
         .service-form.active { display: block; animation: fadeIn 0.5s; }
 
         .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
-        .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap;}
-        .term-input-line { display: flex; align-items: center; }
+        .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; direction: ltr; text-align: left;}
+        .term-input-line { display: flex; align-items: center; direction: ltr;}
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
-        body.lang-ar .term-prompt { margin-right: 0; margin-left: 10px; }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
         .ai-btn {
@@ -121,7 +120,7 @@
         }
         body.lang-en .ai-window { left: auto; right: 30px; }
         .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        .ai-header { background: #fff; color: #000; padding: 15px; text-align: center; font-size: 0.85rem; letter-spacing: 2px; font-weight: bold;}
+        .ai-header { background: #fff; color: #000; padding: 15px; text-align: center; font-size: 0.9rem; letter-spacing: 2px; font-weight: bold;}
         .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; }
         .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
@@ -240,11 +239,11 @@ Connection Secure.
 
     <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">AI</button>
     <div class="ai-window" id="aiWindow">
-        <div class="ai-header mono-text">ORACLE [DEEP MATRIX]</div>
+        <div class="ai-header mono-text">أوراكل [مصفوفة عميقة]</div>
         <div class="ai-body" id="chatBody"></div>
         <div class="ai-input-area">
-            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="Query the system..." onkeypress="handleChatEnter(event)">
-            <button class="ai-send mono-text" onclick="sendChatMessage()">[ENTER]</button>
+            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="استفسر عن النظام..." onkeypress="handleChatEnter(event)">
+            <button class="ai-send mono-text" onclick="sendChatMessage()">[أدخل]</button>
         </div>
     </div>
 
@@ -295,6 +294,7 @@ Connection Secure.
             });
         }
 
+        // إرسال البيانات للحفظ (POST)
         function sendToGoogleSheet(type, message, formElement, onSuccess) {
             const params = new URLSearchParams();
             params.append('Name', currentUser.Name); params.append('Email', currentUser.Email);
@@ -312,21 +312,20 @@ Connection Secure.
             if(serviceId === 'terminal') document.getElementById('termInput').focus();
         }
 
-        // --- GEMINI AI PROXY ---
+        // --- GEMINI AI PROXY (تحديث تخطي الحظر بالـ GET) ---
         async function queryDeepMatrix(text, isTerminal = false) {
-            const params = new URLSearchParams();
-            params.append('Type', 'AI_Query'); 
-            params.append('Message', text);
+            // نستخدم طريقة (GET) الآمنة التي تسمح بقراءة الرد من سيرفرات جوجل
+            const url = GOOGLE_SCRIPT_URL + "?Type=AI_Query&Message=" + encodeURIComponent(text);
 
             try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params });
+                const response = await fetch(url);
                 const answer = await response.text();
                 
                 if(isTerminal) { printTerm(`oracle@fusam:~# ${answer}`); } 
                 else { appendMsg(answer, 'bot'); }
                 
             } catch (error) {
-                const errText = "System Error. Connection to Deep Matrix failed.";
+                const errText = "انقطع الاتصال. الموصّلات العصبية للمصفوفة لا تستجيب.";
                 if(isTerminal) { printTerm(`oracle@fusam:~# ${errText}`); } 
                 else { appendMsg(errText, 'bot'); }
             }
@@ -396,7 +395,7 @@ Connection Secure.
             
             const thinkingMsg = document.createElement('div');
             thinkingMsg.className = `ai-msg bot mono-text glitch`;
-            thinkingMsg.innerText = "[Processing...]";
+            thinkingMsg.innerText = "[جاري معالجة البيانات...]";
             chatBody.appendChild(thinkingMsg);
             chatBody.scrollTop = chatBody.scrollHeight;
 
