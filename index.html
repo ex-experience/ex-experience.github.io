@@ -102,6 +102,7 @@
         textarea.cyber-input { resize: vertical; min-height: 80px; }
         .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
+        .submit-btn:disabled { background: #333; color: #888; cursor: not-allowed; }
 
         #dashboard-view { display: none; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 30px; }
@@ -190,14 +191,11 @@
 
     <section class="content-section">
         <div class="geometric-bg" style="background-image: url('ig-image-1.jpg');"></div>
-        
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">01. الفلسفة المعمارية</div>
             <div class="section-title mono-text en-only">01. Architectural Philosophy</div>
-            
             <h2 class="main-heading ar-only">الخط الفاصل بين العادي والاستثنائي.</h2>
             <h2 class="main-heading en-only">The line between ordinary and extraordinary.</h2>
-            
             <p class="body-text ar-only">
                 <strong>フサム | experience™</strong> هي دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة البشرية. نعمل في نقطة التقاء علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة.
                 <br><br><span style="color: #fff;">هذا ليس تسويقاً.. هذه هندسة معمارية للتجربة.</span>
@@ -211,14 +209,11 @@
 
     <section class="content-section" style="background-color: #030405;">
         <div class="geometric-bg" style="background-image: url('ig-image-2.jpg'); clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%); left: 0; right: auto;"></div>
-
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">02. منهجية HX-5™</div>
             <div class="section-title mono-text en-only">02. HX-5™ Methodology</div>
-
             <h2 class="main-heading ar-only">خمس ركائز لهندسة الإدراك البشري.</h2>
             <h2 class="main-heading en-only">Five pillars engineering human perception.</h2>
-
             <div class="grid-2">
                 <div class="grid-card">
                     <h4 class="mono-text">1. Intent & Context</h4>
@@ -253,18 +248,25 @@
             <div class="portal-container">
                 
                 <div id="login-view">
-                    <p class="ar-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">قم بتسجيل الدخول للوصول إلى لوحة التحكم، المتصفح السيادي، وطلب الاستشارات.</p>
-                    <p class="en-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">Log in to access the dashboard, sovereign browser, and consultations.</p>
+                    <p class="ar-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">قم بتسجيل بياناتك لإنشاء هويتك الرقمية وربطها بقاعدة بيانات المختبر.</p>
+                    <p class="en-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">Register your data to create your digital identity and connect to the lab's database.</p>
                     
                     <form onsubmit="handleLogin(event)">
                         <div class="input-group">
-                            <label class="ar-only">البريد الإلكتروني أو رقم المعايرة</label>
-                            <label class="en-only">Email or Calibration ID</label>
-                            <input type="email" class="cyber-input" required placeholder="you@domain.com">
+                            <label class="ar-only">الاسم الكامل</label><label class="en-only">Full Name</label>
+                            <input type="text" id="userName" class="cyber-input" required>
+                        </div>
+                        <div class="input-group">
+                            <label class="ar-only">البريد الإلكتروني</label><label class="en-only">Email Address</label>
+                            <input type="email" id="userEmail" class="cyber-input" required>
+                        </div>
+                        <div class="input-group">
+                            <label class="ar-only">رقم الجوال</label><label class="en-only">Phone Number</label>
+                            <input type="tel" id="userPhone" class="cyber-input" required>
                         </div>
                         <button type="submit" class="submit-btn mono-text">
-                            <span class="ar-only">دخول / تسجيل</span>
-                            <span class="en-only">Login / Register</span>
+                            <span class="ar-only">دخول / اتصال بقاعدة البيانات</span>
+                            <span class="en-only">Login / Connect to Database</span>
                         </button>
                     </form>
                 </div>
@@ -289,30 +291,50 @@
                     </div>
 
                     <div id="form-consult" class="service-form active">
-                        <form onsubmit="event.preventDefault(); alert('تم إرسال طلب الاستشارة.');">
-                            <div class="input-group"><label class="ar-only">الهدف النفسي أو المادي</label><label class="en-only">Psychological or Material Goal</label><textarea class="cyber-input" required></textarea></div>
-                            <button type="submit" class="submit-btn mono-text"><span class="ar-only">تأكيد طلب المختبر</span><span class="en-only">Confirm Lab Request</span></button>
+                        <form onsubmit="submitServiceForm(event, 'استشارة أفراد / Personal Consult')">
+                            <div class="input-group">
+                                <label class="ar-only">الهدف النفسي أو المادي (شرح الطلب)</label>
+                                <label class="en-only">Psychological or Material Goal</label>
+                                <textarea class="cyber-input" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">
+                                <span class="ar-only">إرسال الطلب للمختبر</span>
+                                <span class="en-only">Submit Lab Request</span>
+                            </button>
                         </form>
                     </div>
 
                     <div id="form-corp" class="service-form">
-                        <form onsubmit="event.preventDefault(); alert('تم الإرسال.');">
-                            <div class="input-group"><label class="ar-only">اسم المنظمة</label><label class="en-only">Organization</label><input type="text" class="cyber-input" required></div>
-                            <button type="submit" class="submit-btn mono-text"><span class="ar-only">طلب هندسة للشركة</span><span class="en-only">Request Corporate Engineering</span></button>
+                        <form onsubmit="submitServiceForm(event, 'طلب شركات / Corporate Request')">
+                            <div class="input-group">
+                                <label class="ar-only">اسم المنظمة / وتفاصيل التحدي</label>
+                                <label class="en-only">Organization & Challenge Details</label>
+                                <textarea class="cyber-input" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">
+                                <span class="ar-only">طلب هندسة للشركة</span>
+                                <span class="en-only">Request Corporate Engineering</span>
+                            </button>
                         </form>
                     </div>
 
                     <div id="form-feedback" class="service-form">
-                        <form onsubmit="event.preventDefault(); alert('تم الاستلام.');">
-                            <div class="input-group"><label class="ar-only">الملاحظات</label><label class="en-only">Notes</label><textarea class="cyber-input" required></textarea></div>
-                            <button type="submit" class="submit-btn mono-text"><span class="ar-only">إرسال للإدارة</span><span class="en-only">Send to Management</span></button>
+                        <form onsubmit="submitServiceForm(event, 'تقييم وملاحظات / Feedback')">
+                            <div class="input-group">
+                                <label class="ar-only">الملاحظات والتقييم</label>
+                                <label class="en-only">Notes & Feedback</label>
+                                <textarea class="cyber-input" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn mono-text">
+                                <span class="ar-only">إرسال للإدارة</span>
+                                <span class="en-only">Send to Management</span>
+                            </button>
                         </form>
                     </div>
 
                     <div id="form-browse" class="service-form">
-                        <p class="ar-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">متصفح آمن مدمج (يدعم المواقع التي تسمح بالـ iframes مثل ويكيبيديا).</p>
-                        <p class="en-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">Secure embedded browser (supports websites that allow iframes).</p>
-                        
+                        <p class="ar-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">متصفح آمن مدمج.</p>
+                        <p class="en-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">Secure embedded browser.</p>
                         <div class="cyber-browser">
                             <div class="browser-header">
                                 <input type="url" id="browserUrl" class="browser-url" value="https://en.wikipedia.org" placeholder="https://...">
@@ -346,8 +368,12 @@
     </div>
 
     <script>
-        // Language System
+        // --- System Variables ---
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQy4sLgR2rR4j9V94U7-1Lq7D1n2wZXXvT9yqXvR2/exec';
+        let currentUser = { Name: '', Email: '', Phone: '' };
         let currentLang = 'ar';
+
+        // --- Language & UI ---
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-ar')) {
@@ -358,19 +384,70 @@
             initChat();
         }
 
-        // Silent Video Play/Pause toggle
         function togglePlayPause(wrapper) {
             const video = wrapper.querySelector('video');
             if (video.paused) { video.play(); wrapper.style.opacity = '1'; } 
             else { video.pause(); wrapper.style.opacity = '0.8'; }
         }
 
-        // Member Portal Logic
+        // --- Database & Portal Logic ---
         function handleLogin(e) {
             e.preventDefault();
-            document.getElementById('login-view').style.display = 'none';
-            document.getElementById('dashboard-view').style.display = 'block';
-            document.getElementById('dashboard-view').style.animation = 'fadeIn 0.8s';
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="mono-text">...جاري الاتصال / Connecting...</span>';
+            btn.disabled = true;
+
+            // Save user data in session
+            currentUser.Name = document.getElementById('userName').value;
+            currentUser.Email = document.getElementById('userEmail').value;
+            currentUser.Phone = document.getElementById('userPhone').value;
+
+            // Send Silent Registration Ping to Google Sheets
+            sendToGoogleSheet('تسجيل دخول جديد / Login', 'تم فتح البوابة / Portal Accessed', null, () => {
+                document.getElementById('login-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                document.getElementById('dashboard-view').style.animation = 'fadeIn 0.8s';
+            });
+        }
+
+        function submitServiceForm(e, type) {
+            e.preventDefault();
+            const form = e.target;
+            const message = form.querySelector('textarea').value;
+            
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="mono-text">...جاري الإرسال / Sending...</span>';
+            btn.disabled = true;
+
+            sendToGoogleSheet(type, message, form, () => {
+                alert(currentLang === 'ar' ? 'تم استلام طلبك في المختبر بنجاح.' : 'Request successfully received in the Lab.');
+                form.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        function sendToGoogleSheet(type, message, formElement, onSuccess) {
+            const formData = new FormData();
+            formData.append('Name', currentUser.Name);
+            formData.append('Email', currentUser.Email);
+            formData.append('Phone', currentUser.Phone);
+            formData.append('Type', type);
+            formData.append('Message', message);
+
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
+                .then(() => { if (onSuccess) onSuccess(); })
+                .catch(error => {
+                    console.error('Database Error:', error);
+                    alert('حدث خطأ في الاتصال بقاعدة البيانات. / Database connection error.');
+                    if (formElement) {
+                        const btn = formElement.querySelector('button');
+                        btn.innerHTML = currentLang === 'ar' ? 'إعادة المحاولة' : 'Retry';
+                        btn.disabled = false;
+                    }
+                });
         }
 
         function switchService(serviceId) {
@@ -380,7 +457,6 @@
             document.getElementById('form-' + serviceId).classList.add('active');
         }
 
-        // Cyber Browser Logic
         function loadUrl() {
             let url = document.getElementById('browserUrl').value;
             if(!url.startsWith('http')) url = 'https://' + url;
@@ -388,7 +464,7 @@
             document.getElementById('browserFrame').src = url;
         }
 
-        // AI CHATBOT LOGIC
+        // --- AI CHATBOT LOGIC ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
@@ -431,7 +507,6 @@
             if(!text) return;
             appendMsg(text, 'user');
             aiInput.value = '';
-            
             setTimeout(() => {
                 let response = botKnowledge[currentLang].default;
                 const lowerText = text.toLowerCase();
@@ -444,7 +519,7 @@
             }, 800);
         }
 
-        // Initialize
+        // --- Initialization ---
         document.addEventListener("DOMContentLoaded", function() {
             initChat();
             const observer = new IntersectionObserver((entries, obs) => {
