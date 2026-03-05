@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<logo>フサム | experience™</logo>
-    <title>Engineering the Human Experience | هندسة التجربة البشرية</title>
+    <title>フサム | experience™ - Engineering Human Experiences</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         
         :root {
+            /* Cybertruck Inspired Palette */
             --obsidian-black: #050505;
-            --stark-white: #FFFFFF;
-            --concrete-gray: #8E8E8E;
-            --signal-yellow: #FFD300;
+            --cyber-steel: #8b939c; /* رمادي معدني مستوحى من السايبرتراك */
+            --stark-white: #ffffff;
+            --off-white: #d1d5d8; /* رمادي مائل للأبيض للشعار */
+            --dark-panel: #0f1112;
         }
 
         body {
@@ -24,9 +25,9 @@
             padding: 0;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            transition: all 0.4s ease;
         }
 
-        /* الجماليات الوظيفية الصارمة والخط التقني */
         .mono-text {
             font-family: 'Space Mono', monospace;
             letter-spacing: -0.5px;
@@ -38,56 +39,91 @@
             padding: 0 20px;
         }
 
-        /* الفراغ المقدس (The Void) */
+        /* نظام اللغات */
+        body.lang-ar { direction: rtl; text-align: right; }
+        body.lang-en { direction: ltr; text-align: left; }
+        
+        .content-ar { display: block; }
+        .content-en { display: none; }
+        
+        body.lang-en .content-ar { display: none; }
+        body.lang-en .content-en { display: block; }
+
+        /* زر تبديل اللغة */
+        .lang-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: transparent;
+            color: var(--cyber-steel);
+            border: 1px solid var(--cyber-steel);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        body.lang-en .lang-toggle {
+            right: auto;
+            left: 30px;
+        }
+
+        .lang-toggle:hover {
+            color: var(--obsidian-black);
+            background: var(--stark-white);
+            border-color: var(--stark-white);
+        }
+
+        /* الواجهة الاستقبالية (Hero) - دائماً بالمنتصف */
         header {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
+            text-align: center !important;
             padding: 40px 20px;
-            position: relative;
         }
 
-        .brand-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 40px;
-            border: 1px solid var(--concrete-gray);
-            box-shadow: 0 0 30px rgba(255, 211, 0, 0.05);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: 1.2rem;
+        /* الشعار النصي التفاعلي */
+        .interactive-logo {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--off-white);
             font-weight: 400;
-            color: var(--concrete-gray);
-            margin-bottom: 40px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            cursor: crosshair;
+            transition: all 0.5s ease;
+            user-select: none;
+        }
+
+        .interactive-logo:hover {
+            color: var(--stark-white);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(209, 213, 216, 0.2);
+            transform: scale(1.02);
             letter-spacing: 4px;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+            color: var(--cyber-steel);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        .manifesto-hook {
-            font-size: 1.5rem;
-            max-width: 700px;
-            margin-bottom: 50px;
+        .personality {
+            font-size: 1rem;
             color: var(--stark-white);
-            border-right: 3px solid var(--signal-yellow);
-            padding-right: 20px;
-            text-align: right;
+            font-style: italic;
+            margin-bottom: 50px;
+            opacity: 0.8;
         }
 
-        /* أزرار الاستدعاء */
+        /* الأزرار الهندسية */
         .btn-group {
             display: flex;
             gap: 15px;
@@ -98,178 +134,163 @@
 
         .btn {
             display: inline-block;
-            padding: 16px 36px;
-            background-color: var(--stark-white);
-            color: var(--obsidian-black);
+            padding: 14px 28px;
+            background-color: transparent;
+            color: var(--stark-white);
             text-decoration: none;
             letter-spacing: 1px;
-            font-weight: bold;
-            border-radius: 0; /* شكل هندسي حاد */
+            font-size: 0.9rem;
+            border: 1px solid var(--cyber-steel);
             transition: all 0.4s ease;
             text-transform: uppercase;
         }
 
-        .btn-primary {
-            background-color: var(--signal-yellow);
-            color: var(--obsidian-black);
-        }
-
-        .btn-primary:hover {
+        .btn:hover {
             background-color: var(--stark-white);
-            transform: scale(1.05);
+            color: var(--obsidian-black);
+            border-color: var(--stark-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        .btn-social {
-            background-color: transparent;
-            color: var(--concrete-gray);
-            border: 1px solid var(--concrete-gray);
+        .btn-founder {
+            border-color: var(--stark-white);
+            background: rgba(255,255,255,0.05);
         }
 
-        .btn-social:hover {
-            border-color: var(--signal-yellow);
-            color: var(--signal-yellow);
-        }
-
-        /* أقسام العمارة الصامتة */
+        /* الأقسام الداخلية */
         .section {
-            padding: 120px 0;
-            border-top: 1px solid #1a1a1a;
+            padding: 100px 0;
+            border-top: 1px solid var(--dark-panel);
         }
 
         .section-title {
-            font-size: 1rem;
-            color: var(--signal-yellow);
+            font-size: 0.9rem;
+            color: var(--cyber-steel);
             margin-bottom: 40px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
 
-        .equation-box {
-            background: #0a0a0a;
+        .content-box {
+            background: var(--dark-panel);
             padding: 50px;
-            border: 1px solid #222;
-            text-align: left;
-            direction: ltr;
-            margin: 50px 0;
+            border-left: 3px solid var(--cyber-steel);
+            margin: 40px 0;
+        }
+        
+        body.lang-ar .content-box {
+            border-left: none;
+            border-right: 3px solid var(--cyber-steel);
         }
 
-        .equation-box h3 {
-            color: var(--concrete-gray);
-            font-size: 1rem;
+        h3 {
+            font-size: 2rem;
+            font-weight: 300;
             margin-top: 0;
-            letter-spacing: 2px;
-        }
-
-        .equation-text {
-            font-size: 1.8rem;
             color: var(--stark-white);
         }
 
-        .highlight {
-            color: var(--signal-yellow);
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        @media (max-width: 768px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
-            h1 { font-size: 2.5rem; }
-        }
-
-        .pillar-card {
-            padding: 30px;
-            background: rgba(255,255,255,0.02);
-            border-right: 2px solid #222;
-            transition: border-color 0.3s ease;
-        }
-
-        .pillar-card:hover {
-            border-color: var(--signal-yellow);
+        p {
+            color: #a0a0a0;
+            font-size: 1.1rem;
         }
 
         footer {
-            text-align: center;
-            padding: 100px 20px 50px;
-            border-top: 1px solid #1a1a1a;
+            text-align: center !important;
+            padding: 80px 20px 40px;
+            border-top: 1px solid var(--dark-panel);
         }
     </style>
 </head>
-<body>
+<body class="lang-ar">
+
+    <button class="lang-toggle mono-text" onclick="toggleLanguage()">EN / عربي</button>
 
     <header>
-        <img src="logo.png" alt="フサム | experience" class="brand-logo" onerror="this.style.display='none'">
+        <div class="interactive-logo mono-text">フサム | experience™</div>
         
-        <h2 class="mono-text">Experience Architecture</h2>
-        <h1>نحن لا نصنع ذكريات،<br>نحن <span class="highlight">نهندس التاريخ الشخصي</span> لكل إنسان.</h1>
-        
-        <div class="manifesto-hook">
-            "العالم غارق في ضجيج بصري لا معنى له. في フサム نحن لا نبيع منتجات، بل نبيع <strong>معايرة للواقع</strong>. نُفعل الاستجابة اللحظية بمدخلات بصرية عالية التباين، ونرسخ الأثر عبر هندسة ارتباط سيكولوجي دائم."
-        </div>
+        <div class="slogan mono-text">Engineering human experiences</div>
+        <div class="personality">Fearless, Relentless, True to you..</div>
         
         <div class="btn-group mono-text">
-            <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="btn btn-primary" target="_blank">طلب استدعاء للمعايرة</a>
-            <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" class="btn btn-social" target="_blank">النظام البصري (IG)</a>
-            <a href="https://snapchat.com/t/HQa8XAW2" class="btn btn-social" target="_blank">التوجيه السينمائي (SNAP)</a>
+            <a href="https://chat.whatsapp.com/GwViPRCCa9c0nYdOmB3hLL" class="btn" target="_blank">Consultation | استدعاء</a>
+            <a href="https://www.instagram.com/ex_experience.sa" class="btn" target="_blank">Instagram</a>
+            <a href="https://www.tiktok.com/@ex_experience.sa" class="btn" target="_blank">TikTok</a>
+            <a href="https://snapchat.com/t/HQa8XAW2" class="btn" target="_blank">Snapchat</a>
+            <a href="https://www.snapchat.com/add/hussambinhassan?share_id=OCfA6GMtSCCLLZZMFhrr0w&locale=en_SA@calendar=gregorian" class="btn btn-founder" target="_blank">Founder's Access</a>
         </div>
     </header>
 
     <div class="container">
         
-        <section class="section">
-            <div class="section-title mono-text">01. THE SCIENTIFIC ENGINE</div>
-            <h3 style="font-size: 2.2rem; font-weight: 300; margin-bottom: 20px;">السيادة الحسية والحتمية الرياضية</h3>
-            <p style="font-size: 1.2rem; color: var(--concrete-gray);">لا توجد حقيقة موضوعية، بل توجد مدخلات حسية. من يسيطر على المحفزات يسيطر على الإدراك. كل شعور بشري (الرهبة، الأدرينالين، السكينة) هو ناتج معادلة قابلة للحل.</p>
-            
-            <div class="equation-box mono-text">
-                <h3>THE IMPACT EQUATION</h3>
-                <div class="equation-text">
-                    Impact = &int; (M + P + C + &Psi;) &times; <span class="highlight">E</span>
+        <div class="content-ar">
+            <section class="section">
+                <div class="section-title mono-text">01. الفلسفة الوجودية</div>
+                <h3>السيادة الحسية والحتمية الرياضية</h3>
+                <p>العالم اليوم غارق في ضجيج بصري لا معنى له. نحن في フサム لا نصمم لإرضاء الحواس بشكل مؤقت، بل نهندس الواقع لترسيخ أثر عاطفي لا يُمحى في العقل الباطن. كل تجربة هي نتاج تفاعل دقيق بين الرياضيات، الفيزياء، الكيمياء، وعلم النفس.</p>
+                
+                <div class="content-box">
+                    <h4 class="mono-text" style="color: var(--stark-white); margin-top:0;">معادلة الأثر (The Equation)</h4>
+                    <p style="font-size: 1.5rem; color: var(--stark-white); direction: ltr; text-align: left;" class="mono-text">
+                        Impact = &int; (M + P + C + &Psi;) &times; E
+                    </p>
+                    <p style="margin-bottom: 0;">تكامل البيانات، المحفزات المادية، الاستجابة العضوية، والذاكرة الإدراكية.. مضروبة في دقة التنفيذ الهندسي.</p>
                 </div>
-                <p style="color: var(--concrete-gray); font-size: 0.9rem; margin-top: 20px; font-family: sans-serif;">
-                    Math (البيانات) + Physics (المحفزات المادية) + Chemistry (الاستجابة العضوية) + Psychology (الذاكرة الإدراكية) &times; <strong>Engineering (هندسة التنفيذ)</strong>.
-                </p>
-            </div>
-        </section>
+            </section>
 
-        <section class="section">
-            <div class="section-title mono-text">02. SOVEREIGN VALUE PILLARS</div>
-            <div class="grid-2">
-                <div class="pillar-card">
-                    <h4 class="highlight mono-text">01 / الحصرية المطلقة</h4>
-                    <p style="color: var(--concrete-gray);">الوصول ليس حقاً، بل "استحقاق مبرهن". لا يتم قبول أي عميل عبر شراء مباشر، بل تمر البيانات عبر خوارزمية التوافق لقياس الفجوة بين واقع العميل وإمكانياته.</p>
+            <section class="section">
+                <div class="section-title mono-text">02. ركائز القيمة</div>
+                <h3>هندسة الندرة المطلقة</h3>
+                <p><strong>الحصرية:</strong> الوصول ليس حقاً، بل استحقاق مبرهن يتم قياسه بخوارزمية التوافق.</p>
+                <p><strong>الدقة الجراحية:</strong> الخطأ في معاييرنا يُقاس بالميكرون، وفي المشاعر يُقاس بالاستجابة الجلفانية للجلد.</p>
+                <p><strong>الأداة (The Artifact):</strong> ليست منتجاً، بل مرساة حسية معدنية تذكرك دائماً بنسختك المهندسة.</p>
+            </section>
+        </div>
+
+        <div class="content-en">
+            <section class="section">
+                <div class="section-title mono-text">01. Core Philosophy</div>
+                <h3>Sensory Sovereignty & Mathematical Determinism</h3>
+                <p>The world is saturated with meaningless visual noise. At フサム, we do not design for temporary sensory satisfaction. We engineer reality to establish a permanent emotional imprint in the subconscious. Every experience is the result of a precise interaction between Mathematics, Physics, Chemistry, and Psychology.</p>
+                
+                <div class="content-box">
+                    <h4 class="mono-text" style="color: var(--stark-white); margin-top:0;">The Impact Equation</h4>
+                    <p style="font-size: 1.5rem; color: var(--stark-white);" class="mono-text">
+                        Impact = &int; (M + P + C + &Psi;) &times; E
+                    </p>
+                    <p style="margin-bottom: 0;">The integration of Data, Physical Stimuli, Organic Response, and Cognitive Memory.. multiplied by the precision of Engineering Execution.</p>
                 </div>
-                <div class="pillar-card">
-                    <h4 class="highlight mono-text">02 / الندرة المهندسة</h4>
-                    <p style="color: var(--concrete-gray);">كل تجربة أو "أداة" تخرج من المختبر هي نقطة تفرد (Singularity) لا تتكرر. التكرار هو موت للعلامة، ونحن نقدس الفراغ والمساحة السلبية.</p>
-                </div>
-                <div class="pillar-card">
-                    <h4 class="highlight mono-text">03 / الدقة الجراحية</h4>
-                    <p style="color: var(--concrete-gray);">الخطأ في معاييرنا يُقاس بالميكرون، وفي المشاعر يُقاس بـ "الاستجابة الجلفانية للجلد". لا توجد ذرة واحدة في التصميم لا تخدم الأثر النهائي.</p>
-                </div>
-                <div class="pillar-card">
-                    <h4 class="highlight mono-text">04 / الأداة (The Artifact)</h4>
-                    <p style="color: var(--concrete-gray);">ليست منتجاً، بل هي حل فيزيائي لمشكلة نفسية. كائن مادي من التيتانيوم والكربون، بارد وثقيل، يعمل كمرساة حسية تذكرك دائماً بحقيقتك الجديدة.</p>
-                </div>
-            </div>
-        </section>
+            </section>
+
+            <section class="section">
+                <div class="section-title mono-text">02. Value Pillars</div>
+                <h3>Engineering Absolute Scarcity</h3>
+                <p><strong>Exclusivity:</strong> Access is not a right; it is a proven entitlement measured by our compatibility algorithm.</p>
+                <p><strong>Surgical Precision:</strong> Errors in our standards are measured in microns, and in emotions by galvanic skin response.</p>
+                <p><strong>The Artifact:</strong> Not a product, but a metallic sensory anchor that perpetually reminds you of your engineered self.</p>
+            </section>
+        </div>
 
     </div>
 
     <footer>
-        <div style="font-size: 2rem; color: var(--stark-white); margin-bottom: 10px;" class="mono-text">フサム | experience™</div>
-        <p style="color: var(--signal-yellow); letter-spacing: 2px; font-size: 0.9rem;">هندسة التجربة البشرية</p>
-        
-        <p style="color: var(--concrete-gray); font-size: 0.9rem; margin-top: 40px; max-width: 500px; margin-left: auto; margin-right: auto;">
-            "أقسم أن أحمي دقة المعادلة، وألا أسمح للعاطفة العشوائية بتلويث النتائج العلمية. نحن مهندسو مستقبلك، لسنا بائعي خدمة."
-        </p>
-        
-        <p style="font-size: 0.75rem; color: #333; margin-top: 60px;" class="mono-text">© 2026 フサム | experience™. ALL RIGHTS RESERVED.</p>
+        <div class="interactive-logo mono-text" style="font-size: 1.5rem; margin-bottom: 5px;">フサム | experience™</div>
+        <p style="color: var(--cyber-steel); font-size: 0.9rem; margin-top: 0;">Engineering human experiences</p>
+        <p class="mono-text" style="font-size: 0.75rem; color: #555; margin-top: 50px;">© 2026 フサム | experience™. ALL RIGHTS RESERVED.</p>
     </footer>
 
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-ar')) {
+                body.classList.remove('lang-ar');
+                body.classList.add('lang-en');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-ar');
+            }
+        }
+    </script>
 </body>
 </html>
