@@ -23,7 +23,7 @@
 
         .mono-text { font-family: 'Space Mono', monospace; }
 
-        /* CRT Scanline Effect (Digital Art) */
+        /* CRT Scanline Effect */
         body::before {
             content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
@@ -71,12 +71,15 @@
 
         .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
         .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--stark-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; }
-        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 40px; letter-spacing: 4px; text-transform: uppercase; }
+        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
+        .hero-desc { font-size: 1.1rem; color: #bbb; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6;}
 
-        .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
+        .content-section { padding: 100px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
+        .alt-bg { background-color: #030303; }
+        
         .geometric-bg {
             position: absolute; top: 0; right: 0; width: 55%; height: 100%;
-            background-size: cover; background-position: center; opacity: 0.2; z-index: 0;
+            background-size: cover; background-position: center; opacity: 0.1; z-index: 0;
             clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); filter: grayscale(80%) contrast(120%);
         }
         body.lang-en .geometric-bg { right: auto; left: 0; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
@@ -86,8 +89,22 @@
 
         .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
         .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
-        .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--stark-white); max-width: 800px; margin-bottom: 20px; color: #bbbbbb; }
-        
+        .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #bbbbbb; max-width: 800px; margin-bottom: 20px; }
+        .highlight { color: var(--stark-white); font-weight: bold; }
+
+        /* Custom Lists & Grids for Brand Content */
+        .cyber-list { list-style: none; padding: 0; margin-bottom: 30px; }
+        .cyber-list li { position: relative; padding-left: 20px; margin-bottom: 15px; color: #bbbbbb; font-size: 1.05rem;}
+        .cyber-list li::before { content: '>'; position: absolute; left: 0; color: var(--stark-white); font-family: 'Space Mono', monospace; }
+        body.lang-ar .cyber-list li { padding-left: 0; padding-right: 20px; }
+        body.lang-ar .cyber-list li::before { right: 0; left: auto; content: '<'; }
+
+        .hx-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
+        @media (min-width: 768px) { .hx-grid { grid-template-columns: 1fr 1fr; } }
+        .hx-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 30px; transition: border-color 0.3s; }
+        .hx-card:hover { border-color: var(--cyber-steel); }
+        .hx-number { font-size: 1.5rem; color: var(--stark-white); font-family: 'Space Mono', monospace; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;}
+
         /* Member Portal & Dashboard */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
@@ -110,12 +127,20 @@
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
+        /* Footer */
+        .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
+        .footer-logo { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
+        .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace;}
+
         /* AI ORACLE CHATBOT */
         .ai-btn {
             position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
             background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
             z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem;
+            transition: transform 0.2s;
         }
+        .ai-btn:hover { transform: scale(1.1); }
         body.lang-en .ai-btn { left: auto; right: 30px; }
         .ai-window {
             position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98);
@@ -156,9 +181,19 @@
         </div>
         <div class="overlay"></div>
 
-        <div class="hero-content">
+        <div class="hero-content fade-in">
             <div class="interactive-logo mono-text glitch" data-text="フサム | experience™️">フサム | experience™️</div>
-            <div class="interactive-slogan mono-text">Engineering human experiences</div>
+            <div class="interactive-slogan mono-text">Engineering Human Experience</div>
+            
+            <p class="hero-desc ar-only">
+                نحن لا نصمم منتجات..<br>
+                نحن نهندس التجربة الإنسانية — من الإحساس الأول إلى الذاكرة الخالدة.
+            </p>
+            <p class="hero-desc en-only">
+                We do not design products..<br>
+                We engineer human experience — from first sensation to lasting memory.
+            </p>
+
             <div style="margin-top: 40px;">
                 <a href="#portal" class="control-btn mono-text" style="padding: 12px 30px; text-decoration: none;">Initialize Connection</a>
             </div>
@@ -168,50 +203,231 @@
     <section class="content-section">
         <div class="geometric-bg" style="background-image: url('bg1.jpg');"></div>
         <div class="container fade-in">
-            <div class="section-title mono-text ar-only">01. الكوديكس الأعظم</div>
-            <div class="section-title mono-text en-only">01. The Great Codex</div>
-            <h2 class="main-heading ar-only glitch" data-text="قانون السيادة الحسية.">قانون السيادة الحسية.</h2>
-            <h2 class="main-heading en-only glitch" data-text="Law of Sensory Sovereignty.">Law of Sensory Sovereignty.</h2>
+            <div class="section-title mono-text ar-only">00.2 / ما هو フサム ؟</div>
+            <div class="section-title mono-text en-only">00.2 / WHAT IS フサム | EXPERIENCE?</div>
+            
+            <h2 class="main-heading ar-only glitch" data-text="مختبر استراتيجي للتجارب.">مختبر استراتيجي للتجارب.</h2>
+            <h2 class="main-heading en-only glitch" data-text="Concept House & Strategic Lab.">Concept House & Strategic Lab.</h2>
+            
             <p class="body-text ar-only">
-                لا توجد حقيقة موضوعية، بل توجد مدخلات حسية. من يسيطر على المحفزات يسيطر على الإدراك. نحن نهندس الفراغ ونحوله إلى أثر سيكولوجي مستدام.
-                <br><br><span style="color: #fff;">التجربة هي العملة الأسمى في هذا الكون.</span>
+                <span class="highlight">フサム | experience™️</span> هو دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة الإنسانية.<br>
+                نحن نعمل في نقطة التقاطع بين علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل العادي إلى ذاكرة. حيث ينتهي التسويق التقليدي، تبدأ هندسة العمارة التجريبية..
             </p>
             <p class="body-text en-only">
-                There is no objective reality, only sensory inputs. He who controls the stimuli controls perception. We engineer the void into a sustainable psychological impact.
-                <br><br><span style="color: #fff;">Experience is the ultimate currency of this universe.</span>
+                <span class="highlight">フサム | experience™️</span> is a concept house and strategic lab focused on Human Experience Engineering.<br>
+                We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory. Where traditional marketing ends, experience architecture begins..
+            </p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.3 / المشكلة الصامتة</div>
+            <div class="section-title mono-text en-only">00.3 / THE SILENT PROBLEM</div>
+            
+            <p class="body-text ar-only">
+                العالم مليء بالمحتوى، لكن القليل جداً من التجارب تُحفر في الذاكرة. تتفاعل العلامات التجارية والأنظمة والبيئات مع الناس، لكنها نادراً ما تترك بصمة عاطفية دائمة. هذه الفجوة ليست مشكلة إبداعية، إنها <span class="highlight">فشل في تصميم التجربة.</span>
+            </p>
+            <p class="body-text en-only">
+                The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint. This gap is not a creative issue, it is an <span class="highlight">experience design failure.</span>
             </p>
         </div>
     </section>
 
-    <section class="content-section" style="background-color: #030303;">
-        <div class="container fade-in">
-            <div class="section-title mono-text ar-only">02. هندسة الحواس</div>
-            <div class="section-title mono-text en-only">02. Architecture of Senses</div>
-            <h2 class="main-heading ar-only glitch" data-text="المنهجية.">المنهجية.</h2>
-            <h2 class="main-heading en-only glitch" data-text="The Methodology.">The Methodology.</h2>
-            <p class="body-text ar-only">
-                نحن لا نصمم مجرد جماليات؛ بل نهتم بالهندسة المعمارية للمشاعر الإنسانية. من خلال دمج الإدراك المكاني، العوالم الرقمية، والمحفزات النفسية، نقوم ببناء بيئات تأسر الانتباه وتغير حالات الوعي.
-                <br><br>كل مشروع هو عملية حسابية دقيقة للضوء، الظل، التردد، والشكل.
-            </p>
-            <p class="body-text en-only">
-                We do not design mere aesthetics; we architect human emotion. By merging spatial awareness, digital realms, and psychological triggers, we construct environments that command attention and alter states of consciousness.
-                <br><br>Every project is a precise calculation of light, shadow, frequency, and form.
-            </p>
-        </div>
-    </section>
-
-    <section class="hero" style="height: 60vh;">
+    <section class="hero" style="height: 50vh;">
         <div class="video-wrapper">
-            <video id="breakVideo" class="video-bg" autoplay loop muted playsinline></video>
+            <video id="breakVideo1" class="video-bg" autoplay loop muted playsinline></video>
         </div>
-        <div class="overlay" style="background: rgba(0,0,0,0.6);"></div>
-        <div class="interactive-logo mono-text glitch" style="z-index: 2;" data-text="Proof of Feeling">Proof of Feeling</div>
+        <div class="overlay" style="background: rgba(0,0,0,0.7);"></div>
+        <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(1.2rem, 3vw, 2rem);" data-text="This is not marketing..">
+            <span class="ar-only">هذا ليس تسويقاً..<br>هذه هندسة معمارية للتجارب.</span>
+            <span class="en-only">This is not marketing..<br>This is experience architecture.</span>
+        </div>
     </section>
 
-    <section id="portal" class="content-section" style="background-color: #000;">
+    <section class="content-section alt-bg">
         <div class="container fade-in">
-            <div class="section-title mono-text ar-only">03. بوابة السيادة</div>
-            <div class="section-title mono-text en-only">03. Sovereign Portal</div>
+            <div class="section-title mono-text ar-only">00.4 / هندسة التجربة الإنسانية</div>
+            <div class="section-title mono-text en-only">00.4 / HUMAN EXPERIENCE ENGINEERING</div>
+            
+            <p class="body-text ar-only" style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+                <span class="mono-text" style="color: var(--cyber-steel);">>> عملنا يدمج بين <<</span><br><br>
+                الرؤية السلوكية &nbsp;—&nbsp; التصميم الحسي &nbsp;—&nbsp; هندسة الطقوس &nbsp;—&nbsp; الترجمة السينمائية
+            </p>
+            <p class="body-text en-only" style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+                <span class="mono-text" style="color: var(--cyber-steel);">>> our work combines <<</span><br><br>
+                Behavioral Insight &nbsp;—&nbsp; Sensory Design &nbsp;—&nbsp; Ritual Engineering &nbsp;—&nbsp; Cinematic Translation
+            </p>
+
+            <hr style="border-color: #222; margin: 60px 0;">
+
+            <div class="section-title mono-text ar-only">00.5 / المنهجية</div>
+            <div class="section-title mono-text en-only">00.5 / THE METHODOLOGY</div>
+            
+            <h2 class="main-heading ar-only glitch" data-text="محرك HX-5™️.">محرك HX-5™️.</h2>
+            <h2 class="main-heading en-only glitch" data-text="HX-5™️ Methodology.">HX-5™️ Methodology.</h2>
+            
+            <p class="body-text ar-only">
+                منهجية HX-5™️ هي إطار معماري حصري مصمم لسد الفجوة بين الإدراك البشري والتنفيذ الاستراتيجي. إنها تتجاوز التصميم التقليدي لتهندس العلاقة الأساسية بين البشر والأنظمة من خلال خمس ركائز أساسية:
+            </p>
+            <p class="body-text en-only">
+                The HX-5™️ Methodology is a proprietary architectural framework designed to bridge the gap between human perception and strategic execution. It moves beyond traditional design, engineering the fundamental relationship between humans and systems through five core pillars:
+            </p>
+
+            <div class="hx-grid">
+                <div class="hx-card">
+                    <div class="hx-number">1. Intent / الغاية</div>
+                    <p class="body-text ar-only">"لماذا يجب أن توجد هذه التجربة؟" الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى.</p>
+                    <p class="body-text en-only">"Why should this experience exist?" Intent defines the existential purpose and the "moral compass" of the project. We establish the core value proposition that ensures every interaction serves a higher objective.</p>
+                </div>
+                <div class="hx-card">
+                    <div class="hx-number">2. Context / السياق</div>
+                    <p class="body-text ar-only">"أين ومتى وتحت أي ظروف تتكشف؟" التجربة لا تحدث في فراغ. نحن نحلل الظروف البيئية والزمنية والنفسية المحيطة لنهندس استجابات سلسة ومتكيفة مع لحظة التفاعل.</p>
+                    <p class="body-text en-only">"Where, when, and under what conditions does it unfold?" An experience does not exist in a vacuum. We analyze the environmental, temporal, and psychological conditions surrounding the interaction.</p>
+                </div>
+                <div class="hx-card">
+                    <div class="hx-number">3. Stimuli / المحفزات</div>
+                    <p class="body-text ar-only">"ما هي المحفزات الحسية التي تفعل العاطفة؟" هندسة المدخلات (البصرية، السمعية، اللمسية) لتشغيل استجابات عصبية محددة تتجاوز الفلاتر المنطقية لتتواصل مباشرة مع العقل الباطن.</p>
+                    <p class="body-text en-only">"Which sensory triggers activate emotion?" Engineering the sensory inputs—visual, auditory, and tactile—to trigger specific emotional and neurological responses that bypass logical filters.</p>
+                </div>
+                <div class="hx-card">
+                    <div class="hx-number">4. Interaction / التفاعل</div>
+                    <p class="body-text ar-only">"كيف يشارك الإنسان، بوعي أو بدونه؟" هذه الركيزة تحكم إيقاع الاندماج. نحن نهندس المسارات التي تحول الشخص من مجرد متفرج إلى مشارك نشط داخل التجربة.</p>
+                    <p class="body-text en-only">"How does the human participate—consciously or unconsciously?" This pillar governs the rhythm of engagement. We engineer the pathways that transform a person from a mere spectator into an active participant.</p>
+                </div>
+                <div class="hx-card" style="grid-column: 1 / -1;">
+                    <div class="hx-number" style="color: var(--terminal-green);">5. Impact / الأثر</div>
+                    <p class="body-text ar-only">"ما الذي يتبقى بعد انتهاء التجربة؟" هذا هو المقياس النهائي للنجاح. نحن لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. الأثر هو الذاكرة الدائمة والبصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
+                    <p class="body-text en-only">"What remains after the experience ends?" The ultimate metric of success. We do not measure the duration of the event, but the "emotional residue" left behind. Impact is the lasting memory and long-term cognitive imprint.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="video-wrapper">
+            <video id="breakVideo2" class="video-bg" autoplay loop muted playsinline></video>
+        </div>
+        <div class="overlay" style="background: rgba(0,0,0,0.8);"></div>
+        <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(1rem, 2.5vw, 1.8rem);" data-text="To create experiences that are felt, before they are understood.">
+            <span class="ar-only">لخلق تجارب تُحَس.. قبل أن تُفهم.</span>
+            <span class="en-only">To create experiences that are felt, before they are understood.</span>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="geometric-bg" style="background-image: url('bg2.jpg');"></div>
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.6 / الفلسفة الأساسية</div>
+            <div class="section-title mono-text en-only">00.6 / THE CORE PHILOSOPHY</div>
+            <p class="body-text ar-only">
+                العالم مشبع بالمحتوى، ولكنه متعطش للمعنى. تم تصميم محرك HX-5™️ لحل "المشكلة الصامتة" للتفاعل الحديث: الفشل في البقاء في الذاكرة. نحن نضمن أن تجربتك لن تُرى فحسب، بل ستُحَس وتُحفظ.
+            </p>
+            <p class="body-text en-only">
+                The world is saturated with content, yet starved for meaning. The HX-5™️ engine is designed to solve the "Silent Problem" of modern interaction: the failure to be remembered. We ensure that your experience is not just seen, but felt and retained.
+            </p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.7 / ماذا نفعل؟</div>
+            <div class="section-title mono-text en-only">00.7 / WHAT WE DO?</div>
+            <p class="body-text ar-only">نحن ننفذ نماذج تجريبية (Pilots) مركزة لمدة 4-6 أسابيع مصممة للتحقق من أثر التجربة. كل نموذج يقدم:</p>
+            <p class="body-text en-only">We execute focused 4-6 week pilots designed to validate experience impact. Each pilot delivers:</p>
+            
+            <ul class="cyber-list ar-only">
+                <li>تجربة إنسانية مصممة بدقة.</li>
+                <li>قياس الاستجابة العاطفية والسلوكية.</li>
+                <li>فيلم سينمائي قصير (60-90 ثانية).</li>
+                <li>دراسة حالة استراتيجية.</li>
+            </ul>
+            <ul class="cyber-list en-only">
+                <li>A designed human experience.</li>
+                <li>Measured emotional and behavioral response.</li>
+                <li>A short cinematic film (60-90 seconds).</li>
+                <li>A strategic case study.</li>
+            </ul>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.8 / لماذا النماذج التجريبية أولاً؟</div>
+            <div class="section-title mono-text en-only">00.8 / WHY PILOTS FIRST?</div>
+            <p class="body-text ar-only">
+                الأفكار ليست كافية.. الوعود لا تتوسع.<br><br>
+                النماذج التجريبية تخلق <span class="highlight">إثبات الشعور (Proof of Feeling)</span> قبل إثبات المفهوم. التجربة يجب أن تُعرض وتُعاش، لا أن تُوصف.
+            </p>
+            <p class="body-text en-only">
+                Ideas are not enough. Promises do not scale.<br><br>
+                Pilots create <span class="highlight">Proof of Feeling</span> before proof of concept. Experience must be demonstrated, not described.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section alt-bg">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.9 / فلسفة الشراكة</div>
+            <div class="section-title mono-text en-only">00.9 / PARTNERSHIP PHILOSOPHY</div>
+            <p class="body-text ar-only">
+                نحن لا ننافس شركاءنا.. نحن نرتقي بهم.
+            </p>
+            <p class="body-text en-only">
+                We do not compete with our partners. We elevate them.
+            </p>
+            <ul class="cyber-list ar-only">
+                <li>الملكية الفكرية الأساسية تبقى مع مبتكرها.</li>
+                <li>الرؤى الجديدة يتم التعامل معها بسرية تامة.</li>
+                <li>الظهور يكون متعمداً، وليس استخراجياً.</li>
+            </ul>
+            <ul class="cyber-list en-only">
+                <li>Background IP remains with its originator.</li>
+                <li>New insights are handled with discretion.</li>
+                <li>Visibility is intentional, never extractive.</li>
+            </ul>
+            <p class="body-text ar-only"><span class="highlight">الشراكة مع フサム تزيد من المعنى، وليس مجرد الظهور.</span></p>
+            <p class="body-text en-only"><span class="highlight">Partnership with フサム increases meaning, not exposure alone.</span></p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.10 / لمن هذا؟</div>
+            <div class="section-title mono-text en-only">00.10 / WHO THIS IS FOR?</div>
+            <ul class="cyber-list ar-only">
+                <li>المنظمات التي تسعى لأثر طويل المدى.</li>
+                <li>المستثمرون الذين يركزون على البنية التحتية، لا الضجيج المؤقت.</li>
+                <li>العلامات التجارية التي تريد أن تُحفر في الذاكرة.</li>
+                <li>المؤسسات الثقافية والمدفوعة بالابتكار.</li>
+            </ul>
+            <ul class="cyber-list en-only">
+                <li>Organizations seeking long-term impact.</li>
+                <li>Investors focused on infrastructure, not hype.</li>
+                <li>Brands that want to be remembered.</li>
+                <li>Cultural and innovation-driven institutions.</li>
+            </ul>
+            <p class="body-text ar-only" style="color: #ff4444;">إذا كنت تبحث عن إعلانات تقليدية، فهذا المكان ليس لك.</p>
+            <p class="body-text en-only" style="color: #ff4444;">If you are looking for advertising, this is not for you.</p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.11 / ملاحظة للمستثمرين</div>
+            <div class="section-title mono-text en-only">00.11 / INVESTOR NOTE</div>
+            <p class="body-text ar-only">
+                フサム ليست شركة منتجات.. وليست وكالة.<br>
+                إنها البنية التحتية لفئة جديدة داخل اقتصاد التجربة (Experience Economy). القيمة تكمن في النظام، قابليته للتكرار، وتطبيقه عبر مختلف القطاعات.
+            </p>
+            <p class="body-text en-only">
+                フサム is not a product company. And not an agency.<br>
+                It is the architecture of a new category, within the Experience Economy. The value lies in the system, its repeatability, and its cross-sector application.
+            </p>
+        </div>
+    </section>
+
+    <section class="hero" style="height: 30vh; background: #000;">
+        <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(0.9rem, 2vw, 1.2rem);" data-text="We work selectively and intentionally.. If this resonates...">
+            <span class="ar-only" style="color: var(--cyber-steel);">نحن نعمل بانتقائية وقصد.. إذا كان هذا يتردد صداه معك...</span>
+            <span class="en-only" style="color: var(--cyber-steel);">We work selectively and intentionally.. If this resonates...</span>
+        </div>
+    </section>
+
+    <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">بوابة السيادة</div>
+            <div class="section-title mono-text en-only">SOVEREIGN PORTAL</div>
             
             <div class="portal-container">
                 <div id="login-view">
@@ -246,14 +462,14 @@
                     </div>
 
                     <div id="form-terminal" class="service-form">
-                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands. Ask the Deep Matrix anything.</p>
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands. Ask Oracle EX directly.</p>
                         <div class="terminal-container" id="terminalBox" onclick="document.getElementById('termInput').focus()">
                             <div class="term-output" id="termOutput">
 Initializing Sovereign Terminal v1.0...
 Connection Secure.
                             </div>
                             <div class="term-input-line">
-                                <span class="term-prompt">user@fusam:~#</span>
+                                <span class="term-prompt">user@ex:~#</span>
                                 <input type="text" id="termInput" class="term-input" autocomplete="off" onkeydown="handleTerminal(event)">
                             </div>
                         </div>
@@ -262,6 +478,21 @@ Connection Secure.
             </div>
         </div>
     </section>
+
+    <div class="container fade-in" style="text-align: center; padding: 60px 0; border-top: 1px solid #111;">
+        <h3 class="mono-text" style="letter-spacing: 3px; margin-bottom: 10px;">フサム | experience™️</h3>
+        <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
+            Engineering Human Experiences <br>
+            All concepts protected through layered strategic disclosure.<br><br>
+            <span style="color: #fff;">Designed to be felt, not explained.</span>
+        </p>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-logo mono-text">フサム | experience™️</div>
+        <div class="footer-slogan mono-text">Fearless, Relentless, True to you.</div>
+        <div class="footer-copy">Engineering Human Experiences<br>©️ 2026 フサム | experience™️. All rights reserved.</div>
+    </footer>
 
     <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">AI</button>
     
@@ -279,17 +510,23 @@ Connection Secure.
 
     <script>
         // --- Dynamic Video Injection ---
+        // سيتم تشغيل الفيديوهات عشوائياً في الأماكن الثلاثة
         document.addEventListener("DOMContentLoaded", () => {
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
             const shuffled = videos.sort(() => 0.5 - Math.random());
+            
             const heroVideo = document.getElementById('heroVideo');
             if(heroVideo) { heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; heroVideo.load(); }
-            const breakVideo = document.getElementById('breakVideo');
-            if(breakVideo) { breakVideo.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo.load(); }
+            
+            const breakVideo1 = document.getElementById('breakVideo1');
+            if(breakVideo1) { breakVideo1.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo1.load(); }
+            
+            const breakVideo2 = document.getElementById('breakVideo2');
+            if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
         // -------------------------------------------------------------
-        // رابط جوجل آب سكريبت الخاص بك (تأكد أنه الرابط الصحيح الذي ينتهي بـ /exec)
+        // رابط جوجل آب سكريبت الخاص بك
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyzUzoWeVEnerInb-9P6-mJC8fo2RqS6M4x3H4xs_hPWzK4C-XSstoKeS6roYULv1B/exec';
         // -------------------------------------------------------------
 
@@ -301,7 +538,6 @@ Connection Secure.
             body.classList.toggle('lang-ar'); body.classList.toggle('lang-en');
             currentLang = body.classList.contains('lang-ar') ? 'ar' : 'en';
             
-            // تحديث نصوص واجهة أوراكل
             const aiInput = document.getElementById('aiInput');
             const aiSendBtn = document.querySelector('.ai-send');
             if(currentLang === 'ar') {
@@ -320,14 +556,12 @@ Connection Secure.
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
             
-            // إرسال البيانات (اختياري)
             const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: 'Login' });
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
                 .then(() => {
                     document.getElementById('login-view').style.display = 'none';
                     document.getElementById('dashboard-view').style.display = 'block';
                 }).catch(() => {
-                    // حتى لو فشل الاتصال، نفتح البوابة
                     document.getElementById('login-view').style.display = 'none';
                     document.getElementById('dashboard-view').style.display = 'block';
                 });
@@ -359,9 +593,8 @@ Connection Secure.
                 });
         }
 
-        // --- GEMINI AI PROXY (تحديث للاتصال بـ GET) ---
+        // --- GEMINI AI PROXY ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            // نستخدم GET لجلب الردود من دالة doGet في السكريبت
             const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
 
             try {
@@ -383,7 +616,7 @@ Connection Secure.
             }
         }
 
-        // --- Sovereign Terminal Logic ---
+        // --- Terminal Logic ---
         const termOutput = document.getElementById('termOutput');
         const termInput = document.getElementById('termInput');
         
@@ -411,7 +644,7 @@ Connection Secure.
             termOutput.scrollTop = termOutput.scrollHeight;
         }
 
-        // --- AI ORACLE CHATBOT Logic ---
+        // --- AI Chatbot Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
@@ -420,7 +653,7 @@ Connection Secure.
             chatWindow.classList.toggle('open'); 
             if(chatWindow.classList.contains('open')) {
                 aiInput.focus();
-                if(chatBody.innerHTML === '') initChat(); // تهيئة رسالة الترحيب عند الفتح لأول مرة
+                if(chatBody.innerHTML === '') initChat();
             }
         }
 
@@ -437,7 +670,7 @@ Connection Secure.
             msgDiv.innerText = text;
             chatBody.appendChild(msgDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
-            return msgDiv; // لإرجاع العنصر إذا أردنا حذفه لاحقاً (مثل علامة التحميل)
+            return msgDiv; 
         }
 
         function handleChatEnter(e) { 
