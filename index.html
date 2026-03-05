@@ -8,10 +8,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         
         :root {
-            --obsidian-black: #000000;
+            --obsidian-black: #020202;
             --cyber-steel: #8b939c;
             --stark-white: #ffffff;
-            --off-white: #d1d5d8;
+            --terminal-green: #0f0;
             --panel-bg: #050607;
         }
 
@@ -22,6 +22,25 @@
         }
 
         .mono-text { font-family: 'Space Mono', monospace; }
+
+        /* CRT Scanline Effect (Digital Art) */
+        body::before {
+            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none;
+        }
+
+        /* Glitch Effect */
+        .glitch { position: relative; display: inline-block; }
+        .glitch:hover::before {
+            content: attr(data-text); position: absolute; left: -2px; text-shadow: 2px 0 red; top: 0;
+            color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse;
+        }
+        .glitch:hover::after {
+            content: attr(data-text); position: absolute; left: 2px; text-shadow: -2px 0 blue; top: 0;
+            color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse;
+        }
+        @keyframes noise { 0% { clip-path: inset(10% 0 10% 0); } 100% { clip-path: inset(80% 0 5% 0); } }
 
         /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
@@ -34,127 +53,89 @@
         /* Top Navigation */
         .top-nav {
             position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; box-sizing: border-box; pointer-events: none;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; pointer-events: none;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
         }
         .top-nav > * { pointer-events: auto; }
         .est-text { font-size: 0.75rem; color: var(--cyber-steel); letter-spacing: 2px; font-weight: bold;}
-        .nav-controls { display: flex; gap: 10px; }
         .control-btn {
             background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel);
             padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s;
         }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        /* Silent Video Backgrounds */
+        /* Dynamic Video Backgrounds */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
-        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; cursor: pointer; }
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: opacity 0.5s ease; filter: grayscale(30%) contrast(110%); }
-        .video-wrapper:hover .video-bg { opacity: 0.5; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)); z-index: 1; pointer-events: none; }
+        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(50%) contrast(120%); }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)); z-index: 1; pointer-events: none; }
 
         .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
-        .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--off-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; transition: all 0.6s; }
-        .interactive-logo:hover { color: var(--stark-white); text-shadow: 0 0 30px rgba(255, 255, 255, 0.4); transform: scale(1.02); letter-spacing: 5px; }
-        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; transition: all 0.4s; }
-        .interactive-slogan:hover { color: var(--stark-white); letter-spacing: 6px; }
-        .static-personality { font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: var(--cyber-steel); font-style: italic; margin-bottom: 40px; letter-spacing: 2px; }
+        .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--stark-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; }
+        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 40px; letter-spacing: 4px; text-transform: uppercase; }
 
-        .social-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .social-btn { padding: 10px 25px; background: transparent; color: var(--stark-white); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--cyber-steel); transition: all 0.4s; text-transform: uppercase; letter-spacing: 2px; }
-        .social-btn:hover { background: var(--stark-white); color: var(--obsidian-black); border-color: var(--stark-white); }
-
-        /* Geometric Instagram Image Backgrounds */
+        /* Fixed Geometric Backgrounds */
         .content-section { padding: 120px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
-        
         .geometric-bg {
             position: absolute; top: 0; right: 0; width: 55%; height: 100%;
-            background-size: cover; background-position: center; opacity: 0.15; z-index: 0; pointer-events: none;
-            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-            filter: grayscale(80%) contrast(120%); transition: all 0.8s ease;
+            background-size: cover; background-position: center; opacity: 0.2; z-index: 0;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); filter: grayscale(80%) contrast(120%);
         }
-        .content-section:hover .geometric-bg { opacity: 0.25; filter: grayscale(30%) contrast(120%); transform: scale(1.02); }
         body.lang-en .geometric-bg { right: auto; left: 0; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
 
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; position: relative; z-index: 2;}
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease; position: relative; z-index: 2;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
         .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--off-white); max-width: 800px; margin-bottom: 20px; }
         
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .grid-card { border-top: 1px solid #222; padding-top: 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); padding: 20px;}
-        .grid-card h4 { font-size: 1.2rem; margin-top: 0; color: var(--stark-white); }
-        .grid-card p { color: var(--cyber-steel); font-size: 0.95rem; }
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .geometric-bg { width: 100%; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);} }
-
-        /* Video Break */
-        .video-break { position: relative; height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-
-        /* Member Portal & Dashboard */
+        /* Member Portal */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
-        .input-group label { color: var(--cyber-steel); font-size: 0.75rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .cyber-input { background: transparent; border: none; border-bottom: 1px solid #333; color: var(--stark-white); padding: 8px 0; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
-        .cyber-input:focus { outline: none; border-bottom-color: var(--stark-white); }
-        textarea.cyber-input { resize: vertical; min-height: 80px; }
+        .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
+        .cyber-input:focus { outline: none; border-color: var(--cyber-steel); background: rgba(255,255,255,0.05); }
         .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
-        .submit-btn:disabled { background: #333; color: #888; cursor: not-allowed; }
 
         #dashboard-view { display: none; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 30px; }
-        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s; color: var(--cyber-steel); }
-        .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); background: rgba(255,255,255,0.05); }
-        .dash-card h4 { margin: 0; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); }
+        .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
-        
-        /* Cyber Browser */
-        .cyber-browser { width: 100%; height: 400px; border: 1px solid #333; background: #000; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
-        .browser-header { background: #111; padding: 10px; display: flex; gap: 10px; border-bottom: 1px solid #333; }
-        .browser-url { flex: 1; background: #000; border: 1px solid #333; color: #fff; padding: 5px 10px; font-family: monospace; font-size: 0.85rem;}
-        .browser-go { background: var(--stark-white); color: #000; border: none; padding: 0 15px; cursor: pointer; font-weight: bold;}
-        .browser-frame { flex: 1; width: 100%; border: none; background: #fff;}
+
+        /* Sovereign Terminal */
+        .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
+        .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap;}
+        .term-input-line { display: flex; align-items: center; }
+        .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
+        body.lang-ar .term-prompt { margin-right: 0; margin-left: 10px; }
+        .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
         /* AI ORACLE CHATBOT */
         .ai-btn {
-            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 50%;
-            background: var(--stark-white); color: var(--obsidian-black); border: none; cursor: pointer;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2); z-index: 9999; display: flex; justify-content: center; align-items: center;
-            transition: all 0.3s ease; font-weight: bold; font-size: 1.2rem;
+            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
+            background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
+            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem;
         }
         body.lang-en .ai-btn { left: auto; right: 30px; }
-        .ai-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
-        
         .ai-window {
-            position: fixed; bottom: 90px; left: 30px; width: 320px; height: 450px; background: rgba(5,6,7,0.95);
-            border: 1px solid #333; backdrop-filter: blur(10px); z-index: 9998; border-radius: 8px;
-            display: flex; flex-direction: column; overflow: hidden; transform: translateY(20px); opacity: 0;
-            pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98);
+            border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column;
+            transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s;
         }
         body.lang-en .ai-window { left: auto; right: 30px; }
         .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        
-        .ai-header { background: #111; padding: 15px; border-bottom: 1px solid #333; text-align: center; color: var(--off-white); font-size: 0.85rem; letter-spacing: 2px;}
+        .ai-header { background: #fff; color: #000; padding: 15px; text-align: center; font-size: 0.85rem; letter-spacing: 2px; font-weight: bold;}
         .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .ai-msg { max-width: 85%; padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; line-height: 1.5; }
-        .ai-msg.bot { background: rgba(255,255,255,0.05); border-left: 2px solid var(--stark-white); color: var(--off-white); align-self: flex-start; }
-        body.lang-ar .ai-msg.bot { border-left: none; border-right: 2px solid var(--stark-white); }
-        .ai-msg.user { background: var(--stark-white); color: var(--obsidian-black); align-self: flex-end; }
-        
+        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; }
+        .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
+        body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
+        .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
         .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 5px; font-family: inherit; font-size: 0.85rem; }
-        .ai-input:focus { outline: none; }
-        .ai-send { background: transparent; border: none; color: var(--stark-white); cursor: pointer; padding: 0 10px; font-weight: bold;}
-
-        /* Footer */
-        footer { text-align: center !important; padding: 60px 20px 40px; border-top: 1px solid #111; background: var(--obsidian-black); position: relative; z-index: 2;}
-        .static-footer { font-size: 0.8rem; color: var(--cyber-steel); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;}
-        .contact-info { font-size: 0.85rem; color: var(--off-white); letter-spacing: 1px; }
-        .contact-info a { color: var(--stark-white); text-decoration: none; margin: 0 10px; transition: color 0.3s ease;}
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
+        .ai-send { background: #fff; color: #000; border: none; cursor: pointer; padding: 0 15px; font-weight: bold;}
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -163,184 +144,98 @@
 
     <div class="top-nav">
         <div class="est-text mono-text">EST EX/2025. SA</div>
-        <div class="nav-controls">
-            <button class="control-btn mono-text" onclick="toggleLanguage()">EN / عربي</button>
-        </div>
+        <button class="control-btn mono-text" onclick="toggleLanguage()">EN / عربي</button>
     </div>
 
     <header class="hero">
-        <div class="video-wrapper" onclick="togglePlayPause(this)">
-            <video id="heroVideo" class="video-bg" autoplay loop muted playsinline>
-                <source src="SnapInsta.to_AQNNXfsHpE3hPCFdMkoyLHEbCMQ6ayO8F7NXSwmDz7u82ndaR0mN7jPnSe0aqdd8ZsTRGVUl_432B376HVSC_TsL.mp4" type="video/mp4">
-            </video>
+        <div class="video-wrapper">
+            <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
         </div>
         <div class="overlay"></div>
 
         <div class="hero-content">
-            <div class="interactive-logo mono-text">フサム | experience™</div>
+            <div class="interactive-logo mono-text glitch" data-text="フサム | experience™">フサム | experience™</div>
             <div class="interactive-slogan mono-text">Engineering human experiences</div>
-            <div class="static-personality">Fearless, Relentless, True to you.</div>
-            
-            <div class="social-btns mono-text">
-                <a href="#portal" class="social-btn" onclick="document.getElementById('portal').scrollIntoView({behavior: 'smooth'});">Member Portal</a>
-                <a href="https://www.instagram.com/ex_experience.sa" class="social-btn" target="_blank">Instagram</a>
-                <a href="https://www.tiktok.com/@ex_experience.sa" class="social-btn" target="_blank">TikTok</a>
+            <div style="margin-top: 40px;">
+                <a href="#portal" class="control-btn mono-text" style="padding: 12px 30px; text-decoration: none;">Initialize Connection</a>
             </div>
         </div>
     </header>
 
     <section class="content-section">
-        <div class="geometric-bg" style="background-image: url('ig-image-1.jpg');"></div>
+        <div class="geometric-bg" style="background-image: url('bg1.jpg');"></div>
         <div class="container fade-in">
-            <div class="section-title mono-text ar-only">01. الفلسفة المعمارية</div>
-            <div class="section-title mono-text en-only">01. Architectural Philosophy</div>
-            <h2 class="main-heading ar-only">الخط الفاصل بين العادي والاستثنائي.</h2>
-            <h2 class="main-heading en-only">The line between ordinary and extraordinary.</h2>
+            <div class="section-title mono-text ar-only">01. الكوديكس الأعظم</div>
+            <div class="section-title mono-text en-only">01. The Great Codex</div>
+            <h2 class="main-heading ar-only glitch" data-text="قانون السيادة الحسية.">قانون السيادة الحسية.</h2>
+            <h2 class="main-heading en-only glitch" data-text="Law of Sensory Sovereignty.">Law of Sensory Sovereignty.</h2>
             <p class="body-text ar-only">
-                <strong>フサム | experience™</strong> هي دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة البشرية. نعمل في نقطة التقاء علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة.
-                <br><br><span style="color: #fff;">هذا ليس تسويقاً.. هذه هندسة معمارية للتجربة.</span>
+                لا توجد حقيقة موضوعية، بل توجد مدخلات حسية. من يسيطر على المحفزات يسيطر على الإدراك. نحن نهندس الفراغ ونحوله إلى أثر سيكولوجي مستدام.
+                <br><br><span style="color: #fff;">التجربة هي العملة الأسمى في هذا الكون.</span>
             </p>
             <p class="body-text en-only">
-                <strong>フサム | experience™</strong> is a concept house and strategic lab focused on Human Experience Engineering. We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory.
-                <br><br><span style="color: #fff;">This is not marketing.. This is experience architecture.</span>
+                There is no objective reality, only sensory inputs. He who controls the stimuli controls perception. We engineer the void into a sustainable psychological impact.
+                <br><br><span style="color: #fff;">Experience is the ultimate currency of this universe.</span>
             </p>
         </div>
     </section>
 
-    <section class="content-section" style="background-color: #030405;">
-        <div class="geometric-bg" style="background-image: url('ig-image-2.jpg'); clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%); left: 0; right: auto;"></div>
-        <div class="container fade-in">
-            <div class="section-title mono-text ar-only">02. منهجية HX-5™</div>
-            <div class="section-title mono-text en-only">02. HX-5™ Methodology</div>
-            <h2 class="main-heading ar-only">خمس ركائز لهندسة الإدراك البشري.</h2>
-            <h2 class="main-heading en-only">Five pillars engineering human perception.</h2>
-            <div class="grid-2">
-                <div class="grid-card">
-                    <h4 class="mono-text">1. Intent & Context</h4>
-                    <p class="ar-only">تحديد الغرض الوجودي وتحليل الظروف البيئية والزمنية لهندسة استجابة مثالية.</p>
-                    <p class="en-only">Defining existential purpose and analyzing environmental conditions for optimal response.</p>
-                </div>
-                <div class="grid-card">
-                    <h4 class="mono-text">2. Stimuli & Interaction</h4>
-                    <p class="ar-only">هندسة المدخلات البصرية والسمعية، والتحكم في إيقاع التفاعل لاختراق اللاوعي.</p>
-                    <p class="en-only">Engineering sensory inputs and governing engagement rhythm to bypass logical filters.</p>
-                </div>
-            </div>
+    <section class="hero" style="height: 60vh;">
+        <div class="video-wrapper">
+            <video id="breakVideo" class="video-bg" autoplay loop muted playsinline></video>
         </div>
-    </section>
-
-    <section class="video-break" onclick="togglePlayPause(this)" style="cursor: pointer;">
-        <video id="secondVideo" class="video-bg" autoplay loop muted playsinline style="opacity: 0.6;">
-            <source src="SnapInsta.to_AQMDUdNuwWm_I0S914efb6SceI2ftxQU4UoR5aACJSHeghEexFxN-IBQSVtp3_6cpmq-LwEeniaGBMlI4VrJOSq1.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <div class="interactive-slogan mono-text" style="position: relative; z-index: 2; font-size: clamp(1.2rem, 3vw, 2rem); color: #fff;">Proof of Feeling</div>
+        <div class="overlay" style="background: rgba(0,0,0,0.6);"></div>
+        <div class="interactive-logo mono-text glitch" style="z-index: 2;" data-text="Proof of Feeling">Proof of Feeling</div>
     </section>
 
     <section id="portal" class="content-section" style="background-color: #000;">
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">بوابة الأعضاء والسيادة</div>
-            <div class="section-title mono-text en-only">Sovereign Member Portal</div>
+            <div class="section-title mono-text en-only">Sovereign Portal</div>
             
-            <h2 class="main-heading ar-only">الوصول الحصري والتحكم.</h2>
-            <h2 class="main-heading en-only">Exclusive Access & Control.</h2>
-
             <div class="portal-container">
-                
                 <div id="login-view">
-                    <p class="ar-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">قم بتسجيل بياناتك لإنشاء هويتك الرقمية وربطها بقاعدة بيانات المختبر.</p>
-                    <p class="en-only" style="color: var(--cyber-steel); margin-bottom: 30px; font-size: 0.9rem;">Register your data to create your digital identity and connect to the lab's database.</p>
-                    
                     <form onsubmit="handleLogin(event)">
                         <div class="input-group">
-                            <label class="ar-only">الاسم الكامل</label><label class="en-only">Full Name</label>
-                            <input type="text" id="userName" class="cyber-input" required>
+                            <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
                         </div>
                         <div class="input-group">
-                            <label class="ar-only">البريد الإلكتروني</label><label class="en-only">Email Address</label>
-                            <input type="email" id="userEmail" class="cyber-input" required>
+                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="Email" required>
                         </div>
-                        <div class="input-group">
-                            <label class="ar-only">رقم الجوال</label><label class="en-only">Phone Number</label>
-                            <input type="tel" id="userPhone" class="cyber-input" required>
-                        </div>
-                        <button type="submit" class="submit-btn mono-text">
-                            <span class="ar-only">دخول / اتصال بقاعدة البيانات</span>
-                            <span class="en-only">Login / Connect to Database</span>
-                        </button>
+                        <button type="submit" class="submit-btn mono-text">Connect to Matrix</button>
                     </form>
                 </div>
 
                 <div id="dashboard-view">
-                    <h3 class="ar-only" style="color: var(--stark-white); font-weight: 300; margin-bottom: 5px;">مرحباً بك في المختبر.</h3>
-                    <h3 class="en-only" style="color: var(--stark-white); font-weight: 300; margin-bottom: 5px;">Welcome to the Lab.</h3>
-
-                    <div class="dashboard-grid" style="margin-top:20px;">
+                    <div class="dashboard-grid">
                         <div class="dash-card active" onclick="switchService('consult')">
-                            <h4 class="ar-only">استشارات</h4><h4 class="en-only">Consult</h4>
+                            <h4 class="mono-text">Consult</h4>
                         </div>
-                        <div class="dash-card" onclick="switchService('corp')">
-                            <h4 class="ar-only">شركات</h4><h4 class="en-only">Corporate</h4>
-                        </div>
-                        <div class="dash-card" onclick="switchService('feedback')">
-                            <h4 class="ar-only">تواصل</h4><h4 class="en-only">Feedback</h4>
-                        </div>
-                        <div class="dash-card" onclick="switchService('browse')" style="border-color: #444;">
-                            <h4 class="ar-only">تصفح الويب 🌐</h4><h4 class="en-only">Web Browser 🌐</h4>
+                        <div class="dash-card" onclick="switchService('terminal')" style="border-color: var(--terminal-green);">
+                            <h4 class="mono-text" style="color: var(--terminal-green);">Terminal_</h4>
                         </div>
                     </div>
 
                     <div id="form-consult" class="service-form active">
-                        <form onsubmit="submitServiceForm(event, 'استشارة أفراد / Personal Consult')">
+                        <form onsubmit="submitServiceForm(event, 'Request')">
                             <div class="input-group">
-                                <label class="ar-only">الهدف النفسي أو المادي (شرح الطلب)</label>
-                                <label class="en-only">Psychological or Material Goal</label>
-                                <textarea class="cyber-input" required></textarea>
+                                <textarea class="cyber-input" placeholder="State your objective..." required></textarea>
                             </div>
-                            <button type="submit" class="submit-btn mono-text">
-                                <span class="ar-only">إرسال الطلب للمختبر</span>
-                                <span class="en-only">Submit Lab Request</span>
-                            </button>
+                            <button type="submit" class="submit-btn mono-text">Transmit</button>
                         </form>
                     </div>
 
-                    <div id="form-corp" class="service-form">
-                        <form onsubmit="submitServiceForm(event, 'طلب شركات / Corporate Request')">
-                            <div class="input-group">
-                                <label class="ar-only">اسم المنظمة / وتفاصيل التحدي</label>
-                                <label class="en-only">Organization & Challenge Details</label>
-                                <textarea class="cyber-input" required></textarea>
+                    <div id="form-terminal" class="service-form">
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands.</p>
+                        <div class="terminal-container" id="terminalBox" onclick="document.getElementById('termInput').focus()">
+                            <div class="term-output" id="termOutput">
+Initializing Sovereign Terminal v1.0...
+Connection Secure.
                             </div>
-                            <button type="submit" class="submit-btn mono-text">
-                                <span class="ar-only">طلب هندسة للشركة</span>
-                                <span class="en-only">Request Corporate Engineering</span>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div id="form-feedback" class="service-form">
-                        <form onsubmit="submitServiceForm(event, 'تقييم وملاحظات / Feedback')">
-                            <div class="input-group">
-                                <label class="ar-only">الملاحظات والتقييم</label>
-                                <label class="en-only">Notes & Feedback</label>
-                                <textarea class="cyber-input" required></textarea>
+                            <div class="term-input-line">
+                                <span class="term-prompt">user@fusam:~#</span>
+                                <input type="text" id="termInput" class="term-input" autocomplete="off" onkeypress="handleTerminal(event)">
                             </div>
-                            <button type="submit" class="submit-btn mono-text">
-                                <span class="ar-only">إرسال للإدارة</span>
-                                <span class="en-only">Send to Management</span>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div id="form-browse" class="service-form">
-                        <p class="ar-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">متصفح آمن مدمج.</p>
-                        <p class="en-only" style="color:var(--cyber-steel); font-size:0.85rem; margin-bottom: 15px;">Secure embedded browser.</p>
-                        <div class="cyber-browser">
-                            <div class="browser-header">
-                                <input type="url" id="browserUrl" class="browser-url" value="https://en.wikipedia.org" placeholder="https://...">
-                                <button class="browser-go mono-text" onclick="loadUrl()">GO</button>
-                            </div>
-                            <iframe id="browserFrame" class="browser-frame" src="https://en.wikipedia.org"></iframe>
                         </div>
                     </div>
 
@@ -349,64 +244,58 @@
         </div>
     </section>
 
-    <footer>
-        <div class="static-footer mono-text">Concept house &bull; &copy; 1991. SA</div>
-        <div class="contact-info mono-text">
-            <a href="mailto:info@ex-experience.sa">info@ex-experience.sa</a> | 
-            <a href="tel:+966500000000" dir="ltr">+966 50 000 0000</a>
-        </div>
-    </footer>
-
-    <button class="ai-btn mono-text" onclick="toggleChat()">AI</button>
+    <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">AI</button>
     <div class="ai-window" id="aiWindow">
-        <div class="ai-header mono-text">フサム | ORACLE SYSTEM</div>
+        <div class="ai-header mono-text">ORACLE [DEEP MATRIX]</div>
         <div class="ai-body" id="chatBody"></div>
         <div class="ai-input-area">
-            <input type="text" id="aiInput" class="ai-input" placeholder="..." onkeypress="handleChatEnter(event)">
-            <button class="ai-send mono-text" onclick="sendChatMessage()">></button>
+            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="Query the system..." onkeypress="handleChatEnter(event)">
+            <button class="ai-send mono-text" onclick="sendChatMessage()">[ENTER]</button>
         </div>
     </div>
 
     <script>
-        // --- System Variables ---
-        // تم التحديث بالرابط السري الجديد والتشفير الدقيق (URLSearchParams)
+        // --- Dynamic Video Injection Logic ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
+            
+            // خلط المصفوفة لاختيار فيديوهين مختلفين
+            const shuffled = videos.sort(() => 0.5 - Math.random());
+            
+            // تعيين الفيديو الأول في الواجهة الرئيسية
+            const heroVideo = document.getElementById('heroVideo');
+            heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`;
+            heroVideo.load();
+            
+            // تعيين الفيديو الثاني في الفاصل السينمائي
+            const breakVideo = document.getElementById('breakVideo');
+            breakVideo.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`;
+            breakVideo.load();
+        });
+
+        // --- Database Connection ---
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkcm9ZdeeAr20aGJbnCySyyE2zzYfKQmXsP9YkBjE-9A9YUsODaMHIREWlQ4JH3RBI/exec';
-        let currentUser = { Name: '', Email: '', Phone: '' };
+        let currentUser = { Name: '', Email: '', Phone: 'Terminal User' };
         let currentLang = 'ar';
 
-        // --- Language & UI ---
         function toggleLanguage() {
             const body = document.body;
-            if (body.classList.contains('lang-ar')) {
-                body.classList.remove('lang-ar'); body.classList.add('lang-en'); currentLang = 'en';
-            } else {
-                body.classList.remove('lang-en'); body.classList.add('lang-ar'); currentLang = 'ar';
-            }
+            body.classList.toggle('lang-ar'); body.classList.toggle('lang-en');
+            currentLang = body.classList.contains('lang-ar') ? 'ar' : 'en';
             initChat();
         }
 
-        function togglePlayPause(wrapper) {
-            const video = wrapper.querySelector('video');
-            if (video.paused) { video.play(); wrapper.style.opacity = '1'; } 
-            else { video.pause(); wrapper.style.opacity = '0.8'; }
-        }
-
-        // --- Database & Portal Logic ---
         function handleLogin(e) {
             e.preventDefault();
             const btn = e.target.querySelector('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<span class="mono-text">...جاري الاتصال / Connecting...</span>';
+            btn.innerHTML = '<span class="mono-text">Decrypting...</span>';
             btn.disabled = true;
-
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
-            currentUser.Phone = document.getElementById('userPhone').value;
 
-            sendToGoogleSheet('تسجيل دخول جديد / Login', 'تم فتح البوابة / Portal Accessed', null, () => {
+            sendToGoogleSheet('Login', 'Portal Accessed', null, () => {
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
-                document.getElementById('dashboard-view').style.animation = 'fadeIn 0.8s';
             });
         }
 
@@ -414,94 +303,103 @@
             e.preventDefault();
             const form = e.target;
             const message = form.querySelector('textarea').value;
-            
             const btn = form.querySelector('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<span class="mono-text">...جاري الإرسال / Sending...</span>';
-            btn.disabled = true;
-
+            btn.innerHTML = 'Transmitting...'; btn.disabled = true;
             sendToGoogleSheet(type, message, form, () => {
-                alert(currentLang === 'ar' ? 'تم استلام طلبك في المختبر بنجاح.' : 'Request successfully received in the Lab.');
-                form.reset();
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                alert('Transmission Successful.');
+                form.reset(); btn.innerHTML = 'Transmit'; btn.disabled = false;
             });
         }
 
         function sendToGoogleSheet(type, message, formElement, onSuccess) {
-            // التشفير الدقيق المطلوب من جوجل
             const params = new URLSearchParams();
-            params.append('Name', currentUser.Name);
-            params.append('Email', currentUser.Email);
-            params.append('Phone', currentUser.Phone);
-            params.append('Type', type);
-            params.append('Message', message);
-
-            fetch(GOOGLE_SCRIPT_URL, { 
-                method: 'POST', 
-                body: params, 
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
+            params.append('Name', currentUser.Name); params.append('Email', currentUser.Email);
+            params.append('Phone', currentUser.Phone); params.append('Type', type); params.append('Message', message);
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
             .then(() => { if (onSuccess) onSuccess(); })
-            .catch(error => {
-                console.error('Database Error:', error);
-                alert('حدث خطأ في الاتصال بقاعدة البيانات. / Database connection error.');
-                if (formElement) {
-                    const btn = formElement.querySelector('button');
-                    btn.innerHTML = currentLang === 'ar' ? 'إعادة المحاولة' : 'Retry';
-                    btn.disabled = false;
-                }
-            });
+            .catch(() => { alert('Network Breach. Try again.'); });
         }
 
         function switchService(serviceId) {
-            document.querySelectorAll('.dash-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.dash-card').forEach(c => c.classList.remove('active'));
             event.currentTarget.classList.add('active');
-            document.querySelectorAll('.service-form').forEach(form => form.classList.remove('active'));
+            document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
             document.getElementById('form-' + serviceId).classList.add('active');
+            if(serviceId === 'terminal') document.getElementById('termInput').focus();
         }
 
-        function loadUrl() {
-            let url = document.getElementById('browserUrl').value;
-            if(!url.startsWith('http')) url = 'https://' + url;
-            document.getElementById('browserUrl').value = url;
-            document.getElementById('browserFrame').src = url;
+        // --- Sovereign Terminal Logic ---
+        const termOutput = document.getElementById('termOutput');
+        const termInput = document.getElementById('termInput');
+        function handleTerminal(e) {
+            if(e.key === 'Enter') {
+                const cmd = termInput.value.trim().toLowerCase();
+                printTerm(`user@fusam:~# ${cmd}`);
+                termInput.value = '';
+                
+                if(cmd === 'help') {
+                    printTerm(`Available Commands:\n- /equation : View the core formula\n- /manifesto : Core beliefs\n- /clear : Clear screen\n- /status : Lab status`);
+                } else if(cmd === '/equation') {
+                    printTerm(`Impact = ∫(M+P+C+Ψ) × E\n[M] Math: Algorithms & Data\n[P] Physics: Sensory Contrast\n[C] Chemistry: Organic Response\n[Ψ] Psychology: Cognitive Memory\n[E] Engineering: Execution Multiplier`);
+                } else if(cmd === '/manifesto') {
+                    printTerm(`We do not design to temporarily satisfy senses.\nWe engineer reality to establish a permanent emotional imprint.\nExperience is the ultimate currency.`);
+                } else if(cmd === '/status') {
+                    printTerm(`Lab Systems: ONLINE.\nTemperature: 20.5 C.\nFrequency: 432Hz.\nProtocol: SOP001 Active.`);
+                } else if(cmd === '/clear') {
+                    termOutput.innerHTML = '';
+                } else if(cmd !== '') {
+                    printTerm(`Command not found: ${cmd}. Type 'help'.`);
+                }
+            }
+        }
+        function printTerm(text) {
+            termOutput.innerHTML += `\n${text}`;
+            termOutput.scrollTop = termOutput.scrollHeight;
         }
 
-        // --- AI CHATBOT LOGIC ---
+        // --- Deep Knowledge AI ORACLE ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-
         function toggleChat() { chatWindow.classList.toggle('open'); }
 
-        const botKnowledge = {
-            ar: {
-                welcome: "مرحباً. أنا أوراكل فُسام. نحن نهندس التاريخ الشخصي. كيف يمكنني إرشادك؟",
-                brand: "نحن لسنا وكالة تسويق. نحن مختبر استراتيجي يدمج الرياضيات بالفيزياء والكيمياء لهندسة تجربة عاطفية لا تُمحى.",
-                contact: "لطلب معايرة أو استشارة، يرجى تسجيل الدخول في (بوابة الأعضاء) أسفل الصفحة.",
-                default: "تم استلام البيانات. للحصول على تحليل دقيق، نرجو استخدام بوابة الأعضاء للتواصل مع الإدارة."
-            },
-            en: {
-                welcome: "System Online. I am the フサム Oracle. We engineer personal history. How may I guide you?",
-                brand: "We are not a marketing agency. We are a strategic lab combining Math, Physics, and Chemistry to engineer indelible experiences.",
-                contact: "To request calibration, please log in via the Sovereign Member Portal below.",
-                default: "Data received. For precise analysis, please use the Member Portal to contact management."
+        const advancedBotLogic = (query) => {
+            const q = query.toLowerCase();
+            if(q.includes('معادلة') || q.includes('equation')) {
+                return currentLang === 'ar' ? 
+                "معادلة الأثر الخاصة بنا هي: Impact = ∫(M+P+C+Ψ) × E. نقوم بمكاملة الرياضيات، الفيزياء، الكيمياء، وعلم النفس، ونضربها في دقة التنفيذ الهندسي (E) لخلق أثر لا يُمحى." : 
+                "Our Impact Equation is: Impact = ∫(M+P+C+Ψ) × E. We integrate Math, Physics, Chemistry, and Psychology, multiplied by precise Engineering (E) to create an indelible mark.";
             }
+            if(q.includes('ركائز') || q.includes('pillars') || q.includes('hx-5')) {
+                return currentLang === 'ar' ? 
+                "منهجية HX-5 تعتمد على 5 ركائز: 1. القصد (الهدف الوجودي) 2. السياق (البيئة) 3. المحفزات (الاختراق الحسي) 4. التفاعل (المسار) 5. الأثر (الراسب العاطفي المتبقي)." : 
+                "The HX-5 methodology relies on 5 pillars: 1. Intent (Existential Goal) 2. Context (Environment) 3. Stimuli (Sensory penetration) 4. Interaction (Path) 5. Impact (Emotional residue).";
+            }
+            if(q.includes('قوانين') || q.includes('laws') || q.includes('manifesto')) {
+                return currentLang === 'ar' ? 
+                "الكوديكس الأعظم ينص على 3 قوانين: 1. قانون السيادة الحسية (التحكم بالمحفزات). 2. قانون الحتمية الرياضية (كل شعور هو معادلة). 3. قانون الخلود عبر الأثر." : 
+                "The Great Codex dictates 3 laws: 1. Sensory Sovereignty. 2. Mathematical Determinism. 3. Immortality via Impact.";
+            }
+            if(q.includes('من أنتم') || q.includes('فوسام') || q.includes('who are you')) {
+                return currentLang === 'ar' ? 
+                "نحنフサム | experience™. نحن لسنا وكالة تسويق، بل مختبر استراتيجي يطبق الهندسة المعمارية على التجربة البشرية." : 
+                "We are フサム | experience™. Not a marketing agency, but a strategic lab applying architecture to human experiences.";
+            }
+            
+            return currentLang === 'ar' ? 
+            "تم استلام المعطيات. هذه البيانات تتطلب تحليل مهندس مختص. يرجى إرسال طلب عبر البوابة (Terminal)." : 
+            "Data ingested. This requires analysis by a certified engineer. Please submit a request via the Terminal.";
         };
 
         function initChat() {
             chatBody.innerHTML = '';
-            appendMsg(botKnowledge[currentLang].welcome, 'bot');
-            aiInput.placeholder = currentLang === 'ar' ? "اكتب هنا..." : "Type here...";
+            const welcome = currentLang === 'ar' ? "أوراكل المختبر متصل. أنا مزود ببيانات الكوديكس الأعظم. اسألني عن (المعادلة، الركائز، أو قوانين الحقيقة)." : "Lab Oracle Online. Ingested data: The Great Codex. Ask me about the Equation, Pillars, or Laws of Reality.";
+            appendMsg(welcome, 'bot');
         }
 
         function appendMsg(text, sender) {
             const msgDiv = document.createElement('div');
-            msgDiv.className = `ai-msg ${sender}`;
+            msgDiv.className = `ai-msg ${sender} mono-text`;
             msgDiv.innerText = text;
             chatBody.appendChild(msgDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -514,23 +412,17 @@
             if(!text) return;
             appendMsg(text, 'user');
             aiInput.value = '';
+            
             setTimeout(() => {
-                let response = botKnowledge[currentLang].default;
-                const lowerText = text.toLowerCase();
-                if(lowerText.includes('من أنتم') || lowerText.includes('فوسام') || lowerText.includes('who') || lowerText.includes('what')) {
-                    response = botKnowledge[currentLang].brand;
-                } else if(lowerText.includes('تواصل') || lowerText.includes('استشارة') || lowerText.includes('contact') || lowerText.includes('consult')) {
-                    response = botKnowledge[currentLang].contact;
-                }
+                const response = advancedBotLogic(text);
                 appendMsg(response, 'bot');
-            }, 800);
+            }, 600);
         }
 
-        // --- Initialization ---
-        document.addEventListener("DOMContentLoaded", function() {
-            initChat();
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initiate Intersection Observer for fade-in elements
             const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); } });
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
             }, { threshold: 0.15 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
