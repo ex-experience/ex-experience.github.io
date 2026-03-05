@@ -260,7 +260,6 @@ Connection Secure.
         });
 
         // --- Database & AI Connection ---
-        // تم حقن الرابط السري الجديد هنا بنجاح:
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyzUzoWeVEnerInb-9P6-mJC8fo2RqS6M4x3H4xs_hPWzK4C-XSstoKeS6roYULv1B/exec';
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
         let currentLang = 'ar';
@@ -316,11 +315,10 @@ Connection Secure.
         // --- GEMINI AI PROXY ---
         async function queryDeepMatrix(text, isTerminal = false) {
             const params = new URLSearchParams();
-            params.append('Type', 'AI_Query'); // إخبار السيرفر أننا نريد الذكاء الاصطناعي
+            params.append('Type', 'AI_Query'); 
             params.append('Message', text);
 
             try {
-                // نستخدم fetch عادي لكي نتمكن من قراءة الرد القادم من الذكاء الاصطناعي
                 const response = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params });
                 const answer = await response.text();
                 
@@ -337,8 +335,10 @@ Connection Secure.
         // --- Sovereign Terminal ---
         const termOutput = document.getElementById('termOutput');
         const termInput = document.getElementById('termInput');
+        
         function handleTerminal(e) {
-            if(e.key === 'Enter') {
+            if(e.key === 'Enter' || e.keyCode === 13) {
+                e.preventDefault();
                 const cmd = termInput.value.trim();
                 if(cmd === '') return;
                 printTerm(`user@fusam:~# ${cmd}`);
@@ -350,10 +350,11 @@ Connection Secure.
                     termOutput.innerHTML = '';
                 } else {
                     printTerm(`[Connecting to Deep Matrix...]`);
-                    queryDeepMatrix(cmd, true); // إرسال الأمر للذكاء الاصطناعي
+                    queryDeepMatrix(cmd, true); 
                 }
             }
         }
+        
         function printTerm(text) {
             termOutput.innerHTML += `\n${text}`;
             termOutput.scrollTop = termOutput.scrollHeight;
@@ -363,6 +364,7 @@ Connection Secure.
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
+        
         function toggleChat() { chatWindow.classList.toggle('open'); }
 
         function initChat() {
@@ -380,24 +382,29 @@ Connection Secure.
         }
 
         function handleChatEnter(e) { 
-            if(e.key === 'Enter') {
-                const text = aiInput.value.trim();
-                if(!text) return;
-                appendMsg(text, 'user');
-                aiInput.value = '';
-                
-                const thinkingMsg = document.createElement('div');
-                thinkingMsg.className = `ai-msg bot mono-text glitch`;
-                thinkingMsg.innerText = "[Processing...]";
-                chatBody.appendChild(thinkingMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
-
-                queryDeepMatrix(text, false).then(() => {
-                    if (chatBody.contains(thinkingMsg)) {
-                        chatBody.removeChild(thinkingMsg);
-                    }
-                });
+            if(e.key === 'Enter' || e.keyCode === 13) {
+                e.preventDefault();
+                sendChatMessage();
             }
+        }
+
+        function sendChatMessage() {
+            const text = aiInput.value.trim();
+            if(!text) return;
+            appendMsg(text, 'user');
+            aiInput.value = '';
+            
+            const thinkingMsg = document.createElement('div');
+            thinkingMsg.className = `ai-msg bot mono-text glitch`;
+            thinkingMsg.innerText = "[Processing...]";
+            chatBody.appendChild(thinkingMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            queryDeepMatrix(text, false).then(() => {
+                if (chatBody.contains(thinkingMsg)) {
+                    chatBody.removeChild(thinkingMsg);
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", () => {
