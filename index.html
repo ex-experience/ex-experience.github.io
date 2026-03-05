@@ -369,8 +369,8 @@
 
     <script>
         // --- System Variables ---
-        // تم حقن الرابط السري الخاص بك هنا بنجاح:
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxktoB6XOpM0-vflyxLzgFP5-NsrtU40boLkDvi47D-GcPqV1wcPzvoCC6hKvxfScpA/exec';
+        // تم التحديث بالرابط السري الجديد والتشفير الدقيق (URLSearchParams)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkcm9ZdeeAr20aGJbnCySyyE2zzYfKQmXsP9YkBjE-9A9YUsODaMHIREWlQ4JH3RBI/exec';
         let currentUser = { Name: '', Email: '', Phone: '' };
         let currentLang = 'ar';
 
@@ -399,12 +399,10 @@
             btn.innerHTML = '<span class="mono-text">...جاري الاتصال / Connecting...</span>';
             btn.disabled = true;
 
-            // Save user data in session
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
             currentUser.Phone = document.getElementById('userPhone').value;
 
-            // Send Silent Registration Ping to Google Sheets
             sendToGoogleSheet('تسجيل دخول جديد / Login', 'تم فتح البوابة / Portal Accessed', null, () => {
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
@@ -431,24 +429,32 @@
         }
 
         function sendToGoogleSheet(type, message, formElement, onSuccess) {
-            const formData = new FormData();
-            formData.append('Name', currentUser.Name);
-            formData.append('Email', currentUser.Email);
-            formData.append('Phone', currentUser.Phone);
-            formData.append('Type', type);
-            formData.append('Message', message);
+            // التشفير الدقيق المطلوب من جوجل
+            const params = new URLSearchParams();
+            params.append('Name', currentUser.Name);
+            params.append('Email', currentUser.Email);
+            params.append('Phone', currentUser.Phone);
+            params.append('Type', type);
+            params.append('Message', message);
 
-            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' })
-                .then(() => { if (onSuccess) onSuccess(); })
-                .catch(error => {
-                    console.error('Database Error:', error);
-                    alert('حدث خطأ في الاتصال بقاعدة البيانات. / Database connection error.');
-                    if (formElement) {
-                        const btn = formElement.querySelector('button');
-                        btn.innerHTML = currentLang === 'ar' ? 'إعادة المحاولة' : 'Retry';
-                        btn.disabled = false;
-                    }
-                });
+            fetch(GOOGLE_SCRIPT_URL, { 
+                method: 'POST', 
+                body: params, 
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(() => { if (onSuccess) onSuccess(); })
+            .catch(error => {
+                console.error('Database Error:', error);
+                alert('حدث خطأ في الاتصال بقاعدة البيانات. / Database connection error.');
+                if (formElement) {
+                    const btn = formElement.querySelector('button');
+                    btn.innerHTML = currentLang === 'ar' ? 'إعادة المحاولة' : 'Retry';
+                    btn.disabled = false;
+                }
+            });
         }
 
         function switchService(serviceId) {
