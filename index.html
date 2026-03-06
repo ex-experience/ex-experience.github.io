@@ -525,7 +525,7 @@ Connection Secure.
         });
 
         // -------------------------------------------------------------
-        // رابط جوجل آب سكريبت الخاص بك
+        // رابط جوجل آب سكريبت الخاص بك (لم يتغير)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyaEwvjVDdLjIqbgvDfQWH5VV8gRr7_O_IoypfwalJbtJTSNhbrnxEwSyhoux70oVv/exec';
         // -------------------------------------------------------------
 
@@ -592,7 +592,7 @@ Connection Secure.
                 });
         }
 
-        // --- GEMINI AI PROXY ---
+        // --- GEMINI AI PROXY (التعديل الوحيد تم هنا لتوافق المصفوفة) ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
 
@@ -602,10 +602,17 @@ Connection Secure.
                 
                 if (loadingElement) loadingElement.remove();
 
+                // طباعة اسم المحرك (Gemini, Groq, Mistral) في كونسول المطور بدون تشويه الدردشة
+                if (data.engine) {
+                    console.log("Matrix Engine Engaged:", data.engine);
+                }
+
+                const finalOutput = data.reply || data.error;
+
                 if(isTerminal) { 
-                    printTerm(`oracle@ex:~# ${data.reply || data.error}`); 
+                    printTerm(`oracle@ex:~# ${finalOutput}`); 
                 } else { 
-                    appendMsg(data.reply || data.error, 'bot'); 
+                    appendMsg(finalOutput, 'bot'); 
                 }
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
