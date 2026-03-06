@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | experience™️ - Engineering Human Experiences</title>
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         
@@ -127,9 +126,6 @@
         .term-input-line { display: flex; align-items: center; direction: ltr;}
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
-
-        /* Social Media Section */
-        .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
 
         /* Footer */
         .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
@@ -338,7 +334,7 @@
             
             <ul class="cyber-list ar-only">
                 <li>تجربة إنسانية مصممة بدقة.</li>
-                <li>قياس الاستجابة العاطفية والسلوكية.</li>
+                <li>قياس الاست الاستجابة العاطفية والسلوكية.</li>
                 <li>فيلم سينمائي قصير (60-90 ثانية).</li>
                 <li>دراسة حالة استراتيجية.</li>
             </ul>
@@ -487,11 +483,11 @@ Connection Secure.
     </section>
 
     <section class="content-section alt-bg" style="padding: 50px 0; border-top: 1px solid #1a1a1a;">
-        <div class="container fade-in text-center" style="text-align: center;">
+        <div class="container fade-in" style="text-align: center;">
             <div class="section-title mono-text glitch ar-only" data-text="روابط الاتصال">روابط الاتصال</div>
             <div class="section-title mono-text glitch en-only" data-text="COMMUNICATION LINKS">COMMUNICATION LINKS</div>
             
-            <div class="social-grid">
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
                 <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="control-btn mono-text" style="text-decoration: none;">INSTAGRAM</a>
                 <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94TGgDVJp8W" target="_blank" class="control-btn mono-text" style="text-decoration: none;">TIKTOK</a>
                 <a href="https://snapchat.com/t/w3omS0EV" target="_blank" class="control-btn mono-text" style="text-decoration: none;">SNAPCHAT</a>
@@ -521,7 +517,7 @@ Connection Secure.
         <div class="ai-header mono-text">
             <span>ORACLE EX :: ONLINE</span>
             <div>
-                <button id="ttsToggle" class="ai-close" style="font-size: 1rem; margin-right: 15px;" onclick="toggleTTS()" title="Text-to-Speech">[🔈]</button>
+                <button id="ttsToggle" class="ai-close" style="font-size: 1.2rem; margin-right: 15px;" onclick="toggleTTS()" title="Text-to-Speech">[🔈]</button>
                 <button class="ai-close" onclick="toggleChat()">×</button>
             </div>
         </div>
@@ -549,10 +545,10 @@ Connection Secure.
         });
 
         // -------------------------------------------------------------
+        // رابط جوجل آب سكريبت الخاص بك
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyaEwvjVDdLjIqbgvDfQWH5VV8gRr7_O_IoypfwalJbtJTSNhbrnxEwSyhoux70oVv/exec';
         // -------------------------------------------------------------
 
-        // تم إضافة ميزة الـ Contact هنا لترسل إلى الشيت
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Contact: 'Unknown' };
         let currentLang = 'ar';
 
@@ -624,11 +620,11 @@ Connection Secure.
             const ttsBtn = document.getElementById('ttsToggle');
             ttsBtn.innerText = isTTSActive ? "[🔊]" : "[🔈]";
             ttsBtn.style.color = isTTSActive ? "var(--terminal-green)" : "#000";
+            if (!isTTSActive) window.speechSynthesis.cancel();
         }
 
         function speakText(text) {
             if(!isTTSActive) return;
-            // تنظيف النص من علامات الترقيم البرمجية ليكون النطق طبيعياً
             const cleanText = text.replace(/[*_#`~>]/g, '');
             const utterance = new SpeechSynthesisUtterance(cleanText);
             utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
@@ -650,9 +646,8 @@ Connection Secure.
                 if(isTerminal) { 
                     printTerm(`oracle@ex:~# ${finalOutput}`); 
                 } else { 
-                    appendMsg(finalOutput, 'bot'); 
-                    // تشغيل النطق الصوتي إذا كان مفعلاً
-                    speakText(finalOutput);
+                    appendMsg(finalOutput, 'bot');
+                    speakText(finalOutput); 
                 }
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
@@ -707,6 +702,7 @@ Connection Secure.
             chatBody.innerHTML = '';
             const welcome = currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. اسألني عن المنهجية، الكون، أو الفراغ." : "System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.";
             appendMsg(welcome, 'bot');
+            speakText(welcome);
         }
 
         function appendMsg(text, sender, isGlitch = false) {
