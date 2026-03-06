@@ -156,7 +156,7 @@
         }
         .ai-close { background: none; border: none; color: #000; font-size: 1.2rem; cursor: pointer; }
         .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; }
+        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; position: relative; }
         .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
         body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
         .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
@@ -164,6 +164,8 @@
         .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
         .ai-send { background: #fff; color: #000; border: none; cursor: pointer; padding: 0 15px; font-weight: bold;}
         .typing-indicator { font-style: italic; color: var(--cyber-steel); font-size: 0.8rem; }
+        .tts-btn { background: transparent; border: none; color: var(--cyber-steel); cursor: pointer; font-size: 1.2rem; padding: 0 5px; margin-top: 5px; transition: color 0.3s;}
+        .tts-btn:hover { color: var(--stark-white); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -436,7 +438,10 @@
                             <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
                         </div>
                         <div class="input-group">
-                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="Email" required>
+                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="E-mail" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact (Phone Number)" required>
                         </div>
                         <button type="submit" class="submit-btn mono-text">Connect to Matrix</button>
                     </form>
@@ -455,7 +460,7 @@
                     <div id="form-consult" class="service-form active">
                         <form onsubmit="submitServiceForm(event, 'Request')">
                             <div class="input-group">
-                                <textarea class="cyber-input" placeholder="State your objective..." required style="height: 100px; resize: vertical;"></textarea>
+                                <textarea class="cyber-input" placeholder="State your objective or inquiry..." required style="height: 100px; resize: vertical;"></textarea>
                             </div>
                             <button type="submit" class="submit-btn mono-text">Transmit</button>
                         </form>
@@ -475,6 +480,19 @@ Connection Secure.
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section alt-bg" style="text-align: center; border-top: 1px solid #1a1a1a; padding: 60px 0;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">الشبكة العصبية / التواصل</div>
+            <div class="section-title mono-text en-only">NEURAL NETWORK / CONNECT</div>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+                <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Instagram</a>
+                <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94TGgDVJp8W" target="_blank" class="control-btn mono-text" style="text-decoration: none;">TikTok</a>
+                <a href="https://snapchat.com/t/w3omS0EV" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Snapchat</a>
+                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" class="control-btn mono-text" style="text-decoration: none;">WhatsApp</a>
             </div>
         </div>
     </section>
@@ -525,7 +543,6 @@ Connection Secure.
         });
 
         // -------------------------------------------------------------
-        // رابط جوجل آب سكريبت الخاص بك (لم يتغير)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyaEwvjVDdLjIqbgvDfQWH5VV8gRr7_O_IoypfwalJbtJTSNhbrnxEwSyhoux70oVv/exec';
         // -------------------------------------------------------------
 
@@ -554,8 +571,9 @@ Connection Secure.
             btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; btn.disabled = true;
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
+            currentUser.Phone = document.getElementById('userContact').value;
             
-            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: 'Login' });
+            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Type: 'Login' });
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
                 .then(() => {
                     document.getElementById('login-view').style.display = 'none';
@@ -581,7 +599,7 @@ Connection Secure.
             const btn = form.querySelector('button');
             btn.innerHTML = 'Transmitting...'; btn.disabled = true;
             
-            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: type, Message: message });
+            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Type: type, Message: message });
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
                 .then(() => {
                     alert(currentLang === 'ar' ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
@@ -592,7 +610,7 @@ Connection Secure.
                 });
         }
 
-        // --- GEMINI AI PROXY (التعديل الوحيد تم هنا لتوافق المصفوفة) ---
+        // --- GEMINI AI PROXY ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
 
@@ -602,7 +620,6 @@ Connection Secure.
                 
                 if (loadingElement) loadingElement.remove();
 
-                // طباعة اسم المحرك (Gemini, Groq, Mistral) في كونسول المطور بدون تشويه الدردشة
                 if (data.engine) {
                     console.log("Matrix Engine Engaged:", data.engine);
                 }
@@ -650,7 +667,7 @@ Connection Secure.
             termOutput.scrollTop = termOutput.scrollHeight;
         }
 
-        // --- AI Chatbot Logic ---
+        // --- AI Chatbot & TTS Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
@@ -673,10 +690,31 @@ Connection Secure.
             const msgDiv = document.createElement('div');
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
             if(isGlitch) msgDiv.setAttribute('data-text', text);
-            msgDiv.innerText = text;
+            
+            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let contentHTML = `<span class="msg-content">${safeText}</span>`;
+            
+            // إضافة زر النطق الصوتي لرسائل البوت فقط (باستثناء مؤشر الكتابة)
+            if (sender === 'bot' && !isGlitch) {
+                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
+            }
+            
+            msgDiv.innerHTML = contentHTML;
             chatBody.appendChild(msgDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
             return msgDiv; 
+        }
+
+        function speakText(btn) {
+            const textContent = btn.previousElementSibling.previousElementSibling.innerText; // Get the span content
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(textContent);
+                utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('عذراً، متصفحك لا يدعم ميزة النطق الصوتي.');
+            }
         }
 
         function handleChatEnter(e) { 
