@@ -4,19 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | experience™️ - Engineering Human Experiences</title>
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ex-experience.github.io/">
-    <meta property="og:title" content="フサム | experience™️ - Engineering Human Experiences">
-    <meta property="og:description" content="نحن لا نصمم منتجات.. نحن نهندس التجربة الإنسانية — من الإحساس الأول إلى الذاكرة الخالدة.">
-    <meta property="og:image" content="https://ex-experience.github.io/preview.jpg">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://ex-experience.github.io/">
-    <meta name="twitter:title" content="フサム | experience™️">
-    <meta name="twitter:description" content="هندسة التجربة الإنسانية — من الإحساس الأول إلى الذاكرة الخالدة.">
-    <meta name="twitter:image" content="https://ex-experience.github.io/preview.jpg">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         
@@ -521,14 +508,6 @@ Connection Secure.
         </div>
     </div>
 
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "puq1s3t01j");
-    </script>
-
     <script>
         // --- Dynamic Video Injection ---
         document.addEventListener("DOMContentLoaded", () => {
@@ -546,7 +525,7 @@ Connection Secure.
         });
 
         // -------------------------------------------------------------
-        // رابط جوجل آب سكريبت الخاص بك
+        // رابط جوجل آب سكريبت الخاص بك (لم يتغير)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyaEwvjVDdLjIqbgvDfQWH5VV8gRr7_O_IoypfwalJbtJTSNhbrnxEwSyhoux70oVv/exec';
         // -------------------------------------------------------------
 
@@ -613,11 +592,9 @@ Connection Secure.
                 });
         }
 
-        // --- GEMINI AI PROXY ---
+        // --- GEMINI AI PROXY (التعديل الوحيد تم هنا لتوافق المصفوفة) ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            
-            // التعديل السري الوحيد: أضفنا &User لكي يتم إرسال اسم الزائر إلى شيت المراقبة (Logs)
-            const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text) + "&User=" + encodeURIComponent(currentUser.Name) + "&Email=" + encodeURIComponent(currentUser.Email);
+            const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
 
             try {
                 const response = await fetch(url);
@@ -625,6 +602,7 @@ Connection Secure.
                 
                 if (loadingElement) loadingElement.remove();
 
+                // طباعة اسم المحرك (Gemini, Groq, Mistral) في كونسول المطور بدون تشويه الدردشة
                 if (data.engine) {
                     console.log("Matrix Engine Engaged:", data.engine);
                 }
