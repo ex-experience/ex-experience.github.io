@@ -334,7 +334,7 @@
             
             <ul class="cyber-list ar-only">
                 <li>تجربة إنسانية مصممة بدقة.</li>
-                <li>قياس الاست الاستجابة العاطفية والسلوكية.</li>
+                <li>قياس الاستجابة العاطفية والسلوكية.</li>
                 <li>فيلم سينمائي قصير (60-90 ثانية).</li>
                 <li>دراسة حالة استراتيجية.</li>
             </ul>
@@ -438,9 +438,6 @@
                         <div class="input-group">
                             <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="Email" required>
                         </div>
-                        <div class="input-group">
-                            <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact" required>
-                        </div>
                         <button type="submit" class="submit-btn mono-text">Connect to Matrix</button>
                     </form>
                 </div>
@@ -482,20 +479,6 @@ Connection Secure.
         </div>
     </section>
 
-    <section class="content-section alt-bg" style="padding: 50px 0; border-top: 1px solid #1a1a1a;">
-        <div class="container fade-in" style="text-align: center;">
-            <div class="section-title mono-text glitch ar-only" data-text="روابط الاتصال">روابط الاتصال</div>
-            <div class="section-title mono-text glitch en-only" data-text="COMMUNICATION LINKS">COMMUNICATION LINKS</div>
-            
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
-                <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="control-btn mono-text" style="text-decoration: none;">INSTAGRAM</a>
-                <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94TGgDVJp8W" target="_blank" class="control-btn mono-text" style="text-decoration: none;">TIKTOK</a>
-                <a href="https://snapchat.com/t/w3omS0EV" target="_blank" class="control-btn mono-text" style="text-decoration: none;">SNAPCHAT</a>
-                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" class="control-btn mono-text" style="text-decoration: none;">WHATSAPP</a>
-            </div>
-        </div>
-    </section>
-
     <div class="container fade-in" style="text-align: center; padding: 60px 0; border-top: 1px solid #111;">
         <h3 class="mono-text" style="letter-spacing: 3px; margin-bottom: 10px;">フサム | experience™️</h3>
         <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
@@ -516,10 +499,7 @@ Connection Secure.
     <div class="ai-window" id="aiWindow">
         <div class="ai-header mono-text">
             <span>ORACLE EX :: ONLINE</span>
-            <div>
-                <button id="ttsToggle" class="ai-close" style="font-size: 1.2rem; margin-right: 15px;" onclick="toggleTTS()" title="Text-to-Speech">[🔈]</button>
-                <button class="ai-close" onclick="toggleChat()">×</button>
-            </div>
+            <button class="ai-close" onclick="toggleChat()">×</button>
         </div>
         <div class="ai-body" id="chatBody"></div>
         <div class="ai-input-area">
@@ -545,11 +525,11 @@ Connection Secure.
         });
 
         // -------------------------------------------------------------
-        // رابط جوجل آب سكريبت الخاص بك
+        // رابط جوجل آب سكريبت الخاص بك (لم يتغير)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyaEwvjVDdLjIqbgvDfQWH5VV8gRr7_O_IoypfwalJbtJTSNhbrnxEwSyhoux70oVv/exec';
         // -------------------------------------------------------------
 
-        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Contact: 'Unknown' };
+        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
         let currentLang = 'ar';
 
         function toggleLanguage() {
@@ -574,9 +554,8 @@ Connection Secure.
             btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; btn.disabled = true;
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
-            currentUser.Contact = document.getElementById('userContact').value;
             
-            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Contact, Type: 'Login' });
+            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: 'Login' });
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
                 .then(() => {
                     document.getElementById('login-view').style.display = 'none';
@@ -602,7 +581,7 @@ Connection Secure.
             const btn = form.querySelector('button');
             btn.innerHTML = 'Transmitting...'; btn.disabled = true;
             
-            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Contact, Type: type, Message: message });
+            const params = new URLSearchParams({ Name: currentUser.Name, Email: currentUser.Email, Type: type, Message: message });
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' })
                 .then(() => {
                     alert(currentLang === 'ar' ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
@@ -613,27 +592,9 @@ Connection Secure.
                 });
         }
 
-        // --- نظام النطق الصوتي (Text-to-Speech) ---
-        let isTTSActive = false;
-        function toggleTTS() {
-            isTTSActive = !isTTSActive;
-            const ttsBtn = document.getElementById('ttsToggle');
-            ttsBtn.innerText = isTTSActive ? "[🔊]" : "[🔈]";
-            ttsBtn.style.color = isTTSActive ? "var(--terminal-green)" : "#000";
-            if (!isTTSActive) window.speechSynthesis.cancel();
-        }
-
-        function speakText(text) {
-            if(!isTTSActive) return;
-            const cleanText = text.replace(/[*_#`~>]/g, '');
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
-            window.speechSynthesis.speak(utterance);
-        }
-
-        // --- GEMINI AI PROXY ---
+        // --- GEMINI AI PROXY (التعديل الوحيد تم هنا لتوافق المصفوفة) ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text) + "&User=" + encodeURIComponent(currentUser.Name);
+            const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
 
             try {
                 const response = await fetch(url);
@@ -641,13 +602,17 @@ Connection Secure.
                 
                 if (loadingElement) loadingElement.remove();
 
+                // طباعة اسم المحرك (Gemini, Groq, Mistral) في كونسول المطور بدون تشويه الدردشة
+                if (data.engine) {
+                    console.log("Matrix Engine Engaged:", data.engine);
+                }
+
                 const finalOutput = data.reply || data.error;
 
                 if(isTerminal) { 
                     printTerm(`oracle@ex:~# ${finalOutput}`); 
                 } else { 
-                    appendMsg(finalOutput, 'bot');
-                    speakText(finalOutput); 
+                    appendMsg(finalOutput, 'bot'); 
                 }
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
@@ -702,7 +667,6 @@ Connection Secure.
             chatBody.innerHTML = '';
             const welcome = currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. اسألني عن المنهجية، الكون، أو الفراغ." : "System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.";
             appendMsg(welcome, 'bot');
-            speakText(welcome);
         }
 
         function appendMsg(text, sender, isGlitch = false) {
