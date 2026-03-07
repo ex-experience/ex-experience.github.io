@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | experience™️ - Engineering Human Experiences</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#020202">
+    <link rel="apple-touch-icon" href="icon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         
@@ -120,6 +124,19 @@
         .dna-role { font-size: 1.2rem; color: var(--stark-white); margin-bottom: 5px; }
         .dna-subrole { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 15px; }
         .dna-name { font-size: 1.1rem; color: #fff; margin-bottom: 10px; display: inline-block; border-bottom: 1px dashed #333; padding-bottom: 5px; color: var(--terminal-green);}
+        
+        .dna-classified-file { border: 1px solid #333; background-color: transparent; margin: 40px 0; padding: 0; color: #e0e0e0; font-family: inherit; border-radius: 4px; overflow: hidden; }
+        .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(20, 20, 20, 0.8); border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
+        .dna-summary:hover { background-color: rgba(40, 40, 40, 0.8); }
+        .dna-title-main { font-size: 1.2rem; line-height: 1.4; }
+        .dna-content { display: none; padding: 30px 20px; background-color: rgba(10, 10, 10, 0.9); }
+        .dna-content.open { display: block; animation: decryptFade 0.5s ease-in-out; }
+        .dna-blockquote { border-left: 2px solid #555; padding-left: 15px; margin-bottom: 40px; font-style: italic; color: #aaa; line-height: 1.6; }
+        body.lang-ar .dna-blockquote { border-left: none; border-right: 2px solid #555; padding-left: 0; padding-right: 15px; }
+        .dna-monospace { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; color: #fff; }
+        .dna-subheading { font-size: 1.1rem; margin-bottom: 5px; }
+        .dna-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
+        @keyframes decryptFade { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
         /* ------------------------------------- */
 
         /* Member Portal & Dashboard */
@@ -449,147 +466,52 @@
                 
                 <div class="classified-content" id="dnaContent">
                     <div class="dna-record">
-                        <style>
-  .dna-classified-file {
-    border: 1px solid #333; 
-    background-color: transparent;
-    margin: 40px 0;
-    padding: 0;
-    color: #e0e0e0;
-    font-family: inherit;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .dna-summary {
-    padding: 20px;
-    cursor: pointer;
-    background-color: rgba(20, 20, 20, 0.8);
-    border-bottom: 1px solid #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background 0.3s ease;
-  }
-  .dna-summary:hover {
-    background-color: rgba(40, 40, 40, 0.8);
-  }
-  .dna-title-main {
-    font-size: 1.2rem;
-    line-height: 1.4;
-  }
-  .dna-content {
-    display: none; 
-    padding: 30px 20px;
-    background-color: rgba(10, 10, 10, 0.9);
-  }
-  .dna-content.open {
-    display: block; 
-    animation: decryptFade 0.5s ease-in-out;
-  }
-  .dna-blockquote {
-    border-left: 2px solid #555;
-    padding-left: 15px;
-    margin-bottom: 40px;
-    font-style: italic;
-    color: #aaa;
-    line-height: 1.6;
-  }
-  .dna-record {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #333;
-  }
-  .dna-record:last-of-type {
-    border-bottom: none;
-  }
-  .dna-monospace {
-    font-family: 'Courier New', Courier, monospace;
-    letter-spacing: 1px;
-    color: #fff;
-  }
-  .dna-subheading {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-  }
-  .dna-role {
-    font-size: 0.9em;
-    color: #888;
-    margin-bottom: 15px;
-  }
-  .dna-name {
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 15px;
-    color: #ccc;
-    display: block;
-  }
-  .dna-desc {
-    line-height: 1.6;
-    color: #bbb;
-    font-size: 0.95rem;
-  }
-  .dna-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #222;
-    color: #666;
-    font-size: 0.85rem;
-  }
-  @keyframes decryptFade {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
+                        <div class="dna-classified-file">
+                          <div class="dna-summary" onclick="document.getElementById('dna-data-log').classList.toggle('open')">
+                            <div class="dna-title-main">
+                              00.12 / الشفرة الوراثية <br> 
+                              00.12 / THE DNA
+                            </div>
+                            <div class="dna-monospace">[ ACCESS LOG ]</div>
+                          </div>
+                          
+                          <div id="dna-data-log" class="dna-content">
+                            <div class="dna-blockquote">
+                              <p>الكيانات الخالدة لا تُبنى بالصدفة، بل تُهندس بدقة. شفرة (DNA) الخاصة بنا ليست مجرد قائمة أسماء أو هيكل إداري؛ إنها "الشبكة العصبية" التي تغذي محرك التجربة. هنا نوثق المعماريين، الحلفاء، والمُمكّنين الذين يحولون الفلسفة إلى واقع ملموس.</p>
+                              <br>
+                              <p>Immortal entities are not built by chance; they are precisely engineered. Our DNA is not a mere roster of names; it is the "neural network" that powers the experience engine. Here, we document the architects, allies, and catalysts who translate philosophy into tangible reality.</p>
+                            </div>
 
-<div class="dna-classified-file">
-  <div class="dna-summary" onclick="document.getElementById('dna-data-log').classList.toggle('open')">
-    <div class="dna-title-main">
-      00.12 / الشفرة الوراثية <br> 
-      00.12 / THE DNA
-    </div>
-    <div class="dna-monospace">[ ACCESS LOG ]</div>
-  </div>
-  
-  <div id="dna-data-log" class="dna-content">
-    <div class="dna-blockquote">
-      <p>الكيانات الخالدة لا تُبنى بالصدفة، بل تُهندس بدقة. شفرة (DNA) الخاصة بنا ليست مجرد قائمة أسماء أو هيكل إداري؛ إنها "الشبكة العصبية" التي تغذي محرك التجربة. هنا نوثق المعماريين، الحلفاء، والمُمكّنين الذين يحولون الفلسفة إلى واقع ملموس.</p>
-      <br>
-      <p>Immortal entities are not built by chance; they are precisely engineered. Our DNA is not a mere roster of names; it is the "neural network" that powers the experience engine. Here, we document the architects, allies, and catalysts who translate philosophy into tangible reality.</p>
-    </div>
+                            <div class="dna-record">
+                              <div class="dna-monospace dna-subheading">[ フサム ] المعمار الأول / THE ARCHITECT</div>
+                              <div class="dna-role">( المؤسس - THE FOUNDER )</div>
+                              <span class="dna-monospace dna-name">[ HUSSAM HASSAN MOHAMMED TAHIRI ]</span>
+                              <div class="dna-desc">
+                                <p>النقطة صِفر (Ground Zero) مؤسس هذه المنظومة. والعقل الاستراتيجي والمصمم لمنهجية HX-5™️. هو من وضع حجر الأساس، ومبتكر هندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد وصناعة اول دار للمفاهيم بالمملكة العربية السعودية.</p>
+                                <br>
+                                <p>The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</p>
+                              </div>
+                            </div>
 
-    <div class="dna-record">
-      <div class="dna-monospace dna-subheading">[ フサム ] المعمار الأول / THE ARCHITECT</div>
-      <div class="dna-role">( المؤسس - THE FOUNDER )</div>
-      <span class="dna-monospace dna-name">[ HUSSAM HASSAN MOHAMMED TAHIRI ]</span>
-      <div class="dna-desc">
-        <p>النقطة صِفر (Ground Zero) مؤسس هذه المنظومة. والعقل الاستراتيجي والمصمم لمنهجية HX-5™️. هو من وضع حجر الأساس، ومبتكر هندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد وصناعة اول دار للمفاهيم بالمملكة العربية السعودية.</p>
-        <br>
-        <p>The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</p>
-      </div>
-    </div>
+                            <div class="dna-record">
+                              <div class="dna-monospace dna-subheading">[ SBS ] المعمار الموازي / THE CO-ARCHITECT</div>
+                              <div class="dna-role">( شريك مؤسس - CO-FOUNDER )</div>
+                              <span class="dna-monospace dna-name">[ P. SULTAN BIN BADR BIN ALBDULMUHSEN AL SAUD ]</span>
+                              <div class="dna-desc">
+                                <p>النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</p>
+                                <br>
+                                <p>The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</p>
+                              </div>
+                            </div>
 
-    <div class="dna-record">
-      <div class="dna-monospace dna-subheading">[ SBS ] المعمار الموازي / THE CO-ARCHITECT</div>
-      <div class="dna-role">( شريك مؤسس - CO-FOUNDER )</div>
-      <span class="dna-monospace dna-name">[ P. SULTAN BIN BADR BIN ALBDULMUHSEN AL SAUD ]</span>
-      <div class="dna-desc">
-        <p>النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</p>
-        <br>
-        <p>The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</p>
-      </div>
-    </div>
-
-    <div class="dna-footer dna-monospace">
-<p>EST EX/2025. SA</p>
-        <p>Concept House • © 1991. SA</p>
-        <p>تم توثيق السجلات في مصفوفة النظام.</p>
-    <p>المملكة العربية السعودية</p>
-          <p>Records verified</p>
-    </div>
-  </div>
-</div>
-                            </p>
+                            <div class="dna-footer dna-monospace">
+                                <p>EST EX/2025. SA</p>
+                                <p>Concept House • © 1991. SA</p>
+                                <p>تم توثيق السجلات في مصفوفة النظام.</p>
+                                <p>المملكة العربية السعودية</p>
+                                <p>Records verified</p>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -597,6 +519,7 @@
 
         </div>
     </section>
+    
     <section class="hero" style="height: 30vh; background: #000;">
         <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(0.9rem, 2vw, 1.2rem);" data-text="We work selectively and intentionally.. If this resonates...">
             <span class="ar-only" style="color: var(--cyber-steel);">نحن نعمل بانتقائية وقصد.. إذا كان هذا يتردد صداه معك تواصل معنا...</span>
@@ -688,7 +611,6 @@ Connection Secure.
         <div class="footer-logo mono-text">フサム | experience™️</div>
         <div class="footer-slogan mono-text">Fearless . Relentless . True to you</div>
         <div class="footer-slogan mono-text">Concepts House & Strategic Lab</div>
-        <div class="©️ 2026 フサム | experience™️1991 All rights reserved</div>
         <span style="color: #fff;">©️ 2026 フサム | experience™️ All rights reserved</span>
     </footer>
 
@@ -899,7 +821,7 @@ Connection Secure.
         }
 
         function speakText(btn) {
-            const textContent = btn.previousElementSibling.previousElementSibling.innerText; // Get the span content
+            const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(textContent);
@@ -937,6 +859,19 @@ Connection Secure.
             }, { threshold: 0.15 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         });
+
+        // =========================================================
+        // نظام التطبيق السيادي (PWA) - Service Worker Registration
+        // =========================================================
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(() => console.log('Matrix Core (Service Worker) Online.'))
+                    .catch((err) => console.log('Matrix Core Offline: ', err));
+            });
+        }
+        // =========================================================
+
     </script>
 </body>
 </html>
