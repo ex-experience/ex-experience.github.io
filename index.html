@@ -105,6 +105,23 @@
         .hx-card:hover { border-color: var(--cyber-steel); }
         .hx-number { font-size: 1.5rem; color: var(--stark-white); font-family: 'Space Mono', monospace; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;}
 
+        /* --- NEW: DNA Classified File CSS --- */
+        .classified-file { background: rgba(0,0,0,0.5); border: 1px solid #222; margin-top: 40px; transition: border-color 0.3s;}
+        .classified-file:hover { border-color: var(--cyber-steel); }
+        .classified-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+        .classified-header:hover { background: rgba(255,255,255,0.05); }
+        .classified-title { color: var(--stark-white); letter-spacing: 2px; font-size: 1.1rem; }
+        .classified-icon { color: var(--terminal-green); font-size: 0.9rem;}
+        .classified-content { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; background: #030405; }
+        .classified-content.open { max-height: 3000px; border-top: 1px solid #222; }
+        .dna-record { padding: 30px; }
+        .dna-node { margin-bottom: 40px; border-left: 2px solid #222; padding-left: 20px; }
+        body.lang-ar .dna-node { border-left: none; border-right: 2px solid #222; padding-left: 0; padding-right: 20px; }
+        .dna-role { font-size: 1.2rem; color: var(--stark-white); margin-bottom: 5px; }
+        .dna-subrole { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 15px; }
+        .dna-name { font-size: 1.1rem; color: #fff; margin-bottom: 10px; display: inline-block; border-bottom: 1px dashed #333; padding-bottom: 5px; color: var(--terminal-green);}
+        /* ------------------------------------- */
+
         /* Member Portal & Dashboard */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
@@ -419,6 +436,75 @@
         </div>
     </section>
 
+    <section class="content-section">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.12 / الشفرة الوراثية</div>
+            <div class="section-title mono-text en-only">00.12 / THE DNA</div>
+
+            <div class="classified-file">
+                <div class="classified-header mono-text" onclick="toggleDNA()">
+                    <span class="classified-title glitch" data-text="ACCESS LOG: THE DNA">ACCESS LOG: THE DNA</span>
+                    <span class="classified-icon" id="dnaIcon">[+] DECRYPT</span>
+                </div>
+                
+                <div class="classified-content" id="dnaContent">
+                    <div class="dna-record">
+                        <p class="body-text ar-only" style="font-style: italic; color: var(--cyber-steel); margin-bottom: 40px;">
+                            الكيانات الخالدة لا تُبنى بالصدفة، بل تُهندس بدقة. شفرة (DNA) الخاصة بنا ليست مجرد قائمة أسماء أو هيكل إداري؛ إنها "الشبكة العصبية" التي تغذي محرك التجربة. هنا نوثق المعماريين، الحلفاء، والمُمكّنين الذين يحولون الفلسفة إلى واقع ملموس.
+                        </p>
+                        <p class="body-text en-only" style="font-style: italic; color: var(--cyber-steel); margin-bottom: 40px;">
+                            Immortal entities are not built by chance; they are precisely engineered. Our DNA is not a mere roster of names; it is the "neural network" that powers the experience engine. Here, we document the architects, allies, and catalysts who translate philosophy into tangible reality.
+                        </p>
+
+                        <div class="dna-node">
+                            <div class="dna-role mono-text">[ 01 ] THE ARCHITECT</div>
+                            <div class="dna-subrole ar-only">(المؤسس - The Founder)</div>
+                            <div class="dna-subrole en-only">(The Founder)</div>
+                            <div class="dna-name mono-text">[اسم المؤسس أو الكنية، مثال: フサム / Husam]</div>
+                            <p class="body-text ar-only" style="font-size: 0.95rem;">النقطة صِفر (Ground Zero) لابتكار هذه المنظومة. العقل الاستراتيجي ومصمم منهجية HX-5™️. هو من وضع حجر الأساس لهندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد.</p>
+                            <p class="body-text en-only" style="font-size: 0.95rem;">The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</p>
+                        </div>
+
+                        <div class="dna-node">
+                            <div class="dna-role mono-text">[ 02 ] THE CO-ARCHITECT</div>
+                            <div class="dna-subrole ar-only">(الشريك المؤسس - The Co-Founder)</div>
+                            <div class="dna-subrole en-only">(The Co-Founder)</div>
+                            <div class="dna-name mono-text">[اسم الشريك المؤسس]</div>
+                            <p class="body-text ar-only" style="font-size: 0.95rem;">النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</p>
+                            <p class="body-text en-only" style="font-size: 0.95rem;">The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</p>
+                        </div>
+
+                        <div class="dna-node">
+                            <div class="dna-role mono-text">[ 03 ] STRATEGIC NODES</div>
+                            <div class="dna-subrole ar-only">(الشركاء - The Partners)</div>
+                            <div class="dna-subrole en-only">(The Partners)</div>
+                            <div class="dna-name mono-text">[اسم الشريك الأول] — [اسم الشريك الثاني]</div>
+                            <p class="body-text ar-only" style="font-size: 0.95rem;">نحن لا نقبل الشراكات العابرة. هؤلاء هم حلفاء التكوين، العقول التي تتكامل مع رؤيتنا لترجمة المعنى إلى تفاعل. شركاؤنا هم امتداد لفلسفتنا، يشاركوننا الرفض المطلق للعادي، والالتزام الصارم برفع معيار الذاكرة الإنسانية.</p>
+                            <p class="body-text en-only" style="font-size: 0.95rem;">We do not accept fleeting partnerships. These are our foundational allies, the minds that integrate with our vision to translate meaning into interaction. Our partners are an extension of our philosophy, sharing our absolute rejection of the ordinary and a rigorous commitment to elevating the standard of human memory.</p>
+                        </div>
+
+                        <div class="dna-node">
+                            <div class="dna-role mono-text">[ 04 ] INFRASTRUCTURE CATALYSTS</div>
+                            <div class="dna-subrole ar-only">(المستثمرون - The Investors)</div>
+                            <div class="dna-subrole en-only">(The Investors)</div>
+                            <div class="dna-name mono-text">[اسم المستثمر أو الجهة الاستثمارية]</div>
+                            <p class="body-text ar-only" style="font-size: 0.95rem;">في اقتصاد التجربة، المال وحده لا يصنع الإرث. مستثمرو フサム ليسوا مجرد مُمولين؛ إنهم مؤمنون بالبنية التحتية الجديدة. هم القوة الدافعة التي تفهم أن القيمة الحقيقية تكمن في النظام (The System) وقابليته للتوسع، وهم من يضمنون استدامة "الأثر" خارج القيود التقليدية.</p>
+                            <p class="body-text en-only" style="font-size: 0.95rem;">In the Experience Economy, capital alone does not build legacy. Investors in フサム are not mere financiers; they are believers in the new infrastructure. They are the driving force that understands true value lies in the system and its scalability, ensuring the sustainability of "Impact" beyond traditional constraints.</p>
+                        </div>
+
+                        <div style="margin-top: 40px; border-top: 1px dashed #333; padding-top: 20px; text-align: center;">
+                            <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
+                                [ // END OF DNA RECORD ]<br><br>
+                                <span class="ar-only">تم توثيق السجلات في مصفوفة النظام.</span>
+                                <span class="en-only">Records verified in the Matrix.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
     <section class="hero" style="height: 30vh; background: #000;">
         <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(0.9rem, 2vw, 1.2rem);" data-text="We work selectively and intentionally.. If this resonates...">
             <span class="ar-only" style="color: var(--cyber-steel);">نحن نعمل بانتقائية وقصد.. إذا كان هذا يتردد صداه معك...</span>
@@ -527,6 +613,19 @@ Connection Secure.
     </div>
 
     <script>
+        // --- NEW: Toggle DNA File Script ---
+        function toggleDNA() {
+            const content = document.getElementById('dnaContent');
+            const icon = document.getElementById('dnaIcon');
+            content.classList.toggle('open');
+            if (content.classList.contains('open')) {
+                icon.innerText = '[-] CLOSE LOG';
+            } else {
+                icon.innerText = '[+] DECRYPT';
+            }
+        }
+        // -----------------------------------
+
         // --- Dynamic Video Injection ---
         document.addEventListener("DOMContentLoaded", () => {
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
