@@ -150,32 +150,32 @@
         .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
         .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace;}
 
-        /* AI ORACLE CHATBOT */
-        .ai-btn {
+        /* フサム | AI CHATBOT */
+        .フサム | ai-btn-btn {
             position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
             background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
             z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem;
             transition: transform 0.2s;
         }
-        .ai-btn:hover { transform: scale(1.1); }
-        body.lang-en .ai-btn { left: auto; right: 30px; }
-        .ai-window {
+        .フサム | ai-btn:hover { transform: scale(1.1); }
+        body.lang-en .フサム | ai-btn { left: auto; right: 30px; }
+        .フサム | ai-btn-window {
             position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98);
             border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column;
             transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        body.lang-en .ai-window { left: auto; right: 30px; }
-        .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        .ai-header { 
+        body.lang-en .フサム | ai-btn-window { left: auto; right: 30px; }
+        .フサム | ai-btn-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .フサム | ai-btn-header { 
             background: #fff; color: #000; padding: 15px; font-size: 0.9rem; letter-spacing: 2px; font-weight: bold;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .ai-close { background: none; border: none; color: #000; font-size: 1.2rem; cursor: pointer; }
-        .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; position: relative; }
-        .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
-        body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
+        .フサム | ai-btn-close { background: none; border: none; color: #000; font-size: 1.2rem; cursor: pointer; }
+        .フサム | ai-btn-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .フサム | ai-btn-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; position: relative; }
+        .フサム | ai-btn-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
+        body.lang-ar .フサム | ai-btn-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
         .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
         .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
         .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
