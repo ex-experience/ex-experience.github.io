@@ -29,104 +29,213 @@
             messagingSenderId: "560048472801",
             appId: "1:560048472801:web:1c8d71c863fc23b41ceda0"
         };
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const db = firebase.firestore();
     </script>
 
     <style>
-        /* ستايل موقعك الأصلي بدون أي تغيير */
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
-        :root { --obsidian-black: #020202; --cyber-steel: #8b939c; --stark-white: #ffffff; --terminal-green: #0f0; --panel-bg: #050607; }
-        body { background-color: var(--obsidian-black); color: var(--stark-white); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.8; margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        :root {
+            --obsidian-black: #020202;
+            --cyber-steel: #8b939c;
+            --stark-white: #ffffff;
+            --terminal-green: #0f0;
+            --panel-bg: #050607;
+        }
+
+        body {
+            background-color: var(--obsidian-black); color: var(--stark-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8; margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth;
+        }
+
         .mono-text { font-family: 'Space Mono', monospace; }
-        body::before { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; }
+
+        /* CRT Scanline Effect */
+        body::before {
+            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none;
+        }
+
+        /* Glitch Effect */
         .glitch { position: relative; display: inline-block; }
-        .glitch:hover::before { content: attr(data-text); position: absolute; left: -2px; text-shadow: 2px 0 red; top: 0; color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse; }
-        .glitch:hover::after { content: attr(data-text); position: absolute; left: 2px; text-shadow: -2px 0 blue; top: 0; color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse; }
+        .glitch:hover::before {
+            content: attr(data-text); position: absolute; left: -2px; text-shadow: 2px 0 red; top: 0;
+            color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse;
+        }
+        .glitch:hover::after {
+            content: attr(data-text); position: absolute; left: 2px; text-shadow: -2px 0 blue; top: 0;
+            color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse;
+        }
         @keyframes noise { 0% { clip-path: inset(10% 0 10% 0); } 100% { clip-path: inset(80% 0 5% 0); } }
+
+        /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
         .ar-only { display: block; } .en-only { display: none; }
         body.lang-en .ar-only { display: none; } body.lang-en .en-only { display: block; }
+
         .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
-        .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; pointer-events: none; background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); }
+
+        .top-nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; pointer-events: none;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+        }
         .top-nav > * { pointer-events: auto; }
         .est-text { font-size: 0.75rem; color: var(--cyber-steel); letter-spacing: 2px; font-weight: bold;}
-        .control-btn { background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel); padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s; }
+        .control-btn {
+            background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel);
+            padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s;
+        }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
+
+        /* Dynamic Video backgrounds */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; filter: grayscale(50%) contrast(120%); }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)); z-index: 1; pointer-events: none; }
+
         .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
         .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--stark-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; }
         .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
         .hero-desc { font-size: 1.1rem; color: #bbb; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6;}
+
         .content-section { padding: 100px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
         .alt-bg { background-color: #030303; }
-        .geometric-bg { position: absolute; top: 0; right: 0; width: 55%; height: 100%; background-size: cover; background-position: center; opacity: 0.1; z-index: 0; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
+        
+        .geometric-bg {
+            position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+            background-size: cover; background-position: center; opacity: 0.1; z-index: 0;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); filter: grayscale(80%) contrast(120%);
+        }
         body.lang-en .geometric-bg { right: auto; left: 0; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
+
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease; position: relative; z-index: 2;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+
         .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
         .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #bbbbbb; max-width: 800px; margin-bottom: 20px; }
         .highlight { color: var(--stark-white); font-weight: bold; }
+
+        /* Custom Lists & Grids */
         .cyber-list { list-style: none; padding: 0; margin-bottom: 30px; }
         .cyber-list li { position: relative; padding-left: 20px; margin-bottom: 15px; color: #bbbbbb; font-size: 1.05rem;}
         .cyber-list li::before { content: '>'; position: absolute; left: 0; color: var(--stark-white); font-family: 'Space Mono', monospace; }
         body.lang-ar .cyber-list li { padding-left: 0; padding-right: 20px; }
         body.lang-ar .cyber-list li::before { right: 0; left: auto; content: '<'; }
+
         .hx-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
         @media (min-width: 768px) { .hx-grid { grid-template-columns: 1fr 1fr; } }
         .hx-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 30px; transition: border-color 0.3s; }
         .hx-card:hover { border-color: var(--cyber-steel); }
         .hx-number { font-size: 1.5rem; color: var(--stark-white); font-family: 'Space Mono', monospace; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;}
+
+        /* --- DNA Classified File CSS --- */
         .classified-file { background: rgba(0,0,0,0.5); border: 1px solid #222; margin-top: 40px; transition: border-color 0.3s;}
-        .classified-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .classified-file:hover { border-color: var(--cyber-steel); }
+        .classified-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+        .classified-header:hover { background: rgba(255,255,255,0.05); }
+        .classified-title { color: var(--stark-white); letter-spacing: 2px; font-size: 1.1rem; }
+        .classified-icon { color: var(--terminal-green); font-size: 0.9rem;}
         .classified-content { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; background: #030405; }
         .classified-content.open { max-height: 3000px; border-top: 1px solid #222; }
         .dna-record { padding: 30px; }
+        .dna-node { margin-bottom: 40px; border-left: 2px solid #222; padding-left: 20px; }
+        body.lang-ar .dna-node { border-left: none; border-right: 2px solid #222; padding-left: 0; padding-right: 20px; }
+        .dna-role { font-size: 1.2rem; color: var(--stark-white); margin-bottom: 5px; }
+        .dna-subrole { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 15px; }
+        .dna-name { font-size: 1.1rem; margin-bottom: 10px; display: inline-block; border-bottom: 1px dashed #333; padding-bottom: 5px; color: var(--terminal-green);}
+        
         .dna-classified-file { border: 1px solid #333; background-color: transparent; margin: 40px 0; padding: 0; color: #e0e0e0; font-family: inherit; border-radius: 4px; overflow: hidden; }
-        .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(20, 20, 20, 0.8); border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(20, 20, 20, 0.8); border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
+        .dna-summary:hover { background-color: rgba(40, 40, 40, 0.8); }
+        .dna-title-main { font-size: 1.2rem; line-height: 1.4; }
         .dna-content { display: none; padding: 30px 20px; background-color: rgba(10, 10, 10, 0.9); }
         .dna-content.open { display: block; animation: decryptFade 0.5s ease-in-out; }
         .dna-blockquote { border-left: 2px solid #555; padding-left: 15px; margin-bottom: 40px; font-style: italic; color: #aaa; line-height: 1.6; }
         body.lang-ar .dna-blockquote { border-left: none; border-right: 2px solid #555; padding-left: 0; padding-right: 15px; }
         .dna-monospace { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; color: #fff; }
+        .dna-subheading { font-size: 1.1rem; margin-bottom: 5px; }
         .dna-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
+        @keyframes decryptFade { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Member Portal & Dashboard */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
         .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
+        .cyber-input:focus { outline: none; border-color: var(--cyber-steel); background: rgba(255,255,255,0.05); }
         .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
+
         #dashboard-view { display: none; }
+        /* 🟢 تحديث شبكة الأزرار لتشمل تبويب التاريخ */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 30px; }
         .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); transition: all 0.3s;}
         .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
+
+        /* 🟢 تنسيق بطاقات الأرشيف */
         .history-card { border: 1px solid #222; padding: 20px; margin-bottom: 15px; background: rgba(255,255,255,0.02); transition: border-color 0.3s; text-align: left; direction: ltr;}
+        .history-card:hover { border-color: var(--cyber-steel); }
         .status-badge { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border: 1px solid;}
+        .reply-box { margin-top: 15px; border-top: 1px dashed #333; padding-top: 15px; background: rgba(0, 255, 0, 0.02); padding: 15px; border-left: 2px solid var(--terminal-green);}
+
+        /* Sovereign Terminal */
         .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
         .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; direction: ltr; text-align: left;}
         .term-input-line { display: flex; align-items: center; direction: ltr;}
+        .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
-        .ai-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer; z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; }
+
+        /* Footer */
+        .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
+        .footer-logo { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
+        .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace;}
+
+        /* AI ORACLE CHATBOT */
+        .ai-btn {
+            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
+            background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
+            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+        .ai-btn:hover { transform: scale(1.1); }
         body.lang-en .ai-btn { left: auto; right: 30px; }
-        .ai-window { position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98); border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s; }
+        .ai-window {
+            position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98);
+            border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column;
+            transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
         body.lang-en .ai-window { left: auto; right: 30px; }
         .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        .ai-header { background: #fff; color: #000; padding: 15px; font-size: 0.9rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .ai-header { 
+            background: #fff; color: #000; padding: 15px; font-size: 0.9rem; letter-spacing: 2px; font-weight: bold;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .ai-close { background: none; border: none; color: #000; font-size: 1.2rem; cursor: pointer; }
         .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; }
-        .ai-msg.bot { background: rgba(255,255,255,0.03); align-self: flex-start; border-left: 2px solid #fff; }
+        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; position: relative; }
+        .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
         body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
-        .ai-msg.user { background: #222; align-self: flex-end; }
+        .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
         .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
         .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
         .ai-send { background: #fff; color: #000; border: none; cursor: pointer; padding: 0 15px; font-weight: bold;}
+        .typing-indicator { font-style: italic; color: var(--cyber-steel); font-size: 0.8rem; }
+        .tts-btn { background: transparent; border: none; color: var(--cyber-steel); cursor: pointer; font-size: 1.2rem; padding: 0 5px; margin-top: 5px; transition: color 0.3s;}
+        .tts-btn:hover { color: var(--stark-white); }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -142,47 +251,377 @@
             <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
         </div>
         <div class="overlay"></div>
+
         <div class="hero-content fade-in">
             <div class="interactive-logo mono-text glitch" data-text="フサム | experience™️">フサム | experience™️</div>
             <div class="interactive-slogan mono-text">Engineering Human Experience</div>
+            
+            <p class="hero-desc ar-only">
+                نحن لا نصمم منتجات..<br>
+                نحن نهندس التجربة الإنسانية — من الإحساس الأول إلى الذاكرة الخالدة.
+            </p>
+            <p class="hero-desc en-only">
+                We do not design products..<br>
+                We engineer human experience — from first sensation to lasting memory.
+            </p>
+
             <div style="margin-top: 40px;">
                 <a href="#portal" class="control-btn mono-text" style="padding: 12px 30px; text-decoration: none;">Initialize Connection</a>
             </div>
         </div>
     </header>
 
-    <section id="portal" class="content-section">
+    <section class="content-section">
+        <div class="geometric-bg" style="background-image: url('bg1.jpg');"></div>
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.2 / ما هو フサム ؟</div>
+            <div class="section-title mono-text en-only">00.2 / WHAT IS フサム | EXPERIENCE?</div>
+            
+            <h2 class="main-heading ar-only glitch" data-text="مختبر استراتيجي للتجارب.">مختبر استراتيجي للتجارب.</h2>
+            <h2 class="main-heading en-only glitch" data-text="Concept House & Strategic Lab.">Concept House & Strategic Lab.</h2>
+            
+            <p class="body-text ar-only">
+                <span class="highlight">フサム | experience™️</span> هو دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة الإنسانية.<br>
+                نحن نعمل في نقطة التقاطع بين علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل العادي إلى ذاكرة. حيث ينتهي التسويق التقليدي، تبدأ هندسة العمارة التجريبية..
+            </p>
+            <p class="body-text en-only">
+                <span class="highlight">フサム | experience™️</span> is a concept house and strategic lab focused on Human Experience Engineering.<br>
+                We operate at the intersection of psychology, sensory design, and cinematic translation to transform interaction into memory. Where traditional marketing ends, experience architecture begins..
+            </p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.3 / المشكلة الصامتة</div>
+            <div class="section-title mono-text en-only">00.3 / THE SILENT PROBLEM</div>
+            
+            <p class="body-text ar-only">
+                العالم مليء بالمحتوى، لكن القليل جداً من التجارب تُحفر في الذاكرة. تتفاعل العلامات التجارية والأنظمة والبيئات مع الناس، لكنها نادراً ما تترك بصمة عاطفية دائمة. هذه الفجوة ليست مشكلة إبداعية، إنها <span class="highlight">فشل في تصميم التجربة.</span>
+            </p>
+            <p class="body-text en-only">
+                The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint. This gap is not a creative issue, it is an <span class="highlight">experience design failure.</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="video-wrapper">
+            <video id="breakVideo1" class="video-bg" autoplay loop muted playsinline></video>
+        </div>
+        <div class="overlay" style="background: rgba(0,0,0,0.7);"></div>
+        <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(1.2rem, 3vw, 2rem);" data-text="This is not marketing..">
+            <span class="ar-only">هذا ليس تسويقاً..<br>هذه هندسة معمارية للتجارب.</span>
+            <span class="en-only">This is not marketing..<br>This is experience architecture.</span>
+        </div>
+    </section>
+
+    <section class="content-section alt-bg">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.4 / هندسة التجربة الإنسانية</div>
+            <div class="section-title mono-text en-only">00.4 / HUMAN EXPERIENCE ENGINEERING</div>
+            
+            <p class="body-text ar-only" style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+                <span class="mono-text" style="color: var(--cyber-steel);">>> عملنا يدمج بين <<</span><br><br>
+                الرؤية السلوكية &nbsp;—&nbsp; التصميم الحسي &nbsp;—&nbsp; هندسة الطقوس &nbsp;—&nbsp; الترجمة السينمائية
+            </p>
+            <p class="body-text en-only" style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">
+                <span class="mono-text" style="color: var(--cyber-steel);">>> our work combines <<</span><br><br>
+                Behavioral Insight &nbsp;—&nbsp; Sensory Design &nbsp;—&nbsp; Ritual Engineering &nbsp;—&nbsp; Cinematic Translation
+            </p>
+
+            <hr style="border-color: #222; margin: 60px 0;">
+
+            <div class="section-title mono-text ar-only">00.5 / المنهجية</div>
+            <div class="section-title mono-text en-only">00.5 / THE METHODOLOGY</div>
+            
+            <h2 class="main-heading ar-only glitch" data-text="محرك HX-5™️.">محرك HX-5™️.</h2>
+            <h2 class="main-heading en-only glitch" data-text="HX-5™️ Methodology.">HX-5™️ Methodology.</h2>
+            
+            <p class="body-text ar-only">
+                منهجية HX-5™️ هي إطار معماري حصري مصمم لسد الفجوة بين الإدراك البشري والتنفيذ الاستراتيجي. إنها تتجاوز التصميم التقليدي لتهندس العلاقة الأساسية بين البشر والأنظمة من خلال خمس ركائز أساسية:
+            </p>
+            <p class="body-text en-only">
+                The HX-5™️ Methodology is a proprietary architectural framework designed to bridge the gap between human perception and strategic execution. It moves beyond traditional design, engineering the fundamental relationship between humans and systems through five core pillars:
+            </p>
+
+            <div class="hx-grid">
+                <div class="hx-card">
+                    <div class="hx-number">1. Intent / الغاية</div>
+                    <p class="body-text ar-only">"لماذا يجب أن توجد هذه التجربة؟" الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى.</p>
+                    <p class="body-text en-only">"Why should this experience exist?" Intent defines the existential purpose and the "moral compass" of the project. We establish the core value proposition that ensures every interaction serves a higher objective.</p>
+                </div>
+                <div class="hx-card">
+                    <div class="hx-number">2. Context / السياق</div>
+                    <p class="body-text ar-only">"أين ومتى وتحت أي ظروف تتكشف؟" التجربة لا تحدث في فراغ. نحن نحلل الظروف البيئية والزمنية والنفسية المحيطة لنهندس استجابات سلسة ومتكيفة مع لحظة التفاعل.</p>
+                    <p class="body-text en-only">"Where, when, and under what conditions does it unfold?" An experience does not exist in a vacuum. We analyze the environmental, temporal, and psychological conditions surrounding the interaction.</p>
+                </div>
+                <div class="hx-card">
+                    <div class="hx-number">3. Stimuli / المحفزات</div>
+                    <p class="body-text ar-only">"ما هي المحفزات الحسية التي تفعل العاطفة؟" هندسة المدخلات (البصرية، السمعية، اللمسية) لتشغيل استجابات عصبية محددة تتجاوز الفلاتر المنطقية لتتواصل مباشرة مع العقل الباطن.</p>
+                    <p class="body-text en-only">"Which sensory triggers activate emotion?" Engineering the sensory inputs—visual, auditory, and tactile—to trigger specific emotional and neurological responses that bypass logical filters.</p>
+                </div>
+                <div class="hx-card">
+                    <div class="hx-number">4. Interaction / التفاعل</div>
+                    <p class="body-text ar-only">"كيف يشارك الإنسان، بوعي أو بدونه؟" هذه الركيزة تحكم إيقاع الاندماج. نحن نهندس المسارات التي تحول الشخص من مجرد متفرج إلى مشارك نشط داخل التجربة.</p>
+                    <p class="body-text en-only">"How does the human participate—consciously or unconsciously?" This pillar governs the rhythm of engagement. We engineer the pathways that transform a person from a mere spectator into an active participant.</p>
+                </div>
+                <div class="hx-card" style="grid-column: 1 / -1;">
+                    <div class="hx-number" style="color: var(--terminal-green);">5. Impact / الأثر</div>
+                    <p class="body-text ar-only">"ما الذي يتبقى بعد انتهاء التجربة؟" هذا هو المقياس النهائي للنجاح. نحن لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. الأثر هو الذاكرة الدائمة والبصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
+                    <p class="body-text en-only">"What remains after the experience ends?" The ultimate metric of success. We do not measure the duration of the event, but the "emotional residue" left behind. Impact is the lasting memory and long-term cognitive imprint.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="video-wrapper">
+            <video id="breakVideo2" class="video-bg" autoplay loop muted playsinline></video>
+        </div>
+        <div class="overlay" style="background: rgba(0,0,0,0.8);"></div>
+        <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(1rem, 2.5vw, 1.8rem);" data-text="To create experiences that are felt, before they are understood.">
+            <span class="ar-only">لخلق تجارب تُحَس.. قبل أن تُفهم.</span>
+            <span class="en-only">To create experiences that are felt, before they are understood.</span>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="geometric-bg" style="background-image: url('bg2.jpg');"></div>
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.6 / الفلسفة الأساسية</div>
+            <div class="section-title mono-text en-only">00.6 / THE CORE PHILOSOPHY</div>
+            <p class="body-text ar-only">
+                العالم مشبع بالمحتوى، ولكنه متعطش للمعنى. تم تصميم محرك HX-5™️ لحل "المشكلة الصامتة" للتفاعل الحديث: الفشل في البقاء في الذاكرة. نحن نضمن أن تجربتك لن تُرى فحسب، بل ستُحَس وتُحفظ.
+            </p>
+            <p class="body-text en-only">
+                The world is saturated with content, yet starved for meaning. The HX-5™️ engine is designed to solve the "Silent Problem" of modern interaction: the failure to be remembered. We ensure that your experience is not just seen, but felt and retained.
+            </p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.7 / ماذا نفعل؟</div>
+            <div class="section-title mono-text en-only">00.7 / WHAT WE DO?</div>
+            <p class="body-text ar-only">نحن ننفذ نماذج تجريبية (Pilots) مركزة لمدة 4-6 أسابيع مصممة للتحقق من أثر التجربة. كل نموذج يقدم:</p>
+            <p class="body-text en-only">We execute focused 4-6 week pilots designed to validate experience impact. Each pilot delivers:</p>
+            
+            <ul class="cyber-list ar-only">
+                <li>تجربة إنسانية مصممة بدقة.</li>
+                <li>قياس الاستجابة العاطفية والسلوكية.</li>
+                <li>فيلم سينمائي قصير (60-90 ثانية).</li>
+                <li>دراسة حالة استراتيجية.</li>
+            </ul>
+            <ul class="cyber-list en-only">
+                <li>A designed human experience.</li>
+                <li>Measured emotional and behavioral response.</li>
+                <li>A short cinematic film (60-90 seconds).</li>
+                <li>A strategic case study.</li>
+            </ul>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.8 / لماذا النماذج التجريبية أولاً؟</div>
+            <div class="section-title mono-text en-only">00.8 / WHY PILOTS FIRST?</div>
+            <p class="body-text ar-only">
+                الأفكار ليست كافية.. الوعود لا تتوسع.<br><br>
+                النماذج التجريبية تخلق <span class="highlight">إثبات الشعور (Proof of Feeling)</span> قبل إثبات المفهوم. التجربة يجب أن تُعرض وتُعاش، لا أن تُوصف.
+            </p>
+            <p class="body-text en-only">
+                Ideas are not enough. Promises do not scale.<br><br>
+                Pilots create <span class="highlight">Proof of Feeling</span> before proof of concept. Experience must be demonstrated, not described.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section alt-bg">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.9 / فلسفة الشراكة</div>
+            <div class="section-title mono-text en-only">00.9 / PARTNERSHIP PHILOSOPHY</div>
+            <p class="body-text ar-only">
+                نحن لا ننافس شركاءنا.. نحن نرتقي بهم.
+            </p>
+            <p class="body-text en-only">
+                We do not compete with our partners. We elevate them.
+            </p>
+            <ul class="cyber-list ar-only">
+                <li>الملكية الفكرية الأساسية تبقى مع مبتكرها.</li>
+                <li>الرؤى الجديدة يتم التعامل معها بسرية تامة.</li>
+                <li>الظهور يكون متعمداً، وليس استخراجياً.</li>
+            </ul>
+            <ul class="cyber-list en-only">
+                <li>Background IP remains with its originator.</li>
+                <li>New insights are handled with discretion.</li>
+                <li>Visibility is intentional, never extractive.</li>
+            </ul>
+            <p class="body-text ar-only"><span class="highlight">الشراكة مع フサム تزيد من المعنى، وليس مجرد الظهور.</span></p>
+            <p class="body-text en-only"><span class="highlight">Partnership with フサム increases meaning, not exposure alone.</span></p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.10 / لمن هذا؟</div>
+            <div class="section-title mono-text en-only">00.10 / WHO THIS IS FOR?</div>
+            <ul class="cyber-list ar-only">
+                <li>المنظمات التي تسعى لأثر طويل المدى.</li>
+                <li>المستثمرون الذين يركزون على البنية التحتية، لا الضجيج المؤقت.</li>
+                <li>العلامات التجارية التي تريد أن تُحفر في الذاكرة.</li>
+                <li>المؤسسات الثقافية والمدفوعة بالابتكار.</li>
+            </ul>
+            <ul class="cyber-list en-only">
+                <li>Organizations seeking long-term impact.</li>
+                <li>Investors focused on infrastructure, not hype.</li>
+                <li>Brands that want to be remembered.</li>
+                <li>Cultural and innovation-driven institutions.</li>
+            </ul>
+            <p class="body-text ar-only" style="color: #ff4444;">إذا كنت تبحث عن إعلانات تقليدية، فهذا المكان ليس لك.</p>
+            <p class="body-text en-only" style="color: #ff4444;">If you are looking for advertising, this is not for you.</p>
+
+            <br><br>
+
+            <div class="section-title mono-text ar-only">00.11 / ملاحظة للمستثمرين</div>
+            <div class="section-title mono-text en-only">00.11 / INVESTOR NOTE</div>
+            <p class="body-text ar-only">
+                フサム ليست شركة منتجات.. وليست وكالة.<br>
+                إنها البنية التحتية لفئة جديدة داخل اقتصاد التجربة (Experience Economy). القيمة تكمن في النظام، قابليته للتكرار، وتطبيقه عبر مختلف القطاعات.
+            </p>
+            <p class="body-text en-only">
+                フサム is not a product company. And not an agency.<br>
+                It is the architecture of a new category, within the Experience Economy. The value lies in the system, its repeatability, and its cross-sector application.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">00.12 / الشفرة الوراثية</div>
+            <div class="section-title mono-text en-only">00.12 / THE DNA</div>
+
+            <div class="classified-file">
+                <div class="classified-header mono-text" onclick="toggleDNA()">
+                    <span class="classified-title glitch" data-text="ACCESS LOG: THE DNA">ACCESS LOG: THE DNA</span>
+                    <span class="classified-icon" id="dnaIcon">[+] DECRYPT</span>
+                </div>
+                
+                <div class="classified-content" id="dnaContent">
+                    <div class="dna-record">
+                        <div class="dna-classified-file">
+                          <div class="dna-summary" onclick="document.getElementById('dna-data-log').classList.toggle('open')">
+                            <div class="dna-title-main">
+                              00.12 / الشفرة الوراثية <br> 
+                              00.12 / THE DNA
+                            </div>
+                            <div class="dna-monospace">[ ACCESS LOG ]</div>
+                          </div>
+                          
+                          <div id="dna-data-log" class="dna-content">
+                            <div class="dna-blockquote">
+                              <p>الكيانات الخالدة لا تُبنى بالصدفة، بل تُهندس بدقة. شفرة (DNA) الخاصة بنا ليست مجرد قائمة أسماء أو هيكل إداري؛ إنها "الشبكة العصبية" التي تغذي محرك التجربة. هنا نوثق المعماريين، الحلفاء، والمُمكّنين الذين يحولون الفلسفة إلى واقع ملموس.</p>
+                              <br>
+                              <p>Immortal entities are not built by chance; they are precisely engineered. Our DNA is not a mere roster of names; it is the "neural network" that powers the experience engine. Here, we document the architects, allies, and catalysts who translate philosophy into tangible reality.</p>
+                            </div>
+
+                            <div class="dna-record">
+                              <div class="dna-monospace dna-subheading">[ フサム ] المعمار الأول / THE ARCHITECT</div>
+                              <div class="dna-role">( المؤسس - THE FOUNDER )</div>
+                              <span class="dna-monospace dna-name">[ HUSSAM HASSAN MOHAMMED TAHIRI ]</span>
+                              <div class="dna-desc">
+                                <p>النقطة صِفر (Ground Zero) مؤسس هذه المنظومة. والعقل الاستراتيجي والمصمم لمنهجية HX-5™️. هو من وضع حجر الأساس، ومبتكر هندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد وصناعة اول دار للمفاهيم بالمملكة العربية السعودية.</p>
+                                <br>
+                                <p>The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</p>
+                              </div>
+                            </div>
+
+                            <div class="dna-record">
+                              <div class="dna-monospace dna-subheading">[ SBS ] المعمار الموازي / THE CO-ARCHITECT</div>
+                              <div class="dna-role">( شريك مؤسس - CO-FOUNDER )</div>
+                              <span class="dna-monospace dna-name">[ P. SULTAN BIN BADR BIN ALBDULMUHSEN AL SAUD ]</span>
+                              <div class="dna-desc">
+                                <p>النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</p>
+                                <br>
+                                <p>The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</p>
+                              </div>
+                            </div>
+
+                            <div class="dna-footer dna-monospace">
+                                <p>EST EX/2025. SA</p>
+                                <p>Concept House • ©️ 1991. SA</p>
+                                <p>تم توثيق السجلات في مصفوفة النظام.</p>
+                                <p>المملكة العربية السعودية</p>
+                                <p>Records verified</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <section class="hero" style="height: 30vh; background: #000;">
+        <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(0.9rem, 2vw, 1.2rem);" data-text="We work selectively and intentionally.. If this resonates...">
+            <span class="ar-only" style="color: var(--cyber-steel);">نحن نعمل بانتقائية وقصد.. إذا كان هذا يتردد صداه معك تواصل معنا...</span>
+            <span class="en-only" style="color: var(--cyber-steel);">We work selectively and intentionally.. If this resonates contacat us...</span>
+        </div>
+    </section>
+
+    <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">بوابة السيادة</div>
             <div class="section-title mono-text en-only">SOVEREIGN PORTAL</div>
+            
             <div class="portal-container">
                 <div id="login-view">
                     <form onsubmit="handleFirebaseLogin(event)">
-                        <input type="text" id="userName" class="cyber-input mono-text" style="width:100%" placeholder="ID / Name" required><br><br>
-                        <input type="email" id="userEmail" class="cyber-input mono-text" style="width:100%" placeholder="E-mail" required><br><br>
-                        <input type="tel" id="userContact" class="cyber-input mono-text" style="width:100%" placeholder="Contact (Phone Number)" required><br><br>
+                        <div class="input-group">
+                            <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="E-mail" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact (Phone Number)" required>
+                        </div>
                         <button type="submit" id="loginBtn" class="submit-btn mono-text">Connect to Matrix</button>
                     </form>
                 </div>
+
                 <div id="dashboard-view">
                     <div class="dashboard-grid">
-                        <div class="dash-card active" onclick="switchService('consult')"><h4 class="mono-text">Consult</h4></div>
-                        <div class="dash-card" onclick="switchService('history')"><h4 class="mono-text">History</h4></div>
-                        <div class="dash-card" onclick="switchService('terminal')" style="border-color: var(--terminal-green);"><h4 class="mono-text" style="color: var(--terminal-green);">Terminal_</h4></div>
+                        <div class="dash-card active" onclick="switchService('consult')">
+                            <h4 class="mono-text">Consult</h4>
+                        </div>
+                        <div class="dash-card" onclick="switchService('history')">
+                            <h4 class="mono-text">History</h4>
+                        </div>
+                        <div class="dash-card" onclick="switchService('terminal')" style="border-color: var(--terminal-green);">
+                            <h4 class="mono-text" style="color: var(--terminal-green);">Terminal_</h4>
+                        </div>
                     </div>
+
                     <div id="form-consult" class="service-form active">
                         <form onsubmit="submitFirebaseConsult(event)">
-                            <textarea class="cyber-input" id="consultText" style="width:100%" placeholder="State your objective..." required style="height: 100px; resize: vertical;"></textarea><br><br>
+                            <div class="input-group">
+                                <textarea class="cyber-input" id="consultText" placeholder="State your objective or inquiry..." required style="height: 100px; resize: vertical;"></textarea>
+                            </div>
                             <button type="submit" id="consultBtn" class="submit-btn mono-text">Transmit</button>
                         </form>
                     </div>
+
                     <div id="form-history" class="service-form">
-                        <div id="history-content" style="max-height: 400px; overflow-y: auto;"></div>
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem; margin-bottom: 20px;">[ACCESSING SECURE ARCHIVES...]</p>
+                        <div id="history-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                            </div>
                     </div>
+
                     <div id="form-terminal" class="service-form">
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem;">[SYSTEM LOGGED IN] Type 'help' for available commands. Ask Oracle EX directly.</p>
                         <div class="terminal-container" id="terminalBox" onclick="document.getElementById('termInput').focus()">
-                            <div class="term-output" id="termOutput">Initializing Sovereign Terminal v5.0... Secure connection established.</div>
-                            <div class="term-input-line"><span class="term-prompt">user@ex:~#</span><input type="text" id="termInput" class="term-input" autocomplete="off" onkeydown="handleTerminal(event)"></div>
+                            <div class="term-output" id="termOutput">
+Initializing Sovereign Terminal v4.0...
+Connection Secure.
+                            </div>
+                            <div class="term-input-line">
+                                <span class="term-prompt">user@ex:~#</span>
+                                <input type="text" id="termInput" class="term-input" autocomplete="off" onkeydown="handleTerminal(event)">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,180 +629,353 @@
         </div>
     </section>
 
-    <footer class="site-footer" style="text-align: center; padding: 40px; border-top: 1px solid #111;">
+    <section class="content-section alt-bg" style="text-align: center; border-top: 1px solid #1a1a1a; padding: 60px 0;">
+        <div class="container fade-in">
+            <div class="section-title mono-text ar-only">شبكاتنا / للتواصل</div>
+            <div class="section-title mono-text en-only">OUR NETWORKS / FOR CONNECT</div>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
+                <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Instagram</a>
+                <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94TGgDVJp8W" target="_blank" class="control-btn mono-text" style="text-decoration: none;">TikTok</a>
+                <a href="https://snapchat.com/t/w3omS0EV" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Snapchat</a>
+                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" class="control-btn mono-text" style="text-decoration: none;">WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container fade-in" style="text-align: center; padding: 60px 0; border-top: 1px solid #111;">
+        <h3 class="mono-text" style="letter-spacing: 3px; margin-bottom: 10px;">フサム | HX-5™️</h3>
+        <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
+            Engineering Human Experiences <br>
+            All concepts protected through layered strategic disclosure<br><br>
+            <span style="color: #fff;">Designed to be felt, not explained</span>
+        </p>
+    </div>
+
+    <footer class="site-footer">
         <div class="footer-logo mono-text">フサム | experience™️</div>
+        <div class="footer-slogan mono-text">Fearless . Relentless . True to you</div>
+        <div class="footer-slogan mono-text">Concepts House & Strategic Lab</div>
         <span style="color: #fff;">©️ 2026 フサム | experience™️ All rights reserved</span>
     </footer>
 
     <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">フサム</button>
+    
     <div class="ai-window" id="aiWindow">
-        <div class="ai-header mono-text"><span>フサム | EX : ONLINE</span><button onclick="toggleChat()" style="background:none; border:none; cursor:pointer;">×</button></div>
+        <div class="ai-header mono-text">
+            <span>フサム | EX : ONLINE</span>
+            <button class="ai-close" onclick="toggleChat()">×</button>
+        </div>
         <div class="ai-body" id="chatBody"></div>
-        <div class="ai-input-area"><input type="text" id="aiInput" class="ai-input mono-text" placeholder="Ask フサム | EX..." onkeydown="handleChatEnter(event)"><button class="ai-send mono-text" onclick="sendChatMessage()">[SEND]</button></div>
+        <div class="ai-input-area">
+            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="Ask フサム | EX..." onkeydown="handleChatEnter(event)">
+            <button class="ai-send mono-text" onclick="sendChatMessage()">[SEND]</button>
+        </div>
     </div>
 
     <script>
-        // 🛡️ دروع الحماية السيبرانية المدمجة في منطق موقعك
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrAPrADcL5-U5LPdDk4NG6x6exxuNO8i5K0Wo7cc94HE4pxz6JY2ZSxf-qT0ilVzs0/exec'; 
-        const SECURE_TOKEN = "EX_SHIELD_99X"; // المصافحة الصامتة
-
-        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
-        let currentLang = 'ar';
-
-        function toggleLanguage() {
-            document.body.classList.toggle('lang-ar'); document.body.classList.toggle('lang-en');
-            currentLang = document.body.classList.contains('lang-ar') ? 'ar' : 'en';
-            document.getElementById('aiInput').placeholder = (currentLang === 'ar' ? "استفسر من أوراكل EX..." : "Ask Oracle EX...");
-        }
-
-        // 🛡️ درع الحماية من الأكواد الخبيثة (XSS Shield)
-        function appendMsg(text, sender, isGlitch = false) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
-            if(isGlitch) msgDiv.setAttribute('data-text', text);
-            
-            const contentSpan = document.createElement('span');
-            contentSpan.className = "msg-content";
-            contentSpan.innerText = text; // 🛡️ استخدام innerText يحول الكود الخبيث لنص عادي ميت
-            msgDiv.appendChild(contentSpan);
-
-            if (sender === 'bot' && !isGlitch) {
-                const btn = document.createElement('button');
-                btn.innerHTML = "🔊"; btn.style.border="none"; btn.style.background="none"; btn.style.cursor="pointer"; btn.style.color="#888";
-                btn.onclick = function() { speakText(this); };
-                msgDiv.appendChild(document.createElement('br'));
-                msgDiv.appendChild(btn);
+        function toggleDNA() {
+            const content = document.getElementById('dnaContent');
+            const icon = document.getElementById('dnaIcon');
+            content.classList.toggle('open');
+            if (content.classList.contains('open')) {
+                icon.innerText = '[-] CLOSE LOG';
+            } else {
+                icon.innerText = '[+] DECRYPT';
             }
-            document.getElementById('chatBody').appendChild(msgDiv);
-            document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
-            return msgDiv; 
-        }
-
-        function speakText(btn) {
-            const text = btn.parentElement.querySelector('.msg-content').innerText; 
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
-                window.speechSynthesis.speak(u);
-            }
-        }
-
-        // 🛡️ درع تسجيل الدخول والمصافحة
-        async function handleFirebaseLogin(e) {
-            e.preventDefault();
-            const btn = document.getElementById('loginBtn');
-            btn.disabled = true; btn.innerText = "DECRYPTING...";
-            currentUser.Name = document.getElementById('userName').value;
-            currentUser.Email = document.getElementById('userEmail').value;
-            currentUser.Phone = document.getElementById('userContact').value;
-            
-            try {
-                await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-                // إرسال التوكن في الرادار
-                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Login', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
-                document.getElementById('login-view').style.display = 'none';
-                document.getElementById('dashboard-view').style.display = 'block';
-                fetchUserHistory();
-            } catch (error) { alert("Matrix Error."); btn.disabled = false; }
-        }
-
-        // 🛡️ درع الاستشارات ضد الـ Spam
-        async function submitFirebaseConsult(e) {
-            e.preventDefault();
-            const btn = document.getElementById('consultBtn');
-            if(btn.disabled) return;
-            const msg = document.getElementById('consultText').value;
-            btn.disabled = true; btn.innerText = "TRANSMITTING...";
-            
-            try {
-                await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Message: msg, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Consultation', Name: currentUser.Name, Email: currentUser.Email, Message: msg });
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
-                alert("Signal Received.");
-                document.getElementById('consultText').value = '';
-                fetchUserHistory();
-                setTimeout(() => { btn.disabled = false; btn.innerText = "Transmit"; }, 10000); // 🛡️ قفل 10 ثواني
-            } catch (e) { alert("Matrix Error."); btn.disabled = false; }
-        }
-
-        async function fetchUserHistory() {
-            const container = document.getElementById('history-content');
-            container.innerHTML = '<p class="mono-text">[SEARCHING...]</p>';
-            try {
-                const snap = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
-                if (snap.empty) { container.innerHTML = '<p class="mono-text">[ZERO RECORDS]</p>'; return; }
-                let html = '';
-                snap.docs.forEach(doc => {
-                    const d = doc.data();
-                    const color = d.Status === 'Pending' ? '#ffaa00' : 'var(--terminal-green)';
-                    html += `<div class="history-card">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                            <span class="mono-text" style="color:#555; font-size:0.7rem;">ID: ${doc.id.substring(0,6)}</span>
-                            <span class="status-badge" style="color:${color}; border-color:${color}">${d.Status}</span>
-                        </div>
-                        <p style="margin:0; font-size:0.9rem;">${d.Message}</p>
-                        ${d.Reply ? `<div style="margin-top:10px; padding-top:10px; border-top:1px dashed #333; color:var(--terminal-green); font-size:0.85rem;">[REPLY]: ${d.Reply}</div>` : ''}
-                    </div>`;
-                });
-                container.innerHTML = html;
-            } catch (e) { container.innerHTML = '<p class="mono-text" style="color:red">[ERROR]</p>'; }
-        }
-
-        async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            // 🛡️ إرسال شفرة العبور في كل سؤال لأوراكل
-            const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text);
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-                if (loadingElement) loadingElement.remove();
-                const output = data.reply || data.error;
-                if(isTerminal) printTerm(`oracle@ex:~# ${output}`); else appendMsg(output, 'bot');
-                db.collection("OracleLogs").add({ Name: currentUser.Name, Email: currentUser.Email, Question: text, Answer: output, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-            } catch (e) { if (loadingElement) loadingElement.remove(); const err = "Matrix Offline."; if(isTerminal) printTerm(err); else appendMsg(err, 'bot'); }
-        }
-
-        function switchService(id) {
-            document.querySelectorAll('.dash-card').forEach(c => c.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
-            document.getElementById('form-' + id).classList.add('active');
-            if(id === 'terminal') document.getElementById('termInput').focus();
-            if(id === 'history') fetchUserHistory();
-        }
-
-        function handleTerminal(e) {
-            if(e.key === 'Enter') {
-                const cmd = document.getElementById('termInput').value.trim();
-                if(!cmd) return;
-                printTerm(`user@ex:~# ${cmd}`);
-                document.getElementById('termInput').value = '';
-                if(cmd === '/clear') document.getElementById('termOutput').innerHTML = '';
-                else queryDeepMatrix(cmd, true);
-            }
-        }
-        function printTerm(t) { const o = document.getElementById('termOutput'); o.innerHTML += `\n${t}`; o.scrollTop = o.scrollHeight; }
-        function toggleChat() { document.getElementById('aiWindow').classList.toggle('open'); }
-        function handleChatEnter(e) { if(e.key === 'Enter') sendChatMessage(); }
-        function sendChatMessage() {
-            const t = document.getElementById('aiInput').value.trim();
-            if(!t) return;
-            appendMsg(t, 'user'); document.getElementById('aiInput').value = '';
-            const loading = appendMsg("[PROCESSING...]", 'bot', true);
-            queryDeepMatrix(t, false, loading);
         }
 
         document.addEventListener("DOMContentLoaded", () => {
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
             const shuffled = videos.sort(() => 0.5 - Math.random());
-            const v = document.getElementById('heroVideo');
-            if(v) { v.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; v.load(); }
-            const obs = new IntersectionObserver((entries) => {
-                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+            
+            const heroVideo = document.getElementById('heroVideo');
+            if(heroVideo) { heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; heroVideo.load(); }
+            
+            const breakVideo1 = document.getElementById('breakVideo1');
+            if(breakVideo1) { breakVideo1.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo1.load(); }
+            
+            const breakVideo2 = document.getElementById('breakVideo2');
+            if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
+
+        // الرابط الذي أرسلته لي مع درع الحماية
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrAPrADcL5-U5LPdDk4NG6x6exxuNO8i5K0Wo7cc94HE4pxz6JY2ZSxf-qT0ilVzs0/exec';
+        const SECURE_TOKEN = "EX_SHIELD_99X"; // 🛡️ درع الاتصال
+
+        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            const body = document.body;
+            body.classList.toggle('lang-ar'); body.classList.toggle('lang-en');
+            currentLang = body.classList.contains('lang-ar') ? 'ar' : 'en';
+            
+            const aiInput = document.getElementById('aiInput');
+            const aiSendBtn = document.querySelector('.ai-send');
+            if(currentLang === 'ar') {
+                aiInput.placeholder = "استفسر من أوراكل EX...";
+                aiSendBtn.innerText = "[إرسال]";
+            } else {
+                aiInput.placeholder = "Ask Oracle EX...";
+                aiSendBtn.innerText = "[SEND]";
+            }
+        }
+
+        // ==========================================
+        // وظائف جلب الأرشيف (التاريخ)
+        // ==========================================
+        async function fetchUserHistory() {
+            const historyContainer = document.getElementById('history-content');
+            historyContainer.innerHTML = '<p class="mono-text" style="color:var(--cyber-steel);">[FETCHING RECORDS...]</p>';
+
+            try {
+                const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
+                
+                if (querySnapshot.empty) {
+                    historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[NO PREVIOUS RECORDS FOUND]</p>';
+                    return;
+                }
+
+                let docs = [];
+                querySnapshot.forEach((doc) => docs.push(doc.data()));
+
+                docs.sort((a, b) => {
+                    let timeA = a.Timestamp ? a.Timestamp.toMillis() : 0;
+                    let timeB = b.Timestamp ? b.Timestamp.toMillis() : 0;
+                    return timeB - timeA;
+                });
+
+                let historyHTML = '';
+                docs.forEach((data) => {
+                    let statusColor = data.Status === 'Pending' ? '#ffaa00' : (data.Status === 'Approved' ? 'var(--terminal-green)' : 'var(--cyber-steel)');
+                    let dateStr = data.Timestamp ? new Date(data.Timestamp.toDate()).toLocaleDateString('en-GB') : 'Just Now';
+                    
+                    historyHTML += `
+                        <div class="history-card">
+                            <div style="display:flex; justify-content: space-between; margin-bottom: 10px; align-items:center;">
+                                <span class="mono-text" style="color: var(--cyber-steel); font-size: 0.8rem;">DATE: ${dateStr}</span>
+                                <span class="status-badge mono-text" style="color: ${statusColor}; border-color: ${statusColor};">${data.Status}</span>
+                            </div>
+                            <p style="font-size: 0.9rem; color: #ccc; margin: 0;">${data.Message}</p>
+                            ${data.Reply ? `<div class="reply-box"><p style="font-size: 0.85rem; color: var(--terminal-green); margin:0;"><strong>[EX REPLY]:</strong> ${data.Reply}</p></div>` : ''}
+                        </div>
+                    `;
+                });
+
+                historyContainer.innerHTML = historyHTML;
+            } catch (error) {
+                console.error("Error fetching history: ", error);
+                historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[ENCRYPTION ERROR: UNABLE TO LOAD RECORDS. CHECK RULES]</p>';
+            }
+        }
+
+        // ==========================================
+        // وظائف التسجيل والإرسال
+        // ==========================================
+        async function handleFirebaseLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; 
+            btn.disabled = true;
+
+            currentUser.Name = document.getElementById('userName').value;
+            currentUser.Email = document.getElementById('userEmail').value;
+            currentUser.Phone = document.getElementById('userContact').value;
+            
+            try {
+                await db.collection("Users").add({
+                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'تسجيل دخول جديد', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
+
+                document.getElementById('login-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                
+                fetchUserHistory();
+
+            } catch (error) {
+                alert("Connection failed. Please check Firebase Rules.");
+                btn.innerHTML = 'Connect to Matrix'; btn.disabled = false;
+            }
+        }
+
+        async function submitFirebaseConsult(e) {
+            e.preventDefault();
+            const btn = document.getElementById('consultBtn');
+            if(btn.disabled) return; // 🛡️ درع الـ Spam
+            const message = document.getElementById('consultText').value;
+            btn.innerHTML = 'Transmitting...'; btn.disabled = true;
+            
+            try {
+                await db.collection("Consultations").add({
+                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
+                    Message: message, Status: "Pending",
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'طلب استشارة', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message });
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
+
+                alert(currentLang === 'ar' ? 'تم استلام استشارتك بنجاح.' : 'Transmission Successful.');
+                document.getElementById('consultText').value = '';
+                
+                fetchUserHistory();
+                switchService('history'); 
+
+                // 🛡️ درع الـ Spam: إغلاق الزر لـ 10 ثواني
+                setTimeout(() => {
+                    btn.innerHTML = 'Transmit'; btn.disabled = false;
+                }, 10000);
+
+            } catch (error) {
+                alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال.' : 'Transmission Failed.');
+                btn.innerHTML = 'Transmit'; btn.disabled = false;
+            }
+        }
+
+        function switchService(serviceId) {
+            document.querySelectorAll('.dash-card').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('form-' + serviceId).classList.add('active');
+            if(serviceId === 'terminal') document.getElementById('termInput').focus();
+            if(serviceId === 'history') fetchUserHistory(); 
+        }
+
+        // --- GEMINI AI PROXY ---
+        async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
+            // 🛡️ درع الاتصال
+            const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text);
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (loadingElement) loadingElement.remove();
+                const finalOutput = data.reply || data.error;
+
+                if(isTerminal) { 
+                    printTerm(`oracle@ex:~# ${finalOutput}`); 
+                } else { 
+                    appendMsg(finalOutput, 'bot'); 
+                }
+
+                try {
+                    await db.collection("OracleLogs").add({
+                        Name: currentUser.Name || "زائر مجهول", Email: currentUser.Email || "غير مسجل", Phone: currentUser.Phone || "غير مسجل",
+                        Question: text, OracleAnswer: finalOutput, EngineUsed: data.engine || "Unknown",
+                        Source: isTerminal ? "Terminal UI" : "AI Chat Window", Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                } catch (logError) {}
+            } catch (error) {
+                if (loadingElement) loadingElement.remove();
+                const errText = currentLang === 'ar' ? "انقطع الاتصال بالشبكة العميقة." : "Grid uncommunicative.";
+                if(isTerminal) { printTerm(`oracle@ex:~# ${errText}`); } else { appendMsg(errText, 'bot'); }
+            }
+        }
+
+        // --- Terminal Logic ---
+        const termOutput = document.getElementById('termOutput');
+        const termInput = document.getElementById('termInput');
+        function handleTerminal(e) {
+            if(e.key === 'Enter' || e.keyCode === 13) {
+                e.preventDefault();
+                const cmd = termInput.value.trim();
+                if(cmd === '') return;
+                printTerm(`user@ex:~# ${cmd}`);
+                termInput.value = '';
+                if(cmd.toLowerCase() === 'help') {
+                    printTerm(`Commands:\n- /clear : Clear screen\n- Any text : Query Oracle EX directly`);
+                } else if(cmd.toLowerCase() === '/clear') {
+                    termOutput.innerHTML = '';
+                } else {
+                    printTerm(`[Decrypting data stream...]`);
+                    queryDeepMatrix(cmd, true); 
+                }
+            }
+        }
+        function printTerm(text) { termOutput.innerHTML += `\n${text}`; termOutput.scrollTop = termOutput.scrollHeight; }
+
+        // --- AI Chatbot & TTS Logic ---
+        const chatWindow = document.getElementById('aiWindow');
+        const chatBody = document.getElementById('chatBody');
+        const aiInput = document.getElementById('aiInput');
+        
+        function toggleChat() { 
+            chatWindow.classList.toggle('open'); 
+            if(chatWindow.classList.contains('open')) {
+                aiInput.focus();
+                if(chatBody.innerHTML === '') initChat();
+            }
+        }
+        
+        function initChat() {
+            chatBody.innerHTML = '';
+            const welcome = currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. اسألني عن المنهجية، الكون، أو الفراغ." : "System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.";
+            appendMsg(welcome, 'bot');
+        }
+
+        function appendMsg(text, sender, isGlitch = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
+            if(isGlitch) msgDiv.setAttribute('data-text', text);
+            
+            // فلترة النص للحماية من الأكواد الخبيثة
+            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let contentHTML = `<span class="msg-content">${safeText}</span>`;
+            
+            // إضافة زر الاستماع لرسائل أوراكل فقط
+            if (sender === 'bot' && !isGlitch) {
+                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
+            }
+            
+            msgDiv.innerHTML = contentHTML;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msgDiv; 
+        }
+
+        // دالة التحدث بالصوت
+        function speakText(btn) {
+            const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(textContent);
+                utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('عذراً، متصفحك لا يدعم ميزة النطق الصوتي.');
+            }
+        }
+
+        function handleChatEnter(e) { 
+            if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); }
+        }
+        
+        function sendChatMessage() {
+            const text = aiInput.value.trim();
+            if(!text) return;
+            appendMsg(text, 'user');
+            aiInput.value = '';
+            const loadingText = currentLang === 'ar' ? "[جاري معالجة البيانات...]" : "[Processing data streams...]";
+            const loadingElement = appendMsg(loadingText, 'bot typing-indicator', true);
+            queryDeepMatrix(text, false, loadingElement);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch((err) => console.log('Matrix Core Offline: ', err));
+            });
+        }
     </script>
 </body>
 </html>
