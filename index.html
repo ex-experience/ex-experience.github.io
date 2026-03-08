@@ -698,8 +698,7 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        // الرابط الذي أرسلته لي مع درع الحماية
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrAPrADcL5-U5LPdDk4NG6x6exxuNO8i5K0Wo7cc94HE4pxz6JY2ZSxf-qT0ilVzs0/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
         const SECURE_TOKEN = "EX_SHIELD_99X"; // 🛡️ درع الاتصال
 
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
@@ -805,7 +804,7 @@ Connection Secure.
         async function submitFirebaseConsult(e) {
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
-            if(btn.disabled) return; // 🛡️ درع الـ Spam
+            if(btn.disabled) return; 
             const message = document.getElementById('consultText').value;
             btn.innerHTML = 'Transmitting...'; btn.disabled = true;
             
@@ -825,7 +824,6 @@ Connection Secure.
                 fetchUserHistory();
                 switchService('history'); 
 
-                // 🛡️ درع الـ Spam: إغلاق الزر لـ 10 ثواني
                 setTimeout(() => {
                     btn.innerHTML = 'Transmit'; btn.disabled = false;
                 }, 10000);
@@ -847,7 +845,6 @@ Connection Secure.
 
         // --- GEMINI AI PROXY ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            // 🛡️ درع الاتصال
             const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text);
 
             try {
@@ -917,65 +914,9 @@ Connection Secure.
             appendMsg(welcome, 'bot');
         }
 
-        function appendMsg(text, sender, isGlitch = false) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
-            if(isGlitch) msgDiv.setAttribute('data-text', text);
-            
-            // فلترة النص للحماية من الأكواد الخبيثة
-            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            let contentHTML = `<span class="msg-content">${safeText}</span>`;
-            
-            // إضافة زر الاستماع لرسائل أوراكل فقط
-            if (sender === 'bot' && !isGlitch) {
-                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
-            }
-            
-            msgDiv.innerHTML = contentHTML;
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-            return msgDiv; 
-        }
-
-        // دالة التحدث بالصوت
-        function speakText(btn) {
-            const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(textContent);
-                utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert('عذراً، متصفحك لا يدعم ميزة النطق الصوتي.');
-            }
-        }
-
-        function handleChatEnter(e) { 
-            if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); }
-        }
-        
-        function sendChatMessage() {
-            const text = aiInput.value.trim();
-            if(!text) return;
-            appendMsg(text, 'user');
-            aiInput.value = '';
-            const loadingText = currentLang === 'ar' ? "[جاري معالجة البيانات...]" : "[Processing data streams...]";
-            const loadingElement = appendMsg(loadingText, 'bot typing-indicator', true);
-            queryDeepMatrix(text, false, loadingElement);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-            }, { threshold: 0.15 });
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        });
-
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').catch((err) => console.log('Matrix Core Offline: ', err));
-            });
-        }
-    </script>
-</body>
-</html>
+        // 👁️ محرك ترجمة الرموز (Markdown Parser)
+        function formatAIResponse(text) {
+            let safe = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white);">$1</strong>');
+            safe = safe.replace(/\*(.*?)\*/g, '<em style="color:#aaa;">$1</em>');
+            safe = safe.replace(/
