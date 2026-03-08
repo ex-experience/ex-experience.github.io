@@ -49,7 +49,6 @@
             --terminal-green: #0f0;
             --panel-bg: #050607;
             --google-blue: #4285F4;
-            --tm-color: #6b5b95; /* لون علامة التجارة النخبوي */
         }
 
         body {
@@ -180,7 +179,7 @@
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
 
-        /* 🟢 تنسيقات أزرار المصادقة */
+        /* 🟢 تنسيقات أزرار المصادقة (Legal Compliant) */
         .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
         @media (max-width: 600px) { .auth-grid { grid-template-columns: 1fr; } }
         .social-btn { width: 100%; padding: 12px; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; background: transparent; color: white; border: 1px solid #333; text-transform: uppercase; letter-spacing: 1px; }
@@ -218,8 +217,13 @@
         .legal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
         body.lang-ar .legal-close { right: auto; left: 20px; }
 
-        /* Footer Redesign */
+        /* Footer */
         .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
+        .footer-logo { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
+        .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace; margin-bottom: 15px;}
+        .legal-links a { color: var(--cyber-steel); text-decoration: none; font-size: 0.8rem; margin: 0 10px; transition: 0.3s; cursor: pointer; }
+        .legal-links a:hover { color: var(--stark-white); }
 
         /* AI ORACLE CHATBOT */
         .ai-btn {
@@ -580,6 +584,7 @@
         </div>
     </section>
 
+    <!-- 🟢 EXECUTIVE INTERFACE SECTION (Legal & Auth Compliant) -->
     <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">الواجهة التنفيذية | EXECUTIVE INTERFACE</div>
@@ -684,47 +689,22 @@ Connection Secure.
         </div>
     </div>
 
-    <!-- 🟢 Footer Redesign Based on Specific Image Request -->
-    <footer class="site-footer fade-in" style="border-top: 1px solid #111; margin-top: 40px; padding-bottom: 60px;">
-        <div class="container" style="max-width: 800px; margin: 0 auto;">
-            
-            <!-- Block 1 -->
-            <div style="margin-bottom: 60px;">
-                <div class="mono-text" style="color: var(--stark-white); font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 5px;">
-                    <sup style="color: var(--tm-color);">TM</sup> フサム | GUIDE33
-                </div>
-                <div class="mono-text" style="color: var(--cyber-steel); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase;">
-                    <sup style="color: var(--tm-color);">TM</sup> DROPzero<sup style="color: var(--tm-color);">TM</sup> x iN STUDIO
-                </div>
-                <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem; line-height: 1.8; margin: 0;">
-                    All concepts protected through layered strategic disclosure<br>
-                    <span style="color: #fff;">Designed to be felt, not explained.</span>
-                </p>
-            </div>
+    <div class="container fade-in" style="text-align: center; padding: 60px 0; border-top: 1px solid #111;">
+        <h3 class="mono-text" style="letter-spacing: 3px; margin-bottom: 10px;">フサム | HX-5™️</h3>
+        <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
+            Engineering Human Experiences <br>
+            All concepts protected through layered strategic disclosure<br><br>
+            <span style="color: #fff;">Designed to be felt, not explained</span>
+        </p>
+    </div>
 
-            <!-- Block 2 -->
-            <div>
-                <div class="mono-text" style="color: var(--stark-white); font-size: 1.6rem; letter-spacing: 2px; margin-bottom: 5px;">
-                    <sup style="color: var(--tm-color);">TM</sup> フサム | experience
-                </div>
-                <div class="mono-text" style="color: var(--cyber-steel); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 30px; text-transform: uppercase;">
-                    ENGINEERING HUMAN EXPERIENCES
-                </div>
-                
-                <div class="mono-text" style="color: var(--cyber-steel); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase;">
-                    FEARLESS . RELENTLESS . TRUE TO YOU
-                </div>
-                <div class="mono-text" style="color: #555; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 30px; text-transform: uppercase;">
-                    フサム | EXPERIENCE™️ ALL RIGHTS RESERVED 2026 ©️
-                </div>
-
-                <div class="legal-links mono-text" style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; font-size: 0.75rem; letter-spacing: 1px;">
-                    <a onclick="openLegal('terms')" style="cursor: pointer; transition: 0.3s;">شروط الاستخدام | TERMS OF USE</a>
-                    <span style="color: #333;">|</span>
-                    <a onclick="openLegal('privacy')" style="cursor: pointer; transition: 0.3s;">سياسة الخصوصية | PRIVACY POLICY</a>
-                </div>
-            </div>
-            
+    <footer class="site-footer">
+        <div class="footer-logo mono-text">フサム | experience™️</div>
+        <div class="footer-slogan mono-text">Fearless . Relentless . True to you</div>
+        <div class="footer-copy mono-text">©️ 2026 フサム | experience™️ All rights reserved</div>
+        <div class="legal-links mono-text">
+            <a onclick="openLegal('privacy')">Privacy Policy / سياسة الخصوصية</a> | 
+            <a onclick="openLegal('terms')">Terms of Use / شروط الاستخدام</a>
         </div>
     </footer>
 
@@ -768,39 +748,21 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        // 🟢 Legal Information Logic (Bilingual Dynamic Modals)
+        // 🟢 Legal Information Logic
         const legalTexts = {
             privacy: {
-                ar: {
-                    title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
-                    body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة، ولا نطلب أو نحتفظ بأي معلومات مالية أو رموز تحقق سرية حساسة."
-                },
-                en: {
-                    title: "PRIVACY POLICY & DATA PROTECTION",
-                    body: "At フサム, we are committed to protecting your personal data in accordance with the Personal Data Protection Law (PDPL) in the Kingdom of Saudi Arabia.<br><br>- <b>Absolute Confidentiality:</b> Your data is never shared, sold, or exploited by any third parties.<br>- <b>Purpose:</b> Input data is used exclusively for engineering and consulting communication related to our elite services.<br>- <b>Security:</b> Our executive interfaces are designed as secure and reliable communication channels; we do not request or store any sensitive financial information or verification codes."
-                }
+                title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
+                body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة، ولا نطلب أو نحتفظ بأي معلومات مالية أو رموز تحقق سرية حساسة."
             },
             terms: {
-                ar: {
-                    title: "شروط الاستخدام | TERMS OF USE",
-                    body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b>الحماية القانونية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام، استخراج البيانات، أو اختراق 'مصفوفة EX'.<br>- <b>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム."
-                },
-                en: {
-                    title: "TERMS OF USE",
-                    body: "Your use of the 'Executive Interface' is subject to the laws and regulations of the Kingdom of Saudi Arabia, including the Anti-Cyber Crime Law.<br><br>- <b>Interface Nature:</b> This platform is designed as a secure interactive environment for exchanging strategic ideas and consultations, not a system for commercial or financial transactions.<br>- <b>Legal Protection:</b> Any attempt to manipulate the system, extract data, or breach the 'EX Matrix' is strictly prohibited.<br>- <b>Intellectual Property:</b> All concepts and methodological frameworks (such as HX-5) presented here are the exclusive registered intellectual property of the フサム Concept House."
-                }
+                title: "شروط الاستخدام | TERMS OF USE",
+                body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b>الحماية القانونية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام، استخراج البيانات، أو اختراق 'مصفوفة EX'.<br>- <b>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム."
             }
         };
 
         function openLegal(type) {
-            const content = legalTexts[type][currentLang];
-            document.getElementById('legalTitle').innerHTML = content.title;
-            
-            const modalBody = document.getElementById('legalBody');
-            modalBody.innerHTML = content.body;
-            modalBody.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
-            modalBody.style.direction = currentLang === 'ar' ? 'rtl' : 'ltr';
-            
+            document.getElementById('legalTitle').innerHTML = legalTexts[type].title;
+            document.getElementById('legalBody').innerHTML = legalTexts[type].body;
             document.getElementById('legalModal').style.display = 'flex';
         }
 
@@ -827,11 +789,6 @@ Connection Secure.
             } else {
                 aiInput.placeholder = "Ask Oracle EX...";
                 aiSendBtn.innerText = "[SEND]";
-            }
-            
-            // تحديث النافذة القانونية المفتوحة إذا تم تبديل اللغة (وإن كان الزر مخفياً)
-            if (document.getElementById('legalModal').style.display === 'flex') {
-                closeLegal(); // إغلاق لضمان عدم وجود تضارب بصري
             }
         }
 
@@ -1064,40 +1021,30 @@ Connection Secure.
             appendMsg(welcome, 'bot');
         }
 
-        function formatAIResponse(text) {
-            let safe = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white); font-weight:bold;">$1</strong>');
-            safe = safe.replace(/\*(.*?)\*/g, '<em style="color:#bbb;">$1</em>');
-            safe = safe.replace(/\n/g, '<br>');
-            return safe;
-        }
-
         function appendMsg(text, sender, isGlitch = false) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
             if(isGlitch) msgDiv.setAttribute('data-text', text);
             
-            const contentSpan = document.createElement('span');
-            contentSpan.className = "msg-content";
+            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             
             if (sender === 'bot' && !isGlitch) {
-                contentSpan.innerHTML = formatAIResponse(text); 
-                
-                const btn = document.createElement('button');
-                btn.innerHTML = "🔊"; 
-                btn.className = "tts-btn";
-                btn.onclick = function() { speakText(this); };
-                
-                msgDiv.appendChild(contentSpan);
-                msgDiv.appendChild(document.createElement('br'));
-                msgDiv.appendChild(btn);
+                safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white); font-weight:bold;">$1</strong>');
+                safeText = safeText.replace(/\*(.*?)\*/g, '<em style="color:#bbb;">$1</em>');
+                safeText = safeText.replace(/\n/g, '<br>');
             } else {
-                contentSpan.innerText = text;
-                msgDiv.appendChild(contentSpan);
+                safeText = safeText.replace(/\n/g, '<br>');
+            }
+
+            let contentHTML = `<span class="msg-content">${safeText}</span>`;
+            
+            if (sender === 'bot' && !isGlitch) {
+                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
             }
             
-            document.getElementById('chatBody').appendChild(msgDiv);
-            document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+            msgDiv.innerHTML = contentHTML;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
             return msgDiv; 
         }
 
