@@ -751,7 +751,7 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-              // 🟢 Legal Information Logic (Bilingual Dynamic Modals)
+                      // 🟢 Legal Information Logic (Bilingual Dynamic Modals)
         const legalTexts = {
             privacy: {
                 ar: {
@@ -774,6 +774,18 @@ Connection Secure.
                 }
             }
         };
+
+        function openLegal(type) {
+            const content = legalTexts[type][currentLang];
+            document.getElementById('legalTitle').innerHTML = content.title;
+            
+            const modalBody = document.getElementById('legalBody');
+            modalBody.innerHTML = content.body;
+            modalBody.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
+            modalBody.style.direction = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.getElementById('legalModal').style.display = 'flex';
+        }
 
         function openLegal(type) {
             const content = legalTexts[type][currentLang];
