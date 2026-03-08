@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +17,10 @@
       gtag('config', 'G-Q36518VXCZ');
     </script>
 
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth-compat.js"></script>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     
     <script>
         const firebaseConfig = {
@@ -35,7 +36,7 @@
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.firestore();
-        const auth = firebase.auth();
+        const auth = firebase.auth(); 
     </script>
 
     <style>
@@ -47,6 +48,7 @@
             --stark-white: #ffffff;
             --terminal-green: #0f0;
             --panel-bg: #050607;
+            --google-blue: #4285F4;
         }
 
         body {
@@ -169,17 +171,22 @@
         @keyframes decryptFade { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Member Portal & Dashboard */
-        .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2; max-width: 500px; margin-left: auto; margin-right: auto;}
+        .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
         .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
-        .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; text-align: center; width: 100%; box-sizing: border-box;}
+        .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
         .cyber-input:focus { outline: none; border-color: var(--cyber-steel); background: rgba(255,255,255,0.05); }
         .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
 
-        .phone-admin-btn { width: 100%; padding: 14px; background: transparent; color: var(--terminal-green); border: 1px solid var(--terminal-green); cursor: pointer; font-family: inherit; transition: 0.3s; font-weight: bold; text-transform: uppercase; margin-bottom: 12px; margin-top: 10px;}
-        .phone-admin-btn:hover { background: rgba(0, 255, 0, 0.05); }
-
+        /* 🟢 تنسيقات أزرار المصادقة (Legal Compliant) */
+        .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        @media (max-width: 600px) { .auth-grid { grid-template-columns: 1fr; } }
+        .social-btn { width: 100%; padding: 12px; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; background: transparent; color: white; border: 1px solid #333; text-transform: uppercase; letter-spacing: 1px; }
+        .social-btn:hover { background: rgba(255,255,255,0.05); border-color: white; }
+        .btn-google { border-color: var(--google-blue); }
+        .btn-apple { background: #000; border-color: #555; }
+        
         .divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: #444; font-size: 0.7rem; letter-spacing: 1px; }
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #222; }
         .divider:not(:empty)::before { margin-left: .5em; }
@@ -204,11 +211,19 @@
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
+        /* Legal Modal */
+        .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .legal-content { background: #050607; border: 1px solid var(--cyber-steel); padding: 40px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+        .legal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        body.lang-ar .legal-close { right: auto; left: 20px; }
+
         /* Footer */
         .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
         .footer-logo { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
         .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
-        .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace;}
+        .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace; margin-bottom: 15px;}
+        .legal-links a { color: var(--cyber-steel); text-decoration: none; font-size: 0.8rem; margin: 0 10px; transition: 0.3s; cursor: pointer; }
+        .legal-links a:hover { color: var(--stark-white); }
 
         /* AI ORACLE CHATBOT */
         .ai-btn {
@@ -250,7 +265,8 @@
 <body class="lang-ar">
 
     <div class="top-nav">
-        <div class="est-text mono-text">EST EX/2025. SA</div>
+        <!-- 🟢 توحيد التواريخ لتبدو مؤسسية وقانونية -->
+        <div class="est-text mono-text">EST. 2025 | KSA</div>
         <button class="control-btn mono-text" onclick="toggleLanguage()">EN / عربي</button>
     </div>
 
@@ -547,9 +563,9 @@
                               </div>
                             </div>
 
+                            <!-- 🟢 توحيد التواريخ وإزالة التناقض -->
                             <div class="dna-footer dna-monospace">
-                                <p>EST EX/2025. SA</p>
-                                <p>Concept House • ©️ 1991. SA</p>
+                                <p>Concept House</p>
                                 <p>تم توثيق السجلات في مصفوفة النظام.</p>
                                 <p>المملكة العربية السعودية</p>
                                 <p>Records verified</p>
@@ -570,6 +586,7 @@
         </div>
     </section>
 
+    <!-- 🟢 PORTAL: تم إزالة حقول الجوال المعقدة لتجنب شبهات نظام مكافحة الجرائم المعلوماتية -->
     <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">بوابة السيادة</div>
@@ -577,32 +594,33 @@
             
             <div class="portal-container">
                 <div id="login-view">
-                    <h2 class="mono-text" style="color: var(--cyber-steel); letter-spacing: 2px; font-size: 1.1rem; text-align: center; margin-bottom: 30px;">[ COMMAND VAULT ACCESS ]</h2>
-                    
-                    <div class="input-group">
-                        <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="E-mail" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact (Phone Number e.g. 05XXXXXXX)" required>
-                    </div>
-
-                    <button onclick="sendOTP()" id="sendCodeBtn" class="phone-admin-btn">SEND OTP CODE</button>
-                    
-                    <div id="otpField" style="display:none; text-align: center;">
-                        <input type="text" id="otpCode" class="cyber-input mono-text" placeholder="Enter OTP Code" style="margin-bottom: 12px;">
-                        <button id="verifyBtn" onclick="verifyOTP()" class="submit-btn">VERIFY & ENTER</button>
+                    <!-- المصادقة الآمنة عبر المنصات العالمية الموثوقة -->
+                    <div class="auth-grid">
+                        <button onclick="signInWithGoogle()" class="social-btn btn-google">
+                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="16">
+                            CONNECT WITH GOOGLE
+                        </button>
+                        <button onclick="signInWithApple()" class="social-btn btn-apple">
+                            <svg width="16" viewBox="0 0 384 512" fill="white"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                            CONNECT WITH APPLE
+                        </button>
                     </div>
 
-                    <div class="divider">STRICT TOKEN</div>
-                    
-                    <input type="password" id="adminPass" class="cyber-input mono-text" placeholder="Enter Command Token">
-                    <button onclick="checkPass()" class="submit-btn" style="background:transparent; color:var(--cyber-steel); border: 1px solid var(--cyber-steel);">DECRYPT TOKEN</button>
-                    
-                    <div id="recaptcha-container"></div>
-                    <div class="status mono-text" id="loginStatus" style="text-align: center; margin-top: 20px;">High-Level Security Protocol Active.</div>
+                    <div class="divider">OR ANALOG ACCESS</div>
+
+                    <!-- نموذج تواصل استشاري (لا يتطلب كلمات مرور لتجنب التصيد) -->
+                    <form onsubmit="handleFirebaseLogin(event)">
+                        <div class="input-group">
+                            <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="E-mail" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact (Phone Number)" required>
+                        </div>
+                        <button type="submit" id="loginBtn" class="submit-btn mono-text">Connect to Matrix</button>
+                    </form>
                 </div>
 
                 <div id="dashboard-view">
@@ -629,7 +647,8 @@
 
                     <div id="form-history" class="service-form">
                         <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem; margin-bottom: 20px;">[ACCESSING SECURE ARCHIVES...]</p>
-                        <div id="history-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px;"></div>
+                        <div id="history-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                            </div>
                     </div>
 
                     <div id="form-terminal" class="service-form">
@@ -663,6 +682,16 @@ Connection Secure.
         </div>
     </section>
 
+    <!-- 🟢 النوافذ القانونية المنبثقة -->
+    <div id="legalModal" class="legal-modal">
+        <div class="legal-content">
+            <button class="legal-close" onclick="closeLegal()">×</button>
+            <h3 id="legalTitle" class="mono-text" style="color:var(--stark-white); margin-bottom:20px;"></h3>
+            <div id="legalBody" style="color:#bbb; font-size:0.9rem; line-height:1.8;"></div>
+        </div>
+    </div>
+
+    <!-- 🟢 توحيد التواريخ وإضافة روابط الشروط والخصوصية -->
     <div class="container fade-in" style="text-align: center; padding: 60px 0; border-top: 1px solid #111;">
         <h3 class="mono-text" style="letter-spacing: 3px; margin-bottom: 10px;">フサム | HX-5™️</h3>
         <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
@@ -675,8 +704,11 @@ Connection Secure.
     <footer class="site-footer">
         <div class="footer-logo mono-text">フサム | experience™️</div>
         <div class="footer-slogan mono-text">Fearless . Relentless . True to you</div>
-        <div class="footer-slogan mono-text">Concepts House & Strategic Lab</div>
-        <span style="color: #fff;">©️ 2026 フサム | experience™️ All rights reserved</span>
+        <div class="footer-copy mono-text">©️ 2026 フサム | experience™️ All rights reserved</div>
+        <div class="legal-links mono-text">
+            <a onclick="openLegal('privacy')">Privacy Policy / سياسة الخصوصية</a> | 
+            <a onclick="openLegal('terms')">Terms of Use / شروط الاستخدام</a>
+        </div>
     </footer>
 
     <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">フサム</button>
@@ -719,6 +751,28 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
+        // 🟢 إدارة النوافذ القانونية
+        const legalTexts = {
+            privacy: {
+                title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
+                body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا.<br>- <b>الأمان:</b> تم تصميم واجهاتنا للعمل كقنوات اتصال آمنة، ولا نطلب أو نحتفظ بأي معلومات بنكية أو رموز تحقق سرية."
+            },
+            terms: {
+                title: "شروط الاستخدام | TERMS OF USE",
+                body: "استخدامك لـ 'بوابة السيادة' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b>طبيعة البوابة:</b> هذه البوابة مصممة كواجهة تفاعلية آمنة لتبادل الأفكار والاستشارات، وليست نظاماً للتعاملات المالية.<br>- <b>الحماية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام أو اختراق 'مصفوفة EX'.<br>- <b>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية لدار フサム."
+            }
+        };
+
+        function openLegal(type) {
+            document.getElementById('legalTitle').innerHTML = legalTexts[type].title;
+            document.getElementById('legalBody').innerHTML = legalTexts[type].body;
+            document.getElementById('legalModal').style.display = 'flex';
+        }
+
+        function closeLegal() {
+            document.getElementById('legalModal').style.display = 'none';
+        }
+
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
         const SECURE_TOKEN = "EX_SHIELD_99X"; // 🛡️ درع الاتصال
 
@@ -742,102 +796,41 @@ Connection Secure.
         }
 
         // ==========================================
-        // وظائف المصادقة عبر الجوال مع التحويل التلقائي
+        // 🟢 وظائف المصادقة (Google, Apple) - آمنة وقانونية
         // ==========================================
-        async function sendOTP() {
-            const name = document.getElementById('userName').value.trim();
-            const email = document.getElementById('userEmail').value.trim();
-            let num = document.getElementById('userContact').value.trim();
 
-            if(!name || !email || !num) {
-                document.getElementById('loginStatus').innerText = "PLEASE FILL ALL FIELDS BEFORE REQUESTING OTP.";
-                document.getElementById('loginStatus').style.color = "#ff4444";
-                return;
-            }
-
-            // 🟢 التعديل التلقائي لصيغة رقم الجوال (المملكة العربية السعودية)
-            if (num.startsWith('05')) {
-                num = '+966' + num.substring(1); 
-            } else if (num.startsWith('5')) {
-                num = '+966' + num; 
-            } else if (!num.startsWith('+')) {
-                num = '+' + num; 
-            }
-
+        async function signInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
             try {
-                document.getElementById('loginStatus').innerText = "SENDING OTP...";
-                document.getElementById('loginStatus').style.color = "var(--cyber-steel)";
-                
-                window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
-                window.confirmationResult = await auth.signInWithPhoneNumber(num, window.recaptchaVerifier);
-                
-                document.getElementById('sendCodeBtn').style.display = 'none';
-                document.getElementById('otpField').style.display = 'block';
-                document.getElementById('loginStatus').innerText = "OTP SENT TO REGISTERED DEVICE.";
-            } catch (error) { 
-                console.error("Firebase Phone Auth Error:", error);
-                document.getElementById('loginStatus').innerText = "INVALID PHONE NUMBER FORMAT OR NETWORK ERROR."; 
-                document.getElementById('loginStatus').style.color = "#ff4444";
-            }
+                const result = await auth.signInWithPopup(provider);
+                finalizeAuth(result.user);
+            } catch (error) { console.error("Google Failed", error); }
         }
 
-        async function verifyOTP() {
-            const code = document.getElementById('otpCode').value;
-            const btn = document.getElementById('verifyBtn');
-            btn.innerHTML = 'Decrypting...'; 
-            btn.disabled = true;
-
+        async function signInWithApple() {
+            const provider = new firebase.auth.OAuthProvider('apple.com');
             try {
-                const result = await window.confirmationResult.confirm(code);
-                
-                // سحب البيانات من الحقول وتخزينها
-                currentUser.Name = document.getElementById('userName').value.trim();
-                currentUser.Email = document.getElementById('userEmail').value.trim();
-                currentUser.Phone = result.user.phoneNumber; 
-                
-                await db.collection("Users").add({
-                    Name: currentUser.Name, 
-                    Email: currentUser.Email, 
-                    Phone: currentUser.Phone, 
-                    AuthMethod: "Phone OTP",
-                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-
-                // إرسال البيانات لجوجل شيت
-                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'تسجيل دخول جديد', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
-
-                document.getElementById('login-view').style.display = 'none';
-                document.getElementById('dashboard-view').style.display = 'block';
-                
-                fetchUserHistory();
-
-            } catch (error) { 
-                document.getElementById('loginStatus').innerText = "INVALID OTP CODE."; 
-                document.getElementById('loginStatus').style.color = "#ff4444";
-                btn.innerHTML = 'VERIFY & ENTER'; 
-                btn.disabled = false;
-            }
+                const result = await auth.signInWithPopup(provider);
+                finalizeAuth(result.user);
+            } catch (error) { console.error("Apple Failed", error); }
         }
 
-        // ==========================================
-        // تجاوز بكلمة مرور المدير (Token Login)
-        // ==========================================
-        const ADMIN_TOKEN = "HX5_COMMAND"; 
-        function checkPass() {
-            const pass = document.getElementById('adminPass').value;
-            if(pass === ADMIN_TOKEN) {
-                currentUser.Name = "Admin";
-                currentUser.Email = "Admin";
-                currentUser.Phone = "Admin";
-                document.getElementById('login-view').style.display = 'none';
-                document.getElementById('dashboard-view').style.display = 'block';
-                document.getElementById('loginStatus').innerText = "TOKEN VALIDATED: ACCESS GRANTED";
-                fetchUserHistory();
-            } else { 
-                document.getElementById('loginStatus').innerText = "INVALID TOKEN."; 
-                document.getElementById('loginStatus').style.color = "#ff4444"; 
-            }
+        function finalizeAuth(user) {
+            currentUser.Name = user.displayName || "Verified_Entity";
+            currentUser.Email = user.email || user.phoneNumber || "Verified_Link";
+            currentUser.Phone = "Social Auth Verified";
+            
+            db.collection("Users").doc(currentUser.Email).set({
+                Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
+                Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
+
+            document.getElementById('login-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            fetchUserHistory();
+            
+            const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Social Login Trace', Name: currentUser.Name, Email: currentUser.Email });
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
         }
 
         // ==========================================
@@ -883,13 +876,41 @@ Connection Secure.
 
                 historyContainer.innerHTML = historyHTML;
             } catch (error) {
+                console.error("Error fetching history: ", error);
                 historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[ENCRYPTION ERROR: UNABLE TO LOAD RECORDS. CHECK RULES]</p>';
             }
         }
 
-        // ==========================================
-        // الإرسال والاستشارات
-        // ==========================================
+        async function handleFirebaseLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; 
+            btn.disabled = true;
+
+            currentUser.Name = document.getElementById('userName').value;
+            currentUser.Email = document.getElementById('userEmail').value;
+            currentUser.Phone = document.getElementById('userContact').value;
+            
+            try {
+                await db.collection("Users").add({
+                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'تسجيل دخول جديد', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
+
+                document.getElementById('login-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                
+                fetchUserHistory();
+
+            } catch (error) {
+                alert("Connection failed. Please check Firebase Rules.");
+                btn.innerHTML = 'Connect to Matrix'; btn.disabled = false;
+            }
+        }
+
         async function submitFirebaseConsult(e) {
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
@@ -934,7 +955,8 @@ Connection Secure.
 
         // --- GEMINI AI PROXY ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text) + "&User=" + encodeURIComponent(currentUser.Name) + "&Email=" + encodeURIComponent(currentUser.Email);
+            // 🟢 إرسال الاسم والإيميل لضمان السجلات
+            const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}`;
 
             try {
                 const response = await fetch(url);
@@ -1008,11 +1030,15 @@ Connection Secure.
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
             if(isGlitch) msgDiv.setAttribute('data-text', text);
             
+            // فلترة النص للحماية من الأكواد الخبيثة
             let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             
             if (sender === 'bot' && !isGlitch) {
+                // تحويل ** إلى خط عريض
                 safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white); font-weight:bold;">$1</strong>');
+                // تحويل * إلى خط مائل
                 safeText = safeText.replace(/\*(.*?)\*/g, '<em style="color:#bbb;">$1</em>');
+                // تحويل النزول لسطر جديد إلى مسافات فعلية
                 safeText = safeText.replace(/\n/g, '<br>');
             } else {
                 safeText = safeText.replace(/\n/g, '<br>');
@@ -1020,6 +1046,7 @@ Connection Secure.
 
             let contentHTML = `<span class="msg-content">${safeText}</span>`;
             
+            // إضافة زر الاستماع لرسائل أوراكل فقط
             if (sender === 'bot' && !isGlitch) {
                 contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
             }
@@ -1030,6 +1057,7 @@ Connection Secure.
             return msgDiv; 
         }
 
+        // دالة التحدث بالصوت
         function speakText(btn) {
             const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
             if ('speechSynthesis' in window) {
