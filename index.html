@@ -697,7 +697,6 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        // 🟢 رابط السكربت المربوط بالإيميلات
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxvSrl6vTZcZP68NuReF8nXHUc_XIwvb7aHvlt1mTSBWBy1C6EBRNxGVLjsm0USkrZ/exec';
 
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
@@ -727,7 +726,6 @@ Connection Secure.
             historyContainer.innerHTML = '<p class="mono-text" style="color:var(--cyber-steel);">[FETCHING RECORDS...]</p>';
 
             try {
-                // نبحث في Firebase عن الاستشارات التي تحمل نفس إيميل الزائر الحالي
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 
                 if (querySnapshot.empty) {
@@ -738,7 +736,6 @@ Connection Secure.
                 let docs = [];
                 querySnapshot.forEach((doc) => docs.push(doc.data()));
 
-                // ترتيب زمني من الأحدث للأقدم
                 docs.sort((a, b) => {
                     let timeA = a.Timestamp ? a.Timestamp.toMillis() : 0;
                     let timeB = b.Timestamp ? b.Timestamp.toMillis() : 0;
@@ -747,7 +744,6 @@ Connection Secure.
 
                 let historyHTML = '';
                 docs.forEach((data) => {
-                    // تحديد لون الحالة (قيد الانتظار أصفر، تمت الموافقة أخضر)
                     let statusColor = data.Status === 'Pending' ? '#ffaa00' : (data.Status === 'Approved' ? 'var(--terminal-green)' : 'var(--cyber-steel)');
                     let dateStr = data.Timestamp ? new Date(data.Timestamp.toDate()).toLocaleDateString('en-GB') : 'Just Now';
                     
@@ -795,7 +791,6 @@ Connection Secure.
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
                 
-                // جلب سجلات العميل فور الدخول
                 fetchUserHistory();
 
             } catch (error) {
@@ -824,7 +819,6 @@ Connection Secure.
                 document.getElementById('consultText').value = '';
                 btn.innerHTML = 'Transmit'; btn.disabled = false;
                 
-                // تحديث الأرشيف ليعرض الطلب الجديد فوراً وتحويل الزائر له
                 fetchUserHistory();
                 switchService('history'); 
 
@@ -840,7 +834,6 @@ Connection Secure.
             document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
             document.getElementById('form-' + serviceId).classList.add('active');
             if(serviceId === 'terminal') document.getElementById('termInput').focus();
-            // تحديث البيانات من السيرفر عند الضغط على زر History
             if(serviceId === 'history') fetchUserHistory(); 
         }
 
@@ -896,10 +889,11 @@ Connection Secure.
         }
         function printTerm(text) { termOutput.innerHTML += `\n${text}`; termOutput.scrollTop = termOutput.scrollHeight; }
 
-        // --- AI Chatbot Logic ---
+        // --- AI Chatbot & TTS Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
+        
         function toggleChat() { 
             chatWindow.classList.toggle('open'); 
             if(chatWindow.classList.contains('open')) {
@@ -907,23 +901,51 @@ Connection Secure.
                 if(chatBody.innerHTML === '') initChat();
             }
         }
+        
         function initChat() {
             chatBody.innerHTML = '';
             const welcome = currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. اسألني عن المنهجية، الكون، أو الفراغ." : "System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.";
             appendMsg(welcome, 'bot');
         }
+
+        // 🟢 التحديث الجديد: حماية النصوص + زر النطق الصوتي TTS
         function appendMsg(text, sender, isGlitch = false) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
             if(isGlitch) msgDiv.setAttribute('data-text', text);
-            msgDiv.innerText = text;
+            
+            // فلترة النص للحماية من الأكواد الخبيثة
+            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let contentHTML = `<span class="msg-content">${safeText}</span>`;
+            
+            // إضافة زر الاستماع لرسائل أوراكل فقط
+            if (sender === 'bot' && !isGlitch) {
+                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
+            }
+            
+            msgDiv.innerHTML = contentHTML;
             chatBody.appendChild(msgDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
             return msgDiv; 
         }
+
+        // 🟢 دالة التحدث بالصوت
+        function speakText(btn) {
+            const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(textContent);
+                utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('عذراً، متصفحك لا يدعم ميزة النطق الصوتي.');
+            }
+        }
+
         function handleChatEnter(e) { 
             if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); }
         }
+        
         function sendChatMessage() {
             const text = aiInput.value.trim();
             if(!text) return;
