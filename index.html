@@ -34,6 +34,7 @@
     </script>
 
     <style>
+        /* ستايل موقعك الأصلي بدون أي تغيير */
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         :root { --obsidian-black: #020202; --cyber-steel: #8b939c; --stark-white: #ffffff; --terminal-green: #0f0; --panel-bg: #050607; }
         body { background-color: var(--obsidian-black); color: var(--stark-white); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.8; margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth; }
@@ -41,6 +42,7 @@
         body::before { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none; }
         .glitch { position: relative; display: inline-block; }
         .glitch:hover::before { content: attr(data-text); position: absolute; left: -2px; text-shadow: 2px 0 red; top: 0; color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse; }
+        .glitch:hover::after { content: attr(data-text); position: absolute; left: 2px; text-shadow: -2px 0 blue; top: 0; color: white; background: black; overflow: hidden; animation: noise 0.3s infinite linear alternate-reverse; }
         @keyframes noise { 0% { clip-path: inset(10% 0 10% 0); } 100% { clip-path: inset(80% 0 5% 0); } }
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
@@ -49,51 +51,82 @@
         .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; pointer-events: none; background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); }
         .top-nav > * { pointer-events: auto; }
-        .control-btn { background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel); padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: 0.3s; }
+        .est-text { font-size: 0.75rem; color: var(--cyber-steel); letter-spacing: 2px; font-weight: bold;}
+        .control-btn { background: transparent; color: var(--stark-white); border: 1px solid var(--cyber-steel); padding: 6px 15px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; transition: all 0.3s; }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center !important; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)); z-index: 1; }
-        .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; box-sizing: border-box; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)); z-index: 1; pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; pointer-events: auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
+        .interactive-logo { font-size: clamp(1.5rem, 4vw, 2.8rem); color: var(--stark-white); font-weight: 300; letter-spacing: 2px; margin-bottom: 10px; cursor: crosshair; }
+        .interactive-slogan { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
+        .hero-desc { font-size: 1.1rem; color: #bbb; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6;}
         .content-section { padding: 100px 0; background: var(--obsidian-black); position: relative; z-index: 2; overflow: hidden;}
         .alt-bg { background-color: #030303; }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s ease; }
+        .geometric-bg { position: absolute; top: 0; right: 0; width: 55%; height: 100%; background-size: cover; background-position: center; opacity: 0.1; z-index: 0; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); }
+        body.lang-en .geometric-bg { right: auto; left: 0; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease; position: relative; z-index: 2;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .section-title { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; }
+        .main-heading { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 300; line-height: 1.3; margin-top: 0; margin-bottom: 30px; }
+        .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #bbbbbb; max-width: 800px; margin-bottom: 20px; }
+        .highlight { color: var(--stark-white); font-weight: bold; }
+        .cyber-list { list-style: none; padding: 0; margin-bottom: 30px; }
+        .cyber-list li { position: relative; padding-left: 20px; margin-bottom: 15px; color: #bbbbbb; font-size: 1.05rem;}
+        .cyber-list li::before { content: '>'; position: absolute; left: 0; color: var(--stark-white); font-family: 'Space Mono', monospace; }
+        body.lang-ar .cyber-list li { padding-left: 0; padding-right: 20px; }
+        body.lang-ar .cyber-list li::before { right: 0; left: auto; content: '<'; }
         .hx-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 40px; }
         @media (min-width: 768px) { .hx-grid { grid-template-columns: 1fr 1fr; } }
-        .hx-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 30px; }
-        .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; }
-        .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; width: 100%; box-sizing: border-box; margin-bottom: 20px;}
-        .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .hx-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 30px; transition: border-color 0.3s; }
+        .hx-card:hover { border-color: var(--cyber-steel); }
+        .hx-number { font-size: 1.5rem; color: var(--stark-white); font-family: 'Space Mono', monospace; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;}
+        .classified-file { background: rgba(0,0,0,0.5); border: 1px solid #222; margin-top: 40px; transition: border-color 0.3s;}
+        .classified-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .classified-content { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; background: #030405; }
+        .classified-content.open { max-height: 3000px; border-top: 1px solid #222; }
+        .dna-record { padding: 30px; }
+        .dna-classified-file { border: 1px solid #333; background-color: transparent; margin: 40px 0; padding: 0; color: #e0e0e0; font-family: inherit; border-radius: 4px; overflow: hidden; }
+        .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(20, 20, 20, 0.8); border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .dna-content { display: none; padding: 30px 20px; background-color: rgba(10, 10, 10, 0.9); }
+        .dna-content.open { display: block; animation: decryptFade 0.5s ease-in-out; }
+        .dna-blockquote { border-left: 2px solid #555; padding-left: 15px; margin-bottom: 40px; font-style: italic; color: #aaa; line-height: 1.6; }
+        body.lang-ar .dna-blockquote { border-left: none; border-right: 2px solid #555; padding-left: 0; padding-right: 15px; }
+        .dna-monospace { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; color: #fff; }
+        .dna-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
+        .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
+        .input-group { display: flex; flex-direction: column; margin-bottom: 20px;}
+        .cyber-input { background: rgba(255,255,255,0.02); border: 1px solid #222; color: var(--stark-white); padding: 12px; font-family: inherit; font-size: 1rem; transition: all 0.3s; }
+        .submit-btn { width: 100%; padding: 15px; background: var(--stark-white); color: var(--obsidian-black); border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 10px; }
+        .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
         #dashboard-view { display: none; }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 30px; }
-        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); }
-        .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); transition: all 0.3s;}
+        .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
-        .history-card { border: 1px solid #222; padding: 20px; margin-bottom: 15px; background: rgba(255,255,255,0.02); text-align: left; direction: ltr;}
-        .status-badge { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; border: 1px solid;}
-        .ai-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer; z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+        .history-card { border: 1px solid #222; padding: 20px; margin-bottom: 15px; background: rgba(255,255,255,0.02); transition: border-color 0.3s; text-align: left; direction: ltr;}
+        .status-badge { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border: 1px solid;}
+        .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
+        .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; direction: ltr; text-align: left;}
+        .term-input-line { display: flex; align-items: center; direction: ltr;}
+        .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
+        .ai-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer; z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem; }
         body.lang-en .ai-btn { left: auto; right: 30px; }
-        .ai-window { position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98); border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px); opacity: 0; pointer-events: none; transition: 0.3s; }
+        .ai-window { position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98); border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s; }
         body.lang-en .ai-window { left: auto; right: 30px; }
         .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        .ai-header { background: #fff; color: #000; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .ai-header { background: #fff; color: #000; padding: 15px; font-size: 0.9rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
         .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; }
         .ai-msg.bot { background: rgba(255,255,255,0.03); align-self: flex-start; border-left: 2px solid #fff; }
         body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
         .ai-msg.user { background: #222; align-self: flex-end; }
         .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; outline: none; }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
         .ai-send { background: #fff; color: #000; border: none; cursor: pointer; padding: 0 15px; font-weight: bold;}
-        .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
-        .term-output { flex: 1; white-space: pre-wrap; direction: ltr; text-align: left; font-size: 0.8rem;}
-        .term-input-line { display: flex; direction: ltr;}
-        .term-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; }
-        .site-footer { text-align: center; padding: 40px; border-top: 1px solid #111; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -105,12 +138,16 @@
     </div>
 
     <header class="hero">
-        <div class="video-wrapper"><video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video></div>
+        <div class="video-wrapper">
+            <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
+        </div>
         <div class="overlay"></div>
         <div class="hero-content fade-in">
             <div class="interactive-logo mono-text glitch" data-text="フサム | experience™️">フサム | experience™️</div>
             <div class="interactive-slogan mono-text">Engineering Human Experience</div>
-            <div style="margin-top: 40px;"><a href="#portal" class="control-btn mono-text" style="padding: 12px 30px; text-decoration: none;">Initialize Connection</a></div>
+            <div style="margin-top: 40px;">
+                <a href="#portal" class="control-btn mono-text" style="padding: 12px 30px; text-decoration: none;">Initialize Connection</a>
+            </div>
         </div>
     </header>
 
@@ -121,9 +158,9 @@
             <div class="portal-container">
                 <div id="login-view">
                     <form onsubmit="handleFirebaseLogin(event)">
-                        <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
-                        <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="E-mail" required>
-                        <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact (Phone Number)" required>
+                        <input type="text" id="userName" class="cyber-input mono-text" style="width:100%" placeholder="ID / Name" required><br><br>
+                        <input type="email" id="userEmail" class="cyber-input mono-text" style="width:100%" placeholder="E-mail" required><br><br>
+                        <input type="tel" id="userContact" class="cyber-input mono-text" style="width:100%" placeholder="Contact (Phone Number)" required><br><br>
                         <button type="submit" id="loginBtn" class="submit-btn mono-text">Connect to Matrix</button>
                     </form>
                 </div>
@@ -135,7 +172,7 @@
                     </div>
                     <div id="form-consult" class="service-form active">
                         <form onsubmit="submitFirebaseConsult(event)">
-                            <textarea class="cyber-input" id="consultText" placeholder="State your objective..." required style="height: 100px; resize: vertical;"></textarea>
+                            <textarea class="cyber-input" id="consultText" style="width:100%" placeholder="State your objective..." required style="height: 100px; resize: vertical;"></textarea><br><br>
                             <button type="submit" id="consultBtn" class="submit-btn mono-text">Transmit</button>
                         </form>
                     </div>
@@ -153,26 +190,22 @@
         </div>
     </section>
 
-    <footer class="site-footer">
+    <footer class="site-footer" style="text-align: center; padding: 40px; border-top: 1px solid #111;">
         <div class="footer-logo mono-text">フサム | experience™️</div>
-        <span style="color: #444;">©️ 2026 フサム | experience™️ All rights reserved</span>
+        <span style="color: #fff;">©️ 2026 フサム | experience™️ All rights reserved</span>
     </footer>
 
     <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">フサム</button>
     <div class="ai-window" id="aiWindow">
         <div class="ai-header mono-text"><span>フサム | EX : ONLINE</span><button onclick="toggleChat()" style="background:none; border:none; cursor:pointer;">×</button></div>
         <div class="ai-body" id="chatBody"></div>
-        <div class="ai-input-area">
-            <input type="text" id="aiInput" class="ai-input mono-text" placeholder="Ask フサム | EX..." onkeydown="handleChatEnter(event)">
-            <button class="ai-send mono-text" onclick="sendChatMessage()">[SEND]</button>
-        </div>
+        <div class="ai-input-area"><input type="text" id="aiInput" class="ai-input mono-text" placeholder="Ask フサム | EX..." onkeydown="handleChatEnter(event)"><button class="ai-send mono-text" onclick="sendChatMessage()">[SEND]</button></div>
     </div>
 
     <script>
-        // 🛡️ دروع الحماية السيبرانية (v5.0)
-        // 🟢 هام: ضع رابط السكربت الجديد هنا
+        // 🛡️ دروع الحماية السيبرانية المدمجة في منطق موقعك
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrAPrADcL5-U5LPdDk4NG6x6exxuNO8i5K0Wo7cc94HE4pxz6JY2ZSxf-qT0ilVzs0/exec'; 
-        const SECURE_TOKEN = "EX_SHIELD_99X"; 
+        const SECURE_TOKEN = "EX_SHIELD_99X"; // المصافحة الصامتة
 
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
         let currentLang = 'ar';
@@ -183,7 +216,7 @@
             document.getElementById('aiInput').placeholder = (currentLang === 'ar' ? "استفسر من أوراكل EX..." : "Ask Oracle EX...");
         }
 
-        // 🛡️ درع XSS Shield: تعقيم النصوص لمنع الأكواد الخبيثة
+        // 🛡️ درع الحماية من الأكواد الخبيثة (XSS Shield)
         function appendMsg(text, sender, isGlitch = false) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
@@ -191,7 +224,7 @@
             
             const contentSpan = document.createElement('span');
             contentSpan.className = "msg-content";
-            contentSpan.innerText = text; // innerText يقتل الـ HTML الخبيث
+            contentSpan.innerText = text; // 🛡️ استخدام innerText يحول الكود الخبيث لنص عادي ميت
             msgDiv.appendChild(contentSpan);
 
             if (sender === 'bot' && !isGlitch) {
@@ -216,27 +249,27 @@
             }
         }
 
-        // 🛡️ درع Spam & Matrix Integration
+        // 🛡️ درع تسجيل الدخول والمصافحة
         async function handleFirebaseLogin(e) {
             e.preventDefault();
             const btn = document.getElementById('loginBtn');
             btn.disabled = true; btn.innerText = "DECRYPTING...";
-
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
             currentUser.Phone = document.getElementById('userContact').value;
             
             try {
                 await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-                // 🛡️ إرسال شفرة العبور في الرادار
+                // إرسال التوكن في الرادار
                 const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Login', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
                 fetchUserHistory();
-            } catch (error) { alert("Matrix Connection Refused. Check Rules."); btn.disabled = false; }
+            } catch (error) { alert("Matrix Error."); btn.disabled = false; }
         }
 
+        // 🛡️ درع الاستشارات ضد الـ Spam
         async function submitFirebaseConsult(e) {
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
@@ -251,16 +284,16 @@
                 alert("Signal Received.");
                 document.getElementById('consultText').value = '';
                 fetchUserHistory();
-                setTimeout(() => { btn.disabled = false; btn.innerText = "Transmit"; }, 10000); // 🛡️ Rate Limit 10s
-            } catch (e) { alert("Transmission Error."); btn.disabled = false; }
+                setTimeout(() => { btn.disabled = false; btn.innerText = "Transmit"; }, 10000); // 🛡️ قفل 10 ثواني
+            } catch (e) { alert("Matrix Error."); btn.disabled = false; }
         }
 
         async function fetchUserHistory() {
             const container = document.getElementById('history-content');
-            container.innerHTML = '<p class="mono-text">[SEARCHING ARCHIVES...]</p>';
+            container.innerHTML = '<p class="mono-text">[SEARCHING...]</p>';
             try {
                 const snap = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
-                if (snap.empty) { container.innerHTML = '<p class="mono-text">[ZERO RECORDS FOUND]</p>'; return; }
+                if (snap.empty) { container.innerHTML = '<p class="mono-text">[ZERO RECORDS]</p>'; return; }
                 let html = '';
                 snap.docs.forEach(doc => {
                     const d = doc.data();
@@ -275,11 +308,11 @@
                     </div>`;
                 });
                 container.innerHTML = html;
-            } catch (e) { container.innerHTML = '<p class="mono-text" style="color:red">[ENCRYPTION ERROR]</p>'; }
+            } catch (e) { container.innerHTML = '<p class="mono-text" style="color:red">[ERROR]</p>'; }
         }
 
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            // 🛡️ المصافحة الصامتة عبر Token
+            // 🛡️ إرسال شفرة العبور في كل سؤال لأوراكل
             const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text);
             try {
                 const res = await fetch(url);
@@ -288,10 +321,9 @@
                 const output = data.reply || data.error;
                 if(isTerminal) printTerm(`oracle@ex:~# ${output}`); else appendMsg(output, 'bot');
                 db.collection("OracleLogs").add({ Name: currentUser.Name, Email: currentUser.Email, Question: text, Answer: output, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-            } catch (e) { if (loadingElement) loadingElement.remove(); const err = "Matrix Unreachable."; if(isTerminal) printTerm(err); else appendMsg(err, 'bot'); }
+            } catch (e) { if (loadingElement) loadingElement.remove(); const err = "Matrix Offline."; if(isTerminal) printTerm(err); else appendMsg(err, 'bot'); }
         }
 
-        // UI Logic
         function switchService(id) {
             document.querySelectorAll('.dash-card').forEach(c => c.classList.remove('active'));
             event.currentTarget.classList.add('active');
@@ -327,7 +359,6 @@
             const shuffled = videos.sort(() => 0.5 - Math.random());
             const v = document.getElementById('heroVideo');
             if(v) { v.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; v.load(); }
-            
             const obs = new IntersectionObserver((entries) => {
                 entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
             }, { threshold: 0.1 });
