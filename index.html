@@ -750,15 +750,27 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        // 🟢 Legal Information Logic
+         // 🟢 Legal Information Logic (Bilingual Dynamic Modals)
         const legalTexts = {
             privacy: {
-                title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
-                body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة، ولا نطلب أو نحتفظ بأي معلومات مالية أو رموز تحقق سرية حساسة."
+                ar: {
+                    title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
+                    body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة، ولا نطلب أو نحتفظ بأي معلومات مالية أو أرقام سرية."
+                },
+                en: {
+                    title: "PRIVACY POLICY & DATA PROTECTION",
+                    body: "At フサム, we are committed to protecting your personal data in accordance with the Personal Data Protection Law (PDPL) in the Kingdom of Saudi Arabia.<br><br>- <b>Absolute Confidentiality:</b> Your data is never shared, sold, or exploited by any third parties.<br>- <b>Purpose:</b> Input data is used exclusively for engineering and consulting communication related to our elite services.<br>- <b>Security:</b> Our executive interfaces are designed as secure and reliable communication channels; we do not request or store any sensitive financial information or passwords."
+                }
             },
             terms: {
-                title: "شروط الاستخدام | TERMS OF USE",
-                body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b>الحماية القانونية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام، استخراج البيانات، أو اختراق 'مصفوفة EX'.<br>- <b>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム."
+                ar: {
+                    title: "شروط الاستخدام | TERMS OF USE",
+                    body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b>الحماية القانونية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام، استخراج البيانات، أو اختراق 'مصفوفة EX'.<br>- <b>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム."
+                },
+                en: {
+                    title: "TERMS OF USE",
+                    body: "Your use of the 'Executive Interface' is subject to the laws and regulations of the Kingdom of Saudi Arabia, including the Anti-Cyber Crime Law.<br><br>- <b>Interface Nature:</b> This platform is designed as a secure interactive environment for exchanging strategic ideas and consultations, not a system for commercial or financial transactions.<br>- <b>Legal Protection:</b> Any attempt to manipulate the system, extract data, or breach the 'EX Matrix' is strictly prohibited.<br>- <b>Intellectual Property:</b> All concepts and methodological frameworks (such as HX-5) presented here are the exclusive registered intellectual property of the フサム Concept House."
+                }
             }
         };
 
