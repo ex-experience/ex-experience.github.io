@@ -921,6 +921,18 @@ Connection Secure.
             
             // فلترة النص للحماية من الأكواد الخبيثة
             let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            
+            if (sender === 'bot' && !isGlitch) {
+                // تحويل ** إلى خط عريض
+                safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white); font-weight:bold;">$1</strong>');
+                // تحويل * إلى خط مائل
+                safeText = safeText.replace(/\*(.*?)\*/g, '<em style="color:#bbb;">$1</em>');
+                // تحويل النزول لسطر جديد إلى مسافات فعلية
+                safeText = safeText.replace(/\n/g, '<br>');
+            } else {
+                safeText = safeText.replace(/\n/g, '<br>');
+            }
+
             let contentHTML = `<span class="msg-content">${safeText}</span>`;
             
             // إضافة زر الاستماع لرسائل أوراكل فقط
