@@ -914,9 +914,65 @@ Connection Secure.
             appendMsg(welcome, 'bot');
         }
 
-        // 👁️ محرك ترجمة الرموز (Markdown Parser)
-        function formatAIResponse(text) {
-            let safe = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white);">$1</strong>');
-            safe = safe.replace(/\*(.*?)\*/g, '<em style="color:#aaa;">$1</em>');
-            safe = safe.replace(/
+        function appendMsg(text, sender, isGlitch = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
+            if(isGlitch) msgDiv.setAttribute('data-text', text);
+            
+            // فلترة النص للحماية من الأكواد الخبيثة
+            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let contentHTML = `<span class="msg-content">${safeText}</span>`;
+            
+            // إضافة زر الاستماع لرسائل أوراكل فقط
+            if (sender === 'bot' && !isGlitch) {
+                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
+            }
+            
+            msgDiv.innerHTML = contentHTML;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msgDiv; 
+        }
+
+        // دالة التحدث بالصوت
+        function speakText(btn) {
+            const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(textContent);
+                utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('عذراً، متصفحك لا يدعم ميزة النطق الصوتي.');
+            }
+        }
+
+        function handleChatEnter(e) { 
+            if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); }
+        }
+        
+        function sendChatMessage() {
+            const text = aiInput.value.trim();
+            if(!text) return;
+            appendMsg(text, 'user');
+            aiInput.value = '';
+            const loadingText = currentLang === 'ar' ? "[جاري معالجة البيانات...]" : "[Processing data streams...]";
+            const loadingElement = appendMsg(loadingText, 'bot typing-indicator', true);
+            queryDeepMatrix(text, false, loadingElement);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch((err) => console.log('Matrix Core Offline: ', err));
+            });
+        }
+    </script>
+</body>
+</html>
