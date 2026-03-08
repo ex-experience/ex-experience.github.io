@@ -19,6 +19,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     
     <script>
         const firebaseConfig = {
@@ -34,6 +35,7 @@
             firebase.initializeApp(firebaseConfig);
         }
         const db = firebase.firestore();
+        const auth = firebase.auth();
     </script>
 
     <style>
@@ -45,6 +47,8 @@
             --stark-white: #ffffff;
             --terminal-green: #0f0;
             --panel-bg: #050607;
+            --google-blue: #4285F4;
+            --apple-black: #000;
         }
 
         body {
@@ -175,15 +179,29 @@
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
 
+        /* Auth Buttons & Vault Integration */
+        .google-admin-btn { width: 100%; padding: 14px; background: transparent; color: var(--stark-white); border: 1px solid var(--google-blue); display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; font-family: inherit; transition: 0.3s; font-weight: bold; margin-bottom: 12px;}
+        .google-admin-btn:hover { background: rgba(66, 133, 244, 0.1); }
+        
+        .apple-admin-btn { width: 100%; padding: 14px; background: var(--apple-black); color: var(--stark-white); border: 1px solid #555; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; font-family: inherit; transition: 0.3s; font-weight: bold; margin-bottom: 12px;}
+        .apple-admin-btn:hover { background: #222; }
+
+        .phone-admin-btn { width: 100%; padding: 14px; background: transparent; color: var(--terminal-green); border: 1px solid var(--terminal-green); cursor: pointer; font-family: inherit; transition: 0.3s; font-weight: bold; text-transform: uppercase; margin-bottom: 12px;}
+        .phone-admin-btn:hover { background: rgba(0, 255, 0, 0.05); }
+        
+        .divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: #444; font-size: 0.7rem; letter-spacing: 1px; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #222; }
+        .divider:not(:empty)::before { margin-left: .5em; }
+        .divider:not(:empty)::after { margin-right: .5em; }
+        .icon { width: 18px; height: 18px; }
+
         #dashboard-view { display: none; }
-        /* 🟢 تحديث شبكة الأزرار لتشمل تبويب التاريخ */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 30px; }
         .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); transition: all 0.3s;}
         .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
 
-        /* 🟢 تنسيق بطاقات الأرشيف */
         .history-card { border: 1px solid #222; padding: 20px; margin-bottom: 15px; background: rgba(255,255,255,0.02); transition: border-color 0.3s; text-align: left; direction: ltr;}
         .history-card:hover { border-color: var(--cyber-steel); }
         .status-badge { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border: 1px solid;}
@@ -567,20 +585,32 @@
             <div class="section-title mono-text ar-only">بوابة السيادة</div>
             <div class="section-title mono-text en-only">SOVEREIGN PORTAL</div>
             
-            <div class="portal-container">
+            <div class="portal-container" style="max-width: 500px; margin: 0 auto;">
                 <div id="login-view">
-                    <form onsubmit="handleFirebaseLogin(event)">
-                        <div class="input-group">
-                            <input type="text" id="userName" class="cyber-input mono-text" placeholder="ID / Name" required>
-                        </div>
-                        <div class="input-group">
-                            <input type="email" id="userEmail" class="cyber-input mono-text" placeholder="E-mail" required>
-                        </div>
-                        <div class="input-group">
-                            <input type="tel" id="userContact" class="cyber-input mono-text" placeholder="Contact (Phone Number)" required>
-                        </div>
-                        <button type="submit" id="loginBtn" class="submit-btn mono-text">Connect to Matrix</button>
-                    </form>
+                    <h2 class="mono-text" style="color: var(--cyber-steel); letter-spacing: 2px; font-size: 1.1rem; text-align: center; margin-bottom: 30px;">[ COMMAND VAULT ACCESS ]</h2>
+                    
+                    <button onclick="adminSignInWithGoogle()" class="google-admin-btn">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="icon">
+                        GOOGLE DECRYPT
+                    </button>
+
+                    <button onclick="adminSignInWithApple()" class="apple-admin-btn">
+                        <svg class="icon" viewBox="0 0 384 512" fill="white"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                        APPLE DECRYPT
+                    </button>
+
+                    <div class="divider">OR SECURE CHANNELS</div>
+
+                    <div id="phoneAuthField" style="display:none;">
+                        <input type="tel" id="phoneNumber" class="cyber-input mono-text" placeholder="+966XXXXXXXXX" style="width: 100%; box-sizing: border-box; text-align: center; margin-bottom: 12px;">
+                        <button onclick="sendOTP()" class="phone-admin-btn">SEND CODE</button>
+                        <input type="text" id="otpCode" class="cyber-input mono-text" placeholder="Enter OTP" style="display:none; width: 100%; box-sizing: border-box; text-align: center; margin-bottom: 12px;">
+                        <button id="verifyBtn" onclick="verifyOTP()" class="submit-btn" style="display:none;">VERIFY & ENTER</button>
+                    </div>
+                    <button id="phoneToggle" onclick="showPhoneField()" class="phone-admin-btn">PHONE AUTHENTICATION</button>
+                    
+                    <div id="recaptcha-container"></div>
+                    <div class="status mono-text" id="loginStatus" style="text-align: center; margin-top: 20px;">High-Level Security Protocol Active.</div>
                 </div>
 
                 <div id="dashboard-view">
@@ -721,6 +751,70 @@ Connection Secure.
         }
 
         // ==========================================
+        // وظائف المصادقة الجديدة المدمجة بالبوابة
+        // ==========================================
+        async function completeLoginProcess(user, authMethod) {
+            currentUser.Name = user.displayName || user.phoneNumber || 'Guest';
+            currentUser.Email = user.email || 'No Email';
+            currentUser.Phone = user.phoneNumber || 'No Phone';
+            
+            try {
+                await db.collection("Users").add({
+                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, AuthMethod: authMethod,
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                document.getElementById('login-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                
+                fetchUserHistory();
+
+            } catch (error) {
+                document.getElementById('loginStatus').innerText = "SYSTEM ERROR. PLEASE RECONNECT.";
+            }
+        }
+
+        async function adminSignInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                completeLoginProcess(result.user, "Google");
+            } catch (error) { document.getElementById('loginStatus').innerText = "GOOGLE AUTH ERROR."; }
+        }
+
+        async function adminSignInWithApple() {
+            const provider = new firebase.auth.OAuthProvider('apple.com');
+            try {
+                const result = await auth.signInWithPopup(provider);
+                completeLoginProcess(result.user, "Apple");
+            } catch (error) { document.getElementById('loginStatus').innerText = "APPLE AUTH ERROR."; }
+        }
+
+        function showPhoneField() {
+            document.getElementById('phoneToggle').style.display = 'none';
+            document.getElementById('phoneAuthField').style.display = 'block';
+            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
+        }
+
+        async function sendOTP() {
+            const num = document.getElementById('phoneNumber').value;
+            try {
+                window.confirmationResult = await auth.signInWithPhoneNumber(num, window.recaptchaVerifier);
+                document.getElementById('otpCode').style.display = 'block';
+                document.getElementById('verifyBtn').style.display = 'block';
+                document.getElementById('loginStatus').innerText = "OTP SENT TO REGISTERED DEVICE.";
+            } catch (error) { document.getElementById('loginStatus').innerText = "INVALID PHONE NUMBER FORMAT."; }
+        }
+
+        async function verifyOTP() {
+            const code = document.getElementById('otpCode').value;
+            try {
+                const result = await window.confirmationResult.confirm(code);
+                completeLoginProcess(result.user, "Phone OTP");
+            } catch (error) { document.getElementById('loginStatus').innerText = "INVALID OTP CODE."; }
+        }
+
+        // ==========================================
         // وظائف جلب الأرشيف (التاريخ)
         // ==========================================
         async function fetchUserHistory() {
@@ -769,38 +863,8 @@ Connection Secure.
         }
 
         // ==========================================
-        // وظائف التسجيل والإرسال
+        // الإرسال والاستشارات
         // ==========================================
-        async function handleFirebaseLogin(e) {
-            e.preventDefault();
-            const btn = document.getElementById('loginBtn');
-            btn.innerHTML = '<span class="mono-text">Decrypting...</span>'; 
-            btn.disabled = true;
-
-            currentUser.Name = document.getElementById('userName').value;
-            currentUser.Email = document.getElementById('userEmail').value;
-            currentUser.Phone = document.getElementById('userContact').value;
-            
-            try {
-                await db.collection("Users").add({
-                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
-                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-
-                const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'تسجيل دخول جديد', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
-
-                document.getElementById('login-view').style.display = 'none';
-                document.getElementById('dashboard-view').style.display = 'block';
-                
-                fetchUserHistory();
-
-            } catch (error) {
-                alert("Connection failed. Please check Firebase Rules.");
-                btn.innerHTML = 'Connect to Matrix'; btn.disabled = false;
-            }
-        }
-
         async function submitFirebaseConsult(e) {
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
@@ -843,9 +907,10 @@ Connection Secure.
             if(serviceId === 'history') fetchUserHistory(); 
         }
 
-        // --- GEMINI AI PROXY ---
+        // --- GEMINI AI PROXY (تحديث لدمج الهوية تلقائياً) ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text);
+            // 🟢 التعديل المضاف: دمج اسم المستخدم وإيميله مع كل سؤال للأوراكل
+            const url = GOOGLE_SCRIPT_URL + "?Token=" + SECURE_TOKEN + "&Message=" + encodeURIComponent(text) + "&User=" + encodeURIComponent(currentUser.Name) + "&Email=" + encodeURIComponent(currentUser.Email);
 
             try {
                 const response = await fetch(url);
@@ -919,15 +984,11 @@ Connection Secure.
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
             if(isGlitch) msgDiv.setAttribute('data-text', text);
             
-            // فلترة النص للحماية من الأكواد الخبيثة
             let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             
             if (sender === 'bot' && !isGlitch) {
-                // تحويل ** إلى خط عريض
                 safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white); font-weight:bold;">$1</strong>');
-                // تحويل * إلى خط مائل
                 safeText = safeText.replace(/\*(.*?)\*/g, '<em style="color:#bbb;">$1</em>');
-                // تحويل النزول لسطر جديد إلى مسافات فعلية
                 safeText = safeText.replace(/\n/g, '<br>');
             } else {
                 safeText = safeText.replace(/\n/g, '<br>');
@@ -935,7 +996,6 @@ Connection Secure.
 
             let contentHTML = `<span class="msg-content">${safeText}</span>`;
             
-            // إضافة زر الاستماع لرسائل أوراكل فقط
             if (sender === 'bot' && !isGlitch) {
                 contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
             }
@@ -946,7 +1006,6 @@ Connection Secure.
             return msgDiv; 
         }
 
-        // دالة التحدث بالصوت
         function speakText(btn) {
             const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
             if ('speechSynthesis' in window) {
