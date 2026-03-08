@@ -679,7 +679,8 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyaEwvjVDdLjIqbgvDfQWH5VV8gRr7_O_IoypfwalJbtJTSNhbrnxEwSyhoux70oVv/exec';
+        // 🟢 الرابط الجديد للمصفوفة الخاصة بك (تم التحديث)
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxvSrl6vTZcZP68NuReF8nXHUc_XIwvb7aHvlt1mTSBWBy1C6EBRNxGVLjsm0USkrZ/exec';
 
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
         let currentLang = 'ar';
@@ -701,7 +702,7 @@ Connection Secure.
         }
 
         // ==========================================
-        // وظائف Firebase
+        // وظائف Firebase + إرسال إشارة الرادار
         // ==========================================
         
         async function handleFirebaseLogin(e) {
@@ -715,12 +716,17 @@ Connection Secure.
             currentUser.Phone = document.getElementById('userContact').value;
             
             try {
+                // حفظ الدخول في Firestore
                 await db.collection("Users").add({
                     Name: currentUser.Name,
                     Email: currentUser.Email,
                     Phone: currentUser.Phone,
                     Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
+
+                // 🟢 إرسال الإشارة للرادار ليرسل الإيميل
+                const params = new URLSearchParams({ Type: 'تسجيل دخول جديد', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
@@ -740,6 +746,7 @@ Connection Secure.
             btn.disabled = true;
             
             try {
+                // حفظ الاستشارة في Firestore
                 await db.collection("Consultations").add({
                     Name: currentUser.Name,
                     Email: currentUser.Email,
@@ -748,6 +755,10 @@ Connection Secure.
                     Status: "Pending",
                     Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
+
+                // 🟢 إرسال الإشارة للرادار ليرسل الإيميل بالاستشارة
+                const params = new URLSearchParams({ Type: 'طلب استشارة', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message });
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
                 alert(currentLang === 'ar' ? 'تم استلام استشارتك بنجاح وسيتواصل معك الخبراء.' : 'Transmission Successful. Our architects will contact you.');
                 document.getElementById('consultText').value = '';
@@ -787,6 +798,7 @@ Connection Secure.
                     appendMsg(finalOutput, 'bot'); 
                 }
 
+                // حفظ محادثات أوراكل في Firebase
                 try {
                     await db.collection("OracleLogs").add({
                         Name: currentUser.Name || "زائر مجهول",
