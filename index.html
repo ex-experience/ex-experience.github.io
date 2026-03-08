@@ -173,11 +173,16 @@
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
 
         #dashboard-view { display: none; }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 30px; }
-        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .dash-card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 15px 10px; text-align: center; cursor: pointer; color: var(--cyber-steel); transition: all 0.3s;}
         .dash-card:hover, .dash-card.active { border-color: var(--stark-white); color: var(--stark-white); }
         .service-form { display: none; padding-top: 20px; border-top: 1px solid #222; }
         .service-form.active { display: block; animation: fadeIn 0.5s; }
+
+        /* History Cards */
+        .history-card { border: 1px solid #222; padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.02); transition: border-color 0.3s; text-align: left; direction: ltr;}
+        .history-card:hover { border-color: var(--cyber-steel); }
+        .status-badge { padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border: 1px solid;}
 
         /* Sovereign Terminal */
         .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
@@ -578,6 +583,9 @@
                         <div class="dash-card active" onclick="switchService('consult')">
                             <h4 class="mono-text">Consult</h4>
                         </div>
+                        <div class="dash-card" onclick="switchService('history')">
+                            <h4 class="mono-text">History</h4>
+                        </div>
                         <div class="dash-card" onclick="switchService('terminal')" style="border-color: var(--terminal-green);">
                             <h4 class="mono-text" style="color: var(--terminal-green);">Terminal_</h4>
                         </div>
@@ -590,6 +598,12 @@
                             </div>
                             <button type="submit" id="consultBtn" class="submit-btn mono-text">Transmit</button>
                         </form>
+                    </div>
+
+                    <div id="form-history" class="service-form">
+                        <p class="mono-text" style="color:var(--cyber-steel); font-size:0.8rem; margin-bottom: 20px;">[ACCESSING SECURE ARCHIVES...]</p>
+                        <div id="history-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                            </div>
                     </div>
 
                     <div id="form-terminal" class="service-form">
@@ -668,18 +682,14 @@ Connection Secure.
         document.addEventListener("DOMContentLoaded", () => {
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
             const shuffled = videos.sort(() => 0.5 - Math.random());
-            
             const heroVideo = document.getElementById('heroVideo');
             if(heroVideo) { heroVideo.innerHTML = `<source src="${shuffled[0]}" type="video/mp4">`; heroVideo.load(); }
-            
             const breakVideo1 = document.getElementById('breakVideo1');
             if(breakVideo1) { breakVideo1.innerHTML = `<source src="${shuffled[1]}" type="video/mp4">`; breakVideo1.load(); }
-            
             const breakVideo2 = document.getElementById('breakVideo2');
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        // 🟢 الرابط الجديد للمصفوفة الخاصة بك (تم التحديث)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxvSrl6vTZcZP68NuReF8nXHUc_XIwvb7aHvlt1mTSBWBy1C6EBRNxGVLjsm0USkrZ/exec';
 
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'Terminal User' };
@@ -702,9 +712,55 @@ Connection Secure.
         }
 
         // ==========================================
-        // وظائف Firebase + إرسال إشارة الرادار
+        // وظائف Firebase (تمت إضافة جلب الأرشيف)
         // ==========================================
         
+        async function fetchUserHistory() {
+            const historyContainer = document.getElementById('history-content');
+            historyContainer.innerHTML = '<p class="mono-text" style="color:var(--cyber-steel);">[FETCHING RECORDS...]</p>';
+
+            try {
+                const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
+                
+                if (querySnapshot.empty) {
+                    historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[NO PREVIOUS RECORDS FOUND]</p>';
+                    return;
+                }
+
+                let docs = [];
+                querySnapshot.forEach((doc) => docs.push(doc.data()));
+
+                // ترتيب زمني من الأحدث للأقدم
+                docs.sort((a, b) => {
+                    let timeA = a.Timestamp ? a.Timestamp.toMillis() : 0;
+                    let timeB = b.Timestamp ? b.Timestamp.toMillis() : 0;
+                    return timeB - timeA;
+                });
+
+                let historyHTML = '';
+                docs.forEach((data) => {
+                    let statusColor = data.Status === 'Pending' ? '#ffaa00' : (data.Status === 'Approved' ? 'var(--terminal-green)' : 'var(--cyber-steel)');
+                    let dateStr = data.Timestamp ? new Date(data.Timestamp.toDate()).toLocaleDateString('en-GB') : 'Just Now';
+                    
+                    historyHTML += `
+                        <div class="history-card">
+                            <div style="display:flex; justify-content: space-between; margin-bottom: 10px; align-items:center;">
+                                <span class="mono-text" style="color: var(--cyber-steel); font-size: 0.8rem;">DATE: ${dateStr}</span>
+                                <span class="status-badge mono-text" style="color: ${statusColor}; border-color: ${statusColor};">${data.Status}</span>
+                            </div>
+                            <p style="font-size: 0.9rem; color: #ccc; margin: 0;">${data.Message}</p>
+                            ${data.Reply ? `<div style="margin-top: 15px; border-top: 1px dashed #333; padding-top: 10px;"><p style="font-size: 0.85rem; color: var(--terminal-green); margin:0;"><strong>[EX REPLY]:</strong> ${data.Reply}</p></div>` : ''}
+                        </div>
+                    `;
+                });
+
+                historyContainer.innerHTML = historyHTML;
+            } catch (error) {
+                console.error("Error fetching history: ", error);
+                historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[ENCRYPTION ERROR: UNABLE TO LOAD RECORDS]</p>';
+            }
+        }
+
         async function handleFirebaseLogin(e) {
             e.preventDefault();
             const btn = document.getElementById('loginBtn');
@@ -716,25 +772,23 @@ Connection Secure.
             currentUser.Phone = document.getElementById('userContact').value;
             
             try {
-                // حفظ الدخول في Firestore
                 await db.collection("Users").add({
-                    Name: currentUser.Name,
-                    Email: currentUser.Email,
-                    Phone: currentUser.Phone,
+                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
                     Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                // 🟢 إرسال الإشارة للرادار ليرسل الإيميل
                 const params = new URLSearchParams({ Type: 'تسجيل دخول جديد', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
+                
+                // جلب سجلات العميل فور الدخول
+                fetchUserHistory();
+
             } catch (error) {
-                console.error("Firebase Error: ", error);
                 alert("Connection failed. Please check Firebase Rules.");
-                btn.innerHTML = 'Connect to Matrix'; 
-                btn.disabled = false;
+                btn.innerHTML = 'Connect to Matrix'; btn.disabled = false;
             }
         }
 
@@ -742,33 +796,29 @@ Connection Secure.
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
             const message = document.getElementById('consultText').value;
-            btn.innerHTML = 'Transmitting...'; 
-            btn.disabled = true;
+            btn.innerHTML = 'Transmitting...'; btn.disabled = true;
             
             try {
-                // حفظ الاستشارة في Firestore
                 await db.collection("Consultations").add({
-                    Name: currentUser.Name,
-                    Email: currentUser.Email,
-                    Phone: currentUser.Phone,
-                    Message: message,
-                    Status: "Pending",
+                    Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
+                    Message: message, Status: "Pending",
                     Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                // 🟢 إرسال الإشارة للرادار ليرسل الإيميل بالاستشارة
                 const params = new URLSearchParams({ Type: 'طلب استشارة', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message });
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
-                alert(currentLang === 'ar' ? 'تم استلام استشارتك بنجاح وسيتواصل معك الخبراء.' : 'Transmission Successful. Our architects will contact you.');
+                alert(currentLang === 'ar' ? 'تم استلام استشارتك بنجاح.' : 'Transmission Successful.');
                 document.getElementById('consultText').value = '';
-                btn.innerHTML = 'Transmit'; 
-                btn.disabled = false;
+                btn.innerHTML = 'Transmit'; btn.disabled = false;
+                
+                // تحديث الأرشيف ليعرض الطلب الجديد فوراً
+                fetchUserHistory();
+                switchService('history'); // تحويله تلقائياً لصفحة الأرشيف ليرى طلبه
+
             } catch (error) {
-                console.error("Firebase Error: ", error);
-                alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من قواعد الأمان.' : 'Transmission Failed.');
-                btn.innerHTML = 'Transmit'; 
-                btn.disabled = false;
+                alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال.' : 'Transmission Failed.');
+                btn.innerHTML = 'Transmit'; btn.disabled = false;
             }
         }
 
@@ -778,6 +828,7 @@ Connection Secure.
             document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
             document.getElementById('form-' + serviceId).classList.add('active');
             if(serviceId === 'terminal') document.getElementById('termInput').focus();
+            if(serviceId === 'history') fetchUserHistory(); // تحديث البيانات عند فتح التبويب
         }
 
         // --- GEMINI AI PROXY ---
@@ -787,9 +838,7 @@ Connection Secure.
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                
                 if (loadingElement) loadingElement.remove();
-
                 const finalOutput = data.reply || data.error;
 
                 if(isTerminal) { 
@@ -798,34 +847,23 @@ Connection Secure.
                     appendMsg(finalOutput, 'bot'); 
                 }
 
-                // حفظ محادثات أوراكل في Firebase
                 try {
                     await db.collection("OracleLogs").add({
-                        Name: currentUser.Name || "زائر مجهول",
-                        Email: currentUser.Email || "غير مسجل",
-                        Phone: currentUser.Phone || "غير مسجل",
-                        Question: text,
-                        OracleAnswer: finalOutput,
-                        EngineUsed: data.engine || "Unknown",
-                        Source: isTerminal ? "Terminal UI" : "AI Chat Window",
-                        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        Name: currentUser.Name || "زائر مجهول", Email: currentUser.Email || "غير مسجل", Phone: currentUser.Phone || "غير مسجل",
+                        Question: text, OracleAnswer: finalOutput, EngineUsed: data.engine || "Unknown",
+                        Source: isTerminal ? "Terminal UI" : "AI Chat Window", Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                } catch (logError) {
-                    console.error("Matrix Logging Silent Error:", logError);
-                }
-
+                } catch (logError) {}
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
                 const errText = currentLang === 'ar' ? "انقطع الاتصال بالشبكة العميقة." : "Grid uncommunicative.";
-                if(isTerminal) { printTerm(`oracle@ex:~# ${errText}`); } 
-                else { appendMsg(errText, 'bot'); }
+                if(isTerminal) { printTerm(`oracle@ex:~# ${errText}`); } else { appendMsg(errText, 'bot'); }
             }
         }
 
         // --- Terminal Logic ---
         const termOutput = document.getElementById('termOutput');
         const termInput = document.getElementById('termInput');
-        
         function handleTerminal(e) {
             if(e.key === 'Enter' || e.keyCode === 13) {
                 e.preventDefault();
@@ -833,7 +871,6 @@ Connection Secure.
                 if(cmd === '') return;
                 printTerm(`user@ex:~# ${cmd}`);
                 termInput.value = '';
-                
                 if(cmd.toLowerCase() === 'help') {
                     printTerm(`Commands:\n- /clear : Clear screen\n- Any text : Query Oracle EX directly`);
                 } else if(cmd.toLowerCase() === '/clear') {
@@ -844,17 +881,12 @@ Connection Secure.
                 }
             }
         }
-        
-        function printTerm(text) {
-            termOutput.innerHTML += `\n${text}`;
-            termOutput.scrollTop = termOutput.scrollHeight;
-        }
+        function printTerm(text) { termOutput.innerHTML += `\n${text}`; termOutput.scrollTop = termOutput.scrollHeight; }
 
         // --- AI Chatbot Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-        
         function toggleChat() { 
             chatWindow.classList.toggle('open'); 
             if(chatWindow.classList.contains('open')) {
@@ -862,13 +894,11 @@ Connection Secure.
                 if(chatBody.innerHTML === '') initChat();
             }
         }
-
         function initChat() {
             chatBody.innerHTML = '';
             const welcome = currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. اسألني عن المنهجية، الكون، أو الفراغ." : "System Online. I am Oracle EX. Ask about our architecture, the universe, or the void.";
             appendMsg(welcome, 'bot');
         }
-
         function appendMsg(text, sender, isGlitch = false) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
@@ -878,24 +908,16 @@ Connection Secure.
             chatBody.scrollTop = chatBody.scrollHeight;
             return msgDiv; 
         }
-
         function handleChatEnter(e) { 
-            if(e.key === 'Enter' || e.keyCode === 13) {
-                e.preventDefault();
-                sendChatMessage();
-            }
+            if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); }
         }
-
         function sendChatMessage() {
             const text = aiInput.value.trim();
             if(!text) return;
-            
             appendMsg(text, 'user');
             aiInput.value = '';
-            
             const loadingText = currentLang === 'ar' ? "[جاري معالجة البيانات...]" : "[Processing data streams...]";
             const loadingElement = appendMsg(loadingText, 'bot typing-indicator', true);
-
             queryDeepMatrix(text, false, loadingElement);
         }
 
@@ -908,9 +930,7 @@ Connection Secure.
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(() => console.log('Matrix Core (Service Worker) Online.'))
-                    .catch((err) => console.log('Matrix Core Offline: ', err));
+                navigator.serviceWorker.register('sw.js').catch((err) => console.log('Matrix Core Offline: ', err));
             });
         }
     </script>
