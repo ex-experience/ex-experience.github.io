@@ -9,10 +9,10 @@
     <meta name="theme-color" content="#020202">
     <link rel="apple-touch-icon" href="icon.png">
     
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
+    <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -23,14 +23,9 @@
             measurementId: "G-DMZ9XS0L70"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
-        // إتاحة الوصول لقاعدة البيانات من السكربت العادي
-        window.matrixDB = db;
-        window.addDoc = addDoc;
-        window.collection = collection;
-        window.serverTimestamp = serverTimestamp;
+        // تفعيل مصفوفة البيانات
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
@@ -120,7 +115,7 @@
         .body-text { font-size: clamp(0.95rem, 2vw, 1.1rem); color: #bbbbbb; max-width: 800px; margin-bottom: 20px; }
         .highlight { color: var(--stark-white); font-weight: bold; }
 
-        /* Custom Lists & Grids for Brand Content */
+        /* Custom Lists & Grids */
         .cyber-list { list-style: none; padding: 0; margin-bottom: 30px; }
         .cyber-list li { position: relative; padding-left: 20px; margin-bottom: 15px; color: #bbbbbb; font-size: 1.05rem;}
         .cyber-list li::before { content: '>'; position: absolute; left: 0; color: var(--stark-white); font-family: 'Space Mono', monospace; }
@@ -161,7 +156,6 @@
         .dna-subheading { font-size: 1.1rem; margin-bottom: 5px; }
         .dna-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
         @keyframes decryptFade { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        /* ------------------------------------- */
 
         /* Member Portal & Dashboard */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
@@ -700,7 +694,7 @@ Connection Secure.
         }
 
         // ==========================================
-        // Firebase Auth & Database Functions (الترقية هنا)
+        // وظائف Firebase
         // ==========================================
         
         async function handleFirebaseLogin(e) {
@@ -714,19 +708,18 @@ Connection Secure.
             currentUser.Phone = document.getElementById('userContact').value;
             
             try {
-                // حفظ الدخول في قاعدة بيانات Firebase
-                await window.addDoc(window.collection(window.matrixDB, "Users"), {
+                await db.collection("Users").add({
                     Name: currentUser.Name,
                     Email: currentUser.Email,
                     Phone: currentUser.Phone,
-                    Timestamp: window.serverTimestamp()
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
             } catch (error) {
                 console.error("Firebase Error: ", error);
-                alert("Matrix connection failed. Please try again.");
+                alert("Connection failed. Please check Firebase Rules.");
                 btn.innerHTML = 'Connect to Matrix'; 
                 btn.disabled = false;
             }
@@ -740,14 +733,13 @@ Connection Secure.
             btn.disabled = true;
             
             try {
-                // حفظ الاستشارة في Firebase
-                await window.addDoc(window.collection(window.matrixDB, "Consultations"), {
+                await db.collection("Consultations").add({
                     Name: currentUser.Name,
                     Email: currentUser.Email,
                     Phone: currentUser.Phone,
                     Message: message,
                     Status: "Pending",
-                    Timestamp: window.serverTimestamp()
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
                 alert(currentLang === 'ar' ? 'تم استلام استشارتك بنجاح وسيتواصل معك الخبراء.' : 'Transmission Successful. Our architects will contact you.');
@@ -756,7 +748,7 @@ Connection Secure.
                 btn.disabled = false;
             } catch (error) {
                 console.error("Firebase Error: ", error);
-                alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال.' : 'Transmission Failed.');
+                alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من قواعد الأمان.' : 'Transmission Failed.');
                 btn.innerHTML = 'Transmit'; 
                 btn.disabled = false;
             }
@@ -770,7 +762,7 @@ Connection Secure.
             if(serviceId === 'terminal') document.getElementById('termInput').focus();
         }
 
-        // --- GEMINI AI PROXY (يظل متصلاً بجوجل سكربت لحماية مفاتيح الذكاء الاصطناعي) ---
+        // --- GEMINI AI PROXY ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             const url = GOOGLE_SCRIPT_URL + "?Message=" + encodeURIComponent(text);
 
@@ -780,10 +772,6 @@ Connection Secure.
                 
                 if (loadingElement) loadingElement.remove();
 
-                if (data.engine) {
-                    console.log("Matrix Engine Engaged:", data.engine);
-                }
-
                 const finalOutput = data.reply || data.error;
 
                 if(isTerminal) { 
@@ -791,6 +779,26 @@ Connection Secure.
                 } else { 
                     appendMsg(finalOutput, 'bot'); 
                 }
+
+                // ==========================================
+                // الكود السري لحفظ محادثات أوراكل في Firebase
+                // ==========================================
+                try {
+                    await db.collection("OracleLogs").add({
+                        Name: currentUser.Name || "زائر مجهول",
+                        Email: currentUser.Email || "غير مسجل",
+                        Phone: currentUser.Phone || "غير مسجل",
+                        Question: text,
+                        OracleAnswer: finalOutput,
+                        EngineUsed: data.engine || "Unknown",
+                        Source: isTerminal ? "Terminal UI" : "AI Chat Window",
+                        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                } catch (logError) {
+                    console.error("Matrix Logging Silent Error:", logError);
+                }
+                // ==========================================
+
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
                 const errText = currentLang === 'ar' ? "انقطع الاتصال بالشبكة العميقة." : "Grid uncommunicative.";
