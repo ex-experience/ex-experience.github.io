@@ -9,8 +9,8 @@
         body { background: var(--bg); color: var(--text); font-family: 'Space Mono', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .container { border: 1px solid #333; padding: 40px; background: #050607; width: 400px; text-align: center; box-shadow: 0 0 20px rgba(0,255,0,0.05); }
         h2 { color: var(--steel); letter-spacing: 2px; text-transform: uppercase; font-size: 1.2rem; margin-bottom: 30px; }
-        input { width: 90%; padding: 12px; margin-bottom: 20px; background: #111; border: 1px solid #333; color: var(--green); text-align: center; font-family: inherit; font-size: 1.1rem;}
-        input:focus { outline: none; border-color: var(--steel); }
+        input { width: 90%; padding: 12px; margin-bottom: 20px; background: #111; border: 1px solid #333; color: var(--green); text-align: center; font-family: inherit; font-size: 1.1rem; outline:none;}
+        input:focus { border-color: var(--steel); }
         button { width: 100%; padding: 15px; background: var(--text); color: var(--bg); border: none; cursor: pointer; font-weight: bold; font-family: inherit; transition: 0.3s; margin-bottom: 15px; text-transform: uppercase;}
         button:hover { background: var(--steel); color: #fff; }
         .btn-green { background: var(--green); color: #000; }
@@ -19,6 +19,7 @@
         .status { font-size: 0.8rem; color: var(--steel); margin-top: 15px; }
     </style>
 
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script>
@@ -37,23 +38,23 @@
 <body>
 
     <div class="container" id="loginBox">
-        <h2>[ ACCESS MATRIX ]</h2>
+        <h2>[ MATRIX COMMAND ]</h2>
         <input type="password" id="adminPass" placeholder="Enter Admin Token">
         <button onclick="checkPass()">DECRYPT</button>
-        <div class="status" id="loginStatus"></div>
+        <div class="status" id="loginStatus">Authorized Personnel Only.</div>
     </div>
 
     <div class="container" id="dashboard">
-        <h2>[ COMMAND CENTER ]</h2>
-        <button onclick="exportData('Users')" class="btn-green">⬇ سحب قاعدة العملاء (Users)</button>
-        <button onclick="exportData('Consultations')" class="btn-green">⬇ سحب الاستشارات (Consultations)</button>
-        <button onclick="exportData('OracleLogs')">⬇ سحب سجلات أوراكل (Oracle Logs)</button>
+        <h2>[ CRM CENTER ]</h2>
+        <button onclick="exportData('Users')" class="btn-green">⬇ سحب قاعدة العملاء (Excel)</button>
+        <button onclick="exportData('Consultations')" class="btn-green">⬇ سحب الاستشارات (Excel)</button>
+        <button onclick="exportData('OracleLogs')">⬇ سحب سجلات أوراكل</button>
         <div class="status" id="dashStatus">System Ready.</div>
     </div>
 
     <script>
-        // 🔒 الرمز السري للدخول إلى هذه اللوحة
-        const ADMIN_TOKEN = "HX5_COMMAND_2026"; 
+        // 🔒 الرمز السري للدخول إلى هذه اللوحة (يمكنك تغييره كما تشاء)
+        const ADMIN_TOKEN = "HX5_COMMAND"; 
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
@@ -81,27 +82,19 @@
                 let rows = [];
                 let headers = [];
 
-                // استخراج العناوين (رؤوس الأقلام) من أول ملف
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    Object.keys(data).forEach(key => {
-                        if(!headers.includes(key)) headers.push(key);
-                    });
+                    Object.keys(data).forEach(key => { if(!headers.includes(key)) headers.push(key); });
                 });
                 rows.push(headers.join(","));
 
-                // استخراج البيانات
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     let row = [];
                     headers.forEach(header => {
                         let val = data[header] || "";
-                        // معالجة التاريخ ليكون مقروءاً
-                        if(val && val.seconds) {
-                            val = new Date(val.toDate()).toLocaleString('en-GB');
-                        }
-                        // تنظيف النص من الفواصل والأسطر الجديدة لكي لا يفسد ملف الإكسيل
-                        val = val.toString().replace(/"/g, '""');
+                        if(val && val.seconds) val = new Date(val.toDate()).toLocaleString('en-GB'); // تحويل الوقت
+                        val = val.toString().replace(/"/g, '""'); // تنظيف النص
                         if(val.search(/("|,|\n)/g) >= 0) val = `"${val}"`;
                         row.push(val);
                     });
