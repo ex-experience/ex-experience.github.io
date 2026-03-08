@@ -9,6 +9,8 @@
     <meta name="theme-color" content="#020202">
     <link rel="apple-touch-icon" href="icon.png">
     
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -17,7 +19,6 @@
       gtag('config', 'G-Q36518VXCZ');
     </script>
 
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
@@ -49,6 +50,7 @@
             --terminal-green: #0f0;
             --panel-bg: #050607;
             --google-blue: #4285F4;
+            --elite-gold: #d4af37;
         }
 
         body {
@@ -141,34 +143,43 @@
         .hx-card:hover { border-color: var(--cyber-steel); }
         .hx-number { font-size: 1.5rem; color: var(--stark-white); font-family: 'Space Mono', monospace; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;}
 
-        /* --- DNA Classified File CSS --- */
-        .classified-file { background: rgba(0,0,0,0.5); border: 1px solid #222; margin-top: 40px; transition: border-color 0.3s;}
-        .classified-file:hover { border-color: var(--cyber-steel); }
-        .classified-header { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
-        .classified-header:hover { background: rgba(255,255,255,0.05); }
-        .classified-title { color: var(--stark-white); letter-spacing: 2px; font-size: 1.1rem; }
-        .classified-icon { color: var(--terminal-green); font-size: 0.9rem;}
-        .classified-content { max-height: 0; overflow: hidden; transition: max-height 0.6s ease-out; background: #030405; }
-        .classified-content.open { max-height: 3000px; border-top: 1px solid #222; }
-        .dna-record { padding: 30px; }
-        .dna-node { margin-bottom: 40px; border-left: 2px solid #222; padding-left: 20px; }
-        body.lang-ar .dna-node { border-left: none; border-right: 2px solid #222; padding-left: 0; padding-right: 20px; }
-        .dna-role { font-size: 1.2rem; color: var(--stark-white); margin-bottom: 5px; }
-        .dna-subrole { font-size: 0.85rem; color: var(--cyber-steel); margin-bottom: 15px; }
-        .dna-name { font-size: 1.1rem; margin-bottom: 10px; display: inline-block; border-bottom: 1px dashed #333; padding-bottom: 5px; color: var(--terminal-green);}
+        /* 🟢 Elite DNA Section Upgrades */
+        .classified-file { background: rgba(5,6,7,0.8); border: 1px solid #222; margin-top: 40px; transition: border-color 0.3s; position: relative; overflow: hidden; backdrop-filter: blur(5px);}
+        .classified-file:hover { border-color: var(--elite-gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.05); }
+        .classified-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; border-bottom: 1px solid transparent;}
+        .classified-header:hover { background: rgba(255,255,255,0.02); }
+        .classified-title { color: var(--stark-white); letter-spacing: 3px; font-size: 1.1rem; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+        .classified-icon { color: var(--elite-gold); font-size: 0.9rem; text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);}
+        .classified-content { max-height: 0; overflow: hidden; transition: max-height 0.8s cubic-bezier(0.16, 1, 0.3, 1); background: linear-gradient(180deg, #030405 0%, #000000 100%); position: relative; }
+        .classified-content.open { max-height: 4000px; border-top: 1px solid #333; }
         
-        .dna-classified-file { border: 1px solid #333; background-color: transparent; margin: 40px 0; padding: 0; color: #e0e0e0; font-family: inherit; border-radius: 4px; overflow: hidden; }
-        .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(20, 20, 20, 0.8); border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s ease; }
-        .dna-summary:hover { background-color: rgba(40, 40, 40, 0.8); }
-        .dna-title-main { font-size: 1.2rem; line-height: 1.4; }
-        .dna-content { display: none; padding: 30px 20px; background-color: rgba(10, 10, 10, 0.9); }
-        .dna-content.open { display: block; animation: decryptFade 0.5s ease-in-out; }
-        .dna-blockquote { border-left: 2px solid #555; padding-left: 15px; margin-bottom: 40px; font-style: italic; color: #aaa; line-height: 1.6; }
-        body.lang-ar .dna-blockquote { border-left: none; border-right: 2px solid #555; padding-left: 0; padding-right: 15px; }
-        .dna-monospace { font-family: 'Courier New', Courier, monospace; letter-spacing: 1px; color: #fff; }
-        .dna-subheading { font-size: 1.1rem; margin-bottom: 5px; }
-        .dna-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #222; color: #666; font-size: 0.85rem; }
-        @keyframes decryptFade { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        /* Scanner Effect */
+        .classified-content::after { content:''; position: absolute; top: -100px; left: 0; width: 100%; height: 100px; background: linear-gradient(to bottom, rgba(212,175,55,0), rgba(212,175,55,0.1)); z-index: 0; pointer-events: none; display: none; }
+        .classified-content.open::after { display: block; animation: scanline 4s linear infinite; }
+        @keyframes scanline { 0% { top: -100px; } 100% { top: 100%; } }
+
+        .dna-record { padding: 40px; position: relative; z-index: 1;}
+        .dna-node { margin-bottom: 50px; position: relative; padding-left: 25px; border-left: 1px solid #333;}
+        body.lang-ar .dna-node { padding-left: 0; padding-right: 25px; border-left: none; border-right: 1px solid #333;}
+        
+        .dna-role { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; }
+        .dna-subrole { font-size: 1.2rem; color: var(--stark-white); margin-bottom: 15px; font-weight: 300;}
+        
+        /* Elite Signature Font */
+        .elite-signature { font-family: 'Caveat', cursive; font-size: 2.8rem; color: var(--elite-gold); display: block; margin-bottom: 15px; text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.3); opacity: 0.9; transform: rotate(-2deg); letter-spacing: 2px;}
+        
+        .dna-classified-file { border: 1px solid #222; background-color: transparent; margin: 40px 0; padding: 0; color: #e0e0e0; font-family: inherit; overflow: hidden; }
+        .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(10, 10, 10, 0.8); border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+        .dna-summary:hover { background-color: rgba(20, 20, 20, 0.8); border-color: var(--elite-gold); }
+        .dna-title-main { font-size: 1.2rem; line-height: 1.4; color: #fff;}
+        .dna-content { display: none; padding: 30px 20px; background-color: rgba(5, 5, 5, 0.9); }
+        .dna-content.open { display: block; animation: decryptFade 0.6s ease-out forwards; }
+        .dna-blockquote { border-left: 2px solid var(--elite-gold); padding-left: 20px; margin-bottom: 40px; font-style: italic; color: #aaa; line-height: 1.8; }
+        body.lang-ar .dna-blockquote { border-left: none; border-right: 2px solid var(--elite-gold); padding-left: 0; padding-right: 20px; }
+        .dna-monospace { font-family: 'Space Mono', monospace; letter-spacing: 1px; color: #fff; }
+        .dna-subheading { font-size: 0.9rem; margin-bottom: 5px; color: #777; letter-spacing: 2px;}
+        .dna-footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px dashed #222; color: #555; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;}
+        @keyframes decryptFade { from { opacity: 0; transform: translateY(-10px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
         /* Member Portal & Dashboard */
         .portal-container { background: var(--panel-bg); padding: 50px; border: 1px solid #1a1a1a; margin-top: 40px; position: relative; z-index: 2;}
@@ -179,14 +190,20 @@
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
 
-        /* 🟢 تنسيقات أزرار المصادقة (Legal Compliant) */
+        /* 🟢 Auth Buttons & "Coming Soon" styling */
         .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
         @media (max-width: 600px) { .auth-grid { grid-template-columns: 1fr; } }
-        .social-btn { width: 100%; padding: 12px; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; background: transparent; color: white; border: 1px solid #333; text-transform: uppercase; letter-spacing: 1px; }
-        .social-btn:hover { background: rgba(255,255,255,0.05); border-color: white; }
+        .social-btn { position: relative; width: 100%; padding: 14px; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; background: transparent; color: white; border: 1px solid #333; text-transform: uppercase; letter-spacing: 1px; overflow: hidden; }
+        .social-btn:hover:not(:disabled) { background: rgba(255,255,255,0.05); border-color: white; }
         .btn-google { border-color: var(--google-blue); }
-        .btn-apple { background: #000; border-color: #555; }
+        .btn-apple { background: #050505; border-color: #555; }
         
+        .soon-badge { position: absolute; top: 5px; right: -25px; background: #ff003c; color: #fff; font-size: 0.5rem; font-weight: bold; padding: 2px 25px; transform: rotate(45deg); letter-spacing: 1px; box-shadow: 0 0 10px rgba(255,0,60,0.5); pointer-events: none;}
+        body.lang-ar .soon-badge { right: auto; left: -25px; transform: rotate(-45deg); }
+        
+        /* Disabled state styling */
+        .social-btn:disabled { opacity: 0.4; cursor: not-allowed; border-style: dashed; filter: grayscale(100%);}
+
         .divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: #444; font-size: 0.7rem; letter-spacing: 1px; }
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #222; }
         .divider:not(:empty)::before { margin-left: .5em; }
@@ -213,7 +230,7 @@
 
         /* Legal Modal */
         .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .legal-content { background: #050607; border: 1px solid var(--cyber-steel); padding: 40px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+        .legal-content { background: #050607; border: 1px solid var(--cyber-steel); padding: 40px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.8);}
         .legal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
         body.lang-ar .legal-close { right: auto; left: 20px; }
 
@@ -222,42 +239,68 @@
         .footer-logo { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
         .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
         .footer-copy { color: #444; font-size: 0.75rem; font-family: 'Space Mono', monospace; margin-bottom: 15px;}
-        .legal-links a { color: var(--cyber-steel); text-decoration: none; font-size: 0.8rem; margin: 0 10px; transition: 0.3s; cursor: pointer; }
-        .legal-links a:hover { color: var(--stark-white); }
+        .legal-links a { color: var(--cyber-steel); text-decoration: none; font-size: 0.8rem; margin: 0 10px; transition: 0.3s; cursor: pointer; border-bottom: 1px solid transparent; padding-bottom: 2px;}
+        .legal-links a:hover { color: var(--stark-white); border-color: var(--stark-white);}
 
-        /* AI ORACLE CHATBOT */
+        /* 🟢 EX|AI ORACLE CHATBOT (Elite Cyberpunk Upgrade) */
         .ai-btn {
-            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 0;
-            background: var(--stark-white); color: var(--obsidian-black); border: 1px solid #fff; cursor: pointer;
-            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1.2rem;
-            transition: transform 0.2s;
+            position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; border-radius: 5px;
+            background: rgba(5,6,7,0.75); backdrop-filter: blur(10px);
+            color: var(--stark-white); border: 1px solid rgba(0, 255, 0, 0.4); cursor: pointer;
+            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.15), inset 0 0 10px rgba(0, 255, 0, 0.1);
+            letter-spacing: 1px;
         }
-        .ai-btn:hover { transform: scale(1.1); }
+        .ai-btn:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 0 25px rgba(0, 255, 0, 0.3), inset 0 0 15px rgba(0, 255, 0, 0.2); border-color: var(--terminal-green); }
+        .ai-btn::before { content:''; position: absolute; top:0; left:-100%; width:50%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: btnSweep 3s infinite; }
+        @keyframes btnSweep { 0% {left: -100%;} 50% {left: 200%;} 100% {left: 200%;} }
+        
         body.lang-en .ai-btn { left: auto; right: 30px; }
+        
+        /* Premium Interface HUD */
         .ai-window {
-            position: fixed; bottom: 90px; left: 30px; width: 350px; height: 500px; background: rgba(2,2,2,0.98);
-            border: 1px solid #333; z-index: 9998; display: flex; flex-direction: column;
-            transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: fixed; bottom: 100px; left: 30px; width: 360px; height: 520px; 
+            background: rgba(5, 6, 7, 0.85); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1); z-index: 9998; display: flex; flex-direction: column;
+            transform: translateY(30px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 20px rgba(0, 255, 0, 0.05);
+            border-radius: 8px; overflow: hidden;
         }
         body.lang-en .ai-window { left: auto; right: 30px; }
-        .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .ai-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+        
         .ai-header { 
-            background: #fff; color: #000; padding: 15px; font-size: 0.9rem; letter-spacing: 2px; font-weight: bold;
-            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.6); color: var(--stark-white); padding: 15px 20px; font-size: 0.85rem; letter-spacing: 2px; font-weight: bold;
+            display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .ai-close { background: none; border: none; color: #000; font-size: 1.2rem; cursor: pointer; }
-        .ai-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .ai-msg { max-width: 90%; padding: 12px; font-size: 0.85rem; line-height: 1.6; border: 1px solid #222; position: relative; }
-        .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid #fff; }
-        body.lang-ar .ai-msg.bot { border-left: 1px solid #222; border-right: 2px solid #fff; }
-        .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
-        .ai-input-area { display: flex; padding: 10px; background: #0a0a0a; border-top: 1px solid #333; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px; font-family: inherit; outline: none; }
-        .ai-send { background: #fff; color: #000; border: none; cursor: pointer; padding: 0 15px; font-weight: bold;}
-        .typing-indicator { font-style: italic; color: var(--cyber-steel); font-size: 0.8rem; }
-        .tts-btn { background: transparent; border: none; color: var(--cyber-steel); cursor: pointer; font-size: 1.2rem; padding: 0 5px; margin-top: 5px; transition: color 0.3s;}
-        .tts-btn:hover { color: var(--stark-white); }
+        .ai-close { background: none; border: none; color: var(--cyber-steel); font-size: 1.5rem; cursor: pointer; transition: 0.3s; line-height: 1;}
+        .ai-close:hover { color: #ff4444; transform: rotate(90deg);}
+        
+        /* 🟢 iOS/Tesla Style Toggle Switch */
+        .voice-toggle-container { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: var(--cyber-steel); font-family: 'Space Mono', monospace; letter-spacing: 1px;}
+        .toggle-switch { width: 36px; height: 18px; background: #222; border-radius: 20px; position: relative; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; border: 1px solid #333;}
+        .toggle-dot { width: 14px; height: 14px; background: #666; border-radius: 50%; position: absolute; top: 1px; left: 2px; transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.3s; }
+        .toggle-switch.active { background: rgba(0, 255, 0, 0.1); border-color: rgba(0, 255, 0, 0.3); box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.2); }
+        .toggle-switch.active .toggle-dot { transform: translateX(18px); background: var(--terminal-green); box-shadow: 0 0 5px var(--terminal-green);}
+        body.lang-ar .toggle-dot { left: auto; right: 2px; }
+        body.lang-ar .toggle-switch.active .toggle-dot { transform: translateX(-18px); }
+
+        .ai-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth;}
+        .ai-body::-webkit-scrollbar { width: 4px; }
+        .ai-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px;}
+        
+        .ai-msg { max-width: 85%; padding: 12px 15px; font-size: 0.85rem; line-height: 1.6; position: relative; border-radius: 4px;}
+        .ai-msg.bot { background: rgba(255,255,255,0.03); color: var(--stark-white); align-self: flex-start; border-left: 2px solid var(--terminal-green); box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        body.lang-ar .ai-msg.bot { border-left: none; border-right: 2px solid var(--terminal-green); }
+        .ai-msg.user { background: rgba(255,255,255,0.1); color: #fff; align-self: flex-end; }
+        
+        .ai-input-area { display: flex; padding: 12px; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.05); }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; padding: 8px 12px; font-family: inherit; outline: none; font-size: 0.85rem;}
+        .ai-input::placeholder { color: #555; }
+        .ai-send { background: transparent; color: var(--terminal-green); border: 1px solid var(--terminal-green); cursor: pointer; padding: 0 15px; font-weight: bold; border-radius: 3px; transition: 0.3s;}
+        .ai-send:hover { background: rgba(0, 255, 0, 0.1); box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);}
+        .typing-indicator { font-style: italic; color: var(--cyber-steel); font-size: 0.75rem; opacity: 0.7; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -526,11 +569,11 @@
                     <div class="dna-record">
                         <div class="dna-classified-file">
                           <div class="dna-summary" onclick="document.getElementById('dna-data-log').classList.toggle('open')">
-                            <div class="dna-title-main">
-                              00.12 / الشفرة الوراثية <br> 
-                              00.12 / THE DNA
+                            <div class="dna-title-main mono-text">
+                              <span style="color: var(--elite-gold);">00.12 /</span> الشفرة الوراثية <br> 
+                              <span style="color: var(--elite-gold);">00.12 /</span> THE DNA
                             </div>
-                            <div class="dna-monospace">[ ACCESS LOG ]</div>
+                            <div class="dna-monospace" style="color:var(--cyber-steel);">[ SYSTEM SECURED ]</div>
                           </div>
                           
                           <div id="dna-data-log" class="dna-content">
@@ -540,22 +583,24 @@
                               <p>Immortal entities are not built by chance; they are precisely engineered. Our DNA is not a mere roster of names; it is the "neural network" that powers the experience engine. Here, we document the architects, allies, and catalysts who translate philosophy into tangible reality.</p>
                             </div>
 
-                            <div class="dna-record">
-                              <div class="dna-monospace dna-subheading">[ フサム ] المعمار الأول / THE ARCHITECT</div>
-                              <div class="dna-role">( المؤسس - THE FOUNDER )</div>
-                              <span class="dna-monospace dna-name">[ HUSSAM HASSAN MOHAMMED TAHIRI ]</span>
-                              <div class="dna-desc">
+                            <div class="dna-node">
+                              <div class="dna-subheading mono-text">[ フサム ] المعمار الأول / THE ARCHITECT</div>
+                              <div class="dna-role">THE FOUNDER</div>
+                              <span class="elite-signature">Hussam Tahiri</span>
+                              <div class="dna-subrole mono-text">HUSSAM HASSAN MOHAMMED TAHIRI</div>
+                              <div class="dna-desc" style="color: #bbb; line-height: 1.6; font-size: 0.9rem;">
                                 <p>النقطة صِفر (Ground Zero) مؤسس هذه المنظومة. والعقل الاستراتيجي والمصمم لمنهجية HX-5™️. هو من وضع حجر الأساس، ومبتكر هندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد وصناعة اول دار للمفاهيم بالمملكة العربية السعودية.</p>
                                 <br>
                                 <p>The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</p>
                               </div>
                             </div>
 
-                            <div class="dna-record">
-                              <div class="dna-monospace dna-subheading">[ SBS ] المعمار الموازي / THE CO-ARCHITECT</div>
-                              <div class="dna-role">( شريك مؤسس - CO-FOUNDER )</div>
-                              <span class="dna-monospace dna-name">[ P. SULTAN BIN BADR BIN ALBDULMUHSEN AL SAUD ]</span>
-                              <div class="dna-desc">
+                            <div class="dna-node">
+                              <div class="dna-subheading mono-text">[ SBS ] المعمار الموازي / THE CO-ARCHITECT</div>
+                              <div class="dna-role">CO-FOUNDER</div>
+                              <span class="elite-signature">Sultan B. Al-Saud</span>
+                              <div class="dna-subrole mono-text">P. SULTAN BIN BADR BIN ABDULMUHSEN AL SAUD</div>
+                              <div class="dna-desc" style="color: #bbb; line-height: 1.6; font-size: 0.9rem;">
                                 <p>النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</p>
                                 <br>
                                 <p>The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</p>
@@ -563,10 +608,10 @@
                             </div>
 
                             <div class="dna-footer dna-monospace">
+                                <p style="color: var(--elite-gold);">EST EX/25. SA™️</p>
                                 <p>Concept House • Strategic Lab</p>
                                 <p>تم توثيق السجلات في مصفوفة النظام</p>
-                                <p>المملكة العربية السعودية</p>
-                                <p>verified</p>
+                                <p>Verified via Executive Node</p>
                             </div>
                           </div>
                         </div>
@@ -584,7 +629,6 @@
         </div>
     </section>
 
-    <!-- 🟢 EXECUTIVE INTERFACE SECTION (Legal & Auth Compliant) -->
     <section id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
         <div class="container fade-in">
             <div class="section-title mono-text ar-only">الواجهة التنفيذية | EXECUTIVE INTERFACE</div>
@@ -592,21 +636,21 @@
             
             <div class="portal-container">
                 <div id="login-view">
-                    <!-- Secure Corporate Authentication -->
                     <div class="auth-grid">
-                        <button onclick="signInWithGoogle()" class="social-btn btn-google">
+                        <button onclick="" class="social-btn btn-google" disabled title="Will be available shortly">
                             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="16">
                             AUTHORIZE WITH GOOGLE
+                            <div class="soon-badge mono-text">SOON</div>
                         </button>
-                        <button onclick="signInWithApple()" class="social-btn btn-apple">
+                        <button onclick="" class="social-btn btn-apple" disabled title="Will be available shortly">
                             <svg width="16" viewBox="0 0 384 512" fill="white"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                             AUTHORIZE WITH APPLE
+                            <div class="soon-badge mono-text">SOON</div>
                         </button>
                     </div>
 
                     <div class="divider">OR INITIATE DIRECT INQUIRY</div>
 
-                    <!-- Standard Consultation Form (No Phishing Risks) -->
                     <form onsubmit="handleFirebaseLogin(event)">
                         <div class="input-group">
                             <input type="text" id="userName" class="cyber-input mono-text" placeholder="Corporate ID / Full Name" required>
@@ -680,7 +724,6 @@ Connection Secure.
         </div>
     </section>
 
-    <!-- 🟢 Legal Modals -->
     <div id="legalModal" class="legal-modal">
         <div class="legal-content">
             <button class="legal-close" onclick="closeLegal()">×</button>
@@ -702,19 +745,26 @@ Connection Secure.
         <div class="footer-logo mono-text">フサム | experience™️</div>
         <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
             Engineering Human Experiences <br>
-<p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
+        <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
             Fearless . Relentless . True To You<br><p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
         <div class="footer-slogan mono-text">©️ 2026 フサム | Experience™️ All Rights Reserved</div>
+        <div class="legal-links mono-text">
             <a onclick="openLegal('privacy')">Privacy Policy / سياسة الخصوصية</a> | 
             <a onclick="openLegal('terms')">Terms of Use / شروط الاستخدام</a>
         </div>
     </footer>
 
-    <button class="ai-btn mono-text glitch" data-text="AI" onclick="toggleChat()">Ex|AI</button>
+    <button class="ai-btn mono-text glitch" data-text="EX|AI" onclick="toggleChat()">EX|AI</button>
     
     <div class="ai-window" id="aiWindow">
         <div class="ai-header mono-text">
             <span>フサム | EX x AI ONLINE</span>
+            <div class="voice-toggle-container">
+                VOICE
+                <div class="toggle-switch" id="voiceToggle" onclick="toggleVoice()">
+                    <div class="toggle-dot"></div>
+                </div>
+            </div>
             <button class="ai-close" onclick="toggleChat()">×</button>
         </div>
         <div class="ai-body" id="chatBody"></div>
@@ -750,21 +800,34 @@ Connection Secure.
             if(breakVideo2) { breakVideo2.innerHTML = `<source src="${shuffled[2]}" type="video/mp4">`; breakVideo2.load(); }
         });
 
-        // 🟢 Legal Information Logic
+        // 🟢 Legal Information Logic (Bilingual & Interactive)
         const legalTexts = {
             privacy: {
-                title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
-                body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة، ولا نطلب أو نحتفظ بأي معلومات مالية أو رموز تحقق سرية حساسة."
+                ar: {
+                    title: "سياسة الخصوصية وحماية البيانات | PRIVACY POLICY",
+                    body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b style='color:white;'>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b style='color:white;'>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b style='color:white;'>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة، ولا نطلب أو نحتفظ بأي معلومات مالية أو رموز تحقق سرية حساسة."
+                },
+                en: {
+                    title: "PRIVACY POLICY & DATA PROTECTION",
+                    body: "At フサム, we are committed to protecting your personal data in compliance with the Personal Data Protection Law (PDPL) of Saudi Arabia.<br><br>- <b style='color:white;'>Absolute Confidentiality:</b> Your data is never shared, sold, or exploited by any third parties.<br>- <b style='color:white;'>Purpose:</b> Entered data is utilized exclusively for engineering and consulting communication linked to our elite services.<br>- <b style='color:white;'>Security:</b> Our executive interfaces are designed as highly secure communication channels. We do not request or store sensitive financial information or authentication codes."
+                }
             },
             terms: {
-                title: "شروط الاستخدام | TERMS OF USE",
-                body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b>الحماية القانونية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام، استخراج البيانات، أو اختراق 'مصفوفة EX'.<br>- <b>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム."
+                ar: {
+                    title: "شروط الاستخدام | TERMS OF USE",
+                    body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية، بما في ذلك نظام مكافحة جرائم المعلوماتية.<br><br>- <b style='color:white;'>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b style='color:white;'>الحماية القانونية:</b> يُحظر تماماً أي محاولة للتلاعب بالنظام، استخراج البيانات، أو اختراق 'مصفوفة EX'.<br>- <b style='color:white;'>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム."
+                },
+                en: {
+                    title: "TERMS OF USE | EXECUTIVE INTERFACE",
+                    body: "Your use of the 'Executive Interface' is subject to the laws and regulations of Saudi Arabia, including the Anti-Cyber Crime Law.<br><br>- <b style='color:white;'>Interface Nature:</b> This platform is designed as a secure interactive environment for strategic consulting and idea exchange, not a commercial transaction system.<br>- <b style='color:white;'>Legal Protection:</b> Any attempt to manipulate the system, extract data, or breach the 'EX Matrix' is strictly prohibited.<br>- <b style='color:white;'>Intellectual Property:</b> All concepts and methodological frameworks (such as HX-5) displayed here are the exclusive registered intellectual property of フサム Concept House."
+                }
             }
         };
 
         function openLegal(type) {
-            document.getElementById('legalTitle').innerHTML = legalTexts[type].title;
-            document.getElementById('legalBody').innerHTML = legalTexts[type].body;
+            const lang = currentLang; // Uses dynamic language variable
+            document.getElementById('legalTitle').innerHTML = legalTexts[type][lang].title;
+            document.getElementById('legalBody').innerHTML = legalTexts[type][lang].body;
             document.getElementById('legalModal').style.display = 'flex';
         }
 
@@ -795,46 +858,9 @@ Connection Secure.
         }
 
         // ==========================================
-        // 🟢 Auth Functions (Legal Compliant)
+        // Auth Functions
         // ==========================================
 
-        async function signInWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            try {
-                const result = await auth.signInWithPopup(provider);
-                finalizeAuth(result.user);
-            } catch (error) { console.error("Google Auth Interrupted", error); }
-        }
-
-        async function signInWithApple() {
-            const provider = new firebase.auth.OAuthProvider('apple.com');
-            try {
-                const result = await auth.signInWithPopup(provider);
-                finalizeAuth(result.user);
-            } catch (error) { console.error("Apple Auth Interrupted", error); }
-        }
-
-        function finalizeAuth(user) {
-            currentUser.Name = user.displayName || "Authorized_Entity";
-            currentUser.Email = user.email || "Verified_Link";
-            currentUser.Phone = "OAuth_Verified";
-            
-            db.collection("Users").doc(currentUser.Email).set({
-                Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
-                Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }, { merge: true });
-
-            document.getElementById('login-view').style.display = 'none';
-            document.getElementById('dashboard-view').style.display = 'block';
-            fetchUserHistory();
-            
-            const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email });
-            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
-        }
-
-        // ==========================================
-        // Fetch History
-        // ==========================================
         async function fetchUserHistory() {
             const historyContainer = document.getElementById('history-content');
             historyContainer.innerHTML = '<p class="mono-text" style="color:var(--cyber-steel);">[FETCHING RECORDS...]</p>';
@@ -1004,10 +1030,25 @@ Connection Secure.
         }
         function printTerm(text) { termOutput.innerHTML += `\n${text}`; termOutput.scrollTop = termOutput.scrollHeight; }
 
-        // --- AI Chatbot & TTS Logic ---
+        // --- 🟢 EX|AI Chatbot & Tesla-Style Voice Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
+        
+        let voiceEnabled = false;
+
+        function toggleVoice() {
+            voiceEnabled = !voiceEnabled;
+            const toggleElement = document.getElementById('voiceToggle');
+            if(voiceEnabled) {
+                toggleElement.classList.add('active');
+            } else {
+                toggleElement.classList.remove('active');
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                }
+            }
+        }
         
         function toggleChat() { 
             chatWindow.classList.toggle('open'); 
@@ -1039,26 +1080,28 @@ Connection Secure.
             }
 
             let contentHTML = `<span class="msg-content">${safeText}</span>`;
-            
-            if (sender === 'bot' && !isGlitch) {
-                contentHTML += `<br><button onclick="speakText(this)" class="tts-btn" title="استماع / Listen">🔊</button>`;
-            }
-            
             msgDiv.innerHTML = contentHTML;
             chatBody.appendChild(msgDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
+
+            // 🟢 Auto trigger voice if switch is ON
+            if(sender === 'bot' && !isGlitch && voiceEnabled) {
+                speakTextRaw(text);
+            }
+
             return msgDiv; 
         }
 
-        function speakText(btn) {
-            const textContent = btn.parentElement.querySelector('.msg-content').innerText; 
+        function speakTextRaw(rawText) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(textContent);
+                // تنظيف النص من علامات التنسيق (النجمات) لكي لا يقرأها المتحدث
+                const cleanText = rawText.replace(/\*/g, '');
+                const utterance = new SpeechSynthesisUtterance(cleanText);
                 utterance.lang = currentLang === 'ar' ? 'ar-SA' : 'en-US';
+                // يمكنك تعديل سرعة ونبرة الصوت هنا إذا أردت
+                utterance.rate = 1.0;
                 window.speechSynthesis.speak(utterance);
-            } else {
-                alert('عذراً، متصفحك لا يدعم ميزة النطق الصوتي.');
             }
         }
 
