@@ -95,7 +95,7 @@
         }
         .control-btn:hover { background: var(--stark-white); color: var(--obsidian-black); }
 
-        /* 🟢 Tesla-Style Full Screen Portals (Scroll Snapping) */
+        /* 🟢 Tesla-Style Full Screen Portals */
         .portal-wrapper { height: 100vh; scroll-snap-type: y mandatory; overflow-y: scroll; overflow-x: hidden; scroll-behavior: smooth;}
         .tesla-section { position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: space-between; align-items: center; scroll-snap-align: start; text-align: center; overflow: hidden; padding-top: 15vh; box-sizing: border-box;}
         
@@ -112,6 +112,84 @@
         .tesla-btn-primary:hover { background: #fff; transform: scale(1.02); }
         .tesla-btn-secondary { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 40px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; text-decoration: none; min-width: 200px;}
         .tesla-btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+        /* 🟢 EXCLUSIVE ZBRUSH/VFX 2030 HOLOGRAPHIC IG VIEWER */
+        .holo-container {
+            position: relative;
+            width: 90%;
+            max-width: 380px;
+            background: rgba(10, 12, 14, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 15px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            margin-top: 2vh;
+            z-index: 2;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left; /* Keep HUD LTR usually for tech feel */
+        }
+        .holo-container:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 30px 70px rgba(0,0,0,1), 0 0 40px rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
+        }
+        .holo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        .holo-user {
+            font-family: 'Space Mono', monospace; font-weight: bold; color: var(--stark-white); font-size: 0.85rem; display: flex; align-items: center; gap: 10px; letter-spacing: 1px;
+        }
+        .holo-user::before {
+            content: ''; display: inline-block; width: 28px; height: 28px; 
+            background: url('icon.png') center/cover no-repeat; 
+            border-radius: 50%; border: 1px solid var(--elite-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        .holo-date { font-family: 'Space Mono', monospace; color: var(--cyber-steel); font-size: 0.65rem; letter-spacing: 2px;}
+        
+        .holo-media {
+            position: relative; width: 100%; border-radius: 8px; overflow: hidden; aspect-ratio: 4/5; background: #000;
+        }
+        .holo-media video, .holo-media img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.95; transition: 0.3s;
+        }
+        .holo-container:hover .holo-media video { opacity: 1; }
+        
+        /* The VFX Watermark */
+        .holo-watermark {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-family: 'Space Mono', monospace; font-size: 1.2rem; color: rgba(255,255,255,0.4);
+            white-space: nowrap; pointer-events: none; letter-spacing: 6px; text-transform: uppercase;
+            mix-blend-mode: overlay; text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        /* Zbrush/Sci-Fi Scanner */
+        .holo-scanline {
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--elite-gold); box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.4);
+            animation: scan 4s infinite ease-in-out; pointer-events: none; opacity: 0.8;
+        }
+        @keyframes scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+        .holo-footer { margin-top: 15px; text-align: right; direction: rtl; }
+        .holo-caption {
+            font-size: 0.8rem; color: #ccc; line-height: 1.7; margin-bottom: 12px;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+        .holo-action {
+            display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--stark-white);
+            text-decoration: none; border: 1px solid rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 2px; transition: 0.3s; letter-spacing: 1px;
+        }
+        .holo-action:hover { background: var(--stark-white); color: #000; }
 
         /* Document/Reading Section styling (For 00.2 - 00.12) */
         .doc-section { background: var(--obsidian-black); position: relative; z-index: 2; border-top: 1px solid #222;}
@@ -150,8 +228,8 @@
         .classified-content.open { max-height: 4000px; border-top: 1px solid #333; }
         
         .classified-content::after { content:''; position: absolute; top: -100px; left: 0; width: 100%; height: 100px; background: linear-gradient(to bottom, rgba(212,175,55,0), rgba(212,175,55,0.1)); z-index: 0; pointer-events: none; display: none; }
-        .classified-content.open::after { display: block; animation: scanline 4s linear infinite; }
-        @keyframes scanline { 0% { top: -100px; } 100% { top: 100%; } }
+        .classified-content.open::after { display: block; animation: scanline-bg 4s linear infinite; }
+        @keyframes scanline-bg { 0% { top: -100px; } 100% { top: 100%; } }
 
         .dna-record { padding: 40px; position: relative; z-index: 1;}
         .dna-node { margin-bottom: 50px; position: relative; padding-left: 25px; border-left: 1px solid #333;}
@@ -232,7 +310,7 @@
         .legal-links a { color: var(--cyber-steel); text-decoration: none; font-size: 0.8rem; margin: 0 10px; transition: 0.3s; cursor: pointer; border-bottom: 1px solid transparent; padding-bottom: 2px;}
         .legal-links a:hover { color: var(--stark-white); border-color: var(--stark-white);}
 
-        /* 🟢 EX|AI ORACLE CHATBOT (Elite Cyberpunk Upgrade) */
+        /* 🟢 EX|AI ORACLE CHATBOT */
         .ai-btn {
             position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; border-radius: 5px;
             background: rgba(5,6,7,0.75); backdrop-filter: blur(10px);
@@ -247,7 +325,6 @@
         @keyframes btnSweep { 0% {left: -100%;} 50% {left: 200%;} 100% {left: 200%;} }
         body.lang-en .ai-btn { left: auto; right: 30px; }
         
-        /* Premium Interface HUD */
         .ai-window {
             position: fixed; bottom: 100px; left: 30px; width: 360px; height: 520px; 
             background: rgba(5, 6, 7, 0.85); backdrop-filter: blur(15px);
@@ -265,7 +342,7 @@
         .ai-close { background: none; border: none; color: var(--cyber-steel); font-size: 1.5rem; cursor: pointer; transition: 0.3s; line-height: 1;}
         .ai-close:hover { color: #ff4444; transform: rotate(90deg);}
         
-        /* iOS/Tesla Style Toggle Switch */
+        /* Voice Toggle Switch */
         .voice-toggle-container { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: var(--cyber-steel); font-family: 'Space Mono', monospace; letter-spacing: 1px;}
         .toggle-switch { width: 36px; height: 18px; background: #222; border-radius: 20px; position: relative; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; border: 1px solid #333;}
         .toggle-dot { width: 14px; height: 14px; background: #666; border-radius: 50%; position: absolute; top: 1px; left: 2px; transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.3s; }
@@ -318,18 +395,25 @@
 
         <section class="tesla-section">
             <video class="video-bg" autoplay loop muted playsinline src="ex2.mp4"></video> 
-            <div class="overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);"></div>
+            <div class="overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.9) 100%);"></div>
             
-            <div class="tesla-header fade-in">
-                <h2 class="tesla-title mono-text" style="color: var(--stark-white);">PROJECT OMEGA</h2>
-                <p class="tesla-subtitle mono-text" style="color: var(--elite-gold);">x @S7S1 COLLABORATION</p>
-                <p class="tesla-desc ar-only">عندما تلتقي ثقافة السيارات عالية الأداء مع الجماليات النخبوية. تصميم حصري يجسد السرعة، الدقة، والأدرينالين.</p>
-                <p class="tesla-desc en-only">Where high-performance automotive culture meets elite aesthetics. An exclusive design embodying speed, precision, and adrenaline.</p>
-            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">01 NOV 2025</span>
+                </div>
+                
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="s7s1_collab.mp4"></video>
+                    <div class="holo-watermark">フサム | EX</div>
+                    <div class="holo-scanline"></div>
+                </div>
 
-            <div class="tesla-actions">
-                <button class="tesla-btn-secondary mono-text" onclick="openLegal('terms')">Explore Campaign</button>
-                <button class="tesla-btn-primary mono-text" onclick="window.open('https://www.instagram.com/s7s1', '_blank')">View @s7s1</button>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">عندما تلتقي ثقافة السيارات عالية الأداء مع الجماليات النخبوية. تصميم حصري يجسد السرعة، الدقة، والأدرينالين بالتعاون مع @s7s1...</p>
+                    <p class="holo-caption en-only">Where high-performance automotive culture meets elite aesthetics. An exclusive design embodying speed and precision with @s7s1...</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/ex_experience.sa', '_blank')">[ OPEN ORIGINAL ]</button>
+                </div>
             </div>
         </section>
 
@@ -337,15 +421,23 @@
             <video class="video-bg" autoplay loop muted playsinline src="ex3.mp4"></video>
             <div class="overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.9) 100%);"></div>
             
-            <div class="tesla-header fade-in">
-                <h2 class="tesla-title mono-text">TRACK 35</h2>
-                <p class="tesla-subtitle mono-text">DOCU-SERIES EVENT</p>
-                <p class="tesla-desc ar-only">توثيق الروح الجامحة لرياضة المحركات في الشرق الأوسط. قصة تُروى من خلف المقود.</p>
-                <p class="tesla-desc en-only">Documenting the untamed spirit of Middle Eastern motorsport. A story told from behind the wheel.</p>
-            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">15 DEC 2025</span>
+                </div>
+                
+                <div class="holo-media">
+                    <img src="bg2.jpg" alt="Track 35 Event">
+                    <div class="holo-watermark">TRACK 35</div>
+                    <div class="holo-scanline"></div>
+                </div>
 
-            <div class="tesla-actions">
-                <a href="#portal" class="tesla-btn-primary mono-text">Join The Matrix</a>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">مشروع TRACK 35: توثيق الروح الجامحة لرياضة المحركات في الشرق الأوسط. قصة تُروى من خلف المقود. انضم للمصفوفة...</p>
+                    <p class="holo-caption en-only">TRACK 35: Documenting the untamed spirit of Middle Eastern motorsport. A story told from behind the wheel. Join the matrix...</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/ex_experience.sa', '_blank')">[ OPEN ORIGINAL ]</button>
+                </div>
             </div>
         </section>
 
