@@ -36,7 +36,7 @@
             z-index: -4;
         }
 
-        /* حاوية الـ 3D (تظهر في القسم الأخير) */
+        /* حاوية الـ 3D */
         #webgl-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; opacity: 0; pointer-events: none;
@@ -49,11 +49,11 @@
             scroll-snap-align: center; 
         }
 
-        /* تنسيق الصور والفيديو */
+        /* تنسيق الفيديو السينمائي */
         .cinematic-media {
-            position: absolute; top: -10%; left: 0; width: 100%; height: 120%;
-            object-fit: cover; z-index: -3; opacity: 0.5;
-            filter: contrast(1.2) grayscale(0.2);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -3; opacity: 0.6;
+            filter: contrast(1.2) grayscale(0.1);
         }
 
         .overlay {
@@ -81,20 +81,25 @@
     <div id="webgl-container"></div>
 
     <section class="story-section" id="section1">
-        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop" class="cinematic-media" alt="واجهة سينمائية">
+        <video class="cinematic-media scroll-video" autoplay loop muted playsinline>
+            <source src="ex1.mp4" type="video/mp4">
+        </video>
         <div class="overlay"></div>
         <h1 class="brand-text">صُمم ليكون <span class="highlight">المطلق</span></h1>
     </section>
 
     <section class="story-section" id="section2">
-        <video class="cinematic-media" id="cinematic-video" loop muted playsinline>
-            <source src="https://cdn.pixabay.com/video/2020/05/24/40090-424888147_large.mp4" type="video/mp4">
+        <video class="cinematic-media scroll-video" loop muted playsinline>
+            <source src="ex2.mp4" type="video/mp4">
         </video>
         <div class="overlay" style="background: radial-gradient(circle, transparent 30%, var(--bg-color) 100%);"></div>
         <h2 class="brand-text">رؤية تتجاوز <span class="highlight">الخيال</span></h2>
     </section>
 
     <section class="story-section" id="section3">
+        <video class="cinematic-media scroll-video" loop muted playsinline style="opacity: 0.3;">
+            <source src="ex3.mp4" type="video/mp4">
+        </video>
         <div class="overlay" style="background: transparent;"></div>
         <h2 class="brand-text">من <span class="blueprint-text">المخطط</span> إلى الواقع</h2>
     </section>
@@ -102,9 +107,7 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // ==========================================
-        // 1. حركة النصوص والبارالاكس (الأساسيات)
-        // ==========================================
+        // 1. حركة النصوص (ضبابية إلى وضوح)
         gsap.utils.toArray('.brand-text').forEach(text => {
             gsap.to(text, {
                 scrollTrigger: { trigger: text, start: "top 85%", end: "center center", scrub: 1 },
@@ -112,42 +115,34 @@
             });
         });
 
-        gsap.utils.toArray('img.cinematic-media').forEach(image => {
-            gsap.to(image, {
-                scrollTrigger: { trigger: image.parentElement, start: "top bottom", end: "bottom top", scrub: true },
-                y: "20%", ease: "none"
-            });
+        // 2. نظام إدارة الفيديوهات الذكي (تشغيل فقط عند الوصول للقسم)
+        const sections = document.querySelectorAll('.story-section');
+        sections.forEach(section => {
+            const video = section.querySelector('video.scroll-video');
+            if(video) {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top 60%", end: "bottom 40%",
+                    onEnter: () => video.play(),
+                    onLeave: () => video.pause(),
+                    onEnterBack: () => video.play(),
+                    onLeaveBack: () => video.pause()
+                });
+            }
         });
 
-        // ==========================================
-        // 2. التحكم الذكي بالفيديو السينمائي
-        // ==========================================
-        const video = document.getElementById('cinematic-video');
-        ScrollTrigger.create({
-            trigger: "#section2",
-            start: "top 60%", end: "bottom 40%",
-            onEnter: () => video.play(),      // تشغيل الفيديو عند الوصول إليه
-            onLeave: () => video.pause(),     // إيقافه عند تجاوزه لتوفير الموارد
-            onEnterBack: () => video.play(),
-            onLeaveBack: () => video.pause()
-        });
-
-        // ==========================================
         // 3. إعداد عالم الـ 3D (Three.js)
-        // ==========================================
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('webgl-container').appendChild(renderer.domElement);
 
-        // إضاءة المشهد
         const light = new THREE.DirectionalLight(0xffffff, 2);
         light.position.set(5, 5, 5);
         scene.add(light);
         scene.add(new THREE.AmbientLight(0x404040, 2));
 
-        // مجسم هندسي متقدم (Icosahedron)
         const geometry = new THREE.IcosahedronGeometry(12, 1);
         const material = new THREE.MeshStandardMaterial({ 
             color: 0x0078FF, wireframe: true, emissive: 0x002255, emissiveIntensity: 0.5 
@@ -156,45 +151,36 @@
         scene.add(mesh);
         camera.position.z = 30;
 
-        // دالة التحديث المستمر للـ 3D
         function animate() {
             requestAnimationFrame(animate);
-            mesh.rotation.y += 0.002; // دوران بطيء جداً وثابت
+            mesh.rotation.y += 0.002; 
             mesh.rotation.x += 0.001;
             renderer.render(scene, camera);
         }
         animate();
 
-        // ==========================================
-        // 4. ربط الـ 3D بحركة الماوس (السحر الحقيقي)
-        // ==========================================
+        // 4. ربط الـ 3D بالقسم الثالث وتغيير لونه
         const webglContainer = document.getElementById('webgl-container');
-        
         ScrollTrigger.create({
             trigger: "#section3",
-            start: "top 70%", // يبدأ التأثير قبل الوصول للقسم بقليل
+            start: "top 70%",
             onEnter: () => {
-                // إظهار حاوية الـ 3D
                 gsap.to(webglContainer, { opacity: 1, duration: 1 });
-                // تحويل المجسم من خطوط (Blueprint) إلى صلب بلون البراند
-                gsap.to(material.color, { r: 0.89, g: 0.09, b: 0.21, duration: 1.5 }); // لون أحمر #E31937
+                gsap.to(material.color, { r: 0.89, g: 0.09, b: 0.21, duration: 1.5 }); // اللون الأحمر
                 setTimeout(() => { material.wireframe = false; }, 500);
             },
             onLeaveBack: () => {
-                // إخفاء الـ 3D والعودة لوضع الخطوط عند الصعود
                 gsap.to(webglContainer, { opacity: 0, duration: 1 });
-                gsap.to(material.color, { r: 0, g: 0.47, b: 1, duration: 1.5 }); // لون أزرق
+                gsap.to(material.color, { r: 0, g: 0.47, b: 1, duration: 1.5 }); // اللون الأزرق
                 material.wireframe = true;
             }
         });
 
-        // تدوير المجسم بقوة عند التمرير داخل القسم الثالث
         gsap.to(mesh.rotation, {
             z: Math.PI,
             scrollTrigger: { trigger: "#section3", start: "top bottom", end: "bottom top", scrub: 1 }
         });
 
-        // تجاوب الشاشة
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
