@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تجربة سينمائية ثلاثية الأبعاد</title>
+    <title>フサム | experience™ - هندسة التجربة البشرية</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        /* إعدادات الألوان (يمكنك تغييرها لاحقاً لتطابق هويتك) */
+        /* الهوية البصرية لـ フサム | experience™ */
         :root {
-            --bg-color: #050505; /* أسود سينمائي */
+            --bg-color: #000000; /* أسود عميق يبرز الفخامة */
             --text-primary: #ffffff;
-            --brand-accent: #E31937; /* لون مميز، مثلاً أحمر */
+            --brand-accent: #ffffff; /* يمكن تغييره للون علامتك */
+            --text-secondary: #888888;
         }
 
         body, html {
@@ -22,134 +25,261 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* خط نقي وبسيط */
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* لجعل الخطوط حادة واحترافية */
         }
 
-        /* مساحة العرض ثلاثية الأبعاد لتكون ثابتة في الخلفية */
+        /* حاوية الـ 3D (تكون ثابتة في الخلفية دائماً) */
         #webgl-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1; /* لجعلها خلف النصوص */
+            z-index: -1;
+            pointer-events: none; /* لمنع تفاعل الماوس مع الـ 3D مباشرة والتأثير على السكرول */
         }
 
-        /* تنسيق أقسام السرد القصصي (Storytelling) */
+        /* تنسيق أقسام السرد القصصي (Storytelling Sections) */
         .section {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start; /* محاذاة لليمين لتناسب العربية */
             padding: 0 10%;
+            position: relative;
+            z-index: 1; /* لتكون فوق الـ 3D */
+        }
+
+        /* تصميم نصوص البراند بمستوى الشركات التقنية الكبرى */
+        .brand-logo {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            position: absolute;
+            top: 40px;
+            right: 10%;
+            font-weight: 300;
         }
 
         .title {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            opacity: 0; /* مخفي مبدئياً ليظهر بحركة انسيابية */
+            transform: translateY(30px);
         }
 
         .subtitle {
-            font-size: 1.5rem;
-            max-width: 600px;
-            line-height: 1.6;
-            color: #cccccc;
+            font-size: 1.2rem;
+            max-width: 500px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
         }
-
-        .brand-highlight {
-            color: var(--brand-accent);
+        
+        /* مؤشر التحميل (Loading) أثناء جلب مجسم الـ 3D */
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            z-index: 999;
+            transition: opacity 0.5s ease;
         }
     </style>
 </head>
 <body>
 
+    <div id="loader">جاري تحميل التجربة... 0%</div>
     <div id="webgl-container"></div>
+    <div class="brand-logo">フサム | experience™</div>
 
-    <section class="section">
-        <h1 class="title">مرحباً بك في <span class="brand-highlight">المستقبل</span></h1>
-        <p class="subtitle">قم بالتمرير للأسفل لتبدأ رحلتك السينمائية وترى كيف يتفاعل المجسم مع حركتك.</p>
+    <section class="section" id="section-1">
+        <h1 class="title">هندسة التجربة<br>البشرية.</h1>
+        <p class="subtitle">تصميم يدمج بين الأداء العالي والجمال البسيط. اكتشف أبعاداً جديدة للعلامة التجارية.</p>
     </section>
 
-    <section class="section">
-        <h2 class="title">تصميم <span class="brand-highlight">هندسي</span> دقيق</h2>
-        <p class="subtitle">هنا سنضع نصوص البراند الخاصة بك، لتتناغم مع حركة المجسم في الخلفية تماماً كما في الأفلام.</p>
+    <section class="section" id="section-2">
+        <h2 class="title" style="text-align: left; width: 100%;">دقة يابانية.<br>رؤية عالمية.</h2>
+        <p class="subtitle" style="text-align: left; width: 100%; margin-left: 0; margin-right: auto;">كل زاوية، كل انحناء، تم تصميمه ليعكس فلسفة الاستدامة والتطور.</p>
     </section>
 
-    <section class="section">
-        <h2 class="title">هويتك، <span class="brand-highlight">رؤيتك</span></h2>
-        <p class="subtitle">هذا مجرد إطار مبدئي. سنقوم باستبدال هذا المجسم بمنتجاتك وصورك الخاصة.</p>
+    <section class="section" id="section-3">
+        <h2 class="title">أداء لا يضاهى.</h2>
+        <p class="subtitle">قوة محركة تدفعك نحو المستقبل، مع الحفاظ على التوازن المثالي.</p>
     </section>
 
     <script>
-        // 1. إعداد مشهد Three.js
+        // --- 1. إعدادات المشهد والكاميرا والإضاءة ---
         const container = document.getElementById('webgl-container');
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); // alpha: true لجعل الخلفية شفافة
         
+        // إعدادات الكاميرا (مجال الرؤية، الأبعاد، المسافة القريبة والبعيدة)
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 10); // وضع الكاميرا المبدئي
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // لتحسين الجودة على الشاشات العالية الدقة (Retina)
+        // تفعيل الظلال الواقعية (مهم جداً لمستوى تيسلا)
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputEncoding = THREE.sRGBEncoding; // لألوان أكثر واقعية
+        renderer.toneMapping = THREE.ACESFilmicToneMapping; // نظام ألوان سينمائي
         container.appendChild(renderer.domElement);
 
-        // 2. إضافة إضاءة سينمائية
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        // إضاءة محيطية خفيفة جداً
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
         scene.add(ambientLight);
         
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(5, 5, 5);
+        // إضاءة موجهة (مثل ضوء الشمس أو كشاف استوديو)
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+        directionalLight.position.set(5, 10, 7);
+        directionalLight.castShadow = true;
         scene.add(directionalLight);
 
-        // 3. إنشاء مجسم هندسي مؤقت (بديل لمنتجك حتى ترفعه)
-        // استخدمت شكل هندسي معقد ليعطي طابعاً احترافياً
-        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-        const material = new THREE.MeshStandardMaterial({ 
-            color: 0xE31937, // لون البراند
-            wireframe: true  // عرض كخطوط هندسية
-        });
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
+        // إضاءة لملء الظلال (Fill Light) لإبراز تفاصيل المجسم
+        const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        fillLight.position.set(-5, 0, -5);
+        scene.add(fillLight);
 
-        camera.position.z = 30;
+        // --- 2. تحميل مجسم الـ 3D (GLTF/GLB) ---
+        let model; // المتغير الذي سيحمل المجسم
+        const loader = new THREE.GLTFLoader();
+        const loaderElement = document.getElementById('loader');
 
-        // 4. ربط حركة المجسم بعجلة التمرير (Scroll) باستخدام GSAP
+        // *** هام جداً: هنا يجب وضع مسار ملف الـ 3D الخاص بك ***
+        // كمثال مؤقت، سأترك المسار فارغاً وسأضيف تعليقاً يوضح مكانه.
+        // يمكنك تحميل موديلات مجانية للتجربة من موقع Sketchfab بصيغة glTF.
+        const modelPath = 'YOUR_3D_MODEL_FILE.glb'; // استبدل هذا بمسار ملفك
+
+        /* ملاحظة للمطور: بما أنه لا يوجد مسار حقيقي الآن، لن يتم تحميل مجسم.
+        لغرض التجربة إذا أردت رؤية شيء قبل أن تحصل على ملف 3D، 
+        يمكننا إضافة كود مؤقت لإنشاء مجسم (كما في الكود السابق) هنا.
+        */
+
+        // دالة التحميل (قم بإزالة التعليقات عندما تمتلك ملف 3D)
+        /*
+        loader.load(
+            modelPath,
+            function (gltf) {
+                model = gltf.scene;
+                
+                // تظبيط حجم المجسم وموقعه المبدئي
+                model.scale.set(1, 1, 1); 
+                model.position.set(0, -1, 0);
+                
+                // جعل المجسم يستقبل ويصدر ظلال
+                model.traverse((node) => {
+                    if (node.isMesh) {
+                        node.castShadow = true;
+                        node.receiveShadow = true;
+                    }
+                });
+
+                scene.add(model);
+                loaderElement.style.opacity = '0'; // إخفاء مؤشر التحميل
+                setTimeout(() => loaderElement.style.display = 'none', 500);
+
+                // بعد تحميل المجسم، نقوم بتجهيز الحركات (الخطوة 3)
+                setupAnimations();
+            },
+            function (xhr) {
+                // عرض نسبة التحميل
+                loaderElement.innerText = `جاري تحميل التجربة... ${Math.round(xhr.loaded / xhr.total * 100)}%`;
+            },
+            function (error) {
+                console.error('حدث خطأ أثناء تحميل المجسم:', error);
+                loaderElement.innerText = 'خطأ في التحميل.';
+            }
+        );
+        */
+
+        // --- 3. برمجة الحركات السينمائية (Animations & Scroll) ---
         gsap.registerPlugin(ScrollTrigger);
 
-        // جعل المجسم يدور ويقترب كلما نزل المستخدم لأسفل
-        gsap.to(mesh.rotation, {
-            x: Math.PI * 2,
-            y: Math.PI * 2,
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1 // لجعل الحركة ناعمة وتتبع الماوس
-            }
-        });
+        function setupAnimations() {
+            if (!model) return; // تأكد من وجود المجسم
 
-        gsap.to(camera.position, {
-            z: 15, // تقريب الكاميرا
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1
-            }
-        });
+            // حركة ظهور النصوص بأسلوب أنيق (Fade in Up)
+            const titles = gsap.utils.toArray('.title');
+            const subtitles = gsap.utils.toArray('.subtitle');
 
-        // 5. دالة تحديث الشاشة المستمرة
+            titles.forEach((title, i) => {
+                gsap.to(title, {
+                    scrollTrigger: {
+                        trigger: title.parentElement,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                });
+                
+                // ربط حركة النص الفرعي بالنص الأساسي
+                gsap.to(subtitles[i], {
+                    scrollTrigger: {
+                        trigger: title.parentElement,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: 0.2, // تأخير بسيط ليظهر بعد العنوان
+                    ease: "power3.out"
+                });
+            });
+
+            // ---------------------------------------------------
+            // السحر الحقيقي: ربط دوران وحركة المجسم بالتمرير (Scroll)
+            // ---------------------------------------------------
+            
+            // إعداد مسار زمني (Timeline) لحركة المجسم
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.5 // يجعل الحركة ناعمة وتتبع سرعة الماوس بدقة
+                }
+            });
+
+            // الحركة من القسم 1 إلى القسم 2 (دوران المجسم وإزاحته لليمين)
+            tl.to(model.rotation, { y: Math.PI / 2, ease: "none" }, 0)
+              .to(model.position, { x: 2, z: 2, ease: "none" }, 0); // الإزاحة لليمين ليترك مساحة للنص في اليسار
+
+            // الحركة من القسم 2 إلى القسم 3 (دوران إضافي وتقريب الكاميرا)
+            tl.to(model.rotation, { y: Math.PI, ease: "none" }, 0.5) // 0.5 تعني منتصف مسافة التمرير
+              .to(model.position, { x: 0, y: 1, ease: "none" }, 0.5)
+              .to(camera.position, { z: 6, ease: "none" }, 0.5); // تقريب الكاميرا (Zoom in)
+        }
+
+        // --- 4. دالة التحديث المستمر (Render Loop) ---
         function animate() {
             requestAnimationFrame(animate);
-            // دوران خفيف ومستمر حتى بدون تمرير
-            mesh.rotation.y += 0.002;
+            
+            // إضافة حركة دوران "تنفس" خفيفة جداً ومستمرة للمجسم (Micro-animation)
+            if (model) {
+                 // تعليق هذه الأسطر إذا أردت أن تكون حركة المجسم معتمدة 100% على التمرير فقط
+                 // model.rotation.y += 0.001; 
+                 // model.position.y += Math.sin(Date.now() * 0.001) * 0.002; // حركة طفو خفيفة
+            }
+            
             renderer.render(scene, camera);
         }
         animate();
 
-        // 6. جعل المشهد يتجاوب مع تغيير حجم الشاشة
+        // --- 5. التجاوب مع حجم الشاشة (Responsive) ---
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
