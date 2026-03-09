@@ -3,169 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع السينمائي | الهندسة المطلقة</title>
+    <title>الهندسة المطلقة | النسخة الماستر</title>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <style>
-        /* ========================================= */
-        /* 1. إعدادات الهوية البصرية والتأثير النفسي */
-        /* ========================================= */
         :root {
-            --brand-color: #E31937; /* لون البراند (أحمر طاقة) */
-            --bg-color: #030303; /* أسود عميق جداً */
+            --brand-color: #E31937; 
+            --bg-color: #030303; 
             --text-color: #FFFFFF;
-            --blueprint-line: rgba(0, 120, 255, 0.07); /* لون خطوط الهندسة */
+            --blueprint-line: rgba(0, 120, 255, 0.08); 
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Helvetica Neue', Arial, sans-serif;
             overflow-x: hidden;
-            /* تفعيل الجذب المغناطيسي القوي */
             scroll-snap-type: y mandatory; 
         }
 
-        /* ========================================= */
-        /* 2. التأثيرات السينمائية والهندسية (الخلفيات) */
-        /* ========================================= */
-        
-        /* شبكة المخططات الهندسية (Blueprint Grid) */
+        /* الشبكات الهندسية (Blueprint Grid) */
         .blueprint-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-size: 50px 50px;
             background-image: 
                 linear-gradient(to right, var(--blueprint-line) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--blueprint-line) 1px, transparent 1px);
-            z-index: -3;
+            z-index: -4;
         }
 
-        /* تأثير حبيبات الفيلم السينمائي (Film Grain) */
-        .film-grain {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
-            opacity: 0.04;
-            pointer-events: none;
-            z-index: 10;
+        /* حاوية الـ 3D (تظهر في القسم الأخير) */
+        #webgl-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2; opacity: 0; pointer-events: none;
         }
 
-        /* ========================================= */
-        /* 3. هيكل الأقسام والنصوص */
-        /* ========================================= */
         .story-section {
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            scroll-snap-align: center; /* نقطة التوقف المغناطيسية */
+            height: 100vh; width: 100vw;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            scroll-snap-align: center; 
         }
 
-        /* تنسيق الصور بتأثير العمق */
-        .cinematic-image {
-            position: absolute;
-            top: -10%; /* مساحة إضافية لحركة البارالاكس */
-            left: 0;
-            width: 100%;
-            height: 120%; /* أكبر من الشاشة لتسمح بالحركة */
-            object-fit: cover;
-            z-index: -2;
-            opacity: 0.4;
-            filter: contrast(1.2) grayscale(0.2); /* تعديل لوني سينمائي */
+        /* تنسيق الصور والفيديو */
+        .cinematic-media {
+            position: absolute; top: -10%; left: 0; width: 100%; height: 120%;
+            object-fit: cover; z-index: -3; opacity: 0.5;
+            filter: contrast(1.2) grayscale(0.2);
         }
 
-        /* طبقة تدرج لوني لدمج الصورة مع الخلفية */
         .overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, var(--bg-color) 90%);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 10%, var(--bg-color) 95%);
             z-index: -1;
         }
 
-        /* نصوص البراند - تصميم هندسي صارم */
+        /* نصوص التأثير النفسي */
         .brand-text {
-            font-size: 5vw;
-            font-weight: 900;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0px 10px 30px rgba(0,0,0,0.9);
-            margin: 0;
-            /* الإعدادات الأولية قبل التحريك */
-            opacity: 0;
-            transform: translateY(80px) scale(0.9);
-            filter: blur(10px); 
+            font-size: 5vw; font-weight: 900; text-align: center;
+            text-transform: uppercase; letter-spacing: 2px;
+            text-shadow: 0px 10px 30px rgba(0,0,0,0.9); margin: 0;
+            opacity: 0; transform: translateY(80px) scale(0.9);
+            filter: blur(15px); 
         }
 
-        .highlight {
-            color: var(--brand-color);
-            text-shadow: 0 0 20px rgba(227, 25, 55, 0.4);
-        }
+        .highlight { color: var(--brand-color); text-shadow: 0 0 20px rgba(227, 25, 55, 0.4); }
+        .blueprint-text { color: #0078FF; text-shadow: 0 0 20px rgba(0, 120, 255, 0.4); }
     </style>
 </head>
 <body>
 
     <div class="blueprint-bg"></div>
-    <div class="film-grain"></div>
+    <div id="webgl-container"></div>
 
     <section class="story-section" id="section1">
-        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop" class="cinematic-image" alt="مشهد سينمائي">
+        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop" class="cinematic-media" alt="واجهة سينمائية">
         <div class="overlay"></div>
         <h1 class="brand-text">صُمم ليكون <span class="highlight">المطلق</span></h1>
     </section>
 
     <section class="story-section" id="section2">
-        <img src="https://images.unsplash.com/photo-1536147116438-ce2654222770?q=80&w=1995&auto=format&fit=crop" class="cinematic-image" alt="مشهد سينمائي آخر">
-        <div class="overlay"></div>
-        <h2 class="brand-text">هندسة تخاطب <span class="highlight">حواسك</span></h2>
+        <video class="cinematic-media" id="cinematic-video" loop muted playsinline>
+            <source src="https://cdn.pixabay.com/video/2020/05/24/40090-424888147_large.mp4" type="video/mp4">
+        </video>
+        <div class="overlay" style="background: radial-gradient(circle, transparent 30%, var(--bg-color) 100%);"></div>
+        <h2 class="brand-text">رؤية تتجاوز <span class="highlight">الخيال</span></h2>
     </section>
 
     <section class="story-section" id="section3">
-        <div class="overlay"></div>
-        <h2 class="brand-text">قوة <span style="color:#0078FF;">المخططات</span> الرقمية</h2>
+        <div class="overlay" style="background: transparent;"></div>
+        <h2 class="brand-text">من <span class="blueprint-text">المخطط</span> إلى الواقع</h2>
     </section>
 
     <script>
-        // تفعيل أداة التمرير
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. حركة سينمائية معقدة للنصوص (ظهور، توضيح، وتكبير)
+        // ==========================================
+        // 1. حركة النصوص والبارالاكس (الأساسيات)
+        // ==========================================
         gsap.utils.toArray('.brand-text').forEach(text => {
             gsap.to(text, {
-                scrollTrigger: {
-                    trigger: text,
-                    start: "top 85%", // تبدأ الحركة عندما يصل العنصر لـ 85% من الشاشة
-                    end: "center center",
-                    scrub: 1 // ربط الحركة بسرعة تمرير الماوس (تأثير تفاعلي)
-                },
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                filter: "blur(0px)", // التحول من الضبابية إلى الوضوح التام
-                ease: "power4.out"
+                scrollTrigger: { trigger: text, start: "top 85%", end: "center center", scrub: 1 },
+                opacity: 1, y: 0, scale: 1, filter: "blur(0px)", ease: "power4.out"
             });
         });
 
-        // 2. تأثير العمق البصري (Parallax) للصور الخلفية
-        gsap.utils.toArray('.cinematic-image').forEach(image => {
+        gsap.utils.toArray('img.cinematic-media').forEach(image => {
             gsap.to(image, {
-                scrollTrigger: {
-                    trigger: image.parentElement,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                },
-                y: "20%", // تحريك الصورة للأسفل ببطء أثناء التمرير
-                ease: "none"
+                scrollTrigger: { trigger: image.parentElement, start: "top bottom", end: "bottom top", scrub: true },
+                y: "20%", ease: "none"
             });
+        });
+
+        // ==========================================
+        // 2. التحكم الذكي بالفيديو السينمائي
+        // ==========================================
+        const video = document.getElementById('cinematic-video');
+        ScrollTrigger.create({
+            trigger: "#section2",
+            start: "top 60%", end: "bottom 40%",
+            onEnter: () => video.play(),      // تشغيل الفيديو عند الوصول إليه
+            onLeave: () => video.pause(),     // إيقافه عند تجاوزه لتوفير الموارد
+            onEnterBack: () => video.play(),
+            onLeaveBack: () => video.pause()
+        });
+
+        // ==========================================
+        // 3. إعداد عالم الـ 3D (Three.js)
+        // ==========================================
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('webgl-container').appendChild(renderer.domElement);
+
+        // إضاءة المشهد
+        const light = new THREE.DirectionalLight(0xffffff, 2);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040, 2));
+
+        // مجسم هندسي متقدم (Icosahedron)
+        const geometry = new THREE.IcosahedronGeometry(12, 1);
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0x0078FF, wireframe: true, emissive: 0x002255, emissiveIntensity: 0.5 
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        camera.position.z = 30;
+
+        // دالة التحديث المستمر للـ 3D
+        function animate() {
+            requestAnimationFrame(animate);
+            mesh.rotation.y += 0.002; // دوران بطيء جداً وثابت
+            mesh.rotation.x += 0.001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // ==========================================
+        // 4. ربط الـ 3D بحركة الماوس (السحر الحقيقي)
+        // ==========================================
+        const webglContainer = document.getElementById('webgl-container');
+        
+        ScrollTrigger.create({
+            trigger: "#section3",
+            start: "top 70%", // يبدأ التأثير قبل الوصول للقسم بقليل
+            onEnter: () => {
+                // إظهار حاوية الـ 3D
+                gsap.to(webglContainer, { opacity: 1, duration: 1 });
+                // تحويل المجسم من خطوط (Blueprint) إلى صلب بلون البراند
+                gsap.to(material.color, { r: 0.89, g: 0.09, b: 0.21, duration: 1.5 }); // لون أحمر #E31937
+                setTimeout(() => { material.wireframe = false; }, 500);
+            },
+            onLeaveBack: () => {
+                // إخفاء الـ 3D والعودة لوضع الخطوط عند الصعود
+                gsap.to(webglContainer, { opacity: 0, duration: 1 });
+                gsap.to(material.color, { r: 0, g: 0.47, b: 1, duration: 1.5 }); // لون أزرق
+                material.wireframe = true;
+            }
+        });
+
+        // تدوير المجسم بقوة عند التمرير داخل القسم الثالث
+        gsap.to(mesh.rotation, {
+            z: Math.PI,
+            scrollTrigger: { trigger: "#section3", start: "top bottom", end: "bottom top", scrub: 1 }
+        });
+
+        // تجاوب الشاشة
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
 </body>
