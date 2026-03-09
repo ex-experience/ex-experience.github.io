@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | experience™️ - Engineering Human Experiences</title>
@@ -97,101 +97,46 @@
 
         /* 🟢 Tesla-Style Full Screen Portals */
         .portal-wrapper { height: 100vh; scroll-snap-type: y mandatory; overflow-y: scroll; overflow-x: hidden; scroll-behavior: smooth;}
-        .tesla-section { position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: space-between; align-items: center; scroll-snap-align: start; text-align: center; overflow: hidden; padding-top: 15vh; box-sizing: border-box;}
+        .tesla-section { position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; align-items: center; scroll-snap-align: start; text-align: center; overflow: hidden; padding-top: 5vh; box-sizing: border-box;}
         
         .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.5; filter: grayscale(30%) contrast(120%); }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.8) 100%); z-index: 1; pointer-events: none; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.9) 100%); z-index: 1; pointer-events: none; }
 
-        .tesla-header { position: relative; z-index: 2; width: 100%; padding: 0 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.9);}
-        .tesla-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; letter-spacing: 4px; margin: 0; }
-        .tesla-subtitle { font-size: clamp(0.9rem, 2vw, 1.2rem); color: #ddd; margin-top: 10px; letter-spacing: 2px; }
-        .tesla-desc { font-size: 1rem; color: #aaa; max-width: 600px; margin: 20px auto 0; line-height: 1.6; }
+        .tesla-header { position: relative; z-index: 2; width: 100%; padding: 0 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin-bottom: 2vh;}
+        .tesla-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 400; letter-spacing: 4px; margin: 0; text-transform: uppercase;}
+        .tesla-subtitle { font-size: clamp(0.8rem, 2vw, 1rem); color: var(--elite-gold); margin-top: 10px; letter-spacing: 3px; font-family: 'Space Mono', monospace; text-transform: uppercase;}
 
-        .tesla-actions { position: relative; z-index: 2; width: 100%; padding: 40px 20px 8vh; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .tesla-btn-primary { background: rgba(255,255,255,0.9); color: #000; border: none; padding: 12px 40px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; text-decoration: none; min-width: 200px;}
-        .tesla-btn-primary:hover { background: #fff; transform: scale(1.02); }
-        .tesla-btn-secondary { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 40px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; cursor: pointer; transition: 0.3s; text-decoration: none; min-width: 200px;}
-        .tesla-btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+        .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.5; animation: bounce 2s infinite; font-size: 1.5rem;}
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } 60% { transform: translateY(-7px) translateX(-50%); } }
 
         /* 🟢 EXCLUSIVE ZBRUSH/VFX 2030 HOLOGRAPHIC IG VIEWER */
         .holo-container {
-            position: relative;
-            width: 90%;
-            max-width: 380px;
-            background: rgba(10, 12, 14, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 15px;
-            backdrop-filter: blur(25px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 20px rgba(212, 175, 55, 0.05);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            margin-top: 2vh;
-            z-index: 2;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: left; /* Keep HUD LTR usually for tech feel */
+            position: relative; width: 90%; max-width: 400px; background: rgba(5, 7, 10, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; padding: 20px;
+            backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.05);
+            transform-style: preserve-3d; perspective: 1000px; z-index: 2; transition: all 0.5s ease; text-align: left;
         }
-        .holo-container:hover {
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 30px 70px rgba(0,0,0,1), 0 0 40px rgba(212, 175, 55, 0.1);
-            transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
-        }
-        .holo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            border-bottom: 1px dashed rgba(255,255,255,0.1);
-            padding-bottom: 10px;
-        }
-        .holo-user {
-            font-family: 'Space Mono', monospace; font-weight: bold; color: var(--stark-white); font-size: 0.85rem; display: flex; align-items: center; gap: 10px; letter-spacing: 1px;
-        }
-        .holo-user::before {
-            content: ''; display: inline-block; width: 28px; height: 28px; 
-            background: url('icon.png') center/cover no-repeat; 
-            border-radius: 50%; border: 1px solid var(--elite-gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
+        .holo-container:hover { border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 30px 60px rgba(0,0,0,1), 0 0 30px rgba(212, 175, 55, 0.1); transform: translateY(-3px) scale(1.01); }
+        
+        .holo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .holo-user { font-family: 'Space Mono', monospace; font-weight: bold; color: var(--stark-white); font-size: 0.8rem; display: flex; align-items: center; gap: 10px; letter-spacing: 1px; text-transform: uppercase;}
+        .holo-user::before { content: '◈'; color: var(--elite-gold); font-size: 1.2rem; text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);}
         .holo-date { font-family: 'Space Mono', monospace; color: var(--cyber-steel); font-size: 0.65rem; letter-spacing: 2px;}
         
-        .holo-media {
-            position: relative; width: 100%; border-radius: 8px; overflow: hidden; aspect-ratio: 4/5; background: #000;
-        }
-        .holo-media video, .holo-media img {
-            width: 100%; height: 100%; object-fit: cover; opacity: 0.95; transition: 0.3s;
-        }
-        .holo-container:hover .holo-media video { opacity: 1; }
+        .holo-media { position: relative; width: 100%; border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; background: #050505; border: 1px solid rgba(255,255,255,0.05);}
+        .holo-media video, .holo-media img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; filter: grayscale(10%);}
+        .holo-container:hover .holo-media video, .holo-container:hover .holo-media img { opacity: 1; filter: grayscale(0%);}
         
-        /* The VFX Watermark */
-        .holo-watermark {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-family: 'Space Mono', monospace; font-size: 1.2rem; color: rgba(255,255,255,0.4);
-            white-space: nowrap; pointer-events: none; letter-spacing: 6px; text-transform: uppercase;
-            mix-blend-mode: overlay; text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-        
-        /* Zbrush/Sci-Fi Scanner */
-        .holo-scanline {
-            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--elite-gold); box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.4);
-            animation: scan 4s infinite ease-in-out; pointer-events: none; opacity: 0.8;
-        }
+        .holo-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Space Mono', monospace; font-size: 1.5rem; color: rgba(255,255,255,0.1); white-space: nowrap; pointer-events: none; letter-spacing: 8px; text-transform: uppercase; mix-blend-mode: overlay; font-weight: bold;}
+        .holo-scanline { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--elite-gold); box-shadow: 0 0 20px 2px rgba(212, 175, 55, 0.5); animation: scan 3s infinite ease-in-out; pointer-events: none; opacity: 0.5;}
         @keyframes scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
 
-        .holo-footer { margin-top: 15px; text-align: right; direction: rtl; }
-        .holo-caption {
-            font-size: 0.8rem; color: #ccc; line-height: 1.7; margin-bottom: 12px;
-            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        }
-        .holo-action {
-            display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--stark-white);
-            text-decoration: none; border: 1px solid rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 2px; transition: 0.3s; letter-spacing: 1px;
-        }
+        .holo-footer { margin-top: 15px; direction: rtl; }
+        .holo-caption { font-size: 0.85rem; color: #ddd; line-height: 1.8; margin-bottom: 15px; font-weight: 300;}
+        .holo-action { display: block; text-align: center; width: 100%; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--stark-white); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 2px; transition: 0.3s; letter-spacing: 2px; background: rgba(0,0,0,0.5); text-transform: uppercase;}
         .holo-action:hover { background: var(--stark-white); color: #000; }
 
-        /* Document/Reading Section styling (For 00.2 - 00.12) */
+        /* Document/Reading Section styling */
         .doc-section { background: var(--obsidian-black); position: relative; z-index: 2; border-top: 1px solid #222;}
         .content-section { padding: 100px 0; position: relative; overflow: hidden; }
         .alt-bg { background-color: #030303; }
@@ -217,7 +162,7 @@
         .hx-card:hover { border-color: var(--cyber-steel); background: rgba(255,255,255,0.03);}
         .hx-number { font-size: 1.5rem; color: var(--stark-white); font-family: 'Space Mono', monospace; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 10px;}
 
-        /* 🟢 Elite DNA Section Upgrades */
+        /* Elite DNA Section Upgrades */
         .classified-file { background: rgba(5,6,7,0.8); border: 1px solid #222; margin-top: 40px; transition: border-color 0.3s; position: relative; overflow: hidden; backdrop-filter: blur(5px);}
         .classified-file:hover { border-color: var(--elite-gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.05); }
         .classified-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; border-bottom: 1px solid transparent;}
@@ -237,7 +182,6 @@
         
         .dna-role { font-size: 0.85rem; color: var(--cyber-steel); letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; }
         .dna-subrole { font-size: 1.2rem; color: var(--stark-white); margin-bottom: 15px; font-weight: 300;}
-        
         .elite-signature { font-family: 'Caveat', cursive; font-size: 2.8rem; color: var(--elite-gold); display: block; margin-bottom: 15px; text-shadow: 0px 0px 10px rgba(212, 175, 55, 0.3); opacity: 0.9; transform: rotate(-2deg); letter-spacing: 2px;}
         
         .dna-summary { padding: 20px; cursor: pointer; background-color: rgba(10, 10, 10, 0.8); border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
@@ -261,7 +205,6 @@
         .submit-btn:hover { background: var(--cyber-steel); color: var(--stark-white); }
         .submit-btn:disabled { background: #333; color: #777; cursor: not-allowed; }
 
-        /* Auth Buttons & "Coming Soon" styling */
         .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
         @media (max-width: 600px) { .auth-grid { grid-template-columns: 1fr; } }
         .social-btn { position: relative; width: 100%; padding: 14px; font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; background: transparent; color: white; border: 1px solid #333; text-transform: uppercase; letter-spacing: 1px; overflow: hidden; }
@@ -289,20 +232,17 @@
         .status-badge { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border: 1px solid;}
         .reply-box { margin-top: 15px; border-top: 1px dashed #333; padding-top: 15px; background: rgba(0, 255, 0, 0.02); padding: 15px; border-left: 2px solid var(--terminal-green);}
 
-        /* Sovereign Terminal */
         .terminal-container { background: #000; border: 1px solid #333; height: 350px; padding: 20px; font-family: 'Space Mono', monospace; color: var(--terminal-green); overflow-y: auto; display: flex; flex-direction: column; }
         .term-output { flex: 1; overflow-y: auto; margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; white-space: pre-wrap; direction: ltr; text-align: left;}
         .term-input-line { display: flex; align-items: center; direction: ltr;}
         .term-prompt { margin-right: 10px; color: var(--cyber-steel); }
         .term-input { background: transparent; border: none; color: var(--stark-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
 
-        /* Legal Modal */
         .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
         .legal-content { background: #050607; border: 1px solid var(--cyber-steel); padding: 40px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.8);}
         .legal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
         body.lang-ar .legal-close { right: auto; left: 20px; }
 
-        /* Footer */
         .site-footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid #111; background: #000; position: relative; z-index: 2;}
         .footer-logo { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 10px; }
         .footer-slogan { color: var(--cyber-steel); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
@@ -310,39 +250,26 @@
         .legal-links a { color: var(--cyber-steel); text-decoration: none; font-size: 0.8rem; margin: 0 10px; transition: 0.3s; cursor: pointer; border-bottom: 1px solid transparent; padding-bottom: 2px;}
         .legal-links a:hover { color: var(--stark-white); border-color: var(--stark-white);}
 
-        /* 🟢 EX|AI ORACLE CHATBOT */
+        /* EX|AI Chatbot */
         .ai-btn {
             position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; border-radius: 5px;
-            background: rgba(5,6,7,0.75); backdrop-filter: blur(10px);
-            color: var(--stark-white); border: 1px solid rgba(0, 255, 0, 0.4); cursor: pointer;
+            background: rgba(5,6,7,0.75); backdrop-filter: blur(10px); color: var(--stark-white); border: 1px solid rgba(0, 255, 0, 0.4); cursor: pointer;
             z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.15), inset 0 0 10px rgba(0, 255, 0, 0.1);
-            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 15px rgba(0, 255, 0, 0.15), inset 0 0 10px rgba(0, 255, 0, 0.1); letter-spacing: 1px;
         }
         .ai-btn:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 0 25px rgba(0, 255, 0, 0.3), inset 0 0 15px rgba(0, 255, 0, 0.2); border-color: var(--terminal-green); }
         .ai-btn::before { content:''; position: absolute; top:0; left:-100%; width:50%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: btnSweep 3s infinite; }
         @keyframes btnSweep { 0% {left: -100%;} 50% {left: 200%;} 100% {left: 200%;} }
         body.lang-en .ai-btn { left: auto; right: 30px; }
         
-        .ai-window {
-            position: fixed; bottom: 100px; left: 30px; width: 360px; height: 520px; 
-            background: rgba(5, 6, 7, 0.85); backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.1); z-index: 9998; display: flex; flex-direction: column;
-            transform: translateY(30px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 20px rgba(0, 255, 0, 0.05); border-radius: 8px; overflow: hidden;
-        }
+        .ai-window { position: fixed; bottom: 100px; left: 30px; width: 360px; height: 520px; background: rgba(5, 6, 7, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); z-index: 9998; display: flex; flex-direction: column; transform: translateY(30px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 20px rgba(0, 255, 0, 0.05); border-radius: 8px; overflow: hidden; }
         body.lang-en .ai-window { left: auto; right: 30px; }
         .ai-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
         
-        .ai-header { 
-            background: rgba(0,0,0,0.6); color: var(--stark-white); padding: 15px 20px; font-size: 0.85rem; letter-spacing: 2px; font-weight: bold;
-            display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .ai-header { background: rgba(0,0,0,0.6); color: var(--stark-white); padding: 15px 20px; font-size: 0.85rem; letter-spacing: 2px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .ai-close { background: none; border: none; color: var(--cyber-steel); font-size: 1.5rem; cursor: pointer; transition: 0.3s; line-height: 1;}
         .ai-close:hover { color: #ff4444; transform: rotate(90deg);}
         
-        /* Voice Toggle Switch */
         .voice-toggle-container { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: var(--cyber-steel); font-family: 'Space Mono', monospace; letter-spacing: 1px;}
         .toggle-switch { width: 36px; height: 18px; background: #222; border-radius: 20px; position: relative; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; border: 1px solid #333;}
         .toggle-dot { width: 14px; height: 14px; background: #666; border-radius: 50%; position: absolute; top: 1px; left: 2px; transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.3s; }
@@ -378,70 +305,408 @@
     <div class="portal-wrapper">
 
         <section class="tesla-section">
-            <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
+            <video id="heroVideo" class="video-bg" autoplay loop muted playsinline src="video_0.mp4"></video>
             <div class="overlay"></div>
-            
-            <div class="tesla-header fade-in" style="margin-top: 10vh;">
+            <div class="tesla-header fade-in">
                 <h1 class="tesla-title mono-text">フサム | experience™️</h1>
                 <p class="tesla-subtitle mono-text">Engineering Human Experience</p>
                 <p class="tesla-desc ar-only">نحن لا نصمم منتجات.. نحن نهندس التجربة الإنسانية من الإحساس الأول إلى الذاكرة الخالدة.</p>
                 <p class="tesla-desc en-only">We do not design products.. We engineer human experience from first sensation to lasting memory.</p>
             </div>
-
-            <div class="tesla-actions">
-                <a href="#portal" class="tesla-btn-secondary mono-text">Executive Access</a>
-            </div>
+            <div class="scroll-indicator mono-text">▼</div>
         </section>
 
         <section class="tesla-section">
-            <video class="video-bg" autoplay loop muted playsinline src="ex2.mp4"></video> 
-            <div class="overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.9) 100%);"></div>
-            
+            <video class="video-bg" autoplay loop muted playsinline src="video_1.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text" style="color: var(--stark-white);">THE GENESIS</h2>
+                <p class="tesla-subtitle mono-text" style="color: var(--elite-gold);">NODE 01 : FOUNDATION</p>
+            </div>
             <div class="holo-container fade-in">
                 <div class="holo-header">
                     <span class="holo-user">@ex_experience.sa</span>
-                    <span class="holo-date">01 NOV 2025</span>
+                    <span class="holo-date">SYS_LOG_01</span>
                 </div>
-                
                 <div class="holo-media">
-                    <video autoplay loop muted playsinline src="s7s1_collab.mp4"></video>
-                    <div class="holo-watermark">フサム | EX</div>
+                    <video autoplay loop muted playsinline src="video_1_ig.mp4"></video>
+                    <div class="holo-watermark">GENESIS</div>
                     <div class="holo-scanline"></div>
                 </div>
-
                 <div class="holo-footer">
-                    <p class="holo-caption ar-only">عندما تلتقي ثقافة السيارات عالية الأداء مع الجماليات النخبوية. تصميم حصري يجسد السرعة، الدقة، والأدرينالين بالتعاون مع @s7s1...</p>
-                    <p class="holo-caption en-only">Where high-performance automotive culture meets elite aesthetics. An exclusive design embodying speed and precision with @s7s1...</p>
-                    <button class="holo-action" onclick="window.open('https://www.instagram.com/ex_experience.sa', '_blank')">[ OPEN ORIGINAL ]</button>
+                    <p class="holo-caption ar-only">المحتوى يُنسى، والشعور يُحفر؛ هذه حقيقة بيولوجية. نحن لا نصمم منتجات تستهلكها، بل نهندس لحظات تستهلكك. لا تحاول الفهم الآن.. الاستيعاب سيأتيك لاحقاً كذاكرة خالدة. <br>`[ SYSTEM INITIATED ]`</p>
+                    <p class="holo-caption en-only">Content is forgotten, feeling is etched. We do not design products you consume; we engineer moments that consume you. Understanding will follow as a lasting memory. <br>`[ SYSTEM INITIATED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DVWaDsfjFmC/', '_blank')">[ DECRYPT SOURCE ]</button>
                 </div>
             </div>
+            <div class="scroll-indicator mono-text">▼</div>
         </section>
 
         <section class="tesla-section">
-            <video class="video-bg" autoplay loop muted playsinline src="ex3.mp4"></video>
-            <div class="overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.9) 100%);"></div>
-            
+            <video class="video-bg" autoplay loop muted playsinline src="video_2.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">TRACK 35</h2>
+                <p class="tesla-subtitle mono-text">NODE 02 : KINETIC ENERGY</p>
+            </div>
             <div class="holo-container fade-in">
                 <div class="holo-header">
                     <span class="holo-user">@ex_experience.sa</span>
-                    <span class="holo-date">15 DEC 2025</span>
+                    <span class="holo-date">SYS_LOG_02</span>
                 </div>
-                
                 <div class="holo-media">
-                    <img src="bg2.jpg" alt="Track 35 Event">
+                    <video autoplay loop muted playsinline src="video_2_ig.mp4"></video>
                     <div class="holo-watermark">TRACK 35</div>
                     <div class="holo-scanline"></div>
                 </div>
-
                 <div class="holo-footer">
-                    <p class="holo-caption ar-only">مشروع TRACK 35: توثيق الروح الجامحة لرياضة المحركات في الشرق الأوسط. قصة تُروى من خلف المقود. انضم للمصفوفة...</p>
-                    <p class="holo-caption en-only">TRACK 35: Documenting the untamed spirit of Middle Eastern motorsport. A story told from behind the wheel. Join the matrix...</p>
-                    <button class="holo-action" onclick="window.open('https://www.instagram.com/ex_experience.sa', '_blank')">[ OPEN ORIGINAL ]</button>
+                    <p class="holo-caption ar-only">السرعة ليست مجرد رقم، بل هي تشوه حقيقي في الإدراك الزمني. توثيق الروح الجامحة لرياضة المحركات في الشرق الأوسط. قصة تُروى من خلف المقود. الخيار لك، والنتيجة محسومة. <br>`[ KINETIC : ENGAGED ]`</p>
+                    <p class="holo-caption en-only">Speed is not a number, it's a distortion in time perception. Documenting the untamed spirit of Middle Eastern motorsport. The choice is yours, the outcome is definitive. <br>`[ KINETIC : ENGAGED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DR13VypDHba/', '_blank')">[ DECRYPT SOURCE ]</button>
                 </div>
             </div>
+            <div class="scroll-indicator mono-text">▼</div>
         </section>
 
-        <section class="doc-section">
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_3.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">PROJECT OMEGA</h2>
+                <p class="tesla-subtitle mono-text">NODE 03 : x @S7S1</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_03</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_3_ig.mp4"></video>
+                    <div class="holo-watermark">OMEGA</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">عندما تلتقي ثقافة السيارات عالية الأداء مع الجماليات النخبوية. تصميم حصري يجسد السرعة، الدقة، والأدرينالين ككتلة بصرية صلبة. <br>`[ PROJECT OMEGA : EXECUTED ]`</p>
+                    <p class="holo-caption en-only">Where high-performance culture meets elite aesthetics. An exclusive design embodying speed, precision, and adrenaline as a solid visual mass. <br>`[ PROJECT OMEGA : EXECUTED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DVTStSfjIso/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_4.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">DROPzero™️</h2>
+                <p class="tesla-subtitle mono-text">NODE 04 : ABSOLUTE SCARCITY</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_04</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_4_ig.mp4"></video>
+                    <div class="holo-watermark">DROPZERO</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">الندرة ليست استراتيجية تسويق، بل قانون فيزيائي. تصميم تقني متجرد من الضجيج. بمجرد أن تكتمل السعة، تُغلق بوابات الوصول إلى الأبد. نحن لا نبيع المقتنيات، نحن نمنح حق الوصول. <br>`[ ACCESS : STRICTLY LIMITED ]`</p>
+                    <p class="holo-caption en-only">Scarcity is a physical law. A technical design stripped of noise. Once capacity is reached, gates close forever. We don't sell items, we grant access. <br>`[ ACCESS : STRICTLY LIMITED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DVN7SkrjHVv/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_5.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">COGNITIVE ECHO</h2>
+                <p class="tesla-subtitle mono-text">NODE 05 : HUMAN METRICS</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_05</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_5_ig.mp4"></video>
+                    <div class="holo-watermark">ECHO</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">الجموع تستهلك، النخبة تستوعب. نحن لا نبني مجتمعات تقليدية، نحن نصيغ طوائف فكرية ترتكز على التطور البشري المحسوس. الترددات مضبوطة للارتقاء الإدراكي. <br>`[ METRICS : ALIGNED ]`</p>
+                    <p class="holo-caption en-only">Masses consume, the elite comprehend. We forge intellectual collectives grounded in tangible human evolution. Frequencies tuned for cognitive elevation. <br>`[ METRICS : ALIGNED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DU7nxvXDMiz/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <img class="video-bg" src="image_6.jpg" alt="Background"> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">DIGITAL FLESH</h2>
+                <p class="tesla-subtitle mono-text">NODE 06 : TECHNO-SYMBIOSIS</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_06</span>
+                </div>
+                <div class="holo-media">
+                    <img src="image_6_ig.jpg" alt="IG Content">
+                    <div class="holo-watermark">SYMBIOSIS</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">التكنولوجيا في أصلها باردة، حتى نضخ فيها النبض البشري. نأخذ الخوارزميات الصامتة ونحولها إلى قشعريرة تسري في الجسد. أنت لست مستخدماً يراقب.. أنت جزء حي من التكوين. <br>`[ OVERRIDE : ENGAGED ]`</p>
+                    <p class="holo-caption en-only">Technology is inherently cold, until we inject human pulse. We turn silent algorithms into somatic shivers. You are not a user watching.. you are a living part of the construct. <br>`[ OVERRIDE : ENGAGED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/p/DUhy927DG17/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_7.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">SENSORY OVERLOAD</h2>
+                <p class="tesla-subtitle mono-text">NODE 07 : THE LAB</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_07</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_7_ig.mp4"></video>
+                    <div class="holo-watermark">OVERLOAD</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">لا مجال للصدفة هنا؛ كل تردد صوتي وشعاع ضوئي محسوب رياضياً ليخترق حاجز الوعي. مختبر المفاهيم يعمل بطاقته القصوى لهندسة الطقوس المستقبلية. <br>`[ LAB STATUS : OPTIMAL ]`</p>
+                    <p class="holo-caption en-only">No room for chance; every frequency and beam is mathematically calculated to breach consciousness. The concept lab operates at peak to engineer future rituals. <br>`[ LAB STATUS : OPTIMAL ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DUoywQfCJZH/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_8.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">ECONOMIC MATRIX</h2>
+                <p class="tesla-subtitle mono-text">NODE 08 : VALUE ARCHITECTURE</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_08</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_8_ig.mp4"></video>
+                    <div class="holo-watermark">VALUE</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">رأس المال الحقيقي في 2030 ليس العملة، بل الانتباه. نحن نهندس الفراغ ليصبح أصولاً ملموسة. الاقتصاد التجريبي لا يعتمد على العرض والطلب، بل على الأثر والاستحواذ. <br>`[ MATRIX : SYNCHED ]`</p>
+                    <p class="holo-caption en-only">True capital in 2030 isn't currency, it's attention. We engineer the void into tangible assets. The experience economy runs on impact and capture. <br>`[ MATRIX : SYNCHED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DUKKx_aiOVz/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_9.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">TIME DILATION</h2>
+                <p class="tesla-subtitle mono-text">NODE 09 : LIFESTYLE 2030</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_09</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_9_ig.mp4"></video>
+                    <div class="holo-watermark">DILATION</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">أسلوب حياة الغد يُكتب اليوم. الجماليات المتجردة ليست خياراً، بل حتمية بيئية. التخلي عن الزوائد للوصول إلى جوهر اللحظة الممتدة. <br>`[ TIME : DILATED ]`</p>
+                    <p class="holo-caption en-only">Tomorrow's lifestyle is coded today. Stripped aesthetics are an environmental imperative. Discarding the excess to reach the core of the extended moment. <br>`[ TIME : DILATED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DUN-2TWDLBp/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_10.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">ABSOLUTE ZERO</h2>
+                <p class="tesla-subtitle mono-text">NODE 10 : MINIMALIST CORE</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_10</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_10_ig.mp4"></video>
+                    <div class="holo-watermark">ZERO</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">الصفر المطلق ليس نهاية، بل بداية النقاء. عندما نزيل كل ما هو غير ضروري، يبرز التصميم كحقيقة مطلقة غير قابلة للتشويه. <br>`[ STATE : PURIFIED ]`</p>
+                    <p class="holo-caption en-only">Absolute zero is not an end, but the dawn of purity. When the unnecessary is removed, design emerges as an undistortable absolute truth. <br>`[ STATE : PURIFIED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DUJwiyJDO0j/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_11.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">BEYOND ZBRUSH</h2>
+                <p class="tesla-subtitle mono-text">NODE 11 : DIGITAL SCULPTING</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_11</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_11_ig.mp4"></video>
+                    <div class="holo-watermark">VFX</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">لا ننحت بكسلات، بل ننحت عواطف. دمج القوة الحسابية مع الفن الخالص لإنشاء مجسمات بصرية تحفز الرهبة. المستقبل يُصمم هنا. <br>`[ RENDER : COMPLETE ]`</p>
+                    <p class="holo-caption en-only">We don't sculpt pixels, we sculpt emotions. Merging computational power with pure art to create awe-inducing visual monoliths. <br>`[ RENDER : COMPLETE ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DTMBak6DE0S/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <img class="video-bg" src="image_12.jpg" alt="Background"> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">VOID ENGINEERING</h2>
+                <p class="tesla-subtitle mono-text">NODE 12 : CONCEPT HOUSE</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_12</span>
+                </div>
+                <div class="holo-media">
+                    <img src="image_12_ig.jpg" alt="IG Content">
+                    <div class="holo-watermark">VOID</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">نحن نهندس الفراغ لكي يتحدث. دار المفاهيم هي الحاضنة الأولى حيث تتحول الأفكار المجردة إلى قوانين فيزيائية واقعية. <br>`[ VOID : MANIFESTED ]`</p>
+                    <p class="holo-caption en-only">We engineer the void so it speaks. The Concept House is the primary incubator where abstract ideas morph into physical laws. <br>`[ VOID : MANIFESTED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/p/DTLfUsqDKVp/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_13.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">KINETIC POETRY</h2>
+                <p class="tesla-subtitle mono-text">NODE 13 : MOTION DYNAMICS</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_13</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_13_ig.mp4"></video>
+                    <div class="holo-watermark">MOTION</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">كل حركة هي سطر في قصيدة ديناميكية. نحن نلتقط الإيقاع السري للأشياء قبل أن تستقر. الطاقة لا تفنى، بل يتم إعادة توجيهها بصرياً. <br>`[ DYNAMICS : FLUID ]`</p>
+                    <p class="holo-caption en-only">Every movement is a line in a dynamic poem. We capture the secret rhythm of things before they settle. Energy visually redirected. <br>`[ DYNAMICS : FLUID ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DTIu8a4DA3t/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <video class="video-bg" autoplay loop muted playsinline src="video_14.mp4"></video> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">THE FINAL FORM</h2>
+                <p class="tesla-subtitle mono-text">NODE 14 : EVOLUTION</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_14</span>
+                </div>
+                <div class="holo-media">
+                    <video autoplay loop muted playsinline src="video_14_ig.mp4"></video>
+                    <div class="holo-watermark">EVOLVE</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">التطور ليس خياراً بل حتمية. الشكل النهائي للتجربة البشرية يتبلور عندما يتصل الوعي بالخوارزمية بشكل كامل. لا عودة للوراء. <br>`[ FORM : FINALIZED ]`</p>
+                    <p class="holo-caption en-only">Evolution is inevitable. The final form of human experience crystallizes when consciousness fully connects with the algorithm. No turning back. <br>`[ FORM : FINALIZED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/reel/DSRAsI0iOz3/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="tesla-section">
+            <img class="video-bg" src="image_15.jpg" alt="Background"> 
+            <div class="overlay"></div>
+            <div class="tesla-header fade-in">
+                <h2 class="tesla-title mono-text">THE EPILOGUE</h2>
+                <p class="tesla-subtitle mono-text">NODE 15 : LEGACY</p>
+            </div>
+            <div class="holo-container fade-in">
+                <div class="holo-header">
+                    <span class="holo-user">@ex_experience.sa</span>
+                    <span class="holo-date">SYS_LOG_15</span>
+                </div>
+                <div class="holo-media">
+                    <img src="image_15_ig.jpg" alt="IG Content">
+                    <div class="holo-watermark">LEGACY</div>
+                    <div class="holo-scanline"></div>
+                </div>
+                <div class="holo-footer">
+                    <p class="holo-caption ar-only">خاتمة المسلسل هي بداية الإرث. ما يتم توثيقه هنا ليس مجرد مشاريع، بل هي الشفرة الوراثية للمستقبل. دار المفاهيم قد تحدثت. <br>`[ LEGACY : SECURED ]`</p>
+                    <p class="holo-caption en-only">The series finale is the birth of a legacy. What is documented here is the genetic code of the future. The concept house has spoken. <br>`[ LEGACY : SECURED ]`</p>
+                    <button class="holo-action" onclick="window.open('https://www.instagram.com/p/DSD8_ohCG7J/', '_blank')">[ DECRYPT SOURCE ]</button>
+                </div>
+            </div>
+            <div class="scroll-indicator mono-text">▼</div>
+        </section>
+
+        <section class="doc-section" style="scroll-snap-align: start;">
             
             <div class="content-section">
                 <div class="geometric-bg" style="background-image: url('bg1.jpg');"></div>
@@ -472,17 +737,6 @@
                     <p class="body-text en-only">
                         The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint. This gap is not a creative issue, it is an <span class="highlight">experience design failure.</span>
                     </p>
-                </div>
-            </div>
-
-            <div class="hero" style="height: 40vh; scroll-snap-align: center;">
-                <div class="video-wrapper">
-                    <video id="breakVideo1" class="video-bg" autoplay loop muted playsinline></video>
-                </div>
-                <div class="overlay" style="background: rgba(0,0,0,0.7);"></div>
-                <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(1.2rem, 3vw, 2rem);" data-text="This is not marketing..">
-                    <span class="ar-only">هذا ليس تسويقاً..<br>هذه هندسة معمارية للتجارب.</span>
-                    <span class="en-only">This is not marketing..<br>This is experience architecture.</span>
                 </div>
             </div>
 
@@ -519,40 +773,24 @@
                         <div class="hx-card">
                             <div class="hx-number">1. Intent / الغاية</div>
                             <p class="body-text ar-only">"لماذا يجب أن توجد هذه التجربة؟" الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى.</p>
-                            <p class="body-text en-only">"Why should this experience exist?" Intent defines the existential purpose and the "moral compass" of the project. We establish the core value proposition that ensures every interaction serves a higher objective.</p>
                         </div>
                         <div class="hx-card">
                             <div class="hx-number">2. Context / السياق</div>
                             <p class="body-text ar-only">"أين ومتى وتحت أي ظروف تتكشف؟" التجربة لا تحدث في فراغ. نحن نحلل الظروف البيئية والزمنية والنفسية المحيطة لنهندس استجابات سلسة ومتكيفة مع لحظة التفاعل.</p>
-                            <p class="body-text en-only">"Where, when, and under what conditions does it unfold?" An experience does not exist in a vacuum. We analyze the environmental, temporal, and psychological conditions surrounding the interaction.</p>
                         </div>
                         <div class="hx-card">
                             <div class="hx-number">3. Stimuli / المحفزات</div>
-                            <p class="body-text ar-only">"ما هي المحفزات الحسية التي تفعل العاطفة؟" هندسة المدخلات (البصرية، السمعية، اللمسية) لتشغيل استجابات عصبية محددة تتجاوز الفلاتر المنطقية لتتواصل مباشرة مع العقل الباطن.</p>
-                            <p class="body-text en-only">"Which sensory triggers activate emotion?" Engineering the sensory inputs—visual, auditory, and tactile—to trigger specific emotional and neurological responses that bypass logical filters.</p>
+                            <p class="body-text ar-only">"ما هي المحفزات الحسية التي تفعل العاطفة؟" هندسة المدخلات (البصرية، السمعية، اللمسية) لتشغيل استجابات عصبية محددة تتجاوز الفلاتر المنطقية.</p>
                         </div>
                         <div class="hx-card">
                             <div class="hx-number">4. Interaction / التفاعل</div>
-                            <p class="body-text ar-only">"كيف يشارك الإنسان، بوعي أو بدونه؟" هذه الركيزة تحكم إيقاع الاندماج. نحن نهندس المسارات التي تحول الشخص من مجرد متفرج إلى مشارك نشط داخل التجربة.</p>
-                            <p class="body-text en-only">"How does the human participate—consciously or unconsciously?" This pillar governs the rhythm of engagement. We engineer the pathways that transform a person from a mere spectator into an active participant.</p>
+                            <p class="body-text ar-only">"كيف يشارك الإنسان، بوعي أو بدونه؟" هذه الركيزة تحكم إيقاع الاندماج. نحن نهندس المسارات التي تحول الشخص من مجرد متفرج إلى مشارك نشط.</p>
                         </div>
                         <div class="hx-card" style="grid-column: 1 / -1;">
                             <div class="hx-number" style="color: var(--terminal-green);">5. Impact / الأثر</div>
-                            <p class="body-text ar-only">"ما الذي يتبقى بعد انتهاء التجربة؟" هذا هو المقياس النهائي للنجاح. نحن لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. الأثر هو الذاكرة الدائمة والبصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
-                            <p class="body-text en-only">"What remains after the experience ends?" The ultimate metric of success. We do not measure the duration of the event, but the "emotional residue" left behind. Impact is the lasting memory and long-term cognitive imprint.</p>
+                            <p class="body-text ar-only">"ما الذي يتبقى بعد انتهاء التجربة؟" هذا هو المقياس النهائي للنجاح. نحن لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. البصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="hero" style="height: 30vh; scroll-snap-align: center;">
-                <div class="video-wrapper">
-                    <video id="breakVideo2" class="video-bg" autoplay loop muted playsinline></video>
-                </div>
-                <div class="overlay" style="background: rgba(0,0,0,0.8);"></div>
-                <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(1rem, 2.5vw, 1.8rem);" data-text="To create experiences that are felt, before they are understood.">
-                    <span class="ar-only">لخلق تجارب تُحَس.. قبل أن تُفهم.</span>
-                    <span class="en-only">To create experiences that are felt, before they are understood.</span>
                 </div>
             </div>
 
@@ -562,33 +800,18 @@
                     <div class="section-title mono-text ar-only">00.6 / الفلسفة الأساسية</div>
                     <div class="section-title mono-text en-only">00.6 / THE CORE PHILOSOPHY</div>
                     <p class="body-text ar-only">العالم مشبع بالمحتوى، ولكنه متعطش للمعنى. تم تصميم محرك HX-5™️ لحل "المشكلة الصامتة" للتفاعل الحديث: الفشل في البقاء في الذاكرة. نحن نضمن أن تجربتك لن تُرى فحسب، بل ستُحَس وتُحفظ.</p>
-                    <p class="body-text en-only">The world is saturated with content, yet starved for meaning. The HX-5™️ engine is designed to solve the "Silent Problem" of modern interaction: the failure to be remembered. We ensure that your experience is not just seen, but felt and retained.</p>
 
                     <br><br>
 
                     <div class="section-title mono-text ar-only">00.7 / ماذا نفعل؟</div>
                     <div class="section-title mono-text en-only">00.7 / WHAT WE DO?</div>
-                    <p class="body-text ar-only">نحن ننفذ نماذج تجريبية (Pilots) مركزة لمدة 4-6 أسابيع مصممة للتحقق من أثر التجربة. كل نموذج يقدم:</p>
-                    <p class="body-text en-only">We execute focused 4-6 week pilots designed to validate experience impact. Each pilot delivers:</p>
-                    <ul class="cyber-list ar-only">
-                        <li>تجربة إنسانية مصممة بدقة.</li>
-                        <li>قياس الاستجابة العاطفية والسلوكية.</li>
-                        <li>فيلم سينمائي قصير (60-90 ثانية).</li>
-                        <li>دراسة حالة استراتيجية.</li>
-                    </ul>
-                    <ul class="cyber-list en-only">
-                        <li>A designed human experience.</li>
-                        <li>Measured emotional and behavioral response.</li>
-                        <li>A short cinematic film (60-90 seconds).</li>
-                        <li>A strategic case study.</li>
-                    </ul>
-
+                    <p class="body-text ar-only">نحن ننفذ نماذج تجريبية (Pilots) مركزة لمدة 4-6 أسابيع مصممة للتحقق من أثر التجربة.</p>
+                    
                     <br><br>
 
                     <div class="section-title mono-text ar-only">00.8 / لماذا النماذج التجريبية أولاً؟</div>
                     <div class="section-title mono-text en-only">00.8 / WHY PILOTS FIRST?</div>
-                    <p class="body-text ar-only">الأفكار ليست كافية.. الوعود لا تتوسع.<br><br>النماذج التجريبية تخلق <span class="highlight">إثبات الشعور (Proof of Feeling)</span> قبل إثبات المفهوم. التجربة يجب أن تُعرض وتُعاش، لا أن تُوصف.</p>
-                    <p class="body-text en-only">Ideas are not enough. Promises do not scale.<br><br>Pilots create <span class="highlight">Proof of Feeling</span> before proof of concept. Experience must be demonstrated, not described.</p>
+                    <p class="body-text ar-only">الأفكار ليست كافية.. الوعود لا تتوسع. النماذج التجريبية تخلق <span class="highlight">إثبات الشعور (Proof of Feeling)</span> قبل إثبات المفهوم. التجربة يجب أن تُعرض وتُعاش، لا أن تُوصف.</p>
                 </div>
             </div>
 
@@ -597,19 +820,7 @@
                     <div class="section-title mono-text ar-only">00.9 / فلسفة الشراكة</div>
                     <div class="section-title mono-text en-only">00.9 / PARTNERSHIP PHILOSOPHY</div>
                     <p class="body-text ar-only">نحن لا ننافس شركاءنا.. نحن نرتقي بهم.</p>
-                    <p class="body-text en-only">We do not compete with our partners. We elevate them.</p>
-                    <ul class="cyber-list ar-only">
-                        <li>الملكية الفكرية الأساسية تبقى مع مبتكرها.</li>
-                        <li>الرؤى الجديدة يتم التعامل معها بسرية تامة.</li>
-                        <li>الظهور يكون متعمداً، وليس استخراجياً.</li>
-                    </ul>
-                    <ul class="cyber-list en-only">
-                        <li>Background IP remains with its originator.</li>
-                        <li>New insights are handled with discretion.</li>
-                        <li>Visibility is intentional, never extractive.</li>
-                    </ul>
                     <p class="body-text ar-only"><span class="highlight">الشراكة مع フサム تزيد من المعنى، وليس مجرد الظهور.</span></p>
-                    <p class="body-text en-only"><span class="highlight">Partnership with フサム increases meaning, not exposure alone.</span></p>
 
                     <br><br>
 
@@ -621,21 +832,12 @@
                         <li>العلامات التجارية التي تريد أن تُحفر في الذاكرة.</li>
                         <li>المؤسسات الثقافية والمدفوعة بالابتكار.</li>
                     </ul>
-                    <ul class="cyber-list en-only">
-                        <li>Organizations seeking long-term impact.</li>
-                        <li>Investors focused on infrastructure, not hype.</li>
-                        <li>Brands that want to be remembered.</li>
-                        <li>Cultural and innovation-driven institutions.</li>
-                    </ul>
-                    <p class="body-text ar-only" style="color: #ff4444;">إذا كنت تبحث عن إعلانات تقليدية، فهذا المكان ليس لك.</p>
-                    <p class="body-text en-only" style="color: #ff4444;">If you are looking for advertising, this is not for you.</p>
 
                     <br><br>
 
                     <div class="section-title mono-text ar-only">00.11 / ملاحظة للمستثمرين</div>
                     <div class="section-title mono-text en-only">00.11 / INVESTOR NOTE</div>
                     <p class="body-text ar-only">フサム ليست شركة منتجات.. وليست وكالة.<br>إنها البنية التحتية لفئة جديدة داخل اقتصاد التجربة (Experience Economy). القيمة تكمن في النظام، قابليته للتكرار، وتطبيقه عبر مختلف القطاعات.</p>
-                    <p class="body-text en-only">フサム is not a product company. And not an agency.<br>It is the architecture of a new category, within the Experience Economy. The value lies in the system, its repeatability, and its cross-sector application.</p>
                 </div>
             </div>
 
@@ -664,8 +866,6 @@
                                   <div id="dna-data-log" class="dna-content">
                                     <div class="dna-blockquote">
                                       <p>الكيانات الخالدة لا تُبنى بالصدفة، بل تُهندس بدقة. شفرة (DNA) الخاصة بنا ليست مجرد قائمة أسماء أو هيكل إداري؛ إنها "الشبكة العصبية" التي تغذي محرك التجربة. هنا نوثق المعماريين، الحلفاء، والمُمكّنين الذين يحولون الفلسفة إلى واقع ملموس.</p>
-                                      <br>
-                                      <p>Immortal entities are not built by chance; they are precisely engineered. Our DNA is not a mere roster of names; it is the "neural network" that powers the experience engine. Here, we document the architects, allies, and catalysts who translate philosophy into tangible reality.</p>
                                     </div>
 
                                     <div class="dna-node">
@@ -675,8 +875,6 @@
                                       <div class="dna-subrole mono-text">HUSSAM HASSAN MOHAMMED TAHIRI</div>
                                       <div class="dna-desc" style="color: #bbb; line-height: 1.6; font-size: 0.9rem;">
                                         <p>النقطة صِفر (Ground Zero) مؤسس هذه المنظومة. والعقل الاستراتيجي والمصمم لمنهجية HX-5™️. هو من وضع حجر الأساس، ومبتكر هندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد وصناعة اول دار للمفاهيم بالمملكة العربية السعودية.</p>
-                                        <br>
-                                        <p>The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</p>
                                       </div>
                                     </div>
 
@@ -687,8 +885,6 @@
                                       <div class="dna-subrole mono-text">P. SULTAN BIN BADR BIN ABDULMUHSEN AL SAUD</div>
                                       <div class="dna-desc" style="color: #bbb; line-height: 1.6; font-size: 0.9rem;">
                                         <p>النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</p>
-                                        <br>
-                                        <p>The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</p>
                                       </div>
                                     </div>
 
@@ -705,15 +901,8 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="hero" style="height: 30vh; background: #000; scroll-snap-align: center;">
-                <div class="interactive-logo mono-text glitch fade-in" style="z-index: 2; font-size: clamp(0.9rem, 2vw, 1.2rem);" data-text="We work selectively and intentionally.. If this resonates...">
-                    <span class="ar-only" style="color: var(--cyber-steel);">نحن نعمل بانتقائية وقصد.. إذا كان هذا يتردد صداه معك تواصل معنا...</span>
-                    <span class="en-only" style="color: var(--cyber-steel);">We work selectively and intentionally.. If this resonates contacat us...</span>
-                </div>
-            </div>
 
-            <div id="portal" class="content-section" style="background-color: #020202; padding-top: 40px; scroll-snap-align: start;">
+            <div id="portal" class="content-section" style="background-color: #020202; padding-top: 40px;">
                 <div class="container fade-in">
                     <div class="section-title mono-text ar-only">الواجهة التنفيذية | EXECUTIVE INTERFACE</div>
                     <div class="section-title mono-text en-only">EXECUTIVE INTERFACE</div>
@@ -799,8 +988,8 @@ Connection Secure.
                     <div class="section-title mono-text ar-only">شبكاتنا / اتصل</div>
                     <div class="section-title mono-text en-only">OUR NETWORKS / CONNECT</div>
                     <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px;">
-                        <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Instagram</a>
-                        <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94TGgDVJp8W" target="_blank" class="control-btn mono-text" style="text-decoration: none;">TikTok</a>
+                        <a href="https://www.instagram.com/ex_experience.sa" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Instagram</a>
+                        <a href="https://www.tiktok.com/@ex_experience.sa" target="_blank" class="control-btn mono-text" style="text-decoration: none;">TikTok</a>
                         <a href="https://snapchat.com/t/w3omS0EV" target="_blank" class="control-btn mono-text" style="text-decoration: none;">Snapchat</a>
                         <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" class="control-btn mono-text" style="text-decoration: none;">WhatsApp</a>
                     </div>
@@ -824,7 +1013,7 @@ Connection Secure.
                 </p>
             </div>
 
-            <footer class="site-footer" style="scroll-snap-align: end;">
+            <footer class="site-footer">
                 <div class="footer-logo mono-text">フサム | experience™️</div>
                 <p class="mono-text" style="color: var(--cyber-steel); font-size: 0.85rem;">
                     Engineering Human Experiences <br>
@@ -871,11 +1060,10 @@ Connection Secure.
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            // إضافة ملفات فيديو لتتناسب مع البوابات إذا أردت مستقبلاً.
-            // حاليا الكود يقرأ فيديوهات كخلفية (مثل ex2.mp4 و ex3.mp4).
+            // فيديوهات البوابات تعمل تلقائياً عبر سمات video tag.
         });
 
-        // 🟢 Legal Information Logic (Bilingual & Interactive)
+        // 🟢 Legal Information Logic
         const legalTexts = {
             privacy: {
                 ar: {
@@ -932,36 +1120,24 @@ Connection Secure.
             }
         }
 
-        // ==========================================
-        // Auth Functions
-        // ==========================================
-
         async function fetchUserHistory() {
             const historyContainer = document.getElementById('history-content');
             historyContainer.innerHTML = '<p class="mono-text" style="color:var(--cyber-steel);">[FETCHING RECORDS...]</p>';
 
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
-                
                 if (querySnapshot.empty) {
                     historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[NO PREVIOUS RECORDS FOUND]</p>';
                     return;
                 }
-
                 let docs = [];
                 querySnapshot.forEach((doc) => docs.push(doc.data()));
-
-                docs.sort((a, b) => {
-                    let timeA = a.Timestamp ? a.Timestamp.toMillis() : 0;
-                    let timeB = b.Timestamp ? b.Timestamp.toMillis() : 0;
-                    return timeB - timeA;
-                });
+                docs.sort((a, b) => { return (b.Timestamp ? b.Timestamp.toMillis() : 0) - (a.Timestamp ? a.Timestamp.toMillis() : 0); });
 
                 let historyHTML = '';
                 docs.forEach((data) => {
                     let statusColor = data.Status === 'Pending' ? '#ffaa00' : (data.Status === 'Approved' ? 'var(--terminal-green)' : 'var(--cyber-steel)');
                     let dateStr = data.Timestamp ? new Date(data.Timestamp.toDate()).toLocaleDateString('en-GB') : 'Just Now';
-                    
                     historyHTML += `
                         <div class="history-card">
                             <div style="display:flex; justify-content: space-between; margin-bottom: 10px; align-items:center;">
@@ -973,7 +1149,6 @@ Connection Secure.
                         </div>
                     `;
                 });
-
                 historyContainer.innerHTML = historyHTML;
             } catch (error) {
                 historyContainer.innerHTML = '<p class="mono-text" style="color:#ff4444;">[ENCRYPTION ERROR: UNABLE TO LOAD RECORDS. CHECK RULES]</p>';
@@ -995,15 +1170,12 @@ Connection Secure.
                     Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
                     Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-
                 const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone });
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
                 document.getElementById('login-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
-                
                 fetchUserHistory();
-
             } catch (error) {
                 alert("Connection failed. Please ensure network stability.");
                 btn.innerHTML = 'Initialize Secure Connection'; btn.disabled = false;
@@ -1020,23 +1192,16 @@ Connection Secure.
             try {
                 await db.collection("Consultations").add({
                     Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone,
-                    Message: message, Status: "Pending",
-                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-
                 const params = new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message });
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: params, mode: 'no-cors' });
 
                 alert(currentLang === 'ar' ? 'تم استلام استشارتك بنجاح.' : 'Transmission Successful.');
                 document.getElementById('consultText').value = '';
-                
                 fetchUserHistory();
                 switchService('history'); 
-
-                setTimeout(() => {
-                    btn.innerHTML = 'Transmit Signal'; btn.disabled = false;
-                }, 10000);
-
+                setTimeout(() => { btn.innerHTML = 'Transmit Signal'; btn.disabled = false; }, 10000);
             } catch (error) {
                 alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال.' : 'Transmission Failed.');
                 btn.innerHTML = 'Transmit Signal'; btn.disabled = false;
@@ -1052,21 +1217,15 @@ Connection Secure.
             if(serviceId === 'history') fetchUserHistory(); 
         }
 
-        // --- GEMINI AI PROXY (Oracle EX Engine) ---
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}`;
-
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 if (loadingElement) loadingElement.remove();
                 const finalOutput = data.reply || data.error;
 
-                if(isTerminal) { 
-                    printTerm(`oracle@ex:~# ${finalOutput}`); 
-                } else { 
-                    appendMsg(finalOutput, 'bot'); 
-                }
+                if(isTerminal) { printTerm(`oracle@ex:~# ${finalOutput}`); } else { appendMsg(finalOutput, 'bot'); }
 
                 try {
                     await db.collection("OracleLogs").add({
@@ -1082,7 +1241,6 @@ Connection Secure.
             }
         }
 
-        // --- Terminal Logic ---
         const termOutput = document.getElementById('termOutput');
         const termInput = document.getElementById('termInput');
         function handleTerminal(e) {
@@ -1104,24 +1262,16 @@ Connection Secure.
         }
         function printTerm(text) { termOutput.innerHTML += `\n${text}`; termOutput.scrollTop = termOutput.scrollHeight; }
 
-        // --- 🟢 EX|AI Chatbot & Tesla-Style Voice Logic ---
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-        
         let voiceEnabled = false;
 
         function toggleVoice() {
             voiceEnabled = !voiceEnabled;
             const toggleElement = document.getElementById('voiceToggle');
-            if(voiceEnabled) {
-                toggleElement.classList.add('active');
-            } else {
-                toggleElement.classList.remove('active');
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                }
-            }
+            if(voiceEnabled) { toggleElement.classList.add('active'); } 
+            else { toggleElement.classList.remove('active'); if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } }
         }
         
         function toggleChat() { 
@@ -1142,26 +1292,17 @@ Connection Secure.
             const msgDiv = document.createElement('div');
             msgDiv.className = `ai-msg ${sender} mono-text ${isGlitch ? 'glitch' : ''}`;
             if(isGlitch) msgDiv.setAttribute('data-text', text);
-            
             let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            
             if (sender === 'bot' && !isGlitch) {
                 safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--stark-white); font-weight:bold;">$1</strong>');
                 safeText = safeText.replace(/\*(.*?)\*/g, '<em style="color:#bbb;">$1</em>');
                 safeText = safeText.replace(/\n/g, '<br>');
-            } else {
-                safeText = safeText.replace(/\n/g, '<br>');
-            }
+            } else { safeText = safeText.replace(/\n/g, '<br>'); }
 
-            let contentHTML = `<span class="msg-content">${safeText}</span>`;
-            msgDiv.innerHTML = contentHTML;
+            msgDiv.innerHTML = `<span class="msg-content">${safeText}</span>`;
             chatBody.appendChild(msgDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
-
-            if(sender === 'bot' && !isGlitch && voiceEnabled) {
-                speakTextRaw(text);
-            }
-
+            if(sender === 'bot' && !isGlitch && voiceEnabled) { speakTextRaw(text); }
             return msgDiv; 
         }
 
@@ -1176,9 +1317,7 @@ Connection Secure.
             }
         }
 
-        function handleChatEnter(e) { 
-            if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); }
-        }
+        function handleChatEnter(e) { if(e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); sendChatMessage(); } }
         
         function sendChatMessage() {
             const text = aiInput.value.trim();
