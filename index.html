@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フサム | experience™ - Engineering Human Experiences</title>
+    <title>フサム | experience™ - Space/Cyber Architecture</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link rel="apple-touch-icon" href="icon.png">
     
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
     <script>
@@ -43,48 +43,52 @@
 
     <style>
         /* -------------------------------------
-           هوية SpaceX (Absolute Black & White)
+           هوية Space/Cyber (استلهاماً من ملف Cybertruck)
            ------------------------------------- */
         :root {
-            --spx-black: #000000;
-            --spx-dark: #090909;
-            --spx-gray: #808080;
-            --spx-light: #cccccc;
-            --spx-white: #ffffff;
-            --spx-accent: #ffffff; /* تم توحيد اللون المميز للون الأبيض للتركيز على التباين */
+            --ts-black: #000000;
+            --ts-panel: #111111; /* لون لوحات تحكم سايبرتراك */
+            --ts-gray: #4d4d4d;
+            --ts-light-gray: #a1a1a1;
+            --ts-white: #ffffff;
+            --ts-accent: #ffffff;
+            --ts-border: rgba(255, 255, 255, 0.15); /* خطوط تقسيم الشاشات */
+            --ts-glass: rgba(10, 10, 10, 0.7);
         }
 
-        /* إخفاء المؤشر العادي */
         body, html {
             cursor: none !important;
-            background-color: var(--spx-black);
-            color: var(--spx-light);
-            font-family: 'Rajdhani', -apple-system, sans-serif;
-            line-height: 1.5; margin: 0; padding: 0; overflow-x: hidden;
+            background-color: var(--ts-black);
+            color: var(--ts-light-gray);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6; margin: 0; padding: 0; overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
         a, button, input, textarea, .interactive { cursor: none !important; }
-
-        .mono-text { font-family: 'Space Mono', monospace; }
+        .mono-text { font-family: 'Space Mono', monospace; text-transform: uppercase; }
         
         /* -------------------------------------
-           Custom Cursor (مؤشر تفاعلي)
+           المؤشر المخصص (Telemetry Cursor)
            ------------------------------------- */
         #custom-cursor {
-            position: fixed; top: 0; left: 0; width: 6px; height: 6px;
-            background-color: var(--spx-white); border-radius: 50%;
-            pointer-events: none; z-index: 10000; transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            position: fixed; top: 0; left: 0; width: 4px; height: 4px;
+            background-color: var(--ts-white); pointer-events: none; z-index: 10000;
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
         }
         #cursor-follower {
-            position: fixed; top: 0; left: 0; width: 30px; height: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%;
+            position: fixed; top: 0; left: 0; width: 36px; height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%;
             pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, border-color 0.3s, background-color 0.3s;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
         }
         .cursor-hover #custom-cursor { width: 0; height: 0; }
-        .cursor-hover #cursor-follower { width: 50px; height: 50px; background-color: rgba(255, 255, 255, 0.1); border-color: var(--spx-white); }
+        .cursor-hover #cursor-follower { 
+            width: 45px; height: 45px; 
+            background-color: rgba(255, 255, 255, 0.05); 
+            border-color: var(--ts-white);
+            border-radius: 0; /* تحويل الدائرة لمربع لاستهداف العناصر كالرادار */
+        }
 
         /* نظام اللغات */
         body.lang-ar { direction: rtl; text-align: right; }
@@ -92,196 +96,244 @@
         .ar-only { display: block; } .en-only { display: none; }
         body.lang-en .ar-only { display: none; } body.lang-en .en-only { display: block; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
-        /* Navigation */
+        /* Navigation - Telemetry Bar */
         .top-nav {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 25px 5%;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-            box-sizing: border-box;
+            border-bottom: 1px solid transparent; transition: all 0.4s;
         }
-        .est-text { font-size: 0.85rem; color: var(--spx-gray); letter-spacing: 2px;}
+        .top-nav.scrolled { 
+            background: var(--ts-glass); backdrop-filter: blur(12px); border-bottom: 1px solid var(--ts-border);
+        }
+        .est-text { font-size: 0.75rem; color: var(--ts-white); letter-spacing: 3px; font-weight: 600;}
         .lang-btn {
-            background: transparent; color: var(--spx-white); border: none;
-            cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
-            opacity: 0.7; transition: opacity 0.3s;
+            background: transparent; color: var(--ts-gray); border: 1px solid var(--ts-gray);
+            cursor: pointer; font-size: 0.7rem; padding: 5px 15px; letter-spacing: 2px;
+            transition: all 0.3s;
         }
-        .lang-btn:hover { opacity: 1; }
+        .lang-btn:hover { color: var(--ts-white); border-color: var(--ts-white); }
 
-        /* Hero Sections */
-        .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 10vh; box-sizing: border-box;}
-        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden;}
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: grayscale(50%); transform: scale(1.05); }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%); z-index: 1; pointer-events: none; }
+        /* Hero Section - Cinematic Overlay */
+        .hero { 
+            position: relative; height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center !important; 
+        }
+        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; background: #000;}
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: contrast(120%) grayscale(20%); }
+        /* شبكة رادار خفيفة مستوحاة من واجهة سايبرتراك */
+        .cyber-grid-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 100px 100px; background-position: center center; pointer-events: none;
+        }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--ts-black) 0%, transparent 100%); z-index: 2; pointer-events: none; }
         
-        .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 5%; box-sizing: border-box; }
-        .main-brand { font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--spx-white); font-weight: 600; letter-spacing: 4px; margin-bottom: 10px; line-height: 1; text-transform: uppercase;}
-        .sub-brand { font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--spx-gray); margin-bottom: 20px; letter-spacing: 5px; text-transform: uppercase; }
-        .hero-desc { font-size: 1.2rem; color: var(--spx-light); max-width: 600px; margin-bottom: 40px; font-weight: 400;}
+        .hero-content { position: relative; z-index: 3; width: 100%; padding: 0 20px; box-sizing: border-box; }
+        .main-brand { font-size: clamp(3rem, 7vw, 6rem); color: var(--ts-white); font-weight: 700; letter-spacing: 5px; margin-bottom: 0; line-height: 1; }
+        .sub-brand { font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--ts-gray); margin-bottom: 40px; letter-spacing: 8px; margin-top: 10px;}
+        .hero-desc { font-size: 1.2rem; color: var(--ts-light-gray); max-width: 600px; margin: 0 auto 40px auto; font-weight: 500;}
 
-        /* Primary Button (SpaceX Style) */
+        /* Primary Button - Launch UI */
         .primary-btn {
-            background: transparent; color: var(--spx-white); border: 2px solid var(--spx-white);
-            padding: 15px 40px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 2px; cursor: pointer; transition: all 0.4s ease; text-decoration: none; display: inline-block;
+            background: transparent; color: var(--ts-white); border: 1px solid var(--ts-gray);
+            padding: 18px 45px; font-size: 0.85rem; font-weight: 600; letter-spacing: 3px;
+            cursor: pointer; transition: all 0.4s ease; text-decoration: none; display: inline-block;
+            position: relative; overflow: hidden;
         }
-        .primary-btn:hover { background: var(--spx-white); color: var(--spx-black); }
+        .primary-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--ts-white); transition: left 0.4s ease; z-index: -1;
+        }
+        .primary-btn:hover { color: var(--ts-black); border-color: var(--ts-white);}
+        .primary-btn:hover::before { left: 0; }
 
-        /* Content Sections */
-        .content-section { padding: 150px 0; background: var(--spx-black); position: relative; z-index: 2; border-bottom: 1px solid #111;}
-        .alt-bg { background-color: var(--spx-dark); }
+        /* Content Sections - Data Panels */
+        .content-section { padding: 180px 0; background: var(--ts-black); position: relative; z-index: 2; }
         
-        .section-label { font-size: 0.85rem; color: var(--spx-gray); margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; display: inline-block;}
-        .main-heading { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1.1; margin-top: 0; margin-bottom: 40px; color: var(--spx-white); text-transform: uppercase;}
-        .body-text { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--spx-light); max-width: 800px; margin-bottom: 30px; font-weight: 400; line-height: 1.6;}
-        .highlight { color: var(--spx-white); font-weight: 600; }
+        /* لتطبيق خلفيات سايبرتراك من ملف الـ PDF */
+        .bg-image-section {
+            background-size: cover; background-position: center; background-attachment: fixed;
+            position: relative;
+        }
+        .bg-image-section::before {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.85); /* تعتيم للصورة لتبرز النصوص */
+            z-index: 1;
+        }
+
+        .section-label { 
+            font-size: 0.8rem; color: var(--ts-white); margin-bottom: 30px; 
+            letter-spacing: 4px; border-bottom: 1px solid var(--ts-border); 
+            padding-bottom: 15px; display: flex; justify-content: space-between;
+        }
+        .main-heading { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; line-height: 1.1; margin-top: 0; margin-bottom: 40px; color: var(--ts-white);}
+        .body-text { font-size: clamp(1rem, 1.8vw, 1.25rem); color: var(--ts-light-gray); max-width: 850px; margin-bottom: 30px; font-weight: 500; line-height: 1.7;}
+        .highlight { color: var(--ts-white); background: rgba(255,255,255,0.1); padding: 0 5px;}
 
         /* Lists */
         .custom-list { list-style: none; padding: 0; margin-bottom: 40px; }
-        .custom-list li { position: relative; padding-left: 20px; margin-bottom: 20px; color: var(--spx-light); font-size: 1.1rem; border-left: 1px solid #333; padding-left: 15px;}
-        body.lang-ar .custom-list li { padding-left: 0; padding-right: 15px; border-left: none; border-right: 1px solid #333;}
+        .custom-list li { position: relative; padding-left: 25px; margin-bottom: 20px; color: var(--ts-light-gray); font-size: 1.1rem; font-weight: 500;}
+        .custom-list li::before { content: '■'; position: absolute; left: 0; top: 2px; color: var(--ts-gray); font-size: 0.8rem;}
+        body.lang-ar .custom-list li { padding-left: 0; padding-right: 25px; }
+        body.lang-ar .custom-list li::before { right: 0; left: auto; }
 
-        /* HX-5 Grid (Technical specs style) */
-        .hx-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 60px; border-top: 1px solid #333; padding-top: 40px;}
+        /* HX-5 Grid (Cybertruck UI Settings Style) */
+        .hx-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 60px;}
         @media (min-width: 768px) { .hx-grid { grid-template-columns: 1fr 1fr; } }
-        .hx-card { padding-bottom: 30px; border-bottom: 1px solid #222; }
-        .hx-number { font-size: 0.9rem; color: var(--spx-gray); margin-bottom: 10px; letter-spacing: 2px;}
-        .hx-title { font-size: 1.5rem; color: var(--spx-white); margin-bottom: 15px; font-weight: 600; text-transform: uppercase;}
+        .hx-card { 
+            background: var(--ts-panel); border: 1px solid var(--ts-border); padding: 40px; 
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+        }
+        .hx-card:hover { border-color: var(--ts-white); background: rgba(20,20,20,1); }
+        .hx-number { font-size: 0.8rem; color: var(--ts-gray); margin-bottom: 15px; letter-spacing: 3px; display: flex; justify-content: space-between;}
+        .hx-title { font-size: 1.6rem; color: var(--ts-white); margin-bottom: 20px; font-weight: 600;}
 
-        /* The DNA Section */
-        .dna-container { margin-top: 60px; }
-        .dna-row { padding: 40px 0; border-bottom: 1px solid #333; cursor: pointer; position: relative;}
-        .dna-header { display: flex; justify-content: space-between; align-items: baseline; }
+        /* The DNA Section (Vehicle Specs Style) */
+        .dna-container { margin-top: 60px; border-top: 1px solid var(--ts-border); }
+        .dna-row { padding: 40px 0; border-bottom: 1px solid var(--ts-border); cursor: pointer; transition: padding 0.3s; }
+        .dna-row:hover { padding-right: 20px; } body.lang-ar .dna-row:hover { padding-left: 20px; padding-right: 0;}
+        .dna-header { display: flex; justify-content: space-between; align-items: center; }
         .dna-title-box { display: flex; flex-direction: column; }
-        .dna-sub { font-size: 0.8rem; color: var(--spx-gray); letter-spacing: 3px; margin-bottom: 10px; text-transform: uppercase;}
-        .dna-name { font-size: 2.5rem; color: var(--spx-white); font-weight: 600; text-transform: uppercase;}
-        .dna-icon { font-size: 2rem; color: var(--spx-gray); font-weight: 300; transition: transform 0.4s ease;}
-        .dna-row.active .dna-icon { transform: rotate(45deg); color: var(--spx-white);}
+        .dna-sub { font-size: 0.75rem; color: var(--ts-gray); letter-spacing: 4px; margin-bottom: 10px; }
+        .dna-name { font-size: 2.2rem; color: var(--ts-white); font-weight: 600; }
+        .dna-icon { font-size: 1.5rem; color: var(--ts-gray); transition: transform 0.4s ease;}
+        .dna-row.active .dna-icon { transform: rotate(135deg); color: var(--ts-white);}
         
         .dna-content { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .dna-content-inner { padding: 30px 0 10px; color: var(--spx-light); font-size: 1.1rem; max-width: 700px; }
-        .elite-signature { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--spx-white); display: block; margin-top: 20px; opacity: 0.8;}
+        .dna-content-inner { padding: 30px 0 10px; color: var(--ts-light-gray); font-size: 1.1rem; max-width: 750px; }
+        .elite-signature { font-family: 'Caveat', cursive; font-size: 2.5rem; color: var(--ts-white); display: block; margin-top: 25px; opacity: 0.6;}
 
-        /* Executive Portal */
-        .portal-box { background: var(--spx-dark); border: 1px solid #333; padding: 60px; margin-top: 50px; }
-        .input-group { margin-bottom: 30px; }
+        /* Executive Portal (Telemetry Login) */
+        .portal-box { 
+            background: var(--ts-panel); border: 1px solid var(--ts-border); 
+            padding: 60px; margin-top: 50px; position: relative;
+        }
+        .portal-box::before {
+            content: '[ SECURE NODE ]'; position: absolute; top: -10px; left: 30px; 
+            background: var(--ts-black); padding: 0 10px; font-size: 0.7rem; color: var(--ts-gray); font-family: 'Space Mono', monospace;
+        }
+        body.lang-ar .portal-box::before { left: auto; right: 30px; }
+
+        .input-group { margin-bottom: 35px; position: relative; }
         .spx-input {
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid #555;
-            color: var(--spx-white); padding: 15px 0; font-family: inherit; font-size: 1.1rem; transition: border-color 0.3s;
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--ts-gray);
+            color: var(--ts-white); padding: 15px 0; font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 500; transition: border-color 0.3s;
         }
-        .spx-input:focus { outline: none; border-bottom-color: var(--spx-white); }
+        .spx-input:focus { outline: none; border-bottom-color: var(--ts-white); }
+        .spx-input::placeholder { color: #444; font-weight: 400;}
+        
         .submit-btn-full {
-            width: 100%; padding: 18px; background: var(--spx-white); color: var(--spx-black);
-            border: none; font-size: 1rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 2px; cursor: pointer; transition: background 0.3s; margin-top: 20px;
+            width: 100%; padding: 20px; background: var(--ts-white); color: var(--ts-black);
+            border: none; font-size: 0.95rem; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: all 0.3s; margin-top: 10px;
         }
-        .submit-btn-full:hover { background: var(--spx-light); }
-        .submit-btn-full:disabled { background: #333; color: #666; cursor: not-allowed; }
+        .submit-btn-full:hover { background: var(--ts-gray); color: var(--ts-white); }
+        .submit-btn-full:disabled { background: #222; color: #555; cursor: not-allowed; }
 
-        .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px; }
         @media (max-width: 600px) { .auth-grid { grid-template-columns: 1fr; } }
         .social-btn {
-            position: relative; width: 100%; padding: 15px; font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: transparent; color: var(--spx-gray); border: 1px solid #333;
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+            position: relative; width: 100%; padding: 18px; font-family: 'Space Mono', monospace; font-size: 0.8rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px;
+            background: transparent; color: var(--ts-gray); border: 1px solid var(--ts-border); transition: 0.3s;
         }
-        .social-btn:hover:not(:disabled) { border-color: var(--spx-white); color: var(--spx-white);}
-        .social-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .social-btn:hover:not(:disabled) { border-color: var(--ts-white); color: var(--ts-white);}
+        .social-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        .divider { display: flex; align-items: center; text-align: center; margin: 40px 0; color: #555; font-size: 0.8rem; letter-spacing: 2px;}
-        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #222; }
-        .divider:not(:empty)::before { margin-left: 1em; } .divider:not(:empty)::after { margin-right: 1em; }
+        .divider { display: flex; align-items: center; text-align: center; margin: 40px 0; color: var(--ts-gray); font-size: 0.8rem; letter-spacing: 3px;}
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--ts-border); }
+        .divider:not(:empty)::before { margin-left: 1.5em; } .divider:not(:empty)::after { margin-right: 1.5em; }
 
         /* Dashboard Views */
         #dashboard-view { display: none; }
-        .dashboard-nav { display: flex; border-bottom: 1px solid #333; margin-bottom: 40px; gap: 30px;}
+        .dashboard-nav { display: flex; border-bottom: 1px solid var(--ts-border); margin-bottom: 50px; gap: 40px;}
         .dash-tab {
-            padding: 15px 0; cursor: pointer; color: var(--spx-gray); font-size: 0.9rem; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid transparent; transition: 0.3s;
+            padding: 15px 0; cursor: pointer; color: var(--ts-gray); font-size: 0.9rem; font-weight: 600;
+            letter-spacing: 2px; border-bottom: 2px solid transparent; transition: 0.3s;
         }
-        .dash-tab:hover, .dash-tab.active { color: var(--spx-white); border-bottom-color: var(--spx-white); }
+        .dash-tab:hover, .dash-tab.active { color: var(--ts-white); border-bottom-color: var(--ts-white); }
         .service-form { display: none; animation: fadeIn 0.5s; }
         .service-form.active { display: block; }
 
-        .history-card { border-bottom: 1px solid #222; padding: 25px 0; text-align: left; direction: ltr;}
-        .status-badge { padding: 4px 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; border: 1px solid;}
-        .reply-box { margin-top: 15px; border-left: 2px solid #555; padding-left: 15px; }
+        .history-card { border: 1px solid var(--ts-border); padding: 30px; margin-bottom: 20px; background: rgba(0,0,0,0.3); text-align: left; direction: ltr;}
+        .status-badge { padding: 4px 12px; font-size: 0.75rem; font-family: 'Space Mono'; border: 1px solid;}
+        .reply-box { margin-top: 20px; border-top: 1px dashed var(--ts-gray); padding-top: 20px; }
 
-        /* Terminal */
-        .terminal-container { background: #050505; border: 1px solid #333; height: 350px; padding: 25px; color: var(--spx-light); display: flex; flex-direction: column;}
-        .term-output { flex: 1; overflow-y: auto; margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; white-space: pre-wrap; direction: ltr; text-align: left;}
-        .term-input-line { display: flex; align-items: center; direction: ltr; border-top: 1px solid #222; padding-top: 15px;}
-        .term-prompt { margin-right: 15px; color: var(--spx-gray); }
-        .term-input { background: transparent; border: none; color: var(--spx-white); flex: 1; font-family: inherit; font-size: 0.9rem; outline: none; }
+        /* Terminal (Command Line Interface) */
+        .terminal-container { background: #000; border: 1px solid var(--ts-border); height: 400px; padding: 30px; color: var(--ts-light-gray); display: flex; flex-direction: column; font-family: 'Space Mono', monospace;}
+        .term-output { flex: 1; overflow-y: auto; margin-bottom: 20px; font-size: 0.85rem; line-height: 1.8; white-space: pre-wrap; direction: ltr; text-align: left;}
+        .term-input-line { display: flex; align-items: center; direction: ltr; border-top: 1px solid #222; padding-top: 20px;}
+        .term-prompt { margin-right: 15px; color: var(--ts-white); }
+        .term-input { background: transparent; border: none; color: var(--ts-white); flex: 1; font-family: inherit; font-size: 0.85rem; outline: none; }
 
         /* Legal Modal */
-        .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; display: none; justify-content: center; align-items: center; }
-        .legal-content { background: var(--spx-black); border: 1px solid #333; padding: 60px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;}
-        .legal-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: var(--spx-gray); font-size: 2rem; cursor: pointer; transition: 0.3s;}
-        .legal-close:hover { color: var(--spx-white);}
+        .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 10000; display: none; justify-content: center; align-items: center; }
+        .legal-content { background: var(--ts-panel); border: 1px solid var(--ts-border); padding: 60px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;}
+        .legal-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: var(--ts-gray); font-size: 2rem; cursor: pointer; transition: 0.3s;}
+        .legal-close:hover { color: var(--ts-white);}
         body.lang-ar .legal-close { right: auto; left: 30px; }
 
         /* Footer */
-        .site-footer { text-align: center; padding: 80px 20px 40px; background: var(--spx-black); border-top: 1px solid #222;}
-        .social-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 50px; flex-wrap: wrap; }
-        .social-link { color: var(--spx-gray); text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
-        .social-link:hover { color: var(--spx-white); }
-        .footer-logo { font-size: 1.5rem; letter-spacing: 4px; margin-bottom: 15px; font-weight: 600; text-transform: uppercase;}
-        .footer-text { color: #555; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;}
-        .legal-links a { color: #555; text-decoration: none; font-size: 0.8rem; margin: 0 15px; transition: 0.3s; cursor: pointer; letter-spacing: 1px;}
-        .legal-links a:hover { color: var(--spx-white); }
+        .site-footer { text-align: center; padding: 80px 20px; background: #000; border-top: 1px solid var(--ts-border);}
+        .social-row { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; flex-wrap: wrap; }
+        .social-link { color: var(--ts-gray); text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 3px; transition: color 0.3s; }
+        .social-link:hover { color: var(--ts-white); }
+        .footer-logo { font-size: 1.8rem; letter-spacing: 6px; margin-bottom: 20px; font-weight: 700; color: var(--ts-white);}
+        .footer-text { color: var(--ts-gray); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; font-weight: 500;}
+        .legal-links a { color: var(--ts-gray); text-decoration: none; font-size: 0.75rem; margin: 0 20px; transition: 0.3s; cursor: pointer; font-family: 'Space Mono';}
+        .legal-links a:hover { color: var(--ts-white); }
 
-        /* 🟢 EX|OS ORACLE CHATBOT (HUD) */
+        /* 🟢 EX|OS ORACLE CHATBOT (HUD Display) */
         .ai-fab {
-            position: fixed; bottom: 40px; left: 40px; width: 60px; height: 60px; border-radius: 50%;
-            background: var(--spx-white); color: var(--spx-black); border: none; cursor: pointer;
-            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: 600; font-size: 1rem;
-            transition: transform 0.3s; letter-spacing: 1px;
+            position: fixed; bottom: 40px; left: 40px; width: 65px; height: 65px; border-radius: 0; /* شكل تقني حاد */
+            background: var(--ts-white); color: var(--ts-black); border: none; cursor: pointer;
+            z-index: 9999; display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 1.2rem;
+            transition: transform 0.3s, background 0.3s; letter-spacing: 1px;
         }
-        .ai-fab:hover { transform: scale(1.05); }
+        .ai-fab:hover { transform: scale(1.05); background: #ccc;}
         body.lang-en .ai-fab { left: auto; right: 40px; }
         
         .ai-window {
-            position: fixed; bottom: 120px; left: 40px; width: 400px; height: 550px; 
-            background: rgba(0,0,0,0.9); border: 1px solid #333;
+            position: fixed; bottom: 120px; left: 40px; width: 420px; height: 600px; 
+            background: rgba(10,10,10,0.95); border: 1px solid var(--ts-border); backdrop-filter: blur(20px);
             z-index: 9998; display: flex; flex-direction: column; 
-            transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.4s ease;
+            transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         body.lang-en .ai-window { left: auto; right: 40px; }
         .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
         
         .ai-header { 
-            background: var(--spx-black); color: var(--spx-white); padding: 20px;
-            display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333;
+            background: transparent; color: var(--ts-white); padding: 25px;
+            display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--ts-border);
         }
-        .ai-title { font-size: 0.9rem; letter-spacing: 3px; font-weight: 600; }
-        .ai-close { background: none; border: none; color: var(--spx-gray); font-size: 1.5rem; cursor: pointer; transition: 0.3s; line-height: 1;}
-        .ai-close:hover { color: var(--spx-white); }
+        .ai-title { font-size: 0.9rem; letter-spacing: 4px; font-weight: 600; font-family: 'Space Mono'; }
+        .ai-close { background: none; border: none; color: var(--ts-gray); font-size: 1.5rem; cursor: pointer; transition: 0.3s; line-height: 1;}
+        .ai-close:hover { color: var(--ts-white); }
         
-        .voice-toggle { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--spx-gray); letter-spacing: 1px;}
-        .switch { width: 36px; height: 18px; background: #222; border-radius: 18px; position: relative; cursor: pointer; transition: 0.3s;}
-        .dot { width: 14px; height: 14px; background: #666; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: transform 0.3s, background 0.3s; }
-        .switch.active { background: #333; border: 1px solid var(--spx-white);}
-        .switch.active .dot { transform: translateX(18px); background: var(--spx-white); }
+        .voice-toggle { display: flex; align-items: center; gap: 12px; font-size: 0.7rem; color: var(--ts-gray); font-family: 'Space Mono';}
+        .switch { width: 36px; height: 16px; background: #222; border-radius: 0; position: relative; cursor: pointer; transition: 0.3s; border: 1px solid #444;}
+        .dot { width: 12px; height: 12px; background: #666; position: absolute; top: 1px; left: 2px; transition: transform 0.3s, background 0.3s; }
+        .switch.active { background: #222; border-color: var(--ts-white);}
+        .switch.active .dot { transform: translateX(18px); background: var(--ts-white); }
         body.lang-ar .dot { left: auto; right: 2px; }
         body.lang-ar .switch.active .dot { transform: translateX(-18px); }
 
-        .ai-body { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;}
-        .ai-body::-webkit-scrollbar { width: 2px; } .ai-body::-webkit-scrollbar-thumb { background: #333; }
+        .ai-body { flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px;}
+        .ai-body::-webkit-scrollbar { width: 3px; } .ai-body::-webkit-scrollbar-thumb { background: #444; }
         
-        .ai-msg { max-width: 85%; padding: 15px; font-size: 0.95rem; line-height: 1.6; font-weight: 400;}
-        .ai-msg.bot { color: var(--spx-white); align-self: flex-start; border-left: 2px solid var(--spx-white); background: rgba(255,255,255,0.02);}
-        body.lang-ar .ai-msg.bot { border-left: none; border-right: 2px solid var(--spx-white); }
+        .ai-msg { max-width: 85%; padding: 18px; font-size: 1rem; line-height: 1.6; font-weight: 500;}
+        .ai-msg.bot { color: var(--ts-white); align-self: flex-start; border-left: 2px solid var(--ts-white); background: rgba(255,255,255,0.03);}
+        body.lang-ar .ai-msg.bot { border-left: none; border-right: 2px solid var(--ts-white); }
         .ai-msg.user { background: #222; color: #fff; align-self: flex-end; }
         
-        .ai-input-area { display: flex; padding: 20px; background: var(--spx-black); border-top: 1px solid #333; }
-        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: inherit; outline: none; font-size: 0.95rem;}
-        .ai-send { background: transparent; color: var(--spx-white); border: none; cursor: pointer; font-weight: 600; letter-spacing: 2px;}
+        .ai-input-area { display: flex; padding: 25px; background: transparent; border-top: 1px solid var(--ts-border); }
+        .ai-input { flex: 1; background: transparent; border: none; color: #fff; font-family: 'Rajdhani'; outline: none; font-size: 1.1rem;}
+        .ai-send { background: transparent; color: var(--ts-gray); border: none; cursor: pointer; font-weight: 700; letter-spacing: 3px; font-family: 'Space Mono'; transition: color 0.3s;}
+        .ai-send:hover { color: var(--ts-white);}
 
         /* Animations */
-        .gsap-fade-up { opacity: 0; transform: translateY(50px); }
+        .gsap-fade-up { opacity: 0; transform: translateY(40px); }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Lenis setup */
@@ -297,7 +349,7 @@
     <div id="custom-cursor"></div>
     <div id="cursor-follower"></div>
 
-    <nav class="top-nav">
+    <nav class="top-nav" id="navbar">
         <div class="est-text mono-text interactive">EST EX/25. SA™️</div>
         <button class="lang-btn mono-text interactive" onclick="toggleLanguage()">EN / عربي</button>
     </nav>
@@ -305,32 +357,34 @@
     <header class="hero">
         <div class="video-wrapper">
             <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
+            <div class="cyber-grid-overlay"></div>
         </div>
         <div class="overlay"></div>
 
         <div class="hero-content gsap-fade-up">
             <h1 class="main-brand interactive">フサム | experience™️</h1>
-            <div class="sub-brand interactive">Engineering Human Experience</div>
+            <div class="sub-brand interactive mono-text">Engineering Human Experience</div>
             
             <p class="hero-desc ar-only">
-                نحن لا نصمم منتجات..<br>
-                نحن نهندس التجربة الإنسانية — من الإحساس الأول إلى الذاكرة الخالدة.
+                نحن لا نصمم منتجات.. نحن نهندس التجربة الإنسانية — من الإحساس الأول إلى الذاكرة الخالدة.
             </p>
             <p class="hero-desc en-only">
-                We do not design products..<br>
-                We engineer human experience — from first sensation to lasting memory.
+                We do not design products.. We engineer human experience — from first sensation to lasting memory.
             </p>
 
-            <div>
-                <a href="#portal" class="primary-btn interactive">Initialize Executive Access</a>
+            <div style="margin-top: 50px;">
+                <a href="#portal" class="primary-btn interactive mono-text">Initialize Executive Access</a>
             </div>
         </div>
     </header>
 
     <section class="content-section">
         <div class="container gsap-fade-up">
-            <div class="section-label mono-text ar-only">00.2 / ما هو フサム ؟</div>
-            <div class="section-label mono-text en-only">00.2 / WHAT IS フサム ?</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.2 / ما هو フサム ؟</span>
+                <span class="en-only">00.2 / WHAT IS フサム ?</span>
+                <span class="interactive">[ DATA LOG ]</span>
+            </div>
             
             <h2 class="main-heading ar-only interactive">مختبر استراتيجي للتجارب.</h2>
             <h2 class="main-heading en-only interactive">Concept House & Strategic Lab.</h2>
@@ -344,8 +398,10 @@
 
             <br><br><br>
 
-            <div class="section-label mono-text ar-only">00.3 / المشكلة الصامتة</div>
-            <div class="section-label mono-text en-only">00.3 / THE SILENT PROBLEM</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.3 / المشكلة الصامتة</span>
+                <span class="en-only">00.3 / THE SILENT PROBLEM</span>
+            </div>
             
             <p class="body-text ar-only">
                 العالم مليء بالمحتوى، لكن القليل جداً من التجارب تُحفر في الذاكرة. تتفاعل العلامات التجارية والأنظمة والبيئات مع الناس، لكنها نادراً ما تترك بصمة عاطفية دائمة. هذه الفجوة ليست مشكلة إبداعية، إنها <span class="highlight">فشل في تصميم التجربة.</span>
@@ -356,12 +412,9 @@
         </div>
     </section>
 
-    <section class="hero" style="height: 60vh; padding:0; justify-content: center;">
-        <div class="video-wrapper">
-            <video id="breakVideo1" class="video-bg" autoplay loop muted playsinline></video>
-        </div>
-        <div class="overlay" style="background: rgba(0,0,0,0.5);"></div>
-        <div class="hero-content gsap-fade-up text-center">
+    <section class="hero bg-image-section" style="height: 70vh; justify-content: center; /* أضف مسار صورة السايبرتراك هنا بدلاً من اللون */ background-color: #050505;">
+        <div class="cyber-grid-overlay" style="opacity: 0.5;"></div>
+        <div class="hero-content gsap-fade-up text-center" style="position: relative; z-index: 5;">
             <h2 class="main-heading interactive" style="margin:0; text-align:center;">
                 <span class="ar-only">هذا ليس تسويقاً..<br>هذه هندسة معمارية للتجارب.</span>
                 <span class="en-only">This is not marketing..<br>This is experience architecture.</span>
@@ -369,22 +422,27 @@
         </div>
     </section>
 
-    <section class="content-section alt-bg">
+    <section class="content-section">
         <div class="container gsap-fade-up">
-            <div class="section-label mono-text ar-only">00.4 / هندسة التجربة الإنسانية</div>
-            <div class="section-label mono-text en-only">00.4 / HUMAN EXPERIENCE ENGINEERING</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.4 / هندسة التجربة الإنسانية</span>
+                <span class="en-only">00.4 / HUMAN EXPERIENCE ENGINEERING</span>
+            </div>
             
-            <p class="body-text ar-only" style="font-size: 1.4rem; color: var(--spx-white);">
+            <p class="body-text ar-only" style="font-size: 1.6rem; color: var(--ts-white); font-weight: 600;">
                 الرؤية السلوكية — التصميم الحسي — هندسة الطقوس — الترجمة السينمائية
             </p>
-            <p class="body-text en-only" style="font-size: 1.4rem; color: var(--spx-white);">
+            <p class="body-text en-only" style="font-size: 1.6rem; color: var(--ts-white); font-weight: 600;">
                 Behavioral Insight — Sensory Design — Ritual Engineering — Cinematic Translation
             </p>
 
             <br><br><br>
 
-            <div class="section-label mono-text ar-only">00.5 / المنهجية</div>
-            <div class="section-label mono-text en-only">00.5 / THE METHODOLOGY</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.5 / المنهجية</span>
+                <span class="en-only">00.5 / THE METHODOLOGY</span>
+                <span class="interactive">[ CORE ENGINE ]</span>
+            </div>
             
             <h2 class="main-heading ar-only interactive">محرك HX-5™️.</h2>
             <h2 class="main-heading en-only interactive">HX-5™️ Methodology.</h2>
@@ -398,31 +456,31 @@
 
             <div class="hx-grid">
                 <div class="hx-card interactive">
-                    <div class="hx-number mono-text">01 // INTENT</div>
+                    <div class="hx-number mono-text"><span>01</span> <span>INTENT</span></div>
                     <div class="hx-title ar-only">الغاية</div>
                     <p class="body-text ar-only" style="font-size:1rem; margin:0;">"لماذا يجب أن توجد هذه التجربة؟" الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى.</p>
                     <p class="body-text en-only" style="font-size:1rem; margin:0;">"Why should this experience exist?" Intent defines the existential purpose and the "moral compass" of the project.</p>
                 </div>
                 <div class="hx-card interactive">
-                    <div class="hx-number mono-text">02 // CONTEXT</div>
+                    <div class="hx-number mono-text"><span>02</span> <span>CONTEXT</span></div>
                     <div class="hx-title ar-only">السياق</div>
                     <p class="body-text ar-only" style="font-size:1rem; margin:0;">"أين ومتى وتحت أي ظروف تتكشف؟" التجربة لا تحدث في فراغ. نحن نحلل الظروف البيئية والزمنية والنفسية المحيطة لنهندس استجابات سلسة ومتكيفة مع لحظة التفاعل.</p>
                     <p class="body-text en-only" style="font-size:1rem; margin:0;">"Where, when, and under what conditions does it unfold?" An experience does not exist in a vacuum.</p>
                 </div>
                 <div class="hx-card interactive">
-                    <div class="hx-number mono-text">03 // STIMULI</div>
+                    <div class="hx-number mono-text"><span>03</span> <span>STIMULI</span></div>
                     <div class="hx-title ar-only">المحفزات</div>
                     <p class="body-text ar-only" style="font-size:1rem; margin:0;">"ما هي المحفزات الحسية التي تفعل العاطفة؟" هندسة المدخلات لتشغيل استجابات عصبية محددة تتجاوز الفلاتر المنطقية لتتواصل مباشرة مع العقل الباطن.</p>
                     <p class="body-text en-only" style="font-size:1rem; margin:0;">Engineering the sensory inputs—visual, auditory, and tactile—to trigger specific emotional and neurological responses.</p>
                 </div>
                 <div class="hx-card interactive">
-                    <div class="hx-number mono-text">04 // INTERACTION</div>
+                    <div class="hx-number mono-text"><span>04</span> <span>INTERACTION</span></div>
                     <div class="hx-title ar-only">التفاعل</div>
                     <p class="body-text ar-only" style="font-size:1rem; margin:0;">"كيف يشارك الإنسان، بوعي أو بدونه؟" هذه الركيزة تحكم إيقاع الاندماج. نحن نهندس المسارات التي تحول الشخص من مجرد متفرج إلى مشارك نشط داخل التجربة.</p>
                     <p class="body-text en-only" style="font-size:1rem; margin:0;">"How does the human participate?" This pillar governs the rhythm of engagement.</p>
                 </div>
-                <div class="hx-card interactive" style="grid-column: 1 / -1; border-bottom: none;">
-                    <div class="hx-number mono-text" style="color: var(--spx-white);">05 // IMPACT</div>
+                <div class="hx-card interactive" style="grid-column: 1 / -1; border-color: var(--ts-white);">
+                    <div class="hx-number mono-text" style="color: var(--ts-white);"><span>05</span> <span>IMPACT</span></div>
                     <div class="hx-title ar-only">الأثر</div>
                     <p class="body-text ar-only" style="font-size:1rem; margin:0;">"ما الذي يتبقى بعد انتهاء التجربة؟" هذا هو المقياس النهائي للنجاح. نحن لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. الأثر هو الذاكرة الدائمة والبصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
                     <p class="body-text en-only" style="font-size:1rem; margin:0;">"What remains after the experience ends?" The ultimate metric of success. We do not measure the duration of the event, but the "emotional residue" left behind.</p>
@@ -431,12 +489,9 @@
         </div>
     </section>
 
-    <section class="hero" style="height: 60vh; padding:0; justify-content: center;">
-        <div class="video-wrapper">
-            <video id="breakVideo2" class="video-bg" autoplay loop muted playsinline></video>
-        </div>
-        <div class="overlay" style="background: rgba(0,0,0,0.6);"></div>
-        <div class="hero-content gsap-fade-up text-center">
+    <section class="hero bg-image-section" style="height: 70vh; justify-content: center; /* أضف مسار صورة السايبرتراك بالثلج هنا */ background-color: #050505;">
+        <div class="cyber-grid-overlay" style="opacity: 0.5;"></div>
+        <div class="hero-content gsap-fade-up text-center" style="position: relative; z-index: 5;">
             <h2 class="main-heading interactive" style="margin:0; text-align:center;">
                 <span class="ar-only">لخلق تجارب تُحَس.. قبل أن تُفهم.</span>
                 <span class="en-only">To create experiences that are felt, before they are understood.</span>
@@ -446,8 +501,10 @@
 
     <section class="content-section">
         <div class="container gsap-fade-up">
-            <div class="section-label mono-text ar-only">00.6 / الفلسفة الأساسية</div>
-            <div class="section-label mono-text en-only">00.6 / THE CORE PHILOSOPHY</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.6 / الفلسفة الأساسية</span>
+                <span class="en-only">00.6 / THE CORE PHILOSOPHY</span>
+            </div>
             
             <p class="body-text ar-only">
                 العالم مشبع بالمحتوى، ولكنه متعطش للمعنى. تم تصميم محرك HX-5™️ لحل "المشكلة الصامتة" للتفاعل الحديث: الفشل في البقاء في الذاكرة. نحن نضمن أن تجربتك لن تُرى فحسب، بل ستُحَس وتُحفظ.
@@ -458,8 +515,10 @@
 
             <br><br><br>
 
-            <div class="section-label mono-text ar-only">00.7 / ماذا نفعل؟</div>
-            <div class="section-label mono-text en-only">00.7 / WHAT WE DO?</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.7 / ماذا نفعل؟</span>
+                <span class="en-only">00.7 / WHAT WE DO?</span>
+            </div>
             
             <p class="body-text ar-only">نحن ننفذ نماذج تجريبية (Pilots) مركزة لمدة 4-6 أسابيع مصممة للتحقق من أثر التجربة. كل نموذج يقدم:</p>
             <p class="body-text en-only">We execute focused 4-6 week pilots designed to validate experience impact. Each pilot delivers:</p>
@@ -479,8 +538,10 @@
 
             <br><br><br>
 
-            <div class="section-label mono-text ar-only">00.8 / لماذا النماذج التجريبية أولاً؟</div>
-            <div class="section-label mono-text en-only">00.8 / WHY PILOTS FIRST?</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.8 / لماذا النماذج التجريبية أولاً؟</span>
+                <span class="en-only">00.8 / WHY PILOTS FIRST?</span>
+            </div>
             
             <p class="body-text ar-only">
                 الأفكار ليست كافية.. الوعود لا تتوسع.<br><br>
@@ -493,10 +554,12 @@
         </div>
     </section>
 
-    <section class="content-section alt-bg">
+    <section class="content-section">
         <div class="container gsap-fade-up">
-            <div class="section-label mono-text ar-only">00.9 / فلسفة الشراكة</div>
-            <div class="section-label mono-text en-only">00.9 / PARTNERSHIP PHILOSOPHY</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.9 / فلسفة الشراكة</span>
+                <span class="en-only">00.9 / PARTNERSHIP PHILOSOPHY</span>
+            </div>
             
             <p class="body-text ar-only">نحن لا ننافس شركاءنا.. نحن نرتقي بهم.</p>
             <p class="body-text en-only">We do not compete with our partners. We elevate them.</p>
@@ -517,8 +580,10 @@
 
             <br><br><br>
 
-            <div class="section-label mono-text ar-only">00.10 / لمن هذا؟</div>
-            <div class="section-label mono-text en-only">00.10 / WHO THIS IS FOR?</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.10 / لمن هذا؟</span>
+                <span class="en-only">00.10 / WHO THIS IS FOR?</span>
+            </div>
             
             <ul class="custom-list ar-only">
                 <li>المنظمات التي تسعى لأثر طويل المدى.</li>
@@ -533,13 +598,15 @@
                 <li>Cultural and innovation-driven institutions.</li>
             </ul>
             
-            <p class="body-text ar-only">إذا كنت تبحث عن إعلانات تقليدية، فهذا المكان ليس لك.</p>
-            <p class="body-text en-only">If you are looking for advertising, this is not for you.</p>
+            <p class="body-text ar-only" style="color: var(--ts-light-gray); font-family: 'Space Mono'; border-left: 2px solid var(--ts-white); padding-left: 15px;">إذا كنت تبحث عن إعلانات تقليدية، فهذا المكان ليس لك.</p>
+            <p class="body-text en-only" style="color: var(--ts-light-gray); font-family: 'Space Mono'; border-left: 2px solid var(--ts-white); padding-left: 15px;">If you are looking for advertising, this is not for you.</p>
 
             <br><br><br>
 
-            <div class="section-label mono-text ar-only">00.11 / ملاحظة للمستثمرين</div>
-            <div class="section-label mono-text en-only">00.11 / INVESTOR NOTE</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.11 / ملاحظة للمستثمرين</span>
+                <span class="en-only">00.11 / INVESTOR NOTE</span>
+            </div>
             
             <p class="body-text ar-only">
                 フサム ليست شركة منتجات.. وليست وكالة.<br>
@@ -554,8 +621,11 @@
 
     <section class="content-section">
         <div class="container gsap-fade-up">
-            <div class="section-label mono-text ar-only">00.12 / الشفرة الوراثية</div>
-            <div class="section-label mono-text en-only">00.12 / THE DNA</div>
+            <div class="section-label mono-text">
+                <span class="ar-only">00.12 / الشفرة الوراثية</span>
+                <span class="en-only">00.12 / THE DNA</span>
+                <span class="interactive">[ ACCESS LOG ]</span>
+            </div>
             
             <h2 class="main-heading ar-only interactive">المعمار والتكوين.</h2>
             <h2 class="main-heading en-only interactive">Architecture & Genesis.</h2>
@@ -578,7 +648,7 @@
                     </div>
                     <div class="dna-content">
                         <div class="dna-content-inner">
-                            <div class="mono-text" style="color: var(--spx-gray); margin-bottom: 15px; font-size:0.9rem;">HUSSAM HASSAN MOHAMMED TAHIRI</div>
+                            <div class="mono-text" style="color: var(--ts-gray); margin-bottom: 15px; font-size:0.9rem;">HUSSAM HASSAN MOHAMMED TAHIRI</div>
                             <span class="ar-only">النقطة صِفر (Ground Zero) مؤسس هذه المنظومة. والعقل الاستراتيجي والمصمم لمنهجية HX-5™️. هو من وضع حجر الأساس، ومبتكر هندسة التجربة الإنسانية، متجاوزاً حدود التصميم التقليدي ليخلق لغة جديدة في الإدراك الحسي والتأثير الممتد وصناعة اول دار للمفاهيم بالمملكة العربية السعودية.</span>
                             <span class="en-only">The Ground Zero of this ecosystem. The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering, moving beyond traditional design to create a new language of sensory perception and lasting impact.</span>
                             <span class="elite-signature">Hussam Tahiri</span>
@@ -596,7 +666,7 @@
                     </div>
                     <div class="dna-content">
                         <div class="dna-content-inner">
-                            <div class="mono-text" style="color: var(--spx-gray); margin-bottom: 15px; font-size:0.9rem;">P. SULTAN BIN BADR BIN ABDULMUHSEN AL SAUD</div>
+                            <div class="mono-text" style="color: var(--ts-gray); margin-bottom: 15px; font-size:0.9rem;">P. SULTAN BIN BADR BIN ABDULMUHSEN AL SAUD</div>
                             <span class="ar-only">النصف الآخر من معادلة التكوين. القوة الموازية التي تحول الرؤية الاستراتيجية العميقة إلى هيكل صلب وقابل للتوسع. يشارك في صياغة الشفرة الوراثية (DNA) للكيان، ويضمن أن العمارة التجريبية لا تقف عند حدود التنظير، بل تُترجم إلى أثر ملموس يصطدم بأرض الواقع ويُحفر في الذاكرة.</span>
                             <span class="en-only">The other half of the genesis equation. The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA, ensuring that experience architecture does not stop at theory, but translates into tangible impact that collides with reality and is etched into memory.</span>
                             <span class="elite-signature">Sultan B. Al-Saud</span>
@@ -604,17 +674,20 @@
                     </div>
                 </div>
                 
-                <div class="mono-text text-center" style="margin-top: 40px; color: var(--spx-gray); font-size: 0.8rem; letter-spacing: 2px;">
+                <div class="mono-text text-center" style="margin-top: 50px; color: var(--ts-gray); font-size: 0.8rem; letter-spacing: 3px;">
                     [ SYSTEM SECURED - VERIFIED VIA EXECUTIVE NODE ]
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portal" class="content-section alt-bg" style="padding-bottom: 150px;">
-        <div class="container gsap-fade-up">
-            <div class="section-label mono-text ar-only">الواجهة التنفيذية | EXECUTIVE INTERFACE</div>
-            <div class="section-label mono-text en-only">EXECUTIVE INTERFACE</div>
+    <section id="portal" class="content-section bg-image-section" style="padding-bottom: 150px; /* أضف مسار صورة التضاريس الصخرية للسايبرتراك هنا */ background-color: #020202;">
+        <div class="cyber-grid-overlay" style="opacity: 0.3;"></div>
+        <div class="container gsap-fade-up" style="position: relative; z-index: 5;">
+            <div class="section-label mono-text">
+                <span class="ar-only">الواجهة التنفيذية | EXECUTIVE INTERFACE</span>
+                <span class="en-only">EXECUTIVE INTERFACE</span>
+            </div>
             
             <div class="portal-box">
                 <div id="login-view">
@@ -639,12 +712,12 @@
                         <div class="input-group">
                             <input type="tel" id="userContact" class="spx-input interactive" placeholder="Contact Number (Optional)">
                         </div>
-                        <button type="submit" id="loginBtn" class="submit-btn-full interactive">Initialize Secure Connection</button>
+                        <button type="submit" id="loginBtn" class="submit-btn-full interactive mono-text">Initialize Secure Connection</button>
                     </form>
                 </div>
 
                 <div id="dashboard-view">
-                    <div class="dashboard-nav">
+                    <div class="dashboard-nav mono-text">
                         <div class="dash-tab active interactive" onclick="switchService('consult')">Consultation</div>
                         <div class="dash-tab interactive" onclick="switchService('history')">Logs</div>
                         <div class="dash-tab interactive" onclick="switchService('terminal')">Oracle Interface_</div>
@@ -655,17 +728,17 @@
                             <div class="input-group">
                                 <textarea class="spx-input interactive" id="consultText" placeholder="Outline your strategic objective or inquiry here..." required style="height: 120px; resize: vertical;"></textarea>
                             </div>
-                            <button type="submit" id="consultBtn" class="submit-btn-full interactive">Transmit Signal</button>
+                            <button type="submit" id="consultBtn" class="submit-btn-full interactive mono-text">Transmit Signal</button>
                         </form>
                     </div>
 
                     <div id="form-history" class="service-form">
-                        <p class="mono-text" style="color:var(--spx-gray); font-size:0.8rem; margin-bottom: 20px;">[ACCESSING ARCHIVES...]</p>
+                        <p class="mono-text" style="color:var(--ts-gray); font-size:0.8rem; margin-bottom: 20px;">[ACCESSING ARCHIVES...]</p>
                         <div id="history-content" style="max-height: 350px; overflow-y: auto;"></div>
                     </div>
 
                     <div id="form-terminal" class="service-form">
-                        <p class="mono-text" style="color:var(--spx-gray); font-size:0.8rem; margin-bottom: 15px;">[SYSTEM LOGGED IN] Type 'help' for available commands.</p>
+                        <p class="mono-text" style="color:var(--ts-gray); font-size:0.8rem; margin-bottom: 15px;">[SYSTEM LOGGED IN] Type 'help' for available commands.</p>
                         <div class="terminal-container interactive" onclick="document.getElementById('termInput').focus()">
                             <div class="term-output mono-text" id="termOutput">
 Initializing Executive Interface v4.0...
@@ -673,7 +746,7 @@ Connection Secure.
                             </div>
                             <div class="term-input-line mono-text">
                                 <span class="term-prompt">user@ex:~#</span>
-                                <input type="text" id="termInput" class="term-input interactive" autocomplete="off" onkeydown="handleTerminal(event)">
+                                <input type="text" id="termInput" class="term-input interactive mono-text" autocomplete="off" onkeydown="handleTerminal(event)">
                             </div>
                         </div>
                     </div>
@@ -684,7 +757,7 @@ Connection Secure.
 
     <footer class="site-footer">
         <div class="container gsap-fade-up">
-            <div class="social-row">
+            <div class="social-row mono-text">
                 <a href="https://www.instagram.com/ex_experience.sa?igsh=enA2bnN3dTFraTk1&utm_source=qr" target="_blank" class="social-link interactive">Instagram</a>
                 <a href="https://www.tiktok.com/@ex_experience.sa?_r=1&_t=ZS-94TGgDVJp8W" target="_blank" class="social-link interactive">TikTok</a>
                 <a href="https://snapchat.com/t/w3omS0EV" target="_blank" class="social-link interactive">Snapchat</a>
@@ -708,8 +781,8 @@ Connection Secure.
     <div id="legalModal" class="legal-modal">
         <div class="legal-content">
             <button class="legal-close interactive" onclick="closeLegal()">×</button>
-            <h3 id="legalTitle" class="mono-text" style="color:var(--spx-white); margin-bottom:20px; font-weight:600;"></h3>
-            <div id="legalBody" style="color:var(--spx-light); font-size:1.1rem; line-height:1.6; font-weight:400;"></div>
+            <h3 id="legalTitle" class="mono-text" style="color:var(--ts-white); margin-bottom:30px; font-weight:600; letter-spacing: 2px;"></h3>
+            <div id="legalBody" style="color:var(--ts-light-gray); font-size:1.1rem; line-height:1.7; font-weight:500;"></div>
         </div>
     </div>
 
@@ -728,8 +801,8 @@ Connection Secure.
         </div>
         <div class="ai-body" id="chatBody"></div>
         <div class="ai-input-area">
-            <input type="text" id="aiInput" class="ai-input mono-text interactive" placeholder="Ask Oracle EX..." onkeydown="handleChatEnter(event)">
-            <button class="ai-send mono-text interactive" onclick="sendChatMessage()">SEND</button>
+            <input type="text" id="aiInput" class="ai-input interactive" placeholder="Ask Oracle EX..." onkeydown="handleChatEnter(event)">
+            <button class="ai-send interactive" onclick="sendChatMessage()">SEND</button>
         </div>
     </div>
 
@@ -740,7 +813,7 @@ Connection Secure.
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: 'EX User' };
         let currentLang = 'ar';
 
-        // --- Custom Cursor & Smooth Scroll (Sprint 1 Implemented) ---
+        // --- Custom Cursor & Smooth Scroll ---
         const lenis = new Lenis({
             duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
             direction: 'vertical', gestureDirection: 'vertical', smooth: true, mouseMultiplier: 1
@@ -766,7 +839,7 @@ Connection Secure.
         animateFollower();
 
         const attachHoverEvents = () => {
-            document.querySelectorAll('.interactive, a, button, input, textarea').forEach(el => {
+            document.querySelectorAll('.interactive, a, button, input, textarea, .hx-card').forEach(el => {
                 el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
                 el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
             });
@@ -777,6 +850,13 @@ Connection Secure.
         document.addEventListener("DOMContentLoaded", () => {
             attachHoverEvents();
 
+            // Navbar Scroll Effect
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+            });
+
             gsap.utils.toArray('.gsap-fade-up').forEach(elem => {
                 gsap.to(elem, {
                     scrollTrigger: { trigger: elem, start: "top 85%" },
@@ -784,7 +864,7 @@ Connection Secure.
                 });
             });
 
-            // Video Initialization
+            // Video Initialization (حافظنا على مصفوفة الفيديوهات الخاصة بك)
             const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4'];
             const shuffled = videos.sort(() => 0.5 - Math.random());
             const setVid = (id, src) => { const v = document.getElementById(id); if(v) { v.innerHTML = `<source src="${src}" type="video/mp4">`; v.load(); } };
@@ -817,12 +897,12 @@ Connection Secure.
         // --- Legal Modals ---
         const legalData = {
             privacy: {
-                ar: { title: "سياسة الخصوصية", body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية بالمملكة.<br><br>البيانات المدخلة تستخدم حصرياً للتواصل الهندسي." },
-                en: { title: "PRIVACY POLICY", body: "At フサム, we protect personal data in compliance with Saudi PDPL.<br><br>Data is used exclusively for engineering communication." }
+                ar: { title: "سياسة الخصوصية وحماية البيانات", body: "نلتزم في フサム بحماية بياناتك الشخصية بما يتوافق مع نظام حماية البيانات الشخصية (PDPL) المعمول به في المملكة العربية السعودية.<br><br>- <b style='color:white;'>السرية التامة:</b> لا يتم مشاركة، بيع، أو استغلال بياناتك لأي أطراف خارجية.<br>- <b style='color:white;'>الغرض:</b> تُستخدم البيانات المدخلة حصرياً لغرض التواصل الهندسي والاستشاري المرتبط بخدماتنا المخصصة للنخبة.<br>- <b style='color:white;'>الأمان:</b> تم تصميم واجهاتنا التنفيذية للعمل كقنوات اتصال آمنة وموثوقة." },
+                en: { title: "PRIVACY POLICY & DATA PROTECTION", body: "At フサム, we are committed to protecting your personal data in compliance with the Personal Data Protection Law (PDPL) of Saudi Arabia.<br><br>- <b style='color:white;'>Absolute Confidentiality:</b> Your data is never shared, sold, or exploited.<br>- <b style='color:white;'>Purpose:</b> Entered data is utilized exclusively for engineering and consulting communication.<br>- <b style='color:white;'>Security:</b> Our executive interfaces are designed as highly secure communication channels." }
             },
             terms: {
-                ar: { title: "شروط الاستخدام", body: "هذه الواجهة بيئة استشارية. كافة المفاهيم (مثل HX-5) ملكية فكرية مسجلة لـ フサム." },
-                en: { title: "TERMS OF USE", body: "This interface is an advisory environment. Concepts (like HX-5) are registered IP of フサム." }
+                ar: { title: "شروط الاستخدام | TERMS OF USE", body: "استخدامك لـ 'الواجهة التنفيذية' يخضع للأنظمة والتشريعات المرعية في المملكة العربية السعودية.<br><br>- <b style='color:white;'>طبيعة الواجهة:</b> هذه المنصة مصممة كبيئة تفاعلية آمنة لتبادل الأفكار والاستشارات الاستراتيجية، وليست نظاماً للتعاملات التجارية أو المالية.<br>- <b style='color:white;'>الملكية الفكرية:</b> كافة المفاهيم والأطر المنهجية (مثل HX-5) المعروضة هنا هي ملكية فكرية حصرية ومسجلة لدار フサム." },
+                en: { title: "TERMS OF USE | EXECUTIVE INTERFACE", body: "Your use of the 'Executive Interface' is subject to the laws and regulations of Saudi Arabia.<br><br>- <b style='color:white;'>Interface Nature:</b> This platform is designed as a secure interactive environment for strategic consulting and idea exchange, not a commercial transaction system.<br>- <b style='color:white;'>Intellectual Property:</b> All concepts and methodological frameworks (such as HX-5) displayed here are the exclusive registered intellectual property of フサム Concept House." }
             }
         };
         function openLegal(type) {
@@ -844,25 +924,25 @@ Connection Secure.
 
         async function fetchUserHistory() {
             const container = document.getElementById('history-content');
-            container.innerHTML = '<p class="mono-text" style="color:var(--spx-gray);">[FETCHING RECORDS...]</p>';
+            container.innerHTML = '<p class="mono-text" style="color:var(--ts-gray);">[FETCHING RECORDS...]</p>';
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
-                if (querySnapshot.empty) { container.innerHTML = '<p class="mono-text" style="color:var(--spx-gray);">[NO PREVIOUS RECORDS]</p>'; return; }
+                if (querySnapshot.empty) { container.innerHTML = '<p class="mono-text" style="color:var(--ts-gray);">[NO PREVIOUS RECORDS]</p>'; return; }
                 
                 let docs = []; querySnapshot.forEach(doc => docs.push(doc.data()));
                 docs.sort((a,b) => (b.Timestamp?.toMillis() || 0) - (a.Timestamp?.toMillis() || 0));
                 
                 let html = '';
                 docs.forEach(d => {
-                    let color = d.Status === 'Pending' ? '#ffaa00' : (d.Status === 'Approved' ? '#ffffff' : 'var(--spx-gray)');
-                    let date = d.Timestamp ? new Date(d.Timestamp.toDate()).toLocaleDateString() : 'Now';
+                    let color = d.Status === 'Pending' ? '#ffaa00' : (d.Status === 'Approved' ? '#ffffff' : 'var(--ts-gray)');
+                    let date = d.Timestamp ? new Date(d.Timestamp.toDate()).toLocaleDateString('en-GB') : 'Now';
                     html += `<div class="history-card mono-text">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-                            <span style="color:var(--spx-gray); font-size:0.75rem;">${date}</span>
+                        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                            <span style="color:var(--ts-gray); font-size:0.8rem;">DATE: ${date}</span>
                             <span class="status-badge" style="color:${color}; border-color:${color};">${d.Status}</span>
                         </div>
-                        <p style="font-size:0.95rem; margin:0; color:var(--spx-light);">${d.Message}</p>
-                        ${d.Reply ? `<div class="reply-box" style="color:var(--spx-white); font-size:0.85rem;">[REPLY]: ${d.Reply}</div>` : ''}
+                        <p style="font-size:1rem; margin:0; color:var(--ts-white); font-family: 'Rajdhani', sans-serif; text-transform:none;">${d.Message}</p>
+                        ${d.Reply ? `<div class="reply-box" style="color:var(--ts-light-gray); font-size:0.9rem; font-family: 'Rajdhani', sans-serif; text-transform:none;">[EX REPLY]: ${d.Reply}</div>` : ''}
                     </div>`;
                 });
                 container.innerHTML = html;
@@ -932,14 +1012,14 @@ Connection Secure.
             if(e.key === 'Enter') {
                 e.preventDefault(); const cmd = termIn.value.trim(); if(!cmd) return;
                 printTerm(`user@ex:~# ${cmd}`); termIn.value = '';
-                if(cmd.toLowerCase() === 'help') printTerm(`Commands:\n- /clear : Clear screen\n- Any text : Query Oracle`);
+                if(cmd.toLowerCase() === 'help') printTerm(`Commands:\n- /clear : Clear screen\n- Any text : Query Oracle EX directly`);
                 else if(cmd.toLowerCase() === '/clear') termOut.innerHTML = '';
                 else { printTerm(`[Processing...]`); queryDeepMatrix(cmd, true); }
             }
         }
         function printTerm(txt) { termOut.innerHTML += `\n${txt}`; termOut.scrollTop = termOut.scrollHeight; }
 
-        // Floating Chat
+        // Floating Chat (EX|OS)
         const chatWin = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiIn = document.getElementById('aiInput');
@@ -957,15 +1037,17 @@ Connection Secure.
         }
 
         function initChat() {
-            appendMsg(currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. كيف أهندس تجربتك؟" : "System Online. I am Oracle EX.", 'bot');
+            appendMsg(currentLang === 'ar' ? "النظام متصل. أنا أوراكل EX. كيف يمكنني هندسة تجربتك؟" : "System Online. I am Oracle EX.", 'bot');
         }
 
         function appendMsg(text, sender, isLoad = false) {
             const div = document.createElement('div');
-            div.className = `ai-msg ${sender} mono-text`;
-            div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+            div.className = `ai-msg ${sender}`;
+            // تنظيف النص وتنسيقه
+            div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--ts-white);">$1</strong>').replace(/\n/g, '<br>');
             chatBody.appendChild(div); chatBody.scrollTop = chatBody.scrollHeight;
             
+            // قراءة النص إذا كان الصوت مفعلاً
             if(sender === 'bot' && !isLoad && voiceEnabled && 'speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(text.replace(/\*/g, ''));
