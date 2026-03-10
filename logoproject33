@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-<html lang="om" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フサム | experience ™ - 3D Pilaanii</title>
-    
-    <!-- Madda Qubee (Fonts) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Mono&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
-    
-    <style>
-<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -52,6 +39,7 @@
         /* LUXURY MINIMALIST THEME */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap');
 
         :root {
             --bg-primary: #ffffff;
@@ -61,6 +49,14 @@
             --accent-blue: #3e6ae1;
             --border-light: #e2e3e3;
             --btn-gray: #eeeeee;
+            
+            /* 3D Blueprint Variables */
+            --obsidian-black: #020202;
+            --stark-white: #FFFFFF;
+            --executive-gray: #F9F9F9;
+            --nexus-blue: #0A84FF;
+            --glitch-red: #ff003c;
+            --glitch-cyan: #00e5ff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -169,8 +165,8 @@
         .pillar-quote { font-style: italic; color: #888; font-size: 1rem; margin-bottom: 10px; display: block;}
 
         /* --- COMPACT EXECUTIVE DASHBOARD (LOGIN) --- */
-        .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 60px 20px;}
-        .login-box { width: 100%; max-width: 380px; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-light); margin: 0 auto; text-align: left;}
+        .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 80px 20px;}
+        .login-box { width: 100%; max-width: 360px; background: #fff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-light); margin: 0 auto; text-align: left;}
         body.lang-ar .login-box { text-align: right; }
         
         .input-group { margin-bottom: 20px; }
@@ -271,7 +267,99 @@
 
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ======== 3D BLUEPRINT STYLES ======== */
+        #blueprint-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--obsidian-black);
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            color: var(--stark-white);
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Cinematic Overlay */
+        .cinematic-vignette {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%);
+        }
+
+        .film-grain {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* HUD Overlay */
+        .hud-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 20;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .hud-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--nexus-blue);
+            text-transform: uppercase;
+        }
+
+        .hud-footer {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--executive-gray);
+            opacity: 0.6;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .glitch-text {
+            color: var(--stark-white);
+            text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan);
+            animation: pulse-glitch 3s infinite;
+        }
+
+        .slogan {
+            font-size: 14px;
+            color: var(--stark-white);
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        @keyframes pulse-glitch {
+            0%, 100% { opacity: 1; text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan); }
+            50% { opacity: 0.8; text-shadow: -2px 0 var(--glitch-red), 2px 0 var(--glitch-cyan); }
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body class="lang-en">
 
@@ -301,7 +389,7 @@
         </div>
         <div class="overlay"></div>
         <div class="hero-content fade-in">
-            <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
+            <span class="tagline ar-only">الخيط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
             
             <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
@@ -491,14 +579,14 @@
     <section class="content-section">
         <div class="container fade-in">
             <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <span class="page-num ar-only" style="margin-bottom: 10px; font-size: 0.75rem;">توقيع العلامة</span>
                 <span class="page-num en-only" style="margin-bottom: 10px; font-size: 0.75rem;">Brand Signature</span>
                 <h2 class="heading-md glitch-anim mono-text">フサム | experience™</h2>
                 
                 <div style="margin-top: 30px; margin-bottom: 30px;">
                     <span class="mono-text" style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">THE FOUNDER</span>
                     <h3 style="font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px;">Hussam Hassan Mohammed Tahiri</h3>
-                    <p class="text-body ar-only" style="font-size: 0.85rem; margin: 0 auto; line-height: 1.5;">العقل الاستراتيجي والمهندس المبتكر لمنهجية HX-5™️. صاحب الرؤية الذي قام بتكوين الحمض النووي للعلامة フサム | experience™
- وابتكار الأساس لهندسة التجارب الإنسانية.</p>
+                    <p class="text-body ar-only" style="font-size: 0.85rem; margin: 0 auto; line-height: 1.5;">العقل الاستراتيجي والمهندس المبتكر لمنهجية HX-5™️. صاحب الرؤية الذي قام بتكوين الحمض النووي للعلامة フサム | experience™ وابتكار الأساس لهندسة التجارب الإنسانية.</p>
                     <p class="text-body en-only" style="font-size: 0.85rem; margin: 0 auto; line-height: 1.5;">The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering.</p>
                 </div>
 
@@ -604,7 +692,8 @@
 
             <div style="margin-top: 60px;">
                 <h3 class="mono-text footer-logo glitch-anim">フサム | experience™</h3>
-                <p class="text-body" style="margin: 0 auto; font-size: 0.95rem;">Fearless, Relentless, True to you.<br>Engineering the Human Experience</p><br>HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.95rem;">Fearless, Relentless, True to you.<br>Engineering the Human Experience</p><br>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.85rem; color: #888;">HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
                 <p class="mono-text" style="font-size: 0.8rem; color: #aaa; margin-top: 15px;">© 2026 フサム | experience™. All rights reserved.</p>
             </div>
         </div>
@@ -643,6 +732,30 @@
             </div>
         </div>
     </div>
+
+    <section id="blueprint-section">
+        <div id="blueprint-loader">SIRNA FE'AMAA JIRA... (LOADING)</div>
+        <div class="film-grain"></div>
+        <div class="cinematic-vignette"></div>
+        <div class="hud-container">
+            <div class="hud-header">
+                <div>
+                    <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
+                    RAGAA MADAALLII (RENDER): 1991.33.EX
+                </div>
+                <div style="text-align: right;">
+                    SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
+                    HAALA: HOLLYWOOD SIINIMAA
+                </div>
+            </div>
+            
+            <div class="hud-footer">
+                <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
+                HX-5TM x 33GUIDETM x iNSTUDIOTM x フサムフサムフサムフサムフサムフサムフサムフサムフiNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991
+            </div>
+        </div>
+        <div id="canvas-container"></div>
+    </section>
 
     <script>
         // Loading Screen Logic - 3 Seconds then Auto-Play video
@@ -777,6 +890,11 @@
                 entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            
+            // Initialize 3D Blueprint when document is ready
+            document.fonts.ready.then(function() {
+                init3DBlueprint();
+            });
         });
 
         // Navbar Scroll
@@ -849,7 +967,7 @@
         async function fetchUserHistory() {
             const historyContainer = document.getElementById('history-content');
             const isAr = document.body.classList.contains('lang-ar');
-            historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'جاري استرجاع السجلات...' : 'Retrieving logs...'}</p>`;
+            historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'جاري استرجاع السجلات المشفرة...' : 'Retrieving encrypted logs...'}</p>`;
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
@@ -970,166 +1088,12 @@
             const loadingElement = appendMsg(isAr ? "..." : "...", 'bot');
             queryDeepMatrix(text, false, loadingElement);
         }
-    </script>
-</body>
-</html>        :root {
-            --obsidian-black: #020202;
-            --stark-white: #FFFFFF;
-            --executive-gray: #F9F9F9;
-            --nexus-blue: #0A84FF;
-            --glitch-red: #ff003c;
-            --glitch-cyan: #00e5ff;
-        }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--obsidian-black);
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            color: var(--stark-white);
-        }
-
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* Dhiibbaa Siinimaa (Cinematic Overlay) */
-        .cinematic-vignette {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 10;
-            background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%);
-        }
-
-        .film-grain {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 9;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* UI Hojii (HUD Overlay) */
-        .hud-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 20;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-sizing: border-box;
-        }
-
-        .hud-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: var(--nexus-blue);
-            text-transform: uppercase;
-        }
-
-        .hud-footer {
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            color: var(--executive-gray);
-            opacity: 0.6;
-            letter-spacing: 1px;
-            line-height: 1.8;
-            max-width: 100%;
-            word-wrap: break-word;
-        }
-
-        .glitch-text {
-            color: var(--stark-white);
-            text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan);
-            animation: pulse-glitch 3s infinite;
-        }
-
-        .slogan {
-            font-size: 14px;
-            color: var(--stark-white);
-            margin-bottom: 15px;
-            letter-spacing: 3px;
-        }
-
-        @keyframes pulse-glitch {
-            0%, 100% { opacity: 1; text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan); }
-            50% { opacity: 0.8; text-shadow: -2px 0 var(--glitch-red), 2px 0 var(--glitch-cyan); }
-        }
-
-        /* Yeroo fe'uu (Loading state) */
-        #loader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--obsidian-black);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Space Mono', monospace;
-            color: var(--nexus-blue);
-            letter-spacing: 5px;
-            transition: opacity 1s ease-out;
-        }
-    </style>
-
-    <!-- Laayibrarii Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-</head>
-<body>
-
-    <div id="loader">SIRNA FE'AMAA JIRA... (LOADING)</div>
-
-    <div class="film-grain"></div>
-    <div class="cinematic-vignette"></div>
-
-    <div class="hud-container">
-        <div class="hud-header">
-            <div>
-                <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
-                RAGAA MADAALLII (RENDER): 1991.33.EX
-            </div>
-            <div style="text-align: right;">
-                SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
-                HAALA: HOLLYWOOD SIINIMAA
-            </div>
-        </div>
-        
-        <div class="hud-footer">
-            <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
-            HX-5TM x 33GUIDETM x iNSTUDIOTM x フサムフサムフサムフサムフサムフサムフサムフサムフiNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991
-        </div>
-    </div>
-
-    <div id="canvas-container"></div>
-
-    <script>
-        // Eeguu hanga qubeen fe'amu (Wait for fonts to load)
-        window.onload = function() {
-            document.fonts.ready.then(function() {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1000);
-                init3DBlueprint();
-            });
-        };
-
+        // 3D Blueprint Integration Script
         function init3DBlueprint() {
-            // 1. Qindaa'ina Bu'uuraa (Scene Setup)
+            const container = document.getElementById('canvas-container');
+            if(!container) return;
+            
             const scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x020202, 0.0015);
 
@@ -1139,46 +1103,39 @@
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            container.appendChild(renderer.domElement);
 
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
             controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.5; // Harkifata suuta (Slow cinematic rotation)
+            controls.autoRotateSpeed = 0.5;
 
-            // 2. Sararoota Pilaanii Lafa (Floor Grid Helper)
             const gridHelper = new THREE.GridHelper(2000, 100, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.15;
             gridHelper.material.transparent = true;
             scene.add(gridHelper);
 
-            // 3. Uumuu Ragaa Pilaanii 2D (Create Dynamic 2D Blueprint Texture)
             const canvas = document.createElement('canvas');
             canvas.width = 4096;
             canvas.height = 2048;
             const ctx = canvas.getContext('2d');
 
-            // Duuba (Background)
             ctx.fillStyle = 'rgba(2, 2, 2, 0.8)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Sararoota Madaallii (Drafting Lines)
             ctx.strokeStyle = 'rgba(10, 132, 255, 0.4)';
             ctx.lineWidth = 2;
             
-            // X fi Y Sarara jidduu (Center crosshairs)
             ctx.beginPath();
             ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2);
             ctx.moveTo(canvas.width/2, 0); ctx.lineTo(canvas.width/2, canvas.height);
             ctx.stroke();
 
-            // Geengoo (Concentric Circles for Concept House)
             ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 400, 0, Math.PI*2); ctx.stroke();
             ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 420, 0, Math.PI*2); ctx.stroke();
             ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 600, 0, Math.PI*2); ctx.stroke();
 
-            // Safaroota (Dimensions & Measurements)
             ctx.fillStyle = '#0A84FF';
             ctx.font = '30px "Space Mono"';
             ctx.fillText('W: 1991.00 mm', canvas.width/2 + 620, canvas.height/2);
@@ -1186,51 +1143,39 @@
             ctx.fillText('RAD: 400.00 EX', canvas.width/2 + 200, canvas.height/2 - 200);
             ctx.fillText('RAD: 600.00 EX', canvas.width/2 + 400, canvas.height/2 - 400);
 
-            // Sarara Kofa (Angled lines)
             ctx.beginPath();
             ctx.moveTo(canvas.width/2 - 800, canvas.height/2 - 800);
             ctx.lineTo(canvas.width/2 + 800, canvas.height/2 + 800);
             ctx.stroke();
 
-            // Barreeffama Giddu-galeessaa (Core Brand Logo)
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            
-            // Glitch Effect (Harkifata)
             ctx.font = '200px "Noto Sans JP", "Inter", sans-serif';
             
-            // Cyan offset
             ctx.fillStyle = 'rgba(0, 229, 255, 0.7)';
             ctx.fillText('フサム | experience™', canvas.width/2 + 8, canvas.height/2 - 50);
-            // Red offset
             ctx.fillStyle = 'rgba(255, 0, 60, 0.7)';
             ctx.fillText('フサム | experience™', canvas.width/2 - 8, canvas.height/2 - 50);
-            // White main
             ctx.fillStyle = '#FFFFFF';
             ctx.fillText('フサム | experience™', canvas.width/2, canvas.height/2 - 50);
 
-            // Dhaadannoo (Slogan)
             ctx.font = '60px "Inter"';
             ctx.letterSpacing = "10px";
             ctx.fillStyle = '#FFFFFF';
             ctx.fillText('Engineering human experiences', canvas.width/2, canvas.height/2 + 150);
 
-            // Unka (Pattern Array)
             ctx.font = '25px "Space Mono"';
             ctx.fillStyle = 'rgba(249, 249, 249, 0.5)';
             const patternText = "HX-5TM x 33GUIDETM x iNSTUDIOTM x フサムフサムフサムフサムフサムフサムフサムフサムフiNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991";
             
-            // Sarara unka gubbaa fi jalaa (Top and bottom pattern borders)
             for(let i=0; i<3; i++) {
                 ctx.fillText(patternText, canvas.width/2, 100 + (i*40));
                 ctx.fillText(patternText, canvas.width/2, canvas.height - 100 - (i*40));
             }
 
-            // Texture uumuu (Create Texture from Canvas)
             const texture = new THREE.CanvasTexture(canvas);
             texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
-            // 4. Meeshaa 3D (3D Mesh Setup)
             const geometry = new THREE.PlaneGeometry(1600, 800);
             const material = new THREE.MeshBasicMaterial({ 
                 map: texture, 
@@ -1240,12 +1185,10 @@
                 blending: THREE.AdditiveBlending
             });
             
-            // Pilaanii Bu'uuraa (Main Blueprint Plane)
             const hologramPlane = new THREE.Mesh(geometry, material);
-            hologramPlane.rotation.x = -Math.PI / 2; // Lafa irra ciibsuu (Lay flat)
+            hologramPlane.rotation.x = -Math.PI / 2;
             scene.add(hologramPlane);
 
-            // Sararoota Agarsiisaa 3D (3D Wireframe Box to make it architectural)
             const boxGeo = new THREE.BoxGeometry(1600, 200, 800);
             const edges = new THREE.EdgesGeometry(boxGeo);
             const lineMat = new THREE.LineBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0.3 });
@@ -1253,7 +1196,6 @@
             wireframeBox.position.y = 100;
             scene.add(wireframeBox);
 
-            // Pilaanii Dabalataa (Floating architectural elements)
             const verticalPlaneGeo = new THREE.PlaneGeometry(800, 400);
             const verticalMat = new THREE.MeshBasicMaterial({ 
                 color: 0x00e5ff, 
@@ -1270,7 +1212,6 @@
             verticalPlane2.position.y = 200;
             scene.add(verticalPlane2);
 
-            // 5. Suuddoowwan (Particles / Dust for cinematic look)
             const particlesGeo = new THREE.BufferGeometry();
             const particlesCount = 2000;
             const posArray = new Float32Array(particlesCount * 3);
@@ -1291,7 +1232,6 @@
             const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
             scene.add(particlesMesh);
 
-            // 6. Sirna Sochii (Animation Loop)
             const clock = new THREE.Clock();
 
             function animate() {
@@ -1299,11 +1239,9 @@
                 
                 const elapsedTime = clock.getElapsedTime();
 
-                // Sochii Suuddoo (Animate particles)
                 particlesMesh.rotation.y = elapsedTime * 0.02;
                 particlesMesh.position.y = Math.sin(elapsedTime * 0.5) * 10;
 
-                // Dhidhiita Madaallii (Pulsating effect for wireframes)
                 wireframeBox.material.opacity = 0.2 + Math.sin(elapsedTime * 2) * 0.1;
                 verticalPlane1.material.opacity = 0.05 + Math.sin(elapsedTime * 3) * 0.05;
 
@@ -1313,11 +1251,12 @@
 
             animate();
 
-            // 7. Geeddaramuu Guddina Fakkii (Handle Window Resize)
             window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
+                const w = window.innerWidth;
+                const h = document.getElementById('blueprint-section').offsetHeight;
+                camera.aspect = w / h;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setSize(w, h);
             });
         }
     </script>
