@@ -126,7 +126,7 @@
         /* Hero Section */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%);}
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%); background-color: #000;}
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)); z-index: 1; pointer-events: none; }
         
         .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; color: #fff;}
@@ -288,7 +288,6 @@
             z-index: 1;
         }
 
-        /* Cinematic Overlay */
         .cinematic-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -306,7 +305,6 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* HUD Overlay */
         .hud-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -389,7 +387,7 @@
         </div>
         <div class="overlay"></div>
         <div class="hero-content fade-in">
-            <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
+            <span class="tagline ar-only">الخيط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
             
             <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
@@ -692,7 +690,8 @@
 
             <div style="margin-top: 60px;">
                 <h3 class="mono-text footer-logo glitch-anim">フサム | experience™</h3>
-                <p class="text-body" style="margin: 0 auto; font-size: 0.95rem;">Fearless, Relentless, True to you.<br>Engineering the Human Experience<br><br>HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.95rem;">Fearless, Relentless, True to you.<br>Engineering the Human Experience</p><br>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.85rem; color: #888;">HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
                 <p class="mono-text" style="font-size: 0.8rem; color: #aaa; margin-top: 15px;">© 2026 フサム | experience™. All rights reserved.</p>
             </div>
         </div>
@@ -1093,6 +1092,13 @@
             const container = document.getElementById('canvas-container');
             if(!container) return;
             
+            // Remove previous canvas if exists (prevents duplicate rendering)
+            const oldLoader = document.getElementById('blueprint-loader');
+            if(oldLoader) {
+                oldLoader.style.opacity = '0';
+                setTimeout(() => oldLoader.style.display = 'none', 1000);
+            }
+
             const scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x020202, 0.0015);
 
@@ -1100,7 +1106,10 @@
             camera.position.set(0, 300, 800);
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Make sure the renderer size fits the section
+            const sectionHeight = document.getElementById('blueprint-section').offsetHeight;
+            renderer.setSize(window.innerWidth, sectionHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
@@ -1109,6 +1118,8 @@
             controls.dampingFactor = 0.05;
             controls.autoRotate = true;
             controls.autoRotateSpeed = 0.5;
+            controls.enableZoom = false; // Disable zooming so it doesn't mess with page scroll
+            controls.enablePan = false;
 
             const gridHelper = new THREE.GridHelper(2000, 100, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.15;
@@ -1206,7 +1217,7 @@
             verticalPlane1.position.y = 200;
             scene.add(verticalPlane1);
 
-            const verticalPlane2 = new THREE.Mesh(verticalPlaneGeo, verticalMat);
+            const verticalPlane2 = new Mesh(verticalPlaneGeo, verticalMat);
             verticalPlane2.rotation.y = Math.PI / 2;
             verticalPlane2.position.y = 200;
             scene.add(verticalPlane2);
@@ -1233,9 +1244,20 @@
 
             const clock = new THREE.Clock();
 
+            // Optimization: Only animate when visible
+            let isVisible = true;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isVisible = entry.isIntersecting;
+                });
+            });
+            observer.observe(document.getElementById('blueprint-section'));
+
             function animate() {
                 requestAnimationFrame(animate);
                 
+                if(!isVisible) return; // Don't waste GPU when off-screen
+
                 const elapsedTime = clock.getElapsedTime();
 
                 particlesMesh.rotation.y = elapsedTime * 0.02;
