@@ -9,8 +9,6 @@
     <meta property="og:title" content="フサム | experience™">
     <meta property="og:description" content="The line between ordinary and extraordinary. Concept house and strategic lab focused on Human Experience Engineering.">
     <meta property="og:image" content="icon.png">
-    <meta property="og:url" content="https://ex-experience.github.io/">
-    <meta name="twitter:card" content="summary_large_image">
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
@@ -27,7 +25,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-functions-compat.js"></script>
     
     <script>
         const firebaseConfig = {
@@ -41,7 +38,6 @@
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.firestore();
         const auth = firebase.auth();
-        const functions = firebase.functions(); 
     </script>
 
     <style>
@@ -257,9 +253,6 @@
         .hud-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
         .hud-header { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; color: var(--nexus-blue); text-transform: uppercase; }
         .hud-footer { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--executive-gray); opacity: 0.6; letter-spacing: 1px; line-height: 1.8; max-width: 100%; word-wrap: break-word; }
-        .glitch-text { color: var(--stark-white); text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan); animation: pulse-glitch 3s infinite; }
-        .slogan { font-size: 14px; color: var(--stark-white); margin-bottom: 15px; letter-spacing: 3px; }
-        @keyframes pulse-glitch { 0%, 100% { opacity: 1; text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan); } 50% { opacity: 0.8; text-shadow: -2px 0 var(--glitch-red), 2px 0 var(--glitch-cyan); } }
 
         .deep-archive { background-color: #000000; color: #ffffff; position: relative; padding: 100px 0; border-top: 1px solid #111; overflow: hidden; z-index: 10; }
         .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
@@ -718,8 +711,12 @@
     </section>
 
     <script>
+        // --- SECURITY TOKENS RESTORED ---
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
+        const SECURE_TOKEN = "EX_SHIELD_99X";
+
         /* =======================================================
-           HX-5 SONIC ENGINE (Web Audio API - 0 Bandwidth Cost) 
+           HX-5 SONIC ENGINE 
            ======================================================= */
         const SonicEngine = (function() {
             let audioCtx = null;
@@ -792,11 +789,11 @@
                     ambientOsc = audioCtx.createOscillator();
                     ambientGain = audioCtx.createGain();
                     ambientOsc.type = 'sine';
-                    ambientOsc.frequency.setValueAtTime(55, audioCtx.currentTime); // Low 55Hz drone
+                    ambientOsc.frequency.setValueAtTime(55, audioCtx.currentTime); 
                     
                     const lfo = audioCtx.createOscillator();
                     lfo.type = 'sine';
-                    lfo.frequency.value = 0.15; // Slow pulse
+                    lfo.frequency.value = 0.15; 
                     const lfoGain = audioCtx.createGain();
                     lfoGain.gain.value = 5;
                     lfo.connect(lfoGain); lfoGain.connect(ambientOsc.frequency);
@@ -819,7 +816,6 @@
             return { init, playClick, playHover, playTerminalTap, triggerBassDrop, toggleAmbient };
         })();
 
-        // Bind Sound Engine to interactions
         document.body.addEventListener('click', SonicEngine.init, { once: true });
         document.body.addEventListener('touchstart', SonicEngine.init, { once: true });
         
@@ -863,7 +859,6 @@
             }
         });
 
-        // Lazy Load Videos & Trigger Audio
         document.addEventListener("DOMContentLoaded", () => {
             const vidObserver = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
@@ -877,7 +872,6 @@
                 if(vid.id !== 'heroVideo') vidObserver.observe(vid);
             });
 
-            // Deep Archive Audio Trigger
             let archiveTriggered = false;
             const archiveObserver = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
@@ -904,7 +898,7 @@
             document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
         }
 
-        // Firebase Auth & Cloud Functions (Encrypted Backend)
+        // Firebase Auth
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
 
         async function signInWithGoogle() {
@@ -926,12 +920,28 @@
         function finalizeAuth(user) {
             currentUser.Name = user.displayName || "Executive";
             currentUser.Email = user.email || "Verified_Link";
+            db.collection("Users").doc(currentUser.Email).set({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
             showDashboard();
+            // Restore Original Fetch
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
         }
 
         async function handleFirebaseLogin(e) {
             e.preventDefault();
-            alert("SECURITY UPDATE: Please use Google or Apple Secure Login.");
+            const btn = document.getElementById('loginBtn');
+            const isAr = document.body.classList.contains('lang-ar');
+            btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
+            currentUser.Name = document.getElementById('userName').value;
+            currentUser.Email = document.getElementById('userEmail').value;
+            try {
+                await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+                // Restore Original Fetch
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
+                showDashboard();
+            } catch (error) {
+                alert(isAr ? "فشل الاتصال." : "Connection failed.");
+                btn.innerHTML = isAr ? 'تسجيل الدخول' : 'Sign In'; btn.disabled = false;
+            }
         }
 
         function showDashboard() {
@@ -982,9 +992,8 @@
             try {
                 await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 
-                // Secure Cloud Function Call
-                const submitFn = functions.httpsCallable('submitConsultation');
-                await submitFn({ message: message });
+                // Restore Original Fetch
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Message: message }), mode: 'no-cors' });
 
                 alert(isAr ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
                 document.getElementById('consultText').value = '';
@@ -993,27 +1002,27 @@
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
-        // NEXUS COMMAND (Secured)
+        // NEXUS COMMAND (Restored)
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
         
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
+            // Restore Original Fetch URL structure
+            const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}`;
             try {
-                // Secure Cloud Function Call
-                const queryNexusFn = functions.httpsCallable('queryNexus');
-                const response = await queryNexusFn({ message: text });
-                
+                const response = await fetch(url);
+                const data = await response.json();
                 if (loadingElement) loadingElement.remove();
-                const finalOutput = response.data.reply;
+                const finalOutput = data.reply || data.error;
                 if(isTerminal) printNexus(`> ${finalOutput}`); else appendMsg(finalOutput, 'bot');
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
-                if(isTerminal) printNexus(`> SIGNAL LOST. SECURE CONNECTION REQUIRED.`); else appendMsg("SIGNAL LOST. SECURE CONNECTION REQUIRED.", 'bot');
+                if(isTerminal) printNexus(`> SIGNAL LOST.`); else appendMsg("SIGNAL LOST.", 'bot');
             }
         }
 
         function handleNexus(e) {
-            SonicEngine.playTerminalTap(); // Sound on keypress
+            SonicEngine.playTerminalTap(); 
             if(e.key === 'Enter') {
                 e.preventDefault();
                 const cmd = nexusInput.value.trim();
@@ -1031,7 +1040,7 @@
                 if (i < text.length) {
                     nexusOutput.innerHTML += text.charAt(i);
                     nexusOutput.scrollTop = nexusOutput.scrollHeight;
-                    if(i%3===0) SonicEngine.playTerminalTap(); // sound effect while printing
+                    if(i%3===0) SonicEngine.playTerminalTap(); 
                     i++;
                     setTimeout(typeWriter, 15);
                 } else {
@@ -1084,7 +1093,7 @@
         }
 
         /* =======================================================
-           3D BLUEPRINT LOGIC (Optimized)
+           3D BLUEPRINT LOGIC
            ======================================================= */
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
@@ -1144,11 +1153,10 @@
             const clock = new THREE.Clock();
             let isVisible = false;
             
-            // Audio & GPU Optimization Observer
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     isVisible = entry.isIntersecting;
-                    SonicEngine.toggleAmbient(isVisible); // Trigger low drone sound
+                    SonicEngine.toggleAmbient(isVisible); 
                 });
             }, { threshold: 0.2 });
             observer.observe(document.getElementById('blueprint-section'));
