@@ -39,7 +39,6 @@
         /* LUXURY MINIMALIST THEME */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap');
 
         :root {
             --bg-primary: #ffffff;
@@ -49,14 +48,6 @@
             --accent-blue: #3e6ae1;
             --border-light: #e2e3e3;
             --btn-gray: #eeeeee;
-            
-            /* 3D Blueprint Variables */
-            --obsidian-black: #020202;
-            --stark-white: #FFFFFF;
-            --executive-gray: #F9F9F9;
-            --nexus-blue: #0A84FF;
-            --glitch-red: #ff003c;
-            --glitch-cyan: #00e5ff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -126,7 +117,7 @@
         /* Hero Section */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%);}
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%); background-color: #000;}
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)); z-index: 1; pointer-events: none; }
         
         .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; color: #fff;}
@@ -219,9 +210,13 @@
         .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.85rem;}
 
         /* --- ORACLE CHAT (iOS Style) --- */
-        .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 2s infinite;}
+        .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 10s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
-        @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(23, 26, 32, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(23, 26, 32, 0); } 100% { box-shadow: 0 0 0 0 rgba(23, 26, 32, 0); } }
+        @keyframes pulse-glow { 
+            0%, 80%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); } 
+            85% { box-shadow: 0 0 0 0 rgba(23, 26, 32, 0.6); } 
+            95% { box-shadow: 0 0 0 15px rgba(23, 26, 32, 0); } 
+        }
         
         .ai-window { position: fixed; bottom: 100px; right: 30px; width: 360px; height: 550px; background: rgba(250, 250, 250, 0.95); backdrop-filter: blur(15px); border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px); opacity: 0; pointer-events: none; transition: 0.3s; border: 1px solid rgba(0,0,0,0.05); overflow: hidden;}
         body.lang-ar .ai-window { right: auto; left: 30px; }
@@ -268,98 +263,126 @@
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* ======== 3D BLUEPRINT STYLES ======== */
-        #blueprint-section {
+        /* ======== DEEP ARCHIVE STYLES ======== */
+        .deep-archive {
+            background-color: #000000;
+            color: #ffffff;
             position: relative;
-            width: 100%;
-            height: 100vh;
-            background-color: var(--obsidian-black);
+            padding: 100px 0;
+            border-top: 1px solid #111;
             overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            color: var(--stark-white);
-        }
-
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* Cinematic Overlay */
-        .cinematic-vignette {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
             z-index: 10;
-            background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%);
         }
 
-        .film-grain {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        /* Infinite Marquee */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px dashed #333;
+            border-bottom: 1px dashed #333;
+            padding: 15px 0;
+            margin-bottom: 80px;
+            background: rgba(10, 132, 255, 0.02);
         }
-
-        /* HUD Overlay */
-        .hud-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 20;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-sizing: border-box;
-        }
-
-        .hud-header {
-            display: flex;
-            justify-content: space-between;
+        .marquee-text {
+            display: inline-block;
             font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: var(--nexus-blue);
-            text-transform: uppercase;
-        }
-
-        .hud-footer {
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            color: var(--executive-gray);
-            opacity: 0.6;
-            letter-spacing: 1px;
-            line-height: 1.8;
-            max-width: 100%;
-            word-wrap: break-word;
-        }
-
-        .glitch-text {
-            color: var(--stark-white);
-            text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan);
-            animation: pulse-glitch 3s infinite;
-        }
-
-        .slogan {
-            font-size: 14px;
-            color: var(--stark-white);
-            margin-bottom: 15px;
+            font-size: 0.85rem;
+            color: #555;
             letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
 
-        @keyframes pulse-glitch {
-            0%, 100% { opacity: 1; text-shadow: 2px 0 var(--glitch-red), -2px 0 var(--glitch-cyan); }
-            50% { opacity: 0.8; text-shadow: -2px 0 var(--glitch-red), 2px 0 var(--glitch-cyan); }
+        /* Classified Grid */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        .archive-card {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+        .archive-card:hover {
+            background: #0a0a0a;
+            border-color: #333;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .archive-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: #0A84FF; /* Nexus Blue */
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .archive-card:hover::before { transform: scaleX(1); }
+
+        .archive-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: #ff003c;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid #ff003c;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+        .archive-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .archive-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Kill Switch (Back to top) */
+        .kill-switch-container {
+            text-align: center;
+            margin-top: 100px;
+        }
+        .kill-switch {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            font-family: 'Space Mono', monospace;
+            padding: 15px 40px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+        .kill-switch:hover {
+            color: #000;
+            background: #fff;
+            border-color: #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body class="lang-en">
 
@@ -389,7 +412,7 @@
         </div>
         <div class="overlay"></div>
         <div class="hero-content fade-in">
-            <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
+            <span class="tagline ar-only">الخيط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
             
             <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
@@ -692,7 +715,8 @@
 
             <div style="margin-top: 60px;">
                 <h3 class="mono-text footer-logo glitch-anim">フサム | experience™</h3>
-                <p class="text-body" style="margin: 0 auto; font-size: 0.95rem;">Fearless, Relentless, True to you.<br>Engineering the Human Experience<br><br>HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.95rem;">Fearless, Relentless, True to you.<br>Engineering the Human Experience</p><br>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.85rem; color: #888;">HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
                 <p class="mono-text" style="font-size: 0.8rem; color: #aaa; margin-top: 15px;">© 2026 フサム | experience™. All rights reserved.</p>
             </div>
         </div>
@@ -733,6 +757,162 @@
     </div>
 
     <section id="blueprint-section">
+        
+        <style>
+            .deep-archive {
+                background-color: #000000;
+                color: #ffffff;
+                position: relative;
+                padding: 100px 0;
+                border-top: 1px solid #111;
+                overflow: hidden;
+                z-index: 10;
+            }
+            .marquee-container {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                border-top: 1px dashed #333;
+                border-bottom: 1px dashed #333;
+                padding: 15px 0;
+                margin-bottom: 80px;
+                background: rgba(10, 132, 255, 0.02);
+            }
+            .marquee-text {
+                display: inline-block;
+                font-family: 'Space Mono', monospace;
+                font-size: 0.85rem;
+                color: #555;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                animation: marquee 30s linear infinite;
+            }
+            @keyframes marquee {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+            }
+            .archive-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 0 5%;
+            }
+            .archive-card {
+                background: #050505;
+                border: 1px solid #1a1a1a;
+                padding: 40px 30px;
+                border-radius: 4px;
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+                cursor: crosshair;
+            }
+            .archive-card:hover {
+                background: #0a0a0a;
+                border-color: #333;
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .archive-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; width: 100%; height: 2px;
+                background: #0A84FF;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s ease;
+            }
+            .archive-card:hover::before { transform: scaleX(1); }
+            .archive-status {
+                font-family: 'Space Mono', monospace;
+                font-size: 0.7rem;
+                color: #ff003c;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+                display: inline-block;
+                border: 1px solid #ff003c;
+                padding: 3px 8px;
+                border-radius: 20px;
+            }
+            .archive-title {
+                font-size: 1.5rem;
+                font-weight: 300;
+                margin-bottom: 10px;
+                color: #fff;
+            }
+            .archive-desc {
+                font-size: 0.9rem;
+                color: #666;
+                line-height: 1.6;
+            }
+            .kill-switch-container {
+                text-align: center;
+                margin-top: 100px;
+            }
+            .kill-switch {
+                background: transparent;
+                border: 1px solid #333;
+                color: #888;
+                font-family: 'Space Mono', monospace;
+                padding: 15px 40px;
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: 0.3s;
+                border-radius: 30px;
+            }
+            .kill-switch:hover {
+                color: #000;
+                background: #fff;
+                border-color: #fff;
+                box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            }
+        </style>
+
+        <section id="deep-archive" class="deep-archive">
+            <div class="marquee-container">
+                <div class="marquee-text">
+                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
+                </div>
+            </div>
+
+            <div class="container fade-in">
+                <div style="text-align: center; margin-bottom: 60px;">
+                    <span class="mono-text" style="color: #444; letter-spacing: 4px; font-size: 0.8rem;">LEVEL 2 CLEARANCE</span>
+                    <h2 style="font-size: 2rem; font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 10px;">The Deep Archive</h2>
+                </div>
+
+                <div class="archive-grid">
+                    <div class="archive-card">
+                        <span class="archive-status">ENCRYPTED</span>
+                        <h3 class="archive-title">Project: T-35</h3>
+                        <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
+                    </div>
+
+                    <div class="archive-card">
+                        <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
+                        <h3 class="archive-title">Concept: The Lab</h3>
+                        <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
+                    </div>
+
+                    <div class="archive-card">
+                        <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
+                        <h3 class="archive-title">System: iN STUDIO</h3>
+                        <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
+                    </div>
+                </div>
+
+                <div class="kill-switch-container">
+                    <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                        [^] Return to Surface
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <div id="blueprint-loader">SIRNA FE'AMAA JIRA... (LOADING)</div>
         <div class="film-grain"></div>
         <div class="cinematic-vignette"></div>
@@ -1088,11 +1268,17 @@
             queryDeepMatrix(text, false, loadingElement);
         }
 
-        // 3D Blueprint Integration Script
+        // 3D Blueprint Integration Script (Optimized)
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
             
+            const oldLoader = document.getElementById('blueprint-loader');
+            if(oldLoader) {
+                oldLoader.style.opacity = '0';
+                setTimeout(() => oldLoader.style.display = 'none', 1000);
+            }
+
             const scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x020202, 0.0015);
 
@@ -1100,7 +1286,9 @@
             camera.position.set(0, 300, 800);
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            const sectionHeight = document.getElementById('blueprint-section').offsetHeight;
+            renderer.setSize(window.innerWidth, sectionHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
@@ -1109,6 +1297,8 @@
             controls.dampingFactor = 0.05;
             controls.autoRotate = true;
             controls.autoRotateSpeed = 0.5;
+            controls.enableZoom = false; 
+            controls.enablePan = false;
 
             const gridHelper = new THREE.GridHelper(2000, 100, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.15;
@@ -1116,8 +1306,8 @@
             scene.add(gridHelper);
 
             const canvas = document.createElement('canvas');
-            canvas.width = 4096;
-            canvas.height = 2048;
+            canvas.width = 2048; // Optimized for performance
+            canvas.height = 1024; // Optimized for performance
             const ctx = canvas.getContext('2d');
 
             ctx.fillStyle = 'rgba(2, 2, 2, 0.8)';
@@ -1131,46 +1321,30 @@
             ctx.moveTo(canvas.width/2, 0); ctx.lineTo(canvas.width/2, canvas.height);
             ctx.stroke();
 
-            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 400, 0, Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 420, 0, Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 600, 0, Math.PI*2); ctx.stroke();
+            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 200, 0, Math.PI*2); ctx.stroke();
+            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 210, 0, Math.PI*2); ctx.stroke();
+            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 300, 0, Math.PI*2); ctx.stroke();
 
             ctx.fillStyle = '#0A84FF';
-            ctx.font = '30px "Space Mono"';
-            ctx.fillText('W: 1991.00 mm', canvas.width/2 + 620, canvas.height/2);
-            ctx.fillText('H: 33.00 mm', canvas.width/2, canvas.height/2 - 440);
-            ctx.fillText('RAD: 400.00 EX', canvas.width/2 + 200, canvas.height/2 - 200);
-            ctx.fillText('RAD: 600.00 EX', canvas.width/2 + 400, canvas.height/2 - 400);
-
-            ctx.beginPath();
-            ctx.moveTo(canvas.width/2 - 800, canvas.height/2 - 800);
-            ctx.lineTo(canvas.width/2 + 800, canvas.height/2 + 800);
-            ctx.stroke();
+            ctx.font = '15px "Space Mono"';
+            ctx.fillText('W: 1991.00 mm', canvas.width/2 + 310, canvas.height/2);
+            ctx.fillText('H: 33.00 mm', canvas.width/2, canvas.height/2 - 220);
 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.font = '200px "Noto Sans JP", "Inter", sans-serif';
+            ctx.font = '100px "Noto Sans JP", "Inter", sans-serif';
             
             ctx.fillStyle = 'rgba(0, 229, 255, 0.7)';
-            ctx.fillText('フサム | experience™', canvas.width/2 + 8, canvas.height/2 - 50);
+            ctx.fillText('フサム | experience™', canvas.width/2 + 4, canvas.height/2 - 25);
             ctx.fillStyle = 'rgba(255, 0, 60, 0.7)';
-            ctx.fillText('フサム | experience™', canvas.width/2 - 8, canvas.height/2 - 50);
+            ctx.fillText('フサム | experience™', canvas.width/2 - 4, canvas.height/2 - 25);
             ctx.fillStyle = '#FFFFFF';
-            ctx.fillText('フサム | experience™', canvas.width/2, canvas.height/2 - 50);
+            ctx.fillText('フサム | experience™', canvas.width/2, canvas.height/2 - 25);
 
-            ctx.font = '60px "Inter"';
-            ctx.letterSpacing = "10px";
+            ctx.font = '30px "Inter"';
+            ctx.letterSpacing = "5px";
             ctx.fillStyle = '#FFFFFF';
-            ctx.fillText('Engineering human experiences', canvas.width/2, canvas.height/2 + 150);
-
-            ctx.font = '25px "Space Mono"';
-            ctx.fillStyle = 'rgba(249, 249, 249, 0.5)';
-            const patternText = "HX-5TM x 33GUIDETM x iNSTUDIOTM x フサムフサムフサムフサムフサムフサムフサムフサムフiNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991";
-            
-            for(let i=0; i<3; i++) {
-                ctx.fillText(patternText, canvas.width/2, 100 + (i*40));
-                ctx.fillText(patternText, canvas.width/2, canvas.height - 100 - (i*40));
-            }
+            ctx.fillText('Engineering human experiences', canvas.width/2, canvas.height/2 + 75);
 
             const texture = new THREE.CanvasTexture(canvas);
             texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -1212,7 +1386,7 @@
             scene.add(verticalPlane2);
 
             const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 2000;
+            const particlesCount = 600; // Optimized for performance
             const posArray = new Float32Array(particlesCount * 3);
 
             for(let i = 0; i < particlesCount * 3; i++) {
@@ -1233,9 +1407,19 @@
 
             const clock = new THREE.Clock();
 
+            let isVisible = true;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isVisible = entry.isIntersecting;
+                });
+            });
+            observer.observe(document.getElementById('blueprint-section'));
+
             function animate() {
                 requestAnimationFrame(animate);
                 
+                if(!isVisible) return;
+
                 const elapsedTime = clock.getElapsedTime();
 
                 particlesMesh.rotation.y = elapsedTime * 0.02;
