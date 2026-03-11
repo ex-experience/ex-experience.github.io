@@ -1322,6 +1322,176 @@
                 renderer.setSize(w, h);
             });
         }
-    </script>
+    <style>
+        .deep-archive {
+            background-color: #000000;
+            color: #ffffff;
+            position: relative;
+            padding: 100px 0;
+            border-top: 1px solid #111;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px dashed #333;
+            border-bottom: 1px dashed #333;
+            padding: 15px 0;
+            margin-bottom: 80px;
+            background: rgba(10, 132, 255, 0.02);
+        }
+        .marquee-text {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            color: #555;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Classified Grid */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        .archive-card {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+        .archive-card:hover {
+            background: #0a0a0a;
+            border-color: #333;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .archive-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--nexus-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .archive-card:hover::before { transform: scaleX(1); }
+
+        .archive-status {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: #ff003c;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid #ff003c;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+        .archive-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .archive-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Kill Switch (Back to top) */
+        .kill-switch-container {
+            text-align: center;
+            margin-top: 100px;
+        }
+        .kill-switch {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            font-family: 'Space Mono', monospace;
+            padding: 15px 40px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+        .kill-switch:hover {
+            color: #000;
+            background: #fff;
+            border-color: #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+    </style>
+
+    <section id="deep-archive" class="deep-archive">
+        
+        <div class="marquee-container">
+            <div class="marquee-text">
+                EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
+            </div>
+        </div>
+
+        <div class="container fade-in">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span class="mono-text" style="color: #444; letter-spacing: 4px; font-size: 0.8rem;">LEVEL 2 CLEARANCE</span>
+                <h2 style="font-size: 2rem; font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 10px;">The Deep Archive</h2>
+            </div>
+
+            <div class="archive-grid">
+                <div class="archive-card">
+                    <span class="archive-status">ENCRYPTED</span>
+                    <h3 class="archive-title">Project: T-35</h3>
+                    <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
+                </div>
+
+                <div class="archive-card">
+                    <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
+                    <h3 class="archive-title">Concept: The Lab</h3>
+                    <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
+                </div>
+
+                <div class="archive-card">
+                    <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
+                    <h3 class="archive-title">System: iN STUDIO</h3>
+                    <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
+                </div>
+            </div>
+
+            <div class="kill-switch-container">
+                <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                    [^] Return to Surface
+                </button>
+            </div>
+        </div>
+    </section>
+    ```
+
+### 🧠 التشريح المعماري لهذا القسم السري:
+1. **شريط الـ Marquee:** شريط نصوص يتحرك بشكل سينمائي لا نهائي يمرر عبارات مثل `CLASSIFIED PROJECTS` و `HX-5 ENGINE RUNNING`. هذا يعطي إحساساً بأن الموقع يتنفس من الداخل.
+2. **شبكة الأرشيف (Archive Grid):** صممتها لك بأسلوب "الملفات المشفرة". استخدمت فيها معلومات من استراتيجياتك (مثل مشروع T-35، ومختبر القهوة المختصة، واستوديو التصميم). عند تمرير الماوس، يظهر خط أزرق سيبراني (Nexus Blue) من الأعلى بحركة أنيقة.
+3. **زر الهروب (Return to Surface):** زر في نهاية الظلام `[^] Return to Surface`، عند الضغط عليه يقوم بنقل الزائر بانسيابية مطلقة إلى نقطة البداية أعلى الموقع (صفحة الـ Hero الأولى).
+
+قم بنسخ هذا الكود ولصقه مباشرة قبل الـ `<script>` النهائي في موقعك. أخبرني إذا كنت تريد تعديل عناوين "الملفات السرية" لتتناسب مع مشاريع محددة تعمل عليها الآن! 🐉🔥
+</script>
 </body>
 </html>
