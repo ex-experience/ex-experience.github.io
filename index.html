@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | experience™</title>
-    
+   
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" href="icon.png">
-    
+   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,12 +20,12 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-    
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    
+   
     <script>
-        // 🛡️ درع منع الفحص والتتبع (Anti-Inspect & Anti-Tamper)
+        // 🛡️ MATRIX SHIELD: Anti-Inspect & Anti-Tamper
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || (e.ctrlKey && e.key === 'U')) {
@@ -34,6 +34,7 @@
             }
         });
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -48,7 +49,7 @@
     </script>
 
     <style>
-        /* LUXURY MINIMALIST THEME */
+        /* LUXURY MINIMALIST THEME & GLOBAL STYLES */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
@@ -57,7 +58,7 @@
             --bg-secondary: #f9f9f9;
             --text-main: #171a20;
             --text-muted: #5c5e62;
-            --accent-blue: #3e6ae1;
+            --accent-blue: #0A84FF;
             --border-light: #e2e3e3;
             --btn-gray: #eeeeee;
         }
@@ -65,28 +66,21 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-primary); 
+            background-color: var(--bg-primary);
             color: var(--text-main);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6; 
-            overflow-x: hidden; 
+            line-height: 1.6;
+            overflow-x: hidden;
             scroll-behavior: smooth;
         }
-
         .mono-text { font-family: 'Space Mono', monospace; }
 
         /* Loading Screen */
         #loading-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-primary);
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease-out;
-            pointer-events: none; /* 🛡️ صمام أمان لعدم حجب الموقع */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-primary); z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease-out; pointer-events: none;
         }
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
@@ -94,15 +88,12 @@
         /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
-        
-        .ar-only { display: none; } 
-        .en-only { display: block; }
-        body.lang-ar .ar-only { display: block; } 
-        body.lang-ar .en-only { display: none; }
+        .ar-only { display: none; } .en-only { display: block; }
+        body.lang-ar .ar-only { display: block; } body.lang-ar .en-only { display: none; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
-        /* Global Glitch Animation for Logos */
+        /* Glitch Animation */
         .glitch-anim { display: inline-block; animation: random-glitch 8s infinite; direction: ltr !important; unicode-bidi: isolate;}
         @keyframes random-glitch {
             0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; }
@@ -112,33 +103,23 @@
         }
 
         /* Navigation */
-        .top-nav {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            background: transparent; transition: background 0.3s ease;
-        }
+        .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: transparent; transition: background 0.3s ease; }
         .top-nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 1px 5px rgba(0,0,0,0.05); }
         .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icons svg { fill: var(--text-main); color: var(--text-main); }
-        
-        .logo-text { position: relative; font-size: 1.1rem; font-weight: 500; letter-spacing: 1px; color: #fff; text-decoration: none; transition: 0.3s; direction: ltr;}
-        
+        .logo-text { font-size: 1.1rem; font-weight: 500; letter-spacing: 1px; color: #fff; text-decoration: none; transition: 0.3s; direction: ltr;}
         .nav-icons { display: flex; gap: 20px; align-items: center; }
         .nav-icon { background: none; border: none; cursor: pointer; color: #fff; display: flex; align-items: center; transition: 0.3s; padding: 5px;}
         .nav-icon svg { width: 24px; height: 24px; fill: currentColor; transition: 0.3s;}
-        .nav-icon:hover { opacity: 0.7; }
 
-        /* Hero Section */
+        /* Hero */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
         .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%); background-color: #000;}
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)); z-index: 1; pointer-events: none; }
-        
         .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; color: #fff;}
         .tagline { font-family: 'Space Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; color: #f4f4f4; margin-bottom: 20px; display: block;}
         .main-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -0.5px; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);}
         .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
-        
-        /* Hero Video Controls UI */
         .hero-video-controls { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
         .vid-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .vid-dot:hover { background: rgba(255,255,255,0.8); }
@@ -148,62 +129,52 @@
         .content-section { padding: 120px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
-        
-        .section-header { margin-bottom: 50px; }
         .page-num { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 2px; display: block;}
         .heading-lg { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 500; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px;}
         .heading-md { font-size: 1.5rem; font-weight: 500; margin-bottom: 15px; color: var(--text-main); }
         .text-body { color: var(--text-muted); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.7; max-width: 900px; font-weight: 400;}
 
-        /* Lists */
+        /* Lists & Pillars */
         .list-clean { list-style: none; padding: 0; margin-top: 15px;}
         .list-clean li { position: relative; padding-left: 20px; margin-bottom: 10px; color: var(--text-muted); font-weight: 400;}
         .list-clean li::before { content: '–'; position: absolute; left: 0; color: var(--text-main); font-weight: bold;}
         body.lang-ar .list-clean li { padding-left: 0; padding-right: 20px; }
         body.lang-ar .list-clean li::before { left: auto; right: 0; }
-
-        /* Methodology (HX-5) Layout */
         .pillar-box { margin-bottom: 40px; border-left: 2px solid var(--border-light); padding-left: 25px; max-width: 900px;}
         body.lang-ar .pillar-box { border-left: none; border-right: 2px solid var(--border-light); padding-left: 0; padding-right: 25px; }
         .pillar-title { font-weight: 500; font-size: 1.3rem; color: var(--text-main); margin-bottom: 5px; }
         .pillar-quote { font-style: italic; color: #888; font-size: 1rem; margin-bottom: 10px; display: block;}
 
-        /* --- COMPACT EXECUTIVE DASHBOARD (LOGIN) --- */
+        /* Executive Dashboard (Login) */
         .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 80px 20px;}
         .login-box { width: 100%; max-width: 360px; background: #fff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-light); margin: 0 auto; text-align: left;}
         body.lang-ar .login-box { text-align: right; }
-        
         .input-group { margin-bottom: 20px; }
         .t-label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
-        .t-input { width: 100%; padding: 12px 15px; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 6px; font-size: 1rem; color: var(--text-main); transition: 0.3s; outline: none; font-family: inherit;}
+        .t-input { width: 100%; padding: 12px 15px; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 6px; font-size: 1rem; color: var(--text-main); outline: none; font-family: inherit; transition: 0.3s;}
         .t-input:focus { border-color: var(--border-light); background: #fff; box-shadow: 0 0 0 1px var(--border-light); }
-        
         .btn-blue { width: 100%; padding: 14px; background: #171a20; color: #fff; border: none; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .btn-blue:hover { background: #333; }
         .btn-blue:disabled { opacity: 0.7; cursor: not-allowed; }
-        
+       
         .divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 0.85rem; }
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-light); }
         .divider:not(:empty)::before { margin-right: .5em; margin-left: .5em;}
         .divider:not(:empty)::after { margin-left: .5em; margin-right: .5em;}
-        
-        /* OAuth Social Buttons */
+       
         .oauth-group { display: flex; justify-content: center; gap: 20px; }
-        .btn-social { background: transparent; border: none; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; padding: 5px; opacity: 0.7;}
+        .btn-social { background: transparent; border: none; cursor: pointer; transition: 0.3s; padding: 5px; opacity: 0.7;}
         .btn-social:hover { opacity: 1; transform: scale(1.1);}
         .btn-social svg { fill: var(--text-main); width: 24px; height: 24px;}
 
         /* Dashboard Internal */
-        #dashboard-view { display: none; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-light); max-width: 800px; margin: 0 auto;}
+        #dashboard-view { display: none; background: #fff; padding: 40px; border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto;}
         .dash-nav { display: flex; justify-content: center; gap: 30px; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 30px; overflow-x: auto; white-space: nowrap;}
         .dash-tab { background: none; border: none; font-size: 0.95rem; font-weight: 500; color: var(--text-muted); cursor: pointer; position: relative; font-family: inherit;}
         .dash-tab.active { color: var(--text-main); }
         .dash-tab.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 2px; background: var(--text-main); }
-        
         .service-form { display: none; animation: fadeIn 0.4s; }
         .service-form.active { display: block; }
-
-        /* Status Tracker Cards */
         .history-card { border: 1px solid var(--border-light); border-radius: 8px; padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; background: #fff; transition: 0.3s;}
         .history-card:hover { border-color: #ccc; box-shadow: 0 2px 10px rgba(0,0,0,0.03);}
         .h-details { max-width: 70%; text-align: left; }
@@ -212,53 +183,42 @@
         .h-date { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #888; }
         .h-status { font-size: 0.75rem; background: var(--bg-secondary); padding: 5px 12px; border-radius: 20px; color: var(--text-main); font-weight: 500; border: 1px solid var(--border-light);}
 
-        /* COMPACT NEXUS COMMAND */
+        /* Nexus Command UI */
         .nexus-window { background: rgba(15, 20, 25, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; font-family: 'Space Mono', monospace; color: #fff; height: 260px; display: flex; flex-direction: column; box-shadow: inset 0 0 15px rgba(255,255,255,0.02);}
         .nexus-header { display: flex; gap: 8px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
         .nexus-dot { width: 10px; height: 10px; border-radius: 50%; background: #444; }
         .nexus-dot.red { background: #ff5f56; } .nexus-dot.yel { background: #ffbd2e; } .nexus-dot.grn { background: #27c93f; }
         .nexus-output { flex: 1; overflow-y: auto; font-size: 0.8rem; line-height: 1.6; color: #a1b2c3; direction: ltr; text-align: left; scrollbar-width: thin;}
         .nexus-input-line { display: flex; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; direction: ltr;}
-        .nexus-prompt { color: #0a84ff; margin-right: 10px; font-weight: bold; font-size: 0.8rem;}
+        .nexus-prompt { color: var(--accent-blue); margin-right: 10px; font-weight: bold; font-size: 0.8rem;}
         .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.85rem;}
 
-        /* --- ORACLE CHAT (iOS Style) --- */
+        /* AI Oracle Chat UI */
         .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 10s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
-        @keyframes pulse-glow { 
-            0%, 80%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); } 
-            85% { box-shadow: 0 0 0 0 rgba(23, 26, 32, 0.6); } 
-            95% { box-shadow: 0 0 0 15px rgba(23, 26, 32, 0); } 
-        }
-        
+        @keyframes pulse-glow { 0%, 80%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); } 85% { box-shadow: 0 0 0 0 rgba(23, 26, 32, 0.6); } 95% { box-shadow: 0 0 0 15px rgba(23, 26, 32, 0); } }
         .ai-window { position: fixed; bottom: 100px; right: 30px; width: 360px; height: 550px; background: rgba(250, 250, 250, 0.95); backdrop-filter: blur(15px); border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px); opacity: 0; pointer-events: none; transition: 0.3s; border: 1px solid rgba(0,0,0,0.05); overflow: hidden;}
         body.lang-ar .ai-window { right: auto; left: 30px; }
         .ai-window.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        
         .ai-header { background: transparent; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05);}
         .ai-title { font-weight: 500; font-size: 0.95rem; color: #000; display: flex; align-items: center; gap: 8px;}
         .ai-title::before { content:''; display:inline-block; width:8px; height:8px; background: #34c759; border-radius:50%; }
         .ai-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #888;}
-        
         .ai-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .ai-msg-wrap { display: flex; flex-direction: column; max-width: 85%; }
         .ai-msg-wrap.bot { align-self: flex-start; }
         .ai-msg-wrap.user { align-self: flex-end; align-items: flex-end; }
-        
         .ai-msg { padding: 12px 16px; font-size: 0.95rem; line-height: 1.5; border-radius: 20px; word-wrap: break-word;}
         .ai-msg.bot { background: #e9e9eb; color: #000; border-bottom-left-radius: 4px; }
         body.lang-ar .ai-msg.bot { border-bottom-left-radius: 20px; border-bottom-right-radius: 4px;}
         .ai-msg.user { background: var(--accent-blue); color: #fff; border-bottom-right-radius: 4px; }
         body.lang-ar .ai-msg.user { border-bottom-right-radius: 20px; border-bottom-left-radius: 4px;}
-        
         .msg-actions { display: flex; gap: 10px; margin-top: 5px; padding: 0 5px;}
         .msg-btn { background: none; border: none; color: #999; cursor: pointer; transition: 0.2s;}
         .msg-btn:hover { color: #333; }
         .ai-msg strong { font-weight: 600; color: #000; }
-        
         .ai-footer-note { font-size: 0.7rem; color: #888; text-align: center; padding: 5px 10px;}
         .ai-footer-note a { color: var(--accent-blue); text-decoration: none; cursor: pointer;}
-        
         .ai-input-area { display: flex; padding: 10px 15px; background: transparent; border-top: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 10px;}
         .ai-input { flex: 1; background: #fff; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; font-size: 0.95rem; outline: none; font-family: inherit;}
         .ai-send { background: var(--accent-blue); width: 32px; height: 32px; border-radius: 50%; border: none; color: #fff; display: flex; justify-content: center; align-items: center; cursor: pointer;}
@@ -269,129 +229,34 @@
         .modal-close { position: absolute; top: 20px; right: 20px; background: #f4f4f4; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2rem; cursor: pointer; display:flex; justify-content:center; align-items:center; color: #333;}
         body.lang-ar .modal-close { right: auto; left: 20px; }
 
-        /* Footer */
+        /* Deep Archive & Blueprint 3D Styles */
+        .deep-archive { background-color: #000000; color: #ffffff; position: relative; padding: 100px 0; border-top: 1px solid #111; overflow: hidden; z-index: 10; }
+        .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
+        .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+        .archive-card { background: #050505; border: 1px solid #1a1a1a; padding: 40px 30px; border-radius: 4px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: crosshair; }
+        .archive-card:hover { background: #0a0a0a; border-color: #333; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .archive-card:hover::before { transform: scaleX(1); }
+        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff003c; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid #ff003c; padding: 3px 8px; border-radius: 20px; }
+        .archive-title { font-size: 1.5rem; font-weight: 300; margin-bottom: 10px; color: #fff; }
+        .archive-desc { font-size: 0.9rem; color: #666; line-height: 1.6; }
+        .kill-switch-container { text-align: center; margin-top: 100px; }
+        .kill-switch { background: transparent; border: 1px solid #333; color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 30px; }
+        .kill-switch:hover { color: #000; background: #fff; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+       
+        .hud-container { position: absolute; top: 20px; left: 20px; right: 20px; pointer-events: none; z-index: 15; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+        .hud-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .glitch-text { color: var(--accent-blue); font-weight: bold; }
+        .hud-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; color: rgba(255,255,255,0.2); }
+        .slogan { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 5px; letter-spacing: 5px; }
+
+        /* General UI Classes */
         .site-footer { text-align: center; padding: 60px 20px; background: var(--bg-primary); border-top: 1px solid var(--border-light);}
         .footer-logo { font-size: 1.2rem; font-weight: 500; margin-bottom: 5px; direction: ltr; display: inline-block;}
-
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        /* ======== DEEP ARCHIVE STYLES ======== */
-        .deep-archive {
-            background-color: #000000;
-            color: #ffffff;
-            position: relative;
-            padding: 100px 0;
-            border-top: 1px solid #111;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        /* Infinite Marquee */
-        .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            border-top: 1px dashed #333;
-            border-bottom: 1px dashed #333;
-            padding: 15px 0;
-            margin-bottom: 80px;
-            background: rgba(10, 132, 255, 0.02);
-        }
-        .marquee-text {
-            display: inline-block;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
-            color: #555;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            animation: marquee 30s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Classified Grid */
-        .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-        .archive-card {
-            background: #050505;
-            border: 1px solid #1a1a1a;
-            padding: 40px 30px;
-            border-radius: 4px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: crosshair;
-        }
-        .archive-card:hover {
-            background: #0a0a0a;
-            border-color: #333;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .archive-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: #0A84FF;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-        .archive-card:hover::before { transform: scaleX(1); }
-        .archive-status {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            color: #ff003c;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block;
-            border: 1px solid #ff003c;
-            padding: 3px 8px;
-            border-radius: 20px;
-        }
-        .archive-title {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        .archive-desc {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.6;
-        }
-        .kill-switch-container {
-            text-align: center;
-            margin-top: 100px;
-        }
-        .kill-switch {
-            background: transparent;
-            border: 1px solid #333;
-            color: #888;
-            font-family: 'Space Mono', monospace;
-            padding: 15px 40px;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-            border-radius: 30px;
-        }
-        .kill-switch:hover {
-            color: #000;
-            background: #fff;
-            border-color: #fff;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
-        }
     </style>
 </head>
 <body class="lang-en">
@@ -424,14 +289,14 @@
         <div class="hero-content fade-in">
             <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
-            
+           
             <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
             <h1 class="main-title en-only">Engineering Human Experiences</h1>
-            
+           
             <p class="text-body ar-only" style="margin: 0 auto; color:#fff;">نحن لا نصمم منتجات..<br>نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
             <p class="text-body en-only" style="margin: 0 auto; color:#fff;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
         </div>
-        
+       
         <div class="hero-video-controls" id="heroControls"></div>
     </header>
 
@@ -482,7 +347,7 @@
                 <p class="text-body ar-only" style="margin:0;">الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن لا نصمم للمنفعة فقط؛ بل نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى ويلبي حاجة إنسانية أساسية.</p>
                 <p class="text-body en-only" style="margin:0;">Intent defines the existential purpose and the “moral compass” of the project. We do not design for utility alone; we establish the core value proposition that ensures every interaction serves a higher objective and resonates with a fundamental human need.</p>
             </div>
-            
+           
             <div class="pillar-box">
                 <div class="pillar-title en-only">Context</div><div class="pillar-title ar-only">السياق</div>
                 <span class="pillar-quote en-only">“Where, when, and under what conditions does it unfold?”</span><span class="pillar-quote ar-only">"أين ومتى وتحت أي ظروف تتكشف؟"</span>
@@ -615,7 +480,7 @@
                 <span class="page-num ar-only" style="margin-bottom: 10px; font-size: 0.75rem;">توقيع العلامة</span>
                 <span class="page-num en-only" style="margin-bottom: 10px; font-size: 0.75rem;">Brand Signature</span>
                 <h2 class="heading-md glitch-anim mono-text">フサム | experience™</h2>
-                
+               
                 <div style="margin-top: 30px; margin-bottom: 30px;">
                     <span class="mono-text" style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">THE FOUNDER</span>
                     <h3 style="font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px;">Hussam Hassan Mohammed Tahiri</h3>
@@ -637,7 +502,7 @@
         <div class="container fade-in">
             <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 30px;">الواجهة التنفيذية</h2>
             <h2 class="heading-md en-only" style="text-align: center; margin-bottom: 30px;">Executive Dashboard</h2>
-            
+           
             <div id="auth-view" class="login-wrapper" style="padding: 0;">
                 <div class="login-box">
                     <form onsubmit="handleFirebaseLogin(event)">
@@ -651,17 +516,22 @@
                             <label class="t-label en-only">Full Name</label>
                             <input type="text" id="userName" class="t-input" required>
                         </div>
+                        <div class="input-group">
+                            <label class="t-label ar-only">رقم الجوال (مطلوب)</label>
+                            <label class="t-label en-only">Phone Number (Required)</label>
+                            <input type="tel" id="userPhone" class="t-input" required>
+                        </div>
                         <button type="submit" id="loginBtn" class="btn-blue">
                             <span class="ar-only">تسجيل الدخول</span>
                             <span class="en-only">Sign In</span>
                         </button>
                     </form>
-                    
+                   
                     <div class="divider">
                         <span class="ar-only">أو</span>
                         <span class="en-only">Or</span>
                     </div>
-                    
+                   
                     <div class="oauth-group">
                         <button class="btn-social" onclick="signInWithGoogle()" title="Google">
                             <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -689,7 +559,7 @@
                         <span class="ar-only">طلب استشارة</span><span class="en-only">New Inquiry</span>
                     </button>
                     <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
-                    
+                   
                     <button class="dash-tab" id="adminTab" style="display:none;" onclick="switchService('admin')">ADMIN CORE</button>
                 </div>
 
@@ -733,13 +603,73 @@
         </div>
     </section>
 
+    <section id="blueprint-section" class="deep-archive">
+        <div class="marquee-container">
+            <div class="marquee-text">
+                EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE //
+            </div>
+        </div>
+
+        <div class="container fade-in">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span class="mono-text" style="color: #444; letter-spacing: 4px; font-size: 0.8rem;">LEVEL 2 CLEARANCE</span>
+                <h2 style="font-size: 2rem; font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 10px;">The Deep Archive</h2>
+            </div>
+
+            <div class="archive-grid">
+                <div class="archive-card">
+                    <span class="archive-status">ENCRYPTED</span>
+                    <h3 class="archive-title">Project: T-35</h3>
+                    <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
+                </div>
+
+                <div class="archive-card">
+                    <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
+                    <h3 class="archive-title">Concept: The Lab</h3>
+                    <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
+                </div>
+
+                <div class="archive-card">
+                    <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
+                    <h3 class="archive-title">System: iN STUDIO</h3>
+                    <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
+                </div>
+            </div>
+
+            <div class="kill-switch-container">
+                <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                    [^] Return to Surface
+                </button>
+            </div>
+        </div>
+
+        <div id="blueprint-loader" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Space Mono', monospace; color:#fff;">SIRNA FE'AMAA JIRA... (LOADING)</div>
+        <div class="hud-container">
+            <div class="hud-header">
+                <div>
+                    <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
+                    RAGAA MADAALLII (RENDER): 1991.33.EX
+                </div>
+                <div style="text-align: right;">
+                    SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
+                    HAALA: HOLLYWOOD SIINIMAA
+                </div>
+            </div>
+            <div class="hud-footer">
+                <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
+                HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991
+            </div>
+        </div>
+        <div id="canvas-container" style="position:relative; width:100%; height:800px; margin-top:50px;"></div>
+    </section>
+
     <footer class="site-footer">
         <div class="container fade-in">
-            <div class="footer-links" style="margin-bottom: 40px;">
-                <a href="https://www.instagram.com/ex_experience.sa" target="_blank">Instagram</a>
-                <a href="https://www.tiktok.com/@ex_experience.sa" target="_blank">TikTok</a>
-                <a href="https://snapchat.com/t/w3omS0EV" target="_blank">Snapchat</a>
-                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank">WhatsApp</a>
+            <div class="footer-links" style="margin-bottom: 40px; display:flex; gap:20px; justify-content:center;">
+                <a href="https://www.instagram.com/ex_experience.sa" target="_blank" style="color:var(--text-muted); text-decoration:none;">Instagram</a>
+                <a href="https://www.tiktok.com/@ex_experience.sa" target="_blank" style="color:var(--text-muted); text-decoration:none;">TikTok</a>
+                <a href="https://snapchat.com/t/w3omS0EV" target="_blank" style="color:var(--text-muted); text-decoration:none;">Snapchat</a>
+                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" style="color:var(--text-muted); text-decoration:none;">WhatsApp</a>
             </div>
 
             <div style="margin-top: 60px;">
@@ -762,7 +692,7 @@
     <button class="ai-btn" onclick="toggleChat()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </button>
-    
+   
     <div class="ai-window" id="aiWindow">
         <div class="ai-header">
             <div style="display:flex; flex-direction:column;">
@@ -785,290 +715,24 @@
         </div>
     </div>
 
-    <section id="blueprint-section">
-        
-        <style>
-            .deep-archive {
-                background-color: #000000;
-                color: #ffffff;
-                position: relative;
-                padding: 100px 0;
-                border-top: 1px solid #111;
-                overflow: hidden;
-                z-index: 10;
-            }
-            .marquee-container {
-                width: 100%;
-                overflow: hidden;
-                white-space: nowrap;
-                border-top: 1px dashed #333;
-                border-bottom: 1px dashed #333;
-                padding: 15px 0;
-                margin-bottom: 80px;
-                background: rgba(10, 132, 255, 0.02);
-            }
-            .marquee-text {
-                display: inline-block;
-                font-family: 'Space Mono', monospace;
-                font-size: 0.85rem;
-                color: #555;
-                letter-spacing: 3px;
-                text-transform: uppercase;
-                animation: marquee 30s linear infinite;
-            }
-            @keyframes marquee {
-                0% { transform: translateX(0%); }
-                100% { transform: translateX(-50%); }
-            }
-            .archive-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 30px;
-                max-width: 1000px;
-                margin: 0 auto;
-                padding: 0 5%;
-            }
-            .archive-card {
-                background: #050505;
-                border: 1px solid #1a1a1a;
-                padding: 40px 30px;
-                border-radius: 4px;
-                transition: all 0.4s ease;
-                position: relative;
-                overflow: hidden;
-                cursor: crosshair;
-            }
-            .archive-card:hover {
-                background: #0a0a0a;
-                border-color: #333;
-                transform: translateY(-5px);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            }
-            .archive-card::before {
-                content: '';
-                position: absolute;
-                top: 0; left: 0; width: 100%; height: 2px;
-                background: #0A84FF;
-                transform: scaleX(0);
-                transform-origin: left;
-                transition: transform 0.4s ease;
-            }
-            .archive-card:hover::before { transform: scaleX(1); }
-            .archive-status {
-                font-family: 'Space Mono', monospace;
-                font-size: 0.7rem;
-                color: #ff003c;
-                letter-spacing: 2px;
-                margin-bottom: 20px;
-                display: inline-block;
-                border: 1px solid #ff003c;
-                padding: 3px 8px;
-                border-radius: 20px;
-            }
-            .archive-title {
-                font-size: 1.5rem;
-                font-weight: 300;
-                margin-bottom: 10px;
-                color: #fff;
-            }
-            .archive-desc {
-                font-size: 0.9rem;
-                color: #666;
-                line-height: 1.6;
-            }
-            .kill-switch-container {
-                text-align: center;
-                margin-top: 100px;
-            }
-            .kill-switch {
-                background: transparent;
-                border: 1px solid #333;
-                color: #888;
-                font-family: 'Space Mono', monospace;
-                padding: 15px 40px;
-                font-size: 0.8rem;
-                letter-spacing: 3px;
-                text-transform: uppercase;
-                cursor: pointer;
-                transition: 0.3s;
-                border-radius: 30px;
-            }
-            .kill-switch:hover {
-                color: #000;
-                background: #fff;
-                border-color: #fff;
-                box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            }
-        </style>
-
-        <section id="deep-archive" class="deep-archive">
-            <div class="marquee-container">
-                <div class="marquee-text">
-                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
-                </div>
-            </div>
-
-            <div class="container fade-in">
-                <div style="text-align: center; margin-bottom: 60px;">
-                    <span class="mono-text" style="color: #444; letter-spacing: 4px; font-size: 0.8rem;">LEVEL 2 CLEARANCE</span>
-                    <h2 style="font-size: 2rem; font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 10px;">The Deep Archive</h2>
-                </div>
-
-                <div class="archive-grid">
-                    <div class="archive-card">
-                        <span class="archive-status">ENCRYPTED</span>
-                        <h3 class="archive-title">Project: T-35</h3>
-                        <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
-                    </div>
-
-                    <div class="archive-card">
-                        <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
-                        <h3 class="archive-title">Concept: The Lab</h3>
-                        <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
-                    </div>
-
-                    <div class="archive-card">
-                        <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
-                        <h3 class="archive-title">System: iN STUDIO</h3>
-                        <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
-                    </div>
-                </div>
-
-                <div class="kill-switch-container">
-                    <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-                        [^] Return to Surface
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <div id="blueprint-loader">SIRNA FE'AMAA JIRA... (LOADING)</div>
-        <div class="film-grain"></div>
-        <div class="cinematic-vignette"></div>
-        <div class="hud-container">
-            <div class="hud-header">
-                <div>
-                    <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
-                    RAGAA MADAALLII (RENDER): 1991.33.EX
-                </div>
-                <div style="text-align: right;">
-                    SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
-                    HAALA: HOLLYWOOD SIINIMAA
-                </div>
-            </div>
-            
-            <div class="hud-footer">
-                <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
-                HX-5TM x 33GUIDETM x iNSTUDIOTM x フサムフサムフサムフサムフサムフサムフサムフサムフiNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991
-            </div>
-        </div>
-        <div id="canvas-container"></div>
-    </section>
-
     <script>
-        // 🛡️ Loading Screen Logic - Fail-Safe (شاشة التحميل لن تعلق أبداً)
+        // 🛡️ Fail-Safe Loader
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
                 if(loader) {
                     loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        const heroVid = document.getElementById('heroVideo');
-                        if (heroVid) heroVid.play().catch(e => console.log("Auto-play prevented by browser"));
-                    }, 800);
+                    setTimeout(() => loader.style.display = 'none', 800);
                 }
-            }, 1500); // 🛡️ هذا هو صمام الأمان (بعد ثانية ونصف ستختفي الشاشة مهما حدث)
-        });
+            }, 1500);
 
-        // Language Logic
-        function toggleLanguage() {
-            const body = document.body;
-            body.classList.toggle('lang-ar'); 
-            body.classList.toggle('lang-en');
-            
-            const isAr = body.classList.contains('lang-ar');
-            document.documentElement.dir = isAr ? 'rtl' : 'ltr';
-            document.documentElement.lang = isAr ? 'ar' : 'en';
-            
-            document.getElementById('userEmail').placeholder = isAr ? "البريد الإلكتروني" : "Email Address";
-            document.getElementById('userName').placeholder = isAr ? "الاسم الكامل" : "Full Name";
-            document.getElementById('consultText').placeholder = isAr ? "حدد هدفك الاستراتيجي هنا..." : "Outline your strategic objective here...";
-            document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
-        }
+            // 🛡️ Fail-Safe 3D Initialization
+            document.fonts.ready.then(function() {
+                try { if (typeof THREE !== 'undefined') init3DBlueprint(); } catch(err) { console.error(err); }
+            });
 
-        // Center Modal Logic
-        const legalData = {
-            center: {
-                en: {
-                    title: "Help & Policies Center",
-                    body: `
-                        <div style="display:flex; flex-direction:column; gap:15px;">
-                            <button onclick="openLegal('privacy')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">Privacy Policy</button>
-                            <button onclick="openLegal('terms')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">Terms of Use</button>
-                            <button onclick="openLegal('oracle')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">Ex Oracle Terms</button>
-                            <button onclick="alert('Complaints System: Please use the Executive Dashboard to log a ticket.')" class="btn-blue" style="margin:0;">Complaints & Ratings</button>
-                        </div>
-                    `
-                },
-                ar: {
-                    title: "مركز السياسات والمساعدة",
-                    body: `
-                        <div style="display:flex; flex-direction:column; gap:15px;">
-                            <button onclick="openLegal('privacy')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">سياسة الخصوصية</button>
-                            <button onclick="openLegal('terms')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">شروط الاستخدام</button>
-                            <button onclick="openLegal('oracle')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">شروط استخدام Ex Oracle</button>
-                            <button onclick="alert('نظام الشكاوى: يرجى استخدام الواجهة التنفيذية لرفع تذكرة.')" class="btn-blue" style="margin:0;">الشكاوى والتقييم</button>
-                        </div>
-                    `
-                }
-            },
-            privacy: {
-                en: {
-                    title: "Privacy Policy & Data Protection",
-                    body: "This platform operates in strict compliance with the Saudi Personal Data Protection Law (PDPL).<br><br><b>1. Data Collection:</b> We do not collect unnecessary personal data. Information provided through the Executive Dashboard is solely for strategic consultation purposes.<br><b>2. Encryption:</b> All strategic inquiries and digital footprints are encrypted within the NEXUS COMMAND architecture.<br><b>3. Regulatory Alignment:</b> Our digital operations align with the regulations set by the Ministry of Commerce and the Ministry of Media in the Kingdom of Saudi Arabia.<br><b>4. Third Parties:</b> Your strategic data is never sold, shared, or exposed to unauthorized external entities."
-                },
-                ar: {
-                    title: "سياسة الخصوصية وحماية البيانات",
-                    body: "تعمل هذه المنصة بامتثال تام لنظام حماية البيانات الشخصية (PDPL) في المملكة العربية السعودية.<br><br><b>1. جمع البيانات:</b> نحن لا نجمع بيانات شخصية غير ضرورية. المعلومات المقدمة عبر الواجهة التنفيذية تُستخدم حصرياً لأغراض الاستشارة الاستراتيجية.<br><b>2. التشفير:</b> يتم تشفير جميع الاستفسارات الاستراتيجية والبصمات الرقمية داخل بنية (NEXUS COMMAND).<br><b>3. التوافق التنظيمي:</b> تتوافق عملياتنا الرقمية مع اللوائح المنصوص عليها من قبل وزارة التجارة ووزارة الإعلام في المملكة.<br><b>4. الأطراف الثالثة:</b> لا يتم بيع أو مشاركة أو كشف بياناتك الاستراتيجية لأي جهات خارجية غير مصرح لها."
-                }
-            },
-            terms: {
-                en: {
-                    title: "Terms of Use & Strategic Engagement",
-                    body: "By accessing the フサム | experience™ platform, you agree to the following framework:<br><br><b>1. Cyber Security:</b> Use of this platform is governed by the Saudi Anti-Cyber Crime Law. Any unauthorized access, data scraping, or attempt to breach the NEXUS COMMAND will be legally pursued.<br><b>2. Intellectual Property:</b> The HX-5™ Methodology and all conceptual architectures are the exclusive intellectual property of フサム.<br><b>3. Cultural Alignment:</b> Our engineered experiences adhere strictly to the guidelines and cultural visions set forth by the Ministry of Culture and the Ministry of Tourism in Saudi Arabia.<br><b>4. Purpose:</b> This is an executive strategic environment, not a public commercial store."
-                },
-                ar: {
-                    title: "شروط الاستخدام والمشاركة الاستراتيجية",
-                    body: "بدخولك إلى منصة フサム | experience™، فإنك توافق على الإطار التالي:<br><br><b>1. الأمن السيبراني:</b> يخضع استخدام هذه المنصة لنظام مكافحة جرائم المعلوماتية السعودي. سيتم الملاحقة القانونية لأي وصول غير مصرح به أو استخراج للبيانات أو محاولة اختراق لـ (NEXUS COMMAND).<br><b>2. الملكية الفكرية:</b> منهجية HX-5™ وكافة الهياكل المفاهيمية هي ملكية فكرية حصرية لـ フサム.<br><b>3. التوافق الثقافي:</b> تلتزم تجاربنا الهندسية بصرامة بالتوجهات والرؤى الثقافية التي وضعتها وزارة الثقافة ووزارة السياحة في المملكة العربية السعودية.<br><b>4. الغاية:</b> هذه بيئة استراتيجية تنفيذية، وليست متجراً تجارياً عاماً."
-                }
-            },
-            oracle: {
-                en: {
-                    title: "Ex Oracle Terms of Use",
-                    body: "Ex Oracle is provided by フサム | experience™ and its affiliates and is designed to answer frequently asked questions about フサム | experience™ products and services.<br><br>Its responses (the “Services”) are generated using a large language model that has access to a broad corpus of content that includes フサム | experience™ product and support pages, manuals, and content generated by human reviewers. This corpus may not be exhaustive or entirely up-to-date.<br><br>As a result, フサム | experience™ Assist's answers may occasionally provide inaccurate or incomplete information. フサム | experience™ Assist is not intended to give professional advice. フサム | experience™ Assist is not a substitute for official フサム | experience™ documentation or communications.<br><br>By using フサム | experience™ Assist, you are agreeing to these Terms of Use (the “Terms”). Acceptable Use. The Services can only be used to answer your questions about products and services. Minimum Age. You must be at least 13 years old."
-                },
-                ar: {
-                    title: "شروط استخدام Ex Oracle",
-                    body: "يتم تقديم Ex Oracle بواسطة フサム | experience™ والشركات التابعة لها، وهو مصمم للإجابة على الأسئلة الشائعة حول منتجات وخدمات フサム.<br><br>يتم إنشاء ردوده (الخدمات) باستخدام نموذج لغوي كبير يعتمد على محتوى قد لا يكون شاملاً أو محدثاً بالكامل. ونتيجة لذلك، قد يقدم المساعد معلومات غير دقيقة أو غير مكتملة أحياناً.<br><br>المساعد ليس بديلاً عن المشورة المهنية أو الوثائق الرسمية لـ フサム. باستخدامك للمساعد، فإنك توافق على هذه الشروط. العمر الأدنى للاستخدام هو 13 عاماً."
-                }
-            }
-        };
-
-        function openLegal(docType) {
-            const isAr = document.body.classList.contains('lang-ar');
-            const lang = isAr ? 'ar' : 'en';
-            document.getElementById('legalTitle').innerHTML = legalData[docType][lang].title;
-            document.getElementById('legalBody').innerHTML = legalData[docType][lang].body;
-            document.getElementById('legalModal').style.display = 'flex';
-        }
-        function closeLegal() { document.getElementById('legalModal').style.display = 'none'; }
-
-        // Setup Placeholders & Default EN state on load
-        document.addEventListener("DOMContentLoaded", () => {
+            // Hero Video Logic
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
-            
-            // Hero Controls Logic
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
             if(heroVidEl && heroControls) {
@@ -1093,18 +757,24 @@
                 entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-            
-            // 🛡️ صمام أمان لـ Three.js
-            document.fonts.ready.then(function() {
-                try {
-                    if (typeof THREE !== 'undefined') {
-                        init3DBlueprint();
-                    }
-                } catch(err) {
-                    console.error("3D Render Error: ", err);
-                }
-            });
         });
+
+        // Language Logic
+        function toggleLanguage() {
+            const body = document.body;
+            body.classList.toggle('lang-ar');
+            body.classList.toggle('lang-en');
+           
+            const isAr = body.classList.contains('lang-ar');
+            document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+            document.documentElement.lang = isAr ? 'ar' : 'en';
+           
+            document.getElementById('userEmail').placeholder = isAr ? "البريد الإلكتروني" : "Email Address";
+            document.getElementById('userName').placeholder = isAr ? "الاسم الكامل" : "Full Name";
+            document.getElementById('userPhone').placeholder = isAr ? "رقم الجوال (مطلوب)" : "Phone Number (Required)";
+            document.getElementById('consultText').placeholder = isAr ? "حدد هدفك الاستراتيجي هنا..." : "Outline your strategic objective here...";
+            document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
+        }
 
         // Navbar Scroll
         window.addEventListener('scroll', () => {
@@ -1113,33 +783,18 @@
             else nav.classList.remove('scrolled');
         });
 
-        // Backend 🛡️ تشفير الروابط والتوكن (Dynamic Decoding)
+        // 🛡️ التشفير الديناميكي للروابط لمنع التتبع (Obfuscation)
         const GOOGLE_SCRIPT_URL = atob("https://script.google.com/macros/s/AKfycbx-JbaOVH2cJQochOpKUlL45_awXgDMCruUoXVFeAXdktUXOepgMHsSEPJMgJwdBWSu/exec");
         const SECURE_TOKEN = atob("RVhfU0hJRUxEXzk5WA==");
-        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
-
-        async function signInWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            try {
-                const result = await auth.signInWithPopup(provider);
-                finalizeAuth(result.user);
-            } catch (error) { console.error("Auth Interrupted", error); }
-        }
-
-        async function signInWithApple() {
-            const provider = new firebase.auth.OAuthProvider('apple.com');
-            try {
-                const result = await auth.signInWithPopup(provider);
-                finalizeAuth(result.user);
-            } catch (error) { console.error("Apple Auth Interrupted", error); }
-        }
+        let currentUser = { Name: 'Unknown', Email: 'unknown', Phone: '' };
 
         function finalizeAuth(user) {
             currentUser.Name = user.displayName || "Executive";
             currentUser.Email = user.email || "Verified_Link";
-            db.collection("Users").doc(currentUser.Email).set({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+            currentUser.Phone = user.phoneNumber || "-";
+            db.collection("Users").doc(currentUser.Email).set({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
             showDashboard();
-            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone }), mode: 'no-cors' });
         }
 
         async function handleFirebaseLogin(e) {
@@ -1149,9 +804,15 @@
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
+            currentUser.Phone = document.getElementById('userPhone').value || "-";
+           
             try {
-                await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
+                // حفظ في Firebase
+                await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+               
+                // 📡 إرسال للرادار (Google Script)
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone }), mode: 'no-cors' });
+               
                 showDashboard();
             } catch (error) {
                 alert(isAr ? "فشل الاتصال." : "Connection failed.");
@@ -1180,7 +841,7 @@
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
-                
+               
                 let html = '';
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
@@ -1204,9 +865,14 @@
             const isAr = document.body.classList.contains('lang-ar');
             const message = document.getElementById('consultText').value;
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
+           
             try {
-                await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Message: message }), mode: 'no-cors' });
+                // حفظ في Firebase
+                await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+               
+                // 📡 إرسال للرادار (Google Script)
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message }), mode: 'no-cors' });
+               
                 alert(isAr ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
                 document.getElementById('consultText').value = '';
                 switchService('history');
@@ -1214,13 +880,16 @@
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
-        // NEXUS COMMAND
+        // ==========================================
+        // 🧠 ربط محركات الذكاء الاصطناعي مع الرادار
+        // ==========================================
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}`;
+            const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}&IsCommand=${isTerminal}`;
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 if (loadingElement) loadingElement.remove();
+               
                 const finalOutput = data.reply || data.error;
                 if(isTerminal) printNexus(`> ${finalOutput}`); else appendMsg(finalOutput, 'bot');
             } catch (error) {
@@ -1229,6 +898,7 @@
             }
         }
 
+        // Nexus Terminal Logic
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
         function handleNexus(e) {
@@ -1242,13 +912,13 @@
                 else queryDeepMatrix(cmd, true);
             }
         }
-        function printNexus(text) { nexusOutput.innerHTML += `\n${text}`; nexusOutput.scrollTop = nexusOutput.scrollHeight; }
+        function printNexus(text) { nexusOutput.innerHTML += `<br>${text}`; nexusOutput.scrollTop = nexusOutput.scrollHeight; }
 
-        // AI Chat UI
+        // Chat UI Logic
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-        
+       
         function toggleChat() {
             chatWindow.classList.toggle('open');
             if(chatWindow.classList.contains('open') && chatBody.innerHTML === '') {
@@ -1260,14 +930,14 @@
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
-            
+           
             let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             safeText = safeText.replace(/\*(.*?)\*/g, '<em>$1</em>');
             safeText = safeText.replace(/\n/g, '<br>');
 
             let innerHTML = `<div class="ai-msg ${sender}">${safeText}</div>`;
-            
+           
             if (sender === 'bot' && text !== '...' && !text.includes('Processing') && !text.includes('المعالجة')) {
                 innerHTML += `
                 <div class="msg-actions">
@@ -1279,7 +949,7 @@
                     </button>
                 </div>`;
             }
-            
+           
             wrapDiv.innerHTML = innerHTML;
             chatBody.appendChild(wrapDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -1287,7 +957,7 @@
         }
 
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
-        
+       
         function sendChatMessage() {
             const text = aiInput.value.trim();
             if(!text) return;
@@ -1299,13 +969,13 @@
         }
 
         // ==========================================
-        // 🔒 تحديث الأمان: تشفير مفتاح الإدارة 
+        // 🔑 حماية لوحة الإدارة - Base64 Encoding
         // ==========================================
-        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); // يفك التشفير وقت التشغيل فقط
+        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ=");
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
-            
+            // يتم التشفير والمطابقة لحماية الكلمة في الكود
             if(pass === ENCRYPTED_TOKEN) {
                 document.getElementById('adminTab').style.display = 'block';
                 switchService('admin');
@@ -1329,7 +999,7 @@
                     status.innerText = "[ NO RECORDS FOUND ]"; status.style.color = "red"; return;
                 }
 
-                let csvContent = "\uFEFF"; 
+                let csvContent = "\uFEFF";
                 let rows = [];
                 let headers = [];
 
@@ -1345,7 +1015,7 @@
                     headers.forEach(header => {
                         let val = data[header] || "";
                         if(val && val.seconds) val = new Date(val.toDate()).toLocaleString('en-GB');
-                        val = val.toString().replace(/"/g, '""'); 
+                        val = val.toString().replace(/"/g, '""');
                         if(val.search(/("|,|\n)/g) >= 0) val = `"${val}"`;
                         row.push(val);
                     });
@@ -1370,11 +1040,13 @@
             }
         }
 
+        // ==========================================
         // 3D Blueprint Integration Script (Optimized)
+        // ==========================================
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
-            
+           
             const oldLoader = document.getElementById('blueprint-loader');
             if(oldLoader) {
                 oldLoader.style.opacity = '0';
@@ -1384,13 +1056,12 @@
             const scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x020202, 0.0015);
 
-            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 4000);
+            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / 800, 1, 4000);
             camera.position.set(0, 300, 800);
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            
-            const sectionHeight = document.getElementById('blueprint-section').offsetHeight || window.innerHeight;
-            renderer.setSize(window.innerWidth, sectionHeight);
+           
+            renderer.setSize(window.innerWidth, 800);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
@@ -1399,7 +1070,7 @@
             controls.dampingFactor = 0.05;
             controls.autoRotate = true;
             controls.autoRotateSpeed = 0.5;
-            controls.enableZoom = false; 
+            controls.enableZoom = false;
             controls.enablePan = false;
 
             const gridHelper = new THREE.GridHelper(2000, 100, 0x0A84FF, 0x0A84FF);
@@ -1408,8 +1079,8 @@
             scene.add(gridHelper);
 
             const canvas = document.createElement('canvas');
-            canvas.width = 2048; 
-            canvas.height = 1024; 
+            canvas.width = 2048;
+            canvas.height = 1024;
             const ctx = canvas.getContext('2d');
 
             ctx.fillStyle = 'rgba(2, 2, 2, 0.8)';
@@ -1417,7 +1088,7 @@
 
             ctx.strokeStyle = 'rgba(10, 132, 255, 0.4)';
             ctx.lineWidth = 2;
-            
+           
             ctx.beginPath();
             ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2);
             ctx.moveTo(canvas.width/2, 0); ctx.lineTo(canvas.width/2, canvas.height);
@@ -1435,7 +1106,7 @@
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.font = '100px "Noto Sans JP", "Inter", sans-serif';
-            
+           
             ctx.fillStyle = 'rgba(0, 229, 255, 0.7)';
             ctx.fillText('フサム | experience™', canvas.width/2 + 4, canvas.height/2 - 25);
             ctx.fillStyle = 'rgba(255, 0, 60, 0.7)';
@@ -1452,14 +1123,14 @@
             texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
             const geometry = new THREE.PlaneGeometry(1600, 800);
-            const material = new THREE.MeshBasicMaterial({ 
-                map: texture, 
-                transparent: true, 
+            const material = new THREE.MeshBasicMaterial({
+                map: texture,
+                transparent: true,
                 opacity: 0.9,
                 side: THREE.DoubleSide,
                 blending: THREE.AdditiveBlending
             });
-            
+           
             const hologramPlane = new THREE.Mesh(geometry, material);
             hologramPlane.rotation.x = -Math.PI / 2;
             scene.add(hologramPlane);
@@ -1472,11 +1143,11 @@
             scene.add(wireframeBox);
 
             const verticalPlaneGeo = new THREE.PlaneGeometry(800, 400);
-            const verticalMat = new THREE.MeshBasicMaterial({ 
-                color: 0x00e5ff, 
-                wireframe: true, 
-                transparent: true, 
-                opacity: 0.1 
+            const verticalMat = new THREE.MeshBasicMaterial({
+                color: 0x00e5ff,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.1
             });
             const verticalPlane1 = new THREE.Mesh(verticalPlaneGeo, verticalMat);
             verticalPlane1.position.y = 200;
@@ -1488,7 +1159,7 @@
             scene.add(verticalPlane2);
 
             const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 600; 
+            const particlesCount = 600;
             const posArray = new Float32Array(particlesCount * 3);
 
             for(let i = 0; i < particlesCount * 3; i++) {
@@ -1519,7 +1190,7 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                
+               
                 if(!isVisible) return;
 
                 const elapsedTime = clock.getElapsedTime();
@@ -1538,12 +1209,57 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = document.getElementById('blueprint-section').offsetHeight || window.innerHeight;
+                const h = 800; // Fixed canvas height
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
             });
         }
+
+        // Center Modals Content
+        const legalData = {
+            center: {
+                en: {
+                    title: "Help & Policies Center",
+                    body: `<div style="display:flex; flex-direction:column; gap:15px;">
+                            <button onclick="openLegal('privacy')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">Privacy Policy</button>
+                            <button onclick="openLegal('terms')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">Terms of Use</button>
+                            <button onclick="openLegal('oracle')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">Ex Oracle Terms</button>
+                            <button onclick="alert('Complaints System: Please use the Executive Dashboard to log a ticket.')" class="btn-blue" style="margin:0;">Complaints & Ratings</button>
+                           </div>`
+                },
+                ar: {
+                    title: "مركز السياسات والمساعدة",
+                    body: `<div style="display:flex; flex-direction:column; gap:15px;">
+                            <button onclick="openLegal('privacy')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">سياسة الخصوصية</button>
+                            <button onclick="openLegal('terms')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">شروط الاستخدام</button>
+                            <button onclick="openLegal('oracle')" class="btn-gray" style="width:100%; padding:12px; border:none; border-radius:4px; cursor:pointer;">شروط استخدام Ex Oracle</button>
+                            <button onclick="alert('نظام الشكاوى: يرجى استخدام الواجهة التنفيذية لرفع تذكرة.')" class="btn-blue" style="margin:0;">الشكاوى والتقييم</button>
+                           </div>`
+                }
+            },
+            privacy: {
+                en: { title: "Privacy Policy & Data Protection", body: "This platform operates in strict compliance with the Saudi Personal Data Protection Law (PDPL)." },
+                ar: { title: "سياسة الخصوصية وحماية البيانات", body: "تعمل هذه المنصة بامتثال تام لنظام حماية البيانات الشخصية (PDPL) في المملكة العربية السعودية." }
+            },
+            terms: {
+                en: { title: "Terms of Use & Strategic Engagement", body: "By accessing the フサム | experience™ platform, you agree to our terms of Cyber Security and Intellectual Property." },
+                ar: { title: "شروط الاستخدام والمشاركة الاستراتيجية", body: "بدخولك إلى منصة フサム | experience™، فإنك توافق على شروطنا للأمن السيبراني والملكية الفكرية." }
+            },
+            oracle: {
+                en: { title: "Ex Oracle Terms of Use", body: "Ex Oracle is provided by フサム | experience™ to answer frequently asked questions using advanced AI models." },
+                ar: { title: "شروط استخدام Ex Oracle", body: "يتم تقديم Ex Oracle بواسطة フサム | experience™ للإجابة على الأسئلة الشائعة باستخدام نماذج الذكاء الاصطناعي." }
+            }
+        };
+
+        function openLegal(docType) {
+            const isAr = document.body.classList.contains('lang-ar');
+            const lang = isAr ? 'ar' : 'en';
+            document.getElementById('legalTitle').innerHTML = legalData[docType][lang].title;
+            document.getElementById('legalBody').innerHTML = legalData[docType][lang].body;
+            document.getElementById('legalModal').style.display = 'flex';
+        }
+        function closeLegal() { document.getElementById('legalModal').style.display = 'none'; }
     </script>
 </body>
 </html>
