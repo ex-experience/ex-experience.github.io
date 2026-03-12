@@ -25,16 +25,16 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     
     <script>
-        // 🛡️ MATRIX SHIELD
+        // 🛡️ درع منع الفحص (تم إيقافه مؤقتاً لتسهيل التحديث)
+        /*
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || (e.ctrlKey && e.key === 'U')) {
                 e.preventDefault();
-                console.warn("[MATRIX SHIELD] Unauthorized access attempt blocked.");
             }
         });
+        */
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -49,41 +49,43 @@
     </script>
 
     <style>
-        /* LUXURY MINIMALIST THEME & GLOBAL STYLES */
+        /* LUXURY MINIMALIST THEME & TYPOGRAPHY ENHANCEMENTS */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f9f9f9;
-            --text-main: #171a20;
-            --text-muted: #5c5e62;
-            --accent-blue: #0A84FF;
-            --border-light: #e2e3e3;
+            --bg-primary: #ffffff; 
+            --bg-secondary: #f9f9f9; 
+            --text-main: #171a20; 
+            --text-muted: #5c5e62; 
+            --accent-blue: #0A84FF; 
+            --border-light: #e2e3e3; 
             --btn-gray: #eeeeee;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
+        /* نقاء عالي جداً للنصوص */
+        body { 
+            background-color: var(--bg-primary); 
+            color: var(--text-main); 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased; /* تحسين نقاء الخطوط */
+            -webkit-font-smoothing: antialiased; 
             -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
+            text-rendering: optimizeLegibility; 
         }
+        
         .mono-text { font-family: 'Space Mono', monospace; }
 
         /* Loading Screen */
-        #loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-primary); z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease-out; pointer-events: none;
+        #loading-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: var(--bg-primary); z-index: 99999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 0.8s ease-out; pointer-events: none; 
         }
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
@@ -98,11 +100,11 @@
 
         /* Glitch Animation */
         .glitch-anim { display: inline-block; animation: random-glitch 8s infinite; direction: ltr !important; unicode-bidi: isolate;}
-        @keyframes random-glitch {
-            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; }
-            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; clip-path: inset(10% 0 30% 0); }
-            96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; clip-path: inset(40% 0 10% 0); }
-            97% { transform: translate(0); text-shadow: none; clip-path: none; }
+        @keyframes random-glitch { 
+            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; } 
+            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; clip-path: inset(10% 0 30% 0); } 
+            96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; clip-path: inset(40% 0 10% 0); } 
+            97% { transform: translate(0); text-shadow: none; clip-path: none; } 
         }
 
         /* Navigation */
@@ -127,7 +129,7 @@
         .vid-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .vid-dot.active { background: #fff; transform: scale(1.3); }
 
-        /* Typography & Layout */
+        /* Sections */
         .content-section { padding: 120px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
@@ -239,7 +241,7 @@
         .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
         .archive-card { background: #050505; border: 1px solid #1a1a1a; padding: 40px 30px; border-radius: 4px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: crosshair; }
         .archive-card:hover { background: #0a0a0a; border-color: #333; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #0A84FF; transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
         .archive-card:hover::before { transform: scaleX(1); }
         .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff003c; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid #ff003c; padding: 3px 8px; border-radius: 20px; }
         .archive-title { font-size: 1.5rem; font-weight: 300; margin-bottom: 10px; color: #fff; }
@@ -276,9 +278,6 @@
             </button>
             <button class="nav-icon" onclick="toggleLanguage()" title="Language">
                 <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.9 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
-            </button>
-            <button class="nav-icon" onclick="openLegal('center')" title="Help & Policies">
-                <svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
             </button>
         </div>
     </nav>
@@ -786,8 +785,8 @@
             else nav.classList.remove('scrolled');
         });
 
-        // 🚨 الرابط الصريح والمباشر (من صورتك)
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEez78-rd2HbeSUf4IMgW4n8asl8t6WLfyj3DgyYFKBRUPqHndxQctUqPQyqXrH0bd/exec";
+        // 🚨 الرابط الصريح والمباشر لسيرفر جوجل
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxeXzQ8RvgXuFNVfWd2u0RoJZMNRHhjLJ2s85UglVEC_1v-0oyuIG94t26WRqbQdcSz/exec";
         const SECURE_TOKEN = "EX_SHIELD_99X"; 
         
         let currentUser = { Name: 'Unknown', Email: 'unknown', Phone: '' };
@@ -988,14 +987,14 @@
         }
 
         // ==========================================
-        // 🔑 حماية لوحة الإدارة 
+        // 🔑 حماية لوحة الإدارة (الباسورد المشفر)
         // ==========================================
-        const ADMIN_PASS = "HX5_COMMAND"; // كلمة المرور للوحة الإدارة
+        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); 
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
             
-            if(pass === ADMIN_PASS) {
+            if(pass === ENCRYPTED_TOKEN) {
                 document.getElementById('adminTab').style.display = 'block';
                 switchService('admin');
                 document.getElementById('adminPass').value = '';
@@ -1080,7 +1079,6 @@
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             
-            // Fix height issue for the canvas
             renderer.setSize(window.innerWidth, 800);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
