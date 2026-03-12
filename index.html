@@ -54,16 +54,34 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
         :root {
-            --bg-primary: #ffffff; --bg-secondary: #f9f9f9; --text-main: #171a20; --text-muted: #5c5e62; --accent-blue: #0A84FF; --border-light: #e2e3e3; --btn-gray: #eeeeee;
+            --bg-primary: #ffffff; 
+            --bg-secondary: #f9f9f9; 
+            --text-main: #171a20; 
+            --text-muted: #5c5e62; 
+            --accent-blue: #0A84FF; 
+            --border-light: #e2e3e3; 
+            --btn-gray: #eeeeee;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body { background-color: var(--bg-primary); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+        body { 
+            background-color: var(--bg-primary); 
+            color: var(--text-main); 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
         .mono-text { font-family: 'Space Mono', monospace; }
 
         /* Loading Screen */
-        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-primary); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease-out; pointer-events: none; }
+        #loading-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: var(--bg-primary); z-index: 99999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 0.8s ease-out; pointer-events: none; 
+        }
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
 
@@ -77,7 +95,12 @@
 
         /* Glitch Animation */
         .glitch-anim { display: inline-block; animation: random-glitch 8s infinite; direction: ltr !important; unicode-bidi: isolate;}
-        @keyframes random-glitch { 0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; } 95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; } 96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; } }
+        @keyframes random-glitch { 
+            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; } 
+            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; clip-path: inset(10% 0 30% 0); } 
+            96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; clip-path: inset(40% 0 10% 0); } 
+            97% { transform: translate(0); text-shadow: none; clip-path: none; } 
+        }
 
         /* Navigation */
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: transparent; transition: background 0.3s ease; }
@@ -99,7 +122,8 @@
         .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
         .hero-video-controls { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
         .vid-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
-        .vid-dot.active { background: #fff; transform: scale(1.3); }
+        .vid-dot:hover { background: rgba(255,255,255,0.8); }
+        .vid-dot.active { background: #fff; transform: scale(1.3); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
         /* Typography & Layout */
         .content-section { padding: 120px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
@@ -127,7 +151,7 @@
         body.lang-ar .login-box { text-align: right; }
         .input-group { margin-bottom: 20px; }
         .t-label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
-        .t-input { width: 100%; padding: 12px 15px; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 6px; font-size: 1rem; color: var(--text-main); outline: none; font-family: inherit;}
+        .t-input { width: 100%; padding: 12px 15px; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 6px; font-size: 1rem; color: var(--text-main); outline: none; font-family: inherit; transition: 0.3s;}
         .t-input:focus { border-color: var(--border-light); background: #fff; box-shadow: 0 0 0 1px var(--border-light); }
         .btn-blue { width: 100%; padding: 14px; background: #171a20; color: #fff; border: none; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .btn-blue:hover { background: #333; }
@@ -146,7 +170,7 @@
         /* Dashboard Internal */
         #dashboard-view { display: none; background: #fff; padding: 40px; border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto;}
         .dash-nav { display: flex; justify-content: center; gap: 30px; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 30px; overflow-x: auto; white-space: nowrap;}
-        .dash-tab { background: none; border: none; font-size: 0.95rem; font-weight: 500; color: var(--text-muted); cursor: pointer; position: relative;}
+        .dash-tab { background: none; border: none; font-size: 0.95rem; font-weight: 500; color: var(--text-muted); cursor: pointer; position: relative; font-family: inherit;}
         .dash-tab.active { color: var(--text-main); }
         .dash-tab.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 2px; background: var(--text-main); }
         .service-form { display: none; animation: fadeIn 0.4s; }
@@ -263,7 +287,7 @@
         </div>
         <div class="overlay"></div>
         <div class="hero-content fade-in">
-            <span class="tagline ar-only">الخيط الفاصل بين العادي والاستثنائي</span>
+            <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
             
             <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
@@ -947,7 +971,7 @@
         // ==========================================
         // 🔑 حماية لوحة الإدارة - Base64 Encoding
         // ==========================================
-        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); 
+        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); // يفك التشفير وقت التشغيل فقط
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
@@ -1185,7 +1209,7 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = 800;
+                const h = 800; 
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
