@@ -971,7 +971,7 @@
         // ==========================================
         // 🔑 حماية لوحة الإدارة - Base64 Encoding
         // ==========================================
-        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); // يفك التشفير وقت التشغيل فقط
+        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); 
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
@@ -1209,7 +1209,7 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = 800; 
+                const h = 800; // Fixed canvas height
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
