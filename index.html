@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | experience™</title>
-   
+    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" href="icon.png">
-   
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,21 +20,19 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-   
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-   
+    
     <script>
-        // 🛡️ MATRIX SHIELD: Anti-Inspect & Anti-Tamper
+        // 🛡️ Anti-Inspect Shield
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || (e.ctrlKey && e.key === 'U')) {
                 e.preventDefault();
-                console.warn("[MATRIX SHIELD] Unauthorized access attempt blocked.");
             }
         });
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -49,60 +47,30 @@
     </script>
 
     <style>
-        /* LUXURY MINIMALIST THEME & GLOBAL STYLES */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f9f9f9;
-            --text-main: #171a20;
-            --text-muted: #5c5e62;
-            --accent-blue: #0A84FF;
-            --border-light: #e2e3e3;
-            --btn-gray: #eeeeee;
+            --bg-primary: #ffffff; --bg-secondary: #f9f9f9; --text-main: #171a20; --text-muted: #5c5e62; --accent-blue: #0A84FF; --border-light: #e2e3e3; --btn-gray: #eeeeee;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+        body { background-color: var(--bg-primary); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
         .mono-text { font-family: 'Space Mono', monospace; }
 
-        /* Loading Screen */
-        #loading-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-primary); z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease-out; pointer-events: none;
-        }
+        #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-primary); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease-out; pointer-events: none; }
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
 
-        /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
         .ar-only { display: none; } .en-only { display: block; }
         body.lang-ar .ar-only { display: block; } body.lang-ar .en-only { display: none; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
-
-        /* Glitch Animation */
         .glitch-anim { display: inline-block; animation: random-glitch 8s infinite; direction: ltr !important; unicode-bidi: isolate;}
-        @keyframes random-glitch {
-            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; }
-            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; clip-path: inset(10% 0 30% 0); }
-            96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; clip-path: inset(40% 0 10% 0); }
-            97% { transform: translate(0); text-shadow: none; clip-path: none; }
-        }
+        @keyframes random-glitch { 0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; } 95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; } 96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; } }
 
-        /* Navigation */
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: transparent; transition: background 0.3s ease; }
         .top-nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 1px 5px rgba(0,0,0,0.05); }
         .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icons svg { fill: var(--text-main); color: var(--text-main); }
@@ -111,7 +79,6 @@
         .nav-icon { background: none; border: none; cursor: pointer; color: #fff; display: flex; align-items: center; transition: 0.3s; padding: 5px;}
         .nav-icon svg { width: 24px; height: 24px; fill: currentColor; transition: 0.3s;}
 
-        /* Hero */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
         .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%); background-color: #000;}
@@ -119,13 +86,10 @@
         .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; color: #fff;}
         .tagline { font-family: 'Space Mono', monospace; font-size: 0.9rem; letter-spacing: 2px; color: #f4f4f4; margin-bottom: 20px; display: block;}
         .main-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -0.5px; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);}
-        .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
         .hero-video-controls { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
         .vid-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
-        .vid-dot:hover { background: rgba(255,255,255,0.8); }
-        .vid-dot.active { background: #fff; transform: scale(1.3); box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .vid-dot.active { background: #fff; transform: scale(1.3); }
 
-        /* Typography & Layout */
         .content-section { padding: 120px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
@@ -134,18 +98,17 @@
         .heading-md { font-size: 1.5rem; font-weight: 500; margin-bottom: 15px; color: var(--text-main); }
         .text-body { color: var(--text-muted); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.7; max-width: 900px; font-weight: 400;}
 
-        /* Lists & Pillars */
         .list-clean { list-style: none; padding: 0; margin-top: 15px;}
         .list-clean li { position: relative; padding-left: 20px; margin-bottom: 10px; color: var(--text-muted); font-weight: 400;}
         .list-clean li::before { content: '–'; position: absolute; left: 0; color: var(--text-main); font-weight: bold;}
         body.lang-ar .list-clean li { padding-left: 0; padding-right: 20px; }
         body.lang-ar .list-clean li::before { left: auto; right: 0; }
+        
         .pillar-box { margin-bottom: 40px; border-left: 2px solid var(--border-light); padding-left: 25px; max-width: 900px;}
         body.lang-ar .pillar-box { border-left: none; border-right: 2px solid var(--border-light); padding-left: 0; padding-right: 25px; }
         .pillar-title { font-weight: 500; font-size: 1.3rem; color: var(--text-main); margin-bottom: 5px; }
         .pillar-quote { font-style: italic; color: #888; font-size: 1rem; margin-bottom: 10px; display: block;}
 
-        /* Executive Dashboard (Login) */
         .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 80px 20px;}
         .login-box { width: 100%; max-width: 360px; background: #fff; padding: 35px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-light); margin: 0 auto; text-align: left;}
         body.lang-ar .login-box { text-align: right; }
@@ -155,19 +118,13 @@
         .t-input:focus { border-color: var(--border-light); background: #fff; box-shadow: 0 0 0 1px var(--border-light); }
         .btn-blue { width: 100%; padding: 14px; background: #171a20; color: #fff; border: none; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .btn-blue:hover { background: #333; }
-        .btn-blue:disabled { opacity: 0.7; cursor: not-allowed; }
-       
         .divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 0.85rem; }
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-light); }
-        .divider:not(:empty)::before { margin-right: .5em; margin-left: .5em;}
-        .divider:not(:empty)::after { margin-left: .5em; margin-right: .5em;}
-       
         .oauth-group { display: flex; justify-content: center; gap: 20px; }
         .btn-social { background: transparent; border: none; cursor: pointer; transition: 0.3s; padding: 5px; opacity: 0.7;}
         .btn-social:hover { opacity: 1; transform: scale(1.1);}
         .btn-social svg { fill: var(--text-main); width: 24px; height: 24px;}
 
-        /* Dashboard Internal */
         #dashboard-view { display: none; background: #fff; padding: 40px; border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto;}
         .dash-nav { display: flex; justify-content: center; gap: 30px; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 30px; overflow-x: auto; white-space: nowrap;}
         .dash-tab { background: none; border: none; font-size: 0.95rem; font-weight: 500; color: var(--text-muted); cursor: pointer; position: relative; font-family: inherit;}
@@ -176,14 +133,12 @@
         .service-form { display: none; animation: fadeIn 0.4s; }
         .service-form.active { display: block; }
         .history-card { border: 1px solid var(--border-light); border-radius: 8px; padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; background: #fff; transition: 0.3s;}
-        .history-card:hover { border-color: #ccc; box-shadow: 0 2px 10px rgba(0,0,0,0.03);}
         .h-details { max-width: 70%; text-align: left; }
         body.lang-ar .h-details { text-align: right; }
         .h-msg { margin: 0; color: var(--text-main); font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .h-date { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #888; }
         .h-status { font-size: 0.75rem; background: var(--bg-secondary); padding: 5px 12px; border-radius: 20px; color: var(--text-main); font-weight: 500; border: 1px solid var(--border-light);}
 
-        /* Nexus Command UI */
         .nexus-window { background: rgba(15, 20, 25, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; font-family: 'Space Mono', monospace; color: #fff; height: 260px; display: flex; flex-direction: column; box-shadow: inset 0 0 15px rgba(255,255,255,0.02);}
         .nexus-header { display: flex; gap: 8px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
         .nexus-dot { width: 10px; height: 10px; border-radius: 50%; background: #444; }
@@ -193,7 +148,6 @@
         .nexus-prompt { color: var(--accent-blue); margin-right: 10px; font-weight: bold; font-size: 0.8rem;}
         .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.85rem;}
 
-        /* AI Oracle Chat UI */
         .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 10s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
         @keyframes pulse-glow { 0%, 80%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); } 85% { box-shadow: 0 0 0 0 rgba(23, 26, 32, 0.6); } 95% { box-shadow: 0 0 0 15px rgba(23, 26, 32, 0); } }
@@ -216,20 +170,16 @@
         .msg-actions { display: flex; gap: 10px; margin-top: 5px; padding: 0 5px;}
         .msg-btn { background: none; border: none; color: #999; cursor: pointer; transition: 0.2s;}
         .msg-btn:hover { color: #333; }
-        .ai-msg strong { font-weight: 600; color: #000; }
-        .ai-footer-note { font-size: 0.7rem; color: #888; text-align: center; padding: 5px 10px;}
-        .ai-footer-note a { color: var(--accent-blue); text-decoration: none; cursor: pointer;}
         .ai-input-area { display: flex; padding: 10px 15px; background: transparent; border-top: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 10px;}
         .ai-input { flex: 1; background: #fff; border: 1px solid #ddd; border-radius: 20px; padding: 8px 15px; font-size: 0.95rem; outline: none; font-family: inherit;}
         .ai-send { background: var(--accent-blue); width: 32px; height: 32px; border-radius: 50%; border: none; color: #fff; display: flex; justify-content: center; align-items: center; cursor: pointer;}
+        .ai-footer-note { font-size: 0.7rem; color: #888; text-align: center; padding: 5px 10px;}
 
-        /* Legal Modals */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;}
-        .modal-content { background: #fff; border-radius: 12px; width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.2);}
-        .modal-close { position: absolute; top: 20px; right: 20px; background: #f4f4f4; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2rem; cursor: pointer; display:flex; justify-content:center; align-items:center; color: #333;}
+        .modal-content { background: #fff; border-radius: 12px; width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 40px; position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: #f4f4f4; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2rem; cursor: pointer; display:flex; justify-content:center; align-items:center;}
         body.lang-ar .modal-close { right: auto; left: 20px; }
 
-        /* Deep Archive & Blueprint 3D Styles */
         .deep-archive { background-color: #000000; color: #ffffff; position: relative; padding: 100px 0; border-top: 1px solid #111; overflow: hidden; z-index: 10; }
         .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
@@ -237,7 +187,7 @@
         .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
         .archive-card { background: #050505; border: 1px solid #1a1a1a; padding: 40px 30px; border-radius: 4px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: crosshair; }
         .archive-card:hover { background: #0a0a0a; border-color: #333; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #0A84FF; transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
         .archive-card:hover::before { transform: scaleX(1); }
         .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff003c; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid #ff003c; padding: 3px 8px; border-radius: 20px; }
         .archive-title { font-size: 1.5rem; font-weight: 300; margin-bottom: 10px; color: #fff; }
@@ -245,14 +195,13 @@
         .kill-switch-container { text-align: center; margin-top: 100px; }
         .kill-switch { background: transparent; border: 1px solid #333; color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 30px; }
         .kill-switch:hover { color: #000; background: #fff; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
-       
+        
         .hud-container { position: absolute; top: 20px; left: 20px; right: 20px; pointer-events: none; z-index: 15; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
         .hud-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
         .glitch-text { color: var(--accent-blue); font-weight: bold; }
         .hud-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; color: rgba(255,255,255,0.2); }
         .slogan { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 5px; letter-spacing: 5px; }
 
-        /* General UI Classes */
         .site-footer { text-align: center; padding: 60px 20px; background: var(--bg-primary); border-top: 1px solid var(--border-light);}
         .footer-logo { font-size: 1.2rem; font-weight: 500; margin-bottom: 5px; direction: ltr; display: inline-block;}
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
@@ -289,14 +238,14 @@
         <div class="hero-content fade-in">
             <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
-           
+            
             <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
             <h1 class="main-title en-only">Engineering Human Experiences</h1>
-           
+            
             <p class="text-body ar-only" style="margin: 0 auto; color:#fff;">نحن لا نصمم منتجات..<br>نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
             <p class="text-body en-only" style="margin: 0 auto; color:#fff;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
         </div>
-       
+        
         <div class="hero-video-controls" id="heroControls"></div>
     </header>
 
@@ -347,7 +296,7 @@
                 <p class="text-body ar-only" style="margin:0;">الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن لا نصمم للمنفعة فقط؛ بل نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى ويلبي حاجة إنسانية أساسية.</p>
                 <p class="text-body en-only" style="margin:0;">Intent defines the existential purpose and the “moral compass” of the project. We do not design for utility alone; we establish the core value proposition that ensures every interaction serves a higher objective and resonates with a fundamental human need.</p>
             </div>
-           
+            
             <div class="pillar-box">
                 <div class="pillar-title en-only">Context</div><div class="pillar-title ar-only">السياق</div>
                 <span class="pillar-quote en-only">“Where, when, and under what conditions does it unfold?”</span><span class="pillar-quote ar-only">"أين ومتى وتحت أي ظروف تتكشف؟"</span>
@@ -480,7 +429,7 @@
                 <span class="page-num ar-only" style="margin-bottom: 10px; font-size: 0.75rem;">توقيع العلامة</span>
                 <span class="page-num en-only" style="margin-bottom: 10px; font-size: 0.75rem;">Brand Signature</span>
                 <h2 class="heading-md glitch-anim mono-text">フサム | experience™</h2>
-               
+                
                 <div style="margin-top: 30px; margin-bottom: 30px;">
                     <span class="mono-text" style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">THE FOUNDER</span>
                     <h3 style="font-size: 1.1rem; font-weight: 500; color: var(--text-main); margin-bottom: 5px;">Hussam Hassan Mohammed Tahiri</h3>
@@ -502,7 +451,7 @@
         <div class="container fade-in">
             <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 30px;">الواجهة التنفيذية</h2>
             <h2 class="heading-md en-only" style="text-align: center; margin-bottom: 30px;">Executive Dashboard</h2>
-           
+            
             <div id="auth-view" class="login-wrapper" style="padding: 0;">
                 <div class="login-box">
                     <form onsubmit="handleFirebaseLogin(event)">
@@ -526,12 +475,12 @@
                             <span class="en-only">Sign In</span>
                         </button>
                     </form>
-                   
+                    
                     <div class="divider">
                         <span class="ar-only">أو</span>
                         <span class="en-only">Or</span>
                     </div>
-                   
+                    
                     <div class="oauth-group">
                         <button class="btn-social" onclick="signInWithGoogle()" title="Google">
                             <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -559,7 +508,7 @@
                         <span class="ar-only">طلب استشارة</span><span class="en-only">New Inquiry</span>
                     </button>
                     <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
-                   
+                    
                     <button class="dash-tab" id="adminTab" style="display:none;" onclick="switchService('admin')">ADMIN CORE</button>
                 </div>
 
@@ -595,6 +544,7 @@
                         <h3 style="color:#0f0; font-family:'Space Mono', monospace;">[ DECRYPTED CORE ]</h3>
                         <button onclick="exportData('Users')" class="btn-blue" style="background:#222; color:#0f0; border:1px solid #0f0; font-family:'Space Mono';">⬇ Download Users</button>
                         <button onclick="exportData('Consultations')" class="btn-blue" style="background:#222; color:#0f0; border:1px solid #0f0; font-family:'Space Mono';">⬇ Download Consultations</button>
+                        <button onclick="exportData('MatrixLogs')" class="btn-blue" style="background:#222; color:#0f0; border:1px solid #0f0; font-family:'Space Mono';">⬇ Download Matrix Logs</button>
                         <div id="dashStatus" style="color:#888; font-size:0.8rem; font-family:'Space Mono', monospace; margin-top:10px;">System Ready.</div>
                     </div>
                 </div>
@@ -606,7 +556,7 @@
     <section id="blueprint-section" class="deep-archive">
         <div class="marquee-container">
             <div class="marquee-text">
-                EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE //
+                EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
             </div>
         </div>
 
@@ -692,7 +642,7 @@
     <button class="ai-btn" onclick="toggleChat()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </button>
-   
+    
     <div class="ai-window" id="aiWindow">
         <div class="ai-header">
             <div style="display:flex; flex-direction:column;">
@@ -724,7 +674,7 @@
                     loader.style.opacity = '0';
                     setTimeout(() => loader.style.display = 'none', 800);
                 }
-            }, 1500);
+            }, 1500); 
 
             // 🛡️ Fail-Safe 3D Initialization
             document.fonts.ready.then(function() {
@@ -762,13 +712,13 @@
         // Language Logic
         function toggleLanguage() {
             const body = document.body;
-            body.classList.toggle('lang-ar');
+            body.classList.toggle('lang-ar'); 
             body.classList.toggle('lang-en');
-           
+            
             const isAr = body.classList.contains('lang-ar');
             document.documentElement.dir = isAr ? 'rtl' : 'ltr';
             document.documentElement.lang = isAr ? 'ar' : 'en';
-           
+            
             document.getElementById('userEmail').placeholder = isAr ? "البريد الإلكتروني" : "Email Address";
             document.getElementById('userName').placeholder = isAr ? "الاسم الكامل" : "Full Name";
             document.getElementById('userPhone').placeholder = isAr ? "رقم الجوال (مطلوب)" : "Phone Number (Required)";
@@ -783,9 +733,10 @@
             else nav.classList.remove('scrolled');
         });
 
-        // 🛡️ التشفير الديناميكي للروابط لمنع التتبع (Obfuscation)
-        const GOOGLE_SCRIPT_URL = atob("https://script.google.com/macros/s/AKfycbx-JbaOVH2cJQochOpKUlL45_awXgDMCruUoXVFeAXdktUXOepgMHsSEPJMgJwdBWSu/exec");
-        const SECURE_TOKEN = atob("RVhfU0hJRUxEXzk5WA==");
+        // 🚨 الرابط بدون تشفير لضمان عمل الرادار والأوراكل بدون أخطاء
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-JbaOVH2cJQochOpKUlL45_awXgDMCruUoXVFeAXdktUXOepgMHsSEPJMgJwdBWSu/exec";
+        const SECURE_TOKEN = "EX_SHIELD_99X"; 
+        
         let currentUser = { Name: 'Unknown', Email: 'unknown', Phone: '' };
 
         function finalizeAuth(user) {
@@ -805,14 +756,14 @@
             currentUser.Name = document.getElementById('userName').value;
             currentUser.Email = document.getElementById('userEmail').value;
             currentUser.Phone = document.getElementById('userPhone').value || "-";
-           
+            
             try {
                 // حفظ في Firebase
                 await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-               
+                
                 // 📡 إرسال للرادار (Google Script)
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone }), mode: 'no-cors' });
-               
+                
                 showDashboard();
             } catch (error) {
                 alert(isAr ? "فشل الاتصال." : "Connection failed.");
@@ -837,11 +788,11 @@
         async function fetchUserHistory() {
             const historyContainer = document.getElementById('history-content');
             const isAr = document.body.classList.contains('lang-ar');
-            historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'جاري استرجاع السجلات المشفرة...' : 'Retrieving encrypted logs...'}</p>`;
+            historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'جاري استرجاع السجلات...' : 'Retrieving logs...'}</p>`;
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
-               
+                
                 let html = '';
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
@@ -865,14 +816,14 @@
             const isAr = document.body.classList.contains('lang-ar');
             const message = document.getElementById('consultText').value;
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
-           
+            
             try {
                 // حفظ في Firebase
                 await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-               
+                
                 // 📡 إرسال للرادار (Google Script)
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message }), mode: 'no-cors' });
-               
+                
                 alert(isAr ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
                 document.getElementById('consultText').value = '';
                 switchService('history');
@@ -881,7 +832,7 @@
         }
 
         // ==========================================
-        // 🧠 ربط محركات الذكاء الاصطناعي مع الرادار
+        // 🧠 ربط محركات الذكاء الاصطناعي مع الرادار وخزنة فايربيس
         // ==========================================
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}&IsCommand=${isTerminal}`;
@@ -889,9 +840,24 @@
                 const response = await fetch(url);
                 const data = await response.json();
                 if (loadingElement) loadingElement.remove();
-               
+                
                 const finalOutput = data.reply || data.error;
                 if(isTerminal) printNexus(`> ${finalOutput}`); else appendMsg(finalOutput, 'bot');
+
+                // 🗄️ حفظ المحادثة والأوامر مباشرة في فايربيس
+                try {
+                    await db.collection("MatrixLogs").add({
+                        Name: currentUser.Name,
+                        Email: currentUser.Email,
+                        Type: isTerminal ? "Nexus Command" : "Oracle Chat",
+                        Input: text,
+                        Output: finalOutput,
+                        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                } catch(firebaseErr) {
+                    console.warn("MatrixLog Sync Error", firebaseErr);
+                }
+
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
                 if(isTerminal) printNexus(`> SIGNAL LOST.`); else appendMsg("SIGNAL LOST.", 'bot');
@@ -918,7 +884,7 @@
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-       
+        
         function toggleChat() {
             chatWindow.classList.toggle('open');
             if(chatWindow.classList.contains('open') && chatBody.innerHTML === '') {
@@ -930,14 +896,14 @@
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
-           
+            
             let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             safeText = safeText.replace(/\*(.*?)\*/g, '<em>$1</em>');
             safeText = safeText.replace(/\n/g, '<br>');
 
             let innerHTML = `<div class="ai-msg ${sender}">${safeText}</div>`;
-           
+            
             if (sender === 'bot' && text !== '...' && !text.includes('Processing') && !text.includes('المعالجة')) {
                 innerHTML += `
                 <div class="msg-actions">
@@ -949,7 +915,7 @@
                     </button>
                 </div>`;
             }
-           
+            
             wrapDiv.innerHTML = innerHTML;
             chatBody.appendChild(wrapDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -957,7 +923,7 @@
         }
 
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
-       
+        
         function sendChatMessage() {
             const text = aiInput.value.trim();
             if(!text) return;
@@ -969,9 +935,9 @@
         }
 
         // ==========================================
-        // 🔑 حماية لوحة الإدارة - Base64 Encoding
+        // 🔑 حماية لوحة الإدارة (الباسورد المشفر)
         // ==========================================
-        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ=");
+        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); 
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
@@ -999,7 +965,7 @@
                     status.innerText = "[ NO RECORDS FOUND ]"; status.style.color = "red"; return;
                 }
 
-                let csvContent = "\uFEFF";
+                let csvContent = "\uFEFF"; 
                 let rows = [];
                 let headers = [];
 
@@ -1015,7 +981,7 @@
                     headers.forEach(header => {
                         let val = data[header] || "";
                         if(val && val.seconds) val = new Date(val.toDate()).toLocaleString('en-GB');
-                        val = val.toString().replace(/"/g, '""');
+                        val = val.toString().replace(/"/g, '""'); 
                         if(val.search(/("|,|\n)/g) >= 0) val = `"${val}"`;
                         row.push(val);
                     });
@@ -1041,12 +1007,12 @@
         }
 
         // ==========================================
-        // 3D Blueprint Integration Script (Optimized)
+        // 3D Blueprint Integration Script 
         // ==========================================
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
-           
+            
             const oldLoader = document.getElementById('blueprint-loader');
             if(oldLoader) {
                 oldLoader.style.opacity = '0';
@@ -1060,7 +1026,7 @@
             camera.position.set(0, 300, 800);
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-           
+            
             renderer.setSize(window.innerWidth, 800);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
@@ -1070,7 +1036,7 @@
             controls.dampingFactor = 0.05;
             controls.autoRotate = true;
             controls.autoRotateSpeed = 0.5;
-            controls.enableZoom = false;
+            controls.enableZoom = false; 
             controls.enablePan = false;
 
             const gridHelper = new THREE.GridHelper(2000, 100, 0x0A84FF, 0x0A84FF);
@@ -1079,8 +1045,8 @@
             scene.add(gridHelper);
 
             const canvas = document.createElement('canvas');
-            canvas.width = 2048;
-            canvas.height = 1024;
+            canvas.width = 2048; 
+            canvas.height = 1024; 
             const ctx = canvas.getContext('2d');
 
             ctx.fillStyle = 'rgba(2, 2, 2, 0.8)';
@@ -1088,7 +1054,7 @@
 
             ctx.strokeStyle = 'rgba(10, 132, 255, 0.4)';
             ctx.lineWidth = 2;
-           
+            
             ctx.beginPath();
             ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2);
             ctx.moveTo(canvas.width/2, 0); ctx.lineTo(canvas.width/2, canvas.height);
@@ -1106,7 +1072,7 @@
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.font = '100px "Noto Sans JP", "Inter", sans-serif';
-           
+            
             ctx.fillStyle = 'rgba(0, 229, 255, 0.7)';
             ctx.fillText('フサム | experience™', canvas.width/2 + 4, canvas.height/2 - 25);
             ctx.fillStyle = 'rgba(255, 0, 60, 0.7)';
@@ -1123,14 +1089,14 @@
             texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
             const geometry = new THREE.PlaneGeometry(1600, 800);
-            const material = new THREE.MeshBasicMaterial({
-                map: texture,
-                transparent: true,
+            const material = new THREE.MeshBasicMaterial({ 
+                map: texture, 
+                transparent: true, 
                 opacity: 0.9,
                 side: THREE.DoubleSide,
                 blending: THREE.AdditiveBlending
             });
-           
+            
             const hologramPlane = new THREE.Mesh(geometry, material);
             hologramPlane.rotation.x = -Math.PI / 2;
             scene.add(hologramPlane);
@@ -1143,12 +1109,13 @@
             scene.add(wireframeBox);
 
             const verticalPlaneGeo = new THREE.PlaneGeometry(800, 400);
-            const verticalMat = new THREE.MeshBasicMaterial({
-                color: 0x00e5ff,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.1
+            const verticalMat = new THREE.MeshBasicMaterial({ 
+                color: 0x00e5ff, 
+                wireframe: true, 
+                transparent: true, 
+                opacity: 0.1 
             });
+            // 🚨 هنا كان الخطأ القاتل وتمت إضافة THREE. لإصلاحه
             const verticalPlane1 = new THREE.Mesh(verticalPlaneGeo, verticalMat);
             verticalPlane1.position.y = 200;
             scene.add(verticalPlane1);
@@ -1159,7 +1126,7 @@
             scene.add(verticalPlane2);
 
             const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 600;
+            const particlesCount = 600; 
             const posArray = new Float32Array(particlesCount * 3);
 
             for(let i = 0; i < particlesCount * 3; i++) {
@@ -1190,7 +1157,7 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-               
+                
                 if(!isVisible) return;
 
                 const elapsedTime = clock.getElapsedTime();
