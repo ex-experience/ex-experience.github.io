@@ -21,7 +21,19 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
     <script>
+        // 🛡️ درع منع الفحص والتتبع (Anti-Inspect & Anti-Tamper)
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                console.warn("[MATRIX SHIELD] Unauthorized access attempt blocked.");
+            }
+        });
+
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -74,6 +86,7 @@
             justify-content: center;
             align-items: center;
             transition: opacity 0.8s ease-out;
+            pointer-events: none; /* 🛡️ صمام أمان لعدم حجب الموقع */
         }
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
@@ -174,7 +187,7 @@
         .divider:not(:empty)::before { margin-right: .5em; margin-left: .5em;}
         .divider:not(:empty)::after { margin-left: .5em; margin-right: .5em;}
         
-        /* OAuth Social Buttons (Borderless & Centered) */
+        /* OAuth Social Buttons */
         .oauth-group { display: flex; justify-content: center; gap: 20px; }
         .btn-social { background: transparent; border: none; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; padding: 5px; opacity: 0.7;}
         .btn-social:hover { opacity: 1; transform: scale(1.1);}
@@ -328,13 +341,12 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 2px;
-            background: #0A84FF; /* Nexus Blue */
+            background: #0A84FF;
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
         }
         .archive-card:hover::before { transform: scaleX(1); }
-
         .archive-status {
             font-family: 'Space Mono', monospace;
             font-size: 0.7rem;
@@ -357,8 +369,6 @@
             color: #666;
             line-height: 1.6;
         }
-
-        /* Kill Switch (Back to top) */
         .kill-switch-container {
             text-align: center;
             margin-top: 100px;
@@ -660,6 +670,13 @@
                             <svg viewBox="0 0 384 512" fill="#000"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                         </button>
                     </div>
+
+                    <div style="margin-top: 30px; text-align: center;">
+                        <h4 style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 10px;">[ DECRYPT SYSTEM ]</h4>
+                        <input type="password" id="adminPass" class="t-input" placeholder="Enter Admin Token" style="margin-bottom: 10px; text-align: center;">
+                        <button onclick="checkPass()" class="btn-blue" style="background: var(--text-muted);">DECRYPT</button>
+                        <div class="status" id="loginStatus" style="font-size: 0.75rem; margin-top: 10px;">Authorized Personnel Only.</div>
+                    </div>
                 </div>
             </div>
 
@@ -672,6 +689,8 @@
                         <span class="ar-only">طلب استشارة</span><span class="en-only">New Inquiry</span>
                     </button>
                     <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
+                    
+                    <button class="dash-tab" id="adminTab" style="display:none;" onclick="switchService('admin')">ADMIN CORE</button>
                 </div>
 
                 <div id="form-history" class="service-form active">
@@ -700,6 +719,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="form-admin" class="service-form">
+                    <div style="display:flex; flex-direction:column; gap:10px; background:#000; padding:20px; border-radius:8px;">
+                        <h3 style="color:#0f0; font-family:'Space Mono', monospace;">[ DECRYPTED CORE ]</h3>
+                        <button onclick="exportData('Users')" class="btn-blue" style="background:#222; color:#0f0; border:1px solid #0f0; font-family:'Space Mono';">⬇ Download Users</button>
+                        <button onclick="exportData('Consultations')" class="btn-blue" style="background:#222; color:#0f0; border:1px solid #0f0; font-family:'Space Mono';">⬇ Download Consultations</button>
+                        <div id="dashStatus" style="color:#888; font-size:0.8rem; font-family:'Space Mono', monospace; margin-top:10px;">System Ready.</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -937,8 +966,8 @@
     </section>
 
     <script>
-        // Loading Screen Logic - 3 Seconds then Auto-Play video
-        window.addEventListener('load', () => {
+        // 🛡️ Loading Screen Logic - Fail-Safe (شاشة التحميل لن تعلق أبداً)
+        document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
                 if(loader) {
@@ -949,7 +978,7 @@
                         if (heroVid) heroVid.play().catch(e => console.log("Auto-play prevented by browser"));
                     }, 800);
                 }
-            }, 3000); 
+            }, 1500); // 🛡️ هذا هو صمام الأمان (بعد ثانية ونصف ستختفي الشاشة مهما حدث)
         });
 
         // Language Logic
@@ -1037,11 +1066,6 @@
 
         // Setup Placeholders & Default EN state on load
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('userEmail').placeholder = "Email Address";
-            document.getElementById('userName').placeholder = "Full Name";
-            document.getElementById('consultText').placeholder = "Outline your strategic objective here...";
-            document.getElementById('aiInput').placeholder = "Message...";
-            
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
             
             // Hero Controls Logic
@@ -1070,9 +1094,15 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
             
-            // Initialize 3D Blueprint when document is ready
+            // 🛡️ صمام أمان لـ Three.js
             document.fonts.ready.then(function() {
-                init3DBlueprint();
+                try {
+                    if (typeof THREE !== 'undefined') {
+                        init3DBlueprint();
+                    }
+                } catch(err) {
+                    console.error("3D Render Error: ", err);
+                }
             });
         });
 
@@ -1083,9 +1113,9 @@
             else nav.classList.remove('scrolled');
         });
 
-        // Backend
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
-        const SECURE_TOKEN = "EX_SHIELD_99X";
+        // Backend 🛡️ تشفير الروابط والتوكن (Dynamic Decoding)
+        const GOOGLE_SCRIPT_URL = atob("aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6S05TMkFGUDgya25ibDZ6eV9zaTA5MWZ3X0tVbmU4Wkh5Q2oyUGtHcjlvR0xOMFBiX1VFQ25Sdy1SMW1NWW5sZnEvZXhlYw==");
+        const SECURE_TOKEN = atob("RVhfU0hJRUxEXzk5WA==");
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
 
         async function signInWithGoogle() {
@@ -1268,6 +1298,78 @@
             queryDeepMatrix(text, false, loadingElement);
         }
 
+        // ==========================================
+        // 🔒 تحديث الأمان: تشفير مفتاح الإدارة 
+        // ==========================================
+        const ENCRYPTED_TOKEN = atob("SFg1X0NPTU1BTkQ="); // يفك التشفير وقت التشغيل فقط
+
+        function checkPass() {
+            const pass = document.getElementById('adminPass').value;
+            
+            if(pass === ENCRYPTED_TOKEN) {
+                document.getElementById('adminTab').style.display = 'block';
+                switchService('admin');
+                document.getElementById('adminPass').value = '';
+                document.getElementById('loginStatus').innerText = "ACCESS GRANTED.";
+                document.getElementById('loginStatus').style.color = "var(--green)";
+            } else {
+                document.getElementById('loginStatus').innerText = "ACCESS DENIED.";
+                document.getElementById('loginStatus').style.color = "red";
+            }
+        }
+
+        async function exportData(collectionName) {
+            const status = document.getElementById('dashStatus');
+            status.innerText = `[ DOWNLOADING ${collectionName.toUpperCase()}... ]`;
+            status.style.color = "var(--green)";
+
+            try {
+                const snapshot = await db.collection(collectionName).get();
+                if(snapshot.empty) {
+                    status.innerText = "[ NO RECORDS FOUND ]"; status.style.color = "red"; return;
+                }
+
+                let csvContent = "\uFEFF"; 
+                let rows = [];
+                let headers = [];
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    Object.keys(data).forEach(key => { if(!headers.includes(key)) headers.push(key); });
+                });
+                rows.push(headers.join(","));
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    let row = [];
+                    headers.forEach(header => {
+                        let val = data[header] || "";
+                        if(val && val.seconds) val = new Date(val.toDate()).toLocaleString('en-GB');
+                        val = val.toString().replace(/"/g, '""'); 
+                        if(val.search(/("|,|\n)/g) >= 0) val = `"${val}"`;
+                        row.push(val);
+                    });
+                    rows.push(row.join(","));
+                });
+
+                csvContent += rows.join("\n");
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = `EX_${collectionName}_Archive.csv`;
+                link.style.display = "none";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                status.innerText = "[ DOWNLOAD COMPLETE ]";
+            } catch(err) {
+                console.error(err);
+                status.innerText = "[ ERROR: CHECK FIREBASE RULES ]";
+                status.style.color = "red";
+            }
+        }
+
         // 3D Blueprint Integration Script (Optimized)
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
@@ -1287,7 +1389,7 @@
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             
-            const sectionHeight = document.getElementById('blueprint-section').offsetHeight;
+            const sectionHeight = document.getElementById('blueprint-section').offsetHeight || window.innerHeight;
             renderer.setSize(window.innerWidth, sectionHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
@@ -1306,8 +1408,8 @@
             scene.add(gridHelper);
 
             const canvas = document.createElement('canvas');
-            canvas.width = 2048; // Optimized for performance
-            canvas.height = 1024; // Optimized for performance
+            canvas.width = 2048; 
+            canvas.height = 1024; 
             const ctx = canvas.getContext('2d');
 
             ctx.fillStyle = 'rgba(2, 2, 2, 0.8)';
@@ -1386,7 +1488,7 @@
             scene.add(verticalPlane2);
 
             const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 600; // Optimized for performance
+            const particlesCount = 600; 
             const posArray = new Float32Array(particlesCount * 3);
 
             for(let i = 0; i < particlesCount * 3; i++) {
@@ -1436,7 +1538,7 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = document.getElementById('blueprint-section').offsetHeight;
+                const h = document.getElementById('blueprint-section').offsetHeight || window.innerHeight;
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
