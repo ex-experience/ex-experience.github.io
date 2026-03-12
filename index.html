@@ -905,36 +905,47 @@
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
-        // ==========================================
-        // 🧠 ربط محركات الذكاء الاصطناعي 
-        // ==========================================
-        async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
-            const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}&IsCommand=${isTerminal}`;
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                if (loadingElement) loadingElement.remove();
-                
-                const finalOutput = data.reply || data.error;
-                if(isTerminal) printNexus(`> ${finalOutput}`); else appendMsg(finalOutput, 'bot');
+   // ==========================================
+   // 🧠 ربط محركات الذكاء الاصطناعي (النسخة المحصنة والنهائية)
+   // ==========================================
+   async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
+    try {
+        // نستخدم URLSearchParams لأنها تتجاوز حماية CORS المعقدة في متصفحات الجوال والكمبيوتر
+        const formData = new URLSearchParams();
+        formData.append("Token", SECURE_TOKEN);
+        formData.append("Message", text);
+        formData.append("Name", currentUser.Name);
+        formData.append("Email", currentUser.Email);
+        formData.append("IsCommand", isTerminal);
 
-                try {
-                    await db.collection("MatrixLogs").add({
-                        Name: currentUser.Name,
-                        Email: currentUser.Email,
-                        Type: isTerminal ? "Nexus Command" : "Oracle Chat",
-                        Input: text,
-                        Output: finalOutput,
-                        Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                } catch(firebaseErr) { console.warn("MatrixLog Sync Error"); }
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        });
 
-            } catch (error) {
-                if (loadingElement) loadingElement.remove();
-                if(isTerminal) printNexus(`> SIGNAL LOST: ${error.message}`); else appendMsg(`SIGNAL LOST: ${error.message}`, 'bot');
-            }
-        }
+        const data = await response.json();
+        if (loadingElement) loadingElement.remove();
+        
+        // استخراج الإجابة وتنقيتها
+        const finalOutput = data.reply || data.error || "خطأ غير معروف في النواة.";
+        let safeOutput = finalOutput.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        
+        if(isTerminal) printNexus(`> ${safeOutput}`); else appendMsg(safeOutput, 'bot');
 
+        // أرشفة المحادثة (صامتة)
+        try {
+            await db.collection("MatrixLogs").add({
+                Name: currentUser.Name, Email: currentUser.Email, Type: isTerminal ? "Nexus Command" : "Oracle Chat", Input: text, Output: finalOutput, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        } catch(e) { console.warn("Log Sync Error"); }
+
+    } catch (error) {
+        if (loadingElement) loadingElement.remove();
+        if(isTerminal) printNexus(`> SIGNAL LOST: ${error.message}`); else appendMsg(`SIGNAL LOST: لم يتمكن المتصفح من العبور إلى النواة.`, 'bot');
+        console.error("MATRIX CORE ERROR:", error);
+    }
+}
+        
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
         function handleNexus(e) {
