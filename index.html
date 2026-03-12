@@ -26,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     
     <script>
-        // 🛡️ MATRIX SHIELD
+        // 🛡️ MATRIX SHIELD (موقف مؤقتاً للتطوير)
         /*
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', e => {
@@ -67,6 +67,7 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        /* Typography & Anti-aliasing */
         body { 
             background-color: var(--bg-primary); 
             color: var(--text-main); 
@@ -81,12 +82,14 @@
         
         .mono-text { font-family: 'Space Mono', monospace; }
 
+        /* Accessibility Focus States */
         a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
             outline: none;
             box-shadow: var(--focus-ring);
             border-radius: 4px;
         }
 
+        /* Loading Screen */
         #loading-screen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background-color: var(--bg-primary); z-index: 99999; 
@@ -96,6 +99,7 @@
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
 
+        /* Language System */
         body.lang-ar { direction: rtl; text-align: right; }
         body.lang-en { direction: ltr; text-align: left; }
         .ar-only { display: none; } .en-only { display: block; }
@@ -103,6 +107,7 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
+        /* Glitch Animation */
         .glitch-anim { display: inline-block; animation: random-glitch 8s infinite; direction: ltr !important; unicode-bidi: isolate;}
         @keyframes random-glitch { 
             0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; } 
@@ -111,6 +116,7 @@
             97% { transform: translate(0); text-shadow: none; clip-path: none; } 
         }
 
+        /* Navigation */
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: transparent; transition: background 0.3s ease, padding 0.3s ease; }
         .top-nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 1px 5px rgba(0,0,0,0.05); padding: 15px 5%;}
         .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icons svg { fill: var(--text-main); color: var(--text-main); }
@@ -120,21 +126,17 @@
         .nav-icon svg { width: 22px; height: 22px; fill: currentColor; transition: 0.3s;}
         .nav-icon:hover { opacity: 0.7; transform: scale(1.05);}
 
-        /* Cinematic Hero Update */
+        /* Hero */
         .hero { position: relative; height: 100vh; min-height: 600px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; background-color: #000; }
-        
-        /* Video transitions for cinematic effect */
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: grayscale(80%) contrast(110%); position: absolute; top: 0; left: 0; transition: opacity 1.5s ease-in-out; }
-        .video-bg.active { opacity: 0.5; }
-        
+        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%); }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)); z-index: 1; pointer-events: none; }
         .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 20px; color: #fff;}
         .tagline { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 2px; color: #e0e0e0; margin-bottom: 20px; display: block; text-transform: uppercase;}
         .main-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 500; letter-spacing: -1px; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.1;}
         .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
         
-        /* Sections */
+        /* Layout Sections */
         .content-section { padding: 100px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
@@ -143,6 +145,7 @@
         .heading-md { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 500; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px;}
         .text-body { color: var(--text-muted); font-size: clamp(1rem, 1.1vw, 1.1rem); line-height: 1.8; max-width: 800px; font-weight: 400;}
 
+        /* UX Hierarchy: Pillars */
         .pillar-box { margin-bottom: 40px; border-left: 2px solid var(--border-light); padding-left: 25px; max-width: 800px; transition: border-color 0.3s ease;}
         .pillar-box:hover { border-color: var(--text-muted); }
         body.lang-ar .pillar-box { border-left: none; border-right: 2px solid var(--border-light); padding-left: 0; padding-right: 25px; }
@@ -150,12 +153,14 @@
         .pillar-title { font-weight: 600; font-size: 1.2rem; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.3px;}
         .pillar-quote { font-style: italic; color: #888; font-size: 0.95rem; margin-bottom: 12px; display: block;}
 
+        /* Lists */
         .list-clean { list-style: none; padding: 0; margin-top: 20px;}
         .list-clean li { position: relative; padding-left: 25px; margin-bottom: 12px; color: var(--text-muted); font-weight: 400;}
         .list-clean li::before { content: '—'; position: absolute; left: 0; color: var(--text-main); font-weight: bold;}
         body.lang-ar .list-clean li { padding-left: 0; padding-right: 25px; }
         body.lang-ar .list-clean li::before { left: auto; right: 0; }
 
+        /* Executive Dashboard (Login) */
         .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 40px 20px;}
         .login-box { width: 100%; max-width: 400px; background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid var(--border-light); margin: 0 auto; text-align: left;}
         body.lang-ar .login-box { text-align: right; }
@@ -176,6 +181,7 @@
         .btn-social:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
         .btn-social svg { width: 20px; height: 20px;}
 
+        /* Dashboard Internal */
         #dashboard-view { display: none; background: #fff; padding: 50px; border-radius: 16px; border: 1px solid var(--border-light); box-shadow: 0 15px 50px rgba(0,0,0,0.05); max-width: 900px; margin: 0 auto;}
         .dash-nav { display: flex; justify-content: flex-start; gap: 30px; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 40px; overflow-x: auto; white-space: nowrap; scrollbar-width: none;}
         .dash-nav::-webkit-scrollbar { display: none; }
@@ -195,6 +201,7 @@
         .h-date { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #888; }
         .h-status { font-size: 0.75rem; background: var(--bg-secondary); padding: 6px 14px; border-radius: 20px; color: var(--text-main); font-weight: 500; border: 1px solid var(--border-light); text-transform: uppercase; letter-spacing: 1px;}
 
+        /* Nexus Command UI */
         .nexus-window { background: rgba(15, 20, 25, 0.98); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 25px; font-family: 'Space Mono', monospace; color: #fff; height: 320px; display: flex; flex-direction: column; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
         .nexus-header { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;}
         .nexus-dot { width: 12px; height: 12px; border-radius: 50%; background: #444; }
@@ -204,6 +211,7 @@
         .nexus-prompt { color: var(--accent-blue); margin-right: 12px; font-weight: bold; font-size: 0.85rem;}
         .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.9rem;}
 
+        /* AI Oracle Chat UI */
         .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 4s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
         @keyframes pulse-glow { 0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.2); } 50% { box-shadow: 0 10px 40px rgba(23, 26, 32, 0.4); transform: scale(1.05); } }
@@ -240,6 +248,7 @@
         .ai-send:hover { background: var(--accent-blue); transform: scale(1.05);}
         .ai-footer-note { font-size: 0.7rem; color: #999; text-align: center; padding: 0 10px 15px 10px; background: #fff;}
 
+        /* Deep Archive & Blueprint 3D Styles */
         .deep-archive { background-color: #050505; color: #ffffff; position: relative; padding: 120px 0; border-top: 1px solid #1a1a1a; overflow: hidden; z-index: 10; }
         .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed rgba(255,255,255,0.1); border-bottom: 1px dashed rgba(255,255,255,0.1); padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: rgba(255,255,255,0.3); letter-spacing: 4px; text-transform: uppercase; animation: marquee 40s linear infinite; }
@@ -265,15 +274,13 @@
         .hud-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; color: rgba(255,255,255,0.2); }
         .slogan { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 6px; }
 
+        /* General UI Classes */
         .site-footer { text-align: center; padding: 80px 20px 40px 20px; background: var(--bg-primary); border-top: 1px solid var(--border-light);}
         .footer-logo { font-size: 1.2rem; font-weight: 500; margin-bottom: 5px; direction: ltr; display: inline-block;}
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;}
-        .modal-content { background: #fff; border-radius: 12px; width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 40px; position: relative;}
-        .modal-close { position: absolute; top: 20px; right: 20px; background: #f4f4f4; border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.2rem; cursor: pointer; display:flex; justify-content:center; align-items:center;}
-
+        /* Responsive Design Rules */
         @media (max-width: 768px) {
             .hero-content { padding: 0 15px; }
             .heading-md { font-size: 1.6rem; }
@@ -309,8 +316,9 @@
 
     <main>
         <section class="hero" aria-label="Hero Section">
-            <div class="video-wrapper" id="videoContainer">
-                </div>
+            <div class="video-wrapper">
+                <video id="heroVideo" class="video-bg" autoplay loop muted playsinline></video>
+            </div>
             <div class="overlay"></div>
             <div class="hero-content fade-in">
                 <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
@@ -323,7 +331,7 @@
                 <p class="text-body en-only" style="margin: 0 auto; color:#fff;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
             </div>
             
-            <div class="hero-video-controls" id="heroControls" aria-label="Video Controls" style="display: none;"></div>
+            <div class="hero-video-controls" id="heroControls" aria-label="Video Controls"></div>
         </section>
 
         <section class="content-section">
@@ -756,61 +764,25 @@
                 try { if (typeof THREE !== 'undefined') init3DBlueprint(); } catch(err) { console.error(err); }
             });
 
-            // ==========================================
-            // V2 Update: Cinematic Video Storytelling Loop
-            // ==========================================
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
-            const videoContainer = document.getElementById('videoContainer');
-            
-            if(videoContainer && allVids.length > 0) {
-                // إعداد العنصرين لتأثير الـ Crossfade
-                let currentVideoIndex = 0;
-                
-                const vid1 = document.createElement('video');
-                vid1.className = 'video-bg active';
-                vid1.muted = true;
-                vid1.playsInline = true;
-                // إزالة خاصية الـ loop لأننا نريد التبديل عند الانتهاء
-                vid1.src = allVids[0];
-                videoContainer.appendChild(vid1);
-
-                const vid2 = document.createElement('video');
-                vid2.className = 'video-bg';
-                vid2.muted = true;
-                vid2.playsInline = true;
-                videoContainer.appendChild(vid2);
-
-                let activeVideo = vid1;
-                let hiddenVideo = vid2;
-
-                // وظيفة السرد: الانتقال للفيديو التالي عند انتهاء الحالي
-                function playNextVideo() {
-                    currentVideoIndex = (currentVideoIndex + 1) % allVids.length; // العودة للصفر بعد آخر فيديو
-                    
-                    hiddenVideo.src = allVids[currentVideoIndex];
-                    hiddenVideo.load();
-                    
-                    // بمجرد أن يصبح الفيديو التالي جاهزاً للتشغيل
-                    hiddenVideo.oncanplay = () => {
-                        hiddenVideo.play().then(() => {
-                            // تأثير الـ Fade
-                            hiddenVideo.classList.add('active');
-                            activeVideo.classList.remove('active');
-                            
-                            // تبديل الأدوار
-                            let temp = activeVideo;
-                            activeVideo = hiddenVideo;
-                            hiddenVideo = temp;
-                        }).catch(e => console.log("Auto-play prevented", e));
+            const heroVidEl = document.getElementById('heroVideo');
+            const heroControls = document.getElementById('heroControls');
+            if(heroVidEl && heroControls) {
+                allVids.forEach((vid, idx) => {
+                    const dot = document.createElement('button');
+                    dot.className = 'vid-dot' + (idx === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Play video ' + (idx + 1));
+                    dot.onclick = () => {
+                        document.querySelectorAll('.vid-dot').forEach(d => d.classList.remove('active'));
+                        dot.classList.add('active');
+                        heroVidEl.innerHTML = `<source src="${vid}" type="video/mp4">`;
+                        heroVidEl.load();
+                        heroVidEl.play();
                     };
-                }
-
-                // الاستماع لحدث الانتهاء لكل فيديو
-                vid1.addEventListener('ended', playNextVideo);
-                vid2.addEventListener('ended', playNextVideo);
-                
-                // تشغيل أول فيديو
-                vid1.play().catch(e => console.log("Auto-play prevented", e));
+                    heroControls.appendChild(dot);
+                });
+                heroVidEl.innerHTML = `<source src="${allVids[0]}" type="video/mp4">`;
+                heroVidEl.load();
             }
 
             const observer = new IntersectionObserver((entries) => {
@@ -842,8 +814,8 @@
             else nav.classList.remove('scrolled');
         });
 
-        const GOOGLE_SCRIPT_URL = "// 🚨 الرابط الصريح والمباشر لسيرفر جوجل لضمان وصول الإشارة (تم التحديث للنسخة الآمنة v13.1)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec";";
+        // 🚨 الرابط الصريح والمباشر لسيرفر جوجل لضمان وصول الإشارة
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec";
         const SECURE_TOKEN = "EX_SHIELD_99X"; 
         
         let currentUser = { Name: 'Unknown', Email: 'unknown', Phone: '' };
@@ -933,6 +905,9 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlD
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
+        // ==========================================
+        // 🧠 ربط محركات الذكاء الاصطناعي 
+        // ==========================================
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             const url = `${GOOGLE_SCRIPT_URL}?Token=${SECURE_TOKEN}&Message=${encodeURIComponent(text)}&Name=${encodeURIComponent(currentUser.Name)}&Email=${encodeURIComponent(currentUser.Email)}&IsCommand=${isTerminal}`;
             try {
@@ -956,7 +931,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlD
 
             } catch (error) {
                 if (loadingElement) loadingElement.remove();
-                if(isTerminal) printNexus(`> SIGNAL LOST.`); else appendMsg("SIGNAL LOST.", 'bot');
+                if(isTerminal) printNexus(`> SIGNAL LOST: ${error.message}`); else appendMsg(`SIGNAL LOST: ${error.message}`, 'bot');
             }
         }
 
@@ -1025,7 +1000,8 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlD
             queryDeepMatrix(text, false, loadingElement);
         }
 
-        const ADMIN_PASS = "HX5_COMMAND";
+        // 🔑 حماية لوحة الإدارة
+        const ADMIN_PASS = "HX5_COMMAND"; // Password = HX5_COMMAND
 
         function checkPass() {
             const pass = document.getElementById('adminPass').value;
@@ -1093,6 +1069,9 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlD
             }
         }
 
+        // ==========================================
+        // 3D Blueprint Integration Script
+        // ==========================================
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
@@ -1266,6 +1245,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlD
             });
         }
 
+        // Center Modals Content
         const legalData = {
             center: {
                 en: {
