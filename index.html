@@ -905,34 +905,36 @@
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
-   // ==========================================
-   // 🧠 ربط محركات الذكاء الاصطناعي (النسخة المحصنة والنهائية)
-   // ==========================================
-   async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
+// ==========================================
+// 🧠 ربط محركات الذكاء الاصطناعي (مضاد للـ CORS)
+// ==========================================
+async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
     try {
-        // نستخدم URLSearchParams لأنها تتجاوز حماية CORS المعقدة في متصفحات الجوال والكمبيوتر
-        const formData = new URLSearchParams();
-        formData.append("Token", SECURE_TOKEN);
-        formData.append("Message", text);
-        formData.append("Name", currentUser.Name);
-        formData.append("Email", currentUser.Email);
-        formData.append("IsCommand", isTerminal);
-
+        // استخدام text/plain هو الثغرة الشرعية الوحيدة لتجاوز حظر جوجل للـ POST
         const response = await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
-            body: formData
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify({
+                Token: SECURE_TOKEN,
+                Message: text,
+                Name: currentUser.Name,
+                Email: currentUser.Email,
+                IsCommand: isTerminal
+            })
         });
 
         const data = await response.json();
         if (loadingElement) loadingElement.remove();
         
-        // استخراج الإجابة وتنقيتها
-        const finalOutput = data.reply || data.error || "خطأ غير معروف في النواة.";
+        // استخراج الرد
+        const finalOutput = data.reply || data.error || "عذراً، حدث خطأ في معالجة البيانات.";
         let safeOutput = finalOutput.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         
         if(isTerminal) printNexus(`> ${safeOutput}`); else appendMsg(safeOutput, 'bot');
 
-        // أرشفة المحادثة (صامتة)
+        // أرشفة المحادثة
         try {
             await db.collection("MatrixLogs").add({
                 Name: currentUser.Name, Email: currentUser.Email, Type: isTerminal ? "Nexus Command" : "Oracle Chat", Input: text, Output: finalOutput, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
@@ -941,8 +943,8 @@
 
     } catch (error) {
         if (loadingElement) loadingElement.remove();
-        if(isTerminal) printNexus(`> SIGNAL LOST: ${error.message}`); else appendMsg(`SIGNAL LOST: لم يتمكن المتصفح من العبور إلى النواة.`, 'bot');
-        console.error("MATRIX CORE ERROR:", error);
+        if(isTerminal) printNexus(`> SIGNAL LOST: الجدار الناري يمنع الاتصال`); else appendMsg(`SIGNAL LOST: الجدار الناري يمنع الاتصال بخوادم النواة.`, 'bot');
+        console.error("MATRIX CORS ERROR:", error);
     }
 }
         
