@@ -320,15 +320,47 @@
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
-        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
-        .archive-card { background: #0a0a0a; border: 1px solid #1f1f1f; padding: 40px 30px; border-radius: 8px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; cursor: crosshair; }
-        .archive-card:hover { border-color: #333; transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
-        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        /* ======== THE DEEP ARCHIVE: EXPANDED & FLOATING UI ======== */
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 20; }
+        
+        .archive-card { 
+            background: rgba(10, 10, 10, 0.4); /* خلفية زجاجية شفافة */
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(10, 132, 255, 0.2); 
+            padding: 50px 40px; 
+            border-radius: 12px; 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            position: relative; overflow: hidden; cursor: crosshair;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+            animation: float-card 6s ease-in-out infinite; /* حركة الطفو المستمرة */
+        }
+        
+        /* تفاوت في حركة الطفو لكل بطاقة لتبدو طبيعية */
+        .archive-card:nth-child(1) { animation-delay: 0s; }
+        .archive-card:nth-child(2) { animation-delay: 2s; border-color: rgba(0, 229, 255, 0.2); }
+        .archive-card:nth-child(3) { animation-delay: 4s; border-color: rgba(39, 201, 63, 0.2); }
+
+        @keyframes float-card {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .archive-card:hover { 
+            background: rgba(15, 15, 15, 0.8);
+            border-color: #0A84FF; 
+            transform: translateY(-20px) scale(1.02); 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.1); 
+        }
+        
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .archive-card:nth-child(2)::before { background: #00e5ff; }
+        .archive-card:nth-child(3)::before { background: #27c93f; }
         .archive-card:hover::before { transform: scaleX(1); }
         
-        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff3b30; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255,59,48,0.3); padding: 4px 10px; border-radius: 20px; background: rgba(255,59,48,0.05);}
-        .archive-title { font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; color: #fff; letter-spacing: -0.5px;}
-        .archive-desc { font-size: 0.95rem; color: #888; line-height: 1.6; }
+        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #ff3b30; letter-spacing: 3px; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(255,59,48,0.3); padding: 6px 15px; border-radius: 30px; background: rgba(255,59,48,0.05);}
+        .archive-title { font-size: 1.8rem; font-weight: 500; margin-bottom: 15px; color: #fff; letter-spacing: -0.5px; text-shadow: 0 0 10px rgba(255,255,255,0.1);}
+        .archive-desc { font-size: 1rem; color: #a1b2c3; line-height: 1.8; }
         
         .kill-switch-container { text-align: center; margin-top: 100px; }
         .kill-switch { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 40px; }
@@ -1654,154 +1686,104 @@
             }
 
             const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x050505, 0.0015);
+            // تقليل كثافة الضباب لنتمكن من رؤية الهياكل البعيدة أثناء التجول
+            scene.fog = new THREE.FogExp2(0x050505, 0.0008);
 
-            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / 800, 1, 4000);
-            camera.position.set(0, 300, 800);
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            // توسيع زاوية الرؤية (FOV) لإعطاء إحساس بالعمق السينمائي
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
             
-            renderer.setSize(window.innerWidth, 800);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
-            controls.dampingFactor = 0.05;
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.5;
-            controls.enableZoom = false; 
-            controls.enablePan = false;
-
-            const gridHelper = new THREE.GridHelper(2000, 100, 0x0A84FF, 0x0A84FF);
+            // الأرضية الشبكية (Grid)
+            const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.15;
             gridHelper.material.transparent = true;
+            gridHelper.position.y = -200;
             scene.add(gridHelper);
 
-            const canvas = document.createElement('canvas');
-            canvas.width = 2048; 
-            canvas.height = 1024; 
-            const ctx = canvas.getContext('2d');
-
-            ctx.fillStyle = 'rgba(5, 5, 5, 0.8)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.strokeStyle = 'rgba(10, 132, 255, 0.5)';
-            ctx.lineWidth = 2;
-            
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2);
-            ctx.moveTo(canvas.width/2, 0); ctx.lineTo(canvas.width/2, canvas.height);
-            ctx.stroke();
-
-            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 200, 0, Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 210, 0, Math.PI*2); ctx.stroke();
-            ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 300, 0, Math.PI*2); ctx.stroke();
-
-            ctx.fillStyle = '#0A84FF';
-            ctx.font = '15px "Space Mono"';
-            ctx.fillText('W: 1991.00 mm', canvas.width/2 + 310, canvas.height/2);
-            ctx.fillText('H: 33.00 mm', canvas.width/2, canvas.height/2 - 220);
-
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.font = '100px "Noto Sans JP", "Inter", sans-serif';
-            
-            ctx.fillStyle = 'rgba(0, 229, 255, 0.7)';
-            ctx.fillText('フサム | experience™', canvas.width/2 + 4, canvas.height/2 - 25);
-            ctx.fillStyle = 'rgba(255, 0, 60, 0.7)';
-            ctx.fillText('フサム | experience™', canvas.width/2 - 4, canvas.height/2 - 25);
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillText('フサム | experience™', canvas.width/2, canvas.height/2 - 25);
-
-            ctx.font = '30px "Inter"';
-            ctx.letterSpacing = "5px";
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillText('Engineering human experiences', canvas.width/2, canvas.height/2 + 75);
-
-            const texture = new THREE.CanvasTexture(canvas);
-            texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-
-            const geometry = new THREE.PlaneGeometry(1600, 800);
-            const material = new THREE.MeshBasicMaterial({ 
-                map: texture, 
-                transparent: true, 
-                opacity: 0.95,
-                side: THREE.DoubleSide,
-                blending: THREE.AdditiveBlending
-            });
-            
-            const hologramPlane = new THREE.Mesh(geometry, material);
-            hologramPlane.rotation.x = -Math.PI / 2;
-            scene.add(hologramPlane);
-
-            const boxGeo = new THREE.BoxGeometry(1600, 200, 800);
+            // بناء "مدينة المخططات" للتجول بداخلها
+            const wireframes = [];
+            const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
-            const lineMat = new THREE.LineBasicMaterial({ color: 0x0A84FF, transparent: true, opacity: 0.4 });
-            const wireframeBox = new THREE.LineSegments(edges, lineMat);
-            wireframeBox.position.y = 100;
-            scene.add(wireframeBox);
-
-            const verticalPlaneGeo = new THREE.PlaneGeometry(800, 400);
-            const verticalMat = new THREE.MeshBasicMaterial({ 
-                color: 0x00e5ff, 
-                wireframe: true, 
-                transparent: true, 
-                opacity: 0.1 
-            });
-            const verticalPlane1 = new THREE.Mesh(verticalPlaneGeo, verticalMat);
-            verticalPlane1.position.y = 200;
-            scene.add(verticalPlane1);
-
-            const verticalPlane2 = new THREE.Mesh(verticalPlaneGeo, verticalMat);
-            verticalPlane2.rotation.y = Math.PI / 2;
-            verticalPlane2.position.y = 200;
-            scene.add(verticalPlane2);
-
-            const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 800; 
-            const posArray = new Float32Array(particlesCount * 3);
-
-            for(let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 2000;
+            
+            // إنشاء 15 هيكل سلكي عائم في الفضاء
+            for(let i=0; i<15; i++) {
+                const color = i % 3 === 0 ? 0x0A84FF : (i % 2 === 0 ? 0x00e5ff : 0xffffff);
+                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.15 });
+                const wireframeBox = new THREE.LineSegments(edges, lineMat);
+                
+                // توزيع الهياكل بشكل عشوائي ومتباعد
+                wireframeBox.position.set(
+                    (Math.random() - 0.5) * 4000,
+                    (Math.random() - 0.5) * 1000,
+                    (Math.random() - 0.5) * 4000
+                );
+                
+                // أحجام مختلفة
+                const scale = Math.random() * 1.5 + 0.5;
+                wireframeBox.scale.set(scale, scale, scale);
+                
+                wireframes.push({
+                    mesh: wireframeBox,
+                    rotationSpeedX: (Math.random() - 0.5) * 0.005,
+                    rotationSpeedY: (Math.random() - 0.5) * 0.005
+                });
+                scene.add(wireframeBox);
             }
 
+            // الجزيئات الحائمة (Data Dust)
+            const particlesGeo = new THREE.BufferGeometry();
+            const particlesCount = 2000; 
+            const posArray = new Float32Array(particlesCount * 3);
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5000;
+            }
             particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
             const particlesMat = new THREE.PointsMaterial({
-                size: 2,
-                color: 0x0A84FF,
-                transparent: true,
-                opacity: 0.6,
-                blending: THREE.AdditiveBlending
+                size: 3, color: 0x0A84FF, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending
             });
-
             const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
             scene.add(particlesMesh);
 
             const clock = new THREE.Clock();
-
             let isVisible = true;
+            
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    isVisible = entry.isIntersecting;
-                });
-            });
+                entries.forEach(entry => { isVisible = entry.isIntersecting; });
+            }, { threshold: 0.05 });
             observer.observe(document.getElementById('blueprint-section'));
 
+            // دالة التحريك المستمر (The Wandering Drone)
             function animate() {
                 requestAnimationFrame(animate);
-                
                 if(!isVisible) return;
 
-                const elapsedTime = clock.getElapsedTime();
+                const time = clock.getElapsedTime();
 
-                particlesMesh.rotation.y = elapsedTime * 0.03;
-                particlesMesh.position.y = Math.sin(elapsedTime * 0.5) * 15;
+                // 1. حركة الكاميرا: التجول المستمر والبطيء في جميع المحاور
+                // الكاميرا ترسم مساراً يشبه رقم 8 (Lissajous curve) في الفضاء الثلاثي
+                camera.position.x = Math.sin(time * 0.05) * 1500;
+                camera.position.y = Math.sin(time * 0.08) * 400 + 200; // ارتفاع وانخفاض
+                camera.position.z = Math.cos(time * 0.05) * 1500;
 
-                wireframeBox.material.opacity = 0.2 + Math.sin(elapsedTime * 2) * 0.2;
-                verticalPlane1.material.opacity = 0.05 + Math.sin(elapsedTime * 3) * 0.05;
+                // 2. توجيه نظر الكاميرا (LookAt): لا تنظر للمركز الثابت، بل تتلفت حولها ببطء
+                const lookX = Math.sin(time * 0.07) * 500;
+                const lookY = Math.cos(time * 0.06) * 200;
+                const lookZ = Math.cos(time * 0.07) * 500;
+                camera.lookAt(lookX, lookY, lookZ);
 
-                controls.update();
+                // 3. تحريك الهياكل ببطء
+                wireframes.forEach(obj => {
+                    obj.mesh.rotation.x += obj.rotationSpeedX;
+                    obj.mesh.rotation.y += obj.rotationSpeedY;
+                });
+
+                // 4. تحريك جزيئات الغبار
+                particlesMesh.rotation.y = time * 0.02;
+
                 renderer.render(scene, camera);
             }
 
@@ -1809,7 +1791,7 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = 800; 
+                const h = window.innerHeight; // جعل الكانفاس يغطي الشاشة
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
