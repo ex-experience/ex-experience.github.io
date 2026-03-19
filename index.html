@@ -237,7 +237,7 @@
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* ======== 5-STAGE HX-5 MIRACLE MATRIX ======== */
+        /* ======== THE MIRACLE: 5-STAGE HX-5 MATRIX GATEWAY STYLES ======== */
         .nfc-gateway-btn {
             background: #000; border: 1px solid #222; color: #555; padding: 18px 40px; 
             font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px; 
@@ -282,8 +282,10 @@
         }
         .hx-stage-ui.active { display: block; opacity: 1; }
         
-        .stage-title { font-family: 'Space Mono', monospace; font-size: 1rem; color: #0A84FF; letter-spacing: 4px; margin-bottom: 15px; }
-        .stage-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 2.5vw, 1.2rem); color: #fff; line-height: 1.8; margin-bottom: 30px; direction: rtl; }
+        .stage-title { font-family: 'Space Mono', monospace; font-size: 1.1rem; color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold; }
+        .stage-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 2.5vw, 1.2rem); color: #fff; line-height: 1.8; margin-bottom: 40px; }
+        body.lang-ar .stage-desc { direction: rtl; }
+        body.lang-en .stage-desc { direction: ltr; }
         
         /* Interactive Elements */
         .hx-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 15px 40px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s; border-radius: 30px; text-transform: uppercase;}
@@ -298,8 +300,10 @@
 
         /* The Final Hook Styling */
         .ultimate-hook { background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px); padding: 40px; border: 1px solid rgba(255,215,0,0.3); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(255,215,0,0.05); }
-        .hook-title { color: #FFD700; font-family: 'Space Mono'; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 20px;}
-        .hook-body { color: #e0e0e0; font-size: 1.1rem; line-height: 1.9; direction: rtl; text-align: justify; margin-bottom: 30px;}
+        .hook-title { color: #FFD700; font-family: 'Space Mono'; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 20px; font-weight: bold;}
+        .hook-body { color: #e0e0e0; font-size: 1.1rem; line-height: 1.9; text-align: justify; margin-bottom: 30px;}
+        body.lang-ar .hook-body { direction: rtl; text-align: right; }
+        body.lang-en .hook-body { direction: ltr; text-align: left; }
         .hook-highlight { color: #fff; font-weight: bold; }
 
         /* ======== 3D BLUEPRINT & DEEP ARCHIVE ======== */
@@ -609,357 +613,84 @@
                 </div>
 
                 <div id="stage-1" class="hx-stage-ui">
-                    <div class="stage-title">[ 01 : INTENT ] الغاية</div>
-                    <div class="stage-desc">كل شيء يبدأ بنواة. لا يوجد أثر بدون قصد. اضغط لتوليد الشرارة الأولى.</div>
-                    <button class="hx-btn" onclick="advanceStage(2)">[ IGNITE THE CORE ]</button>
+                    <div class="stage-title">
+                        <span class="ar-only">[ 01 : INTENT ] الغاية</span>
+                        <span class="en-only">[ 01 : INTENT ]</span>
+                    </div>
+                    <div class="stage-desc">
+                        <span class="ar-only">كل شيء يبدأ بنواة مقصودة. نحن لا نصمم للمنفعة، بل نؤسس القيمة الجوهرية. اضغط لتوليد الشرارة الأولى لاختراق حاجز الانتباه.</span>
+                        <span class="en-only">Everything begins with a deliberate core. We don't design for utility; we establish intrinsic value. Tap to ignite the first spark and breach the attention barrier.</span>
+                    </div>
+                    <button class="hx-btn" onclick="advanceStage(2)">
+                        <span class="ar-only">[ ولّد الشرارة ]</span>
+                        <span class="en-only">[ IGNITE THE CORE ]</span>
+                    </button>
                 </div>
 
                 <div id="stage-2" class="hx-stage-ui">
-                    <div class="stage-title">[ 02 : CONTEXT ] السياق</div>
-                    <div class="stage-desc">نحن لا نوجد في فراغ. اسحب لاكتشاف الفضاء حولك، وابحث عن نقطة التماس الخضراء.</div>
+                    <div class="stage-title">
+                        <span class="ar-only">[ 02 : CONTEXT ] السياق</span>
+                        <span class="en-only">[ 02 : CONTEXT ]</span>
+                    </div>
+                    <div class="stage-desc">
+                        <span class="ar-only">التجربة لا تحدث في فراغ. نحن نحلل الظروف البيئية والنفسية المحيطة بك لتشكيل واقعك. اسحب الفضاء لاكتشاف نقطة التماس الخفية.</span>
+                        <span class="en-only">Experience does not unfold in a vacuum. We analyze the environmental and psychological conditions to shape your reality. Drag the space to discover the hidden touchpoint.</span>
+                    </div>
                 </div>
 
                 <div id="stage-3" class="hx-stage-ui">
-                    <div class="stage-title">[ 03 : STIMULI ] المحفزات</div>
-                    <div class="stage-desc">لاختراق الفلاتر المنطقية للعقل، يجب رفع طاقة النظام. اسحب المؤشر للحد الأقصى.</div>
+                    <div class="stage-title">
+                        <span class="ar-only">[ 03 : STIMULI ] المحفزات</span>
+                        <span class="en-only">[ 03 : STIMULI ]</span>
+                    </div>
+                    <div class="stage-desc">
+                        <span class="ar-only">لتجاوز الفلاتر المنطقية والوصول المباشر إلى عقلك الباطن، يجب رفع طاقة النظام. اسحب المؤشر للحد الأقصى لتفعيل "الاستجابة الحيوية".</span>
+                        <span class="en-only">To bypass logical filters and directly access your subconscious, system energy must peak. Drag the slider to maximum to activate the "Biometric Response".</span>
+                    </div>
                     <input type="range" min="0" max="100" value="0" class="hx-slider" id="stimuliSlider" oninput="handleStimuli()">
                 </div>
 
                 <div id="stage-4" class="hx-stage-ui">
-                    <div class="stage-title">[ 04 : INTERACTION ] التفاعل</div>
-                    <div class="stage-desc">الفوضى أصبحت منظمة. أنت الآن في "حالة التدفق". اضغط باستمرار لتوحيد الإدراك.</div>
-                    <button class="hold-btn" id="syncBtn">HOLD<br>TO SYNC</button>
+                    <div class="stage-title">
+                        <span class="ar-only">[ 04 : INTERACTION ] التفاعل</span>
+                        <span class="en-only">[ 04 : INTERACTION ]</span>
+                    </div>
+                    <div class="stage-desc">
+                        <span class="ar-only">لقد دخلت الآن في "حالة التدفق" (Flow State). معدل التشتت يقترب من الصفر. اضغط باستمرار لتوحيد الإدراك وهندسة التشوه الزمني.</span>
+                        <span class="en-only">You have now entered the "Flow State". Distraction rate approaches zero. Hold to synchronize cognition and engineer time distortion.</span>
+                    </div>
+                    <button class="hold-btn" id="syncBtn">
+                        <span class="ar-only">اضغط للتوحيد</span>
+                        <span class="en-only">HOLD<br>TO SYNC</span>
+                    </button>
                 </div>
 
                 <div id="stage-5" class="hx-stage-ui">
                     <div class="ultimate-hook">
-                        <div class="hook-title">[ 05 : IMPACT ] الأثر الخالد</div>
-                        <div class="hook-body">
-                            هنا تنتهي المحاكاة، ويبدأ الواقع. نحن لا نصمم واجهات.. نحن نُهندس واقعك.<br><br>
-                            من <span class="hook-highlight">قهوتك المختصة</span> الصباحية، إلى تفاصيل <span class="hook-highlight">أسلوبك الشخصي</span>.. من شغفك بـ <span class="hook-highlight">رياضة المحركات والأداء العالي</span>، إلى <span class="hook-highlight">استثمارات شركتك</span> ومشاريعك الكبرى.<br><br>
-                            نحن المستشار الأول الذي يصمم <span class="hook-highlight">موسيقاك، ذوقك، رحلاتك، ومزاجك</span> ليرتقي بجودة حياتك إلى أعلى مستويات النخبوية والفخامة.
+                        <div class="hook-title">
+                            <span class="ar-only">[ 05 : IMPACT ] الأثر الخالد</span>
+                            <span class="en-only">[ 05 : IMPACT ] THE LASTING MEMORY</span>
                         </div>
-                        <button class="hx-btn" style="background:#0A84FF; border-color:#0A84FF; width:100%;" onclick="closeHX5Journey(true)">[ ENGINEER MY REALITY ]</button>
+                        <div class="hook-body">
+                            <span class="ar-only">
+                                هنا تنتهي المحاكاة، ويبدأ الواقع. الأثر هو البصمة المعرفية التي تحول هذه اللحظة إلى ذاكرة خالدة.<br><br>
+                                من تفاصيل قهوتك الدقيقة، إلى هويتك الشخصية، وشغفك بالأداء العالي، وصولاً إلى استثماراتك الكبرى.. نحن نُهندس واقعك، ذوقك، ومزاجك ليرتقي إلى أعلى مستويات النخبوية والفخامة.
+                            </span>
+                            <span class="en-only" style="direction: ltr; text-align: left; display: block;">
+                                Here the simulation ends, and reality begins. Impact is the cognitive imprint that turns this moment into a lasting memory.<br><br>
+                                From the precise details of your coffee, to your personal identity, your passion for high-performance, and your grandest investments.. We engineer your reality, your taste, and your mood to reach the highest tiers of elitism and luxury.
+                            </span>
+                        </div>
+                        <button class="hx-btn" style="background:#0A84FF; border-color:#0A84FF; width:100%; color: #fff;" onclick="closeHX5Journey(true)">
+                            <span class="ar-only">[ هندس واقعي ]</span>
+                            <span class="en-only">[ ENGINEER MY REALITY ]</span>
+                        </button>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <script>
-            // ==========================================
-            // THE 5-STAGE HX-5 MIRACLE MATRIX LOGIC
-            // ==========================================
-            let hxScene, hxCamera, hxRenderer, hxParticles;
-            let hxAnimationId;
-            let isHXActive = false;
-            let currentStage = 0;
-            let particleBasePositions = []; // To store base random layout
-            let particlesCount = 0;
-            let targetNode; // For Stage 2
-            let hxRaycaster, hxMouse;
-
-            // Interactive state variables
-            let stimuliLevel = 0;
-            let syncProgress = 0;
-            let syncInterval;
-
-            function initiateHX5Journey() {
-                document.body.style.overflow = 'hidden';
-                const overlay = document.getElementById('miracle-matrix-overlay');
-                overlay.style.display = 'block';
-                setTimeout(() => { overlay.style.opacity = '1'; }, 50);
-
-                if(!isHXActive) {
-                    isHXActive = true;
-                    init3DHXMatrix();
-                    advanceStage(1);
-                }
-            }
-
-            function init3DHXMatrix() {
-                const container = document.getElementById('matrix-canvas-container');
-                container.innerHTML = ''; // Clean up
-                
-                hxScene = new THREE.Scene();
-                hxScene.fog = new THREE.FogExp2(0x000000, 0.001);
-
-                hxCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
-                hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800; 
-
-                hxRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                hxRenderer.setPixelRatio(window.devicePixelRatio);
-                hxRenderer.setSize(window.innerWidth, window.innerHeight);
-                container.appendChild(hxRenderer.domElement);
-
-                // Core Particles Creation
-                const geometry = new THREE.BufferGeometry();
-                particlesCount = window.innerWidth < 768 ? 1500 : 4000; 
-                const positions = new Float32Array(particlesCount * 3);
-                
-                for(let i = 0; i < particlesCount * 3; i++) {
-                    positions[i] = (Math.random() - 0.5) * 2000;
-                    particleBasePositions.push(positions[i]); // Store original random position
-                }
-                
-                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-                const material = new THREE.PointsMaterial({
-                    size: window.innerWidth < 768 ? 3 : 2, 
-                    color: 0xffffff, 
-                    transparent: true, 
-                    opacity: 0.8, 
-                    blending: THREE.AdditiveBlending
-                });
-                hxParticles = new THREE.Points(geometry, material);
-                hxScene.add(hxParticles);
-
-                // Setup the hidden Node for Stage 2
-                const nodeGeo = new THREE.SphereGeometry(20, 16, 16);
-                const nodeMat = new THREE.MeshBasicMaterial({ color: 0x27c93f });
-                targetNode = new THREE.Mesh(nodeGeo, nodeMat);
-                targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
-                targetNode.visible = false; // Hidden initially
-                hxScene.add(targetNode);
-
-                hxRaycaster = new THREE.Raycaster();
-                hxMouse = new THREE.Vector2();
-                container.addEventListener('pointerdown', onMatrixTap, false);
-
-                // Sync Button Logic (Stage 4)
-                const syncBtn = document.getElementById('syncBtn');
-                syncBtn.addEventListener('mousedown', startSync);
-                syncBtn.addEventListener('touchstart', startSync);
-                syncBtn.addEventListener('mouseup', stopSync);
-                syncBtn.addEventListener('touchend', stopSync);
-                syncBtn.addEventListener('mouseleave', stopSync);
-
-                window.addEventListener('resize', onHXResize, false);
-                animateHX();
-            }
-
-            function advanceStage(stageNum) {
-                currentStage = stageNum;
-                if (navigator.vibrate) navigator.vibrate(50);
-
-                // Hide all UIs
-                document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
-                
-                // Show target UI
-                const activeUI = document.getElementById(`stage-${stageNum}`);
-                if(activeUI) {
-                    setTimeout(() => activeUI.classList.add('active'), 300); // slight delay for drama
-                }
-
-                // Stage specific initializations
-                if(stageNum === 2) {
-                    targetNode.visible = true;
-                    // Scramble node pos so it's fresh
-                    targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
-                } else if(stageNum === 3) {
-                    targetNode.visible = false;
-                } else if(stageNum === 5) {
-                    if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
-                    document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
-                    document.getElementById('matrixStatus').style.color = "#FFD700"; // Gold
-                }
-            }
-
-            function onMatrixTap(event) {
-                if (currentStage !== 2) return; // Only tap node in Stage 2
-
-                hxMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-                hxMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-                hxRaycaster.setFromCamera(hxMouse, hxCamera);
-                const intersects = hxRaycaster.intersectObject(targetNode);
-
-                if (intersects.length > 0) {
-                    if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
-                    targetNode.material.color.setHex(0xffffff); // Flash white
-                    setTimeout(() => { advanceStage(3); }, 500);
-                }
-            }
-
-            function handleStimuli() {
-                const slider = document.getElementById('stimuliSlider');
-                stimuliLevel = slider.value / 100;
-                
-                if(stimuliLevel > 0.1 && navigator.vibrate) {
-                    // Continuous light vibration as power increases
-                    navigator.vibrate(10);
-                }
-
-                if (stimuliLevel >= 0.99) {
-                    slider.disabled = true; // Lock it
-                    if (navigator.vibrate) navigator.vibrate(200);
-                    advanceStage(4);
-                }
-            }
-
-            function startSync(e) {
-                e.preventDefault();
-                if(currentStage !== 4) return;
-                
-                const btn = document.getElementById('syncBtn');
-                syncInterval = setInterval(() => {
-                    syncProgress += 2;
-                    btn.style.background = `rgba(39, 201, 63, ${syncProgress/100})`;
-                    btn.innerText = `${syncProgress}%`;
-                    if (navigator.vibrate) navigator.vibrate(15);
-
-                    if(syncProgress >= 100) {
-                        stopSync(e);
-                        advanceStage(5);
-                    }
-                }, 50);
-            }
-
-            function stopSync(e) {
-                e.preventDefault();
-                clearInterval(syncInterval);
-                if(currentStage === 4 && syncProgress < 100) {
-                    syncProgress = 0;
-                    document.getElementById('syncBtn').style.background = 'transparent';
-                    document.getElementById('syncBtn').innerText = "HOLD\nTO SYNC";
-                }
-            }
-
-            function closeHX5Journey(scrollToForm = false) {
-                const mainOverlay = document.getElementById('miracle-matrix-overlay');
-                mainOverlay.style.opacity = '0';
-                
-                setTimeout(() => {
-                    mainOverlay.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Restore scroll
-                    resetHXState();
-                    
-                    if (scrollToForm) {
-                        const portalSection = document.getElementById('portal');
-                        portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        
-                        setTimeout(() => {
-                            const emailInput = document.getElementById('userEmail');
-                            if(emailInput) {
-                                emailInput.focus();
-                                emailInput.style.boxShadow = "0 0 20px rgba(10, 132, 255, 0.5)";
-                                setTimeout(() => emailInput.style.boxShadow = "none", 2000);
-                            }
-                        }, 800);
-                    }
-                }, 800);
-            }
-
-            function resetHXState() {
-                isHXActive = false;
-                cancelAnimationFrame(hxAnimationId);
-                currentStage = 0;
-                stimuliLevel = 0;
-                syncProgress = 0;
-                document.getElementById('stimuliSlider').value = 0;
-                document.getElementById('stimuliSlider').disabled = false;
-                document.getElementById('syncBtn').style.background = 'transparent';
-                document.getElementById('syncBtn').innerText = "HOLD\nTO SYNC";
-                document.getElementById('matrixStatus').innerText = "SYSTEM: STANDBY";
-                document.getElementById('matrixStatus').style.color = "#0A84FF";
-                document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
-            }
-
-            let mx = 0; let my = 0;
-            document.getElementById('matrix-canvas-container').addEventListener('pointermove', (e) => {
-                mx = (e.clientX - window.innerWidth / 2) * 0.5;
-                my = (e.clientY - window.innerHeight / 2) * 0.5;
-            });
-
-            function animateHX() {
-                if(!isHXActive) return;
-                hxAnimationId = requestAnimationFrame(animateHX);
-                const time = Date.now() * 0.001;
-
-                const positions = hxParticles.geometry.attributes.position.array;
-                
-                // Base behavior calculations based on Stage
-                for(let i = 0; i < particlesCount; i++) {
-                    const idx = i * 3;
-                    let targetX = particleBasePositions[idx];
-                    let targetY = particleBasePositions[idx+1];
-                    let targetZ = particleBasePositions[idx+2];
-
-                    if (currentStage === 1) {
-                        // Intent: The Singularity (Tiny dense core)
-                        targetX *= 0.02; targetY *= 0.02; targetZ *= 0.02;
-                        hxParticles.material.color.setHex(0xffffff);
-                        hxParticles.rotation.y = time * 0.1;
-                        
-                    } else if (currentStage === 2) {
-                        // Context: Expanding Universe
-                        hxParticles.material.color.setHex(0x0A84FF); // Blue
-                        hxParticles.rotation.y = time * 0.05;
-                        
-                    } else if (currentStage === 3) {
-                        // Stimuli: Chaotic Energy (Red) controlled by slider
-                        const chaoticRadius = 1 + (stimuliLevel * 2);
-                        targetX *= chaoticRadius; targetY *= chaoticRadius; targetZ *= chaoticRadius;
-                        
-                        // Lerp color from Blue to Red based on stimuli
-                        const r = 0x0A + (0xff - 0x0A) * stimuliLevel;
-                        const g = 0x84 - (0x84 * stimuliLevel);
-                        const b = 0xFF - (0xFF * stimuliLevel);
-                        hxParticles.material.color.setRGB(r/255, g/255, b/255);
-                        
-                        hxParticles.rotation.y += stimuliLevel * 0.05;
-                        hxParticles.rotation.x += stimuliLevel * 0.02;
-
-                    } else if (currentStage === 4) {
-                        // Interaction: The Vortex (Flow State)
-                        const angle = time * 2 + particleBasePositions[idx+1] * 0.01;
-                        const radius = Math.abs(particleBasePositions[idx+1]) * 0.6 + (100 - syncProgress);
-                        targetX = Math.cos(angle) * radius;
-                        targetZ = Math.sin(angle) * radius;
-                        // Color lerps to Green based on sync
-                        hxParticles.material.color.setHex(0xff003c); 
-                        if(syncProgress > 0) hxParticles.material.color.setHex(0x27c93f);
-                        
-                    } else if (currentStage === 5) {
-                        // Impact: The Perfect Golden Sphere
-                        const len = Math.sqrt(targetX*targetX + targetY*targetY + targetZ*targetZ);
-                        const sphereRadius = window.innerWidth < 768 ? 300 : 500;
-                        targetX = (targetX/len) * sphereRadius;
-                        targetY = (targetY/len) * sphereRadius;
-                        targetZ = (targetZ/len) * sphereRadius;
-                        
-                        // Breathing effect
-                        const scale = 1 + Math.sin(time * 2) * 0.05;
-                        targetX *= scale; targetY *= scale; targetZ *= scale;
-
-                        hxParticles.material.color.setHex(0xFFD700); // Gold
-                        hxParticles.rotation.y = time * 0.2;
-                        hxParticles.rotation.x = time * 0.1;
-                    }
-
-                    // Smooth transition (Lerp) to target position
-                    positions[idx] += (targetX - positions[idx]) * 0.05;
-                    positions[idx+1] += (targetY - positions[idx+1]) * 0.05;
-                    positions[idx+2] += (targetZ - positions[idx+2]) * 0.05;
-                }
-
-                hxParticles.geometry.attributes.position.needsUpdate = true;
-
-                // Subtle Camera Movement
-                hxCamera.position.x += (mx - hxCamera.position.x) * 0.05;
-                hxCamera.position.y += (-my - hxCamera.position.y) * 0.05;
-                hxCamera.lookAt(hxScene.position);
-
-                hxRenderer.render(hxScene, hxCamera);
-            }
-
-            function onHXResize() {
-                if(!hxCamera || !hxRenderer) return;
-                hxCamera.aspect = window.innerWidth / window.innerHeight;
-                hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800; 
-                hxCamera.updateProjectionMatrix();
-                hxRenderer.setSize(window.innerWidth, window.innerHeight);
-            }
-        </script>
         <section id="portal" class="content-section alt-bg no-border">
             <div class="container fade-in">
                 <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
@@ -1181,6 +912,334 @@
     </div>
 
     <script>
+        // ==========================================
+        // THE 5-STAGE HX-5 MIRACLE MATRIX LOGIC
+        // ==========================================
+        let hxScene, hxCamera, hxRenderer, hxParticles;
+        let hxAnimationId;
+        let isHXActive = false;
+        let currentStage = 0;
+        let particleBasePositions = []; // To store base random layout
+        let particlesCount = 0;
+        let targetNode; // For Stage 2
+        let hxRaycaster, hxMouse;
+
+        // Interactive state variables
+        let stimuliLevel = 0;
+        let syncProgress = 0;
+        let syncInterval;
+
+        function initiateHX5Journey() {
+            document.body.style.overflow = 'hidden';
+            const overlay = document.getElementById('miracle-matrix-overlay');
+            overlay.style.display = 'block';
+            setTimeout(() => { overlay.style.opacity = '1'; }, 50);
+
+            if(!isHXActive) {
+                isHXActive = true;
+                init3DHXMatrix();
+                advanceStage(1);
+            }
+        }
+
+        function init3DHXMatrix() {
+            const container = document.getElementById('matrix-canvas-container');
+            container.innerHTML = ''; // Clean up
+            
+            hxScene = new THREE.Scene();
+            hxScene.fog = new THREE.FogExp2(0x000000, 0.001);
+
+            hxCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
+            hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800; 
+
+            hxRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            hxRenderer.setPixelRatio(window.devicePixelRatio);
+            hxRenderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(hxRenderer.domElement);
+
+            // Core Particles Creation
+            const geometry = new THREE.BufferGeometry();
+            particlesCount = window.innerWidth < 768 ? 1500 : 4000; 
+            const positions = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 2000;
+                particleBasePositions.push(positions[i]); // Store original random position
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const material = new THREE.PointsMaterial({
+                size: window.innerWidth < 768 ? 3 : 2, 
+                color: 0xffffff, 
+                transparent: true, 
+                opacity: 0.8, 
+                blending: THREE.AdditiveBlending
+            });
+            hxParticles = new THREE.Points(geometry, material);
+            hxScene.add(hxParticles);
+
+            // Setup the hidden Node for Stage 2
+            const nodeGeo = new THREE.SphereGeometry(20, 16, 16);
+            const nodeMat = new THREE.MeshBasicMaterial({ color: 0x27c93f });
+            targetNode = new THREE.Mesh(nodeGeo, nodeMat);
+            targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
+            targetNode.visible = false; // Hidden initially
+            hxScene.add(targetNode);
+
+            hxRaycaster = new THREE.Raycaster();
+            hxMouse = new THREE.Vector2();
+            container.addEventListener('pointerdown', onMatrixTap, false);
+
+            // Sync Button Logic (Stage 4)
+            const syncBtn = document.getElementById('syncBtn');
+            syncBtn.addEventListener('mousedown', startSync);
+            syncBtn.addEventListener('touchstart', startSync);
+            syncBtn.addEventListener('mouseup', stopSync);
+            syncBtn.addEventListener('touchend', stopSync);
+            syncBtn.addEventListener('mouseleave', stopSync);
+
+            window.addEventListener('resize', onHXResize, false);
+            animateHX();
+        }
+
+        function advanceStage(stageNum) {
+            currentStage = stageNum;
+            if (navigator.vibrate) navigator.vibrate(50);
+
+            // Hide all UIs
+            document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
+            
+            // Show target UI
+            const activeUI = document.getElementById(`stage-${stageNum}`);
+            if(activeUI) {
+                setTimeout(() => activeUI.classList.add('active'), 300); // slight delay for drama
+            }
+
+            // Stage specific initializations
+            if(stageNum === 2) {
+                targetNode.visible = true;
+                // Scramble node pos so it's fresh
+                targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
+            } else if(stageNum === 3) {
+                targetNode.visible = false;
+            } else if(stageNum === 5) {
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+                document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
+                document.getElementById('matrixStatus').style.color = "#FFD700"; // Gold
+            }
+        }
+
+        function onMatrixTap(event) {
+            if (currentStage !== 2) return; // Only tap node in Stage 2
+
+            hxMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            hxMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            hxRaycaster.setFromCamera(hxMouse, hxCamera);
+            const intersects = hxRaycaster.intersectObject(targetNode);
+
+            if (intersects.length > 0) {
+                if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+                targetNode.material.color.setHex(0xffffff); // Flash white
+                setTimeout(() => { advanceStage(3); }, 500);
+            }
+        }
+
+        function handleStimuli() {
+            const slider = document.getElementById('stimuliSlider');
+            stimuliLevel = slider.value / 100;
+            
+            if(stimuliLevel > 0.1 && navigator.vibrate) {
+                // Continuous light vibration as power increases
+                navigator.vibrate(10);
+            }
+
+            if (stimuliLevel >= 0.99) {
+                slider.disabled = true; // Lock it
+                if (navigator.vibrate) navigator.vibrate(200);
+                advanceStage(4);
+            }
+        }
+
+        function startSync(e) {
+            e.preventDefault();
+            if(currentStage !== 4) return;
+            
+            const btn = document.getElementById('syncBtn');
+            syncInterval = setInterval(() => {
+                syncProgress += 2;
+                btn.style.background = `rgba(39, 201, 63, ${syncProgress/100})`;
+                const isAr = document.body.classList.contains('lang-ar');
+                btn.innerText = `${syncProgress}%`;
+                if (navigator.vibrate) navigator.vibrate(15);
+
+                if(syncProgress >= 100) {
+                    stopSync(e);
+                    advanceStage(5);
+                }
+            }, 50);
+        }
+
+        function stopSync(e) {
+            e.preventDefault();
+            clearInterval(syncInterval);
+            if(currentStage === 4 && syncProgress < 100) {
+                syncProgress = 0;
+                document.getElementById('syncBtn').style.background = 'transparent';
+                const isAr = document.body.classList.contains('lang-ar');
+                document.getElementById('syncBtn').innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
+            }
+        }
+
+        function closeHX5Journey(scrollToForm = false) {
+            const mainOverlay = document.getElementById('miracle-matrix-overlay');
+            mainOverlay.style.opacity = '0';
+            
+            setTimeout(() => {
+                mainOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scroll
+                resetHXState();
+                
+                if (scrollToForm) {
+                    const portalSection = document.getElementById('portal');
+                    portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    setTimeout(() => {
+                        const emailInput = document.getElementById('userEmail');
+                        if(emailInput) {
+                            emailInput.focus();
+                            emailInput.style.boxShadow = "0 0 20px rgba(10, 132, 255, 0.5)";
+                            setTimeout(() => emailInput.style.boxShadow = "none", 2000);
+                        }
+                    }, 800);
+                }
+            }, 800);
+        }
+
+        function resetHXState() {
+            isHXActive = false;
+            cancelAnimationFrame(hxAnimationId);
+            currentStage = 0;
+            stimuliLevel = 0;
+            syncProgress = 0;
+            const slider = document.getElementById('stimuliSlider');
+            if(slider) { slider.value = 0; slider.disabled = false; }
+            const syncBtn = document.getElementById('syncBtn');
+            if(syncBtn) { syncBtn.style.background = 'transparent'; }
+            const statusEl = document.getElementById('matrixStatus');
+            if(statusEl) { statusEl.innerText = "SYSTEM: STANDBY"; statusEl.style.color = "#0A84FF"; }
+            document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
+        }
+
+        let mx = 0; let my = 0;
+        const matrixContainer = document.getElementById('matrix-canvas-container');
+        if(matrixContainer) {
+            matrixContainer.addEventListener('pointermove', (e) => {
+                mx = (e.clientX - window.innerWidth / 2) * 0.5;
+                my = (e.clientY - window.innerHeight / 2) * 0.5;
+            });
+        }
+
+        function animateHX() {
+            if(!isHXActive) return;
+            hxAnimationId = requestAnimationFrame(animateHX);
+            const time = Date.now() * 0.001;
+
+            if(hxParticles && hxParticles.geometry) {
+                const positions = hxParticles.geometry.attributes.position.array;
+                
+                // Base behavior calculations based on Stage
+                for(let i = 0; i < particlesCount; i++) {
+                    const idx = i * 3;
+                    let targetX = particleBasePositions[idx];
+                    let targetY = particleBasePositions[idx+1];
+                    let targetZ = particleBasePositions[idx+2];
+
+                    if (currentStage === 1) {
+                        // Intent: The Singularity (Tiny dense core)
+                        targetX *= 0.02; targetY *= 0.02; targetZ *= 0.02;
+                        hxParticles.material.color.setHex(0xffffff);
+                        hxParticles.rotation.y = time * 0.1;
+                        
+                    } else if (currentStage === 2) {
+                        // Context: Expanding Universe
+                        hxParticles.material.color.setHex(0x0A84FF); // Blue
+                        hxParticles.rotation.y = time * 0.05;
+                        
+                    } else if (currentStage === 3) {
+                        // Stimuli: Chaotic Energy (Red) controlled by slider
+                        const chaoticRadius = 1 + (stimuliLevel * 2);
+                        targetX *= chaoticRadius; targetY *= chaoticRadius; targetZ *= chaoticRadius;
+                        
+                        // Lerp color from Blue to Red based on stimuli
+                        const r = 0x0A + (0xff - 0x0A) * stimuliLevel;
+                        const g = 0x84 - (0x84 * stimuliLevel);
+                        const b = 0xFF - (0xFF * stimuliLevel);
+                        hxParticles.material.color.setRGB(r/255, g/255, b/255);
+                        
+                        hxParticles.rotation.y += stimuliLevel * 0.05;
+                        hxParticles.rotation.x += stimuliLevel * 0.02;
+
+                    } else if (currentStage === 4) {
+                        // Interaction: The Vortex (Flow State)
+                        const angle = time * 2 + particleBasePositions[idx+1] * 0.01;
+                        const radius = Math.abs(particleBasePositions[idx+1]) * 0.6 + (100 - syncProgress);
+                        targetX = Math.cos(angle) * radius;
+                        targetZ = Math.sin(angle) * radius;
+                        // Color lerps to Green based on sync
+                        hxParticles.material.color.setHex(0xff003c); 
+                        if(syncProgress > 0) hxParticles.material.color.setHex(0x27c93f);
+                        
+                    } else if (currentStage === 5) {
+                        // Impact: The Perfect Golden Sphere
+                        const len = Math.sqrt(targetX*targetX + targetY*targetY + targetZ*targetZ);
+                        const sphereRadius = window.innerWidth < 768 ? 300 : 500;
+                        targetX = (targetX/len) * sphereRadius;
+                        targetY = (targetY/len) * sphereRadius;
+                        targetZ = (targetZ/len) * sphereRadius;
+                        
+                        // Breathing effect
+                        const scale = 1 + Math.sin(time * 2) * 0.05;
+                        targetX *= scale; targetY *= scale; targetZ *= scale;
+
+                        hxParticles.material.color.setHex(0xFFD700); // Gold
+                        hxParticles.rotation.y = time * 0.2;
+                        hxParticles.rotation.x = time * 0.1;
+                    }
+
+                    // Smooth transition (Lerp) to target position
+                    positions[idx] += (targetX - positions[idx]) * 0.05;
+                    positions[idx+1] += (targetY - positions[idx+1]) * 0.05;
+                    positions[idx+2] += (targetZ - positions[idx+2]) * 0.05;
+                }
+
+                hxParticles.geometry.attributes.position.needsUpdate = true;
+            }
+
+            // Subtle Camera Movement
+            if(hxCamera && hxScene) {
+                hxCamera.position.x += (mx - hxCamera.position.x) * 0.05;
+                hxCamera.position.y += (-my - hxCamera.position.y) * 0.05;
+                hxCamera.lookAt(hxScene.position);
+            }
+
+            if(hxRenderer && hxScene && hxCamera) {
+                hxRenderer.render(hxScene, hxCamera);
+            }
+        }
+
+        function onHXResize() {
+            if(!hxCamera || !hxRenderer) return;
+            hxCamera.aspect = window.innerWidth / window.innerHeight;
+            hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800; 
+            hxCamera.updateProjectionMatrix();
+            hxRenderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // ==========================================
+        // END 5-STAGE HX-5 MIRACLE MATRIX LOGIC
+        // ==========================================
+
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
@@ -1236,6 +1295,12 @@
             document.getElementById('consultText').placeholder = isAr ? "حدد هدفك الاستراتيجي هنا..." : "Outline your strategic objective here...";
             document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
             document.getElementById('adminPass').placeholder = isAr ? "أدخل الرمز السري" : "Enter Admin Token";
+            
+            // Fix sync button text if it exists
+            const syncBtn = document.getElementById('syncBtn');
+            if (syncBtn && syncProgress < 100) {
+                 syncBtn.innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
+            }
         }
 
         window.addEventListener('scroll', () => {
