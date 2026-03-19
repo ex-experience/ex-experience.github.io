@@ -321,7 +321,8 @@
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
         /* ======== THE DEEP ARCHIVE: EXPANDED & FLOATING UI ======== */
-        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 20; }
+        .archive-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 20; }
+        @media (max-width: 900px) { .archive-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
         
         .archive-card { 
             background: rgba(10, 10, 10, 0.4); /* خلفية زجاجية شفافة */
