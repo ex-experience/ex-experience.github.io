@@ -236,6 +236,76 @@
 
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* ======== NFC UX/UI ARCHITECTURE ======== */
+        .nfc-gateway-btn {
+            background: #000; border: 1px solid #222; color: #555; padding: 18px 40px; 
+            font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px; 
+            cursor: pointer; transition: all 0.5s ease; border-radius: 0;
+            text-transform: uppercase;
+        }
+        .nfc-gateway-btn:hover {
+            color: #fff; border-color: #555; box-shadow: 0 0 20px rgba(255,255,255,0.05);
+        }
+        
+        #nfc-ux-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #000000; z-index: 9999999; display: none;
+            color: #d1d1d1; font-family: 'Space Mono', monospace;
+            overflow: hidden; touch-action: none;
+        }
+        .nfc-phase { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            display: none; flex-direction: column; justify-content: center; align-items: center; 
+        }
+        .nfc-phase.active { display: flex; }
+
+        /* Phase 1: The Blank Canvas */
+        .nfc-phase-01 .logo-glow {
+            font-size: 1.8rem; color: #fff; font-weight: 300; opacity: 0; 
+            transition: opacity 1.5s ease-in-out; text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+        }
+
+        /* Phase 2: Decryption */
+        .nfc-phase-02 .terminal-box {
+            position: absolute; top: 40px; left: 40px; text-align: left; 
+            font-size: 0.85rem; line-height: 2; color: #a1b2c3; direction: ltr;
+        }
+        .decryption-line {
+            overflow: hidden; white-space: nowrap; width: 0; 
+            border-right: 2px solid #a1b2c3; display: none;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes glitch-blink { 50% { border-color: transparent } }
+
+        /* Phase 3: Access Terminal */
+        .nfc-phase-03 .access-container { text-align: center; }
+        .nfc-p3-title { color: #fff; font-size: 1.1rem; margin-bottom: 25px; letter-spacing: 4px; }
+        .nfc-p3-status { color: #8b0000; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 8px;}
+        .nfc-p3-location { color: #a1b2c3; font-size: 0.85rem; letter-spacing: 2px;}
+        .nfc-p3-timer-wrapper { font-size: 0.8rem; color: #a1b2c3; margin: 40px 0; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 10px;}
+        .nfc-p3-timer { font-size: 2.2rem; color: #ffffff; letter-spacing: 6px; font-weight: 400; }
+        .nfc-p3-msg { color: #a1b2c3; font-size: 0.95rem; max-width: 450px; line-height: 1.8; margin: 0 auto; font-family: 'Inter', sans-serif; direction: rtl;}
+        
+        .nfc-cta-btn {
+            position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+            background: transparent; border: none; color: #fff; 
+            font-family: 'Space Mono', monospace; letter-spacing: 8px; font-size: 0.9rem; 
+            cursor: pointer; text-transform: uppercase; opacity: 0.6; transition: opacity 0.5s;
+        }
+        .nfc-cta-btn:hover { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
+
+        /* Phase 4: Lock-in */
+        .nfc-phase-04 .lockin-msg { 
+            color: #fff; text-align: center; max-width: 500px; line-height: 2; 
+            font-family: 'Inter', sans-serif; opacity: 0; font-size: 1rem;
+        }
+        .nfc-phase-04 .lockin-en {
+            font-family: 'Space Mono', monospace; color: #fff; letter-spacing: 2px; 
+            margin-bottom: 15px; font-size: 1.1rem; text-transform: uppercase;
+        }
+        @keyframes slowFadeIn { to { opacity: 1; } }
 
         /* ======== 3D BLUEPRINT & DEEP ARCHIVE ======== */
         #blueprint-section { position: relative; width: 100%; height: 100vh; background-color: var(--obsidian-black); overflow: hidden; font-family: 'Inter', sans-serif; color: var(--stark-white); }
@@ -282,6 +352,7 @@
             body.lang-ar .ai-window { left: 5vw; }
             .hud-header { flex-direction: column; gap: 10px; text-align: center; }
             .hud-header div { text-align: center !important; }
+            .nfc-p3-timer { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -525,6 +596,58 @@
             </div>
         </section>
 
+        <section class="content-section" style="background: #000; padding: 100px 0; border: none;">
+            <div class="container fade-in" style="text-align: center;">
+                <p class="mono-text" style="color: #444; font-size: 0.75rem; letter-spacing: 5px; margin-bottom: 25px; text-transform: uppercase;">
+                    <span class="ar-only">بوابة ولوج حصرية</span>
+                    <span class="en-only">CLASSIFIED ACCESS GATEWAY</span>
+                </p>
+                <button class="nfc-gateway-btn" onclick="initiateNFCProtocol()">
+                    [ SIMULATE NFC INVITATION ]
+                </button>
+            </div>
+        </section>
+
+        <div id="nfc-ux-overlay">
+            
+            <div id="nfc-p1" class="nfc-phase">
+                <div class="logo-glow mono-text">フサム</div>
+            </div>
+
+            <div id="nfc-p2" class="nfc-phase">
+                <div class="terminal-box mono-text">
+                    <div class="decryption-line">> INITIATING SECURE HANDSHAKE...</div>
+                    <div class="decryption-line">> VALIDATING NFC TOKEN...</div>
+                    <div class="decryption-line">> CLEARANCE LEVEL: 2 CONFIRMED.</div>
+                    <div class="decryption-line">> DECRYPTING PROJECT: TRACK 35…</div>
+                </div>
+            </div>
+
+            <div id="nfc-p3" class="nfc-phase">
+                <div class="access-container">
+                    <div class="nfc-p3-title mono-text">[ PROTOCOL: TRACK 35 ]</div>
+                    <div class="nfc-p3-status mono-text">STATUS: CLASSIFIED // ACTIVE</div>
+                    <div class="nfc-p3-location mono-text">LOCATION: 21.5433° N, 39.1728° E</div>
+                    
+                    <div class="nfc-p3-timer-wrapper">
+                        T-MINUS: > [ <span id="nfcTimer" class="nfc-p3-timer">14 : 08 : 33 : 12</span> ]
+                    </div>
+
+                    <p class="nfc-p3-msg">
+                        الهوية مؤكدة. لتفعيل بروتوكول الاستخراج وتأكيد التواجد في نقطة الصفر، اضغط أدناه.
+                    </p>
+                </div>
+                <button class="nfc-cta-btn" onclick="confirmNFCProtocol()">[ INITIATE CONNECTION ]</button>
+            </div>
+
+            <div id="nfc-p4" class="nfc-phase">
+                <div class="lockin-en">CONNECTION ESTABLISHED.</div>
+                <div class="lockin-msg">
+                    سيتم إرسال تعليمات الوصول وبروتوكول الاستضافة إلى قناتك الآمنة قبل 24 ساعة من ساعة الصفر.<br>نهاية الاتصال.
+                </div>
+            </div>
+
+        </div>
         <section id="portal" class="content-section alt-bg no-border">
             <div class="container fade-in">
                 <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
@@ -632,33 +755,6 @@
         </section>
 
         <section id="blueprint-section" class="deep-archive" aria-label="The Deep Archive Projects">
-            
-            <style>
-                .deep-archive { background-color: #000000; color: #ffffff; position: relative; padding: 100px 0; border-top: 1px solid #111; overflow: hidden; z-index: 10; }
-                .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
-                .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
-                @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-                .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
-                .archive-card { background: #050505; border: 1px solid #1a1a1a; padding: 40px 30px; border-radius: 4px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: crosshair; }
-                .archive-card:hover { background: #0a0a0a; border-color: #333; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-                .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #0A84FF; /* Nexus Blue */ transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-                .archive-card:hover::before { transform: scaleX(1); }
-                .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff003c; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid #ff003c; padding: 3px 8px; border-radius: 20px; }
-                .archive-title { font-size: 1.5rem; font-weight: 300; margin-bottom: 10px; color: #fff; }
-                .archive-desc { font-size: 0.9rem; color: #666; line-height: 1.6; }
-                .kill-switch-container { text-align: center; margin-top: 100px; }
-                .kill-switch { background: transparent; border: 1px solid #333; color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 30px; }
-                .kill-switch:hover { color: #000; background: #fff; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
-                .hud-container { position: absolute; top: 20px; left: 20px; right: 20px; pointer-events: none; z-index: 15; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.4); }
-                .hud-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
-                .glitch-text { color: var(--accent-blue); font-weight: bold; letter-spacing: 1px;}
-                .hud-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; color: rgba(255,255,255,0.2); }
-                .slogan { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 6px; }
-                #canvas-container { position: relative; width: 100%; height: 800px; margin-top: 60px; z-index: 1; }
-                .cinematic-vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%); }
-                .film-grain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
-            </style>
-
             <div class="marquee-container" aria-hidden="true">
                 <div class="marquee-text">
                     EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
@@ -773,6 +869,102 @@
     </div>
 
     <script>
+        // ==========================================
+        // NFC PROTOCOL UX/UI LOGIC
+        // ==========================================
+        let nfcTimerInterval;
+        let isNFCUsed = false; // Artificial Scarcity Tracker
+
+        function initiateNFCProtocol() {
+            if (isNFCUsed) {
+                alert("> ACCESS DENIED. TOKEN EXPIRED.");
+                return;
+            }
+            
+            // Lock background
+            document.body.style.overflow = 'hidden';
+            const overlay = document.getElementById('nfc-ux-overlay');
+            overlay.style.display = 'block';
+
+            // Phase 01: The Blank Canvas (1.5s)
+            const p1 = document.getElementById('nfc-p1');
+            const logo = p1.querySelector('.logo-glow');
+            
+            document.querySelectorAll('.nfc-phase').forEach(p => p.classList.remove('active'));
+            p1.classList.add('active');
+            
+            setTimeout(() => { logo.style.opacity = '1'; }, 100);
+            setTimeout(() => { logo.style.opacity = '0'; }, 1200);
+
+            // Phase 02: Decryption Protocol (3s)
+            setTimeout(() => {
+                p1.classList.remove('active');
+                const p2 = document.getElementById('nfc-p2');
+                p2.classList.add('active');
+                
+                const lines = p2.querySelectorAll('.decryption-line');
+                let delay = 0;
+                
+                lines.forEach((line) => {
+                    setTimeout(() => {
+                        line.style.display = 'block';
+                        line.style.animation = `typing 0.4s steps(30, end) forwards`;
+                    }, delay);
+                    delay += 600;
+                });
+
+                // Move to Phase 03
+                setTimeout(() => {
+                    p2.classList.remove('active');
+                    activateTerminalPhase();
+                }, delay + 600);
+
+            }, 1800);
+        }
+
+        function activateTerminalPhase() {
+            const p3 = document.getElementById('nfc-p3');
+            p3.classList.add('active');
+            
+            // Start Live Countdown
+            let d = 14, h = 8, m = 33, s = 12;
+            const timerEl = document.getElementById('nfcTimer');
+            
+            nfcTimerInterval = setInterval(() => {
+                s--;
+                if(s < 0) { s = 59; m--; }
+                if(m < 0) { m = 59; h--; }
+                if(h < 0) { h = 23; d--; }
+                
+                const format = (val) => val.toString().padStart(2, '0');
+                timerEl.innerText = `${format(d)} : ${format(h)} : ${format(m)} : ${format(s)}`;
+            }, 1000);
+        }
+
+        function confirmNFCProtocol() {
+            // Haptic Feedback Trigger
+            if (navigator.vibrate) { navigator.vibrate([50, 100, 50]); }
+
+            clearInterval(nfcTimerInterval);
+            document.getElementById('nfc-p3').classList.remove('active');
+            
+            const p4 = document.getElementById('nfc-p4');
+            p4.classList.add('active');
+            
+            // Reveal Lock-in Message
+            setTimeout(() => {
+                p4.querySelector('.lockin-msg').style.animation = "slowFadeIn 1s forwards";
+            }, 300);
+
+            // Close sequence & Burn Token
+            setTimeout(() => {
+                p4.innerHTML = `<div class="logo-glow mono-text" style="opacity:1; font-size:1.5rem; letter-spacing:3px;">フサム | experience™</div>`;
+                isNFCUsed = true; // Burns the token so it can't be reused in this session
+            }, 4500);
+        }
+        // ==========================================
+
+
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
