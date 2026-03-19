@@ -320,48 +320,83 @@
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
-        /* ======== THE DEEP ARCHIVE: EXPANDED & FLOATING UI ======== */
-        .archive-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 20; }
-        @media (max-width: 900px) { .archive-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } }
+        /* ======== THE DEEP ARCHIVE: HORIZONTAL SWIPE & FOCUS UI ======== */
+        .archive-grid { 
+            display: flex; 
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            gap: 30px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px 5% 60px 5%; 
+            position: relative; 
+            z-index: 20; 
+            scrollbar-width: none; /* إخفاء شريط التمرير لشكل أنظف */
+            -webkit-overflow-scrolling: touch;
+        }
+        .archive-grid::-webkit-scrollbar { display: none; }
         
         .archive-card { 
-            background: rgba(10, 10, 10, 0.4); /* خلفية زجاجية شفافة */
+            flex: 0 0 340px; /* عرض ثابت للبطاقة */
+            scroll-snap-align: center;
+            background: rgba(10, 10, 10, 0.6); 
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(10, 132, 255, 0.2); 
-            padding: 50px 40px; 
+            padding: 40px 30px; 
             border-radius: 12px; 
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-            position: relative; overflow: hidden; cursor: crosshair;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
-            animation: float-card 6s ease-in-out infinite; /* حركة الطفو المستمرة */
+            position: relative; 
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            height: fit-content;
         }
         
-        /* تفاوت في حركة الطفو لكل بطاقة لتبدو طبيعية */
-        .archive-card:nth-child(1) { animation-delay: 0s; }
-        .archive-card:nth-child(2) { animation-delay: 2s; border-color: rgba(0, 229, 255, 0.2); }
-        .archive-card:nth-child(3) { animation-delay: 4s; border-color: rgba(39, 201, 63, 0.2); }
-
-        @keyframes float-card {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        @media (max-width: 768px) {
+            .archive-card { flex: 0 0 82vw; } /* على الجوال: تظهر جزء من البطاقة التالية لتحفيز السحب */
         }
 
-        .archive-card:hover { 
-            background: rgba(15, 15, 15, 0.8);
-            border-color: #0A84FF; 
-            transform: translateY(-20px) scale(1.02); 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.1); 
-        }
-        
-        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        /* تفاصيل البطاقة */
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
         .archive-card:nth-child(2)::before { background: #00e5ff; }
         .archive-card:nth-child(3)::before { background: #27c93f; }
         .archive-card:hover::before { transform: scaleX(1); }
         
-        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #ff3b30; letter-spacing: 3px; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(255,59,48,0.3); padding: 6px 15px; border-radius: 30px; background: rgba(255,59,48,0.05);}
-        .archive-title { font-size: 1.8rem; font-weight: 500; margin-bottom: 15px; color: #fff; letter-spacing: -0.5px; text-shadow: 0 0 10px rgba(255,255,255,0.1);}
-        .archive-desc { font-size: 1rem; color: #a1b2c3; line-height: 1.8; }
+        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 20px; }
+        .archive-title { font-size: 1.6rem; font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; }
+        
+        /* تأثير التشفير والفتح */
+        .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #555; letter-spacing: 3px; margin-top: 25px; transition: 0.3s; text-transform: uppercase; }
+        .archive-card:hover .card-prompt { color: #0A84FF; }
+        
+        .archive-desc { 
+            font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #e0e0e0; line-height: 1.8; 
+            max-height: 0; opacity: 0; overflow: hidden; 
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body.lang-ar .archive-desc { direction: rtl; text-align: justify; }
+
+        /* حالة التركيز (Focus State) */
+        .archive-grid.has-focus .archive-card:not(.focused) {
+            opacity: 0.3;
+            filter: blur(4px);
+            transform: scale(0.95);
+        }
+        .archive-card.focused {
+            background: rgba(15, 15, 15, 0.98);
+            border-color: #0A84FF; 
+            transform: scale(1.05); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.15); 
+            z-index: 30;
+        }
+        .archive-card.focused:nth-child(2) { border-color: #00e5ff; }
+        .archive-card.focused:nth-child(3) { border-color: #27c93f; }
+
+        .archive-card.focused .archive-desc {
+            max-height: 400px; /* لفتح مساحة النص */
+            opacity: 1;
+            margin-top: 20px;
+        }
+        .archive-card.focused .card-prompt { display: none; }
         
         .kill-switch-container { text-align: center; margin-top: 100px; }
         .kill-switch { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 40px; }
@@ -843,23 +878,35 @@
                     <h2 style="font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 15px;">The Deep Archive</h2>
                 </div>
 
-                <div class="archive-grid">
-                    <div class="archive-card">
-                        <span class="archive-status">ENCRYPTED</span>
-                        <h3 class="archive-title">Project: T-35</h3>
-                        <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
+               <div class="archive-grid" id="archiveGrid">
+                    <div class="archive-card" onclick="focusArchiveCard(this)">
+                        <span class="archive-status" style="color:#0A84FF; border: 1px solid rgba(10,132,255,0.3); background: rgba(10,132,255,0.05);">ENCRYPTED // ACTIVE</span>
+                        <h3 class="archive-title">Project: TRACK 35</h3>
+                        <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
+                        <div class="archive-desc">
+                            <span class="ar-only">مشروع وثائقي سينمائي يعكس فهماً عميقاً لثقافة الأداء العالي والمشهد المعقد لرياضة المحركات في الشرق الأوسط. دراسة حية في سيكولوجيا الأداء وتجاوز الحدود البشرية.</span>
+                            <span class="en-only">A cinematic docu-series reflecting a deep understanding of high-performance culture and the complex motorsport scene in the Middle East. A live study in the psychology of performance.</span>
+                        </div>
                     </div>
 
-                    <div class="archive-card">
-                        <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
-                        <h3 class="archive-title">Concept: The Lab</h3>
-                        <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
+                    <div class="archive-card" style="border-color: rgba(0, 229, 255, 0.2);" onclick="focusArchiveCard(this)">
+                        <span class="archive-status" style="color:#00e5ff; border: 1px solid rgba(0,229,255,0.3); background: rgba(0,229,255,0.05);">IN DEVELOPMENT</span>
+                        <h3 class="archive-title">Concept: THE LAB</h3>
+                        <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
+                        <div class="archive-desc">
+                            <span class="ar-only">بيئة قهوة مختصة مبنية على أسس هندسية حسية لتعزيز التركيز والعزلة، مما يبرز الاهتمام بتفكيك الطقوس اليومية وتحويلها إلى تجارب نقدية ومدروسة.</span>
+                            <span class="en-only">A specialty coffee environment built on sensory engineering principles to enhance focus and isolation. Deconstructing daily rituals into critical, calculated experiences.</span>
+                        </div>
                     </div>
 
-                    <div class="archive-card">
-                        <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
+                    <div class="archive-card" style="border-color: rgba(39, 201, 63, 0.2);" onclick="focusArchiveCard(this)">
+                        <span class="archive-status" style="color:#27c93f; border: 1px solid rgba(39,201,63,0.3); background: rgba(39,201,63,0.05);">SYSTEM DEPLOYED</span>
                         <h3 class="archive-title">System: iN STUDIO</h3>
-                        <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
+                        <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
+                        <div class="archive-desc">
+                            <span class="ar-only">بنية تحتية لتصميم العلامات التجارية الفاخرة، تؤكد على التوجه الصارم نحو مواءمة المعايير الجمالية العالمية مع دقة التنفيذ المحلي.</span>
+                            <span class="en-only">An infrastructure for luxury brand design, emphasizing a strict approach towards aligning global aesthetic standards with local execution precision.</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1860,6 +1907,46 @@
             document.getElementById('legalModal').style.display = 'flex';
         }
         function closeLegal() { document.getElementById('legalModal').style.display = 'none'; }
+        // ==========================================
+        // DEEP ARCHIVE: FOCUS & DECRYPT LOGIC
+        // ==========================================
+        function focusArchiveCard(clickedCard) {
+            const grid = document.getElementById('archiveGrid');
+            const isAlreadyFocused = clickedCard.classList.contains('focused');
+            
+            // إزالة التركيز عن جميع البطاقات أولاً
+            document.querySelectorAll('.archive-card').forEach(card => {
+                card.classList.remove('focused');
+            });
+            
+            if (!isAlreadyFocused) {
+                // تفعيل حالة التركيز للبطاقة المضغوطة
+                grid.classList.add('has-focus');
+                clickedCard.classList.add('focused');
+                
+                // تحريك البطاقة لتتوسط الشاشة بسلاسة (خاصة في الجوال)
+                clickedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                
+                // استجابة لمسية (Haptic Feedback) خفيفة عند فك التشفير
+                if (navigator.vibrate) navigator.vibrate(40);
+                
+            } else {
+                // إذا تم الضغط على نفس البطاقة المفتوحة، قم بإغلاقها
+                grid.classList.remove('has-focus');
+            }
+        }
+
+        // إغلاق التركيز عند الضغط في أي مكان خارج البطاقات
+        document.addEventListener('click', function(event) {
+            const grid = document.getElementById('archiveGrid');
+            if (grid && grid.classList.contains('has-focus')) {
+                if (!event.target.closest('.archive-card')) {
+                    document.querySelectorAll('.archive-card').forEach(card => card.classList.remove('focused'));
+                    grid.classList.remove('has-focus');
+                }
+            }
+        });
+        
     </script>
 </body>
 </html>
