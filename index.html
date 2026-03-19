@@ -674,8 +674,9 @@
                 setTimeout(() => { overlay.style.opacity = '1'; }, 50);
 
                 if(!isMatrixActive) {
+                    // التعديل الجذري هنا: يجب إعطاء التصريح (true) قبل بناء المصفوفة وليس بعدها!
+                    isMatrixActive = true; 
                     init3DMatrix();
-                    isMatrixActive = true;
                 }
             }
 
