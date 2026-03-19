@@ -236,6 +236,53 @@
 
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;}
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ======== 3D BLUEPRINT & DEEP ARCHIVE ======== */
+        #blueprint-section { position: relative; width: 100%; height: 100vh; background-color: var(--obsidian-black); overflow: hidden; font-family: 'Inter', sans-serif; color: var(--stark-white); }
+        #canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .cinematic-vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%); }
+        .film-grain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+        .hud-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 20; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+        .hud-header { display: flex; justify-content: space-between; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; color: var(--nexus-blue); text-transform: uppercase; }
+        .hud-footer { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--executive-gray); opacity: 0.6; letter-spacing: 1px; line-height: 1.8; max-width: 100%; word-wrap: break-word; }
+
+        .deep-archive { background-color: #000000; color: #ffffff; position: relative; padding: 100px 0; border-top: 1px solid #111; overflow: hidden; z-index: 10; }
+        .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
+        .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+        
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+        .archive-card { background: #0a0a0a; border: 1px solid #1f1f1f; padding: 40px 30px; border-radius: 8px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; cursor: crosshair; }
+        .archive-card:hover { border-color: #333; transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .archive-card:hover::before { transform: scaleX(1); }
+        
+        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff3b30; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255,59,48,0.3); padding: 4px 10px; border-radius: 20px; background: rgba(255,59,48,0.05);}
+        .archive-title { font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; color: #fff; letter-spacing: -0.5px;}
+        .archive-desc { font-size: 0.95rem; color: #888; line-height: 1.6; }
+        
+        .kill-switch-container { text-align: center; margin-top: 100px; }
+        .kill-switch { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 40px; }
+        .kill-switch:hover { color: #fff; border-color: #fff; background: rgba(255,255,255,0.05); box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+        
+        .hud-container { position: absolute; top: 20px; left: 20px; right: 20px; pointer-events: none; z-index: 15; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+        .hud-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .glitch-text { color: var(--accent-blue); font-weight: bold; letter-spacing: 1px;}
+        .hud-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; color: rgba(255,255,255,0.2); }
+        .slogan { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 6px; }
+
+        @media (max-width: 768px) {
+            .hero-content { padding: 0 15px; }
+            .heading-md { font-size: 1.6rem; }
+            .pillar-box { padding-left: 20px; border-left-width: 3px; }
+            body.lang-ar .pillar-box { padding-right: 20px; border-right-width: 3px; }
+            .dash-nav { justify-content: flex-start; }
+            .login-box, #dashboard-view { padding: 25px 20px; }
+            .ai-window { width: 90vw; right: 5vw; bottom: 100px; height: 75vh;}
+            body.lang-ar .ai-window { left: 5vw; }
+            .hud-header { flex-direction: column; gap: 10px; text-align: center; }
+            .hud-header div { text-align: center !important; }
+        }
     </style>
 </head>
 <body class="lang-en">
@@ -253,6 +300,9 @@
             </button>
             <button class="nav-icon" onclick="toggleLanguage()" title="Language" aria-label="Switch Language">
                 <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.9 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+            </button>
+            <button class="nav-icon" onclick="openLegal('center')" title="Help & Policies" aria-label="Help & Policies">
+                <svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
             </button>
         </div>
     </nav>
@@ -536,6 +586,7 @@
                             <span class="ar-only">طلب استشارة</span><span class="en-only">New Inquiry</span>
                         </button>
                         <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
+                        <button class="dash-tab" id="adminTab" style="display:none;" onclick="switchService('admin')">ADMIN CORE</button>
                     </nav>
 
                     <div id="form-history" class="service-form active" aria-live="polite">
@@ -565,8 +616,108 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id="form-admin" class="service-form">
+                        <div style="display:flex; flex-direction:column; gap:15px; background:#050505; padding:30px; border-radius:12px; border: 1px solid #1f1f1f;">
+                            <h3 style="color:#27c93f; font-family:'Space Mono', monospace; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 10px;">[ DECRYPTED CORE ]</h3>
+                            <button onclick="exportData('Users')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download Users Directory</button>
+                            <button onclick="exportData('Consultations')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download Strategic Consultations</button>
+                            <button onclick="exportData('MatrixLogs')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download AI Matrix Logs</button>
+                            <div id="dashStatus" style="color:#888; font-size:0.85rem; font-family:'Space Mono', monospace; margin-top:15px;">System Ready.</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+        </section>
+
+        <section id="blueprint-section" class="deep-archive" aria-label="The Deep Archive Projects">
+            
+            <style>
+                .deep-archive { background-color: #000000; color: #ffffff; position: relative; padding: 100px 0; border-top: 1px solid #111; overflow: hidden; z-index: 10; }
+                .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
+                .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
+                @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
+                .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 5%; }
+                .archive-card { background: #050505; border: 1px solid #1a1a1a; padding: 40px 30px; border-radius: 4px; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: crosshair; }
+                .archive-card:hover { background: #0a0a0a; border-color: #333; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+                .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #0A84FF; /* Nexus Blue */ transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+                .archive-card:hover::before { transform: scaleX(1); }
+                .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #ff003c; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; border: 1px solid #ff003c; padding: 3px 8px; border-radius: 20px; }
+                .archive-title { font-size: 1.5rem; font-weight: 300; margin-bottom: 10px; color: #fff; }
+                .archive-desc { font-size: 0.9rem; color: #666; line-height: 1.6; }
+                .kill-switch-container { text-align: center; margin-top: 100px; }
+                .kill-switch { background: transparent; border: 1px solid #333; color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: 0.3s; border-radius: 30px; }
+                .kill-switch:hover { color: #000; background: #fff; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+                .hud-container { position: absolute; top: 20px; left: 20px; right: 20px; pointer-events: none; z-index: 15; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+                .hud-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+                .glitch-text { color: var(--accent-blue); font-weight: bold; letter-spacing: 1px;}
+                .hud-footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 0.6rem; color: rgba(255,255,255,0.2); }
+                .slogan { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 6px; }
+                #canvas-container { position: relative; width: 100%; height: 800px; margin-top: 60px; z-index: 1; }
+                .cinematic-vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; background: radial-gradient(circle at center, transparent 30%, rgba(2, 2, 2, 0.95) 100%); }
+                .film-grain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+            </style>
+
+            <div class="marquee-container" aria-hidden="true">
+                <div class="marquee-text">
+                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
+                </div>
+            </div>
+
+            <div class="container fade-in">
+                <div style="text-align: center; margin-bottom: 70px;">
+                    <span class="mono-text" style="color: #666; letter-spacing: 5px; font-size: 0.85rem;">LEVEL 2 CLEARANCE</span>
+                    <h2 style="font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 15px;">The Deep Archive</h2>
+                </div>
+
+                <div class="archive-grid">
+                    <div class="archive-card">
+                        <span class="archive-status">ENCRYPTED</span>
+                        <h3 class="archive-title">Project: T-35</h3>
+                        <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
+                    </div>
+
+                    <div class="archive-card">
+                        <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
+                        <h3 class="archive-title">Concept: The Lab</h3>
+                        <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
+                    </div>
+
+                    <div class="archive-card">
+                        <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
+                        <h3 class="archive-title">System: iN STUDIO</h3>
+                        <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
+                    </div>
+                </div>
+
+                <div class="kill-switch-container">
+                    <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                        [^] Return to Surface
+                    </button>
+                </div>
+            </div>
+
+            <div id="blueprint-loader" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Space Mono', monospace; color:#fff;" aria-hidden="true">SIRNA FE'AMAA JIRA... (LOADING)</div>
+            <div class="film-grain"></div>
+            <div class="cinematic-vignette"></div>
+            <div class="hud-container" aria-hidden="true">
+                <div class="hud-header">
+                    <div>
+                        <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
+                        RAGAA MADAALLII (RENDER): 1991.33.EX
+                    </div>
+                    <div style="text-align: right;">
+                        SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
+                        HAALA: HOLLYWOOD SIINIMAA
+                    </div>
+                </div>
+                <div class="hud-footer">
+                    <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
+                    HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 
+                </div>
+            </div>
+            <div id="canvas-container" aria-hidden="true"></div>
         </section>
     </main>
 
@@ -683,69 +834,129 @@
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
-    });
+        });
 
-    const SECURE_TOKEN = "EX_SHIELD_99X"; 
-    const MY_EMAIL = "hussambinhassan@hotmail.com"; 
+        const SECURE_TOKEN = "EX_SHIELD_99X"; 
+        const MY_EMAIL = "hussambinhassan@hotmail.com"; 
 
-    function doGet(e) {
-    try {
-    if (e.parameter.Token !== SECURE_TOKEN) {
-    return ContentService.createTextOutput(JSON.stringify({"error": "ACCESS DENIED"})).setMimeType(ContentService.MimeType.JSON);
-    }
+        function doGet(e) {
+            try {
+                if (e.parameter.Token !== SECURE_TOKEN) {
+                    return ContentService.createTextOutput(JSON.stringify({"error": "ACCESS DENIED"})).setMimeType(ContentService.MimeType.JSON);
+                }
 
-    var msg = e.parameter.Message || "مرحبا";
-    var name = e.parameter.Name || "Unknown";
-    var email = e.parameter.Email || "Unknown";
-    
-    var systemPrompt = "أنت أوراكل EX، الذكاء الاصطناعي لعلامة フサム | experience. أجب بأسلوب سينمائي وعميق.";
+                var msg = e.parameter.Message || "مرحبا";
+                var name = e.parameter.Name || "Unknown";
+                var email = e.parameter.Email || "Unknown";
+                
+                var systemPrompt = "أنت أوراكل EX، الذكاء الاصطناعي لعلامة フサム | experience. أجب بأسلوب سينمائي وعميق.";
 
-    var geminiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_KEY');
-    var groqKey = PropertiesService.getScriptProperties().getProperty('GROQ_KEY');
-    
-    var aiResponse = "";
-    var usedEngine = "";
+                var geminiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_KEY');
+                var groqKey = PropertiesService.getScriptProperties().getProperty('GROQ_KEY');
+                
+                var aiResponse = "";
+                var usedEngine = "";
 
-    try {
-      aiResponse = callGemini(msg, systemPrompt, geminiKey);
-      usedEngine = "GEMINI";
-    } catch (err1) {
-      try {
-        aiResponse = callGroq(msg, systemPrompt, groqKey);
-        usedEngine = "GROQ";
-      } catch (err2) {
-        aiResponse = "❌ عطل المحركات | Gemini: " + err1.message + " | Groq: " + err2.message;
-        usedEngine = "FAILED";
-      }
-    }
+                try {
+                    aiResponse = callGemini(msg, systemPrompt, geminiKey);
+                    usedEngine = "GEMINI";
+                } catch (err1) {
+                    try {
+                        aiResponse = callGroq(msg, systemPrompt, groqKey);
+                        usedEngine = "GROQ";
+                    } catch (err2) {
+                        aiResponse = "❌ عطل المحركات | Gemini: " + err1.message + " | Groq: " + err2.message;
+                        usedEngine = "FAILED";
+                    }
+                }
 
-    return ContentService.createTextOutput(JSON.stringify({"reply": aiResponse, "engine": usedEngine}))
-      .setMimeType(ContentService.MimeType.JSON);
+                return ContentService.createTextOutput(JSON.stringify({"reply": aiResponse, "engine": usedEngine}))
+                .setMimeType(ContentService.MimeType.JSON);
 
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({"error": "System Error: " + err.message})).setMimeType(ContentService.MimeType.JSON);
-  }
-}
+            } catch (err) {
+                return ContentService.createTextOutput(JSON.stringify({"error": "System Error: " + err.message})).setMimeType(ContentService.MimeType.JSON);
+            }
+        }
 
-function callGemini(msg, prompt, key) {
-  if (!key) throw new Error("مفتاح Gemini مفقود");
-  var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + key;
-  var payload = { "system_instruction": { "parts": [{ "text": prompt }] }, "contents": [{ "parts": [{ "text": msg }] }], "generationConfig": { "temperature": 0.3 } };
-  var res = UrlFetchApp.fetch(url, { "method": "post", "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
-  var json = JSON.parse(res.getContentText());
-  if (json.error) throw new Error(json.error.message);
-  return json.candidates[0].content.parts[0].text;
-}
+        function callGemini(msg, prompt, key) {
+            if (!key) throw new Error("مفتاح Gemini مفقود");
+            var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + key;
+            var payload = { "system_instruction": { "parts": [{ "text": prompt }] }, "contents": [{ "parts": [{ "text": msg }] }], "generationConfig": { "temperature": 0.3 } };
+            var res = UrlFetchApp.fetch(url, { "method": "post", "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
+            var json = JSON.parse(res.getContentText());
+            if (json.error) throw new Error(json.error.message);
+            return json.candidates[0].content.parts[0].text;
+        }
 
-function callGroq(msg, prompt, key) {
-  if (!key) throw new Error("مفتاح Groq مفقود");
-  var url = "https://api.groq.com/openai/v1/chat/completions";
-  var payload = { "model": "llama3-8b-8192", "messages": [ {"role": "system", "content": prompt}, {"role": "user", "content": msg} ], "temperature": 0.3 };
-  var res = UrlFetchApp.fetch(url, { "method": "post", "headers": {"Authorization": "Bearer " + key}, "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
-  var json = JSON.parse(res.getContentText());
-  if (json.error) throw new Error(json.error.message);
-  return json.choices[0].message.content;
-}
+        function callGroq(msg, prompt, key) {
+            if (!key) throw new Error("مفتاح Groq مفقود");
+            var url = "https://api.groq.com/openai/v1/chat/completions";
+            var payload = { "model": "llama3-8b-8192", "messages": [ {"role": "system", "content": prompt}, {"role": "user", "content": msg} ], "temperature": 0.3 };
+            var res = UrlFetchApp.fetch(url, { "method": "post", "headers": {"Authorization": "Bearer " + key}, "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
+            var json = JSON.parse(res.getContentText());
+            if (json.error) throw new Error(json.error.message);
+            return json.choices[0].message.content;
+        }
+
+        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
+
+        async function signInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                finalizeAuth(result.user);
+            } catch (error) { console.error("Auth Interrupted", error); }
+        }
+
+        async function signInWithApple() {
+            const provider = new firebase.auth.OAuthProvider('apple.com');
+            try {
+                const result = await auth.signInWithPopup(provider);
+                finalizeAuth(result.user);
+            } catch (error) { console.error("Apple Auth Interrupted", error); }
+        }
+
+        function finalizeAuth(user) {
+            currentUser.Name = user.displayName || "Executive";
+            currentUser.Email = user.email || "Verified_Link";
+            db.collection("Users").doc(currentUser.Email).set({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+            showDashboard();
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
+        }
+
+        async function handleFirebaseLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const isAr = document.body.classList.contains('lang-ar');
+            btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
+            currentUser.Name = document.getElementById('userName').value;
+            currentUser.Email = document.getElementById('userEmail').value;
+            currentUser.Phone = document.getElementById('userPhone').value;
+            try {
+                await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
+                fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone }), mode: 'no-cors' });
+                showDashboard();
+            } catch (error) {
+                alert(isAr ? "فشل الاتصال." : "Connection failed.");
+                btn.innerHTML = isAr ? 'تسجيل الدخول' : 'Sign In'; btn.disabled = false;
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('auth-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            switchService('history');
+        }
+
+        function switchService(serviceId) {
+            document.querySelectorAll('.dash-tab').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
+            document.getElementById('form-' + serviceId).classList.add('active');
+            if(serviceId === 'history') fetchUserHistory();
+        }
 
         async function fetchUserHistory() {
             const historyContainer = document.getElementById('history-content');
@@ -781,6 +992,7 @@ function callGroq(msg, prompt, key) {
             
             try {
                 await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message }), mode: 'no-cors' });
                 alert(isAr ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
                 document.getElementById('consultText').value = '';
@@ -791,6 +1003,7 @@ function callGroq(msg, prompt, key) {
 
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             try {
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
                 const urlParams = new URLSearchParams({
                     Token: SECURE_TOKEN,
                     Message: text,
