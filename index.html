@@ -869,130 +869,359 @@
     </div>
 
     <script>
-        // ==========================================
-        // NFC PROTOCOL UX/UI LOGIC
-        // ==========================================
-        let nfcTimerInterval;
-        let isNFCUsed = false; // Artificial Scarcity Tracker
+ <section class="content-section" style="background: #000; padding: 100px 0; border: none; position: relative; z-index: 50;">
+            <div class="container fade-in" style="text-align: center;">
+                <p class="mono-text" style="color: #444; font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 5px; margin-bottom: 25px; text-transform: uppercase;">
+                    <span class="ar-only">محاكاة الرنين العاطفي | مستوى الوصول: سري</span>
+                    <span class="en-only">ERI SIMULATION | ACCESS LEVEL: CLASSIFIED</span>
+                </p>
+                <button class="nfc-gateway-btn" onclick="initiateMiracleMatrix()">
+                    [ INITIATE NEURAL LINK ]
+                </button>
+            </div>
+        </section>
 
-        function initiateNFCProtocol() {
-            if (isNFCUsed) {
-                alert("> ACCESS DENIED. TOKEN EXPIRED.");
-                return;
+        <style>
+            #miracle-matrix-overlay {
+                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background-color: #000000; z-index: 9999999; display: none;
+                overflow: hidden; touch-action: none;
+                font-family: 'Space Mono', monospace; color: #fff;
+                opacity: 0; transition: opacity 1.5s ease-in-out;
+            }
+            #matrix-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+            
+            /* UI Layer */
+            .matrix-ui-layer {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+                pointer-events: none; /* Let clicks pass through to 3D canvas */
+                display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 4vw, 40px);
             }
             
-            // Lock background
-            document.body.style.overflow = 'hidden';
-            const overlay = document.getElementById('nfc-ux-overlay');
-            overlay.style.display = 'block';
+            .matrix-header { display: flex; justify-content: space-between; align-items: flex-start; }
+            .matrix-status { font-size: clamp(0.7rem, 2vw, 0.85rem); color: #0A84FF; letter-spacing: 2px; text-shadow: 0 0 10px rgba(10,132,255,0.5); }
+            .matrix-progress-container { text-align: right; }
+            .matrix-progress-text { font-size: clamp(0.6rem, 1.5vw, 0.75rem); color: #888; letter-spacing: 2px; margin-bottom: 5px; }
+            .progress-bar-bg { width: 100px; height: 2px; background: #333; float: right; }
+            .progress-bar-fill { width: 0%; height: 100%; background: #ff003c; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s; box-shadow: 0 0 10px #ff003c; }
 
-            // Phase 01: The Blank Canvas (1.5s)
-            const p1 = document.getElementById('nfc-p1');
-            const logo = p1.querySelector('.logo-glow');
-            
-            document.querySelectorAll('.nfc-phase').forEach(p => p.classList.remove('active'));
-            p1.classList.add('active');
-            
-            setTimeout(() => { logo.style.opacity = '1'; }, 100);
-            setTimeout(() => { logo.style.opacity = '0'; }, 1200);
+            .matrix-footer { text-align: center; }
+            .matrix-instruction { font-size: clamp(0.75rem, 2vw, 0.9rem); color: #a1b2c3; letter-spacing: 3px; animation: pulse-opacity 2s infinite; }
+            @keyframes pulse-opacity { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-            // Phase 02: Decryption Protocol (3s)
-            setTimeout(() => {
-                p1.classList.remove('active');
-                const p2 = document.getElementById('nfc-p2');
-                p2.classList.add('active');
+            /* Holographic Info Panel */
+            #hologram-panel {
+                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
+                width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto;
+                background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+                border: 1px solid rgba(10, 132, 255, 0.3); border-radius: 12px;
+                padding: clamp(25px, 5vw, 40px); z-index: 20;
+                opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(10,132,255,0.1);
+                direction: rtl; text-align: right;
+                scrollbar-width: none; /* Firefox */
+            }
+            #hologram-panel::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+            #hologram-panel.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+            
+            .holo-tag { display: inline-block; font-family: 'Space Mono'; font-size: 0.65rem; color: #0A84FF; border: 1px solid #0A84FF; padding: 3px 8px; border-radius: 20px; margin-bottom: 15px; letter-spacing: 2px; direction: ltr;}
+            .holo-title { font-family: 'Inter', sans-serif; font-size: clamp(1.2rem, 4vw, 1.5rem); color: #fff; margin-bottom: 15px; font-weight: 500; letter-spacing: -0.5px;}
+            .holo-text { font-family: 'Inter', sans-serif; font-size: clamp(0.9rem, 2.5vw, 1rem); color: #a1b2c3; line-height: 1.8; margin-bottom: 25px; }
+            .holo-btn { background: #fff; color: #000; border: none; padding: 12px 30px; font-family: 'Space Mono'; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; cursor: pointer; border-radius: 4px; transition: 0.3s; text-transform: uppercase; width: 100%;}
+            .holo-btn:hover { background: #0A84FF; color: #fff; box-shadow: 0 0 15px rgba(10,132,255,0.5);}
+
+            /* Critical Sequence Overlay */
+            #critical-overlay {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 30;
+                background: rgba(255, 0, 60, 0.1); backdrop-filter: blur(5px); display: none;
+                flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;
+            }
+            .critical-text { font-size: clamp(1.2rem, 4vw, 2rem); color: #ff003c; font-weight: bold; letter-spacing: 4px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(255,0,60,0.6); }
+            .critical-sub { font-family: 'Inter', sans-serif; font-size: clamp(0.9rem, 2vw, 1.1rem); color: #fff; max-width: 500px; line-height: 1.8; margin-bottom: 40px; direction: rtl;}
+        </style>
+
+        <div id="miracle-matrix-overlay">
+            <div id="matrix-canvas-container"></div>
+            
+            <div class="matrix-ui-layer">
+                <div class="matrix-header">
+                    <div class="matrix-status" id="matrixStatus">SYSTEM: ONLINE<br>TRACKING SENSORY INPUT</div>
+                    <div class="matrix-progress-container">
+                        <div class="matrix-progress-text">DATA NODES DECRYPTED: <span id="nodes-count">0</span>/3</div>
+                        <div class="progress-bar-bg"><div class="progress-bar-fill" id="matrix-progress"></div></div>
+                    </div>
+                </div>
+                <div class="matrix-footer">
+                    <div class="matrix-instruction" id="matrixGuide">[ DRAG TO EXPLORE // TAP GLOWING RED NODES TO DECRYPT ]</div>
+                </div>
+            </div>
+
+            <div id="hologram-panel">
+                <span class="holo-tag" id="holo-id">NODE_01</span>
+                <h3 class="holo-title" id="holo-title">الاستجابة الحيوية (Biometric Response)</h3>
+                <p class="holo-text" id="holo-desc">عندما يتعرض الجسد لمحفزات مدروسة، يرتفع معدل ضربات القلب ويتجاوز الفلاتر المنطقية ليصل مباشرة إلى العقل الباطن. هذا هو أول أسرار اختراق الانتباه.</p>
+                <button class="holo-btn" onclick="closeHologram()">[ ASSIMILATE DATA ]</button>
+            </div>
+
+            <div id="critical-overlay">
+                <div class="critical-text glitch-anim">[ CRITICAL RESONANCE ACHIEVED ]</div>
+                <div class="critical-sub">تم الوصول إلى الحد الأقصى للاستيعاب الإدراكي. تم تشفير البصمة المعرفية بنجاح.<br><br>لفك تشفير أرشيف <strong>TRACK 35</strong> بالكامل وتأكيد حضورك، يجب توثيق قناتك الآمنة الآن.</div>
+            </div>
+        </div>
+
+        <script>
+            // ==========================================
+            // THE MIRACLE MATRIX: CORE LOGIC
+            // ==========================================
+            let matrixScene, matrixCamera, matrixRenderer, matrixParticles, dataNodes = [];
+            let matrixRaycaster, matrixMouse;
+            let unlockedNodes = 0;
+            let matrixAnimationId;
+            let isMatrixActive = false;
+
+            const nodeData = [
+                {
+                    id: "NODE_01_BIO",
+                    title: "الاستجابة الحيوية (Biometric Response)",
+                    desc: "في مسار TRACK 35، نحن لا نراقب فقط.. نحن نقيس الأثر. عندما يتناقض الصمت المطلق مع الهدير المفاجئ للمحركات، يرتفع معدل ضربات القلب بنسبة 82%. نحن نهندس هذه اللحظة لاختراق حاجز الانتباه."
+                },
+                {
+                    id: "NODE_02_FLOW",
+                    title: "التشوه الزمني (Time Distortion)",
+                    desc: "أثناء حالة 'التدفق' (Flow State) التي نهندسها، يفقد الإنسان إحساسه بالزمن. معدل التشتت (D) يصبح قريباً من الصفر. في عصر اقتصاد الانتباه، هذا المستوى من الاحتكار يمثل الأصل التجاري الأعلى قيمة."
+                },
+                {
+                    id: "NODE_03_MEM",
+                    title: "البصمة المعرفية (Cognitive Memory)",
+                    desc: "التجربة لا تنتهي بانتهاء الحدث. مؤشر الرنين العاطفي (ERI) يضمن أن التفاعل المؤقت يتحول إلى 'ذاكرة خالدة'. المستثمر الذي يختبر هذا الأدرينالين يتحول إلى مدافع شرس عن العلامة التجارية."
+                }
+            ];
+
+            function initiateMiracleMatrix() {
+                // Lock scroll & show overlay
+                document.body.style.overflow = 'hidden';
+                const overlay = document.getElementById('miracle-matrix-overlay');
+                overlay.style.display = 'block';
                 
-                const lines = p2.querySelectorAll('.decryption-line');
-                let delay = 0;
+                // Slight delay for smooth fade in
+                setTimeout(() => { overlay.style.opacity = '1'; }, 50);
+
+                if(!isMatrixActive) {
+                    init3DMatrix();
+                    isMatrixActive = true;
+                }
+            }
+
+            function init3DMatrix() {
+                const container = document.getElementById('matrix-canvas-container');
                 
-                lines.forEach((line) => {
+                matrixScene = new THREE.Scene();
+                matrixScene.fog = new THREE.FogExp2(0x000000, 0.001);
+
+                matrixCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+                matrixCamera.position.z = window.innerWidth < 768 ? 1200 : 800; // Responsive camera distance
+
+                matrixRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                matrixRenderer.setPixelRatio(window.devicePixelRatio);
+                matrixRenderer.setSize(window.innerWidth, window.innerHeight);
+                container.appendChild(matrixRenderer.domElement);
+
+                // Core Particles (The Subconscious)
+                const geometry = new THREE.BufferGeometry();
+                const particlesCount = window.innerWidth < 768 ? 1500 : 3000; // Optimize for mobile
+                const positions = new Float32Array(particlesCount * 3);
+                
+                for(let i = 0; i < particlesCount * 3; i++) {
+                    positions[i] = (Math.random() - 0.5) * 1500;
+                }
+                
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                const material = new THREE.PointsMaterial({
+                    size: 2, color: 0x0A84FF, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending
+                });
+                matrixParticles = new THREE.Points(geometry, material);
+                matrixScene.add(matrixParticles);
+
+                // Data Nodes (The Clickable Targets)
+                const nodeGeo = new THREE.SphereGeometry(15, 16, 16);
+                const nodeMat = new THREE.MeshBasicMaterial({ color: 0xff003c, transparent: true, opacity: 0.8 });
+                
+                for(let i=0; i<3; i++) {
+                    const node = new THREE.Mesh(nodeGeo, nodeMat);
+                    // Random positions within a visible radius
+                    node.position.x = (Math.random() - 0.5) * 600;
+                    node.position.y = (Math.random() - 0.5) * 600;
+                    node.position.z = (Math.random() - 0.5) * 400 + 200;
+                    node.userData = { index: i, decrypted: false };
+                    
+                    // Add a glowing halo to nodes
+                    const haloGeo = new THREE.SphereGeometry(25, 16, 16);
+                    const haloMat = new THREE.MeshBasicMaterial({ color: 0xff003c, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending });
+                    const halo = new THREE.Mesh(haloGeo, haloMat);
+                    node.add(halo);
+
+                    matrixScene.add(node);
+                    dataNodes.push(node);
+                }
+
+                // Interaction Setup
+                matrixRaycaster = new THREE.Raycaster();
+                matrixMouse = new THREE.Vector2();
+                
+                // Handle both Touch and Mouse
+                container.addEventListener('pointerdown', onNodeClick, false);
+                
+                // Responsive Resize
+                window.addEventListener('resize', onMatrixResize, false);
+
+                animateMatrix();
+            }
+
+            function onNodeClick(event) {
+                // Normalize mouse/touch coordinates
+                matrixMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                matrixMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+                matrixRaycaster.setFromCamera(matrixMouse, matrixCamera);
+                const intersects = matrixRaycaster.intersectObjects(dataNodes);
+
+                if (intersects.length > 0) {
+                    const clickedNode = intersects[0].object;
+                    
+                    if (!clickedNode.userData.decrypted) {
+                        // Haptic Feedback
+                        if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+                        
+                        // Change visual state of node
+                        clickedNode.material.color.setHex(0x27c93f); // Turn Green
+                        clickedNode.children[0].material.color.setHex(0x27c93f);
+                        clickedNode.userData.decrypted = true;
+                        
+                        openHologram(clickedNode.userData.index);
+                    }
+                }
+            }
+
+            let currentOpenNodeIndex = -1;
+
+            function openHologram(index) {
+                currentOpenNodeIndex = index;
+                const data = nodeData[index];
+                
+                document.getElementById('holo-id').innerText = data.id;
+                document.getElementById('holo-title').innerText = data.title;
+                document.getElementById('holo-desc').innerText = data.desc;
+                
+                document.getElementById('hologram-panel').classList.add('active');
+            }
+
+            function closeHologram() {
+                // Haptic Feedback
+                if (navigator.vibrate) navigator.vibrate(20);
+                
+                document.getElementById('hologram-panel').classList.remove('active');
+                
+                // Update Progress
+                unlockedNodes++;
+                document.getElementById('nodes-count').innerText = unlockedNodes;
+                
+                const progressPercentage = (unlockedNodes / 3) * 100;
+                document.getElementById('matrix-progress').style.width = progressPercentage + '%';
+                
+                if(unlockedNodes === 3) {
+                    document.getElementById('matrix-progress').style.background = '#27c93f';
+                    document.getElementById('matrix-progress').style.boxShadow = '0 0 10px #27c93f';
+                    document.getElementById('matrixStatus').innerHTML = "SYSTEM: CRITICAL<br>COGNITIVE LIMIT REACHED";
+                    document.getElementById('matrixStatus').style.color = "#ff003c";
+                    
+                    setTimeout(triggerCriticalSequence, 1000);
+                }
+            }
+
+            function triggerCriticalSequence() {
+                // Haptic Overload
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+                
+                // Speed up particles drastically
+                matrixParticles.material.color.setHex(0xff003c); // Turn core red
+                
+                const critOverlay = document.getElementById('critical-overlay');
+                critOverlay.style.display = 'flex';
+
+                // The UX Bridge (Seamless Scroll to Dashboard)
+                setTimeout(() => {
+                    const mainOverlay = document.getElementById('miracle-matrix-overlay');
+                    mainOverlay.style.opacity = '0';
+                    
                     setTimeout(() => {
-                        line.style.display = 'block';
-                        line.style.animation = `typing 0.4s steps(30, end) forwards`;
-                    }, delay);
-                    delay += 600;
+                        mainOverlay.style.display = 'none';
+                        document.body.style.overflow = 'auto'; // Restore scroll
+                        
+                        // Scroll to Portal
+                        const portalSection = document.getElementById('portal');
+                        portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Auto-focus email to capture intent
+                        setTimeout(() => {
+                            const emailInput = document.getElementById('userEmail');
+                            if(emailInput) {
+                                emailInput.focus();
+                                emailInput.style.boxShadow = "0 0 20px rgba(255, 0, 60, 0.4)";
+                                setTimeout(() => emailInput.style.boxShadow = "none", 2000);
+                            }
+                        }, 800);
+                        
+                    }, 1500); // Wait for fade out
+                }, 4500); // Allow user to read critical message
+            }
+
+            let mouseX = 0; let mouseY = 0;
+            document.getElementById('matrix-canvas-container').addEventListener('pointermove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.5;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.5;
+            });
+
+            function animateMatrix() {
+                if(!isMatrixActive) return;
+                matrixAnimationId = requestAnimationFrame(animateMatrix);
+
+                // Rotate Core
+                const speed = unlockedNodes === 3 ? 0.02 : 0.002; // Faster if critical
+                matrixParticles.rotation.x += speed;
+                matrixParticles.rotation.y += speed;
+
+                // Subtle Camera Movement based on interaction
+                matrixCamera.position.x += (mouseX - matrixCamera.position.x) * 0.05;
+                matrixCamera.position.y += (-mouseY - matrixCamera.position.y) * 0.05;
+                matrixCamera.lookAt(matrixScene.position);
+
+                // Animate Nodes (Floating effect)
+                const time = Date.now() * 0.001;
+                dataNodes.forEach((node, idx) => {
+                    node.position.y += Math.sin(time * 2 + idx) * 0.5;
+                    // Pulse Halo
+                    node.children[0].scale.setScalar(1 + Math.sin(time * 5 + idx) * 0.2);
                 });
 
-                // Move to Phase 03
-                setTimeout(() => {
-                    p2.classList.remove('active');
-                    activateTerminalPhase();
-                }, delay + 600);
+                matrixRenderer.render(matrixScene, matrixCamera);
+            }
 
-            }, 1800);
-        }
+            function onMatrixResize() {
+                if(!matrixCamera || !matrixRenderer) return;
+                matrixCamera.aspect = window.innerWidth / window.innerHeight;
+                matrixCamera.position.z = window.innerWidth < 768 ? 1200 : 800; // Adjust for mobile portrait
+                matrixCamera.updateProjectionMatrix();
+                matrixRenderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        </script>
+        ```
 
-        function activateTerminalPhase() {
-            const p3 = document.getElementById('nfc-p3');
-            p3.classList.add('active');
-            
-            // Start Live Countdown
-            let d = 14, h = 8, m = 33, s = 12;
-            const timerEl = document.getElementById('nfcTimer');
-            
-            nfcTimerInterval = setInterval(() => {
-                s--;
-                if(s < 0) { s = 59; m--; }
-                if(m < 0) { m = 59; h--; }
-                if(h < 0) { h = 23; d--; }
-                
-                const format = (val) => val.toString().padStart(2, '0');
-                timerEl.innerText = `${format(d)} : ${format(h)} : ${format(m)} : ${format(s)}`;
-            }, 1000);
-        }
+### ماذا يستفيد الزائر التجربة السيكولوجية)؟
+* **الاستقلالية وحب الاستطلاع:** نحن لا نجبره على القراءة؛ نحن نعطيه مساحة ثلاثية الأبعاد ونطلب منه "الاستكشاف". البشر مجبلون على تتبع الأشياء المضيئة والضغط عليها.
+* **إثبات المنهجية:** بدلاً من القراءة عن "التشوه الزمني" في مستند PDF طويل، هو يختبره فعلياً عبر التفاعل مع الجزيئات والهولوغرام والاهتزازات.
+* **المبرر المنطقي للتسجيل:** التسجيل لم يعد فخاً تسويقياً. لقد أصبح "إجراءً أمنياً" لحماية المستثمر من "التشبع الإدراكي" (Cognitive Overload) وللسماح له بحفظ ما اكتشفه من أسرار. الدوافع النفسية هنا في أعلى مستوياتها.
 
-        function confirmNFCProtocol() {
-            // الاستجابة اللمسية (Haptic Feedback)
-            if (navigator.vibrate) { navigator.vibrate([50, 100, 50]); }
-
-            clearInterval(nfcTimerInterval);
-            document.getElementById('nfc-p3').classList.remove('active');
-            
-            const p4 = document.getElementById('nfc-p4');
-            p4.classList.add('active');
-            
-            // إظهار رسالة تأكيد الاتصال (Lock-in Message)
-            setTimeout(() => {
-                p4.querySelector('.lockin-msg').style.animation = "slowFadeIn 1s forwards";
-            }, 300);
-
-            // ==========================================
-            // الجسر الرقمي (The UX Bridge): الإغلاق والتوجيه
-            // ==========================================
-            setTimeout(() => {
-                // 1. حرق الرابط (Token Burn) لمنع إعادة الاستخدام في نفس الجلسة
-                isNFCUsed = true; 
-                
-                // 2. تلاشي الشاشة السوداء (Fade Out) بسلاسة سينمائية
-                const overlay = document.getElementById('nfc-ux-overlay');
-                overlay.style.transition = "opacity 0.8s ease-in-out";
-                overlay.style.opacity = '0'; 
-                
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    document.body.style.overflow = 'auto'; // إعادة تفعيل التمرير للمستخدم
-                    
-                    // 3. النزول التلقائي (Auto-Scroll) إلى الواجهة التنفيذية
-                    const portalSection = document.getElementById('portal');
-                    portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
-                    // 4. تفعيل الحقل الأول (Auto-Focus) لدفع المستخدم نفسياً للبدء بالكتابة
-                    setTimeout(() => {
-                        const emailInput = document.getElementById('userEmail');
-                        if(emailInput) {
-                            emailInput.focus();
-                            // إضافة وميض خفيف للحقل لجذب الانتباه
-                            emailInput.style.boxShadow = "0 0 15px rgba(10, 132, 255, 0.5)";
-                            setTimeout(() => emailInput.style.boxShadow = "none", 1500);
-                        }
-                    }, 800);
-
-                }, 800); // انتظار انتهاء تأثير التلاشي
-
-            }, 4500); // الانتظار 4.5 ثوانٍ ليقرأ المستثمر الرسالة براحة
-        }
-        // ==========================================
-
+هل أنت جاهز لتطبيق هذه الشفرة وربطها بالواجهة لتكون الحجر الأساس في بوابة **フサム | experience™**؟
 
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
