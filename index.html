@@ -942,7 +942,7 @@
         }
 
         function confirmNFCProtocol() {
-            // Haptic Feedback Trigger
+            // الاستجابة اللمسية (Haptic Feedback)
             if (navigator.vibrate) { navigator.vibrate([50, 100, 50]); }
 
             clearInterval(nfcTimerInterval);
@@ -951,16 +951,45 @@
             const p4 = document.getElementById('nfc-p4');
             p4.classList.add('active');
             
-            // Reveal Lock-in Message
+            // إظهار رسالة تأكيد الاتصال (Lock-in Message)
             setTimeout(() => {
                 p4.querySelector('.lockin-msg').style.animation = "slowFadeIn 1s forwards";
             }, 300);
 
-            // Close sequence & Burn Token
+            // ==========================================
+            // الجسر الرقمي (The UX Bridge): الإغلاق والتوجيه
+            // ==========================================
             setTimeout(() => {
-                p4.innerHTML = `<div class="logo-glow mono-text" style="opacity:1; font-size:1.5rem; letter-spacing:3px;">フサム | experience™</div>`;
-                isNFCUsed = true; // Burns the token so it can't be reused in this session
-            }, 4500);
+                // 1. حرق الرابط (Token Burn) لمنع إعادة الاستخدام في نفس الجلسة
+                isNFCUsed = true; 
+                
+                // 2. تلاشي الشاشة السوداء (Fade Out) بسلاسة سينمائية
+                const overlay = document.getElementById('nfc-ux-overlay');
+                overlay.style.transition = "opacity 0.8s ease-in-out";
+                overlay.style.opacity = '0'; 
+                
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // إعادة تفعيل التمرير للمستخدم
+                    
+                    // 3. النزول التلقائي (Auto-Scroll) إلى الواجهة التنفيذية
+                    const portalSection = document.getElementById('portal');
+                    portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // 4. تفعيل الحقل الأول (Auto-Focus) لدفع المستخدم نفسياً للبدء بالكتابة
+                    setTimeout(() => {
+                        const emailInput = document.getElementById('userEmail');
+                        if(emailInput) {
+                            emailInput.focus();
+                            // إضافة وميض خفيف للحقل لجذب الانتباه
+                            emailInput.style.boxShadow = "0 0 15px rgba(10, 132, 255, 0.5)";
+                            setTimeout(() => emailInput.style.boxShadow = "none", 1500);
+                        }
+                    }, 800);
+
+                }, 800); // انتظار انتهاء تأثير التلاشي
+
+            }, 4500); // الانتظار 4.5 ثوانٍ ليقرأ المستثمر الرسالة براحة
         }
         // ==========================================
 
