@@ -247,65 +247,6 @@
         .nfc-gateway-btn:hover {
             color: #fff; border-color: #555; box-shadow: 0 0 20px rgba(255,255,255,0.05);
         }
-        
-        #nfc-ux-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #000000; z-index: 9999999; display: none;
-            color: #d1d1d1; font-family: 'Space Mono', monospace;
-            overflow: hidden; touch-action: none;
-        }
-        .nfc-phase { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            display: none; flex-direction: column; justify-content: center; align-items: center; 
-        }
-        .nfc-phase.active { display: flex; }
-
-        /* Phase 1: The Blank Canvas */
-        .nfc-phase-01 .logo-glow {
-            font-size: 1.8rem; color: #fff; font-weight: 300; opacity: 0; 
-            transition: opacity 1.5s ease-in-out; text-shadow: 0 0 15px rgba(255,255,255,0.3);
-            letter-spacing: 2px;
-        }
-
-        /* Phase 2: Decryption */
-        .nfc-phase-02 .terminal-box {
-            position: absolute; top: 40px; left: 40px; text-align: left; 
-            font-size: 0.85rem; line-height: 2; color: #a1b2c3; direction: ltr;
-        }
-        .decryption-line {
-            overflow: hidden; white-space: nowrap; width: 0; 
-            border-right: 2px solid #a1b2c3; display: none;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes glitch-blink { 50% { border-color: transparent } }
-
-        /* Phase 3: Access Terminal */
-        .nfc-phase-03 .access-container { text-align: center; }
-        .nfc-p3-title { color: #fff; font-size: 1.1rem; margin-bottom: 25px; letter-spacing: 4px; }
-        .nfc-p3-status { color: #8b0000; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 8px;}
-        .nfc-p3-location { color: #a1b2c3; font-size: 0.85rem; letter-spacing: 2px;}
-        .nfc-p3-timer-wrapper { font-size: 0.8rem; color: #a1b2c3; margin: 40px 0; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 10px;}
-        .nfc-p3-timer { font-size: 2.2rem; color: #ffffff; letter-spacing: 6px; font-weight: 400; }
-        .nfc-p3-msg { color: #a1b2c3; font-size: 0.95rem; max-width: 450px; line-height: 1.8; margin: 0 auto; font-family: 'Inter', sans-serif; direction: rtl;}
-        
-        .nfc-cta-btn {
-            position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
-            background: transparent; border: none; color: #fff; 
-            font-family: 'Space Mono', monospace; letter-spacing: 8px; font-size: 0.9rem; 
-            cursor: pointer; text-transform: uppercase; opacity: 0.6; transition: opacity 0.5s;
-        }
-        .nfc-cta-btn:hover { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
-
-        /* Phase 4: Lock-in */
-        .nfc-phase-04 .lockin-msg { 
-            color: #fff; text-align: center; max-width: 500px; line-height: 2; 
-            font-family: 'Inter', sans-serif; opacity: 0; font-size: 1rem;
-        }
-        .nfc-phase-04 .lockin-en {
-            font-family: 'Space Mono', monospace; color: #fff; letter-spacing: 2px; 
-            margin-bottom: 15px; font-size: 1.1rem; text-transform: uppercase;
-        }
-        @keyframes slowFadeIn { to { opacity: 1; } }
 
         /* ======== 3D BLUEPRINT & DEEP ARCHIVE ======== */
         #blueprint-section { position: relative; width: 100%; height: 100vh; background-color: var(--obsidian-black); overflow: hidden; font-family: 'Inter', sans-serif; color: var(--stark-white); }
@@ -352,7 +293,6 @@
             body.lang-ar .ai-window { left: 5vw; }
             .hud-header { flex-direction: column; gap: 10px; text-align: center; }
             .hud-header div { text-align: center !important; }
-            .nfc-p3-timer { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -596,280 +536,7 @@
             </div>
         </section>
 
-        <section class="content-section" style="background: #000; padding: 100px 0; border: none;">
-            <div class="container fade-in" style="text-align: center;">
-                <p class="mono-text" style="color: #444; font-size: 0.75rem; letter-spacing: 5px; margin-bottom: 25px; text-transform: uppercase;">
-                    <span class="ar-only">بوابة ولوج حصرية</span>
-                    <span class="en-only">CLASSIFIED ACCESS GATEWAY</span>
-                </p>
-                <button class="nfc-gateway-btn" onclick="initiateNFCProtocol()">
-                    [ SIMULATE NFC INVITATION ]
-                </button>
-            </div>
-        </section>
-
-        <div id="nfc-ux-overlay">
-            
-            <div id="nfc-p1" class="nfc-phase">
-                <div class="logo-glow mono-text">フサム</div>
-            </div>
-
-            <div id="nfc-p2" class="nfc-phase">
-                <div class="terminal-box mono-text">
-                    <div class="decryption-line">> INITIATING SECURE HANDSHAKE...</div>
-                    <div class="decryption-line">> VALIDATING NFC TOKEN...</div>
-                    <div class="decryption-line">> CLEARANCE LEVEL: 2 CONFIRMED.</div>
-                    <div class="decryption-line">> DECRYPTING PROJECT: TRACK 35…</div>
-                </div>
-            </div>
-
-            <div id="nfc-p3" class="nfc-phase">
-                <div class="access-container">
-                    <div class="nfc-p3-title mono-text">[ PROTOCOL: TRACK 35 ]</div>
-                    <div class="nfc-p3-status mono-text">STATUS: CLASSIFIED // ACTIVE</div>
-                    <div class="nfc-p3-location mono-text">LOCATION: 21.5433° N, 39.1728° E</div>
-                    
-                    <div class="nfc-p3-timer-wrapper">
-                        T-MINUS: > [ <span id="nfcTimer" class="nfc-p3-timer">14 : 08 : 33 : 12</span> ]
-                    </div>
-
-                    <p class="nfc-p3-msg">
-                        الهوية مؤكدة. لتفعيل بروتوكول الاستخراج وتأكيد التواجد في نقطة الصفر، اضغط أدناه.
-                    </p>
-                </div>
-                <button class="nfc-cta-btn" onclick="confirmNFCProtocol()">[ INITIATE CONNECTION ]</button>
-            </div>
-
-            <div id="nfc-p4" class="nfc-phase">
-                <div class="lockin-en">CONNECTION ESTABLISHED.</div>
-                <div class="lockin-msg">
-                    سيتم إرسال تعليمات الوصول وبروتوكول الاستضافة إلى قناتك الآمنة قبل 24 ساعة من ساعة الصفر.<br>نهاية الاتصال.
-                </div>
-            </div>
-
-        </div>
-        <section id="portal" class="content-section alt-bg no-border">
-            <div class="container fade-in">
-                <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
-                <h2 class="heading-md en-only" style="text-align: center; margin-bottom: 40px;">Executive Dashboard</h2>
-                
-                <div id="auth-view" class="login-wrapper" style="padding: 0;">
-                    <div class="login-box">
-                        <form onsubmit="handleFirebaseLogin(event)">
-                            <div class="input-group">
-                                <label for="userEmail" class="t-label ar-only">البريد الإلكتروني</label>
-                                <label for="userEmail" class="t-label en-only">Email Address</label>
-                                <input type="email" id="userEmail" class="t-input" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="userName" class="t-label ar-only">الاسم الكامل</label>
-                                <label for="userName" class="t-label en-only">Full Name</label>
-                                <input type="text" id="userName" class="t-input" required>
-                            </div>
-                            <div class="input-group">
-                                <label for="userPhone" class="t-label ar-only">رقم الجوال (مطلوب)</label>
-                                <label for="userPhone" class="t-label en-only">Phone Number (Required)</label>
-                                <input type="tel" id="userPhone" class="t-input" required>
-                            </div>
-                            <button type="submit" id="loginBtn" class="btn-blue">
-                                <span class="ar-only">تسجيل الدخول</span>
-                                <span class="en-only">Sign In</span>
-                            </button>
-                        </form>
-                        
-                        <div class="divider">
-                            <span class="ar-only">أو</span>
-                            <span class="en-only">Or</span>
-                        </div>
-                        
-                        <div class="oauth-group">
-                            <button class="btn-social" onclick="signInWithGoogle()" title="Google" aria-label="Sign in with Google">
-                                <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                            </button>
-                            <button class="btn-social" onclick="signInWithApple()" title="Apple" aria-label="Sign in with Apple">
-                                <svg viewBox="0 0 384 512" fill="#000"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                            </button>
-                        </div>
-
-                        <div style="margin-top: 40px; text-align: center;">
-                            <h4 style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase;">[ DECRYPT SYSTEM ]</h4>
-                            <input type="password" id="adminPass" class="t-input" placeholder="Enter Admin Token" style="margin-bottom: 15px; text-align: center;">
-                            <button onclick="checkPass()" class="btn-blue" style="background: var(--text-muted);">DECRYPT</button>
-                            <div class="status" id="loginStatus" style="font-size: 0.8rem; margin-top: 15px; font-weight: 500;">Authorized Personnel Only.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="dashboard-view">
-                    <nav class="dash-nav" aria-label="Dashboard Navigation">
-                        <button class="dash-tab active" onclick="switchService('history')">
-                            <span class="ar-only">السجلات والحالة</span><span class="en-only">Status & Logs</span>
-                        </button>
-                        <button class="dash-tab" onclick="switchService('consult')">
-                            <span class="ar-only">طلب استشارة</span><span class="en-only">New Inquiry</span>
-                        </button>
-                        <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
-                        <button class="dash-tab" id="adminTab" style="display:none;" onclick="switchService('admin')">ADMIN CORE</button>
-                    </nav>
-
-                    <div id="form-history" class="service-form active" aria-live="polite">
-                        <div id="history-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px;"></div>
-                    </div>
-
-                    <div id="form-consult" class="service-form">
-                        <form onsubmit="submitFirebaseConsult(event)">
-                            <label for="consultText" class="sr-only" style="display:none;">Your Inquiry</label>
-                            <textarea class="t-input" id="consultText" style="height: 150px; resize: vertical; margin-bottom: 20px;" required></textarea>
-                            <button type="submit" id="consultBtn" class="btn-blue" style="width: auto; padding: 14px 40px;">
-                                <span class="ar-only">إرسال الطلب</span>
-                                <span class="en-only">Transmit Inquiry</span>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div id="form-nexus" class="service-form">
-                        <div class="nexus-window" onclick="document.getElementById('nexusInput').focus()">
-                            <div class="nexus-header">
-                                <div class="nexus-dot red"></div><div class="nexus-dot yel"></div><div class="nexus-dot grn"></div>
-                            </div>
-                            <div class="nexus-output" id="nexusOutput" aria-live="polite">SYSTEM INITIALIZED. SECURE CONNECTION ACTIVE.</div>
-                            <div class="nexus-input-line">
-                                <label for="nexusInput" class="nexus-prompt">root@nexus:~#</label>
-                                <input type="text" id="nexusInput" class="nexus-input" autocomplete="off" onkeydown="handleNexus(event)">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="form-admin" class="service-form">
-                        <div style="display:flex; flex-direction:column; gap:15px; background:#050505; padding:30px; border-radius:12px; border: 1px solid #1f1f1f;">
-                            <h3 style="color:#27c93f; font-family:'Space Mono', monospace; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 10px;">[ DECRYPTED CORE ]</h3>
-                            <button onclick="exportData('Users')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download Users Directory</button>
-                            <button onclick="exportData('Consultations')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download Strategic Consultations</button>
-                            <button onclick="exportData('MatrixLogs')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download AI Matrix Logs</button>
-                            <div id="dashStatus" style="color:#888; font-size:0.85rem; font-family:'Space Mono', monospace; margin-top:15px;">System Ready.</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="blueprint-section" class="deep-archive" aria-label="The Deep Archive Projects">
-            <div class="marquee-container" aria-hidden="true">
-                <div class="marquee-text">
-                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
-                </div>
-            </div>
-
-            <div class="container fade-in">
-                <div style="text-align: center; margin-bottom: 70px;">
-                    <span class="mono-text" style="color: #666; letter-spacing: 5px; font-size: 0.85rem;">LEVEL 2 CLEARANCE</span>
-                    <h2 style="font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 15px;">The Deep Archive</h2>
-                </div>
-
-                <div class="archive-grid">
-                    <div class="archive-card">
-                        <span class="archive-status">ENCRYPTED</span>
-                        <h3 class="archive-title">Project: T-35</h3>
-                        <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
-                    </div>
-
-                    <div class="archive-card">
-                        <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
-                        <h3 class="archive-title">Concept: The Lab</h3>
-                        <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
-                    </div>
-
-                    <div class="archive-card">
-                        <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
-                        <h3 class="archive-title">System: iN STUDIO</h3>
-                        <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
-                    </div>
-                </div>
-
-                <div class="kill-switch-container">
-                    <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-                        [^] Return to Surface
-                    </button>
-                </div>
-            </div>
-
-            <div id="blueprint-loader" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Space Mono', monospace; color:#fff;" aria-hidden="true">SIRNA FE'AMAA JIRA... (LOADING)</div>
-            <div class="film-grain"></div>
-            <div class="cinematic-vignette"></div>
-            <div class="hud-container" aria-hidden="true">
-                <div class="hud-header">
-                    <div>
-                        <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
-                        RAGAA MADAALLII (RENDER): 1991.33.EX
-                    </div>
-                    <div style="text-align: right;">
-                        SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
-                        HAALA: HOLLYWOOD SIINIMAA
-                    </div>
-                </div>
-                <div class="hud-footer">
-                    <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
-                    HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 
-                </div>
-            </div>
-            <div id="canvas-container" aria-hidden="true"></div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container fade-in">
-            <div class="footer-links" style="margin-bottom: 40px; display:flex; flex-wrap: wrap; gap:25px; justify-content:center;">
-                <a href="https://www.instagram.com/ex_experience.sa" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">Instagram</a>
-                <a href="https://www.tiktok.com/@ex_experience.sa" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">TikTok</a>
-                <a href="https://snapchat.com/t/w3omS0EV" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">Snapchat</a>
-                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">WhatsApp</a>
-            </div>
-
-            <div style="margin-top: 60px;">
-                <h2 class="mono-text footer-logo glitch-anim">フサム | experience™</h2>
-                <p class="text-body" style="margin: 0 auto; font-size: 1rem; color: var(--text-main); font-weight: 500;">Fearless, Relentless, True to you.<br>Engineering the Human Experience</p><br>
-                <p class="text-body" style="margin: 0 auto; font-size: 0.85rem; color: #888;">HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
-                <p class="mono-text" style="font-size: 0.8rem; color: #aaa; margin-top: 20px;">© 2026 フサム | experience™. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <div id="legalModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeLegal()" aria-label="Close modal">×</button>
-            <h2 id="legalTitle" class="heading-md" style="margin-bottom: 20px;"></h2>
-            <div id="legalBody" class="text-body" style="font-size: 0.95rem; color: var(--text-main);"></div>
-        </div>
-    </div>
-
-    <button class="ai-btn" onclick="toggleChat()" aria-label="Open Oracle Chat">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-    </button>
-    
-    <div class="ai-window" id="aiWindow" role="complementary" aria-label="Oracle Chat Interface">
-        <header class="ai-header">
-            <span class="ai-title">Ex Oracle</span>
-            <button class="ai-close" onclick="toggleChat()" aria-label="Close chat">×</button>
-        </header>
-        <div class="ai-body" id="chatBody" aria-live="polite"></div>
-        <div style="display: flex; flex-direction: column; background: #fff;">
-            <div class="ai-input-area">
-                <label for="aiInput" class="sr-only" style="display:none;">Type message to Oracle</label>
-                <input type="text" id="aiInput" class="ai-input" onkeydown="handleChatEnter(event)">
-                <button class="ai-send" onclick="sendChatMessage()" aria-label="Send message">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                </button>
-            </div>
-            <div class="ai-footer-note">
-                <span class="ar-only">قد يخطئ الأوراكل. <button style="background:none;border:none;color:var(--accent-blue);cursor:pointer;text-decoration:underline;" onclick="openLegal('oracle')">شروط الاستخدام</button></span>
-                <span class="en-only">Ex Oracle can make mistakes. <button style="background:none;border:none;color:var(--accent-blue);cursor:pointer;text-decoration:underline;" onclick="openLegal('oracle')">Terms of Use</button></span>
-            </div>
-        </div>
-    </div>
-
-    <script>
- <section class="content-section" style="background: #000; padding: 100px 0; border: none; position: relative; z-index: 50;">
+        <section class="content-section" style="background: #000; padding: 100px 0; border: none; position: relative; z-index: 50;">
             <div class="container fade-in" style="text-align: center;">
                 <p class="mono-text" style="color: #444; font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 5px; margin-bottom: 25px; text-transform: uppercase;">
                     <span class="ar-only">محاكاة الرنين العاطفي | مستوى الوصول: سري</span>
@@ -1214,16 +881,227 @@
                 matrixRenderer.setSize(window.innerWidth, window.innerHeight);
             }
         </script>
-        ```
+        <section id="portal" class="content-section alt-bg no-border">
+            <div class="container fade-in">
+                <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
+                <h2 class="heading-md en-only" style="text-align: center; margin-bottom: 40px;">Executive Dashboard</h2>
+                
+                <div id="auth-view" class="login-wrapper" style="padding: 0;">
+                    <div class="login-box">
+                        <form onsubmit="handleFirebaseLogin(event)">
+                            <div class="input-group">
+                                <label for="userEmail" class="t-label ar-only">البريد الإلكتروني</label>
+                                <label for="userEmail" class="t-label en-only">Email Address</label>
+                                <input type="email" id="userEmail" class="t-input" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="userName" class="t-label ar-only">الاسم الكامل</label>
+                                <label for="userName" class="t-label en-only">Full Name</label>
+                                <input type="text" id="userName" class="t-input" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="userPhone" class="t-label ar-only">رقم الجوال (مطلوب)</label>
+                                <label for="userPhone" class="t-label en-only">Phone Number (Required)</label>
+                                <input type="tel" id="userPhone" class="t-input" required>
+                            </div>
+                            <button type="submit" id="loginBtn" class="btn-blue">
+                                <span class="ar-only">تسجيل الدخول</span>
+                                <span class="en-only">Sign In</span>
+                            </button>
+                        </form>
+                        
+                        <div class="divider">
+                            <span class="ar-only">أو</span>
+                            <span class="en-only">Or</span>
+                        </div>
+                        
+                        <div class="oauth-group">
+                            <button class="btn-social" onclick="signInWithGoogle()" title="Google" aria-label="Sign in with Google">
+                                <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                            </button>
+                            <button class="btn-social" onclick="signInWithApple()" title="Apple" aria-label="Sign in with Apple">
+                                <svg viewBox="0 0 384 512" fill="#000"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                            </button>
+                        </div>
 
-### ماذا يستفيد الزائر التجربة السيكولوجية)؟
-* **الاستقلالية وحب الاستطلاع:** نحن لا نجبره على القراءة؛ نحن نعطيه مساحة ثلاثية الأبعاد ونطلب منه "الاستكشاف". البشر مجبلون على تتبع الأشياء المضيئة والضغط عليها.
-* **إثبات المنهجية:** بدلاً من القراءة عن "التشوه الزمني" في مستند PDF طويل، هو يختبره فعلياً عبر التفاعل مع الجزيئات والهولوغرام والاهتزازات.
-* **المبرر المنطقي للتسجيل:** التسجيل لم يعد فخاً تسويقياً. لقد أصبح "إجراءً أمنياً" لحماية المستثمر من "التشبع الإدراكي" (Cognitive Overload) وللسماح له بحفظ ما اكتشفه من أسرار. الدوافع النفسية هنا في أعلى مستوياتها.
+                        <div style="margin-top: 40px; text-align: center;">
+                            <h4 style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase;">[ DECRYPT SYSTEM ]</h4>
+                            <input type="password" id="adminPass" class="t-input" placeholder="Enter Admin Token" style="margin-bottom: 15px; text-align: center;">
+                            <button onclick="checkPass()" class="btn-blue" style="background: var(--text-muted);">DECRYPT</button>
+                            <div class="status" id="loginStatus" style="font-size: 0.8rem; margin-top: 15px; font-weight: 500;">Authorized Personnel Only.</div>
+                        </div>
+                    </div>
+                </div>
 
-هل أنت جاهز لتطبيق هذه الشفرة وربطها بالواجهة لتكون الحجر الأساس في بوابة **フサム | experience™**؟
+                <div id="dashboard-view">
+                    <nav class="dash-nav" aria-label="Dashboard Navigation">
+                        <button class="dash-tab active" onclick="switchService('history')">
+                            <span class="ar-only">السجلات والحالة</span><span class="en-only">Status & Logs</span>
+                        </button>
+                        <button class="dash-tab" onclick="switchService('consult')">
+                            <span class="ar-only">طلب استشارة</span><span class="en-only">New Inquiry</span>
+                        </button>
+                        <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
+                        <button class="dash-tab" id="adminTab" style="display:none;" onclick="switchService('admin')">ADMIN CORE</button>
+                    </nav>
 
+                    <div id="form-history" class="service-form active" aria-live="polite">
+                        <div id="history-content" style="max-height: 400px; overflow-y: auto; padding-right: 10px;"></div>
+                    </div>
+
+                    <div id="form-consult" class="service-form">
+                        <form onsubmit="submitFirebaseConsult(event)">
+                            <label for="consultText" class="sr-only" style="display:none;">Your Inquiry</label>
+                            <textarea class="t-input" id="consultText" style="height: 150px; resize: vertical; margin-bottom: 20px;" required></textarea>
+                            <button type="submit" id="consultBtn" class="btn-blue" style="width: auto; padding: 14px 40px;">
+                                <span class="ar-only">إرسال الطلب</span>
+                                <span class="en-only">Transmit Inquiry</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="form-nexus" class="service-form">
+                        <div class="nexus-window" onclick="document.getElementById('nexusInput').focus()">
+                            <div class="nexus-header">
+                                <div class="nexus-dot red"></div><div class="nexus-dot yel"></div><div class="nexus-dot grn"></div>
+                            </div>
+                            <div class="nexus-output" id="nexusOutput" aria-live="polite">SYSTEM INITIALIZED. SECURE CONNECTION ACTIVE.</div>
+                            <div class="nexus-input-line">
+                                <label for="nexusInput" class="nexus-prompt">root@nexus:~#</label>
+                                <input type="text" id="nexusInput" class="nexus-input" autocomplete="off" onkeydown="handleNexus(event)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="form-admin" class="service-form">
+                        <div style="display:flex; flex-direction:column; gap:15px; background:#050505; padding:30px; border-radius:12px; border: 1px solid #1f1f1f;">
+                            <h3 style="color:#27c93f; font-family:'Space Mono', monospace; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 10px;">[ DECRYPTED CORE ]</h3>
+                            <button onclick="exportData('Users')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download Users Directory</button>
+                            <button onclick="exportData('Consultations')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download Strategic Consultations</button>
+                            <button onclick="exportData('MatrixLogs')" class="btn-blue" style="background:#111; color:#27c93f; border:1px solid #27c93f; font-family:'Space Mono'; padding: 12px;">⬇ Download AI Matrix Logs</button>
+                            <div id="dashStatus" style="color:#888; font-size:0.85rem; font-family:'Space Mono', monospace; margin-top:15px;">System Ready.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="blueprint-section" class="deep-archive" aria-label="The Deep Archive Projects">
+            <div class="marquee-container" aria-hidden="true">
+                <div class="marquee-text">
+                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
+                </div>
+            </div>
+
+            <div class="container fade-in">
+                <div style="text-align: center; margin-bottom: 70px;">
+                    <span class="mono-text" style="color: #666; letter-spacing: 5px; font-size: 0.85rem;">LEVEL 2 CLEARANCE</span>
+                    <h2 style="font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 300; color: #fff; letter-spacing: -0.5px; margin-top: 15px;">The Deep Archive</h2>
+                </div>
+
+                <div class="archive-grid">
+                    <div class="archive-card">
+                        <span class="archive-status">ENCRYPTED</span>
+                        <h3 class="archive-title">Project: T-35</h3>
+                        <p class="archive-desc">Cinematic docu-series architecture. Exploring the high-performance culture and motorsport matrix in the Middle East.</p>
+                    </div>
+
+                    <div class="archive-card">
+                        <span class="archive-status" style="color:#00e5ff; border-color:#00e5ff;">IN DEVELOPMENT</span>
+                        <h3 class="archive-title">Concept: The Lab</h3>
+                        <p class="archive-desc">Physical translation of the HX-5 methodology. Sensory specialty coffee environment engineered for focus and isolation.</p>
+                    </div>
+
+                    <div class="archive-card">
+                        <span class="archive-status" style="color:#27c93f; border-color:#27c93f;">ACTIVE</span>
+                        <h3 class="archive-title">System: iN STUDIO</h3>
+                        <p class="archive-desc">High-end, minimalist luxury brand design infrastructure. Aligning global aesthetic standards with local implementation.</p>
+                    </div>
+                </div>
+
+                <div class="kill-switch-container">
+                    <button class="kill-switch" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                        [^] Return to Surface
+                    </button>
+                </div>
+            </div>
+
+            <div id="blueprint-loader" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Space Mono', monospace; color:#fff;" aria-hidden="true">SIRNA FE'AMAA JIRA... (LOADING)</div>
+            <div class="film-grain"></div>
+            <div class="cinematic-vignette"></div>
+            <div class="hud-container" aria-hidden="true">
+                <div class="hud-header">
+                    <div>
+                        <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
+                        RAGAA MADAALLII (RENDER): 1991.33.EX
+                    </div>
+                    <div style="text-align: right;">
+                        SAFAROOTA (DIMENSIONS): 4096 x 2048<br>
+                        HAALA: HOLLYWOOD SIINIMAA
+                    </div>
+                </div>
+                <div class="hud-footer">
+                    <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
+                    HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 
+                </div>
+            </div>
+            <div id="canvas-container" aria-hidden="true"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container fade-in">
+            <div class="footer-links" style="margin-bottom: 40px; display:flex; flex-wrap: wrap; gap:25px; justify-content:center;">
+                <a href="https://www.instagram.com/ex_experience.sa" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">Instagram</a>
+                <a href="https://www.tiktok.com/@ex_experience.sa" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">TikTok</a>
+                <a href="https://snapchat.com/t/w3omS0EV" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">Snapchat</a>
+                <a href="https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z" target="_blank" style="color:var(--text-muted); text-decoration:none; font-weight: 500; transition: color 0.3s;" onmouseover="this.style.color='var(--text-main)'" onmouseout="this.style.color='var(--text-muted)'">WhatsApp</a>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <h2 class="mono-text footer-logo glitch-anim">フサム | experience™</h2>
+                <p class="text-body" style="margin: 0 auto; font-size: 1rem; color: var(--text-main); font-weight: 500;">Fearless, Relentless, True to you.<br>Engineering the Human Experience</p><br>
+                <p class="text-body" style="margin: 0 auto; font-size: 0.85rem; color: #888;">HX-5™ x 33GUIDE™ x iNSTUDIO™ x DROPzero™</p>
+                <p class="mono-text" style="font-size: 0.8rem; color: #aaa; margin-top: 20px;">© 2026 フサム | experience™. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="legalModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeLegal()" aria-label="Close modal">×</button>
+            <h2 id="legalTitle" class="heading-md" style="margin-bottom: 20px;"></h2>
+            <div id="legalBody" class="text-body" style="font-size: 0.95rem; color: var(--text-main);"></div>
+        </div>
+    </div>
+
+    <button class="ai-btn" onclick="toggleChat()" aria-label="Open Oracle Chat">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    </button>
     
+    <div class="ai-window" id="aiWindow" role="complementary" aria-label="Oracle Chat Interface">
+        <header class="ai-header">
+            <span class="ai-title">Ex Oracle</span>
+            <button class="ai-close" onclick="toggleChat()" aria-label="Close chat">×</button>
+        </header>
+        <div class="ai-body" id="chatBody" aria-live="polite"></div>
+        <div style="display: flex; flex-direction: column; background: #fff;">
+            <div class="ai-input-area">
+                <label for="aiInput" class="sr-only" style="display:none;">Type message to Oracle</label>
+                <input type="text" id="aiInput" class="ai-input" onkeydown="handleChatEnter(event)">
+                <button class="ai-send" onclick="sendChatMessage()" aria-label="Send message">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+            <div class="ai-footer-note">
+                <span class="ar-only">قد يخطئ الأوراكل. <button style="background:none;border:none;color:var(--accent-blue);cursor:pointer;text-decoration:underline;" onclick="openLegal('oracle')">شروط الاستخدام</button></span>
+                <span class="en-only">Ex Oracle can make mistakes. <button style="background:none;border:none;color:var(--accent-blue);cursor:pointer;text-decoration:underline;" onclick="openLegal('oracle')">Terms of Use</button></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
