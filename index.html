@@ -320,25 +320,21 @@
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
-        /* ======== THE DEEP ARCHIVE: HORIZONTAL SWIPE & FOCUS UI ======== */
+        /* ======== THE DEEP ARCHIVE: RESPONSIVE CARDS ======== */
         .archive-grid { 
-            display: flex; 
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory; 
-            gap: 30px; 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* إجبار النظام على 3 أعمدة متساوية للكمبيوتر */
+            gap: 25px; 
+            width: 100%;
             max-width: 1200px; 
             margin: 0 auto; 
-            padding: 20px 5% 60px 5%; 
+            padding: 40px 2%; 
             position: relative; 
             z-index: 20; 
-            scrollbar-width: none; /* إخفاء شريط التمرير لشكل أنظف */
-            -webkit-overflow-scrolling: touch;
         }
-        .archive-grid::-webkit-scrollbar { display: none; }
         
         .archive-card { 
-            flex: 0 0 340px; /* عرض ثابت للبطاقة */
-            scroll-snap-align: center;
+            width: 100%; /* تتمدد وتتقلص مع الشاشة لمنع القص */
             background: rgba(10, 10, 10, 0.6); 
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(10, 132, 255, 0.2); 
@@ -350,19 +346,32 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             height: fit-content;
         }
-        
-        @media (max-width: 768px) {
-            .archive-card { flex: 0 0 82vw; } /* على الجوال: تظهر جزء من البطاقة التالية لتحفيز السحب */
-        }
 
-        /* تفاصيل البطاقة */
-        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
+        /* تحويل العرض إلى سحب أفقي (Carousel) في الجوال والتابلت فقط */
+        @media (max-width: 900px) {
+            .archive-grid { 
+                display: flex; 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                scrollbar-width: none; 
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 40px;
+            }
+            .archive-grid::-webkit-scrollbar { display: none; }
+            .archive-card { 
+                flex: 0 0 85vw; /* عرض البطاقة في الجوال */
+                scroll-snap-align: center;
+            }
+        }
+        
+        /* تفاصيل البطاقة وتأثيرات الخطوط */
+        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .archive-card:nth-child(2)::before { background: #00e5ff; }
         .archive-card:nth-child(3)::before { background: #27c93f; }
         .archive-card:hover::before { transform: scaleX(1); }
         
         .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 20px; }
-        .archive-title { font-size: 1.6rem; font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; }
+        .archive-title { font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; }
         
         /* تأثير التشفير والفتح */
         .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #555; letter-spacing: 3px; margin-top: 25px; transition: 0.3s; text-transform: uppercase; }
@@ -392,7 +401,7 @@
         .archive-card.focused:nth-child(3) { border-color: #27c93f; }
 
         .archive-card.focused .archive-desc {
-            max-height: 400px; /* لفتح مساحة النص */
+            max-height: 500px; 
             opacity: 1;
             margin-top: 20px;
         }
@@ -643,14 +652,14 @@
                     <div style="margin-top: 40px; margin-bottom: 30px;">
                         <span class="mono-text" style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">THE FOUNDER</span>
                         <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px;">Hussam Hassan Mohammed Tahiri</h3>
-                        <p class="text-body ar-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">العقل الاستراتيجي والمهندس المبتكر لمنهجية HX-5™️. صاحب الرؤية الذي قام بتكوين الحمض النووي للعلامة フサム | experience™ وابتكار الأساس لهندسة التجارب الإنسانية.</p>
-                        <p class="text-body en-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">The strategic mind and architect of the HX-5™️ methodology. The visionary who laid the foundation for Human Experience Engineering.</p>
+                        <p class="text-body ar-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">العقل الاستراتيجي والمهندس المبتكر لمنهجية HX-5™️. صاحب الرؤية الذي قام بتكوين جذور الحمض النووي للعلامة フサム | experience™ وابتكار الأساس لهندسة التجارب الإنسانية.</p>
+                        <p class="text-body en-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">The DNA creator & strategic mind. architect of the HX-5™️ methodology. The visionary who laid the foundation for Engineering Human Experiences.</p>
                     </div>
 
                     <div>
                         <span class="mono-text" style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">CO-FOUNDER</span>
-                        <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px;">P.Sultan Bin Badr Bin Abdulmuhsen Al Saud</h3>
-                        <p class="text-body ar-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">القوة الموازية التي تترجم الرؤية الاستراتيجية العميقة إلى إطار صلب وقابل للتوسع. مهندس مشارك في الحمض النووي للكيان.</p>
+                        <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px;">Sultan Bin Badr Abdulmuhsen Al Saud</h3>
+                        <p class="text-body ar-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">القوة الموازية التي تترجم الرؤية الاستراتيجية العميقة إلى إطار صلب وقابل للتوسع. مهندس مشارك في جينات الحمض النووي للكيان.</p>
                         <p class="text-body en-only" style="font-size: 0.9rem; margin: 0 auto; line-height: 1.6;">The parallel force that translates deep strategic vision into a solid, scalable framework. Co-engineering the entity's DNA.</p>
                     </div>
                 </div>
