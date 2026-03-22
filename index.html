@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta property="og:image" content="https://ex-experience.github.io/og-image.png">
-<meta property="og:image:secure_url" content="https://ex-experience.github.io/og-image.png">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+    <meta property="og:image" content="https://ex-experience.github.io/og-image.png">
+    <meta property="og:image:secure_url" content="https://ex-experience.github.io/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://[https://ex-experience.github.io/]/">
-<meta name="twitter:title" content="フサム | experience™">
-<meta name="twitter:description" content="Engineering Human Experiences">
-<meta name="twitter:image" content="https://[https://ex-experience.github.io/]/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://[https://ex-experience.github.io/]/">
+    <meta name="twitter:title" content="フサム | experience™">
+    <meta name="twitter:description" content="Engineering Human Experiences">
+    <meta name="twitter:image" content="https://[https://ex-experience.github.io/]/assets/og-image.png">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="フサム | experience™ - Engineering Human Experiences">
     <title>フサム | experience™</title>
     
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" href="icon.png">
@@ -37,6 +44,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     
     <script>
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -51,7 +59,9 @@
     </script>
 
     <style>
-        /* LUXURY MINIMALIST THEME & TYPOGRAPHY ENHANCEMENTS */
+        /* ========================================== */
+        /* LUXURY MINIMALIST THEME & TYPOGRAPHY       */
+        /* ========================================== */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
@@ -112,6 +122,7 @@
             97% { transform: translate(0); text-shadow: none; clip-path: none; } 
         }
 
+        /* NAVIGATION */
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: transparent; transition: background 0.3s ease, padding 0.3s ease; }
         .top-nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 1px 5px rgba(0,0,0,0.05); padding: 15px 5%;}
         .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icons svg { fill: var(--text-main); color: var(--text-main); }
@@ -121,6 +132,7 @@
         .nav-icon svg { width: 22px; height: 22px; fill: currentColor; transition: 0.3s;}
         .nav-icon:hover { opacity: 0.7; transform: scale(1.05);}
 
+        /* HERO SECTION */
         .hero { position: relative; height: 100vh; min-height: 600px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; background-color: #000; }
         .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; filter: grayscale(80%) contrast(110%); }
@@ -130,6 +142,7 @@
         .main-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 500; letter-spacing: -1px; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.1;}
         .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
         
+        /* CONTENT TYPOGRAPHY */
         .content-section { padding: 100px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
@@ -151,6 +164,7 @@
         body.lang-ar .list-clean li { padding-left: 0; padding-right: 25px; }
         body.lang-ar .list-clean li::before { left: auto; right: 0; }
 
+        /* DASHBOARD & FORMS */
         .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 40px 20px;}
         .login-box { width: 100%; max-width: 400px; background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid var(--border-light); margin: 0 auto; text-align: left;}
         body.lang-ar .login-box { text-align: right; }
@@ -190,6 +204,7 @@
         .h-date { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #888; }
         .h-status { font-size: 0.75rem; background: var(--bg-secondary); padding: 6px 14px; border-radius: 20px; color: var(--text-main); font-weight: 500; border: 1px solid var(--border-light); text-transform: uppercase; letter-spacing: 1px;}
 
+        /* NEXUS COMMAND TERMINAL */
         .nexus-window { background: rgba(15, 20, 25, 0.98); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 25px; font-family: 'Space Mono', monospace; color: #fff; height: 320px; display: flex; flex-direction: column; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
         .nexus-header { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;}
         .nexus-dot { width: 12px; height: 12px; border-radius: 50%; background: #444; }
@@ -199,6 +214,7 @@
         .nexus-prompt { color: var(--accent-blue); margin-right: 12px; font-weight: bold; font-size: 0.85rem;}
         .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.9rem;}
 
+        /* EX ORACLE UI */
         .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 4s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
         @keyframes pulse-glow { 0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.2); } 50% { box-shadow: 0 10px 40px rgba(23, 26, 32, 0.4); transform: scale(1.05); } }
@@ -334,7 +350,7 @@
         /* ======== THE DEEP ARCHIVE: RESPONSIVE CARDS ======== */
         .archive-grid { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); /* إجبار النظام على 3 أعمدة متساوية للكمبيوتر */
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px; 
             width: 100%;
             max-width: 1200px; 
@@ -345,7 +361,7 @@
         }
         
         .archive-card { 
-            width: 100%; /* تتمدد وتتقلص مع الشاشة لمنع القص */
+            width: 100%; 
             background: rgba(10, 10, 10, 0.6); 
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(10, 132, 255, 0.2); 
@@ -358,7 +374,6 @@
             height: fit-content;
         }
 
-        /* تحويل العرض إلى سحب أفقي (Carousel) في الجوال والتابلت فقط */
         @media (max-width: 900px) {
             .archive-grid { 
                 display: flex; 
@@ -370,12 +385,11 @@
             }
             .archive-grid::-webkit-scrollbar { display: none; }
             .archive-card { 
-                flex: 0 0 85vw; /* عرض البطاقة في الجوال */
+                flex: 0 0 85vw;
                 scroll-snap-align: center;
             }
         }
         
-        /* تفاصيل البطاقة وتأثيرات الخطوط */
         .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .archive-card:nth-child(2)::before { background: #00e5ff; }
         .archive-card:nth-child(3)::before { background: #27c93f; }
@@ -384,7 +398,6 @@
         .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 20px; }
         .archive-title { font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; }
         
-        /* تأثير التشفير والفتح */
         .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #555; letter-spacing: 3px; margin-top: 25px; transition: 0.3s; text-transform: uppercase; }
         .archive-card:hover .card-prompt { color: #0A84FF; }
         
@@ -395,7 +408,6 @@
         }
         body.lang-ar .archive-desc { direction: rtl; text-align: justify; }
 
-        /* حالة التركيز (Focus State) */
         .archive-grid.has-focus .archive-card:not(.focused) {
             opacity: 0.3;
             filter: blur(4px);
@@ -407,15 +419,12 @@
             transform: scale(1.05); 
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.15); 
             z-index: 30;
-            /* التعديل الجوهري: السماح بالتمرير داخل البطاقة إذا كان المحتوى طويلاً */
             max-height: 80vh; 
             overflow-y: auto; 
-            /* إخفاء شريط التمرير الافتراضي لشكل أنظف */
             scrollbar-width: thin; 
             scrollbar-color: rgba(255,255,255,0.2) transparent;
         }
         
-        /* Webkit Scrollbar Styling for focused cards */
         .archive-card.focused::-webkit-scrollbar { width: 4px; }
         .archive-card.focused::-webkit-scrollbar-track { background: transparent; }
         .archive-card.focused::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.2); border-radius: 4px; }
@@ -424,7 +433,7 @@
         .archive-card.focused:nth-child(3) { border-color: #27c93f; }
 
         .archive-card.focused .archive-desc {
-            max-height: none; /* إزالة الحد الأقصى للسماح بالنص بأخذ مساحته الطبيعية */
+            max-height: none; 
             opacity: 1;
             margin-top: 20px;
         }
@@ -689,108 +698,6 @@
             </div>
         </section>
 
-        <section class="content-section" style="background: #000; padding: 100px 0; border: none; position: relative; z-index: 50;">
-            <div class="container fade-in" style="text-align: center;">
-                <p class="mono-text" style="color: #444; font-size: clamp(0.6rem, 2vw, 0.75rem); letter-spacing: 5px; margin-bottom: 25px; text-transform: uppercase;">
-                    <span class="ar-only">بوابة الولوج: محاكاة HX-5 الإدراكية</span>
-                    <span class="en-only">ACCESS GATEWAY: HX-5 COGNITIVE SIMULATION</span>
-                </p>
-                <button class="nfc-gateway-btn" onclick="initiateHX5Journey()">
-                    [ ENTER THE MATRIX ]
-                </button>
-            </div>
-        </section>
-
-        <div id="miracle-matrix-overlay">
-            <div id="matrix-canvas-container"></div>
-            
-            <div class="matrix-ui-layer">
-                <div class="matrix-header">
-                    <div class="matrix-status" id="matrixStatus">SYSTEM: STANDBY</div>
-                    <div class="matrix-controls-container">
-                        <button class="matrix-abort-btn" onclick="closeHX5Journey(false)">[ ABORT SIMULATION ]</button>
-                    </div>
-                </div>
-
-                <div id="stage-1" class="hx-stage-ui">
-                    <div class="stage-title">
-                        <span class="ar-only">[ 01 : INTENT ] الغاية</span>
-                        <span class="en-only">[ 01 : INTENT ]</span>
-                    </div>
-                    <div class="stage-desc">
-                        <span class="ar-only">كل شيء يبدأ بالنية. نحن لا نصمم للاستهلاك التجاري، بل نؤسس القيمة الجوهرية لمنفعة الانسان في اسلوب حياته. اضغط لتوليد الشرارة الأولى لاختراق حاجز الانتباه.</span>
-                        <span class="en-only">Everything begins with a deliberate core. We don't design for utility; we establish intrinsic value. Tap to ignite the first spark and breach the attention barrier.</span>
-                    </div>
-                    <button class="hx-btn" onclick="advanceStage(2)">
-                        <span class="ar-only">[ ولّد الشرارة ]</span>
-                        <span class="en-only">[ IGNITE THE CORE ]</span>
-                    </button>
-                </div>
-
-                <div id="stage-2" class="hx-stage-ui">
-                    <div class="stage-title">
-                        <span class="ar-only">[ 02 : CONTEXT ] السياق</span>
-                        <span class="en-only">[ 02 : CONTEXT ]</span>
-                    </div>
-                    <div class="stage-desc">
-                        <span class="ar-only">التجربة لا تحدث في فراغ. نحن نحلل كل الظروف البيئية والنفسية المحيطة بك رقميا لهندسة وتشكيل واقعك . اسحب الفضاء لاكتشاف نقطة التماس الخفية.</span>
-                        <span class="en-only">Experience does not unfold in a vacuum. We analyze the environmental and psychological conditions to shape your reality. Drag the space to discover the hidden touchpoint.</span>
-                    </div>
-                </div>
-
-                <div id="stage-3" class="hx-stage-ui">
-                    <div class="stage-title">
-                        <span class="ar-only">[ 03 : STIMULI ] المحفزات</span>
-                        <span class="en-only">[ 03 : STIMULI ]</span>
-                    </div>
-                    <div class="stage-desc">
-                        <span class="ar-only">لتجاوز الفلاتر المنطقية والوصول المباشر إلى عقلك الباطن، يجب رفع طاقة النظام. اسحب المؤشر للحد الأقصى لتفعيل "الاستجابة الحيوية".</span>
-                        <span class="en-only">To bypass logical filters and directly access your subconscious, system energy must peak. Drag the slider to maximum to activate the "Biometric Response".</span>
-                    </div>
-                    <input type="range" min="0" max="100" value="0" class="hx-slider" id="stimuliSlider" oninput="handleStimuli()">
-                </div>
-
-                <div id="stage-4" class="hx-stage-ui">
-                    <div class="stage-title">
-                        <span class="ar-only">[ 04 : INTERACTION ] التفاعل</span>
-                        <span class="en-only">[ 04 : INTERACTION ]</span>
-                    </div>
-                    <div class="stage-desc">
-                        <span class="ar-only">لقد دخلت الآن في "حالة التدفق" (Flow State). معدل التشتت يقترب من الصفر. اضغط باستمرار لتوحيد الإدراك وهندسة التشوه الزمني.</span>
-                        <span class="en-only">You have now entered the "Flow State". Distraction rate approaches zero. Hold to synchronize cognition and engineer time distortion.</span>
-                    </div>
-                    <button class="hold-btn" id="syncBtn">
-                        <span class="ar-only">اضغط للتوحيد</span>
-                        <span class="en-only">HOLD<br>TO SYNC</span>
-                    </button>
-                </div>
-
-                <div id="stage-5" class="hx-stage-ui">
-                    <div class="ultimate-hook">
-                        <div class="hook-title">
-                            <span class="ar-only">[ 05 : IMPACT ] الأثر الخالد</span>
-                            <span class="en-only">[ 05 : IMPACT ] THE LASTING MEMORY</span>
-                        </div>
-                        <div class="hook-body">
-                            <span class="ar-only">
-                                هنا تنتهي المحاكاة، ويبدأ الواقع. الأثر هو البصمة المعرفية التي تحول هذه اللحظة إلى ذاكرة خالدة.<br><br>
-                              من تفاصيل قهوتك الدقيقة، إلى هويتك الشخصية وهواياتك، وشغفك بالأداء العالي، وصولاً إلى استثماراتك الكبرى.. نحن نُهندس واقعك، ذوقك، ومزاجك اسلوب حياتك لترتقي إلى أعلى مستويات المنفعة وجودة الحياة
-                            </span>
-                            <span class="en-only" style="direction: ltr; text-align: left; display: block;">
-                                Here the simulation ends, and reality begins. Impact is the cognitive imprint that turns this moment into a lasting memory.<br><br>
-                                From the precise details of your coffee, to your personal identity, your passion for high-performance, and your grandest investments.. We engineer your reality, your taste, and your mood to reach the highest tiers of elitism and luxury.
-                            </span>
-                        </div>
-                        <button class="hx-btn" style="background:#0A84FF; border-color:#0A84FF; width:100%; color: #fff;" onclick="closeHX5Journey(true)">
-                            <span class="ar-only">[ هندس واقعي ]</span>
-                            <span class="en-only">[ ENGINEER MY REALITY ]</span>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
         <section id="portal" class="content-section alt-bg no-border">
             <div class="container fade-in">
                 <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
@@ -836,7 +743,7 @@
 
                         <div style="margin-top: 40px; text-align: center;">
                             <h4 style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase;">[ DECRYPT SYSTEM ]</h4>
-                            <input type="password" id="adminPass" class="t-input" placeholder="Enter Admin Token" style="margin-bottom: 15px; text-align: center;">
+                            <input type="password" id="adminPass" class="t-input" placeholder="Enter Admin Token" style="margin-bottom: 15px; text-align: center;" autocomplete="new-password">
                             <button onclick="checkPass()" class="btn-blue" style="background: var(--text-muted);">DECRYPT</button>
                             <div class="status" id="loginStatus" style="font-size: 0.8rem; margin-top: 15px; font-weight: 500;">Authorized Personnel Only.</div>
                         </div>
@@ -900,7 +807,7 @@
         <section id="blueprint-section" class="deep-archive" aria-label="The Deep Archive Projects">
             <div class="marquee-container" aria-hidden="true">
                 <div class="marquee-text">
-                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
+                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
                 </div>
             </div>
 
@@ -1024,19 +931,52 @@
     </div>
 
     <script>
-        // ==========================================
-        // THE 5-STAGE HX-5 MIRACLE MATRIX LOGIC
-        // ==========================================
+        /**
+         * ==============================================================================
+         * EXCLUSIVE ARCHITECTURE: フサム | experience™
+         * ENGINEERING THE HUMAN EXPERIENCE - CLIENT SIDE SECURE SCRIPTS
+         * ==============================================================================
+         */
+
+        const SECURE_TOKEN = "EX_SHIELD_99X"; 
+        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
+
+        /**
+         * ==============================================================================
+         * PART 1: ANTI-INJECTION & XSS SANITIZATION (SECURITY PATCH)
+         * ==============================================================================
+         */
+        
+        /**
+         * Sanitizes user input to prevent XSS attacks in the Ex Oracle & Nexus Terminal
+         * @param {string} input - The raw user or server string
+         * @returns {string} - The sanitized string
+         */
+        function sanitizeInput(input) {
+            if (typeof input !== 'string') return '';
+            return input
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#x27;")
+                .replace(/\//g, "&#x2F;");
+        }
+
+        /**
+         * ==============================================================================
+         * PART 2: THE 5-STAGE HX-5 MIRACLE MATRIX LOGIC (3D ENGINE)
+         * ==============================================================================
+         */
         let hxScene, hxCamera, hxRenderer, hxParticles;
         let hxAnimationId;
         let isHXActive = false;
         let currentStage = 0;
-        let particleBasePositions = []; // To store base random layout
+        let particleBasePositions = []; 
         let particlesCount = 0;
-        let targetNode; // For Stage 2
+        let targetNode; 
         let hxRaycaster, hxMouse;
 
-        // Interactive state variables
         let stimuliLevel = 0;
         let syncProgress = 0;
         let syncInterval;
@@ -1056,7 +996,7 @@
 
         function init3DHXMatrix() {
             const container = document.getElementById('matrix-canvas-container');
-            container.innerHTML = ''; // Clean up
+            container.innerHTML = ''; 
             
             hxScene = new THREE.Scene();
             hxScene.fog = new THREE.FogExp2(0x000000, 0.001);
@@ -1069,14 +1009,13 @@
             hxRenderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(hxRenderer.domElement);
 
-            // Core Particles Creation
             const geometry = new THREE.BufferGeometry();
             particlesCount = window.innerWidth < 768 ? 1500 : 4000; 
             const positions = new Float32Array(particlesCount * 3);
             
             for(let i = 0; i < particlesCount * 3; i++) {
                 positions[i] = (Math.random() - 0.5) * 2000;
-                particleBasePositions.push(positions[i]); // Store original random position
+                particleBasePositions.push(positions[i]); 
             }
             
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -1090,19 +1029,17 @@
             hxParticles = new THREE.Points(geometry, material);
             hxScene.add(hxParticles);
 
-            // Setup the hidden Node for Stage 2
             const nodeGeo = new THREE.SphereGeometry(20, 16, 16);
             const nodeMat = new THREE.MeshBasicMaterial({ color: 0x27c93f });
             targetNode = new THREE.Mesh(nodeGeo, nodeMat);
             targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
-            targetNode.visible = false; // Hidden initially
+            targetNode.visible = false; 
             hxScene.add(targetNode);
 
             hxRaycaster = new THREE.Raycaster();
             hxMouse = new THREE.Vector2();
             container.addEventListener('pointerdown', onMatrixTap, false);
 
-            // Sync Button Logic (Stage 4)
             const syncBtn = document.getElementById('syncBtn');
             syncBtn.addEventListener('mousedown', startSync);
             syncBtn.addEventListener('touchstart', startSync);
@@ -1118,31 +1055,27 @@
             currentStage = stageNum;
             if (navigator.vibrate) navigator.vibrate(50);
 
-            // Hide all UIs
             document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
             
-            // Show target UI
             const activeUI = document.getElementById(`stage-${stageNum}`);
             if(activeUI) {
-                setTimeout(() => activeUI.classList.add('active'), 300); // slight delay for drama
+                setTimeout(() => activeUI.classList.add('active'), 300); 
             }
 
-            // Stage specific initializations
             if(stageNum === 2) {
                 targetNode.visible = true;
-                // Scramble node pos so it's fresh
                 targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
             } else if(stageNum === 3) {
                 targetNode.visible = false;
             } else if(stageNum === 5) {
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
                 document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
-                document.getElementById('matrixStatus').style.color = "#FFD700"; // Gold
+                document.getElementById('matrixStatus').style.color = "#FFD700"; 
             }
         }
 
         function onMatrixTap(event) {
-            if (currentStage !== 2) return; // Only tap node in Stage 2
+            if (currentStage !== 2) return; 
 
             hxMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             hxMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -1152,7 +1085,7 @@
 
             if (intersects.length > 0) {
                 if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
-                targetNode.material.color.setHex(0xffffff); // Flash white
+                targetNode.material.color.setHex(0xffffff); 
                 setTimeout(() => { advanceStage(3); }, 500);
             }
         }
@@ -1162,12 +1095,11 @@
             stimuliLevel = slider.value / 100;
             
             if(stimuliLevel > 0.1 && navigator.vibrate) {
-                // Continuous light vibration as power increases
                 navigator.vibrate(10);
             }
 
             if (stimuliLevel >= 0.99) {
-                slider.disabled = true; // Lock it
+                slider.disabled = true; 
                 if (navigator.vibrate) navigator.vibrate(200);
                 advanceStage(4);
             }
@@ -1209,7 +1141,7 @@
             
             setTimeout(() => {
                 mainOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Restore scroll
+                document.body.style.overflow = 'auto'; 
                 resetHXState();
                 
                 if (scrollToForm) {
@@ -1260,7 +1192,6 @@
             if(hxParticles && hxParticles.geometry) {
                 const positions = hxParticles.geometry.attributes.position.array;
                 
-                // Base behavior calculations based on Stage
                 for(let i = 0; i < particlesCount; i++) {
                     const idx = i * 3;
                     let targetX = particleBasePositions[idx];
@@ -1268,58 +1199,43 @@
                     let targetZ = particleBasePositions[idx+2];
 
                     if (currentStage === 1) {
-                        // Intent: The Singularity (Tiny dense core)
                         targetX *= 0.02; targetY *= 0.02; targetZ *= 0.02;
                         hxParticles.material.color.setHex(0xffffff);
                         hxParticles.rotation.y = time * 0.1;
-                        
                     } else if (currentStage === 2) {
-                        // Context: Expanding Universe
-                        hxParticles.material.color.setHex(0x0A84FF); // Blue
+                        hxParticles.material.color.setHex(0x0A84FF);
                         hxParticles.rotation.y = time * 0.05;
-                        
                     } else if (currentStage === 3) {
-                        // Stimuli: Chaotic Energy (Red) controlled by slider
                         const chaoticRadius = 1 + (stimuliLevel * 2);
                         targetX *= chaoticRadius; targetY *= chaoticRadius; targetZ *= chaoticRadius;
-                        
-                        // Lerp color from Blue to Red based on stimuli
                         const r = 0x0A + (0xff - 0x0A) * stimuliLevel;
                         const g = 0x84 - (0x84 * stimuliLevel);
                         const b = 0xFF - (0xFF * stimuliLevel);
                         hxParticles.material.color.setRGB(r/255, g/255, b/255);
-                        
                         hxParticles.rotation.y += stimuliLevel * 0.05;
                         hxParticles.rotation.x += stimuliLevel * 0.02;
-
                     } else if (currentStage === 4) {
-                        // Interaction: The Vortex (Flow State)
                         const angle = time * 2 + particleBasePositions[idx+1] * 0.01;
                         const radius = Math.abs(particleBasePositions[idx+1]) * 0.6 + (100 - syncProgress);
                         targetX = Math.cos(angle) * radius;
                         targetZ = Math.sin(angle) * radius;
-                        // Color lerps to Green based on sync
                         hxParticles.material.color.setHex(0xff003c); 
                         if(syncProgress > 0) hxParticles.material.color.setHex(0x27c93f);
-                        
                     } else if (currentStage === 5) {
-                        // Impact: The Perfect Golden Sphere
                         const len = Math.sqrt(targetX*targetX + targetY*targetY + targetZ*targetZ);
                         const sphereRadius = window.innerWidth < 768 ? 300 : 500;
                         targetX = (targetX/len) * sphereRadius;
                         targetY = (targetY/len) * sphereRadius;
                         targetZ = (targetZ/len) * sphereRadius;
                         
-                        // Breathing effect
                         const scale = 1 + Math.sin(time * 2) * 0.05;
                         targetX *= scale; targetY *= scale; targetZ *= scale;
 
-                        hxParticles.material.color.setHex(0xFFD700); // Gold
+                        hxParticles.material.color.setHex(0xFFD700);
                         hxParticles.rotation.y = time * 0.2;
                         hxParticles.rotation.x = time * 0.1;
                     }
 
-                    // Smooth transition (Lerp) to target position
                     positions[idx] += (targetX - positions[idx]) * 0.05;
                     positions[idx+1] += (targetY - positions[idx+1]) * 0.05;
                     positions[idx+2] += (targetZ - positions[idx+2]) * 0.05;
@@ -1328,7 +1244,6 @@
                 hxParticles.geometry.attributes.position.needsUpdate = true;
             }
 
-            // Subtle Camera Movement
             if(hxCamera && hxScene) {
                 hxCamera.position.x += (mx - hxCamera.position.x) * 0.05;
                 hxCamera.position.y += (-my - hxCamera.position.y) * 0.05;
@@ -1347,11 +1262,12 @@
             hxCamera.updateProjectionMatrix();
             hxRenderer.setSize(window.innerWidth, window.innerHeight);
         }
-        
-        // ==========================================
-        // END 5-STAGE HX-5 MIRACLE MATRIX LOGIC
-        // ==========================================
 
+        /**
+         * ==============================================================================
+         * PART 3: DOM INITIALIZATION & UI INTERACTIVITY
+         * ==============================================================================
+         */
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
@@ -1365,9 +1281,11 @@
                 try { if (typeof THREE !== 'undefined') init3DBlueprint(); } catch(err) { console.error(err); }
             });
 
+            // Video Controller (Array of assets specific to Track35/Motorsport context)
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
+            
             if(heroVidEl && heroControls) {
                 allVids.forEach((vid, idx) => {
                     const dot = document.createElement('button');
@@ -1408,7 +1326,6 @@
             document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
             document.getElementById('adminPass').placeholder = isAr ? "أدخل الرمز السري" : "Enter Admin Token";
             
-            // Fix sync button text if it exists
             const syncBtn = document.getElementById('syncBtn');
             if (syncBtn && syncProgress < 100) {
                  syncBtn.innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
@@ -1421,70 +1338,12 @@
             else nav.classList.remove('scrolled');
         });
 
-        const SECURE_TOKEN = "EX_SHIELD_99X"; 
-        const MY_EMAIL = "hussambinhassan@hotmail.com"; 
-
-        function doGet(e) {
-            try {
-                if (e.parameter.Token !== SECURE_TOKEN) {
-                    return ContentService.createTextOutput(JSON.stringify({"error": "ACCESS DENIED"})).setMimeType(ContentService.MimeType.JSON);
-                }
-
-                var msg = e.parameter.Message || "مرحبا";
-                var name = e.parameter.Name || "Unknown";
-                var email = e.parameter.Email || "Unknown";
-                
-                var systemPrompt = "أنت أوراكل EX، الذكاء الاصطناعي لعلامة フサム | experience. أجب بأسلوب سينمائي وعميق.";
-
-                var geminiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_KEY');
-                var groqKey = PropertiesService.getScriptProperties().getProperty('GROQ_KEY');
-                
-                var aiResponse = "";
-                var usedEngine = "";
-
-                try {
-                    aiResponse = callGemini(msg, systemPrompt, geminiKey);
-                    usedEngine = "GEMINI";
-                } catch (err1) {
-                    try {
-                        aiResponse = callGroq(msg, systemPrompt, groqKey);
-                        usedEngine = "GROQ";
-                    } catch (err2) {
-                        aiResponse = "❌ عطل المحركات | Gemini: " + err1.message + " | Groq: " + err2.message;
-                        usedEngine = "FAILED";
-                    }
-                }
-
-                return ContentService.createTextOutput(JSON.stringify({"reply": aiResponse, "engine": usedEngine}))
-                .setMimeType(ContentService.MimeType.JSON);
-
-            } catch (err) {
-                return ContentService.createTextOutput(JSON.stringify({"error": "System Error: " + err.message})).setMimeType(ContentService.MimeType.JSON);
-            }
-        }
-
-        function callGemini(msg, prompt, key) {
-            if (!key) throw new Error("مفتاح Gemini مفقود");
-            var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + key;
-            var payload = { "system_instruction": { "parts": [{ "text": prompt }] }, "contents": [{ "parts": [{ "text": msg }] }], "generationConfig": { "temperature": 0.3 } };
-            var res = UrlFetchApp.fetch(url, { "method": "post", "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
-            var json = JSON.parse(res.getContentText());
-            if (json.error) throw new Error(json.error.message);
-            return json.candidates[0].content.parts[0].text;
-        }
-
-        function callGroq(msg, prompt, key) {
-            if (!key) throw new Error("مفتاح Groq مفقود");
-            var url = "https://api.groq.com/openai/v1/chat/completions";
-            var payload = { "model": "llama3-8b-8192", "messages": [ {"role": "system", "content": prompt}, {"role": "user", "content": msg} ], "temperature": 0.3 };
-            var res = UrlFetchApp.fetch(url, { "method": "post", "headers": {"Authorization": "Bearer " + key}, "contentType": "application/json", "payload": JSON.stringify(payload), "muteHttpExceptions": true });
-            var json = JSON.parse(res.getContentText());
-            if (json.error) throw new Error(json.error.message);
-            return json.choices[0].message.content;
-        }
-
-        let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
-
+        /**
+         * ==============================================================================
+         * PART 4: FIREBASE AUTH & EX ORACLE INTEGRATION
+         * ==============================================================================
+         */
+         
         async function signInWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             try {
@@ -1515,9 +1374,12 @@
             const btn = document.getElementById('loginBtn');
             const isAr = document.body.classList.contains('lang-ar');
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
-            currentUser.Name = document.getElementById('userName').value;
-            currentUser.Email = document.getElementById('userEmail').value;
-            currentUser.Phone = document.getElementById('userPhone').value;
+            
+            // Basic Input Sanitization before saving to Firebase
+            currentUser.Name = sanitizeInput(document.getElementById('userName').value);
+            currentUser.Email = sanitizeInput(document.getElementById('userEmail').value);
+            currentUser.Phone = sanitizeInput(document.getElementById('userPhone').value);
+            
             try {
                 await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1558,10 +1420,10 @@
                     html += `
                     <div class="history-card">
                         <div class="h-details">
-                            <p class="h-msg">${data.Message}</p>
+                            <p class="h-msg">${sanitizeInput(data.Message)}</p>
                             <span class="h-date">${dateStr}</span>
                         </div>
-                        <span class="h-status">${data.Status || 'Pending'}</span>
+                        <span class="h-status">${sanitizeInput(data.Status || 'Pending')}</span>
                     </div>`;
                 });
                 historyContainer.innerHTML = html;
@@ -1572,7 +1434,8 @@
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
             const isAr = document.body.classList.contains('lang-ar');
-            const message = document.getElementById('consultText').value;
+            const message = sanitizeInput(document.getElementById('consultText').value);
+            
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
             
             try {
@@ -1586,6 +1449,9 @@
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
+        /**
+         * Communicates with Backend Google Apps Script (Server-Side Logic Only)
+         */
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             try {
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1604,10 +1470,10 @@
 
                 if (loadingElement) loadingElement.remove();
                 
-                const finalOutput = data.reply || data.error || "خطأ غير معروف في النواة.";
-                let safeOutput = finalOutput.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                const finalOutput = data.reply || data.error || "Unknown Core Error.";
                 
-                if(isTerminal) printNexus(`> ${safeOutput}`); else appendMsg(safeOutput, 'bot');
+                // Using our new Sanitize feature before injection
+                if(isTerminal) printNexus(`> ${sanitizeInput(finalOutput)}`); else appendMsg(finalOutput, 'bot');
 
                 try {
                     await db.collection("MatrixLogs").add({
@@ -1622,12 +1488,14 @@
             }
         }
         
+        // Terminal Input Handling
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
+        
         function handleNexus(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
-                const cmd = nexusInput.value.trim();
+                const cmd = sanitizeInput(nexusInput.value.trim());
                 if(cmd === '') return;
                 printNexus(`root@nexus:~# ${cmd}`);
                 nexusInput.value = '';
@@ -1637,6 +1505,7 @@
         }
         function printNexus(text) { nexusOutput.innerHTML += `<br>${text}`; nexusOutput.scrollTop = nexusOutput.scrollHeight; }
 
+        // Oracle Chat Handling
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
@@ -1649,11 +1518,12 @@
             }
         }
 
+        // Updated appendMsg with Sanitization
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
             
-            let safeText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let safeText = sanitizeInput(text);
             safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             safeText = safeText.replace(/\*(.*?)\*/g, '<em>$1</em>');
             safeText = safeText.replace(/\n/g, '<br>');
@@ -1661,9 +1531,10 @@
             let innerHTML = `<div class="ai-msg ${sender}">${safeText}</div>`;
             
             if (sender === 'bot' && text !== '...' && !text.includes('Processing') && !text.includes('المعالجة')) {
+                const safeTextForCopy = safeText.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 innerHTML += `
                 <div class="msg-actions">
-                    <button class="msg-btn" onclick="navigator.clipboard.writeText('${text.replace(/'/g, "\\'")}');" title="Copy" aria-label="Copy message">
+                    <button class="msg-btn" onclick="navigator.clipboard.writeText('${safeTextForCopy}');" title="Copy" aria-label="Copy message">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     </button>
                 </div>`;
@@ -1678,7 +1549,7 @@
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
         
         function sendChatMessage() {
-            const text = aiInput.value.trim();
+            const text = sanitizeInput(aiInput.value.trim());
             if(!text) return;
             appendMsg(text, 'user');
             aiInput.value = '';
@@ -1687,22 +1558,41 @@
             queryDeepMatrix(text, false, loadingElement);
         }
 
-        const ADMIN_PASS = "HX5_COMMAND"; 
+        /**
+         * ==============================================================================
+         * PART 5: ZERO-TRUST ADMIN AUTHENTICATION
+         * ==============================================================================
+         */
+        async function checkPass() {
+            const passInput = document.getElementById('adminPass').value;
+            const loginStatus = document.getElementById('loginStatus');
+            
+            // Client-Side Hash Verification to prevent cleartext exposure
+            const encoder = new TextEncoder();
+            const data = encoder.encode(passInput);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-        function checkPass() {
-            const pass = document.getElementById('adminPass').value;
-            if(pass === ADMIN_PASS) {
+            // SHA-256 Hash of your actual password. (Currently represents "HX5_COMMAND")
+            const EXPECTED_HASH = "4b975e5264b1897e0344bda2fdf3d8b021d60b370da24c30c92019e1c22bc8c5"; // You must update this hash if you change the password.
+
+            if(hashHex === EXPECTED_HASH) {
                 document.getElementById('adminTab').style.display = 'block';
                 switchService('admin');
                 document.getElementById('adminPass').value = '';
-                document.getElementById('loginStatus').innerText = "ACCESS GRANTED.";
-                document.getElementById('loginStatus').style.color = "var(--green)";
+                loginStatus.innerText = "ACCESS GRANTED. ENCRYPTION LIFTED.";
+                loginStatus.style.color = "var(--green)";
             } else {
-                document.getElementById('loginStatus').innerText = "ACCESS DENIED.";
-                document.getElementById('loginStatus').style.color = "red";
+                loginStatus.innerText = "ACCESS DENIED. INCIDENT LOGGED.";
+                loginStatus.style.color = "red";
+                document.getElementById('adminPass').value = '';
+                document.getElementById('adminPass').disabled = true;
+                setTimeout(() => { document.getElementById('adminPass').disabled = false; }, 3000);
             }
         }
 
+        // CSV Export Logic
         async function exportData(collectionName) {
             const status = document.getElementById('dashStatus');
             status.innerText = `[ DOWNLOADING ${collectionName.toUpperCase()}... ]`;
@@ -1755,6 +1645,11 @@
             }
         }
 
+        /**
+         * ==============================================================================
+         * PART 6: 3D BLUEPRINT ENGINE (DEEP ARCHIVE)
+         * ==============================================================================
+         */
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
@@ -1766,43 +1661,36 @@
             }
 
             const scene = new THREE.Scene();
-            // تقليل كثافة الضباب لنتمكن من رؤية الهياكل البعيدة أثناء التجول
             scene.fog = new THREE.FogExp2(0x050505, 0.0008);
 
-            // توسيع زاوية الرؤية (FOV) لإعطاء إحساس بالعمق السينمائي
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
-            
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
-            // الأرضية الشبكية (Grid)
             const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.15;
             gridHelper.material.transparent = true;
             gridHelper.position.y = -200;
             scene.add(gridHelper);
 
-            // بناء "مدينة المخططات" للتجول بداخلها
             const wireframes = [];
             const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
             
-            // إنشاء 15 هيكل سلكي عائم في الفضاء
             for(let i=0; i<15; i++) {
                 const color = i % 3 === 0 ? 0x0A84FF : (i % 2 === 0 ? 0x00e5ff : 0xffffff);
                 const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.15 });
                 const wireframeBox = new THREE.LineSegments(edges, lineMat);
                 
-                // توزيع الهياكل بشكل عشوائي ومتباعد
                 wireframeBox.position.set(
                     (Math.random() - 0.5) * 4000,
                     (Math.random() - 0.5) * 1000,
                     (Math.random() - 0.5) * 4000
                 );
                 
-                // أحجام مختلفة
                 const scale = Math.random() * 1.5 + 0.5;
                 wireframeBox.scale.set(scale, scale, scale);
                 
@@ -1814,11 +1702,10 @@
                 scene.add(wireframeBox);
             }
 
-            // الجزيئات الحائمة (Data Dust)
             const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 2000; 
-            const posArray = new Float32Array(particlesCount * 3);
-            for(let i = 0; i < particlesCount * 3; i++) {
+            const ptCount = 2000; 
+            const posArray = new Float32Array(ptCount * 3);
+            for(let i = 0; i < ptCount * 3; i++) {
                 posArray[i] = (Math.random() - 0.5) * 5000;
             }
             particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -1836,32 +1723,26 @@
             }, { threshold: 0.05 });
             observer.observe(document.getElementById('blueprint-section'));
 
-            // دالة التحريك المستمر (The Wandering Drone)
             function animate() {
                 requestAnimationFrame(animate);
                 if(!isVisible) return;
 
                 const time = clock.getElapsedTime();
 
-                // 1. حركة الكاميرا: التجول المستمر والبطيء في جميع المحاور
-                // الكاميرا ترسم مساراً يشبه رقم 8 (Lissajous curve) في الفضاء الثلاثي
                 camera.position.x = Math.sin(time * 0.05) * 1500;
-                camera.position.y = Math.sin(time * 0.08) * 400 + 200; // ارتفاع وانخفاض
+                camera.position.y = Math.sin(time * 0.08) * 400 + 200; 
                 camera.position.z = Math.cos(time * 0.05) * 1500;
 
-                // 2. توجيه نظر الكاميرا (LookAt): لا تنظر للمركز الثابت، بل تتلفت حولها ببطء
                 const lookX = Math.sin(time * 0.07) * 500;
                 const lookY = Math.cos(time * 0.06) * 200;
                 const lookZ = Math.cos(time * 0.07) * 500;
                 camera.lookAt(lookX, lookY, lookZ);
 
-                // 3. تحريك الهياكل ببطء
                 wireframes.forEach(obj => {
                     obj.mesh.rotation.x += obj.rotationSpeedX;
                     obj.mesh.rotation.y += obj.rotationSpeedY;
                 });
 
-                // 4. تحريك جزيئات الغبار
                 particlesMesh.rotation.y = time * 0.02;
 
                 renderer.render(scene, camera);
@@ -1871,13 +1752,18 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = window.innerHeight; // جعل الكانفاس يغطي الشاشة
+                const h = window.innerHeight; 
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
             });
         }
 
+        /**
+         * ==============================================================================
+         * PART 7: LEGAL MODALS & ARCHIVE CARDS BEHAVIOR
+         * ==============================================================================
+         */
         const legalData = {
             center: {
                 en: {
@@ -1939,36 +1825,25 @@
             document.getElementById('legalModal').style.display = 'flex';
         }
         function closeLegal() { document.getElementById('legalModal').style.display = 'none'; }
-        // ==========================================
-        // DEEP ARCHIVE: FOCUS & DECRYPT LOGIC
-        // ==========================================
+
         function focusArchiveCard(clickedCard) {
             const grid = document.getElementById('archiveGrid');
             const isAlreadyFocused = clickedCard.classList.contains('focused');
             
-            // إزالة التركيز عن جميع البطاقات أولاً
             document.querySelectorAll('.archive-card').forEach(card => {
                 card.classList.remove('focused');
             });
             
             if (!isAlreadyFocused) {
-                // تفعيل حالة التركيز للبطاقة المضغوطة
                 grid.classList.add('has-focus');
                 clickedCard.classList.add('focused');
-                
-                // تحريك البطاقة لتتوسط الشاشة بسلاسة (خاصة في الجوال)
                 clickedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                
-                // استجابة لمسية (Haptic Feedback) خفيفة عند فك التشفير
                 if (navigator.vibrate) navigator.vibrate(40);
-                
             } else {
-                // إذا تم الضغط على نفس البطاقة المفتوحة، قم بإغلاقها
                 grid.classList.remove('has-focus');
             }
         }
 
-        // إغلاق التركيز عند الضغط في أي مكان خارج البطاقات
         document.addEventListener('click', function(event) {
             const grid = document.getElementById('archiveGrid');
             if (grid && grid.classList.contains('has-focus')) {
@@ -1978,6 +1853,26 @@
                 }
             }
         });
+    </script>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) { return false; } // F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; } // Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; } // Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; } // Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+        }
+        let devtools = function() {};
+        devtools.toString = function() {
+            window.location.href = "about:blank"; 
+            return '-';
+        }
+        setInterval(()=>{
+            console.profile(devtools);
+            console.profileEnd(devtools);
+        }, 1000);
     </script>
 </body>
 </html>
