@@ -1027,6 +1027,72 @@
 
         /**
          * ==============================================================================
+         * PART 1.5: THREAT DETECTION & TELEMETRY SYSTEM (WAF SENSORS)
+         * ==============================================================================
+         */
+        
+        const THREAT_SIGNATURES = [
+            /(<script.*?>.*?<\/script>)/gi,               
+            /(UNION\s+SELECT|DROP\s+TABLE|--|;)/gi,       
+            /(\.\.\/|\.\.\\|etc\/passwd)/gi,              
+            /(bash\s-i|wget\s|curl\s|nc\s-e)/gi,          
+            /(document\.cookie|window\.location)/gi       
+        ];
+
+        async function triggerSecurityProtocol(payload, context, threatType) {
+            let attackerIP = "Unknown";
+            try {
+                const ipRes = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipRes.json();
+                attackerIP = ipData.ip;
+            } catch(e) { attackerIP = "Shielded/Proxy"; }
+
+            const footprint = {
+                ip: attackerIP,
+                userAgent: navigator.userAgent,
+                platform: navigator.platform || navigator.userAgentData?.platform || "Unknown",
+                language: navigator.language,
+                screen: `${window.screen.width}x${window.screen.height}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                localTime: new Date().toString()
+            };
+
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
+            const formData = new URLSearchParams({
+                Token: SECURE_TOKEN,
+                Type: 'Security Breach',
+                Name: currentUser?.Name || "Unauthenticated Attacker",
+                Email: currentUser?.Email || "None",
+                Context: context,
+                ThreatType: threatType,
+                Payload: payload,
+                Footprint: JSON.stringify(footprint)
+            });
+
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' });
+
+            document.body.innerHTML = `
+                <div style="background:#050505; color:#ff003c; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; font-family:'Space Mono', monospace; text-align:center; padding:20px; position:fixed; top:0; left:0; width:100%; z-index:9999999;">
+                    <h1 style="font-size:clamp(1.5rem, 4vw, 2.5rem); letter-spacing:5px;">[ SECURITY BREACH DETECTED ]</h1>
+                    <p style="margin-top:20px; font-size:clamp(1rem, 2vw, 1.2rem); color:#fff;">MALICIOUS PAYLOAD INTERCEPTED.</p>
+                    <p style="color:#888; margin-top:10px; max-width:600px; line-height:1.6;">YOUR DIGITAL FOOTPRINT (IP: ${attackerIP}) HAS BEEN LOGGED AND REPORTED TO CYBERSECURITY AUTHORITIES.</p>
+                </div>
+            `;
+            throw new Error("SECURITY_BREACH_HALTED");
+        }
+
+        async function scanForThreats(input, context) {
+            for (let sig of THREAT_SIGNATURES) {
+                if (sig.test(input)) {
+                    await triggerSecurityProtocol(input, context, "Code Injection / Exploitation Attempt");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /**
+         * ==============================================================================
          * PART 2: THE 5-STAGE HX-5 MIRACLE MATRIX LOGIC (3D ENGINE)
          * ==============================================================================
          */
@@ -1343,7 +1409,6 @@
                 try { if (typeof THREE !== 'undefined') init3DBlueprint(); } catch(err) { console.error(err); }
             });
 
-            // Video Controller (Array of assets specific to Track35/Motorsport context)
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
@@ -1437,7 +1502,6 @@
             const isAr = document.body.classList.contains('lang-ar');
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
             
-            // Basic Input Sanitization before saving to Firebase
             currentUser.Name = sanitizeInput(document.getElementById('userName').value);
             currentUser.Email = sanitizeInput(document.getElementById('userEmail').value);
             currentUser.Phone = sanitizeInput(document.getElementById('userPhone').value);
@@ -1496,7 +1560,13 @@
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
             const isAr = document.body.classList.contains('lang-ar');
-            const message = sanitizeInput(document.getElementById('consultText').value);
+            
+            const rawMessage = document.getElementById('consultText').value;
+            
+            // WAF SENSOR CHECK
+            if (await scanForThreats(rawMessage, "Consultation Form")) return;
+
+            const message = sanitizeInput(rawMessage);
             
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
             
@@ -1511,9 +1581,6 @@
             btn.innerHTML = isAr ? 'إرسال' : 'Transmit'; btn.disabled = false;
         }
 
-        /**
-         * Communicates with Backend Google Apps Script (Server-Side Logic Only)
-         */
         async function queryDeepMatrix(text, isTerminal = false, loadingElement = null) {
             try {
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1534,7 +1601,6 @@
                 
                 const finalOutput = data.reply || data.error || "Unknown Core Error.";
                 
-                // Using our new Sanitize feature before injection
                 if(isTerminal) printNexus(`> ${sanitizeInput(finalOutput)}`); else appendMsg(finalOutput, 'bot');
 
                 try {
@@ -1550,15 +1616,19 @@
             }
         }
         
-        // Terminal Input Handling
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
         
-        function handleNexus(e) {
+        async function handleNexus(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
-                const cmd = sanitizeInput(nexusInput.value.trim());
-                if(cmd === '') return;
+                const rawCmd = nexusInput.value.trim();
+                if(rawCmd === '') return;
+
+                // WAF SENSOR CHECK
+                if (await scanForThreats(rawCmd, "NEXUS Terminal")) return;
+
+                const cmd = sanitizeInput(rawCmd);
                 printNexus(`root@nexus:~# ${cmd}`);
                 nexusInput.value = '';
                 if(cmd.toLowerCase() === '/clear') nexusOutput.innerHTML = '';
@@ -1567,7 +1637,6 @@
         }
         function printNexus(text) { nexusOutput.innerHTML += `<br>${text}`; nexusOutput.scrollTop = nexusOutput.scrollHeight; }
 
-        // Oracle Chat Handling
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
@@ -1580,7 +1649,6 @@
             }
         }
 
-        // Updated appendMsg with Sanitization
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
@@ -1610,9 +1678,14 @@
 
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
         
-        function sendChatMessage() {
-            const text = sanitizeInput(aiInput.value.trim());
-            if(!text) return;
+        async function sendChatMessage() {
+            const rawText = aiInput.value.trim();
+            if(!rawText) return;
+
+            // WAF SENSOR CHECK
+            if (await scanForThreats(rawText, "Ex Oracle Chat")) return;
+
+            const text = sanitizeInput(rawText);
             appendMsg(text, 'user');
             aiInput.value = '';
             const isAr = document.body.classList.contains('lang-ar');
@@ -1629,10 +1702,7 @@
             const passInput = document.getElementById('adminPass').value.trim(); 
             const loginStatus = document.getElementById('loginStatus');
             
-            // استخدام تشفير Base64 (نفس المستخدم بنجاح في الأرشيف)
             const encodedInput = btoa(passInput);
-
-            // البصمة المشفرة الدقيقة 100% لكلمة: CALIBURN-EX1959.J
             const EXPECTED_HASH = "Q0FMSUJVUk4tRVgxOTU5Lko="; 
 
             if(encodedInput === EXPECTED_HASH) {
@@ -1649,7 +1719,7 @@
                 setTimeout(() => { document.getElementById('adminPass').disabled = false; }, 3000);
             }
         }
-        // CSV Export Logic
+
         async function exportData(collectionName) {
             const status = document.getElementById('dashStatus');
             status.innerText = `[ DOWNLOADING ${collectionName.toUpperCase()}... ]`;
