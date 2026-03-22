@@ -1564,18 +1564,16 @@
          * ==============================================================================
          */
         async function checkPass() {
-            const passInput = document.getElementById('adminPass').value;
+            const passInput = document.getElementById('adminPass').value.trim(); 
             const loginStatus = document.getElementById('loginStatus');
             
-            // Client-Side Hash Verification to prevent cleartext exposure
-            const encoder = new TextEncoder();
-            const data = encoder.encode(passInput);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            // ... (أكواد التشفير الخاصة بالمتصفح) ...
 
-            // SHA-256 Hash of your actual password. (Currently represents "HX5_COMMAND")
-            const EXPECTED_HASH = "4b975e5264b1897e0344bda2fdf3d8b021d60b370da24c30c92019e1c22bc8c5"; // You must update this hash if you change the password.
+            // 👇 هنا تضع البصمة الجديدة الخاصة بـ CALIBURN-EX1959.J 👇
+            const EXPECTED_HASH = "E6646E393D80B18D4214FBCFD383ECEA"; 
+
+            if(hashHex === EXPECTED_HASH) {
+                // ... (28FBB17EF9E8EEC380A14218077972D0) ...
 
             if(hashHex === EXPECTED_HASH) {
                 document.getElementById('adminTab').style.display = 'block';
