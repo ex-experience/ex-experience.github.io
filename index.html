@@ -74,6 +74,7 @@
             --border-light: #e2e3e3; 
             --btn-gray: #eeeeee;
             --focus-ring: 0 0 0 3px rgba(10, 132, 255, 0.4);
+            --green: #27c93f;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -347,6 +348,48 @@
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         
+        /* ======== DEEP ARCHIVE: VIP LOCK SCREEN ======== */
+        .archive-lock-ui {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+            border-top: 1px dashed rgba(10, 132, 255, 0.3);
+            padding-top: 20px;
+        }
+        /* إظهار شاشة القفل فقط إذا كانت البطاقة في وضع التركيز ولم يتم فتحها بعد */
+        .archive-card.focused:not(.unlocked) .archive-lock-ui {
+            display: flex;
+        }
+        /* إخفاء الوصف الافتراضي وإظهاره فقط إذا تم الفتح */
+        .archive-card.focused .archive-desc { display: none; }
+        .archive-card.focused.unlocked .archive-desc {
+            display: block;
+            max-height: none; 
+            opacity: 1;
+            margin-top: 20px;
+            animation: fadeIn 0.8s ease;
+        }
+        .archive-pass-input {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+        }
+        .archive-pass-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 15px rgba(10, 132, 255, 0.2); }
+        .archive-decrypt-btn {
+            background: var(--accent-blue); color: #fff; border: none; padding: 12px;
+            font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px;
+            border-radius: 6px; cursor: pointer; transition: 0.3s;
+        }
+        .archive-decrypt-btn:hover { background: #fff; color: #000; }
+
         /* ======== THE DEEP ARCHIVE: RESPONSIVE CARDS ======== */
         .archive-grid { 
             display: grid; 
@@ -819,9 +862,17 @@
 
                <div class="archive-grid" id="archiveGrid">
                     <div class="archive-card" onclick="focusArchiveCard(this)">
-                        <span class="archive-status" style="color:#0A84FF; border: 1px solid rgba(10,132,255,0.3); background: rgba(10,132,255,0.05);">ENCRYPTED // ACTIVE</span>
+                        <span class="archive-status" style="color:#0A84FF; border: 1px solid rgba(10,132,255,0.3); background: rgba(10,132,255,0.05);">ENCRYPTED // FILE 01</span>
                         <h3 class="archive-title">Project: TRACK35</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
+                        
+                        <div class="archive-lock-ui" onclick="event.stopPropagation()">
+                            <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
+                            <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-1">
+                            <button class="archive-decrypt-btn" onclick="unlockArchiveFile(1, 'VFJLMzUtVklQLTk5', this)">DECRYPT FILE</button>
+                            <div id="error-card-1" style="color:#ff5f56; font-size:0.75rem; text-align:center; display:none; font-family:'Space Mono'; mt-2">ACCESS DENIED.</div>
+                        </div>
+
                         <div class="archive-desc">
                             <span class="ar-only">مشروع سينمائي يعكس فهماً عميقاً لثقافة الأداء العالي والمشهد المعقد لرياضة المحركات في الشرق الأوسط. دراسة حية في سيكولوجيا الأداء وتجاوز الحدود البشرية.</span>
                             <span class="en-only">A cinematic docu-series reflecting a deep understanding of high-performance culture and the complex motorsport scene in the Middle East. A live study in the psychology of performance.</span>
@@ -829,9 +880,17 @@
                     </div>
 
                     <div class="archive-card" style="border-color: rgba(0, 229, 255, 0.2);" onclick="focusArchiveCard(this)">
-                        <span class="archive-status" style="color:#00e5ff; border: 1px solid rgba(0,229,255,0.3); background: rgba(0,229,255,0.05);">IN DEVELOPMENT</span>
+                        <span class="archive-status" style="color:#00e5ff; border: 1px solid rgba(0,229,255,0.3); background: rgba(0,229,255,0.05);">ENCRYPTED // FILE 02</span>
                         <h3 class="archive-title">Concept: LAB</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
+                        
+                        <div class="archive-lock-ui" onclick="event.stopPropagation()">
+                            <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
+                            <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-2">
+                            <button class="archive-decrypt-btn" style="background:#00e5ff; color:#000;" onclick="unlockArchiveFile(2, 'TEFCLVNFTlNPUlktMDA=', this)">DECRYPT FILE</button>
+                            <div id="error-card-2" style="color:#ff5f56; font-size:0.75rem; text-align:center; display:none; font-family:'Space Mono'; mt-2">ACCESS DENIED.</div>
+                        </div>
+
                         <div class="archive-desc">
                             <span class="ar-only">بيئة القهوة المختصة العالمية مبنية على أسس علمية هندسية وحسية لتعزيز الدقة والتركيز والاتقان الذي لا يقبل الخطأ لتذوق نكهات حقيقية تمثل شخصية البن من المصدر، مما يبرز الاهتمام بتفكيك الطقوس بالتفصيل لكل اداة وتحويلها إلى تجارب علمية مدروسة ومفهومة.</span>
                             <span class="en-only">A specialty coffee environment built on sensory engineering principles to enhance focus and isolation. Deconstructing daily rituals into critical, calculated experiences.</span>
@@ -839,9 +898,17 @@
                     </div>
 
                     <div class="archive-card" style="border-color: rgba(39, 201, 63, 0.2);" onclick="focusArchiveCard(this)">
-                        <span class="archive-status" style="color:#27c93f; border: 1px solid rgba(39,201,63,0.3); background: rgba(39,201,63,0.05);">SYSTEM DEPLOYED</span>
+                        <span class="archive-status" style="color:#27c93f; border: 1px solid rgba(39,201,63,0.3); background: rgba(39,201,63,0.05);">ENCRYPTED // FILE 03</span>
                         <h3 class="archive-title">System:   iNSTUDIO</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
+
+                        <div class="archive-lock-ui" onclick="event.stopPropagation()">
+                            <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
+                            <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-3">
+                            <button class="archive-decrypt-btn" style="background:#27c93f; color:#000;" onclick="unlockArchiveFile(3, 'SU5TVFVESU8tTFVYLVg=', this)">DECRYPT FILE</button>
+                            <div id="error-card-3" style="color:#ff5f56; font-size:0.75rem; text-align:center; display:none; font-family:'Space Mono'; mt-2">ACCESS DENIED.</div>
+                        </div>
+
                         <div class="archive-desc">
                             <span class="ar-only">البنية التحتية لتصميم العلامات التجارية الفاخرة، تؤكد على التوجه الصارم نحو مواءمة جميع المعايير العالمية مع دقة التنفيذ المحلي وابتكار معايير عالمية جديدة للنخبة بالتوقيع خاص.</span>
                             <span class="en-only">An infrastructure for luxury brand design, emphasizing a strict approach towards aligning global aesthetic standards with local execution precision.</span>
@@ -947,11 +1014,6 @@
          * ==============================================================================
          */
         
-        /**
-         * Sanitizes user input to prevent XSS attacks in the Ex Oracle & Nexus Terminal
-         * @param {string} input - The raw user or server string
-         * @returns {string} - The sanitized string
-         */
         function sanitizeInput(input) {
             if (typeof input !== 'string') return '';
             return input
@@ -1567,15 +1629,17 @@
             const passInput = document.getElementById('adminPass').value.trim(); 
             const loginStatus = document.getElementById('loginStatus');
             
-            // ... (أكواد التشفير الخاصة بالمتصفح) ...
+            const encoder = new TextEncoder();
+            const data = encoder.encode(passInput);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-            // 👇 هنا تضع البصمة الجديدة الخاصة بـ CALIBURN-EX1959.J 👇
-            const EXPECTED_HASH = "E6646E393D80B18D4214FBCFD383ECEA"; 
+            // البصمة الرقمية للرمز CALIBURN-EX1959.J
+            const EXPECTED_HASH = "632f146a8155d9d71c1b181db8f8b8a7b97e932b13e9a55e1a123f03b221081a"; 
 
-            if(hashHex === EXPECTED_HASH) {
-                // ... (28FBB17EF9E8EEC380A14218077972D0) ...
-
-            if(hashHex === EXPECTED_HASH) {
+            // دالة التحقق المعدلة لتكون دقيقة ومحصنة
+            if(hashHex.toUpperCase() === EXPECTED_HASH.toUpperCase() || hashHex === EXPECTED_HASH) {
                 document.getElementById('adminTab').style.display = 'block';
                 switchService('admin');
                 document.getElementById('adminPass').value = '';
@@ -1851,8 +1915,37 @@
                 }
             }
         });
-    </script>
 
-    
+        // ==========================================
+        // DEEP ARCHIVE: VIP UNLOCK LOGIC
+        // ==========================================
+        function unlockArchiveFile(cardId, expectedEncodedPass, btnElement) {
+            event.stopPropagation(); 
+            
+            const inputEl = document.getElementById(`pass-card-${cardId}`);
+            const errorEl = document.getElementById(`error-card-${cardId}`);
+            const cardEl = btnElement.closest('.archive-card');
+
+            const enteredPass = inputEl.value.trim();
+            const encodedInput = btoa(enteredPass);
+
+            if (encodedInput === expectedEncodedPass) {
+                errorEl.style.display = 'none';
+                cardEl.classList.add('unlocked');
+                
+                const statusEl = cardEl.querySelector('.archive-status');
+                statusEl.innerText = 'DECRYPTED // VIP ACCESS GRANTED';
+                statusEl.style.color = '#FFD700'; 
+                statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
+                statusEl.style.background = 'rgba(255, 215, 0, 0.05)';
+                
+                if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+            } else {
+                errorEl.style.display = 'block';
+                inputEl.value = '';
+                if (navigator.vibrate) navigator.vibrate(200);
+            }
+        }
+    </script>
 </body>
 </html>
