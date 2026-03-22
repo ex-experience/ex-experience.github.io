@@ -929,12 +929,12 @@
             <div class="hud-container" aria-hidden="true">
                 <div class="hud-header">
                     <div>
-                        <span class="glitch-text">NEXUS COMMAND</span> // PILAANII 3D<br>
-                        333 SOVAGE (RENDER): 1991.33.EX
+                        <span class="glitch-text">S.B.S • T.H</span> // zBRUSH 12v<br>
+                        333 SUVAGE (Guide33): 1991.33.EX
                     </div>
                     <div style="text-align: right;">
-                        AK-30 (DIMENSIONS): 4096 x 2048<br>
-                        HUSTLE : HOLLYWOOD SIINIMAA
+                        AKA-187 (DIMENSIONS): 4096 x 2048<br>
+                        HUSTLER : CALIFORNIA RIYADH
                     </div>
                 </div>
                 <div class="hud-footer">
@@ -1625,21 +1625,17 @@
          * PART 5: ZERO-TRUST ADMIN AUTHENTICATION
          * ==============================================================================
          */
-        async function checkPass() {
+        function checkPass() {
             const passInput = document.getElementById('adminPass').value.trim(); 
             const loginStatus = document.getElementById('loginStatus');
             
-            const encoder = new TextEncoder();
-            const data = encoder.encode(passInput);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            // استخدام تشفير Base64 (نفس المستخدم بنجاح في الأرشيف)
+            const encodedInput = btoa(passInput);
 
-            // البصمة الرقمية للرمز CALIBURN-EX1959.J
-            const EXPECTED_HASH = "632f146a8155d9d71c1b181db8f8b8a7b97e932b13e9a55e1a123f03b221081a"; 
+            // البصمة المشفرة الدقيقة 100% لكلمة: CALIBURN-EX1959.J
+            const EXPECTED_HASH = "Q0FMSUJVUk4tRVgxOTU5Lko="; 
 
-            // دالة التحقق المعدلة لتكون دقيقة ومحصنة
-            if(hashHex.toUpperCase() === EXPECTED_HASH.toUpperCase() || hashHex === EXPECTED_HASH) {
+            if(encodedInput === EXPECTED_HASH) {
                 document.getElementById('adminTab').style.display = 'block';
                 switchService('admin');
                 document.getElementById('adminPass').value = '';
@@ -1653,7 +1649,6 @@
                 setTimeout(() => { document.getElementById('adminPass').disabled = false; }, 3000);
             }
         }
-
         // CSV Export Logic
         async function exportData(collectionName) {
             const status = document.getElementById('dashStatus');
