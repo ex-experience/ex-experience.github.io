@@ -12,12 +12,12 @@
     <meta name="twitter:title" content="フサム | experience™">
     <meta name="twitter:description" content="Engineering Human Experiences">
     <meta name="twitter:image" content="https://[https://ex-experience.github.io/]/assets/og-image.png">
-    
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="フサム | experience™ - Engineering Human Experiences">
     <title>フサム | experience™</title>
-    
+   
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="referrer" content="no-referrer">
@@ -27,7 +27,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" href="icon.png">
-    
+   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -39,10 +39,10 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-    
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    
+   
     <script>
         // Firebase Configuration
         const firebaseConfig = {
@@ -57,45 +57,7 @@
         const db = firebase.firestore();
         const auth = firebase.auth();
     </script>
-/* ========================================== */
-        /* EX-MASTER LOADER & HX-5 STYLES             */
-        /* ========================================== */
-        #ex-master-loader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #050505; z-index: 999999;
-            display: flex; justify-content: center; align-items: center; overflow: hidden;
-            transition: opacity 1.5s ease-in-out, visibility 1.5s; 
-        }
-        .ex-loader-flash {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #ffffff; opacity: 0; z-index: 2; pointer-events: none;
-        }
-        .flash-active { animation: flashToWhite 2s forwards ease-in-out; }
-        .ex-loader-content { position: relative; z-index: 10; text-align: center; font-family: 'Space Mono', monospace; transition: opacity 1s; }
-        @keyframes flashToWhite { 0% { opacity: 0; } 40% { opacity: 1; } 60% { opacity: 1; } 100% { opacity: 0; } }
 
-        .nfc-gateway-btn {
-            position: fixed; bottom: 110px; left: 30px; z-index: 9997;
-            background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(10, 132, 255, 0.4); color: #0A84FF;
-            padding: 15px 30px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer;
-            backdrop-filter: blur(10px); transition: all 0.4s ease; border-radius: 0;
-        }
-        body.lang-ar .nfc-gateway-btn { left: auto; right: 30px; }
-        .nfc-gateway-btn:hover { background: #0A84FF; color: #fff; box-shadow: 0 0 25px rgba(10,132,255,0.6); }
-
-        #miracle-matrix-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #000000; z-index: 9999999; display: none;
-            overflow: hidden; touch-action: none; font-family: 'Space Mono', monospace; color: #fff;
-            opacity: 0; transition: opacity 0.8s ease-in-out;
-        }
-        .hx-stage-ui {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            text-align: center; width: 90%; max-width: 600px;
-            opacity: 0; display: none; transition: opacity 0.5s ease;
-        }
-        .hx-btn { background: transparent; border: 1px solid #fff; color: #fff; padding: 15px 40px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s; text-transform: uppercase;}
-        .hx-btn:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
     <style>
         /* ========================================== */
         /* LUXURY MINIMALIST THEME & TYPOGRAPHY       */
@@ -104,12 +66,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
         :root {
-            --bg-primary: #ffffff; 
-            --bg-secondary: #f9f9f9; 
-            --text-main: #171a20; 
-            --text-muted: #5c5e62; 
-            --accent-blue: #0A84FF; 
-            --border-light: #e2e3e3; 
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9f9f9;
+            --text-main: #171a20;
+            --text-muted: #5c5e62;
+            --accent-blue: #0A84FF;
+            --border-light: #e2e3e3;
             --btn-gray: #eeeeee;
             --focus-ring: 0 0 0 3px rgba(10, 132, 255, 0.4);
             --green: #27c93f;
@@ -117,18 +79,18 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body { 
-            background-color: var(--bg-primary); 
-            color: var(--text-main); 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            line-height: 1.6; 
-            overflow-x: hidden; 
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased; 
+            -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility; 
+            text-rendering: optimizeLegibility;
         }
-        
+       
         .mono-text { font-family: 'Space Mono', monospace; }
 
         a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
@@ -137,11 +99,11 @@
             border-radius: 4px;
         }
 
-        #loading-screen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background-color: transparent !important; z-index: 99999; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            transition: opacity 0.8s ease-out; pointer-events: none; 
+        #loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: transparent !important; z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease-out; pointer-events: none;
         }
         .loader-logo { font-size: 1.5rem; font-weight: 500; letter-spacing: 2px; color: var(--text-main); margin-bottom: 20px; direction: ltr;}
         .loader-text { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase;}
@@ -154,11 +116,11 @@
         .container { max-width: 1000px; margin: 0 auto; padding: 0 5%; position: relative; z-index: 2; }
 
         .glitch-anim { display: inline-block; animation: random-glitch 8s infinite; direction: ltr !important; unicode-bidi: isolate;}
-        @keyframes random-glitch { 
-            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; } 
-            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; clip-path: inset(10% 0 30% 0); } 
-            96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; clip-path: inset(40% 0 10% 0); } 
-            97% { transform: translate(0); text-shadow: none; clip-path: none; } 
+        @keyframes random-glitch {
+            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; }
+            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 #0f0, -2px 0 #f00; clip-path: inset(10% 0 30% 0); }
+            96% { transform: translate(2px, -1px); text-shadow: -2px 0 #0f0, 2px 0 #f00; clip-path: inset(40% 0 10% 0); }
+            97% { transform: translate(0); text-shadow: none; clip-path: none; }
         }
 
         /* NAVIGATION */
@@ -180,12 +142,12 @@
         .tagline { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 2px; color: #e0e0e0; margin-bottom: 20px; display: block; text-transform: uppercase;}
         .main-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 500; letter-spacing: -1px; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.1;}
         .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
-        
+       
         /* CONTENT TYPOGRAPHY */
         .content-section { padding: 100px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
-        
+       
         .page-num { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 3px; display: block; text-transform: uppercase;}
         .heading-md { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 500; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px;}
         .text-body { color: var(--text-muted); font-size: clamp(1rem, 1.1vw, 1.1rem); line-height: 1.8; max-width: 800px; font-weight: 400;}
@@ -213,12 +175,12 @@
         .btn-blue { width: 100%; padding: 14px; background: var(--text-main); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; }
         .btn-blue:hover { background: #000; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
         .btn-blue:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none;}
-        
+       
         .divider { display: flex; align-items: center; text-align: center; margin: 30px 0; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;}
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-light); }
         .divider:not(:empty)::before { margin-right: .5em; margin-left: .5em;}
         .divider:not(:empty)::after { margin-left: .5em; margin-right: .5em;}
-        
+       
         .oauth-group { display: flex; justify-content: center; gap: 15px; }
         .btn-social { background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 50%; cursor: pointer; transition: all 0.3s ease; padding: 12px; display: flex; justify-content: center; align-items: center;}
         .btn-social:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
@@ -231,10 +193,10 @@
         .dash-tab:hover { color: var(--text-main); }
         .dash-tab.active { color: var(--text-main); }
         .dash-tab.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 2px; background: var(--text-main); }
-        
+       
         .service-form { display: none; animation: fadeIn 0.5s ease; }
         .service-form.active { display: block; }
-        
+       
         .history-card { border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; background: #fff; transition: all 0.3s ease;}
         .history-card:hover { border-color: #ccc; box-shadow: 0 5px 15px rgba(0,0,0,0.03); transform: translateY(-2px);}
         .h-details { max-width: 75%; text-align: left; }
@@ -257,32 +219,32 @@
         .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 4s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
         @keyframes pulse-glow { 0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.2); } 50% { box-shadow: 0 10px 40px rgba(23, 26, 32, 0.4); transform: scale(1.05); } }
-        
+       
         .ai-window { position: fixed; bottom: 110px; right: 30px; width: 380px; height: 600px; max-height: calc(100vh - 140px); background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(0,0,0,0.08); overflow: hidden;}
         body.lang-ar .ai-window { right: auto; left: 30px; }
         .ai-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-        
+       
         .ai-header { background: transparent; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05);}
         .ai-title { font-weight: 600; font-size: 1rem; color: #000; display: flex; align-items: center; gap: 10px;}
         .ai-title::before { content:''; display:inline-block; width:10px; height:10px; background: #34c759; border-radius:50%; box-shadow: 0 0 10px rgba(52, 199, 89, 0.5);}
         .ai-close { background: var(--bg-secondary); border: none; font-size: 1.2rem; cursor: pointer; color: #555; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
         .ai-close:hover { background: #eee; color: #000;}
-        
+       
         .ai-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; scrollbar-width: thin;}
         .ai-msg-wrap { display: flex; flex-direction: column; max-width: 88%; }
         .ai-msg-wrap.bot { align-self: flex-start; }
         .ai-msg-wrap.user { align-self: flex-end; align-items: flex-end; }
-        
+       
         .ai-msg { padding: 14px 18px; font-size: 0.95rem; line-height: 1.6; border-radius: 20px; word-wrap: break-word;}
         .ai-msg.bot { background: var(--bg-secondary); color: var(--text-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-light);}
         body.lang-ar .ai-msg.bot { border-bottom-left-radius: 20px; border-bottom-right-radius: 4px;}
         .ai-msg.user { background: var(--accent-blue); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(10, 132, 255, 0.2);}
         body.lang-ar .ai-msg.user { border-bottom-right-radius: 20px; border-bottom-left-radius: 4px;}
-        
+       
         .msg-actions { display: flex; gap: 12px; margin-top: 8px; padding: 0 5px;}
         .msg-btn { background: none; border: none; color: #aaa; cursor: pointer; transition: 0.2s;}
         .msg-btn:hover { color: var(--text-main); transform: scale(1.1);}
-        
+       
         .ai-input-area { display: flex; padding: 15px 20px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 12px;}
         .ai-input { flex: 1; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 24px; padding: 12px 18px; font-size: 0.95rem; outline: none; font-family: inherit; transition: 0.3s;}
         .ai-input:focus { background: #fff; border-color: var(--border-light); box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
@@ -305,8 +267,8 @@
 
         /* ======== THE MIRACLE: 5-STAGE HX-5 MATRIX GATEWAY STYLES ======== */
         .nfc-gateway-btn {
-            background: #000; border: 1px solid #222; color: #555; padding: 18px 40px; 
-            font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px; 
+            background: #000; border: 1px solid #222; color: #555; padding: 18px 40px;
+            font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px;
             cursor: pointer; transition: all 0.5s ease; border-radius: 0;
             text-transform: uppercase;
         }
@@ -322,20 +284,20 @@
             opacity: 0; transition: opacity 0.8s ease-in-out;
         }
         #matrix-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        
+       
         .matrix-ui-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
-            pointer-events: none; 
+            pointer-events: none;
             display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 4vw, 40px);
         }
-        
+       
         .matrix-header { display: flex; justify-content: space-between; align-items: flex-start; }
         .matrix-status { font-size: clamp(0.7rem, 2vw, 0.85rem); color: #0A84FF; letter-spacing: 2px; text-shadow: 0 0 10px rgba(10,132,255,0.5); transition: color 0.5s; }
         .matrix-controls-container { text-align: right; pointer-events: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 15px;}
-        
+       
         .matrix-abort-btn {
-            background: rgba(0,0,0,0.5); border: 1px solid #555; color: #888; 
-            font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 6px 12px; 
+            background: rgba(0,0,0,0.5); border: 1px solid #555; color: #888;
+            font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 6px 12px;
             cursor: pointer; letter-spacing: 2px; border-radius: 4px; transition: 0.3s;
         }
         .matrix-abort-btn:hover { background: #ff003c; color: #fff; border-color: #ff003c; box-shadow: 0 0 10px rgba(255,0,60,0.5); }
@@ -347,20 +309,20 @@
             opacity: 0; display: none; transition: opacity 0.8s ease;
         }
         .hx-stage-ui.active { display: block; opacity: 1; }
-        
+       
         .stage-title { font-family: 'Space Mono', monospace; font-size: 1.1rem; color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold; }
         .stage-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 2.5vw, 1.2rem); color: #fff; line-height: 1.8; margin-bottom: 40px; }
         body.lang-ar .stage-desc { direction: rtl; }
         body.lang-en .stage-desc { direction: ltr; }
-        
+       
         /* Interactive Elements */
         .hx-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 15px 40px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s; border-radius: 30px; text-transform: uppercase;}
         .hx-btn:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
-        
+       
         input[type=range].hx-slider { -webkit-appearance: none; width: 100%; max-width: 300px; background: transparent; margin: 20px auto; display: block;}
         input[type=range].hx-slider::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #ff003c; cursor: pointer; margin-top: -8px; box-shadow: 0 0 15px #ff003c;}
         input[type=range].hx-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
-        
+       
         .hold-btn { background: transparent; border: 2px solid #27c93f; color: #27c93f; padding: 20px; border-radius: 50%; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-size: 0.7rem; letter-spacing: 1px; cursor: pointer; margin: 0 auto; transition: all 0.2s; user-select: none; -webkit-user-select: none;}
         .hold-btn:active { background: rgba(39, 201, 63, 0.2); transform: scale(0.9); box-shadow: inset 0 0 20px rgba(39,201,63,0.5); }
 
@@ -385,7 +347,7 @@
         .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-        
+       
         /* ======== DEEP ARCHIVE: VIP LOCK SCREEN ======== */
         .archive-lock-ui {
             display: none;
@@ -404,7 +366,7 @@
         .archive-card.focused .archive-desc { display: none; }
         .archive-card.focused.unlocked .archive-desc {
             display: block;
-            max-height: none; 
+            max-height: none;
             opacity: 1;
             margin-top: 20px;
             animation: fadeIn 0.8s ease;
@@ -429,62 +391,62 @@
         .archive-decrypt-btn:hover { background: #fff; color: #000; }
 
         /* ======== THE DEEP ARCHIVE: RESPONSIVE CARDS ======== */
-        .archive-grid { 
-            display: grid; 
+        .archive-grid {
+            display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px; 
+            gap: 25px;
             width: 100%;
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 40px 2%; 
-            position: relative; 
-            z-index: 20; 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 2%;
+            position: relative;
+            z-index: 20;
         }
-        
-        .archive-card { 
-            width: 100%; 
-            background: rgba(10, 10, 10, 0.6); 
+       
+        .archive-card {
+            width: 100%;
+            background: rgba(10, 10, 10, 0.6);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(10, 132, 255, 0.2); 
-            padding: 40px 30px; 
-            border-radius: 12px; 
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-            position: relative; 
+            border: 1px solid rgba(10, 132, 255, 0.2);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             height: fit-content;
         }
 
         @media (max-width: 900px) {
-            .archive-grid { 
-                display: flex; 
-                overflow-x: auto; 
-                scroll-snap-type: x mandatory; 
-                scrollbar-width: none; 
+            .archive-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
                 -webkit-overflow-scrolling: touch;
                 padding-bottom: 40px;
             }
             .archive-grid::-webkit-scrollbar { display: none; }
-            .archive-card { 
+            .archive-card {
                 flex: 0 0 85vw;
                 scroll-snap-align: center;
             }
         }
-        
+       
         .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .archive-card:nth-child(2)::before { background: #00e5ff; }
         .archive-card:nth-child(3)::before { background: #27c93f; }
         .archive-card:hover::before { transform: scaleX(1); }
-        
+       
         .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 20px; }
         .archive-title { font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; }
-        
+       
         .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #555; letter-spacing: 3px; margin-top: 25px; transition: 0.3s; text-transform: uppercase; }
         .archive-card:hover .card-prompt { color: #0A84FF; }
-        
-        .archive-desc { 
-            font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #e0e0e0; line-height: 1.8; 
-            max-height: 0; opacity: 0; overflow: hidden; 
+       
+        .archive-desc {
+            font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #e0e0e0; line-height: 1.8;
+            max-height: 0; opacity: 0; overflow: hidden;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         body.lang-ar .archive-desc { direction: rtl; text-align: justify; }
@@ -496,16 +458,16 @@
         }
         .archive-card.focused {
             background: rgba(15, 15, 15, 0.98);
-            border-color: #0A84FF; 
-            transform: scale(1.05); 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.15); 
+            border-color: #0A84FF;
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.15);
             z-index: 30;
-            max-height: 80vh; 
-            overflow-y: auto; 
-            scrollbar-width: thin; 
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
             scrollbar-color: rgba(255,255,255,0.2) transparent;
         }
-        
+       
         .archive-card.focused::-webkit-scrollbar { width: 4px; }
         .archive-card.focused::-webkit-scrollbar-track { background: transparent; }
         .archive-card.focused::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.2); border-radius: 4px; }
@@ -514,12 +476,12 @@
         .archive-card.focused:nth-child(3) { border-color: #27c93f; }
 
         .archive-card.focused .archive-desc {
-            max-height: none; 
+            max-height: none;
             opacity: 1;
             margin-top: 20px;
         }
         .archive-card.focused .card-prompt { display: none; }
-        
+       
         .kill-switch-container { text-align: center; margin-top: 100px; }
         .kill-switch { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 40px; }
         .kill-switch:hover { color: #fff; border-color: #fff; background: rgba(255,255,255,0.05); box-shadow: 0 0 20px rgba(255,255,255,0.1); }
@@ -558,14 +520,14 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #050505; 
+    background-color: #050505;
     z-index: 999999;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     /* إبطاء اختفاء الشاشة السوداء في النهاية */
-    transition: opacity 1.5s ease-in-out, visibility 1.5s; 
+    transition: opacity 1.5s ease-in-out, visibility 1.5s;
 }
 
 /* طبقة الوميض الأبيض الانتقالي */
@@ -580,7 +542,7 @@
 
 /* تبطيء الوميض ليكون ناعماً وليس كالفلاش المزعج */
 .flash-active {
-    animation: flashToWhite 2s forwards ease-in-out; 
+    animation: flashToWhite 2s forwards ease-in-out;
 }
 
 .ex-loader-content {
@@ -590,75 +552,32 @@
     color: #fff;
     font-family: 'Space Mono', monospace;
     /* إبطاء اختفاء النص */
-    transition: opacity 1s; 
+    transition: opacity 1s;
 }
 
 @keyframes flashToWhite {
     0% { opacity: 0; }
     40% { opacity: 1; } /* يثبت اللون الأبيض قليلاً */
     60% { opacity: 1; }
-    100% { opacity: 0; } 
+    100% { opacity: 0; }
 }
 
 @keyframes flashToWhite {
     0% { opacity: 0; }
     50% { opacity: 1; } /* تصبح الشاشة بيضاء بالكامل */
     100% { opacity: 0; } /* تختفي لتكشف الموقع الأساسي */
-}   
+}  
     </style>
 </head>
 <body class="lang-en">
 <!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
-        <div class="ex-loader-flash" id="loader-flash"></div>
-        <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
-            <h1 class="glitch-anim" style="font-size: 1.5rem; letter-spacing: 2px; color: #fff;">フサム | experience™</h1>
-            <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
-        </div>
+    <div class="ex-loader-flash" id="loader-flash"></div>
+    <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
+        <h1 class="glitch-anim" style="font-size: 1.5rem; letter-spacing: 2px; color: #fff;">フサム | experience™</h1>
+        <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
     </div>
-
-    <button class="nfc-gateway-btn" onclick="openMatrixJourney()" aria-label="NFC VIP Gate">
-        [NFC] VIP GATE
-    </button>
-
-    <div id="miracle-matrix-overlay">
-        <div style="position: absolute; top: 40px; left: 40px; color: #0A84FF; letter-spacing: 2px; font-size: 0.8rem;">SYSTEM: HX-5 ENGINE RUNNING</div>
-        
-        <div id="stage-1" class="hx-stage-ui">
-            <h2 style="color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px;">STAGE 01 — INTENT</h2>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="ar-only">لماذا يجب أن توجد هذه التجربة؟ نحن لا نصمم للمنفعة فقط، بل نؤسس القيمة الجوهرية.</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="en-only">Why must this experience exist? We do not design for utility alone.</p>
-            <button class="hx-btn" onclick="advanceStage(2)">PROCEED</button>
-        </div>
-
-        <div id="stage-2" class="hx-stage-ui">
-            <h2 style="color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px;">STAGE 02 — CONTEXT</h2>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="ar-only">أين ومتى وتحت أي ظروف تتكشف؟ التجربة لا تحدث في فراغ.</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="en-only">Where and when does it unfold? An experience does not exist in a vacuum.</p>
-            <button class="hx-btn" onclick="advanceStage(3)">PROCEED</button>
-        </div>
-
-        <div id="stage-3" class="hx-stage-ui">
-            <h2 style="color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px;">STAGE 03 — STIMULI</h2>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="ar-only">المحفزات الحسية التي تفعل العاطفة وتتجاوز الفلاتر المنطقية.</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="en-only">Sensory triggers that bypass logical filters to communicate directly with the subconscious.</p>
-            <button class="hx-btn" onclick="advanceStage(4)">PROCEED</button>
-        </div>
-
-        <div id="stage-4" class="hx-stage-ui">
-            <h2 style="color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px;">STAGE 04 — INTERACTION</h2>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="ar-only">تحويل الشخص من متفرج إلى مشارك نشط.</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="en-only">Transforming a person from a mere spectator into an active participant.</p>
-            <button class="hx-btn" onclick="advanceStage(5)">PROCEED</button>
-        </div>
-
-        <div id="stage-5" class="hx-stage-ui">
-            <h2 style="color: #27c93f; letter-spacing: 4px; margin-bottom: 20px;">STAGE 05 — IMPACT</h2>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="ar-only">الأثر هو الذاكرة والبصمة المعرفية التي تحول التفاعل إلى إرث دائم.</p>
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;" class="en-only">Impact is the lasting memory and long-term cognitive imprint.</p>
-            <button class="hx-btn" style="background: #27c93f; color: #000; border-color: #27c93f; font-weight: bold;" onclick="closeMatrixJourney()">RETURN TO SURFACE</button>
-        </div>
-    </div>
+</div>
 <!-- نهاية شاشة التحميل السينمائية -->
 
     <nav class="top-nav" id="navbar" aria-label="Main Navigation">
@@ -685,14 +604,14 @@
             <div class="hero-content fade-in">
                 <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
                 <span class="tagline en-only">The line between ordinary and extraordinary</span>
-                
+               
                 <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
                 <h1 class="main-title en-only">Engineering Human Experiences</h1>
-                
+               
                 <p class="text-body ar-only" style="margin: 0 auto; color:#fff;">نحن لا نصمم منتجات..<br>نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
                 <p class="text-body en-only" style="margin: 0 auto; color:#fff;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
             </div>
-            
+           
             <div class="hero-video-controls" id="heroControls" aria-label="Video Controls"></div>
         </section>
 
@@ -743,7 +662,7 @@
                     <p class="text-body ar-only" style="margin:0;">الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن لا نصمم للمنفعة فقط؛ بل نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى ويلبي حاجة إنسانية أساسية.</p>
                     <p class="text-body en-only" style="margin:0;">Intent defines the existential purpose and the “moral compass” of the project. We do not design for utility alone; we establish the core value proposition that ensures every interaction serves a higher objective and resonates with a fundamental human need.</p>
                 </article>
-                
+               
                 <article class="pillar-box">
                     <h3 class="pillar-title en-only">Context</h3><h3 class="pillar-title ar-only">السياق</h3>
                     <span class="pillar-quote en-only">“Where, when, and under what conditions does it unfold?”</span><span class="pillar-quote ar-only">"أين ومتى وتحت أي ظروف تتكشف؟"</span>
@@ -876,7 +795,7 @@
                     <span class="page-num ar-only" style="margin-bottom: 10px; font-size: 0.75rem;">توقيع العلامة</span>
                     <span class="page-num en-only" style="margin-bottom: 10px; font-size: 0.75rem;">Brand Signature</span>
                     <h2 class="heading-md glitch-anim mono-text">フサム | experience™</h2>
-                    
+                   
                     <div style="margin-top: 40px; margin-bottom: 30px;">
                         <span class="mono-text" style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">THE FOUNDER</span>
                         <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px;">Hussam Hassan Mohammed Tahiri</h3>
@@ -898,7 +817,7 @@
             <div class="container fade-in">
                 <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
                 <h2 class="heading-md en-only" style="text-align: center; margin-bottom: 40px;">Executive Dashboard</h2>
-                
+               
                 <div id="auth-view" class="login-wrapper" style="padding: 0;">
                     <div class="login-box">
                         <form onsubmit="handleFirebaseLogin(event)">
@@ -922,12 +841,12 @@
                                 <span class="en-only">Sign In</span>
                             </button>
                         </form>
-                        
+                       
                         <div class="divider">
                             <span class="ar-only">أو</span>
                             <span class="en-only">Or</span>
                         </div>
-                        
+                       
                         <div class="oauth-group">
                             <button class="btn-social" onclick="signInWithGoogle()" title="Google" aria-label="Sign in with Google">
                                 <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -1003,7 +922,7 @@
         <section id="blueprint-section" class="deep-archive" aria-label="The Deep Archive Projects">
             <div class="marquee-container" aria-hidden="true">
                 <div class="marquee-text">
-                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // 
+                    EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE // EX-MATRIX OFFLINE // CLASSIFIED PROJECTS // RESTRICTED ACCESS // HX-5 ENGINE RUNNING // フサム EXPERIENCE //
                 </div>
             </div>
 
@@ -1018,7 +937,7 @@
                         <span class="archive-status" style="color:#0A84FF; border: 1px solid rgba(10,132,255,0.3); background: rgba(10,132,255,0.05);">ENCRYPTED // FILE 01</span>
                         <h3 class="archive-title">Project: TRACK35</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
-                        
+                       
                         <div class="archive-lock-ui" onclick="event.stopPropagation()">
                             <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
                             <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-1">
@@ -1036,7 +955,7 @@
                         <span class="archive-status" style="color:#00e5ff; border: 1px solid rgba(0,229,255,0.3); background: rgba(0,229,255,0.05);">ENCRYPTED // FILE 02</span>
                         <h3 class="archive-title">Concept: LAB</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
-                        
+                       
                         <div class="archive-lock-ui" onclick="event.stopPropagation()">
                             <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
                             <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-2">
@@ -1092,7 +1011,7 @@
                 </div>
                 <div class="hud-footer">
                     <div class="slogan">ENGINEERING HUMAN EXPERIENCES</div>
-                    HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991 
+                    HX-5TM x 33GUIDETM x iNSTUDIOTM x DROPzeroTM x iNSIDETM x PRO | LABTM x C©Ncept house • 1991
                 </div>
             </div>
             <div id="canvas-container" aria-hidden="true"></div>
@@ -1128,7 +1047,7 @@
     <button class="ai-btn" onclick="toggleChat()" aria-label="Open Oracle Chat">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </button>
-    
+   
     <div class="ai-window" id="aiWindow" role="complementary" aria-label="Oracle Chat Interface">
         <header class="ai-header">
             <span class="ai-title">Ex Oracle</span>
@@ -1158,7 +1077,7 @@
          * ==============================================================================
          */
 
-        const SECURE_TOKEN = "EX_SHIELD_99X"; 
+        const SECURE_TOKEN = "EX_SHIELD_99X";
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
 
         /**
@@ -1166,7 +1085,7 @@
          * PART 1: ANTI-INJECTION & XSS SANITIZATION (SECURITY PATCH)
          * ==============================================================================
          */
-        
+       
         function sanitizeInput(input) {
             if (typeof input !== 'string') return '';
             return input
@@ -1183,13 +1102,13 @@
          * PART 1.5: THREAT DETECTION & TELEMETRY SYSTEM (WAF SENSORS)
          * ==============================================================================
          */
-        
+       
         const THREAT_SIGNATURES = [
-            /(<script.*?>.*?<\/script>)/gi,               
-            /(UNION\s+SELECT|DROP\s+TABLE|--|;)/gi,       
+            /(<script.*?>.*?<\/script>)/gi,              
+            /(UNION\s+SELECT|DROP\s+TABLE|--|;)/gi,      
             /(\.\.\/|\.\.\\|etc\/passwd)/gi,              
             /(bash\s-i|wget\s|curl\s|nc\s-e)/gi,          
-            /(document\.cookie|window\.location)/gi       
+            /(document\.cookie|window\.location)/gi      
         ];
 
         async function triggerSecurityProtocol(payload, context, threatType) {
@@ -1253,9 +1172,9 @@
         let hxAnimationId;
         let isHXActive = false;
         let currentStage = 0;
-        let particleBasePositions = []; 
+        let particleBasePositions = [];
         let particlesCount = 0;
-        let targetNode; 
+        let targetNode;
         let hxRaycaster, hxMouse;
 
         let stimuliLevel = 0;
@@ -1277,13 +1196,13 @@
 
         function init3DHXMatrix() {
             const container = document.getElementById('matrix-canvas-container');
-            container.innerHTML = ''; 
-            
+            container.innerHTML = '';
+           
             hxScene = new THREE.Scene();
             hxScene.fog = new THREE.FogExp2(0x000000, 0.001);
 
             hxCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 3000);
-            hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800; 
+            hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800;
 
             hxRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             hxRenderer.setPixelRatio(window.devicePixelRatio);
@@ -1291,20 +1210,20 @@
             container.appendChild(hxRenderer.domElement);
 
             const geometry = new THREE.BufferGeometry();
-            particlesCount = window.innerWidth < 768 ? 1500 : 4000; 
+            particlesCount = window.innerWidth < 768 ? 1500 : 4000;
             const positions = new Float32Array(particlesCount * 3);
-            
+           
             for(let i = 0; i < particlesCount * 3; i++) {
                 positions[i] = (Math.random() - 0.5) * 2000;
-                particleBasePositions.push(positions[i]); 
+                particleBasePositions.push(positions[i]);
             }
-            
+           
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             const material = new THREE.PointsMaterial({
-                size: window.innerWidth < 768 ? 3 : 2, 
-                color: 0xffffff, 
-                transparent: true, 
-                opacity: 0.8, 
+                size: window.innerWidth < 768 ? 3 : 2,
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.8,
                 blending: THREE.AdditiveBlending
             });
             hxParticles = new THREE.Points(geometry, material);
@@ -1314,7 +1233,7 @@
             const nodeMat = new THREE.MeshBasicMaterial({ color: 0x27c93f });
             targetNode = new THREE.Mesh(nodeGeo, nodeMat);
             targetNode.position.set((Math.random()-0.5)*1000, (Math.random()-0.5)*1000, (Math.random()-0.5)*500);
-            targetNode.visible = false; 
+            targetNode.visible = false;
             hxScene.add(targetNode);
 
             hxRaycaster = new THREE.Raycaster();
@@ -1337,10 +1256,10 @@
             if (navigator.vibrate) navigator.vibrate(50);
 
             document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
-            
+           
             const activeUI = document.getElementById(`stage-${stageNum}`);
             if(activeUI) {
-                setTimeout(() => activeUI.classList.add('active'), 300); 
+                setTimeout(() => activeUI.classList.add('active'), 300);
             }
 
             if(stageNum === 2) {
@@ -1351,12 +1270,12 @@
             } else if(stageNum === 5) {
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
                 document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
-                document.getElementById('matrixStatus').style.color = "#FFD700"; 
+                document.getElementById('matrixStatus').style.color = "#FFD700";
             }
         }
 
         function onMatrixTap(event) {
-            if (currentStage !== 2) return; 
+            if (currentStage !== 2) return;
 
             hxMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             hxMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -1366,7 +1285,7 @@
 
             if (intersects.length > 0) {
                 if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
-                targetNode.material.color.setHex(0xffffff); 
+                targetNode.material.color.setHex(0xffffff);
                 setTimeout(() => { advanceStage(3); }, 500);
             }
         }
@@ -1374,13 +1293,13 @@
         function handleStimuli() {
             const slider = document.getElementById('stimuliSlider');
             stimuliLevel = slider.value / 100;
-            
+           
             if(stimuliLevel > 0.1 && navigator.vibrate) {
                 navigator.vibrate(10);
             }
 
             if (stimuliLevel >= 0.99) {
-                slider.disabled = true; 
+                slider.disabled = true;
                 if (navigator.vibrate) navigator.vibrate(200);
                 advanceStage(4);
             }
@@ -1389,7 +1308,7 @@
         function startSync(e) {
             e.preventDefault();
             if(currentStage !== 4) return;
-            
+           
             const btn = document.getElementById('syncBtn');
             syncInterval = setInterval(() => {
                 syncProgress += 2;
@@ -1419,16 +1338,16 @@
         function closeHX5Journey(scrollToForm = false) {
             const mainOverlay = document.getElementById('miracle-matrix-overlay');
             mainOverlay.style.opacity = '0';
-            
+           
             setTimeout(() => {
                 mainOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto'; 
+                document.body.style.overflow = 'auto';
                 resetHXState();
-                
+               
                 if (scrollToForm) {
                     const portalSection = document.getElementById('portal');
                     portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
+                   
                     setTimeout(() => {
                         const emailInput = document.getElementById('userEmail');
                         if(emailInput) {
@@ -1472,7 +1391,7 @@
 
             if(hxParticles && hxParticles.geometry) {
                 const positions = hxParticles.geometry.attributes.position.array;
-                
+               
                 for(let i = 0; i < particlesCount; i++) {
                     const idx = i * 3;
                     let targetX = particleBasePositions[idx];
@@ -1500,7 +1419,7 @@
                         const radius = Math.abs(particleBasePositions[idx+1]) * 0.6 + (100 - syncProgress);
                         targetX = Math.cos(angle) * radius;
                         targetZ = Math.sin(angle) * radius;
-                        hxParticles.material.color.setHex(0xff003c); 
+                        hxParticles.material.color.setHex(0xff003c);
                         if(syncProgress > 0) hxParticles.material.color.setHex(0x27c93f);
                     } else if (currentStage === 5) {
                         const len = Math.sqrt(targetX*targetX + targetY*targetY + targetZ*targetZ);
@@ -1508,7 +1427,7 @@
                         targetX = (targetX/len) * sphereRadius;
                         targetY = (targetY/len) * sphereRadius;
                         targetZ = (targetZ/len) * sphereRadius;
-                        
+                       
                         const scale = 1 + Math.sin(time * 2) * 0.05;
                         targetX *= scale; targetY *= scale; targetZ *= scale;
 
@@ -1539,7 +1458,7 @@
         function onHXResize() {
             if(!hxCamera || !hxRenderer) return;
             hxCamera.aspect = window.innerWidth / window.innerHeight;
-            hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800; 
+            hxCamera.position.z = window.innerWidth < 768 ? 1200 : 800;
             hxCamera.updateProjectionMatrix();
             hxRenderer.setSize(window.innerWidth, window.innerHeight);
         }
@@ -1556,7 +1475,7 @@
                     loader.style.opacity = '0';
                     setTimeout(() => loader.style.display = 'none', 800);
                 }
-            }, 1500); 
+            }, 1500);
 
             document.fonts.ready.then(function() {
                 try { if (typeof THREE !== 'undefined') init3DBlueprint(); } catch(err) { console.error(err); }
@@ -1565,7 +1484,7 @@
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
-            
+           
             if(heroVidEl && heroControls) {
                 allVids.forEach((vid, idx) => {
                     const dot = document.createElement('button');
@@ -1592,20 +1511,20 @@
 
         function toggleLanguage() {
             const body = document.body;
-            body.classList.toggle('lang-ar'); 
+            body.classList.toggle('lang-ar');
             body.classList.toggle('lang-en');
-            
+           
             const isAr = body.classList.contains('lang-ar');
             document.documentElement.dir = isAr ? 'rtl' : 'ltr';
             document.documentElement.lang = isAr ? 'ar' : 'en';
-            
+           
             document.getElementById('userEmail').placeholder = isAr ? "البريد الإلكتروني" : "Email Address";
             document.getElementById('userName').placeholder = isAr ? "الاسم الكامل" : "Full Name";
             document.getElementById('userPhone').placeholder = isAr ? "رقم الجوال (مطلوب)" : "Phone Number (Required)";
             document.getElementById('consultText').placeholder = isAr ? "حدد هدفك الاستراتيجي هنا..." : "Outline your strategic objective here...";
             document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
             document.getElementById('adminPass').placeholder = isAr ? "أدخل الرمز السري" : "Enter Admin Token";
-            
+           
             const syncBtn = document.getElementById('syncBtn');
             if (syncBtn && syncProgress < 100) {
                  syncBtn.innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
@@ -1654,11 +1573,11 @@
             const btn = document.getElementById('loginBtn');
             const isAr = document.body.classList.contains('lang-ar');
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
-            
+           
             currentUser.Name = sanitizeInput(document.getElementById('userName').value);
             currentUser.Email = sanitizeInput(document.getElementById('userEmail').value);
             currentUser.Phone = sanitizeInput(document.getElementById('userPhone').value);
-            
+           
             try {
                 await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1691,7 +1610,7 @@
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
-                
+               
                 let html = '';
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
@@ -1713,16 +1632,16 @@
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
             const isAr = document.body.classList.contains('lang-ar');
-            
+           
             const rawMessage = document.getElementById('consultText').value;
-            
+           
             // WAF SENSOR CHECK
             if (await scanForThreats(rawMessage, "Consultation Form")) return;
 
             const message = sanitizeInput(rawMessage);
-            
+           
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
-            
+           
             try {
                 await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1744,16 +1663,16 @@
                     Email: currentUser?.Email || "Unknown",
                     IsCommand: isTerminal
                 });
-                
+               
                 const finalUrl = `${GOOGLE_SCRIPT_URL}?${urlParams.toString()}`;
 
                 const response = await fetch(finalUrl);
                 const data = await response.json();
 
                 if (loadingElement) loadingElement.remove();
-                
+               
                 const finalOutput = data.reply || data.error || "Unknown Core Error.";
-                
+               
                 if(isTerminal) printNexus(`> ${sanitizeInput(finalOutput)}`); else appendMsg(finalOutput, 'bot');
 
                 try {
@@ -1768,10 +1687,10 @@
                 console.error("MATRIX CORE ERROR:", error);
             }
         }
-        
+       
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
-        
+       
         async function handleNexus(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
@@ -1793,7 +1712,7 @@
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-        
+       
         function toggleChat() {
             chatWindow.classList.toggle('open');
             if(chatWindow.classList.contains('open') && chatBody.innerHTML === '') {
@@ -1805,14 +1724,14 @@
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
-            
+           
             let safeText = sanitizeInput(text);
             safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             safeText = safeText.replace(/\*(.*?)\*/g, '<em>$1</em>');
             safeText = safeText.replace(/\n/g, '<br>');
 
             let innerHTML = `<div class="ai-msg ${sender}">${safeText}</div>`;
-            
+           
             if (sender === 'bot' && text !== '...' && !text.includes('Processing') && !text.includes('المعالجة')) {
                 const safeTextForCopy = safeText.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 innerHTML += `
@@ -1822,7 +1741,7 @@
                     </button>
                 </div>`;
             }
-            
+           
             wrapDiv.innerHTML = innerHTML;
             chatBody.appendChild(wrapDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -1830,7 +1749,7 @@
         }
 
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
-        
+       
         async function sendChatMessage() {
             const rawText = aiInput.value.trim();
             if(!rawText) return;
@@ -1852,11 +1771,11 @@
          * ==============================================================================
          */
         function checkPass() {
-            const passInput = document.getElementById('adminPass').value.trim(); 
+            const passInput = document.getElementById('adminPass').value.trim();
             const loginStatus = document.getElementById('loginStatus');
-            
+           
             const encodedInput = btoa(passInput);
-            const EXPECTED_HASH = "Q0FMSUJVUk4tRVgxOTU5Lko="; 
+            const EXPECTED_HASH = "Q0FMSUJVUk4tRVgxOTU5Lko=";
 
             if(encodedInput === EXPECTED_HASH) {
                 document.getElementById('adminTab').style.display = 'block';
@@ -1884,7 +1803,7 @@
                     status.innerText = "[ NO RECORDS FOUND ]"; status.style.color = "red"; return;
                 }
 
-                let csvContent = "\uFEFF"; 
+                let csvContent = "\uFEFF";
                 let rows = [];
                 let headers = [];
 
@@ -1900,7 +1819,7 @@
                     headers.forEach(header => {
                         let val = data[header] || "";
                         if(val && val.seconds) val = new Date(val.toDate()).toLocaleString('en-GB');
-                        val = val.toString().replace(/"/g, '""'); 
+                        val = val.toString().replace(/"/g, '""');
                         if(val.search(/("|,|\n)/g) >= 0) val = `"${val}"`;
                         row.push(val);
                     });
@@ -1933,7 +1852,7 @@
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
-            
+           
             const oldLoader = document.getElementById('blueprint-loader');
             if(oldLoader) {
                 oldLoader.style.opacity = '0';
@@ -1945,7 +1864,7 @@
 
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            
+           
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
@@ -1959,21 +1878,21 @@
             const wireframes = [];
             const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
-            
+           
             for(let i=0; i<15; i++) {
                 const color = i % 3 === 0 ? 0x0A84FF : (i % 2 === 0 ? 0x00e5ff : 0xffffff);
                 const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.15 });
                 const wireframeBox = new THREE.LineSegments(edges, lineMat);
-                
+               
                 wireframeBox.position.set(
                     (Math.random() - 0.5) * 4000,
                     (Math.random() - 0.5) * 1000,
                     (Math.random() - 0.5) * 4000
                 );
-                
+               
                 const scale = Math.random() * 1.5 + 0.5;
                 wireframeBox.scale.set(scale, scale, scale);
-                
+               
                 wireframes.push({
                     mesh: wireframeBox,
                     rotationSpeedX: (Math.random() - 0.5) * 0.005,
@@ -1983,7 +1902,7 @@
             }
 
             const particlesGeo = new THREE.BufferGeometry();
-            const ptCount = 2000; 
+            const ptCount = 2000;
             const posArray = new Float32Array(ptCount * 3);
             for(let i = 0; i < ptCount * 3; i++) {
                 posArray[i] = (Math.random() - 0.5) * 5000;
@@ -1997,7 +1916,7 @@
 
             const clock = new THREE.Clock();
             let isVisible = true;
-            
+           
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { isVisible = entry.isIntersecting; });
             }, { threshold: 0.05 });
@@ -2010,7 +1929,7 @@
                 const time = clock.getElapsedTime();
 
                 camera.position.x = Math.sin(time * 0.05) * 1500;
-                camera.position.y = Math.sin(time * 0.08) * 400 + 200; 
+                camera.position.y = Math.sin(time * 0.08) * 400 + 200;
                 camera.position.z = Math.cos(time * 0.05) * 1500;
 
                 const lookX = Math.sin(time * 0.07) * 500;
@@ -2032,7 +1951,7 @@
 
             window.addEventListener('resize', () => {
                 const w = window.innerWidth;
-                const h = window.innerHeight; 
+                const h = window.innerHeight;
                 camera.aspect = w / h;
                 camera.updateProjectionMatrix();
                 renderer.setSize(w, h);
@@ -2066,33 +1985,33 @@
                 }
             },
             privacy: {
-                en: { 
-                    title: "Privacy Policy & Data Protection", 
-                    body: "This platform operates under a <b>Zero-Trust Architecture</b> in strict compliance with the Saudi Personal Data Protection Law (PDPL).<br><br><b>1. Data Collection:</b> We do not collect unnecessary personal data. Information provided through the Executive Dashboard is solely for strategic consultation purposes.<br><b>2. Active Telemetry & Security Logging:</b> For system integrity, our Intrusion Detection System (IDS) actively monitors traffic. In the event of a suspected cyber threat or malicious injection, your digital footprint (including IP address, OS, and browser data) is automatically logged and reported.<br><b>3. Encryption:</b> All strategic inquiries and digital footprints are encrypted within the NEXUS COMMAND architecture.<br><b>4. Third Parties:</b> Your strategic data is never sold, shared, or exposed to unauthorized external entities." 
+                en: {
+                    title: "Privacy Policy & Data Protection",
+                    body: "This platform operates under a <b>Zero-Trust Architecture</b> in strict compliance with the Saudi Personal Data Protection Law (PDPL).<br><br><b>1. Data Collection:</b> We do not collect unnecessary personal data. Information provided through the Executive Dashboard is solely for strategic consultation purposes.<br><b>2. Active Telemetry & Security Logging:</b> For system integrity, our Intrusion Detection System (IDS) actively monitors traffic. In the event of a suspected cyber threat or malicious injection, your digital footprint (including IP address, OS, and browser data) is automatically logged and reported.<br><b>3. Encryption:</b> All strategic inquiries and digital footprints are encrypted within the NEXUS COMMAND architecture.<br><b>4. Third Parties:</b> Your strategic data is never sold, shared, or exposed to unauthorized external entities."
                 },
-                ar: { 
-                    title: "سياسة الخصوصية وحماية البيانات", 
-                    body: "تعمل هذه المنصة وفق بنية <b>معدومة الثقة (Zero-Trust)</b> بامتثال تام لنظام حماية البيانات الشخصية (PDPL) في المملكة العربية السعودية.<br><br><b>1. جمع البيانات:</b> نحن لا نجمع بيانات شخصية غير ضرورية. المعلومات المقدمة عبر الواجهة التنفيذية تُستخدم حصرياً لأغراض الاستشارة الاستراتيجية.<br><b>2. المراقبة الأمنية النشطة:</b> لحماية تكامل النظام، يقوم نظام كشف التسلل (IDS) الخاص بنا بمراقبة الحركة. في حال رصد أي تهديد سيبراني أو حقن خبيث، يتم تسجيل بصمتك الرقمية (بما في ذلك عنوان IP، ونظام التشغيل) والإبلاغ عنها تلقائياً.<br><b>3. التشفير:</b> يتم تشفير جميع الاستفسارات الاستراتيجية داخل بنية (NEXUS COMMAND).<br><b>4. الأطراف الثالثة:</b> لا يتم بيع أو مشاركة أو كشف بياناتك الاستراتيجية لأي جهات خارجية." 
+                ar: {
+                    title: "سياسة الخصوصية وحماية البيانات",
+                    body: "تعمل هذه المنصة وفق بنية <b>معدومة الثقة (Zero-Trust)</b> بامتثال تام لنظام حماية البيانات الشخصية (PDPL) في المملكة العربية السعودية.<br><br><b>1. جمع البيانات:</b> نحن لا نجمع بيانات شخصية غير ضرورية. المعلومات المقدمة عبر الواجهة التنفيذية تُستخدم حصرياً لأغراض الاستشارة الاستراتيجية.<br><b>2. المراقبة الأمنية النشطة:</b> لحماية تكامل النظام، يقوم نظام كشف التسلل (IDS) الخاص بنا بمراقبة الحركة. في حال رصد أي تهديد سيبراني أو حقن خبيث، يتم تسجيل بصمتك الرقمية (بما في ذلك عنوان IP، ونظام التشغيل) والإبلاغ عنها تلقائياً.<br><b>3. التشفير:</b> يتم تشفير جميع الاستفسارات الاستراتيجية داخل بنية (NEXUS COMMAND).<br><b>4. الأطراف الثالثة:</b> لا يتم بيع أو مشاركة أو كشف بياناتك الاستراتيجية لأي جهات خارجية."
                 }
             },
             terms: {
-                en: { 
-                    title: "Terms of Use & Strategic Engagement", 
-                    body: "By accessing the フサム | experience™ platform, you agree to the following framework:<br><br><b>1. Cyber Security & Active Defense:</b> Use of this platform is governed by the Saudi Anti-Cyber Crime Law. The system employs an active Web Application Firewall (WAF). Any unauthorized access, malicious payload injection (e.g., XSS, SQLi), or attempt to breach the NEXUS COMMAND will trigger an immediate system lock and an automated forensic report to relevant cybersecurity authorities.<br><b>2. Intellectual Property:</b> The HX-5™ Methodology and all conceptual architectures are the exclusive intellectual property of フサム.<br><b>3. Cultural Alignment:</b> Our engineered experiences adhere strictly to the guidelines set forth by the relevant cultural and tourism authorities in Saudi Arabia.<br><b>4. Purpose:</b> This is a highly secure executive strategic environment, not a public commercial store." 
+                en: {
+                    title: "Terms of Use & Strategic Engagement",
+                    body: "By accessing the フサム | experience™ platform, you agree to the following framework:<br><br><b>1. Cyber Security & Active Defense:</b> Use of this platform is governed by the Saudi Anti-Cyber Crime Law. The system employs an active Web Application Firewall (WAF). Any unauthorized access, malicious payload injection (e.g., XSS, SQLi), or attempt to breach the NEXUS COMMAND will trigger an immediate system lock and an automated forensic report to relevant cybersecurity authorities.<br><b>2. Intellectual Property:</b> The HX-5™ Methodology and all conceptual architectures are the exclusive intellectual property of フサム.<br><b>3. Cultural Alignment:</b> Our engineered experiences adhere strictly to the guidelines set forth by the relevant cultural and tourism authorities in Saudi Arabia.<br><b>4. Purpose:</b> This is a highly secure executive strategic environment, not a public commercial store."
                 },
-                ar: { 
-                    title: "شروط الاستخدام والمشاركة الاستراتيجية", 
-                    body: "بدخولك إلى منصة フサム | experience™، فإنك توافق على الإطار التالي:<br><br><b>1. الأمن السيبراني والدفاع النشط:</b> يخضع استخدام هذه المنصة لنظام مكافحة جرائم المعلوماتية السعودي. يستخدم النظام مستشعرات دفاعية نشطة (IDS/WAF). أي محاولة حقن أكواد خبيثة (مثل XSS أو SQLi) أو اختراق لـ NEXUS COMMAND ستؤدي إلى إغلاق النظام فوراً ورفع تقرير جنائي آلي للجهات الأمنية المختصة.<br><b>2. الملكية الفكرية:</b> منهجية HX-5™ وكافة الهياكل المفاهيمية هي ملكية فكرية حصرية لـ フサム.<br><b>3. التوافق الثقافي:</b> تلتزم تجاربنا الهندسية بصرامة بالتوجهات والرؤى الثقافية المعتمدة في المملكة العربية السعودية.<br><b>4. الغاية:</b> هذه بيئة استراتيجية تنفيذية عالية الأمان، وليست متجراً تجارياً عاماً." 
+                ar: {
+                    title: "شروط الاستخدام والمشاركة الاستراتيجية",
+                    body: "بدخولك إلى منصة フサム | experience™، فإنك توافق على الإطار التالي:<br><br><b>1. الأمن السيبراني والدفاع النشط:</b> يخضع استخدام هذه المنصة لنظام مكافحة جرائم المعلوماتية السعودي. يستخدم النظام مستشعرات دفاعية نشطة (IDS/WAF). أي محاولة حقن أكواد خبيثة (مثل XSS أو SQLi) أو اختراق لـ NEXUS COMMAND ستؤدي إلى إغلاق النظام فوراً ورفع تقرير جنائي آلي للجهات الأمنية المختصة.<br><b>2. الملكية الفكرية:</b> منهجية HX-5™ وكافة الهياكل المفاهيمية هي ملكية فكرية حصرية لـ フサム.<br><b>3. التوافق الثقافي:</b> تلتزم تجاربنا الهندسية بصرامة بالتوجهات والرؤى الثقافية المعتمدة في المملكة العربية السعودية.<br><b>4. الغاية:</b> هذه بيئة استراتيجية تنفيذية عالية الأمان، وليست متجراً تجارياً عاماً."
                 }
             },
             oracle: {
-                en: { 
-                    title: "Ex Oracle Terms of Use", 
-                    body: "Ex Oracle is an AI entity provided by フサム | experience™ designed to answer frequently asked questions about our strategic products and services.<br><br>Its responses are generated using advanced LLM models proxied through a secure isolated backend. While engineered for precision, the Ex Oracle may occasionally provide inaccurate or incomplete information. It is not intended to give professional, legal, or absolute strategic advice and is not a substitute for official フサム documentation.<br><br>By using Ex Oracle, you agree that your inputs are sanitized for security purposes. Malicious prompts will trigger system defense protocols." 
+                en: {
+                    title: "Ex Oracle Terms of Use",
+                    body: "Ex Oracle is an AI entity provided by フサム | experience™ designed to answer frequently asked questions about our strategic products and services.<br><br>Its responses are generated using advanced LLM models proxied through a secure isolated backend. While engineered for precision, the Ex Oracle may occasionally provide inaccurate or incomplete information. It is not intended to give professional, legal, or absolute strategic advice and is not a substitute for official フサム documentation.<br><br>By using Ex Oracle, you agree that your inputs are sanitized for security purposes. Malicious prompts will trigger system defense protocols."
                 },
-                ar: { 
-                    title: "شروط استخدام Ex Oracle", 
-                    body: "نظام Ex Oracle هو كيان ذكاء اصطناعي مُقدم بواسطة フサム | experience™ ومصمم للإجابة على الأسئلة الشائعة حول منتجاتنا وخدماتنا الاستراتيجية.<br><br>يتم توليد ردوده باستخدام نماذج لغوية متقدمة تعمل من خلال خادم خلفي معزول وآمن. على الرغم من هندسته للدقة، قد يقدم الأوراكل أحياناً معلومات غير مكتملة. هو ليس بديلاً عن المشورة المهنية أو الوثائق الرسمية لـ フサム.<br><br>باستخدامك للأوراكل، فإنك توافق على أن مدخلاتك تخضع لعمليات التطهير الأمني (Sanitization). أي محاولات لإدخال أوامر خبيثة ستؤدي إلى تفعيل بروتوكولات الدفاع الآلية." 
+                ar: {
+                    title: "شروط استخدام Ex Oracle",
+                    body: "نظام Ex Oracle هو كيان ذكاء اصطناعي مُقدم بواسطة フサム | experience™ ومصمم للإجابة على الأسئلة الشائعة حول منتجاتنا وخدماتنا الاستراتيجية.<br><br>يتم توليد ردوده باستخدام نماذج لغوية متقدمة تعمل من خلال خادم خلفي معزول وآمن. على الرغم من هندسته للدقة، قد يقدم الأوراكل أحياناً معلومات غير مكتملة. هو ليس بديلاً عن المشورة المهنية أو الوثائق الرسمية لـ フサム.<br><br>باستخدامك للأوراكل، فإنك توافق على أن مدخلاتك تخضع لعمليات التطهير الأمني (Sanitization). أي محاولات لإدخال أوامر خبيثة ستؤدي إلى تفعيل بروتوكولات الدفاع الآلية."
                 }
             }
         };
@@ -2109,11 +2028,11 @@
         function focusArchiveCard(clickedCard) {
             const grid = document.getElementById('archiveGrid');
             const isAlreadyFocused = clickedCard.classList.contains('focused');
-            
+           
             document.querySelectorAll('.archive-card').forEach(card => {
                 card.classList.remove('focused');
             });
-            
+           
             if (!isAlreadyFocused) {
                 grid.classList.add('has-focus');
                 clickedCard.classList.add('focused');
@@ -2138,8 +2057,8 @@
         // DEEP ARCHIVE: VIP UNLOCK LOGIC
         // ==========================================
         function unlockArchiveFile(cardId, expectedEncodedPass, btnElement) {
-            event.stopPropagation(); 
-            
+            event.stopPropagation();
+           
             const inputEl = document.getElementById(`pass-card-${cardId}`);
             const errorEl = document.getElementById(`error-card-${cardId}`);
             const cardEl = btnElement.closest('.archive-card');
@@ -2150,13 +2069,13 @@
             if (encodedInput === expectedEncodedPass) {
                 errorEl.style.display = 'none';
                 cardEl.classList.add('unlocked');
-                
+               
                 const statusEl = cardEl.querySelector('.archive-status');
                 statusEl.innerText = 'DECRYPTED // VIP ACCESS GRANTED';
-                statusEl.style.color = '#FFD700'; 
+                statusEl.style.color = '#FFD700';
                 statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                 statusEl.style.background = 'rgba(255, 215, 0, 0.05)';
-                
+               
                 if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
             } else {
                 errorEl.style.display = 'block';
@@ -2164,139 +2083,134 @@
                 if (navigator.vibrate) navigator.vibrate(200);
             }
         }
-
-        // ==============================================================
-        // EX-MASTER LOADER, SOUND ENGINE, AND HX-5 MATRIX LOGIC
-        // ==============================================================
-
-        let audioCtx;
-        function initAudio() {
-            if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
-        }
-
-        function playSound(type) {
-            initAudio();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            if (type === 'startup') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1.5);
-                gain.gain.setValueAtTime(0, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.5);
-                gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 2);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 2);
-            } else if (type === 'chime') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.5);
-            }
-        }
-
-        window.addEventListener('load', function() {
-            document.body.style.overflow = 'hidden'; 
-            
-            const masterLoader = document.getElementById('ex-master-loader');
-            const flashLayer = document.getElementById('loader-flash');
-            const textLayer = document.getElementById('loader-text');
-            
-            if (masterLoader && typeof THREE !== 'undefined') {
-                const canvasContainer = document.createElement('div');
-                canvasContainer.style.position = 'absolute'; canvasContainer.style.top = '0'; canvasContainer.style.left = '0'; canvasContainer.style.width = '100%'; canvasContainer.style.height = '100%'; canvasContainer.style.zIndex = '1';
-                masterLoader.appendChild(canvasContainer);
-
-                const scene = new THREE.Scene();
-                scene.fog = new THREE.FogExp2(0x050505, 0.0008);
-                const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
-                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                canvasContainer.appendChild(renderer.domElement);
-
-                const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
-                gridHelper.material.opacity = 0.3; gridHelper.material.transparent = true; gridHelper.position.y = -200;
-                scene.add(gridHelper);
-
-                const wireframes = [];
-                const boxGeo = new THREE.BoxGeometry(600, 600, 600);
-                const edges = new THREE.EdgesGeometry(boxGeo);
-                for(let i=0; i<10; i++) { 
-                    const lineMat = new THREE.LineBasicMaterial({ color: i%2===0?0x0A84FF:0xffffff, transparent: true, opacity: 0.2 }); 
-                    const mesh = new THREE.LineSegments(edges, lineMat);
-                    mesh.position.set((Math.random() - 0.5) * 3000, (Math.random() - 0.5) * 1000, (Math.random() - 0.5) * 3000);
-                    wireframes.push({ mesh, rx: (Math.random() - 0.5) * 0.01, ry: (Math.random() - 0.5) * 0.01 });
-                    scene.add(mesh);
-                }
-
-                const particlesGeo = new THREE.BufferGeometry();
-                const ptCount = 2000; 
-                const posArray = new Float32Array(ptCount * 3);
-                for(let i = 0; i < ptCount * 3; i++) { posArray[i] = (Math.random() - 0.5) * 5000; }
-                particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-                const particlesMat = new THREE.PointsMaterial({ size: 3, color: 0x0A84FF, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
-                const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-                scene.add(particlesMesh);
-
-                const clock = new THREE.Clock();
-                let animId;
-                function animate() {
-                    animId = requestAnimationFrame(animate);
-                    const t = clock.getElapsedTime();
-                    camera.position.x = Math.sin(t * 0.05) * 1500; camera.position.y = Math.sin(t * 0.08) * 400 + 200; camera.position.z = Math.cos(t * 0.05) * 1500;
-                    camera.lookAt(Math.sin(t * 0.07) * 500, Math.cos(t * 0.06) * 200, Math.cos(t * 0.07) * 500);
-                    wireframes.forEach(w => { w.mesh.rotation.x += w.rx; w.mesh.rotation.y += w.ry; });
-                    particlesMesh.rotation.y = time * 0.02;
-                    renderer.render(scene, camera);
-                }
-                animate();
-
-                setTimeout(() => { if(textLayer) textLayer.style.opacity = '0'; }, 3500);
-                setTimeout(() => { 
-                    if(flashLayer) flashLayer.classList.add('flash-active');
-                    playSound('startup'); 
-                }, 4000);
-                setTimeout(() => {
-                    masterLoader.style.opacity = '0';
-                    masterLoader.style.visibility = 'hidden';
-                    cancelAnimationFrame(animId);
-                    document.body.style.overflow = 'auto';
-                }, 5500);
-            }
-        });
-
-        function openMatrixJourney() {
-            playSound('chime');
-            const overlay = document.getElementById('miracle-matrix-overlay');
-            overlay.style.display = 'block';
-            setTimeout(() => { overlay.style.opacity = '1'; }, 50);
-            advanceStage(1);
-        }
-
-        function advanceStage(stageNum) {
-            playSound('chime');
-            document.querySelectorAll('.hx-stage-ui').forEach(el => { el.style.display = 'none'; el.style.opacity = '0'; });
-            const activeStage = document.getElementById(`stage-${stageNum}`);
-            if(activeStage) {
-                activeStage.style.display = 'block';
-                setTimeout(() => { activeStage.style.opacity = '1'; activeStage.style.transition = 'opacity 0.5s'; }, 50);
-            }
-        }
-
-        function closeMatrixJourney() {
-            const overlay = document.getElementById('miracle-matrix-overlay');
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                document.querySelectorAll('.hx-stage-ui').forEach(el => el.style.display = 'none');
-            }, 800);
-        }
     </script>
+    <script>
+    // ==============================================================
+    // EX-MASTER LOADER & 3D INITIALIZATION SCRIPT (ADJUSTED TIMING)
+    // ==============================================================
+   
+    function initExMasterLoader() {
+        const masterLoader = document.getElementById('ex-master-loader');
+        const flashLayer = document.getElementById('loader-flash');
+        const textLayer = document.getElementById('loader-text');
+       
+        if (masterLoader && typeof THREE !== 'undefined') {
+            const canvasContainer = document.createElement('div');
+            canvasContainer.style.position = 'absolute';
+            canvasContainer.style.top = '0';
+            canvasContainer.style.left = '0';
+            canvasContainer.style.width = '100%';
+            canvasContainer.style.height = '100%';
+            canvasContainer.style.zIndex = '1';
+            canvasContainer.style.pointerEvents = 'none';
+            masterLoader.appendChild(canvasContainer);
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.0008);
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+           
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            canvasContainer.appendChild(renderer.domElement);
+
+            // زيادة وضوح الشبكة الزرقاء (كانت 0.15 أصبحت 0.3)
+            const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
+            gridHelper.material.opacity = 0.3;
+            gridHelper.material.transparent = true;
+            gridHelper.position.y = -200;
+            scene.add(gridHelper);
+
+            const particlesGeo = new THREE.BufferGeometry();
+            const ptCount = 2000;
+            const posArray = new Float32Array(ptCount * 3);
+            for(let i = 0; i < ptCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5000;
+            }
+            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+           
+            // زيادة وضوح النقاط (كانت 0.5 أصبحت 0.8)
+            const particlesMat = new THREE.PointsMaterial({
+                size: 3, color: 0x0A84FF, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
+            });
+            const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+            scene.add(particlesMesh);
+
+            // إضافة المجسمات (الصناديق الشبكية) التي طلبها حسام لتشبه قسم الكروت
+            const wireframes = [];
+            const boxGeo = new THREE.BoxGeometry(600, 600, 600);
+            const edges = new THREE.EdgesGeometry(boxGeo);
+           
+            for(let i=0; i<10; i++) { // رسم 10 مجسمات
+                const color = i % 2 === 0 ? 0x0A84FF : 0xffffff;
+                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 }); // وضوح المجسمات
+                const wireframeBox = new THREE.LineSegments(edges, lineMat);
+               
+                wireframeBox.position.set(
+                    (Math.random() - 0.5) * 3000,
+                    (Math.random() - 0.5) * 1000,
+                    (Math.random() - 0.5) * 3000
+                );
+               
+                const scale = Math.random() * 1.2 + 0.5;
+                wireframeBox.scale.set(scale, scale, scale);
+               
+                wireframes.push({
+                    mesh: wireframeBox,
+                    rotationSpeedX: (Math.random() - 0.5) * 0.01,
+                    rotationSpeedY: (Math.random() - 0.5) * 0.01
+                });
+                scene.add(wireframeBox);
+            }
+
+            const clock = new THREE.Clock();
+            let animationId;
+
+            function animate() {
+                animationId = requestAnimationFrame(animate);
+                const time = clock.getElapsedTime();
+                camera.position.x = Math.sin(time * 0.05) * 1500;
+                camera.position.y = Math.sin(time * 0.08) * 400 + 200;
+                camera.position.z = Math.cos(time * 0.05) * 1500;
+                camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
+                particlesMesh.rotation.y = time * 0.02;
+               
+                // تدوير المجسمات
+                wireframes.forEach(obj => {
+                    obj.mesh.rotation.x += obj.rotationSpeedX;
+                    obj.mesh.rotation.y += obj.rotationSpeedY;
+                });
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // ---------------------------------------------------------
+            // التوقيتات الجديدة (تم التأخير لضمان الاستمتاع بالمشهد 3D)
+            // ---------------------------------------------------------
+
+            // إخفاء النص بعد 3.5 ثانية (كانت 2 ثانية)
+            setTimeout(() => {
+                if(textLayer) textLayer.style.opacity = '0';
+            }, 3500);
+
+            // بدء الوميض الأبيض بعد 4 ثوانٍ (كانت 2 ثانية)
+            setTimeout(() => {
+                if(flashLayer) flashLayer.classList.add('flash-active');
+            }, 4000);
+
+            // إخفاء اللودينج بالكامل والانتقال للموقع بعد 5.5 ثانية (كانت 2.7 ثانية)
+            // في هذه اللحظة يكون الوميض في قمة البياض، فيتم الانتقال بسلاسة
+            setTimeout(() => {
+                masterLoader.style.opacity = '0';
+                masterLoader.style.visibility = 'hidden';
+                cancelAnimationFrame(animationId);
+                document.body.style.overflow = 'auto';
+            }, 5500);
+        }
+    }
+
+    window.addEventListener('load', initExMasterLoader);
+</script>
 </body>
 </html>
