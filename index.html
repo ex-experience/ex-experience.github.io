@@ -510,14 +510,85 @@
     background-color: #050505;
     transition: opacity 1.5s ease;
 }
+     /* ========================================== */
+/* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
+/* ========================================== */
+#ex-master-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505; /* بداية شاشة سوداء من الصفر */
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+}
+
+/* شبكة المخططات الهندسية السريعة */
+.ex-loader-grid {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        linear-gradient(rgba(10, 132, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10, 132, 255, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0;
+    transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(200px);
+    animation: gridReveal 2s 0.2s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* طبقة الوميض الأبيض الانتقالي */
+.ex-loader-flash {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.flash-active {
+    animation: flashToWhite 1.2s forwards ease-in-out;
+}
+
+.ex-loader-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    transition: opacity 0.3s;
+}
+
+/* حركات الأنيميشن */
+@keyframes gridReveal {
+    0% { opacity: 0; transform: perspective(500px) rotateX(70deg) translateY(-200px) translateZ(300px); }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(0); }
+}
+
+@keyframes flashToWhite {
+    0% { opacity: 0; }
+    50% { opacity: 1; } /* تصبح الشاشة بيضاء بالكامل */
+    100% { opacity: 0; } /* تختفي لتكشف الموقع الأساسي */
+}   
     </style>
 </head>
 <body class="lang-en">
-<div id="loading-3d-bg"></div>
-    <div id="loading-screen" aria-label="Loading application">
-        <h1 class="loader-logo mono-text glitch-anim">フサム | experience™</h1>
-        <span class="loader-text">LOADING...</span>
+<!-- بداية شاشة التحميل السينمائية -->
+<div id="ex-master-loader">
+    <div class="ex-loader-flash" id="loader-flash"></div>
+    <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
+        <h1 class="glitch-anim" style="font-size: 1.5rem; letter-spacing: 2px; color: #fff;">フサム | experience™</h1>
+        <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
     </div>
+</div>
+<!-- نهاية شاشة التحميل السينمائية -->
 
     <nav class="top-nav" id="navbar" aria-label="Main Navigation">
         <a href="#" class="logo-text mono-text glitch-anim" aria-label="Hussam Experience Home">フサム | experience™</a>
@@ -2024,62 +2095,95 @@
         }
     </script>
     <script>
-function initLoading3D() {
-    const container = document.getElementById('loading-3d-bg');
-    if(!container || typeof THREE === 'undefined') return;
-
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050505, 0.0008);
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // ==============================================================
+    // EX-MASTER LOADER & 3D INITIALIZATION SCRIPT
+    // ==============================================================
     
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
+    function initExMasterLoader() {
+        const masterLoader = document.getElementById('ex-master-loader');
+        const flashLayer = document.getElementById('loader-flash');
+        const textLayer = document.getElementById('loader-text');
+        
+        // 1. إعداد خلفية 3D (الخطوط والنقاط) داخل شاشة التحميل السوداء
+        if (masterLoader && typeof THREE !== 'undefined') {
+            // ننشئ حاوية للـ 3D ونضيفها داخل masterLoader لكي تظهر خلف النص
+            const canvasContainer = document.createElement('div');
+            canvasContainer.style.position = 'absolute';
+            canvasContainer.style.top = '0';
+            canvasContainer.style.left = '0';
+            canvasContainer.style.width = '100%';
+            canvasContainer.style.height = '100%';
+            canvasContainer.style.zIndex = '1'; // خلف النص والوميض
+            canvasContainer.style.pointerEvents = 'none';
+            masterLoader.appendChild(canvasContainer);
 
-    const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
-    gridHelper.material.opacity = 0.15;
-    gridHelper.material.transparent = true;
-    gridHelper.position.y = -200;
-    scene.add(gridHelper);
+            // إعداد THREE.js
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.0008);
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            canvasContainer.appendChild(renderer.domElement);
 
-    const particlesGeo = new THREE.BufferGeometry();
-    const ptCount = 2000; 
-    const posArray = new Float32Array(ptCount * 3);
-    for(let i = 0; i < ptCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 5000;
+            // شبكة الخطوط الزرقاء
+            const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
+            gridHelper.material.opacity = 0.15;
+            gridHelper.material.transparent = true;
+            gridHelper.position.y = -200;
+            scene.add(gridHelper);
+
+            // النقاط
+            const particlesGeo = new THREE.BufferGeometry();
+            const ptCount = 2000; 
+            const posArray = new Float32Array(ptCount * 3);
+            for(let i = 0; i < ptCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5000;
+            }
+            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMat = new THREE.PointsMaterial({
+                size: 3, color: 0x0A84FF, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending
+            });
+            const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+            scene.add(particlesMesh);
+
+            const clock = new THREE.Clock();
+            let animationId;
+
+            function animate() {
+                animationId = requestAnimationFrame(animate);
+                const time = clock.getElapsedTime();
+                camera.position.x = Math.sin(time * 0.05) * 1500;
+                camera.position.y = Math.sin(time * 0.08) * 400 + 200; 
+                camera.position.z = Math.cos(time * 0.05) * 1500;
+                camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
+                particlesMesh.rotation.y = time * 0.02;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // 2. التحكم الزمني السينمائي (الوميض الأبيض والإخفاء)
+            // بعد 2 ثانية: تفعيل الوميض الأبيض وإخفاء النص
+            setTimeout(() => {
+                if(flashLayer) flashLayer.classList.add('flash-active');
+                if(textLayer) textLayer.style.opacity = '0';
+            }, 2000);
+
+            // بعد 2.7 ثانية: إخفاء شاشة التحميل بالكامل وإيقاف معالجة الـ 3D لتوفير موارد الجهاز
+            setTimeout(() => {
+                masterLoader.style.opacity = '0';
+                masterLoader.style.visibility = 'hidden';
+                cancelAnimationFrame(animationId);
+                
+                // التأكد من أن التمرير يعمل بشكل صحيح بعد إخفاء الشاشة
+                document.body.style.overflow = 'auto';
+            }, 2700);
+        }
     }
-    particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const particlesMat = new THREE.PointsMaterial({
-        size: 3, color: 0x0A84FF, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending
-    });
-    const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-    scene.add(particlesMesh);
 
-    const clock = new THREE.Clock();
-    let animationId;
-
-    function animate() {
-        animationId = requestAnimationFrame(animate);
-        const time = clock.getElapsedTime();
-        camera.position.x = Math.sin(time * 0.05) * 1500;
-        camera.position.y = Math.sin(time * 0.08) * 400 + 200; 
-        camera.position.z = Math.cos(time * 0.05) * 1500;
-        camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
-        particlesMesh.rotation.y = time * 0.02;
-        renderer.render(scene, camera);
-    }
-    animate();
-
-    setTimeout(() => {
-        container.style.opacity = '0';
-        setTimeout(() => {
-            container.style.display = 'none';
-            cancelAnimationFrame(animationId); 
-        }, 1500);
-    }, 2500); 
-}
-window.addEventListener('load', initLoading3D);
+    // تشغيل الدالة المدمجة عند تحميل الصفحة
+    window.addEventListener('load', initExMasterLoader);
 </script>
 </body>
 </html>
