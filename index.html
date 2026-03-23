@@ -441,6 +441,49 @@
             padding: 15px 25px; font-family: 'Space Mono'; letter-spacing: 2px; cursor: pointer; z-index: 999999; transition: 0.3s;
         }
         .ex-cta:hover { background: #fff; color: #000; }
+
+        /* ================= EXPERIENCE OS v1.0 STYLES ================= */
+        #ai-agent {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 320px;
+            background: #000;
+            color: #0A84FF;
+            border: 1px solid #0A84FF;
+            font-family: 'Space Mono', monospace;
+            z-index: 999999;
+        }
+        #ai-header {
+            padding: 10px;
+            border-bottom: 1px solid #0A84FF;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+        #ai-chat {
+            height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            font-size: 12px;
+        }
+        #ai-input {
+            display: flex;
+        }
+        #ai-input input {
+            flex: 1;
+            background: #000;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            outline: none;
+        }
+        #ai-input button {
+            background: #0A84FF;
+            border: none;
+            color: #000;
+            padding: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="lang-en">
@@ -947,6 +990,15 @@
                 <span class="ar-only">قد يخطئ الأوراكل. <button style="background:none;border:none;color:var(--accent-blue);cursor:pointer;text-decoration:underline;" onclick="openLegal('oracle')">شروط الاستخدام</button></span>
                 <span class="en-only">Ex Oracle can make mistakes. <button style="background:none;border:none;color:var(--accent-blue);cursor:pointer;text-decoration:underline;" onclick="openLegal('oracle')">Terms of Use</button></span>
             </div>
+        </div>
+    </div>
+
+    <div id="ai-agent">
+        <div id="ai-header">EX AI // ACTIVE</div>
+        <div id="ai-chat"></div>
+        <div id="ai-input">
+            <input id="userMsg" placeholder="Type..."/>
+            <button onclick="sendMsg()">→</button>
         </div>
     </div>
 
@@ -2138,7 +2190,7 @@
                 z-index:999999;
             `;
             document.body.appendChild(msg);
-            setTimeout(()=>msg.remove(), 4000); // إخفاء الرسالة بعد فترة
+            setTimeout(()=>msg.remove(), 4000);
         },8000);
 
         const EXProfile = {
@@ -2196,6 +2248,103 @@
                 alert("Elite Mode Activated");
             }
         });
+
+        // ================= EXPERIENCE OS v1.0 LOGIC =================
+        const EX_OS = {
+            level: 1,
+            xp: 0,
+            userType: "unknown",
+            token: localStorage.getItem("ex_token") || null
+        };
+
+        // ================= INVITE SYSTEM =================
+        const VALID_TOKEN = "EX-ACCESS-2026";
+
+        if(!EX_OS.token){
+            const input = prompt("Enter Access Code:");
+            if(input === VALID_TOKEN){
+                localStorage.setItem("ex_token", input);
+                alert("Access Granted");
+            } else {
+                document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:20%;font-family:monospace;'>ACCESS DENIED</h1>";
+                document.body.style.backgroundColor = "#000";
+            }
+        }
+
+        // ================= LEVEL SYSTEM =================
+        function gainXP(amount){
+            EX_OS.xp += amount;
+            if(EX_OS.xp > 100){
+                EX_OS.level++;
+                EX_OS.xp = 0;
+                alert("LEVEL UP → " + EX_OS.level);
+            }
+        }
+
+        document.addEventListener("click", ()=>gainXP(5));
+
+        // ================= PERSONALIZATION =================
+        setInterval(()=>{
+            if(EX_OS.level > 3){
+                document.body.style.filter = "contrast(110%)";
+                EX_OS.userType = "engaged";
+            }
+        },3000);
+
+        // ================= AI AGENT =================
+        const exChat = document.getElementById("ai-chat");
+
+        function addExMsg(msg, from="ai"){
+            const div = document.createElement("div");
+            div.style.marginBottom = "8px";
+            div.innerText = (from === "ai" ? "AI: " : "YOU: ") + msg;
+            div.style.color = from === "ai" ? "#0A84FF" : "#fff";
+            exChat.appendChild(div);
+            exChat.scrollTop = exChat.scrollHeight;
+        }
+
+        function sendMsg(){
+            const input = document.getElementById("userMsg");
+            const msg = input.value.trim();
+            if(!msg) return;
+            
+            addExMsg(msg,"user");
+
+            let reply = "Tell me more.";
+
+            if(msg.toLowerCase().includes("project")){
+                reply = "What outcome do you want?";
+            }
+            if(msg.toLowerCase().includes("marketing")){
+                reply = "We don't do marketing. We engineer perception.";
+            }
+            if(msg.toLowerCase().includes("price") || msg.toLowerCase().includes("cost")){
+                reply = "Access is limited. Apply for private pilot.";
+            }
+
+            setTimeout(()=>addExMsg(reply), 800);
+            input.value = "";
+        }
+
+        document.getElementById("userMsg").addEventListener("keypress", function(event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            sendMsg();
+          }
+        });
+
+        // ================= CINEMATIC GENERATOR =================
+        setInterval(()=>{
+            if(EX_OS.level > 2 && !document.body.style.background.includes("linear-gradient")){
+                document.body.style.background = "linear-gradient(black, #020617)";
+            }
+        },5000);
+
+        // ================= PSYCHO TRIGGER =================
+        setTimeout(()=>{
+            addExMsg("You are not here by accident.");
+        }, 4000);
+
     </script>
 </body>
 </html>
