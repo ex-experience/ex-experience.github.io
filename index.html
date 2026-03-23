@@ -65,8 +65,8 @@
         :root {
             --accent-blue: #0A84FF; --green: #27c93f;
             --obsidian-black: #000000; --stark-white: #ffffff;
-            --text-main: #ffffff; --text-muted: #a1a1aa;
-            --focus-ring: 0 0 0 3px rgba(10, 132, 255, 0.4);
+            --text-main: #ffffff; --text-muted: #888888;
+            --focus-ring: 0 0 0 1px rgba(255, 255, 255, 0.4);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,7 +80,7 @@
         }
         
         .mono-text { font-family: 'Space Mono', monospace; }
-        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 0; }
 
         body.lang-ar { direction: rtl; text-align: right; } body.lang-en { direction: ltr; text-align: left; }
         .ar-only { display: none; } .en-only { display: block; }
@@ -101,56 +101,56 @@
         /* ========================================== */
         .cinematic-section {
             position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            overflow: hidden; padding: 120px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden; padding: 120px 0; border-bottom: 1px solid #111;
         }
         .cinematic-section.hero { padding: 0; border-bottom: none; }
         .cinematic-section.center-align { align-items: center; text-align: center; }
         
-        .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.5; filter: grayscale(20%) contrast(1.1); }
-        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 80%, #000 100%); pointer-events: none; }
-        .bg-overlay-heavy { background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%), linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, #000 100%); }
+        .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.4; filter: grayscale(50%) contrast(1.2); }
+        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 80%, #000 100%); pointer-events: none; }
+        .bg-overlay-heavy { background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.9) 100%), linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, #000 100%); }
         .content-layer { position: relative; z-index: 2; width: 100%; }
 
-        .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
         /* ========================================== */
-        /* NAVIGATION & NEW LOGO (BOXED)              */
+        /* NAVIGATION & NEW LOGO (EXACT MATCH)        */
         /* ========================================== */
         .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: transparent; transition: all 0.4s ease; }
-        .top-nav.scrolled { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 5%;}
+        .top-nav.scrolled { background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #111; padding: 15px 5%;}
         
-        /* THE REQUESTED LOGO STYLE */
         .logo-box {
             display: inline-flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(10, 132, 255, 0.4); border-radius: 4px;
-            padding: 6px 14px; background: rgba(10, 132, 255, 0.05);
-            box-shadow: inset 0 0 10px rgba(10, 132, 255, 0.1), 0 0 10px rgba(10, 132, 255, 0.05);
+            border: 1px solid rgba(50, 100, 150, 0.6); /* Matched border color */
+            border-radius: 4px;
+            padding: 6px 12px; 
+            background: transparent;
             text-decoration: none; transition: 0.3s;
         }
-        .logo-box:hover { border-color: rgba(10, 132, 255, 0.8); background: rgba(10, 132, 255, 0.1); box-shadow: inset 0 0 15px rgba(10, 132, 255, 0.2), 0 0 15px rgba(10, 132, 255, 0.2); transform: scale(1.02); }
-        .logo-text { font-size: 1.1rem; font-weight: 500; letter-spacing: 2px; color: #fff; direction: ltr; margin: 0;}
+        .logo-box:hover { border-color: #fff; transform: scale(1.02); }
+        .logo-text { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: normal; letter-spacing: 1px; color: #fff; direction: ltr; margin: 0;}
         
         .nav-icons { display: flex; gap: 15px; align-items: center; }
         .nav-icon { background: none; border: none; cursor: pointer; color: #fff; padding: 8px; transition: 0.3s;}
-        .nav-icon svg { width: 22px; height: 22px; fill: currentColor; }
+        .nav-icon svg { width: 20px; height: 20px; fill: currentColor; }
         .nav-icon:hover { opacity: 0.7; transform: scale(1.1);}
 
         /* TYPOGRAPHY */
-        .page-num { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--accent-blue); margin-bottom: 20px; letter-spacing: 4px; display: block; text-transform: uppercase;}
+        .page-num { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #666; margin-bottom: 20px; letter-spacing: 4px; display: block; text-transform: uppercase;}
         .heading-xl { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 600; letter-spacing: -2px; margin-bottom: 20px; text-shadow: 0 10px 30px rgba(0,0,0,0.8); line-height: 1.1;}
         .heading-lg { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; margin-bottom: 20px; letter-spacing: -1px; text-shadow: 0 5px 20px rgba(0,0,0,0.8); line-height: 1.2;}
         .heading-md { font-size: clamp(1.5rem, 2.5vw, 2.5rem); font-weight: 500; margin-bottom: 20px; letter-spacing: -0.5px; text-shadow: 0 4px 15px rgba(0,0,0,0.6);}
-        .text-body { color: var(--text-muted); font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.9; max-width: 800px; font-weight: 300;}
+        .text-body { color: #aaa; font-size: clamp(0.95rem, 1.1vw, 1.1rem); line-height: 1.9; max-width: 800px; font-weight: 300;}
         .text-body strong { color: #fff; font-weight: 500; }
-        .tagline { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px; color: #e0e0e0; margin-bottom: 20px; display: block; text-transform: uppercase;}
+        .tagline { font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 4px; color: #888; margin-bottom: 20px; display: block; text-transform: uppercase;}
 
         .btn-luxury {
-            position: relative; overflow: hidden; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.3); color: #fff;
-            padding: 18px 45px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; transition: all 0.5s; border-radius: 2px; margin-top: 40px; display: inline-block; backdrop-filter: blur(5px);
+            position: relative; overflow: hidden; background: transparent; border: 1px solid #fff; color: #fff;
+            padding: 16px 40px; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; cursor: pointer; transition: all 0.5s; border-radius: 0; margin-top: 40px; display: inline-block;
         }
         .btn-luxury::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.6s; z-index: -1; }
-        .btn-luxury:hover { color: #000; border-color: #fff; } .btn-luxury:hover::before { transform: scaleX(1); transform-origin: left; }
+        .btn-luxury:hover { color: #000; } .btn-luxury:hover::before { transform: scaleX(1); transform-origin: left; }
 
         /* ========================================== */
         /* STICKY SCROLL SECTION                      */
@@ -160,14 +160,14 @@
         body.lang-ar .sticky-left { padding-right: 0; padding-left: 50px; }
         .sticky-right { width: 55%; padding-top: 10vh; padding-bottom: 20vh;}
         
-        .sticky-glass-card { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px; margin-bottom: 80px; transition: transform 0.4s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .sticky-glass-card:hover { transform: translateY(-5px); border-color: rgba(10, 132, 255, 0.3); }
+        .sticky-glass-card { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); border: 1px solid #222; border-radius: 8px; padding: 40px; margin-bottom: 80px; transition: transform 0.4s ease; }
+        .sticky-glass-card:hover { border-color: #444; }
         .sticky-glass-card:last-child { margin-bottom: 0; }
         
-        .sp-num { font-family: 'Space Mono'; font-size: 1rem; color: var(--accent-blue); margin-bottom: 15px; display: block; letter-spacing: 2px;}
-        .sp-title { font-size: 1.8rem; font-weight: 500; margin-bottom: 15px; letter-spacing: -1px; color: #fff; }
-        .sp-quote { font-style: italic; color: #888; font-size: 0.95rem; margin-bottom: 20px; display: block; border-left: 2px solid var(--accent-blue); padding-left: 15px;}
-        body.lang-ar .sp-quote { border-left: none; border-right: 2px solid var(--accent-blue); padding-left: 0; padding-right: 15px; }
+        .sp-num { font-family: 'Space Mono'; font-size: 0.9rem; color: #555; margin-bottom: 15px; display: block; letter-spacing: 2px;}
+        .sp-title { font-size: 1.6rem; font-weight: 500; margin-bottom: 15px; letter-spacing: -1px; color: #fff; }
+        .sp-quote { font-style: italic; color: #777; font-size: 0.9rem; margin-bottom: 20px; display: block; border-left: 1px solid #444; padding-left: 15px;}
+        body.lang-ar .sp-quote { border-left: none; border-right: 1px solid #444; padding-left: 0; padding-right: 15px; }
 
         @media (max-width: 900px) {
             .sticky-wrapper { flex-direction: column; } .sticky-left { width: 100%; position: relative; top: 0; margin-bottom: 40px; padding: 0; text-align: center; } .sticky-right { width: 100%; padding-top: 0; }
@@ -176,150 +176,144 @@
 
         .list-cinematic { list-style: none; padding: 0; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;}
         @media (max-width: 600px) { .list-cinematic { grid-template-columns: 1fr; } }
-        .list-cinematic li { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; color: var(--text-muted); font-weight: 400; display: flex; align-items: center; gap: 15px; transition: 0.3s;}
-        .list-cinematic li:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: #fff; transform: translateY(-3px);}
-        .list-cinematic li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue);}
+        .list-cinematic li { background: transparent; border: 1px solid #222; padding: 20px; border-radius: 4px; color: var(--text-muted); font-weight: 400; display: flex; align-items: center; gap: 15px; transition: 0.3s;}
+        .list-cinematic li:hover { border-color: #555; color: #fff;}
+        .list-cinematic li::before { content: ''; display: block; width: 4px; height: 4px; background: #555; }
 
         /* ========================================== */
-        /* TESLA KEY-CARDS (NO IMAGES, ENGRAVED)      */
+        /* TESLA/SPACEX KEY-CARDS (MINIMALIST)        */
         /* ========================================== */
-        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 5%; position: relative; z-index: 20; }
+        .archive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; margin: 0 auto; padding: 20px 5%; position: relative; z-index: 20; }
         
         .archive-card {
-            width: 100%; height: 480px; position: relative; cursor: pointer; overflow: hidden;
-            background: linear-gradient(145deg, #151515 0%, #050505 100%);
-            border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 15px 30px rgba(0,0,0,0.9);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%; height: 350px; position: relative; cursor: pointer; overflow: hidden;
+            background: #080808; border-radius: 8px; border: 1px solid #1a1a1a;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
         }
-        /* Engraved Circuit / Carbon Pattern */
+        /* Subtle Engraved Circuit Pattern */
         .archive-card::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 12px);
-            opacity: 0.5; pointer-events: none; z-index: 1; transition: opacity 0.5s;
+            background-image: radial-gradient(#1f1f1f 1px, transparent 1px);
+            background-size: 20px 20px; opacity: 0.3; pointer-events: none; z-index: 1; transition: opacity 0.5s;
         }
-        .archive-card:hover { border-color: var(--accent-blue); box-shadow: inset 0 0 40px rgba(10,132,255,0.1), 0 20px 50px rgba(0,0,0,1); transform: translateY(-10px); }
-        .archive-card:hover::after { opacity: 1; }
+        .archive-card:hover { border-color: #333; transform: translateY(-5px); }
+        .archive-card:hover::after { opacity: 0.6; }
 
-        .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); z-index: 10; }
-        .archive-card:nth-child(2):before { background: #00e5ff; }
-        .archive-card:nth-child(3):before { background: #27c93f; }
-        .archive-card:hover::before { transform: scaleX(1); }
-
-        .rc-content-wrapper { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-end; z-index: 2; transition: all 0.5s; }
+        .rc-content-wrapper { position: relative; z-index: 2; transition: all 0.5s; width: 100%; }
         
-        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; padding: 6px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); width: fit-content; background: rgba(0,0,0,0.5);}
-        .archive-title { font-size: clamp(1.4rem, 2vw, 1.8rem); font-weight: 600; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);}
-        .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #666; letter-spacing: 3px; margin-top: 15px; transition: 0.3s; text-transform: uppercase; }
-        .archive-card:hover .card-prompt { color: var(--accent-blue); text-shadow: 0 0 10px rgba(10,132,255,0.5); }
+        .archive-status { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; padding: 4px 10px; border-radius: 2px; border: 1px solid #222; width: fit-content; background: #000; color: #555;}
+        .archive-title { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px;}
+        .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #444; letter-spacing: 3px; margin-top: 15px; transition: 0.3s; text-transform: uppercase; }
+        .archive-card:hover .card-prompt { color: #888; }
         
-        .archive-desc { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #aaa; line-height: 1.8; max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        body.lang-ar .archive-desc { direction: rtl; text-align: justify; }
+        .archive-desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #888; line-height: 1.6; max-height: 0; opacity: 0; overflow: hidden; transition: all 0.4s; }
+        body.lang-ar .archive-desc { direction: rtl; text-align: right; }
 
         /* VIP LOCK UI */
-        .archive-lock-ui { display: none; flex-direction: column; gap: 15px; margin-top: 20px; animation: fadeIn 0.5s ease; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; }
+        .archive-lock-ui { display: none; flex-direction: column; gap: 10px; margin-top: 15px; animation: fadeIn 0.4s ease; border-top: 1px solid #222; padding-top: 15px; }
         .archive-card.focused:not(.unlocked) .archive-lock-ui { display: flex; }
         .archive-card.focused .archive-desc { display: none; }
-        .archive-card.focused.unlocked .archive-desc { display: block; max-height: none; opacity: 1; margin-top: 20px; animation: fadeIn 0.8s ease; }
-        .archive-pass-input { background: #000; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 14px; border-radius: 2px; font-family: 'Space Mono', monospace; text-align: center; outline: none; transition: 0.3s; }
-        .archive-pass-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 15px rgba(10, 132, 255, 0.2); }
-        .archive-decrypt-btn { background: #fff; color: #000; border: none; padding: 14px; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; font-weight: bold; border-radius: 2px; cursor: pointer; transition: 0.3s; }
-        .archive-decrypt-btn:hover { background: var(--accent-blue); color: #fff; }
+        .archive-card.focused.unlocked .archive-desc { display: block; max-height: none; opacity: 1; margin-top: 15px; animation: fadeIn 0.8s ease; }
+        .archive-pass-input { background: transparent; border: 1px solid #333; color: #fff; padding: 10px; font-family: 'Space Mono', monospace; text-align: center; outline: none; transition: 0.3s; font-size: 0.8rem;}
+        .archive-pass-input:focus { border-color: #666; }
+        .archive-decrypt-btn { background: #222; color: #fff; border: none; padding: 10px; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
+        .archive-decrypt-btn:hover { background: #fff; color: #000; }
 
-        .archive-grid.has-focus .archive-card:not(.focused) { opacity: 0.2; filter: blur(5px); transform: scale(0.95); }
-        .archive-card.focused { transform: scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,1), inset 0 0 30px rgba(10, 132, 255, 0.1); z-index: 30; max-height: 80vh; overflow-y: auto; scrollbar-width: none; border-color: var(--accent-blue);}
+        .archive-grid.has-focus .archive-card:not(.focused) { opacity: 0.2; filter: blur(2px); transform: scale(0.98); }
+        .archive-card.focused { transform: scale(1.05); z-index: 30; max-height: 80vh; overflow-y: auto; scrollbar-width: none; border-color: #555; background: #050505;}
         .archive-card.focused::-webkit-scrollbar { display: none; }
-        .archive-card.focused .rc-content-wrapper { background: transparent; justify-content: flex-start; }
         .archive-card.focused .card-prompt { display: none; }
 
         @media (max-width: 900px) {
             .archive-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 40px; scrollbar-width: none;}
-            .archive-card { flex: 0 0 85vw; scroll-snap-align: center; height: 500px;}
+            .archive-card { flex: 0 0 85vw; scroll-snap-align: center; height: 380px;}
         }
 
         /* ========================================== */
         /* SPACEX INSPIRED DASHBOARD & PORTAL         */
         /* ========================================== */
-        #portal { background: #000; position: relative; border-bottom: 1px solid #222; }
+        #portal { background: #000; position: relative; border-bottom: 1px solid #111; padding: 100px 0;}
         
-        .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 60px 0;}
-        .login-box { width: 100%; max-width: 500px; background: transparent; border: 1px solid rgba(255,255,255,0.1); padding: 50px; margin: 0 auto; text-align: left;}
+        .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 40px 0;}
+        .login-box { width: 100%; max-width: 450px; background: transparent; border: 1px solid #1a1a1a; padding: 50px 40px; margin: 0 auto; text-align: left; border-radius: 4px;}
         body.lang-ar .login-box { text-align: right; }
         
-        .t-label { color: #888; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .t-input { width: 100%; padding: 12px 0; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.3); border-radius: 0; font-size: 1rem; color: #fff; outline: none; font-family: inherit; transition: all 0.3s ease; margin-bottom: 30px;}
-        .t-input:focus { border-color: var(--accent-blue); box-shadow: 0 4px 0 -2px var(--accent-blue); }
+        .t-label-group { margin-bottom: 30px; position: relative;}
+        .t-label { color: #666; font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+        .t-input { width: 100%; padding: 8px 0; background: transparent; border: none; border-bottom: 1px solid #333; border-radius: 0; font-size: 1rem; color: #fff; outline: none; font-family: 'Space Mono', monospace; transition: all 0.3s ease;}
+        .t-input:focus { border-bottom-color: #fff; }
         
-        .btn-spacex { width: 100%; padding: 18px; background: transparent; color: #fff; border: 1px solid #fff; border-radius: 0; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+        .btn-spacex { width: 100%; padding: 16px; background: transparent; color: #fff; border: 1px solid #fff; border-radius: 0; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
         .btn-spacex:hover { background: #fff; color: #000; }
-        .btn-spacex:disabled { opacity: 0.5; cursor: not-allowed; hover: none; }
+        .btn-spacex:disabled { opacity: 0.5; cursor: not-allowed; }
         
         .divider { display: flex; align-items: center; text-align: center; margin: 40px 0; color: #444; font-family: 'Space Mono'; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;}
-        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #222; }
         .divider:not(:empty)::before { margin-right: 1em; margin-left: .5em;} .divider:not(:empty)::after { margin-left: 1em; margin-right: .5em;}
         
         .oauth-group { display: flex; justify-content: center; gap: 20px; }
-        .btn-social { background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 0; cursor: pointer; transition: all 0.3s ease; padding: 14px; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;}
-        .btn-social:hover { border-color: #fff; background: rgba(255,255,255,0.05);}
-        .btn-social svg { width: 24px; height: 24px;}
+        .btn-social { background: transparent; border: 1px solid #333; border-radius: 2px; cursor: pointer; transition: all 0.3s ease; padding: 12px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;}
+        .btn-social:hover { border-color: #fff; }
+        .btn-social svg { width: 20px; height: 20px;}
 
-        #dashboard-view { display: none; background: transparent; padding: 0; max-width: 1000px; margin: 0 auto;}
-        .dash-nav { display: flex; justify-content: flex-start; gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 50px; overflow-x: auto; white-space: nowrap; scrollbar-width: none;}
-        .dash-tab { background: none; border: none; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #666; cursor: pointer; position: relative; padding-bottom: 10px; transition: color 0.3s ease;}
+        #dashboard-view { display: none; background: transparent; padding: 0; max-width: 900px; margin: 0 auto;}
+        .dash-nav { display: flex; justify-content: flex-start; gap: 40px; border-bottom: 1px solid #222; padding-bottom: 15px; margin-bottom: 50px; overflow-x: auto; white-space: nowrap; scrollbar-width: none;}
+        .dash-tab { background: none; border: none; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #555; cursor: pointer; position: relative; padding-bottom: 10px; transition: color 0.3s ease;}
         .dash-tab:hover { color: #fff; } .dash-tab.active { color: #fff; }
-        .dash-tab.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 2px; background: #fff; }
+        .dash-tab.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 1px; background: #fff; }
         
         .service-form { display: none; animation: fadeIn 0.5s ease; } .service-form.active { display: block; }
         
-        .history-card { border: 1px solid rgba(255,255,255,0.1); border-radius: 0; padding: 25px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; background: transparent; transition: all 0.3s ease;}
-        .history-card:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.02);}
-        .h-msg { margin: 0 0 10px 0; color: #fff; font-size: 1rem; line-height: 1.5; }
-        .h-date { font-family: 'Space Mono'; font-size: 0.75rem; color: #888; letter-spacing: 1px; }
-        .h-status { font-family: 'Space Mono'; font-size: 0.75rem; background: rgba(10,132,255,0.1); padding: 8px 16px; border-radius: 2px; color: var(--accent-blue); font-weight: bold; border: 1px solid rgba(10,132,255,0.3); letter-spacing: 2px;}
+        .history-card { border: 1px solid #1a1a1a; border-radius: 0; padding: 25px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; background: transparent; transition: all 0.3s ease;}
+        .history-card:hover { border-color: #333; }
+        .h-msg { margin: 0 0 10px 0; color: #fff; font-size: 0.95rem; line-height: 1.5; font-family: 'Inter', sans-serif;}
+        .h-date { font-family: 'Space Mono'; font-size: 0.7rem; color: #666; letter-spacing: 1px; }
+        .h-status { font-family: 'Space Mono'; font-size: 0.7rem; padding: 6px 12px; border-radius: 2px; color: #fff; border: 1px solid #333; letter-spacing: 1px;}
 
-        .nexus-window { background: #050505; border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; font-family: 'Space Mono', monospace; color: #fff; height: 400px; display: flex; flex-direction: column;}
-        .nexus-header { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 15px;}
-        .nexus-dot { width: 10px; height: 10px; border-radius: 50%; background: #444; } .nexus-dot.red { background: #ff5f56; } .nexus-dot.yel { background: #ffbd2e; } .nexus-dot.grn { background: #27c93f; }
-        .nexus-output { flex: 1; overflow-y: auto; font-size: 0.85rem; line-height: 1.8; color: #a1b2c3; direction: ltr; text-align: left; scrollbar-width: thin; scrollbar-color: #333 transparent;}
-        .nexus-input-line { display: flex; margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px; direction: ltr; align-items: center;}
-        .nexus-prompt { color: var(--accent-blue); margin-right: 15px; font-weight: bold; font-size: 0.85rem;}
-        .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.9rem;}
+        .nexus-window { background: #050505; border: 1px solid #1a1a1a; padding: 30px; font-family: 'Space Mono', monospace; color: #fff; height: 400px; display: flex; flex-direction: column;}
+        .nexus-header { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px;}
+        .nexus-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; } .nexus-dot.red { background: #ff5f56; } .nexus-dot.yel { background: #ffbd2e; } .nexus-dot.grn { background: #27c93f; }
+        .nexus-output { flex: 1; overflow-y: auto; font-size: 0.8rem; line-height: 1.8; color: #888; direction: ltr; text-align: left; scrollbar-width: none;}
+        .nexus-input-line { display: flex; margin-top: 15px; border-top: 1px solid #222; padding-top: 15px; direction: ltr; align-items: center;}
+        .nexus-prompt { color: #fff; margin-right: 15px; font-size: 0.8rem;}
+        .nexus-input { background: transparent; border: none; color: #fff; flex: 1; outline: none; font-family: inherit; font-size: 0.85rem;}
 
         /* ========================================== */
         /* EX ORACLE UI                               */
         /* ========================================== */
-        .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: #fff; color: #000; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(255,255,255,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 4s infinite;}
+        .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #fff; color: #000; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
+        .ai-btn:hover { transform: scale(1.05); }
         body.lang-ar .ai-btn { right: auto; left: 30px; }
-        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 10px 30px rgba(255,255,255,0.1); } 50% { box-shadow: 0 10px 50px rgba(255, 255, 255, 0.3); transform: scale(1.05); } }
         
-        .ai-window { position: fixed; bottom: 110px; right: 30px; width: 380px; height: 600px; max-height: calc(100vh - 140px); background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(25px); border-radius: 12px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(255,255,255,0.1); overflow: hidden;}
+        .ai-window { position: fixed; bottom: 100px; right: 30px; width: 360px; height: 550px; max-height: calc(100vh - 120px); background: #050505; border: 1px solid #222; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;}
         body.lang-ar .ai-window { right: auto; left: 30px; }
         .ai-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
         
-        .ai-header { background: #000; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);}
-        .ai-title { font-family: 'Space Mono'; font-weight: 600; font-size: 0.9rem; color: #fff; display: flex; align-items: center; gap: 10px; letter-spacing: 2px; text-transform: uppercase;}
-        .ai-title::before { content:''; display:inline-block; width:8px; height:8px; background: #34c759; border-radius:50%; box-shadow: 0 0 10px rgba(52, 199, 89, 0.8);}
-        .ai-close { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #888; width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
+        .ai-header { background: #000; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111;}
+        .ai-title { font-family: 'Space Mono'; font-weight: 600; font-size: 0.85rem; color: #fff; display: flex; align-items: center; gap: 10px; letter-spacing: 2px;}
+        .ai-title::before { content:''; display:inline-block; width:6px; height:6px; background: #34c759; border-radius:50%; box-shadow: 0 0 10px rgba(52, 199, 89, 0.5);}
+        .ai-close { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #666; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
         .ai-close:hover { color: #fff; transform: rotate(90deg);}
         
-        .ai-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scrollbar-width: thin; scrollbar-color: #444 transparent;}
+        .ai-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scrollbar-width: none;}
         .ai-msg-wrap { display: flex; flex-direction: column; max-width: 90%; }
         .ai-msg-wrap.bot { align-self: flex-start; } .ai-msg-wrap.user { align-self: flex-end; align-items: flex-end; }
         
-        .ai-msg { padding: 14px 18px; font-size: 0.95rem; line-height: 1.6; border-radius: 8px; word-wrap: break-word;}
-        .ai-msg.bot { background: rgba(255,255,255,0.05); color: #fff; border-top-left-radius: 0; border: 1px solid rgba(255,255,255,0.1);}
-        body.lang-ar .ai-msg.bot { border-top-left-radius: 8px; border-top-right-radius: 0;}
-        .ai-msg.user { background: var(--accent-blue); color: #fff; border-bottom-right-radius: 0; }
-        body.lang-ar .ai-msg.user { border-bottom-right-radius: 8px; border-bottom-left-radius: 0;}
+        .ai-msg { padding: 12px 16px; font-size: 0.9rem; line-height: 1.6; border-radius: 4px; word-wrap: break-word;}
+        .ai-msg.bot { background: #111; color: #ddd; border-top-left-radius: 0; border: 1px solid #222;}
+        body.lang-ar .ai-msg.bot { border-top-left-radius: 4px; border-top-right-radius: 0;}
+        .ai-msg.user { background: #fff; color: #000; border-bottom-right-radius: 0; }
+        body.lang-ar .ai-msg.user { border-bottom-right-radius: 4px; border-bottom-left-radius: 0;}
         
         .msg-actions { display: flex; gap: 12px; margin-top: 8px; padding: 0 5px;}
-        .msg-btn { background: none; border: none; color: #666; cursor: pointer; transition: 0.2s;} .msg-btn:hover { color: #fff; }
+        .msg-btn { background: none; border: none; color: #444; cursor: pointer; transition: 0.2s;} .msg-btn:hover { color: #fff; }
         
-        .ai-input-area { display: flex; padding: 15px 20px; background: #000; border-top: 1px solid rgba(255,255,255,0.1); align-items: center; gap: 15px;}
-        .ai-input { flex: 1; background: transparent; border: none; font-size: 0.95rem; color:#fff; outline: none; font-family: inherit;}
-        .ai-send { background: #fff; width: 36px; height: 36px; border-radius: 4px; border: none; color: #000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s;}
-        .ai-send:hover { background: var(--accent-blue); color:#fff; }
-        .ai-footer-note { font-size: 0.7rem; color: #555; text-align: center; padding: 0 10px 15px 10px; background: #000;}
+        .ai-input-area { display: flex; padding: 15px 20px; background: #000; border-top: 1px solid #111; align-items: center; gap: 15px;}
+        .ai-input { flex: 1; background: transparent; border: none; font-size: 0.9rem; color:#fff; outline: none; font-family: inherit;}
+        .ai-send { background: #fff; width: 32px; height: 32px; border-radius: 2px; border: none; color: #000; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s;}
+        .ai-send:hover { background: #ccc; }
+        .ai-footer-note { font-size: 0.65rem; font-family: 'Space Mono'; color: #444; text-align: center; padding: 0 10px 15px 10px; background: #000;}
 
         /* ========================================== */
         /* HX-5 MATRIX GATEWAY OVERLAY                */
@@ -328,43 +322,43 @@
         #matrix-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         .matrix-ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 4vw, 40px); }
         .matrix-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .matrix-status { font-size: clamp(0.7rem, 2vw, 0.85rem); color: #0A84FF; letter-spacing: 2px; text-shadow: 0 0 10px rgba(10,132,255,0.5); transition: color 0.5s; }
+        .matrix-status { font-size: clamp(0.7rem, 2vw, 0.85rem); color: #fff; letter-spacing: 2px; transition: color 0.5s; }
         .matrix-controls-container { text-align: right; pointer-events: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 15px;}
-        .matrix-abort-btn { background: rgba(0,0,0,0.5); border: 1px solid #555; color: #888; font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 8px 16px; cursor: pointer; letter-spacing: 2px; border-radius: 2px; transition: 0.3s; }
-        .matrix-abort-btn:hover { background: #ff003c; color: #fff; border-color: #ff003c; box-shadow: 0 0 15px rgba(255,0,60,0.5); }
+        .matrix-abort-btn { background: transparent; border: 1px solid #333; color: #666; font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 8px 16px; cursor: pointer; letter-spacing: 2px; border-radius: 2px; transition: 0.3s; }
+        .matrix-abort-btn:hover { color: #fff; border-color: #fff; }
         .hx-stage-ui { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width: 90%; max-width: 600px; pointer-events: auto; opacity: 0; display: none; transition: opacity 0.8s ease; }
         .hx-stage-ui.active { display: block; opacity: 1; }
-        .stage-title { font-family: 'Space Mono', monospace; font-size: 1.2rem; color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold; text-shadow: 0 0 15px rgba(10,132,255,0.5);}
-        .stage-desc { font-family: 'Inter', sans-serif; font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: #fff; line-height: 1.8; margin-bottom: 40px; text-shadow: 0 4px 10px rgba(0,0,0,0.8);}
-        .hx-btn { background: transparent; border: 1px solid rgba(255,255,255,0.5); color: #fff; padding: 16px 45px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s; border-radius: 2px; text-transform: uppercase;}
-        .hx-btn:hover { background: #fff; color: #000; box-shadow: 0 0 25px rgba(255,255,255,0.5); }
+        .stage-title { font-family: 'Space Mono', monospace; font-size: 1.2rem; color: #fff; letter-spacing: 4px; margin-bottom: 20px; font-weight: normal; }
+        .stage-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 2.5vw, 1.2rem); color: #888; line-height: 1.8; margin-bottom: 40px; }
+        .hx-btn { background: transparent; border: 1px solid #fff; color: #fff; padding: 16px 45px; font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s; border-radius: 0; text-transform: uppercase;}
+        .hx-btn:hover { background: #fff; color: #000; }
         input[type=range].hx-slider { -webkit-appearance: none; width: 100%; max-width: 350px; background: transparent; margin: 30px auto; display: block;}
-        input[type=range].hx-slider::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #ff003c; cursor: pointer; margin-top: -10px; box-shadow: 0 0 20px #ff003c;}
-        input[type=range].hx-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
-        .hold-btn { background: transparent; border: 2px solid #27c93f; color: #27c93f; padding: 20px; border-radius: 50%; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-size: 0.8rem; font-weight:bold; letter-spacing: 1px; cursor: pointer; margin: 0 auto; transition: all 0.2s; user-select: none; -webkit-user-select: none; box-shadow: 0 0 20px rgba(39,201,63,0.2);}
-        .hold-btn:active { background: rgba(39, 201, 63, 0.2); transform: scale(0.9); box-shadow: inset 0 0 30px rgba(39,201,63,0.5), 0 0 40px rgba(39,201,63,0.4); }
-        .ultimate-hook { background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(15px); padding: 50px; border: 1px solid rgba(255,215,0,0.4); border-radius: 12px; box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(255,215,0,0.1); margin-bottom: 40px;}
-        .hook-title { color: #FFD700; font-family: 'Space Mono'; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 25px; font-weight: bold; text-shadow: 0 0 20px rgba(255,215,0,0.5);}
-        .hook-body { color: #e0e0e0; font-size: 1.15rem; line-height: 1.9; text-align: justify;}
+        input[type=range].hx-slider::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 0; background: #fff; cursor: pointer; margin-top: -6px; }
+        input[type=range].hx-slider::-webkit-slider-runnable-track { width: 100%; height: 2px; cursor: pointer; background: #333; }
+        .hold-btn { background: transparent; border: 1px solid #fff; color: #fff; padding: 20px; border-radius: 50%; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; margin: 0 auto; transition: all 0.2s; user-select: none; -webkit-user-select: none;}
+        .hold-btn:active { background: #fff; color: #000; transform: scale(0.95); }
+        .ultimate-hook { background: #050505; border: 1px solid #333; padding: 50px; border-radius: 4px; margin-bottom: 40px;}
+        .hook-title { color: #fff; font-family: 'Space Mono'; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 25px; }
+        .hook-body { color: #888; font-size: 1rem; line-height: 1.9; text-align: justify;}
 
         /* Legal Modals & Footer */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;}
-        .modal-content { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; padding: 50px; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.9);}
-        .modal-close { position: absolute; top: 25px; right: 25px; background: transparent; border: none; width: 36px; height: 36px; font-size: 1.8rem; cursor: pointer; display:flex; justify-content:center; align-items:center; color: #888; transition: 0.3s;}
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(5px); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px;}
+        .modal-content { background: #050505; border: 1px solid #222; border-radius: 4px; width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; padding: 50px; position: relative;}
+        .modal-close { position: absolute; top: 25px; right: 25px; background: transparent; border: none; width: 36px; height: 36px; font-size: 1.8rem; cursor: pointer; display:flex; justify-content:center; align-items:center; color: #666; transition: 0.3s;}
         .modal-close:hover { color: #fff; transform: rotate(90deg);}
         body.lang-ar .modal-close { right: auto; left: 25px; }
 
-        .site-footer { text-align: center; padding: 80px 20px; background: #000; border-top: 1px solid rgba(255,255,255,0.05);}
-        .footer-logo { font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; direction: ltr; display: inline-block; letter-spacing: 2px;}
+        .site-footer { text-align: center; padding: 80px 20px; background: #000; border-top: 1px solid #111;}
+        .footer-logo { font-size: 1.2rem; font-weight: 500; margin-bottom: 10px; direction: ltr; display: inline-block; letter-spacing: 2px;}
 
         /* ========================================== */
-        /* EX-MASTER LOADER (CINEMATIC BOOT)          */
+        /* EX-MASTER LOADER (FAST MOBILE BOOT)        */
         /* ========================================== */
-        #ex-master-loader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #000; z-index: 999999; display: flex; justify-content: center; align-items: center; overflow: hidden; transition: opacity 1.2s ease-in-out, visibility 1.2s; }
+        #ex-master-loader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #000; z-index: 999999; display: flex; justify-content: center; align-items: center; overflow: hidden; transition: opacity 0.8s ease-in-out, visibility 0.8s; }
         .ex-loader-flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; opacity: 0; z-index: 2; pointer-events: none; }
-        .flash-active { animation: flashToWhite 2s forwards cubic-bezier(0.16, 1, 0.3, 1); }
-        .ex-loader-content { position: relative; z-index: 3; text-align: center; color: #fff; font-family: 'Space Mono', monospace; transition: opacity 0.8s; }
-        @keyframes flashToWhite { 0% { opacity: 0; } 40% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+        .flash-active { animation: flashToWhite 1.5s forwards cubic-bezier(0.16, 1, 0.3, 1); }
+        .ex-loader-content { position: relative; z-index: 3; text-align: center; color: #fff; font-family: 'Space Mono', monospace; transition: opacity 0.5s; }
+        @keyframes flashToWhite { 0% { opacity: 0; } 30% { opacity: 1; } 60% { opacity: 1; } 100% { opacity: 0; } }
 
         @media (max-width: 768px) {
             .cinematic-section { padding: 80px 0; }
@@ -383,23 +377,23 @@
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
     <div class="ex-loader-content" id="loader-text">
-        <h1 class="glitch-anim" style="font-size: 1.8rem; letter-spacing: 4px; color: #fff;">フサム | experience™</h1>
-        <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 6px; margin-top: 15px;">SYSTEM BOOT SEQUENCE...</p>
+        <div class="logo-box glitch-anim" style="margin-bottom: 20px;"><span class="logo-text">フサム</span></div>
+        <p style="font-size: 0.7rem; color: #666; letter-spacing: 4px;">SYSTEM BOOT SEQUENCE...</p>
     </div>
 </div>
 
 <nav class="top-nav" id="navbar" aria-label="Main Navigation">
     <a href="#" class="logo-box glitch-anim" aria-label="Hussam Experience Home">
-        <span class="logo-text">フサム | experience™</span>
+        <span class="logo-text">フサム</span>
     </a>
     <div class="nav-icons">
-        <button class="nav-icon" onclick="document.getElementById('portal').scrollIntoView();" title="Account" aria-label="Go to Dashboard">
+        <button class="nav-icon" onclick="document.getElementById('portal').scrollIntoView();" title="Account">
             <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         </button>
-        <button class="nav-icon" onclick="toggleLanguage()" title="Language" aria-label="Switch Language">
+        <button class="nav-icon" onclick="toggleLanguage()" title="Language">
             <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.9 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
         </button>
-        <button class="nav-icon" onclick="openLegal('center')" title="Help & Policies" aria-label="Help & Policies">
+        <button class="nav-icon" onclick="openLegal('center')" title="Help">
             <svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
         </button>
     </div>
@@ -407,8 +401,8 @@
 
 <main>
     <section class="cinematic-section hero center-align">
-        <video src="ex1.mp4" class="bg-video" autoplay loop muted playsinline style="opacity: 0.8;"></video>
-        <div class="bg-overlay" style="background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(5,5,5,0.9) 100%);"></div>
+        <video src="ex1.mp4" class="bg-video" autoplay loop muted playsinline style="opacity: 0.6; filter: contrast(1.2);"></video>
+        <div class="bg-overlay" style="background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, #000 100%);"></div>
         <div class="content-layer container reveal-on-scroll">
             <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
             <span class="tagline en-only">The line between ordinary and extraordinary</span>
@@ -416,10 +410,10 @@
             <h1 class="heading-xl ar-only">هندسة التجربة الإنسانية</h1>
             <h1 class="heading-xl en-only">Engineering<br>Human Experiences</h1>
             
-            <p class="text-body ar-only" style="margin: 0 auto; color:#ddd; font-size: 1.2rem;">نحن لا نصمم منتجات..<br>نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
-            <p class="text-body en-only" style="margin: 0 auto; color:#ddd; font-size: 1.2rem;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
+            <p class="text-body ar-only" style="margin: 0 auto; color:#aaa;">نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
+            <p class="text-body en-only" style="margin: 0 auto; color:#aaa;">We engineer human experiences..from first sensation to lasting memory.</p>
             
-            <button class="btn-luxury" onclick="initiateHX5Journey()" aria-label="NFC VIP Gate">
+            <button class="btn-luxury" onclick="initiateHX5Journey()">
                 DECRYPT HX-5 MATRIX
             </button>
         </div>
@@ -430,33 +424,33 @@
         <div class="bg-overlay bg-overlay-heavy"></div>
         <div class="content-layer container">
             <div class="reveal-on-scroll" style="max-width: 600px;">
-                <h2 class="heading-lg ar-only" style="color: #ff3366;">المشكلة الصامتة</h2>
-                <h2 class="heading-lg en-only" style="color: #ff3366;">The Silent Problem</h2>
+                <h2 class="heading-lg ar-only" style="color: #fff;">المشكلة الصامتة</h2>
+                <h2 class="heading-lg en-only" style="color: #fff;">The Silent Problem</h2>
                 <p class="text-body ar-only">العالم مليء بالمحتوى. لكن القليل جداً من التجارب تُحفر في الذاكرة. تتفاعل العلامات التجارية والأنظمة والبيئات مع الناس، لكنها نادراً ما تترك بصمة عاطفية دائمة.<br><br>هذه الفجوة ليست مشكلة إبداعية، إنها فشل في <strong>تصميم التجربة.</strong></p>
                 <p class="text-body en-only">The world is full of content. Very few experiences are remembered. Brands, systems, and environments interact with people, but rarely leave a lasting emotional imprint.<br><br>This gap is not a creative issue, It is an <strong>experience design failure.</strong></p>
             </div>
             
             <div class="reveal-on-scroll" style="max-width: 600px; margin-top: 100px; margin-left: auto;">
                 <span class="page-num">001</span>
-                <h2 class="heading-md ar-only">ما هو フサム | experience ؟</h2>
-                <h2 class="heading-md en-only">What is フサム | experience™ ?</h2>
-                <p class="text-body ar-only">フサム | experience™ هو دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة الإنسانية. نحن نعمل في نقطة التقاطع بين علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة.<br><br>حيث ينتهي التسويق التقليدي، تبدأ <strong>هندسة العمارة التجريبية.</strong></p>
+                <h2 class="heading-md ar-only">ما هو フサム ؟</h2>
+                <h2 class="heading-md en-only">What is フサム ?</h2>
+                <p class="text-body ar-only">فوسام هو دار مفاهيم ومختبر استراتيجي يركز على هندسة التجربة الإنسانية. نحن نعمل في نقطة التقاطع بين علم النفس، التصميم الحسي، والترجمة السينمائية لتحويل التفاعل إلى ذاكرة.<br><br>حيث ينتهي التسويق التقليدي، تبدأ <strong>هندسة العمارة التجريبية.</strong></p>
                 <p class="text-body en-only">フサム | experience™ is a concept house and strategic lab focused on Human Experience Engineering. We operate at the intersection of psychology, sensory design, and cinematic translation.<br><br>Where traditional marketing ends, <strong>experience architecture begins.</strong></p>
             </div>
         </div>
     </section>
 
     <section class="cinematic-section" style="padding: 0; position: relative;">
-        <video src="ex3.mp4" class="bg-video" autoplay loop muted playsinline style="position: sticky; top: 0; height: 100vh; opacity: 0.5;"></video>
-        <div class="bg-overlay" style="position: sticky; top: 0; height: 100vh; background: rgba(5,5,5,0.7);"></div>
+        <video src="ex3.mp4" class="bg-video" autoplay loop muted playsinline style="position: sticky; top: 0; height: 100vh; opacity: 0.3;"></video>
+        <div class="bg-overlay" style="position: sticky; top: 0; height: 100vh; background: rgba(0,0,0,0.8);"></div>
         
         <div class="content-layer sticky-wrapper" style="margin-top: -100vh;">
             <div class="sticky-left reveal-on-scroll">
-                <span class="page-num" style="color:#fff;">002 // FRAMEWORK</span>
+                <span class="page-num">002 // FRAMEWORK</span>
                 <h2 class="heading-lg ar-only">منهجية HX-5™</h2>
                 <h2 class="heading-lg en-only">HX-5™ Engine</h2>
-                <p class="text-body ar-only" style="color: #ccc;">إطار معماري حصري مصمم لسد الفجوة بين الإدراك البشري والتنفيذ الاستراتيجي. إنها تتجاوز التصميم التقليدي لتهندس العلاقة الأساسية من خلال خمس ركائز.</p>
-                <p class="text-body en-only" style="color: #ccc;">A proprietary architectural framework bridging human perception and execution. It engineers the fundamental relationship through five core pillars.</p>
+                <p class="text-body ar-only">إطار معماري حصري مصمم لسد الفجوة بين الإدراك البشري والتنفيذ الاستراتيجي. إنها تتجاوز التصميم التقليدي لتهندس العلاقة الأساسية من خلال خمس ركائز.</p>
+                <p class="text-body en-only">A proprietary architectural framework bridging human perception and execution. It engineers the fundamental relationship through five core pillars.</p>
             </div>
             
             <div class="sticky-right">
@@ -488,7 +482,7 @@
                     <p class="text-body en-only" style="margin:0;">Governing the rhythm of engagement to transform spectators into active participants.</p>
                     <p class="text-body ar-only" style="margin:0;">تحكم إيقاع الاندماج لتحويل الشخص من متفرج إلى مشارك نشط.</p>
                 </article>
-                <article class="sticky-glass-card reveal-on-scroll" style="border-color: var(--accent-blue);">
+                <article class="sticky-glass-card reveal-on-scroll" style="border-color: #333;">
                     <span class="sp-num">V. IMPACT</span>
                     <h3 class="sp-title en-only">Impact</h3><h3 class="sp-title ar-only">الأثر</h3>
                     <span class="sp-quote en-only">“What remains after the experience ends?”</span><span class="sp-quote ar-only">"ما الذي يتبقى بعد الانتهاء؟"</span>
@@ -507,8 +501,8 @@
                 <span class="page-num">003</span>
                 <h2 class="heading-lg ar-only">النماذج التجريبية أولاً</h2>
                 <h2 class="heading-lg en-only">Pilots First</h2>
-                <p class="text-body ar-only" style="margin: 0 auto; font-size: 1.2rem;">الأفكار ليست كافية. الوعود لا تتوسع.<br>النماذج التجريبية تخلق <strong>إثبات الشعور</strong> قبل إثبات المفهوم.</p>
-                <p class="text-body en-only" style="margin: 0 auto; font-size: 1.2rem;">Ideas are not enough. Promises do not scale.<br>Pilots create <strong>proof of feeling</strong> before proof of concept.</p>
+                <p class="text-body ar-only" style="margin: 0 auto;">الأفكار ليست كافية. الوعود لا تتوسع.<br>النماذج التجريبية تخلق <strong>إثبات الشعور</strong> قبل إثبات المفهوم.</p>
+                <p class="text-body en-only" style="margin: 0 auto;">Ideas are not enough. Promises do not scale.<br>Pilots create <strong>proof of feeling</strong> before proof of concept.</p>
             </div>
             <ul class="list-cinematic reveal-on-scroll" style="max-width: 800px; margin: 50px auto 0;">
                 <li class="ar-only">تجربة إنسانية مصممة بدقة</li><li class="en-only">A designed human experience</li>
@@ -530,22 +524,22 @@
                     <h2 class="heading-md en-only">Partnership</h2>
                     <p class="text-body ar-only">نحن لا ننافس شركاءنا. نحن نرتقي بهم. الملكية الفكرية تبقى مع مبتكرها، والظهور يكون متعمداً وليس استخراجياً.</p>
                     <p class="text-body en-only">We do not compete with our partners. We elevate them. Background IP remains with its originator, visibility is intentional.</p>
-                    <p class="text-body ar-only" style="margin-top: 20px;"><strong>الشراكة مع フサム | experience™ تزيد من المعنى، وليس مجرد الظهور.</strong></p>
-                    <p class="text-body en-only" style="margin-top: 20px;"><strong>Partnership with フサム | experience™ increases meaning, not exposure alone.</strong></p>
+                    <p class="text-body ar-only" style="margin-top: 20px; color:#fff;"><strong>الشراكة تزيد من المعنى، وليس مجرد الظهور.</strong></p>
+                    <p class="text-body en-only" style="margin-top: 20px; color:#fff;"><strong>Partnership increases meaning, not exposure alone.</strong></p>
                 </div>
                 <div class="reveal-on-scroll" style="flex: 1; min-width: 300px;">
                     <span class="page-num" style="color: transparent;">-</span>
                     <h2 class="heading-md ar-only">لمن هذا؟</h2>
                     <h2 class="heading-md en-only">Who Is This For?</h2>
-                    <ul class="list-clean ar-only" style="color: #fff;">
-                        <li>المنظمات التي تسعى لأثر طويل المدى</li>
-                        <li>المستثمرون (البنية التحتية، لا الضجيج)</li>
-                        <li>العلامات التجارية التي تريد أن تُحفر بالذاكرة</li>
+                    <ul class="list-cinematic ar-only" style="display:block;">
+                        <li style="margin-bottom:10px;">المنظمات التي تسعى لأثر طويل المدى</li>
+                        <li style="margin-bottom:10px;">المستثمرون (البنية التحتية، لا الضجيج)</li>
+                        <li style="margin-bottom:10px;">العلامات التجارية التي تريد أن تُحفر بالذاكرة</li>
                     </ul>
-                    <ul class="list-clean en-only" style="color: #fff;">
-                        <li>Organizations seeking long-term impact</li>
-                        <li>Investors (infrastructure, not hype)</li>
-                        <li>Brands that want to be remembered</li>
+                    <ul class="list-cinematic en-only" style="display:block;">
+                        <li style="margin-bottom:10px;">Organizations seeking long-term impact</li>
+                        <li style="margin-bottom:10px;">Investors (infrastructure, not hype)</li>
+                        <li style="margin-bottom:10px;">Brands that want to be remembered</li>
                     </ul>
                 </div>
             </div>
@@ -559,43 +553,50 @@
         <div class="content-layer container reveal-on-scroll" style="text-align: center; margin-bottom: 100px;">
             <span class="page-num ar-only" style="margin-bottom: 10px;">توقيع العلامة</span>
             <span class="page-num en-only" style="margin-bottom: 10px;">Brand Signature</span>
-            <h2 class="heading-md glitch-anim mono-text" style="color: #fff;">フサム | experience™</h2>
             
-            <div style="display:flex; flex-wrap:wrap; gap:40px; justify-content:center; margin-top: 50px;">
-                <div style="flex:1; min-width:280px; max-width: 400px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 8px;">
-                    <span class="mono-text" style="font-size: 0.75rem; color: var(--accent-blue); letter-spacing: 2px; display: block; margin-bottom: 10px;">THE FOUNDER</span>
-                    <h3 style="font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 15px;">Hussam Hassan Mohammed Tahiri</h3>
-                    <p class="text-body ar-only" style="font-size: 0.9rem; margin: 0 auto;">العقل الاستراتيجي والمهندس المبتكر لمنهجية HX-5™️. صاحب الرؤية الذي قام بابتكار الأساس لهندسة التجارب.</p>
-                    <p class="text-body en-only" style="font-size: 0.9rem; margin: 0 auto;">The DNA creator & strategic mind. architect of the HX-5™️ methodology. The visionary founder.</p>
+            <div class="logo-box glitch-anim" style="margin-bottom: 40px; padding: 10px 20px;"><span class="logo-text" style="font-size: 1.5rem;">フサム</span></div>
+            
+            <div style="display:flex; flex-wrap:wrap; gap:40px; justify-content:center;">
+                <div style="flex:1; min-width:280px; max-width: 400px; background: transparent; border:1px solid #222; padding: 40px; border-radius: 2px;">
+                    <span class="mono-text" style="font-size: 0.7rem; color: #666; letter-spacing: 2px; display: block; margin-bottom: 15px;">THE FOUNDER</span>
+                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 15px;">Hussam Hassan Mohammed Tahiri</h3>
+                    <p class="text-body ar-only" style="font-size: 0.85rem; margin: 0 auto;">العقل الاستراتيجي والمهندس المبتكر لمنهجية HX-5™️. صاحب الرؤية الذي قام بابتكار الأساس لهندسة التجارب.</p>
+                    <p class="text-body en-only" style="font-size: 0.85rem; margin: 0 auto;">The DNA creator & strategic mind. architect of the HX-5™️ methodology. The visionary founder.</p>
                 </div>
-                <div style="flex:1; min-width:280px; max-width: 400px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 8px;">
-                    <span class="mono-text" style="font-size: 0.75rem; color: var(--accent-blue); letter-spacing: 2px; display: block; margin-bottom: 10px;">CO-FOUNDER</span>
-                    <h3 style="font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 15px;">Sultan Bin Badr Al Saud</h3>
-                    <p class="text-body ar-only" style="font-size: 0.9rem; margin: 0 auto;">القوة الموازية التي تترجم الرؤية الاستراتيجية العميقة إلى إطار صلب. مهندس مشارك في جينات الكيان.</p>
-                    <p class="text-body en-only" style="font-size: 0.9rem; margin: 0 auto;">The parallel force translating vision into a scalable framework. Co-engineering the entity's DNA.</p>
+                <div style="flex:1; min-width:280px; max-width: 400px; background: transparent; border:1px solid #222; padding: 40px; border-radius: 2px;">
+                    <span class="mono-text" style="font-size: 0.7rem; color: #666; letter-spacing: 2px; display: block; margin-bottom: 15px;">CO-FOUNDER</span>
+                    <h3 style="font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 15px;">Sultan Bin Badr Abdulmuhsen Al Saud</h3>
+                    <p class="text-body ar-only" style="font-size: 0.85rem; margin: 0 auto;">القوة الموازية التي تترجم الرؤية الاستراتيجية العميقة إلى إطار صلب. مهندس مشارك في جينات الكيان.</p>
+                    <p class="text-body en-only" style="font-size: 0.85rem; margin: 0 auto;">The parallel force translating vision into a scalable framework. Co-engineering the entity's DNA.</p>
                 </div>
             </div>
         </div>
 
-        <div class="content-layer" id="portal" style="width: 100%; border-top: 1px solid #222; background: #000; padding: 100px 0;">
+        <div class="content-layer" id="portal" style="width: 100%; border-top: 1px solid #111; background: #000; padding: 120px 0;">
             <div class="container reveal-on-scroll">
-                <h2 class="heading-lg ar-only" style="text-align: center; margin-bottom: 40px; font-family: 'Space Mono'; letter-spacing: 2px;">الواجهة التنفيذية</h2>
-                <h2 class="heading-lg en-only" style="text-align: center; margin-bottom: 40px; font-family: 'Space Mono'; letter-spacing: 2px; text-transform: uppercase;">Executive Dashboard</h2>
+                <h2 class="heading-lg ar-only" style="text-align: center; margin-bottom: 60px; font-family: 'Space Mono', monospace; letter-spacing: 2px;">الواجهة التنفيذية</h2>
+                <h2 class="heading-lg en-only" style="text-align: center; margin-bottom: 60px; font-family: 'Space Mono', monospace; letter-spacing: 4px; text-transform: uppercase; font-size: 2.5rem;">Executive Dashboard</h2>
                 
                 <div id="auth-view" class="login-wrapper">
                     <div class="login-box">
                         <form onsubmit="handleFirebaseLogin(event)">
-                            <label for="userEmail" class="t-label ar-only">البريد الإلكتروني</label>
-                            <label for="userEmail" class="t-label en-only">Email Address</label>
-                            <input type="email" id="userEmail" class="t-input" required>
+                            <div class="t-label-group">
+                                <label for="userEmail" class="t-label ar-only">البريد الإلكتروني</label>
+                                <label for="userEmail" class="t-label en-only">Email Address</label>
+                                <input type="email" id="userEmail" class="t-input" required>
+                            </div>
                             
-                            <label for="userName" class="t-label ar-only">الاسم الكامل</label>
-                            <label for="userName" class="t-label en-only">Full Name</label>
-                            <input type="text" id="userName" class="t-input" required>
+                            <div class="t-label-group">
+                                <label for="userName" class="t-label ar-only">الاسم الكامل</label>
+                                <label for="userName" class="t-label en-only">Full Name</label>
+                                <input type="text" id="userName" class="t-input" required>
+                            </div>
                             
-                            <label for="userPhone" class="t-label ar-only">رقم الجوال (مطلوب)</label>
-                            <label for="userPhone" class="t-label en-only">Phone Number (Required)</label>
-                            <input type="tel" id="userPhone" class="t-input" required>
+                            <div class="t-label-group">
+                                <label for="userPhone" class="t-label ar-only">رقم الجوال (مطلوب)</label>
+                                <label for="userPhone" class="t-label en-only">Phone Number (Required)</label>
+                                <input type="tel" id="userPhone" class="t-input" required>
+                            </div>
                             
                             <button type="submit" id="loginBtn" class="btn-spacex">
                                 <span class="ar-only">بدء الاتصال</span><span class="en-only">INITIATE CONNECTION</span>
@@ -613,11 +614,11 @@
                             </button>
                         </div>
 
-                        <div style="margin-top: 50px; text-align: center;">
-                            <h4 style="color: #555; font-family: 'Space Mono'; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 15px;">[ OVERRIDE PROTOCOL ]</h4>
-                            <input type="password" id="adminPass" class="t-input" placeholder="ACCESS TOKEN" style="text-align: center; border-bottom-color: #333;" autocomplete="new-password">
-                            <button onclick="checkPass()" class="btn-spacex" style="padding: 12px; font-size: 0.7rem; border-color: #333; color: #888;">DECRYPT</button>
-                            <div class="status" id="loginStatus" style="font-size: 0.75rem; font-family: 'Space Mono'; margin-top: 15px; color:#555;">Authorized Personnel Only.</div>
+                        <div style="margin-top: 60px; text-align: center;">
+                            <h4 style="color: #444; font-family: 'Space Mono'; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 15px;">[ OVERRIDE PROTOCOL ]</h4>
+                            <input type="password" id="adminPass" class="t-input" placeholder="ACCESS TOKEN" style="text-align: center; border-bottom-color: #222;" autocomplete="new-password">
+                            <button onclick="checkPass()" class="btn-spacex" style="padding: 12px; font-size: 0.7rem; border-color: #222; color: #666;">DECRYPT</button>
+                            <div class="status" id="loginStatus" style="font-size: 0.7rem; font-family: 'Space Mono'; margin-top: 15px; color:#444;">Authorized Personnel Only.</div>
                         </div>
                     </div>
                 </div>
@@ -627,7 +628,7 @@
                         <button class="dash-tab active" onclick="switchService('history')"><span class="ar-only">السجلات والحالة</span><span class="en-only">STATUS & LOGS</span></button>
                         <button class="dash-tab" onclick="switchService('consult')"><span class="ar-only">طلب استشارة</span><span class="en-only">NEW INQUIRY</span></button>
                         <button class="dash-tab" onclick="switchService('nexus')">NEXUS COMMAND</button>
-                        <button class="dash-tab" id="adminTab" style="display:none; color: #27c93f;" onclick="switchService('admin')">ADMIN CORE</button>
+                        <button class="dash-tab" id="adminTab" style="display:none; color: #fff; border-bottom: 1px solid #fff;" onclick="switchService('admin')">ADMIN CORE</button>
                     </nav>
 
                     <div id="form-history" class="service-form active" aria-live="polite">
@@ -636,7 +637,7 @@
                     
                     <div id="form-consult" class="service-form">
                         <form onsubmit="submitFirebaseConsult(event)">
-                            <textarea class="t-input" id="consultText" style="height: 150px; resize: vertical; border: 1px solid rgba(255,255,255,0.2); padding: 15px;" required></textarea>
+                            <textarea class="t-input" id="consultText" style="height: 150px; resize: vertical; border: 1px solid #222; padding: 15px; border-radius:0;" required></textarea>
                             <button type="submit" id="consultBtn" class="btn-spacex" style="width: auto; padding: 14px 40px;"><span class="ar-only">إرسال الطلب</span><span class="en-only">TRANSMIT INQUIRY</span></button>
                         </form>
                     </div>
@@ -650,19 +651,18 @@
                     </div>
 
                     <div id="form-admin" class="service-form">
-                        <div style="display:flex; flex-direction:column; gap:15px; background:rgba(255,255,255,0.02); padding:40px; border: 1px solid rgba(39, 201, 63, 0.2);">
-                            <h3 style="color:#27c93f; font-family:'Space Mono'; font-size: 1.2rem; letter-spacing: 2px;">[ DECRYPTED CORE ]</h3>
-                            <button onclick="exportData('Users')" class="btn-spacex" style="border-color:#27c93f; color:#27c93f;">⬇ Users Directory</button>
-                            <button onclick="exportData('Consultations')" class="btn-spacex" style="border-color:#27c93f; color:#27c93f;">⬇ Strategic Consultations</button>
-                            <button onclick="exportData('MatrixLogs')" class="btn-spacex" style="border-color:#27c93f; color:#27c93f;">⬇ AI Matrix Logs</button>
-                            <div id="dashStatus" style="color:#888; font-size:0.85rem; font-family:'Space Mono'; margin-top:15px;">System Ready.</div>
+                        <div style="display:flex; flex-direction:column; gap:15px; background: transparent; padding:40px; border: 1px solid #333;">
+                            <h3 style="color:#fff; font-family:'Space Mono'; font-size: 1.2rem; letter-spacing: 2px;">[ DECRYPTED CORE ]</h3>
+                            <button onclick="exportData('Users')" class="btn-spacex" style="border-color:#444; color:#fff;">⬇ Users Directory</button>
+                            <button onclick="exportData('Consultations')" class="btn-spacex" style="border-color:#444; color:#fff;">⬇ Strategic Consultations</button>
+                            <button onclick="exportData('MatrixLogs')" class="btn-spacex" style="border-color:#444; color:#fff;">⬇ AI Matrix Logs</button>
+                            <div id="dashStatus" style="color:#666; font-size:0.8rem; font-family:'Space Mono'; margin-top:15px;">System Ready.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <section id="blueprint-section" class="cinematic-section deep-archive" aria-label="The Deep Archive Projects" style="padding: 0; background: #050505;">
         <video src="ex10.mp4.mp4" class="bg-video" autoplay loop muted playsinline style="opacity:0.15; filter: grayscale(100%);"></video>
         <div class="bg-overlay" style="background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 20%, rgba(0,0,0,1) 100%); z-index: 1;"></div>
@@ -874,6 +874,7 @@
         try {
             if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
             if (audioContext.state === 'suspended') audioContext.resume();
+            
             const osc = audioContext.createOscillator(); 
             const gain = audioContext.createGain();
             osc.connect(gain); 
@@ -955,21 +956,21 @@
         terms: {
             en: {
                 title: "Terms of Use & Strategic Engagement",
-                body: "By accessing the フサム | experience™ platform, you agree to the following framework:<br><br><b>1. Cyber Security & Active Defense:</b> Use of this platform is governed by the Saudi Anti-Cyber Crime Law. The system employs an active Web Application Firewall (WAF). Any unauthorized access, malicious payload injection (e.g., XSS, SQLi), or attempt to breach the NEXUS COMMAND will trigger an immediate system lock and an automated forensic report to relevant cybersecurity authorities.<br><b>2. Intellectual Property:</b> The HX-5™ Methodology and all conceptual architectures are the exclusive intellectual property of フサム | experience™.<br><b>3. Cultural Alignment:</b> Our engineered experiences adhere strictly to the guidelines set forth by the relevant cultural and tourism authorities in Saudi Arabia.<br><b>4. Purpose:</b> This is a highly secure executive strategic environment, not a public commercial store."
+                body: "By accessing the フサム | experience™ platform, you agree to the following framework:<br><br><b>1. Cyber Security & Active Defense:</b> Use of this platform is governed by the Saudi Anti-Cyber Crime Law. The system employs an active Web Application Firewall (WAF). Any unauthorized access, malicious payload injection (e.g., XSS, SQLi), or attempt to breach the NEXUS COMMAND will trigger an immediate system lock and an automated forensic report to relevant cybersecurity authorities.<br><b>2. Intellectual Property:</b> The HX-5™ Methodology and all conceptual architectures are the exclusive intellectual property of フサム.<br><b>3. Cultural Alignment:</b> Our engineered experiences adhere strictly to the guidelines set forth by the relevant cultural and tourism authorities in Saudi Arabia.<br><b>4. Purpose:</b> This is a highly secure executive strategic environment, not a public commercial store."
             },
             ar: {
                 title: "شروط الاستخدام والمشاركة الاستراتيجية",
-                body: "بدخولك إلى منصة フサム | experience™، فإنك توافق على الإطار التالي:<br><br><b>1. الأمن السيبراني والدفاع النشط:</b> يخضع استخدام هذه المنصة لنظام مكافحة جرائم المعلوماتية السعودي. يستخدم النظام مستشعرات دفاعية نشطة (IDS/WAF). أي محاولة حقن أكواد خبيثة (مثل XSS أو SQLi) أو اختراق لـ NEXUS COMMAND ستؤدي إلى إغلاق النظام فوراً ورفع تقرير جنائي آلي للجهات الأمنية المختصة.<br><b>2. الملكية الفكرية:</b> منهجية HX-5™ وكافة الهياكل المفاهيمية هي ملكية فكرية حصرية لـ フサム | experience™.<br><b>3. التوافق الثقافي:</b> تلتزم تجاربنا الهندسية بصرامة بالتوجهات والرؤى الثقافية المعتمدة في المملكة العربية السعودية.<br><b>4. الغاية:</b> هذه بيئة استراتيجية تنفيذية عالية الأمان، وليست متجراً تجارياً عاماً."
+                body: "بدخولك إلى منصة フサム | experience™، فإنك توافق على الإطار التالي:<br><br><b>1. الأمن السيبراني والدفاع النشط:</b> يخضع استخدام هذه المنصة لنظام مكافحة جرائم المعلوماتية السعودي. يستخدم النظام مستشعرات دفاعية نشطة (IDS/WAF). أي محاولة حقن أكواد خبيثة (مثل XSS أو SQLi) أو اختراق لـ NEXUS COMMAND ستؤدي إلى إغلاق النظام فوراً ورفع تقرير جنائي آلي للجهات الأمنية المختصة.<br><b>2. الملكية الفكرية:</b> منهجية HX-5™ وكافة الهياكل المفاهيمية هي ملكية فكرية حصرية لـ フサム.<br><b>3. التوافق الثقافي:</b> تلتزم تجاربنا الهندسية بصرامة بالتوجهات والرؤى الثقافية المعتمدة في المملكة العربية السعودية.<br><b>4. الغاية:</b> هذه بيئة استراتيجية تنفيذية عالية الأمان، وليست متجراً تجارياً عاماً."
             }
         },
         oracle: {
             en: {
                 title: "Ex Oracle Terms of Use",
-                body: "Ex Oracle is an AI entity provided by フサム | experience™ designed to answer frequently asked questions about our strategic products and services.<br><br>Its responses are generated using advanced LLM models proxied through a secure isolated backend. While engineered for precision, the Ex Oracle may occasionally provide inaccurate or incomplete information. It is not intended to give professional, legal, or absolute strategic advice and is not a substitute for official フサム | experience™ documentation.<br><br>By using Ex Oracle, you agree that your inputs are sanitized for security purposes. Malicious prompts will trigger system defense protocols."
+                body: "Ex Oracle is an AI entity provided by フサム | experience™ designed to answer frequently asked questions about our strategic products and services.<br><br>Its responses are generated using advanced LLM models proxied through a secure isolated backend. While engineered for precision, the Ex Oracle may occasionally provide inaccurate or incomplete information. It is not intended to give professional, legal, or absolute strategic advice and is not a substitute for official フサム documentation.<br><br>By using Ex Oracle, you agree that your inputs are sanitized for security purposes. Malicious prompts will trigger system defense protocols."
             },
             ar: {
                 title: "شروط استخدام Ex Oracle",
-                body: "نظام Ex Oracle هو كيان ذكاء اصطناعي مُقدم بواسطة フサム | experience™ ومصمم للإجابة على الأسئلة الشائعة حول منتجاتنا وخدماتنا الاستراتيجية.<br><br>يتم توليد ردوده باستخدام نماذج لغوية متقدمة تعمل من خلال خادم خلفي معزول وآمن. على الرغم من هندسته للدقة، قد يقدم الأوراكل أحياناً معلومات غير مكتملة. هو ليس بديلاً عن المشورة المهنية أو الوثائق الرسمية لـ フサム | experience™.<br><br>باستخدامك للأوراكل، فإنك توافق على أن مدخلاتك تخضع لعمليات التطهير الأمني (Sanitization). أي محاولات لإدخال أوامر خبيثة ستؤدي إلى تفعيل بروتوكولات الدفاع الآلية."
+                body: "نظام Ex Oracle هو كيان ذكاء اصطناعي مُقدم بواسطة フサム | experience™ ومصمم للإجابة على الأسئلة الشائعة حول منتجاتنا وخدماتنا الاستراتيجية.<br><br>يتم توليد ردوده باستخدام نماذج لغوية متقدمة تعمل من خلال خادم خلفي معزول وآمن. على الرغم من هندسته للدقة، قد يقدم الأوراكل أحياناً معلومات غير مكتملة. هو ليس بديلاً عن المشورة المهنية أو الوثائق الرسمية لـ フサム.<br><br>باستخدامك للأوراكل، فإنك توافق على أن مدخلاتك تخضع لعمليات التطهير الأمني (Sanitization). أي محاولات لإدخال أوامر خبيثة ستؤدي إلى تفعيل بروتوكولات الدفاع الآلية."
             }
         }
     };
@@ -1563,9 +1564,9 @@
         
         // Detect Mobile to Speed up Loading
         const isMobile = window.innerWidth <= 768;
-        const textFadeTime = isMobile ? 1000 : 3500;
-        const flashTime = isMobile ? 1200 : 4000;
-        const totalLoadTime = isMobile ? 1800 : 5500;
+        const textFadeTime = isMobile ? 800 : 3500;
+        const flashTime = isMobile ? 1000 : 4000;
+        const totalLoadTime = isMobile ? 1400 : 5500;
 
         if (masterLoader && typeof THREE !== 'undefined') {
             const canvasContainer = document.createElement('div'); 
@@ -1614,44 +1615,6 @@
     }
     
     window.addEventListener('load', initExMasterLoader);
-    
-    /** ==========================================================
-     * TESLA CARDS LOGIC & INTERACTIONS 
-     * ========================================================== */
-    function focusArchiveCard(clickedCard) {
-        const grid = document.getElementById('archiveGrid'); const isAlreadyFocused = clickedCard.classList.contains('focused');
-        document.querySelectorAll('.archive-card').forEach(card => { card.classList.remove('focused'); });
-        if (!isAlreadyFocused) { 
-            grid.classList.add('has-focus'); clickedCard.classList.add('focused'); 
-            clickedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); 
-            if (navigator.vibrate) navigator.vibrate(40); 
-        } else { grid.classList.remove('has-focus'); }
-    }
-    
-    document.addEventListener('click', function(event) { 
-        const grid = document.getElementById('archiveGrid'); 
-        if (grid && grid.classList.contains('has-focus') && !event.target.closest('.archive-card')) { 
-            document.querySelectorAll('.archive-card').forEach(card => card.classList.remove('focused')); 
-            grid.classList.remove('has-focus'); 
-        } 
-    });
-
-    function unlockArchiveFile(cardId, expectedEncodedPass, btnElement) {
-        event.stopPropagation(); 
-        const inputEl = document.getElementById(`pass-card-${cardId}`); 
-        const errorEl = document.getElementById(`error-card-${cardId}`); 
-        const cardEl = btnElement.closest('.archive-card');
-        
-        if (btoa(inputEl.value.trim()) === expectedEncodedPass) { 
-            errorEl.style.display = 'none'; cardEl.classList.add('unlocked'); 
-            const statusEl = cardEl.querySelector('.archive-status'); 
-            statusEl.innerText = 'VIP ACCESS GRANTED'; statusEl.style.color = '#FFD700'; 
-            if (navigator.vibrate) navigator.vibrate([50, 100, 50]); 
-        } else { 
-            errorEl.style.display = 'block'; inputEl.value = ''; 
-            if (navigator.vibrate) navigator.vibrate(200); 
-        }
-    }
 </script>
 </body>
 </html>
