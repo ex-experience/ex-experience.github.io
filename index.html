@@ -2213,4 +2213,244 @@
     window.addEventListener('load', initExMasterLoader);
 </script>
 </body>
+    <!-- ================= CYBER CORE ENGINE ================= -->
+<script>
+class EXSystem {
+    constructor(){
+        this.state = {
+            userLevel: 0,
+            interactions: 0,
+            unlocked: false
+        };
+        this.init();
+    }
+
+    init(){
+        console.log("EX SYSTEM INITIALIZED");
+        this.track();
+        this.activateChaos();
+    }
+
+    track(){
+        document.addEventListener("click", ()=>{
+            this.state.interactions++;
+            if(this.state.interactions > 10){
+                this.unlockPhase();
+            }
+        });
+    }
+
+    unlockPhase(){
+        if(this.state.unlocked) return;
+        this.state.unlocked = true;
+
+        document.body.classList.add("ex-unlocked");
+
+        const msg = document.createElement("div");
+        msg.innerHTML = "SYSTEM LEVEL ↑";
+        msg.style = `
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            font-size:2rem;
+            color:#0A84FF;
+            z-index:999999;
+        `;
+        document.body.appendChild(msg);
+
+        setTimeout(()=>msg.remove(),2000);
+    }
+
+    activateChaos(){
+        setInterval(()=>{
+            document.querySelectorAll(".glitch-anim").forEach(el=>{
+                el.style.transform = `translate(${Math.random()*3}px, ${Math.random()*3}px)`;
+            });
+        },3000);
+    }
+}
+
+window.EX = new EXSystem();
+</script>
+    <style>
+#holo-cursor{
+    position:fixed;
+    width:20px;
+    height:20px;
+    border:1px solid #0A84FF;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:999999;
+    transition:transform 0.1s linear;
+}
+</style>
+
+<div id="holo-cursor"></div>
+
+<script>
+const cursor = document.getElementById("holo-cursor");
+
+document.addEventListener("mousemove", e=>{
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+</script>
+    <canvas id="matrix-bg"></canvas>
+
+<style>
+#matrix-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    opacity:0.05;
+}
+</style>
+
+<script>
+const canvas = document.getElementById("matrix-bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "EXPERIENCE0123456789";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw(){
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = "#0A84FF";
+    ctx.font = fontSize + "px monospace";
+
+    drops.forEach((y,i)=>{
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,y*fontSize);
+
+        if(y*fontSize > canvas.height && Math.random()>0.975){
+            drops[i]=0;
+        }
+        drops[i]++;
+    });
+}
+
+setInterval(draw, 35);
+</script>
+    <canvas id="matrix-bg"></canvas>
+
+<style>
+#matrix-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    opacity:0.05;
+}
+</style>
+
+<script>
+const canvas = document.getElementById("matrix-bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "EXPERIENCE0123456789";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw(){
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle = "#0A84FF";
+    ctx.font = fontSize + "px monospace";
+
+    drops.forEach((y,i)=>{
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,y*fontSize);
+
+        if(y*fontSize > canvas.height && Math.random()>0.975){
+            drops[i]=0;
+        }
+        drops[i]++;
+    });
+}
+
+setInterval(draw, 35);
+</script>
+    <div class="ex-video-layer">
+    <video autoplay muted loop>
+        <source src="https://cdn.coverr.co/videos/coverr-dark-code-5176/1080p.mp4" type="video/mp4">
+    </video>
+</div>
+
+<style>
+.ex-video-layer{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-2;
+    overflow:hidden;
+}
+.ex-video-layer video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.15;
+}
+</style>
+    <script>
+setTimeout(()=>{
+    const msg = document.createElement("div");
+    msg.innerHTML = "Are you ready to unlock the system?";
+    msg.style = `
+        position:fixed;
+        bottom:40px;
+        left:50%;
+        transform:translateX(-50%);
+        background:#000;
+        color:#fff;
+        padding:15px 30px;
+        border:1px solid #0A84FF;
+        z-index:999999;
+    `;
+    document.body.appendChild(msg);
+},8000);
+</script>
+    <div class="ex-cta">
+    INITIATE PRIVATE ACCESS
+</div>
+
+<style>
+.ex-cta{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#0A84FF;
+    color:#fff;
+    padding:15px 25px;
+    font-family:'Space Mono';
+    letter-spacing:2px;
+    cursor:pointer;
+    z-index:999999;
+    transition:0.3s;
+}
+.ex-cta:hover{
+    background:#fff;
+    color:#000;
+}
+</style>
 </html>
