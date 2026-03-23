@@ -8,16 +8,16 @@
     <meta property="og:image:height" content="630">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://[https://ex-experience.github.io/]/">
+    <meta name="twitter:url" content="https://ex-experience.github.io/">
     <meta name="twitter:title" content="フサム | experience™">
     <meta name="twitter:description" content="Engineering Human Experiences">
-    <meta name="twitter:image" content="https://[https://ex-experience.github.io/]/assets/og-image.png">
-   
+    <meta name="twitter:image" content="https://ex-experience.github.io/assets/og-image.png">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="フサム | experience™ - Engineering Human Experiences">
     <title>フサム | experience™</title>
-   
+    
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="referrer" content="no-referrer">
@@ -27,7 +27,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" href="icon.png">
-   
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -39,10 +39,10 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-   
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-   
+    
     <script>
         // Firebase Configuration
         const firebaseConfig = {
@@ -75,6 +75,10 @@
             --btn-gray: #eeeeee;
             --focus-ring: 0 0 0 3px rgba(10, 132, 255, 0.4);
             --green: #27c93f;
+            --obsidian-black: #050505;
+            --stark-white: #ffffff;
+            --nexus-blue: #0A84FF;
+            --executive-gray: #888888;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -85,12 +89,13 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            overflow-y: hidden; /* Will be released by loader */
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
-       
+        
         .mono-text { font-family: 'Space Mono', monospace; }
 
         a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
@@ -142,12 +147,12 @@
         .tagline { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 2px; color: #e0e0e0; margin-bottom: 20px; display: block; text-transform: uppercase;}
         .main-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 500; letter-spacing: -1px; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.1;}
         .sub-title { font-size: clamp(1rem, 1.5vw, 1.2rem); font-weight: 300; margin-bottom: 0; color: #f4f4f4; line-height: 1.6;}
-       
+        
         /* CONTENT TYPOGRAPHY */
         .content-section { padding: 100px 0; background: var(--bg-primary); color: var(--text-main); border-bottom: 1px solid var(--border-light);}
         .alt-bg { background-color: var(--bg-secondary); }
         .no-border { border-bottom: none; }
-       
+        
         .page-num { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px; letter-spacing: 3px; display: block; text-transform: uppercase;}
         .heading-md { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 500; margin-bottom: 20px; color: var(--text-main); letter-spacing: -0.5px;}
         .text-body { color: var(--text-muted); font-size: clamp(1rem, 1.1vw, 1.1rem); line-height: 1.8; max-width: 800px; font-weight: 400;}
@@ -175,12 +180,12 @@
         .btn-blue { width: 100%; padding: 14px; background: var(--text-main); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; }
         .btn-blue:hover { background: #000; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
         .btn-blue:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none;}
-       
+        
         .divider { display: flex; align-items: center; text-align: center; margin: 30px 0; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;}
         .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-light); }
         .divider:not(:empty)::before { margin-right: .5em; margin-left: .5em;}
         .divider:not(:empty)::after { margin-left: .5em; margin-right: .5em;}
-       
+        
         .oauth-group { display: flex; justify-content: center; gap: 15px; }
         .btn-social { background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 50%; cursor: pointer; transition: all 0.3s ease; padding: 12px; display: flex; justify-content: center; align-items: center;}
         .btn-social:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
@@ -193,10 +198,10 @@
         .dash-tab:hover { color: var(--text-main); }
         .dash-tab.active { color: var(--text-main); }
         .dash-tab.active::after { content: ''; position: absolute; bottom: -16px; left: 0; width: 100%; height: 2px; background: var(--text-main); }
-       
+        
         .service-form { display: none; animation: fadeIn 0.5s ease; }
         .service-form.active { display: block; }
-       
+        
         .history-card { border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; background: #fff; transition: all 0.3s ease;}
         .history-card:hover { border-color: #ccc; box-shadow: 0 5px 15px rgba(0,0,0,0.03); transform: translateY(-2px);}
         .h-details { max-width: 75%; text-align: left; }
@@ -219,32 +224,32 @@
         .ai-btn { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: var(--text-main); color: #fff; border: none; border-radius: 50%; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; animation: pulse-glow 4s infinite;}
         body.lang-ar .ai-btn { right: auto; left: 30px; }
         @keyframes pulse-glow { 0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.2); } 50% { box-shadow: 0 10px 40px rgba(23, 26, 32, 0.4); transform: scale(1.05); } }
-       
+        
         .ai-window { position: fixed; bottom: 110px; right: 30px; width: 380px; height: 600px; max-height: calc(100vh - 140px); background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 9998; display: flex; flex-direction: column; transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(0,0,0,0.08); overflow: hidden;}
         body.lang-ar .ai-window { right: auto; left: 30px; }
         .ai-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
-       
+        
         .ai-header { background: transparent; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05);}
         .ai-title { font-weight: 600; font-size: 1rem; color: #000; display: flex; align-items: center; gap: 10px;}
         .ai-title::before { content:''; display:inline-block; width:10px; height:10px; background: #34c759; border-radius:50%; box-shadow: 0 0 10px rgba(52, 199, 89, 0.5);}
         .ai-close { background: var(--bg-secondary); border: none; font-size: 1.2rem; cursor: pointer; color: #555; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: 0.3s;}
         .ai-close:hover { background: #eee; color: #000;}
-       
+        
         .ai-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; scrollbar-width: thin;}
         .ai-msg-wrap { display: flex; flex-direction: column; max-width: 88%; }
         .ai-msg-wrap.bot { align-self: flex-start; }
         .ai-msg-wrap.user { align-self: flex-end; align-items: flex-end; }
-       
+        
         .ai-msg { padding: 14px 18px; font-size: 0.95rem; line-height: 1.6; border-radius: 20px; word-wrap: break-word;}
         .ai-msg.bot { background: var(--bg-secondary); color: var(--text-main); border-bottom-left-radius: 4px; border: 1px solid var(--border-light);}
         body.lang-ar .ai-msg.bot { border-bottom-left-radius: 20px; border-bottom-right-radius: 4px;}
         .ai-msg.user { background: var(--accent-blue); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(10, 132, 255, 0.2);}
         body.lang-ar .ai-msg.user { border-bottom-right-radius: 20px; border-bottom-left-radius: 4px;}
-       
+        
         .msg-actions { display: flex; gap: 12px; margin-top: 8px; padding: 0 5px;}
         .msg-btn { background: none; border: none; color: #aaa; cursor: pointer; transition: 0.2s;}
         .msg-btn:hover { color: var(--text-main); transform: scale(1.1);}
-       
+        
         .ai-input-area { display: flex; padding: 15px 20px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05); align-items: center; gap: 12px;}
         .ai-input { flex: 1; background: var(--bg-secondary); border: 1px solid transparent; border-radius: 24px; padding: 12px 18px; font-size: 0.95rem; outline: none; font-family: inherit; transition: 0.3s;}
         .ai-input:focus { background: #fff; border-color: var(--border-light); box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
@@ -270,7 +275,7 @@
             background: #000; border: 1px solid #222; color: #555; padding: 18px 40px;
             font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 4px;
             cursor: pointer; transition: all 0.5s ease; border-radius: 0;
-            text-transform: uppercase;
+            text-transform: uppercase; margin-top: 20px;
         }
         .nfc-gateway-btn:hover {
             color: #fff; border-color: #555; box-shadow: 0 0 20px rgba(255,255,255,0.05);
@@ -284,17 +289,17 @@
             opacity: 0; transition: opacity 0.8s ease-in-out;
         }
         #matrix-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-       
+        
         .matrix-ui-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
             pointer-events: none;
             display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 4vw, 40px);
         }
-       
+        
         .matrix-header { display: flex; justify-content: space-between; align-items: flex-start; }
         .matrix-status { font-size: clamp(0.7rem, 2vw, 0.85rem); color: #0A84FF; letter-spacing: 2px; text-shadow: 0 0 10px rgba(10,132,255,0.5); transition: color 0.5s; }
         .matrix-controls-container { text-align: right; pointer-events: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 15px;}
-       
+        
         .matrix-abort-btn {
             background: rgba(0,0,0,0.5); border: 1px solid #555; color: #888;
             font-family: 'Space Mono', monospace; font-size: 0.7rem; padding: 6px 12px;
@@ -309,20 +314,20 @@
             opacity: 0; display: none; transition: opacity 0.8s ease;
         }
         .hx-stage-ui.active { display: block; opacity: 1; }
-       
+        
         .stage-title { font-family: 'Space Mono', monospace; font-size: 1.1rem; color: #0A84FF; letter-spacing: 4px; margin-bottom: 20px; font-weight: bold; }
         .stage-desc { font-family: 'Inter', sans-serif; font-size: clamp(1rem, 2.5vw, 1.2rem); color: #fff; line-height: 1.8; margin-bottom: 40px; }
         body.lang-ar .stage-desc { direction: rtl; }
         body.lang-en .stage-desc { direction: ltr; }
-       
+        
         /* Interactive Elements */
         .hx-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 15px 40px; font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer; transition: 0.3s; border-radius: 30px; text-transform: uppercase;}
         .hx-btn:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
-       
+        
         input[type=range].hx-slider { -webkit-appearance: none; width: 100%; max-width: 300px; background: transparent; margin: 20px auto; display: block;}
         input[type=range].hx-slider::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #ff003c; cursor: pointer; margin-top: -8px; box-shadow: 0 0 15px #ff003c;}
         input[type=range].hx-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
-       
+        
         .hold-btn { background: transparent; border: 2px solid #27c93f; color: #27c93f; padding: 20px; border-radius: 50%; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-family: 'Space Mono'; font-size: 0.7rem; letter-spacing: 1px; cursor: pointer; margin: 0 auto; transition: all 0.2s; user-select: none; -webkit-user-select: none;}
         .hold-btn:active { background: rgba(39, 201, 63, 0.2); transform: scale(0.9); box-shadow: inset 0 0 20px rgba(39,201,63,0.5); }
 
@@ -332,7 +337,6 @@
         .hook-body { color: #e0e0e0; font-size: 1.1rem; line-height: 1.9; text-align: justify; margin-bottom: 30px;}
         body.lang-ar .hook-body { direction: rtl; text-align: right; }
         body.lang-en .hook-body { direction: ltr; text-align: left; }
-        .hook-highlight { color: #fff; font-weight: bold; }
 
         /* ======== 3D BLUEPRINT & DEEP ARCHIVE ======== */
         #blueprint-section { position: relative; width: 100%; height: 100vh; background-color: var(--obsidian-black); overflow: hidden; font-family: 'Inter', sans-serif; color: var(--stark-white); }
@@ -347,40 +351,20 @@
         .marquee-container { width: 100%; overflow: hidden; white-space: nowrap; border-top: 1px dashed #333; border-bottom: 1px dashed #333; padding: 15px 0; margin-bottom: 80px; background: rgba(10, 132, 255, 0.02); }
         .marquee-text { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.85rem; color: #555; letter-spacing: 3px; text-transform: uppercase; animation: marquee 30s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
-       
+        
         /* ======== DEEP ARCHIVE: VIP LOCK SCREEN ======== */
         .archive-lock-ui {
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease;
-            border-top: 1px dashed rgba(10, 132, 255, 0.3);
-            padding-top: 20px;
+            display: none; flex-direction: column; gap: 15px; margin-top: 20px;
+            animation: fadeIn 0.5s ease; border-top: 1px dashed rgba(10, 132, 255, 0.3); padding-top: 20px;
         }
-        /* إظهار شاشة القفل فقط إذا كانت البطاقة في وضع التركيز ولم يتم فتحها بعد */
-        .archive-card.focused:not(.unlocked) .archive-lock-ui {
-            display: flex;
-        }
-        /* إخفاء الوصف الافتراضي وإظهاره فقط إذا تم الفتح */
+        .archive-card.focused:not(.unlocked) .archive-lock-ui { display: flex; }
         .archive-card.focused .archive-desc { display: none; }
         .archive-card.focused.unlocked .archive-desc {
-            display: block;
-            max-height: none;
-            opacity: 1;
-            margin-top: 20px;
-            animation: fadeIn 0.8s ease;
+            display: block; max-height: none; opacity: 1; margin-top: 20px; animation: fadeIn 0.8s ease;
         }
         .archive-pass-input {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Space Mono', monospace;
-            text-align: center;
-            outline: none;
-            transition: 0.3s;
+            background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px;
+            border-radius: 6px; font-family: 'Space Mono', monospace; text-align: center; outline: none; transition: 0.3s;
         }
         .archive-pass-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 15px rgba(10, 132, 255, 0.2); }
         .archive-decrypt-btn {
@@ -392,82 +376,51 @@
 
         /* ======== THE DEEP ARCHIVE: RESPONSIVE CARDS ======== */
         .archive-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 2%;
-            position: relative;
-            z-index: 20;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 100%; max-width: 1200px;
+            margin: 0 auto; padding: 40px 2%; position: relative; z-index: 20;
         }
-       
+        
         .archive-card {
-            width: 100%;
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(10, 132, 255, 0.2);
-            padding: 40px 30px;
-            border-radius: 12px;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            height: fit-content;
+            width: 100%; background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(10, 132, 255, 0.2); padding: 40px 30px; border-radius: 12px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); position: relative; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); height: fit-content;
         }
 
         @media (max-width: 900px) {
             .archive-grid {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                scrollbar-width: none;
-                -webkit-overflow-scrolling: touch;
-                padding-bottom: 40px;
+                display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+                scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 40px;
             }
             .archive-grid::-webkit-scrollbar { display: none; }
-            .archive-card {
-                flex: 0 0 85vw;
-                scroll-snap-align: center;
-            }
+            .archive-card { flex: 0 0 85vw; scroll-snap-align: center; }
         }
-       
+        
         .archive-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent-blue); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .archive-card:nth-child(2)::before { background: #00e5ff; }
-        .archive-card:nth-child(3)::before { background: #27c93f; }
+        .archive-card:nth-child(2):before { background: #00e5ff; }
+        .archive-card:nth-child(3):before { background: #27c93f; }
         .archive-card:hover::before { transform: scaleX(1); }
-       
+        
         .archive-status { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 20px; }
         .archive-title { font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 500; margin-bottom: 5px; color: #fff; letter-spacing: -0.5px; }
-       
         .card-prompt { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #555; letter-spacing: 3px; margin-top: 25px; transition: 0.3s; text-transform: uppercase; }
         .archive-card:hover .card-prompt { color: #0A84FF; }
-       
+        
         .archive-desc {
             font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #e0e0e0; line-height: 1.8;
-            max-height: 0; opacity: 0; overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         body.lang-ar .archive-desc { direction: rtl; text-align: justify; }
 
         .archive-grid.has-focus .archive-card:not(.focused) {
-            opacity: 0.3;
-            filter: blur(4px);
-            transform: scale(0.95);
+            opacity: 0.3; filter: blur(4px); transform: scale(0.95);
         }
         .archive-card.focused {
-            background: rgba(15, 15, 15, 0.98);
-            border-color: #0A84FF;
-            transform: scale(1.05);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.15);
-            z-index: 30;
-            max-height: 80vh;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,0.2) transparent;
+            background: rgba(15, 15, 15, 0.98); border-color: #0A84FF; transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 30px rgba(10, 132, 255, 0.15); z-index: 30;
+            max-height: 80vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
         }
-       
+        
         .archive-card.focused::-webkit-scrollbar { width: 4px; }
         .archive-card.focused::-webkit-scrollbar-track { background: transparent; }
         .archive-card.focused::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.2); border-radius: 4px; }
@@ -475,13 +428,9 @@
         .archive-card.focused:nth-child(2) { border-color: #00e5ff; }
         .archive-card.focused:nth-child(3) { border-color: #27c93f; }
 
-        .archive-card.focused .archive-desc {
-            max-height: none;
-            opacity: 1;
-            margin-top: 20px;
-        }
+        .archive-card.focused .archive-desc { max-height: none; opacity: 1; margin-top: 20px; }
         .archive-card.focused .card-prompt { display: none; }
-       
+        
         .kill-switch-container { text-align: center; margin-top: 100px; }
         .kill-switch { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #888; font-family: 'Space Mono', monospace; padding: 15px 40px; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 40px; }
         .kill-switch:hover { color: #fff; border-color: #fff; background: rgba(255,255,255,0.05); box-shadow: 0 0 20px rgba(255,255,255,0.1); }
@@ -499,78 +448,41 @@
             .hud-header div { text-align: center !important; }
             .matrix-controls-container { align-items: center; width: 100%;}
         }
+        
         #loading-3d-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99998;
-    pointer-events: none;
-    background-color: #050505;
-    transition: opacity 1.5s ease;
-}
-     /* ========================================== */
-/* ========================================== */
-/* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
-/* ========================================== */
-#ex-master-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #050505;
-    z-index: 999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    /* إبطاء اختفاء الشاشة السوداء في النهاية */
-    transition: opacity 1.5s ease-in-out, visibility 1.5s;
-}
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 99998; pointer-events: none; background-color: #050505; transition: opacity 1.5s ease;
+        }
 
-/* طبقة الوميض الأبيض الانتقالي */
-.ex-loader-flash {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #ffffff;
-    opacity: 0;
-    z-index: 2;
-    pointer-events: none;
-}
+        /* ========================================== */
+        /* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
+        /* ========================================== */
+        #ex-master-loader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #050505; z-index: 999999; display: flex; justify-content: center; align-items: center; overflow: hidden;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+        }
 
-/* تبطيء الوميض ليكون ناعماً وليس كالفلاش المزعج */
-.flash-active {
-    animation: flashToWhite 2s forwards ease-in-out;
-}
+        .ex-loader-flash {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; opacity: 0; z-index: 2; pointer-events: none;
+        }
 
-.ex-loader-content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    /* إبطاء اختفاء النص */
-    transition: opacity 1s;
-}
+        .flash-active { animation: flashToWhite 2s forwards ease-in-out; }
 
-@keyframes flashToWhite {
-    0% { opacity: 0; }
-    40% { opacity: 1; } /* يثبت اللون الأبيض قليلاً */
-    60% { opacity: 1; }
-    100% { opacity: 0; }
-}
+        .ex-loader-content {
+            position: relative; z-index: 3; text-align: center; color: #fff; font-family: 'Space Mono', monospace; transition: opacity 1s;
+        }
 
-@keyframes flashToWhite {
-    0% { opacity: 0; }
-    50% { opacity: 1; } /* تصبح الشاشة بيضاء بالكامل */
-    100% { opacity: 0; } /* تختفي لتكشف الموقع الأساسي */
-}  
+        /* Cleaned Duplicate Keyframes */
+        @keyframes flashToWhite {
+            0% { opacity: 0; }
+            40% { opacity: 1; }
+            60% { opacity: 1; }
+            100% { opacity: 0; }
+        }  
     </style>
 </head>
 <body class="lang-en">
-<!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
     <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
@@ -578,7 +490,57 @@
         <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
     </div>
 </div>
-<!-- نهاية شاشة التحميل السينمائية -->
+
+<div id="miracle-matrix-overlay">
+    <div id="matrix-canvas-container"></div>
+    
+    <div class="matrix-ui-layer">
+        <div class="matrix-header">
+            <div id="matrixStatus" class="matrix-status">SYSTEM: STANDBY</div>
+            <div class="matrix-controls-container">
+                <button class="matrix-abort-btn" onclick="closeHX5Journey(false)">ABORT SEQUENCE</button>
+            </div>
+        </div>
+
+        <div id="stage-1" class="hx-stage-ui active">
+            <div class="stage-title">STAGE 01 — INTENT</div>
+            <div class="stage-desc ar-only">لماذا يجب أن توجد هذه التجربة؟</div>
+            <div class="stage-desc en-only">Why must this experience exist?</div>
+            <button class="hx-btn" onclick="advanceStage(2)">BEGIN THE JOURNEY</button>
+        </div>
+
+        <div id="stage-2" class="hx-stage-ui">
+            <div class="stage-title">STAGE 02 — CONTEXT</div>
+            <div class="stage-desc ar-only">اضغط على العقدة المتوهجة لتحديد سياقك</div>
+            <div class="stage-desc en-only">Tap the glowing node to map your reality</div>
+        </div>
+
+        <div id="stage-3" class="hx-stage-ui">
+            <div class="stage-title">STAGE 03 — STIMULI</div>
+            <div class="stage-desc ar-only">اضبط شدة المحفزات الحسية</div>
+            <div class="stage-desc en-only">Tune the sensory intensity</div>
+            <input type="range" id="stimuliSlider" class="hx-slider" min="0" max="100" value="0" oninput="handleStimuli()">
+            <button class="hx-btn" onclick="advanceStage(4)">CONFIRM CALIBRATION</button>
+        </div>
+
+        <div id="stage-4" class="hx-stage-ui">
+            <div class="stage-title">STAGE 04 — INTERACTION</div>
+            <div class="stage-desc ar-only">استمر في الضغط لمزامنة نبضك مع الماتريكس</div>
+            <div class="stage-desc en-only">Hold to synchronize your pulse</div>
+            <button id="syncBtn" class="hold-btn">HOLD<br>TO SYNC</button>
+        </div>
+
+        <div id="stage-5" class="hx-stage-ui">
+            <div class="stage-title">STAGE 05 — IMPACT</div>
+            <div class="ultimate-hook">
+                <div class="hook-title">HX-5™ DEPLOYED</div>
+                <div class="hook-body ar-only">الأثر العاطفي الآن دائم. أنت جزء من الهندسة.</div>
+                <div class="hook-body en-only">The emotional residue is permanent.<br>You are now part of the architecture.</div>
+            </div>
+            <button class="hx-btn" onclick="closeHX5Journey(true)">RETURN TO SURFACE</button>
+        </div>
+    </div>
+</div>
 
     <nav class="top-nav" id="navbar" aria-label="Main Navigation">
         <a href="#" class="logo-text mono-text glitch-anim" aria-label="Hussam Experience Home">フサム | experience™</a>
@@ -604,14 +566,19 @@
             <div class="hero-content fade-in">
                 <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
                 <span class="tagline en-only">The line between ordinary and extraordinary</span>
-               
+                
                 <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
                 <h1 class="main-title en-only">Engineering Human Experiences</h1>
-               
+                
                 <p class="text-body ar-only" style="margin: 0 auto; color:#fff;">نحن لا نصمم منتجات..<br>نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
                 <p class="text-body en-only" style="margin: 0 auto; color:#fff;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
+                
+                <button class="nfc-gateway-btn" onclick="initiateHX5Journey()" aria-label="NFC VIP Gate">
+                    HX-5™ DEEP MATRIX
+                </button>
+
             </div>
-           
+            
             <div class="hero-video-controls" id="heroControls" aria-label="Video Controls"></div>
         </section>
 
@@ -662,7 +629,7 @@
                     <p class="text-body ar-only" style="margin:0;">الغاية تحدد الغرض الوجودي والبوصلة الأخلاقية للمشروع. نحن لا نصمم للمنفعة فقط؛ بل نؤسس القيمة الجوهرية التي تضمن أن كل تفاعل يخدم هدفاً أسمى ويلبي حاجة إنسانية أساسية.</p>
                     <p class="text-body en-only" style="margin:0;">Intent defines the existential purpose and the “moral compass” of the project. We do not design for utility alone; we establish the core value proposition that ensures every interaction serves a higher objective and resonates with a fundamental human need.</p>
                 </article>
-               
+                
                 <article class="pillar-box">
                     <h3 class="pillar-title en-only">Context</h3><h3 class="pillar-title ar-only">السياق</h3>
                     <span class="pillar-quote en-only">“Where, when, and under what conditions does it unfold?”</span><span class="pillar-quote ar-only">"أين ومتى وتحت أي ظروف تتكشف؟"</span>
@@ -795,7 +762,7 @@
                     <span class="page-num ar-only" style="margin-bottom: 10px; font-size: 0.75rem;">توقيع العلامة</span>
                     <span class="page-num en-only" style="margin-bottom: 10px; font-size: 0.75rem;">Brand Signature</span>
                     <h2 class="heading-md glitch-anim mono-text">フサム | experience™</h2>
-                   
+                    
                     <div style="margin-top: 40px; margin-bottom: 30px;">
                         <span class="mono-text" style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 2px; display: block; margin-bottom: 5px;">THE FOUNDER</span>
                         <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px;">Hussam Hassan Mohammed Tahiri</h3>
@@ -817,7 +784,7 @@
             <div class="container fade-in">
                 <h2 class="heading-md ar-only" style="text-align: center; margin-bottom: 40px;">الواجهة التنفيذية</h2>
                 <h2 class="heading-md en-only" style="text-align: center; margin-bottom: 40px;">Executive Dashboard</h2>
-               
+                
                 <div id="auth-view" class="login-wrapper" style="padding: 0;">
                     <div class="login-box">
                         <form onsubmit="handleFirebaseLogin(event)">
@@ -841,12 +808,12 @@
                                 <span class="en-only">Sign In</span>
                             </button>
                         </form>
-                       
+                        
                         <div class="divider">
                             <span class="ar-only">أو</span>
                             <span class="en-only">Or</span>
                         </div>
-                       
+                        
                         <div class="oauth-group">
                             <button class="btn-social" onclick="signInWithGoogle()" title="Google" aria-label="Sign in with Google">
                                 <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -937,7 +904,7 @@
                         <span class="archive-status" style="color:#0A84FF; border: 1px solid rgba(10,132,255,0.3); background: rgba(10,132,255,0.05);">ENCRYPTED // FILE 01</span>
                         <h3 class="archive-title">Project: TRACK35</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
-                       
+                        
                         <div class="archive-lock-ui" onclick="event.stopPropagation()">
                             <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
                             <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-1">
@@ -955,7 +922,7 @@
                         <span class="archive-status" style="color:#00e5ff; border: 1px solid rgba(0,229,255,0.3); background: rgba(0,229,255,0.05);">ENCRYPTED // FILE 02</span>
                         <h3 class="archive-title">Concept: LAB</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
-                       
+                        
                         <div class="archive-lock-ui" onclick="event.stopPropagation()">
                             <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
                             <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-2">
@@ -1047,7 +1014,7 @@
     <button class="ai-btn" onclick="toggleChat()" aria-label="Open Oracle Chat">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </button>
-   
+    
     <div class="ai-window" id="aiWindow" role="complementary" aria-label="Oracle Chat Interface">
         <header class="ai-header">
             <span class="ai-title">Ex Oracle</span>
@@ -1073,19 +1040,48 @@
         /**
          * ==============================================================================
          * EXCLUSIVE ARCHITECTURE: フサム | experience™
-         * ENGINEERING THE HUMAN EXPERIENCE - CLIENT SIDE SECURE SCRIPTS
+         * SYSTEM CORE & AUDIO ENGINE
          * ==============================================================================
          */
-
         const SECURE_TOKEN = "EX_SHIELD_99X";
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
+        
+        let audioContext;
+        function playMatrixSound(type) {
+            try {
+                if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') audioContext.resume();
+
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.connect(gain); 
+                gain.connect(audioContext.destination);
+                
+                if (type === 'chime') {
+                    osc.frequency.setValueAtTime(880, audioContext.currentTime); 
+                    osc.type = 'sine'; 
+                    gain.gain.setValueAtTime(0.18, audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(audioContext.currentTime + 0.5);
+                } else if (type === 'hum') {
+                    osc.frequency.setValueAtTime(58, audioContext.currentTime); 
+                    osc.type = 'sawtooth'; 
+                    gain.gain.setValueAtTime(0.07, audioContext.currentTime);
+                    gain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 2.5);
+                    osc.start();
+                    osc.stop(audioContext.currentTime + 3);
+                }
+            } catch (e) {
+                console.log("Audio play blocked or not supported until user interaction.");
+            }
+        }
 
         /**
          * ==============================================================================
          * PART 1: ANTI-INJECTION & XSS SANITIZATION (SECURITY PATCH)
          * ==============================================================================
          */
-       
         function sanitizeInput(input) {
             if (typeof input !== 'string') return '';
             return input
@@ -1097,12 +1093,6 @@
                 .replace(/\//g, "&#x2F;");
         }
 
-        /**
-         * ==============================================================================
-         * PART 1.5: THREAT DETECTION & TELEMETRY SYSTEM (WAF SENSORS)
-         * ==============================================================================
-         */
-       
         const THREAT_SIGNATURES = [
             /(<script.*?>.*?<\/script>)/gi,              
             /(UNION\s+SELECT|DROP\s+TABLE|--|;)/gi,      
@@ -1182,6 +1172,7 @@
         let syncInterval;
 
         function initiateHX5Journey() {
+            playMatrixSound('hum'); // SOUND TRIGGER
             document.body.style.overflow = 'hidden';
             const overlay = document.getElementById('miracle-matrix-overlay');
             overlay.style.display = 'block';
@@ -1197,7 +1188,7 @@
         function init3DHXMatrix() {
             const container = document.getElementById('matrix-canvas-container');
             container.innerHTML = '';
-           
+            
             hxScene = new THREE.Scene();
             hxScene.fog = new THREE.FogExp2(0x000000, 0.001);
 
@@ -1212,12 +1203,13 @@
             const geometry = new THREE.BufferGeometry();
             particlesCount = window.innerWidth < 768 ? 1500 : 4000;
             const positions = new Float32Array(particlesCount * 3);
-           
+            particleBasePositions = []; // Reset Array
+            
             for(let i = 0; i < particlesCount * 3; i++) {
                 positions[i] = (Math.random() - 0.5) * 2000;
                 particleBasePositions.push(positions[i]);
             }
-           
+            
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             const material = new THREE.PointsMaterial({
                 size: window.innerWidth < 768 ? 3 : 2,
@@ -1252,11 +1244,12 @@
         }
 
         function advanceStage(stageNum) {
+            playMatrixSound('chime'); // SOUND TRIGGER
             currentStage = stageNum;
             if (navigator.vibrate) navigator.vibrate(50);
 
             document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
-           
+            
             const activeUI = document.getElementById(`stage-${stageNum}`);
             if(activeUI) {
                 setTimeout(() => activeUI.classList.add('active'), 300);
@@ -1271,6 +1264,8 @@
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
                 document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
                 document.getElementById('matrixStatus').style.color = "#FFD700";
+            } else {
+                document.getElementById('matrixStatus').innerText = `SYSTEM: STAGE 0${stageNum}`;
             }
         }
 
@@ -1293,7 +1288,7 @@
         function handleStimuli() {
             const slider = document.getElementById('stimuliSlider');
             stimuliLevel = slider.value / 100;
-           
+            
             if(stimuliLevel > 0.1 && navigator.vibrate) {
                 navigator.vibrate(10);
             }
@@ -1308,7 +1303,7 @@
         function startSync(e) {
             e.preventDefault();
             if(currentStage !== 4) return;
-           
+            
             const btn = document.getElementById('syncBtn');
             syncInterval = setInterval(() => {
                 syncProgress += 2;
@@ -1338,16 +1333,16 @@
         function closeHX5Journey(scrollToForm = false) {
             const mainOverlay = document.getElementById('miracle-matrix-overlay');
             mainOverlay.style.opacity = '0';
-           
+            
             setTimeout(() => {
                 mainOverlay.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto'; // Re-enable normal scrolling
                 resetHXState();
-               
+                
                 if (scrollToForm) {
                     const portalSection = document.getElementById('portal');
                     portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                   
+                    
                     setTimeout(() => {
                         const emailInput = document.getElementById('userEmail');
                         if(emailInput) {
@@ -1391,7 +1386,7 @@
 
             if(hxParticles && hxParticles.geometry) {
                 const positions = hxParticles.geometry.attributes.position.array;
-               
+                
                 for(let i = 0; i < particlesCount; i++) {
                     const idx = i * 3;
                     let targetX = particleBasePositions[idx];
@@ -1427,7 +1422,7 @@
                         targetX = (targetX/len) * sphereRadius;
                         targetY = (targetY/len) * sphereRadius;
                         targetZ = (targetZ/len) * sphereRadius;
-                       
+                        
                         const scale = 1 + Math.sin(time * 2) * 0.05;
                         targetX *= scale; targetY *= scale; targetZ *= scale;
 
@@ -1484,7 +1479,7 @@
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
-           
+            
             if(heroVidEl && heroControls) {
                 allVids.forEach((vid, idx) => {
                     const dot = document.createElement('button');
@@ -1513,18 +1508,18 @@
             const body = document.body;
             body.classList.toggle('lang-ar');
             body.classList.toggle('lang-en');
-           
+            
             const isAr = body.classList.contains('lang-ar');
             document.documentElement.dir = isAr ? 'rtl' : 'ltr';
             document.documentElement.lang = isAr ? 'ar' : 'en';
-           
+            
             document.getElementById('userEmail').placeholder = isAr ? "البريد الإلكتروني" : "Email Address";
             document.getElementById('userName').placeholder = isAr ? "الاسم الكامل" : "Full Name";
             document.getElementById('userPhone').placeholder = isAr ? "رقم الجوال (مطلوب)" : "Phone Number (Required)";
             document.getElementById('consultText').placeholder = isAr ? "حدد هدفك الاستراتيجي هنا..." : "Outline your strategic objective here...";
             document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
             document.getElementById('adminPass').placeholder = isAr ? "أدخل الرمز السري" : "Enter Admin Token";
-           
+            
             const syncBtn = document.getElementById('syncBtn');
             if (syncBtn && syncProgress < 100) {
                  syncBtn.innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
@@ -1542,7 +1537,6 @@
          * PART 4: FIREBASE AUTH & EX ORACLE INTEGRATION
          * ==============================================================================
          */
-         
         async function signInWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             try {
@@ -1573,11 +1567,11 @@
             const btn = document.getElementById('loginBtn');
             const isAr = document.body.classList.contains('lang-ar');
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
-           
+            
             currentUser.Name = sanitizeInput(document.getElementById('userName').value);
             currentUser.Email = sanitizeInput(document.getElementById('userEmail').value);
             currentUser.Phone = sanitizeInput(document.getElementById('userPhone').value);
-           
+            
             try {
                 await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1610,7 +1604,7 @@
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
-               
+                
                 let html = '';
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
@@ -1632,16 +1626,16 @@
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
             const isAr = document.body.classList.contains('lang-ar');
-           
+            
             const rawMessage = document.getElementById('consultText').value;
-           
+            
             // WAF SENSOR CHECK
             if (await scanForThreats(rawMessage, "Consultation Form")) return;
 
             const message = sanitizeInput(rawMessage);
-           
+            
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
-           
+            
             try {
                 await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1663,16 +1657,16 @@
                     Email: currentUser?.Email || "Unknown",
                     IsCommand: isTerminal
                 });
-               
+                
                 const finalUrl = `${GOOGLE_SCRIPT_URL}?${urlParams.toString()}`;
 
                 const response = await fetch(finalUrl);
                 const data = await response.json();
 
                 if (loadingElement) loadingElement.remove();
-               
+                
                 const finalOutput = data.reply || data.error || "Unknown Core Error.";
-               
+                
                 if(isTerminal) printNexus(`> ${sanitizeInput(finalOutput)}`); else appendMsg(finalOutput, 'bot');
 
                 try {
@@ -1687,10 +1681,10 @@
                 console.error("MATRIX CORE ERROR:", error);
             }
         }
-       
+        
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
-       
+        
         async function handleNexus(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
@@ -1712,7 +1706,7 @@
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-       
+        
         function toggleChat() {
             chatWindow.classList.toggle('open');
             if(chatWindow.classList.contains('open') && chatBody.innerHTML === '') {
@@ -1724,14 +1718,14 @@
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
-           
+            
             let safeText = sanitizeInput(text);
             safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             safeText = safeText.replace(/\*(.*?)\*/g, '<em>$1</em>');
             safeText = safeText.replace(/\n/g, '<br>');
 
             let innerHTML = `<div class="ai-msg ${sender}">${safeText}</div>`;
-           
+            
             if (sender === 'bot' && text !== '...' && !text.includes('Processing') && !text.includes('المعالجة')) {
                 const safeTextForCopy = safeText.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 innerHTML += `
@@ -1741,7 +1735,7 @@
                     </button>
                 </div>`;
             }
-           
+            
             wrapDiv.innerHTML = innerHTML;
             chatBody.appendChild(wrapDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -1749,7 +1743,7 @@
         }
 
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
-       
+        
         async function sendChatMessage() {
             const rawText = aiInput.value.trim();
             if(!rawText) return;
@@ -1773,7 +1767,7 @@
         function checkPass() {
             const passInput = document.getElementById('adminPass').value.trim();
             const loginStatus = document.getElementById('loginStatus');
-           
+            
             const encodedInput = btoa(passInput);
             const EXPECTED_HASH = "Q0FMSUJVUk4tRVgxOTU5Lko=";
 
@@ -1852,7 +1846,7 @@
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
-           
+            
             const oldLoader = document.getElementById('blueprint-loader');
             if(oldLoader) {
                 oldLoader.style.opacity = '0';
@@ -1864,7 +1858,7 @@
 
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-           
+            
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
@@ -1878,21 +1872,21 @@
             const wireframes = [];
             const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
-           
+            
             for(let i=0; i<15; i++) {
                 const color = i % 3 === 0 ? 0x0A84FF : (i % 2 === 0 ? 0x00e5ff : 0xffffff);
                 const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.15 });
                 const wireframeBox = new THREE.LineSegments(edges, lineMat);
-               
+                
                 wireframeBox.position.set(
                     (Math.random() - 0.5) * 4000,
                     (Math.random() - 0.5) * 1000,
                     (Math.random() - 0.5) * 4000
                 );
-               
+                
                 const scale = Math.random() * 1.5 + 0.5;
                 wireframeBox.scale.set(scale, scale, scale);
-               
+                
                 wireframes.push({
                     mesh: wireframeBox,
                     rotationSpeedX: (Math.random() - 0.5) * 0.005,
@@ -1916,7 +1910,7 @@
 
             const clock = new THREE.Clock();
             let isVisible = true;
-           
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { isVisible = entry.isIntersecting; });
             }, { threshold: 0.05 });
@@ -2028,11 +2022,11 @@
         function focusArchiveCard(clickedCard) {
             const grid = document.getElementById('archiveGrid');
             const isAlreadyFocused = clickedCard.classList.contains('focused');
-           
+            
             document.querySelectorAll('.archive-card').forEach(card => {
                 card.classList.remove('focused');
             });
-           
+            
             if (!isAlreadyFocused) {
                 grid.classList.add('has-focus');
                 clickedCard.classList.add('focused');
@@ -2058,7 +2052,7 @@
         // ==========================================
         function unlockArchiveFile(cardId, expectedEncodedPass, btnElement) {
             event.stopPropagation();
-           
+            
             const inputEl = document.getElementById(`pass-card-${cardId}`);
             const errorEl = document.getElementById(`error-card-${cardId}`);
             const cardEl = btnElement.closest('.archive-card');
@@ -2069,13 +2063,13 @@
             if (encodedInput === expectedEncodedPass) {
                 errorEl.style.display = 'none';
                 cardEl.classList.add('unlocked');
-               
+                
                 const statusEl = cardEl.querySelector('.archive-status');
                 statusEl.innerText = 'DECRYPTED // VIP ACCESS GRANTED';
                 statusEl.style.color = '#FFD700';
                 statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                 statusEl.style.background = 'rgba(255, 215, 0, 0.05)';
-               
+                
                 if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
             } else {
                 errorEl.style.display = 'block';
@@ -2083,134 +2077,122 @@
                 if (navigator.vibrate) navigator.vibrate(200);
             }
         }
-    </script>
-    <script>
-    // ==============================================================
-    // EX-MASTER LOADER & 3D INITIALIZATION SCRIPT (ADJUSTED TIMING)
-    // ==============================================================
-   
-    function initExMasterLoader() {
-        const masterLoader = document.getElementById('ex-master-loader');
-        const flashLayer = document.getElementById('loader-flash');
-        const textLayer = document.getElementById('loader-text');
-       
-        if (masterLoader && typeof THREE !== 'undefined') {
-            const canvasContainer = document.createElement('div');
-            canvasContainer.style.position = 'absolute';
-            canvasContainer.style.top = '0';
-            canvasContainer.style.left = '0';
-            canvasContainer.style.width = '100%';
-            canvasContainer.style.height = '100%';
-            canvasContainer.style.zIndex = '1';
-            canvasContainer.style.pointerEvents = 'none';
-            masterLoader.appendChild(canvasContainer);
 
-            const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x050505, 0.0008);
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-           
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            canvasContainer.appendChild(renderer.domElement);
+        // ==============================================================
+        // EX-MASTER LOADER & 3D INITIALIZATION SCRIPT (MERGED & SECURED)
+        // ==============================================================
+        function initExMasterLoader() {
+            playMatrixSound('chime'); // Trigger Sound Effect
+            const masterLoader = document.getElementById('ex-master-loader');
+            const flashLayer = document.getElementById('loader-flash');
+            const textLayer = document.getElementById('loader-text');
+            
+            if (masterLoader && typeof THREE !== 'undefined') {
+                const canvasContainer = document.createElement('div');
+                canvasContainer.style.position = 'absolute';
+                canvasContainer.style.top = '0';
+                canvasContainer.style.left = '0';
+                canvasContainer.style.width = '100%';
+                canvasContainer.style.height = '100%';
+                canvasContainer.style.zIndex = '1';
+                canvasContainer.style.pointerEvents = 'none';
+                masterLoader.appendChild(canvasContainer);
 
-            // زيادة وضوح الشبكة الزرقاء (كانت 0.15 أصبحت 0.3)
-            const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
-            gridHelper.material.opacity = 0.3;
-            gridHelper.material.transparent = true;
-            gridHelper.position.y = -200;
-            scene.add(gridHelper);
+                const scene = new THREE.Scene();
+                scene.fog = new THREE.FogExp2(0x050505, 0.0008);
+                const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                canvasContainer.appendChild(renderer.domElement);
 
-            const particlesGeo = new THREE.BufferGeometry();
-            const ptCount = 2000;
-            const posArray = new Float32Array(ptCount * 3);
-            for(let i = 0; i < ptCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 5000;
-            }
-            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-           
-            // زيادة وضوح النقاط (كانت 0.5 أصبحت 0.8)
-            const particlesMat = new THREE.PointsMaterial({
-                size: 3, color: 0x0A84FF, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-            });
-            const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-            scene.add(particlesMesh);
+                const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
+                gridHelper.material.opacity = 0.3;
+                gridHelper.material.transparent = true;
+                gridHelper.position.y = -200;
+                scene.add(gridHelper);
 
-            // إضافة المجسمات (الصناديق الشبكية) التي طلبها حسام لتشبه قسم الكروت
-            const wireframes = [];
-            const boxGeo = new THREE.BoxGeometry(600, 600, 600);
-            const edges = new THREE.EdgesGeometry(boxGeo);
-           
-            for(let i=0; i<10; i++) { // رسم 10 مجسمات
-                const color = i % 2 === 0 ? 0x0A84FF : 0xffffff;
-                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 }); // وضوح المجسمات
-                const wireframeBox = new THREE.LineSegments(edges, lineMat);
-               
-                wireframeBox.position.set(
-                    (Math.random() - 0.5) * 3000,
-                    (Math.random() - 0.5) * 1000,
-                    (Math.random() - 0.5) * 3000
-                );
-               
-                const scale = Math.random() * 1.2 + 0.5;
-                wireframeBox.scale.set(scale, scale, scale);
-               
-                wireframes.push({
-                    mesh: wireframeBox,
-                    rotationSpeedX: (Math.random() - 0.5) * 0.01,
-                    rotationSpeedY: (Math.random() - 0.5) * 0.01
+                const particlesGeo = new THREE.BufferGeometry();
+                const ptCount = 2000;
+                const posArray = new Float32Array(ptCount * 3);
+                for(let i = 0; i < ptCount * 3; i++) {
+                    posArray[i] = (Math.random() - 0.5) * 5000;
+                }
+                particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                
+                const particlesMat = new THREE.PointsMaterial({
+                    size: 3, color: 0x0A84FF, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
                 });
-                scene.add(wireframeBox);
+                const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+                scene.add(particlesMesh);
+
+                const wireframes = [];
+                const boxGeo = new THREE.BoxGeometry(600, 600, 600);
+                const edges = new THREE.EdgesGeometry(boxGeo);
+                
+                for(let i=0; i<10; i++) { 
+                    const color = i % 2 === 0 ? 0x0A84FF : 0xffffff;
+                    const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 });
+                    const wireframeBox = new THREE.LineSegments(edges, lineMat);
+                    
+                    wireframeBox.position.set(
+                        (Math.random() - 0.5) * 3000,
+                        (Math.random() - 0.5) * 1000,
+                        (Math.random() - 0.5) * 3000
+                    );
+                    
+                    const scale = Math.random() * 1.2 + 0.5;
+                    wireframeBox.scale.set(scale, scale, scale);
+                    
+                    wireframes.push({
+                        mesh: wireframeBox,
+                        rotationSpeedX: (Math.random() - 0.5) * 0.01,
+                        rotationSpeedY: (Math.random() - 0.5) * 0.01
+                    });
+                    scene.add(wireframeBox);
+                }
+
+                const clock = new THREE.Clock();
+                let animationId;
+
+                function animate() {
+                    animationId = requestAnimationFrame(animate);
+                    const time = clock.getElapsedTime();
+                    camera.position.x = Math.sin(time * 0.05) * 1500;
+                    camera.position.y = Math.sin(time * 0.08) * 400 + 200;
+                    camera.position.z = Math.cos(time * 0.05) * 1500;
+                    camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
+                    particlesMesh.rotation.y = time * 0.02;
+                    
+                    wireframes.forEach(obj => {
+                        obj.mesh.rotation.x += obj.rotationSpeedX;
+                        obj.mesh.rotation.y += obj.rotationSpeedY;
+                    });
+
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                setTimeout(() => {
+                    if(textLayer) textLayer.style.opacity = '0';
+                }, 3500);
+
+                setTimeout(() => {
+                    if(flashLayer) flashLayer.classList.add('flash-active');
+                }, 4000);
+
+                setTimeout(() => {
+                    masterLoader.style.opacity = '0';
+                    masterLoader.style.visibility = 'hidden';
+                    cancelAnimationFrame(animationId);
+                    document.body.style.overflow = 'auto'; // Re-enable scroll when loader finishes
+                    document.body.style.overflowX = 'hidden';
+                }, 5500);
             }
-
-            const clock = new THREE.Clock();
-            let animationId;
-
-            function animate() {
-                animationId = requestAnimationFrame(animate);
-                const time = clock.getElapsedTime();
-                camera.position.x = Math.sin(time * 0.05) * 1500;
-                camera.position.y = Math.sin(time * 0.08) * 400 + 200;
-                camera.position.z = Math.cos(time * 0.05) * 1500;
-                camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
-                particlesMesh.rotation.y = time * 0.02;
-               
-                // تدوير المجسمات
-                wireframes.forEach(obj => {
-                    obj.mesh.rotation.x += obj.rotationSpeedX;
-                    obj.mesh.rotation.y += obj.rotationSpeedY;
-                });
-
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            // ---------------------------------------------------------
-            // التوقيتات الجديدة (تم التأخير لضمان الاستمتاع بالمشهد 3D)
-            // ---------------------------------------------------------
-
-            // إخفاء النص بعد 3.5 ثانية (كانت 2 ثانية)
-            setTimeout(() => {
-                if(textLayer) textLayer.style.opacity = '0';
-            }, 3500);
-
-            // بدء الوميض الأبيض بعد 4 ثوانٍ (كانت 2 ثانية)
-            setTimeout(() => {
-                if(flashLayer) flashLayer.classList.add('flash-active');
-            }, 4000);
-
-            // إخفاء اللودينج بالكامل والانتقال للموقع بعد 5.5 ثانية (كانت 2.7 ثانية)
-            // في هذه اللحظة يكون الوميض في قمة البياض، فيتم الانتقال بسلاسة
-            setTimeout(() => {
-                masterLoader.style.opacity = '0';
-                masterLoader.style.visibility = 'hidden';
-                cancelAnimationFrame(animationId);
-                document.body.style.overflow = 'auto';
-            }, 5500);
         }
-    }
 
-    window.addEventListener('load', initExMasterLoader);
-</script>
+        window.addEventListener('load', initExMasterLoader);
+    </script>
 </body>
 </html>
