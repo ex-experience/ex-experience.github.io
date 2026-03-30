@@ -2211,8 +2211,7 @@
     }
 
     window.addEventListener('load', initExMasterLoader);
-</script>
-    /**
+     /**
  * ==============================================================================
  * EX-TELEMETRY: LIVE SESSION MIRRORING (استخبارات النوايا)
  * ==============================================================================
@@ -2277,6 +2276,7 @@ window.addEventListener('beforeunload', () => {
     if (typeof db !== 'undefined') {
         db.collection("ActiveSessions").doc(sessionID).delete();
     }
-});
+});   
+</script>
 </body>
 </html>
