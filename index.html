@@ -500,88 +500,77 @@
             .matrix-controls-container { align-items: center; width: 100%;}
         }
         #loading-3d-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 99998;
-            pointer-events: none;
-            background-color: #050505;
-            transition: opacity 1.5s ease;
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99998;
+    pointer-events: none;
+    background-color: #050505;
+    transition: opacity 1.5s ease;
+}
+     /* ========================================== */
+/* ========================================== */
+/* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
+/* ========================================== */
+#ex-master-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505;
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* إبطاء اختفاء الشاشة السوداء في النهاية */
+    transition: opacity 1.5s ease-in-out, visibility 1.5s;
+}
 
-        /* ========================================== */
-        /* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
-        /* ========================================== */
-        #ex-master-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #050505;
-            z-index: 999999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: opacity 1.5s ease-in-out, visibility 1.5s;
-        }
+/* طبقة الوميض الأبيض الانتقالي */
+.ex-loader-flash {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+}
 
-        .ex-loader-flash {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #ffffff;
-            opacity: 0;
-            z-index: 2;
-            pointer-events: none;
-        }
+/* تبطيء الوميض ليكون ناعماً وليس كالفلاش المزعج */
+.flash-active {
+    animation: flashToWhite 2s forwards ease-in-out;
+}
 
-        .flash-active {
-            animation: flashToWhite 2s forwards ease-in-out;
-        }
+.ex-loader-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    /* إبطاء اختفاء النص */
+    transition: opacity 1s;
+}
 
-        .ex-loader-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            color: #fff;
-            font-family: 'Space Mono', monospace;
-            transition: opacity 1s;
-        }
+@keyframes flashToWhite {
+    0% { opacity: 0; }
+    40% { opacity: 1; } /* يثبت اللون الأبيض قليلاً */
+    60% { opacity: 1; }
+    100% { opacity: 0; }
+}
 
-        @keyframes flashToWhite {
-            0% { opacity: 0; }
-            40% { opacity: 1; }
-            60% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* ========================================== */
-        /* THE LAB SIMULATOR STYLES                   */
-        /* ========================================== */
-        .slider-group { margin-bottom: 20px; position: relative; }
-        .lab-label { display: block; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #888; margin-bottom: 8px; direction: rtl; text-align: right; letter-spacing: 1px; }
-
-        input[type=range].lab-slider { -webkit-appearance: none; width: 100%; background: transparent; display: block; }
-        input[type=range].lab-slider::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: #0A84FF; cursor: pointer; margin-top: -6px; box-shadow: 0 0 10px rgba(10,132,255,0.6); transition: 0.2s; }
-        input[type=range].lab-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
-        input[type=range].lab-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: #333; border-radius: 2px; }
-
-        input[type=range].force-multiplier::-webkit-slider-thumb { background: #FFD700; box-shadow: 0 0 15px rgba(255,215,0,0.6); }
-
-        .val-display { font-family: 'Space Mono', monospace; font-size: 0.9rem; color: #0A84FF; position: absolute; left: 0; top: 0; font-weight: bold; }
-
-        .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: rgba(10,132,255,0.3); opacity: 0.5; animation: scan 3s linear infinite; pointer-events: none; }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-
-        @media (max-width: 768px) {
-            .lab-simulator-grid { grid-template-columns: 1fr; gap: 20px; }
-        }
+@keyframes flashToWhite {
+    0% { opacity: 0; }
+    50% { opacity: 1; } /* تصبح الشاشة بيضاء بالكامل */
+    100% { opacity: 0; } /* تختفي لتكشف الموقع الأساسي */
+}  
     </style>
 </head>
 <body class="lang-en">
+<!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
     <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
@@ -589,7 +578,9 @@
         <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
     </div>
 </div>
-<nav class="top-nav" id="navbar" aria-label="Main Navigation">
+<!-- نهاية شاشة التحميل السينمائية -->
+
+    <nav class="top-nav" id="navbar" aria-label="Main Navigation">
         <a href="#" class="logo-text mono-text glitch-anim" aria-label="Hussam Experience Home">フサム | experience™</a>
         <div class="nav-icons">
             <button class="nav-icon" onclick="document.getElementById('portal').scrollIntoView();" title="Account" aria-label="Go to Dashboard">
@@ -660,8 +651,8 @@
                 <span class="page-num" style="text-align: center;">003</span>
                 <h2 class="heading-md ar-only" style="text-align: center;">منهجية HX-5™ | هندسة التجربة الإنسانية</h2>
                 <h2 class="heading-md en-only" style="text-align: center;">HX-5™ Methodology | Human Experience Engineering</h2>
-                <p class="text-body ar-only" style="text-align: center; margin: 0 auto 60px auto;">منهجية HX-5™ هي إطار معماري حصري مصمم لسد الفجوة بين الإدراك البشري والتنفيذ الاستراتيجي. إنها تتجاوز التصميم التقليدي لتهندس العلاقة الأساسية بين البشر والأنظمة من خلال خمس ركائز أساسية، يتم اختبارها وصقلها داخل المختبر:</p>
-                <p class="text-body en-only" style="text-align: center; margin: 0 auto 60px auto;">The HX-5™ Methodology is a proprietary architectural framework designed to bridge the gap between human perception and strategic execution. It moves beyond traditional design, engineering the fundamental relationship between humans and systems through five core pillars, tested and refined within The Lab:</p>
+                <p class="text-body ar-only" style="text-align: center; margin: 0 auto 60px auto;">منهجية HX-5™ هي إطار معماري حصري مصمم لسد الفجوة بين الإدراك البشري والتنفيذ الاستراتيجي. إنها تتجاوز التصميم التقليدي لتهندس العلاقة الأساسية بين البشر والأنظمة من خلال خمس ركائز أساسية:</p>
+                <p class="text-body en-only" style="text-align: center; margin: 0 auto 60px auto;">The HX-5™ Methodology is a proprietary architectural framework designed to bridge the gap between human perception and strategic execution. It moves beyond traditional design, engineering the fundamental relationship between humans and systems through five core pillars:</p>
 
                 <article class="pillar-box">
                     <h3 class="pillar-title ar-only">الغاية (Intent)</h3>
@@ -699,58 +690,7 @@
                     <p class="text-body en-only" style="margin:0;">The ultimate metric of success. We do not measure the duration of the event, but the “emotional residue” left behind. Impact is the lasting memory and the long-term cognitive imprint that transforms a temporary interaction into a permanent brand legacy.</p>
                     <p class="text-body ar-only" style="margin:0;">المقياس النهائي للنجاح. لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. الأثر هو الذاكرة والبصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
                 </article>
-
-                <article class="pillar-box" style="border-color: var(--accent-blue); background: #050505; padding: 40px 30px; border-radius: 16px; margin-top: 60px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <h3 class="pillar-title" style="color: var(--accent-blue); font-family: 'Space Mono', monospace; letter-spacing: 2px; font-size: 1.5rem;">[ THE LAB // محرك المعادلة الكبرى ]</h3>
-                        <p class="mono-text" style="color: #888; font-size: 0.85rem; letter-spacing: 1px;">Impact = ∫(M + P + C + Ψ) × E</p>
-                    </div>
-
-                    <div class="lab-simulator-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-                        <div class="lab-controls">
-                            <div class="slider-group">
-                                <label class="lab-label">الرياضيات [M] - مصفوفة التنبؤ السلوكي</label>
-                                <input type="range" id="var-m" class="lab-slider" min="0" max="100" value="50" oninput="calculateImpact()">
-                                <div class="val-display" id="val-m">50%</div>
-                            </div>
-                            
-                            <div class="slider-group">
-                                <label class="lab-label">الفيزياء [P] - المحفزات المادية (Lux, Hz)</label>
-                                <input type="range" id="var-p" class="lab-slider" min="0" max="100" value="50" oninput="calculateImpact()">
-                                <div class="val-display" id="val-p">50%</div>
-                            </div>
-                            
-                            <div class="slider-group">
-                                <label class="lab-label">الكيمياء [C] - المفاعل الداخلي (Dopamine)</label>
-                                <input type="range" id="var-c" class="lab-slider" min="0" max="100" value="50" oninput="calculateImpact()">
-                                <div class="val-display" id="val-c">50%</div>
-                            </div>
-                            
-                            <div class="slider-group">
-                                <label class="lab-label">علم النفس [Ψ] - المرساة الذهنية</label>
-                                <input type="range" id="var-psi" class="lab-slider" min="0" max="100" value="50" oninput="calculateImpact()">
-                                <div class="val-display" id="val-psi">50%</div>
-                            </div>
-
-                            <div class="slider-group" style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #333;">
-                                <label class="lab-label" style="color: #FFD700;">الهندسة [E] - معامل التنفيذ</label>
-                                <input type="range" id="var-e" class="lab-slider force-multiplier" min="0.1" max="10.0" step="0.1" value="1.0" oninput="calculateImpact()">
-                                <div class="val-display" id="val-e" style="color: #FFD700;">1.0x</div>
-                            </div>
-                        </div>
-
-                        <div class="lab-analysis-screen" style="background: #111; border: 1px solid #222; border-radius: 12px; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden;">
-                            <div class="scan-line"></div>
-                            <span class="mono-text" style="color: #555; font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 10px;">TOTAL IMPACT YIELD</span>
-                            <div id="impact-score" class="glitch-anim" style="font-size: 4rem; font-weight: 700; color: #fff; font-family: 'Space Mono', monospace; line-height: 1; text-shadow: 0 0 20px rgba(10,132,255,0.4);">0200</div>
-                            
-                            <div id="lab-diagnostic" style="margin-top: 30px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #aaa; line-height: 1.8; text-align: justify; direction: rtl;">
-                                جاري تهيئة النظام... بانتظار إدخال المتغيرات الأولية للتجربة.
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                </div>
+            </div>
         </section>
 
         <section class="content-section">
@@ -1140,6 +1080,12 @@
         const SECURE_TOKEN = "EX_SHIELD_99X";
         let currentUser = { Name: 'Unknown', Email: 'unknown@matrix', Phone: '' };
 
+        /**
+         * ==============================================================================
+         * PART 1: ANTI-INJECTION & XSS SANITIZATION (SECURITY PATCH)
+         * ==============================================================================
+         */
+       
         function sanitizeInput(input) {
             if (typeof input !== 'string') return '';
             return input
@@ -1151,6 +1097,12 @@
                 .replace(/\//g, "&#x2F;");
         }
 
+        /**
+         * ==============================================================================
+         * PART 1.5: THREAT DETECTION & TELEMETRY SYSTEM (WAF SENSORS)
+         * ==============================================================================
+         */
+       
         const THREAT_SIGNATURES = [
             /(<script.*?>.*?<\/script>)/gi,              
             /(UNION\s+SELECT|DROP\s+TABLE|--|;)/gi,      
@@ -1211,6 +1163,11 @@
             return false;
         }
 
+        /**
+         * ==============================================================================
+         * PART 2: THE 5-STAGE HX-5 MIRACLE MATRIX LOGIC (3D ENGINE)
+         * ==============================================================================
+         */
         let hxScene, hxCamera, hxRenderer, hxParticles;
         let hxAnimationId;
         let isHXActive = false;
@@ -1240,7 +1197,7 @@
         function init3DHXMatrix() {
             const container = document.getElementById('matrix-canvas-container');
             container.innerHTML = '';
-            
+           
             hxScene = new THREE.Scene();
             hxScene.fog = new THREE.FogExp2(0x000000, 0.001);
 
@@ -1255,12 +1212,12 @@
             const geometry = new THREE.BufferGeometry();
             particlesCount = window.innerWidth < 768 ? 1500 : 4000;
             const positions = new Float32Array(particlesCount * 3);
-            
+           
             for(let i = 0; i < particlesCount * 3; i++) {
                 positions[i] = (Math.random() - 0.5) * 2000;
                 particleBasePositions.push(positions[i]);
             }
-            
+           
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             const material = new THREE.PointsMaterial({
                 size: window.innerWidth < 768 ? 3 : 2,
@@ -1284,13 +1241,11 @@
             container.addEventListener('pointerdown', onMatrixTap, false);
 
             const syncBtn = document.getElementById('syncBtn');
-            if(syncBtn) {
-                syncBtn.addEventListener('mousedown', startSync);
-                syncBtn.addEventListener('touchstart', startSync);
-                syncBtn.addEventListener('mouseup', stopSync);
-                syncBtn.addEventListener('touchend', stopSync);
-                syncBtn.addEventListener('mouseleave', stopSync);
-            }
+            syncBtn.addEventListener('mousedown', startSync);
+            syncBtn.addEventListener('touchstart', startSync);
+            syncBtn.addEventListener('mouseup', stopSync);
+            syncBtn.addEventListener('touchend', stopSync);
+            syncBtn.addEventListener('mouseleave', stopSync);
 
             window.addEventListener('resize', onHXResize, false);
             animateHX();
@@ -1301,7 +1256,7 @@
             if (navigator.vibrate) navigator.vibrate(50);
 
             document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
-            
+           
             const activeUI = document.getElementById(`stage-${stageNum}`);
             if(activeUI) {
                 setTimeout(() => activeUI.classList.add('active'), 300);
@@ -1314,10 +1269,8 @@
                 targetNode.visible = false;
             } else if(stageNum === 5) {
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
-                if(document.getElementById('matrixStatus')) {
-                    document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
-                    document.getElementById('matrixStatus').style.color = "#FFD700";
-                }
+                document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
+                document.getElementById('matrixStatus').style.color = "#FFD700";
             }
         }
 
@@ -1339,9 +1292,8 @@
 
         function handleStimuli() {
             const slider = document.getElementById('stimuliSlider');
-            if(!slider) return;
             stimuliLevel = slider.value / 100;
-            
+           
             if(stimuliLevel > 0.1 && navigator.vibrate) {
                 navigator.vibrate(10);
             }
@@ -1356,7 +1308,7 @@
         function startSync(e) {
             e.preventDefault();
             if(currentStage !== 4) return;
-            
+           
             const btn = document.getElementById('syncBtn');
             syncInterval = setInterval(() => {
                 syncProgress += 2;
@@ -1386,16 +1338,16 @@
         function closeHX5Journey(scrollToForm = false) {
             const mainOverlay = document.getElementById('miracle-matrix-overlay');
             mainOverlay.style.opacity = '0';
-            
+           
             setTimeout(() => {
                 mainOverlay.style.display = 'none';
                 document.body.style.overflow = 'auto';
                 resetHXState();
-                
+               
                 if (scrollToForm) {
                     const portalSection = document.getElementById('portal');
                     portalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
+                   
                     setTimeout(() => {
                         const emailInput = document.getElementById('userEmail');
                         if(emailInput) {
@@ -1439,7 +1391,7 @@
 
             if(hxParticles && hxParticles.geometry) {
                 const positions = hxParticles.geometry.attributes.position.array;
-                
+               
                 for(let i = 0; i < particlesCount; i++) {
                     const idx = i * 3;
                     let targetX = particleBasePositions[idx];
@@ -1475,7 +1427,7 @@
                         targetX = (targetX/len) * sphereRadius;
                         targetY = (targetY/len) * sphereRadius;
                         targetZ = (targetZ/len) * sphereRadius;
-                        
+                       
                         const scale = 1 + Math.sin(time * 2) * 0.05;
                         targetX *= scale; targetY *= scale; targetZ *= scale;
 
@@ -1511,6 +1463,11 @@
             hxRenderer.setSize(window.innerWidth, window.innerHeight);
         }
 
+        /**
+         * ==============================================================================
+         * PART 3: DOM INITIALIZATION & UI INTERACTIVITY
+         * ==============================================================================
+         */
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
@@ -1527,7 +1484,7 @@
             const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
-            
+           
             if(heroVidEl && heroControls) {
                 allVids.forEach((vid, idx) => {
                     const dot = document.createElement('button');
@@ -1556,18 +1513,18 @@
             const body = document.body;
             body.classList.toggle('lang-ar');
             body.classList.toggle('lang-en');
-            
+           
             const isAr = body.classList.contains('lang-ar');
             document.documentElement.dir = isAr ? 'rtl' : 'ltr';
             document.documentElement.lang = isAr ? 'ar' : 'en';
-            
+           
             document.getElementById('userEmail').placeholder = isAr ? "البريد الإلكتروني" : "Email Address";
             document.getElementById('userName').placeholder = isAr ? "الاسم الكامل" : "Full Name";
             document.getElementById('userPhone').placeholder = isAr ? "رقم الجوال (مطلوب)" : "Phone Number (Required)";
             document.getElementById('consultText').placeholder = isAr ? "حدد هدفك الاستراتيجي هنا..." : "Outline your strategic objective here...";
             document.getElementById('aiInput').placeholder = isAr ? "رسالة..." : "Message...";
             document.getElementById('adminPass').placeholder = isAr ? "أدخل الرمز السري" : "Enter Admin Token";
-            
+           
             const syncBtn = document.getElementById('syncBtn');
             if (syncBtn && syncProgress < 100) {
                  syncBtn.innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
@@ -1580,6 +1537,12 @@
             else nav.classList.remove('scrolled');
         });
 
+        /**
+         * ==============================================================================
+         * PART 4: FIREBASE AUTH & EX ORACLE INTEGRATION
+         * ==============================================================================
+         */
+         
         async function signInWithGoogle() {
             const provider = new firebase.auth.GoogleAuthProvider();
             try {
@@ -1610,11 +1573,11 @@
             const btn = document.getElementById('loginBtn');
             const isAr = document.body.classList.contains('lang-ar');
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
-            
+           
             currentUser.Name = sanitizeInput(document.getElementById('userName').value);
             currentUser.Email = sanitizeInput(document.getElementById('userEmail').value);
             currentUser.Phone = sanitizeInput(document.getElementById('userPhone').value);
-            
+           
             try {
                 await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1647,7 +1610,7 @@
             try {
                 const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
-                
+               
                 let html = '';
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
@@ -1669,15 +1632,16 @@
             e.preventDefault();
             const btn = document.getElementById('consultBtn');
             const isAr = document.body.classList.contains('lang-ar');
-            
+           
             const rawMessage = document.getElementById('consultText').value;
-            
+           
+            // WAF SENSOR CHECK
             if (await scanForThreats(rawMessage, "Consultation Form")) return;
 
             const message = sanitizeInput(rawMessage);
-            
+           
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
-            
+           
             try {
                 await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
@@ -1699,16 +1663,16 @@
                     Email: currentUser?.Email || "Unknown",
                     IsCommand: isTerminal
                 });
-                
+               
                 const finalUrl = `${GOOGLE_SCRIPT_URL}?${urlParams.toString()}`;
 
                 const response = await fetch(finalUrl);
                 const data = await response.json();
 
                 if (loadingElement) loadingElement.remove();
-                
+               
                 const finalOutput = data.reply || data.error || "Unknown Core Error.";
-                
+               
                 if(isTerminal) printNexus(`> ${sanitizeInput(finalOutput)}`); else appendMsg(finalOutput, 'bot');
 
                 try {
@@ -1723,16 +1687,17 @@
                 console.error("MATRIX CORE ERROR:", error);
             }
         }
-        
+       
         const nexusOutput = document.getElementById('nexusOutput');
         const nexusInput = document.getElementById('nexusInput');
-        
+       
         async function handleNexus(e) {
             if(e.key === 'Enter') {
                 e.preventDefault();
                 const rawCmd = nexusInput.value.trim();
                 if(rawCmd === '') return;
 
+                // WAF SENSOR CHECK
                 if (await scanForThreats(rawCmd, "NEXUS Terminal")) return;
 
                 const cmd = sanitizeInput(rawCmd);
@@ -1747,7 +1712,7 @@
         const chatWindow = document.getElementById('aiWindow');
         const chatBody = document.getElementById('chatBody');
         const aiInput = document.getElementById('aiInput');
-        
+       
         function toggleChat() {
             chatWindow.classList.toggle('open');
             if(chatWindow.classList.contains('open') && chatBody.innerHTML === '') {
@@ -1759,14 +1724,14 @@
         function appendMsg(text, sender) {
             const wrapDiv = document.createElement('div');
             wrapDiv.className = `ai-msg-wrap ${sender}`;
-            
+           
             let safeText = sanitizeInput(text);
             safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             safeText = safeText.replace(/\*(.*?)\*/g, '<em>$1</em>');
             safeText = safeText.replace(/\n/g, '<br>');
 
             let innerHTML = `<div class="ai-msg ${sender}">${safeText}</div>`;
-            
+           
             if (sender === 'bot' && text !== '...' && !text.includes('Processing') && !text.includes('المعالجة')) {
                 const safeTextForCopy = safeText.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 innerHTML += `
@@ -1776,7 +1741,7 @@
                     </button>
                 </div>`;
             }
-            
+           
             wrapDiv.innerHTML = innerHTML;
             chatBody.appendChild(wrapDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
@@ -1784,11 +1749,12 @@
         }
 
         function handleChatEnter(e) { if(e.key === 'Enter') { e.preventDefault(); sendChatMessage(); } }
-        
+       
         async function sendChatMessage() {
             const rawText = aiInput.value.trim();
             if(!rawText) return;
 
+            // WAF SENSOR CHECK
             if (await scanForThreats(rawText, "Ex Oracle Chat")) return;
 
             const text = sanitizeInput(rawText);
@@ -1799,10 +1765,15 @@
             queryDeepMatrix(text, false, loadingElement);
         }
 
+        /**
+         * ==============================================================================
+         * PART 5: ZERO-TRUST ADMIN AUTHENTICATION
+         * ==============================================================================
+         */
         function checkPass() {
             const passInput = document.getElementById('adminPass').value.trim();
             const loginStatus = document.getElementById('loginStatus');
-            
+           
             const encodedInput = btoa(passInput);
             const EXPECTED_HASH = "Q0FMSUJVUk4tRVgxOTU5Lko=";
 
@@ -1873,10 +1844,15 @@
             }
         }
 
+        /**
+         * ==============================================================================
+         * PART 6: 3D BLUEPRINT ENGINE (DEEP ARCHIVE)
+         * ==============================================================================
+         */
         function init3DBlueprint() {
             const container = document.getElementById('canvas-container');
             if(!container) return;
-            
+           
             const oldLoader = document.getElementById('blueprint-loader');
             if(oldLoader) {
                 oldLoader.style.opacity = '0';
@@ -1888,7 +1864,7 @@
 
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            
+           
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
@@ -1902,21 +1878,21 @@
             const wireframes = [];
             const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
-            
+           
             for(let i=0; i<15; i++) {
                 const color = i % 3 === 0 ? 0x0A84FF : (i % 2 === 0 ? 0x00e5ff : 0xffffff);
                 const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.15 });
                 const wireframeBox = new THREE.LineSegments(edges, lineMat);
-                
+               
                 wireframeBox.position.set(
                     (Math.random() - 0.5) * 4000,
                     (Math.random() - 0.5) * 1000,
                     (Math.random() - 0.5) * 4000
                 );
-                
+               
                 const scale = Math.random() * 1.5 + 0.5;
                 wireframeBox.scale.set(scale, scale, scale);
-                
+               
                 wireframes.push({
                     mesh: wireframeBox,
                     rotationSpeedX: (Math.random() - 0.5) * 0.005,
@@ -1940,7 +1916,7 @@
 
             const clock = new THREE.Clock();
             let isVisible = true;
-            
+           
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { isVisible = entry.isIntersecting; });
             }, { threshold: 0.05 });
@@ -1982,6 +1958,11 @@
             });
         }
 
+        /**
+         * ==============================================================================
+         * PART 7: LEGAL MODALS & ARCHIVE CARDS BEHAVIOR
+         * ==============================================================================
+         */
         const legalData = {
             center: {
                 en: {
@@ -2047,11 +2028,11 @@
         function focusArchiveCard(clickedCard) {
             const grid = document.getElementById('archiveGrid');
             const isAlreadyFocused = clickedCard.classList.contains('focused');
-            
+           
             document.querySelectorAll('.archive-card').forEach(card => {
                 card.classList.remove('focused');
             });
-            
+           
             if (!isAlreadyFocused) {
                 grid.classList.add('has-focus');
                 clickedCard.classList.add('focused');
@@ -2072,9 +2053,12 @@
             }
         });
 
+        // ==========================================
+        // DEEP ARCHIVE: VIP UNLOCK LOGIC
+        // ==========================================
         function unlockArchiveFile(cardId, expectedEncodedPass, btnElement) {
             event.stopPropagation();
-            
+           
             const inputEl = document.getElementById(`pass-card-${cardId}`);
             const errorEl = document.getElementById(`error-card-${cardId}`);
             const cardEl = btnElement.closest('.archive-card');
@@ -2085,13 +2069,13 @@
             if (encodedInput === expectedEncodedPass) {
                 errorEl.style.display = 'none';
                 cardEl.classList.add('unlocked');
-                
+               
                 const statusEl = cardEl.querySelector('.archive-status');
                 statusEl.innerText = 'DECRYPTED // VIP ACCESS GRANTED';
                 statusEl.style.color = '#FFD700';
                 statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                 statusEl.style.background = 'rgba(255, 215, 0, 0.05)';
-                
+               
                 if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
             } else {
                 errorEl.style.display = 'block';
@@ -2099,64 +2083,6 @@
                 if (navigator.vibrate) navigator.vibrate(200);
             }
         }
-
-        // ==========================================
-        // HX-5 LAB EQUATION ENGINE
-        // ==========================================
-        function calculateImpact() {
-            const m = parseFloat(document.getElementById('var-m').value);
-            const p = parseFloat(document.getElementById('var-p').value);
-            const c = parseFloat(document.getElementById('var-c').value);
-            const psi = parseFloat(document.getElementById('var-psi').value);
-            const e = parseFloat(document.getElementById('var-e').value);
-
-            document.getElementById('val-m').innerText = m + '%';
-            document.getElementById('val-p').innerText = p + '%';
-            document.getElementById('val-c').innerText = c + '%';
-            document.getElementById('val-psi').innerText = psi + '%';
-            document.getElementById('val-e').innerText = e.toFixed(1) + 'x';
-
-            const baseIntegral = (m + p + c + psi); 
-            let impact = Math.floor(baseIntegral * e);
-
-            const scoreEl = document.getElementById('impact-score');
-            scoreEl.innerText = impact.toString().padStart(4, '0');
-            
-            let color = "#0A84FF";
-            let shadow = "rgba(10,132,255,0.4)";
-            if (impact > 2000) { color = "#FFD700"; shadow = "rgba(255,215,0,0.6)"; }
-            else if (impact < 500) { color = "#ff5f56"; shadow = "rgba(255,95,86,0.4)"; }
-            else if (impact >= 1000 && e >= 5) { color = "#27c93f"; shadow = "rgba(39,201,63,0.5)"; }
-            
-            scoreEl.style.color = color;
-            scoreEl.style.textShadow = `0 0 20px ${shadow}`;
-
-            generateDiagnostic(m, p, c, psi, e, impact);
-        }
-
-        function generateDiagnostic(m, p, c, psi, e, impact) {
-            const diagEl = document.getElementById('lab-diagnostic');
-            let analysis = "";
-
-            if (e < 1.0) {
-                analysis = "<strong style='color:#ff5f56;'>تحذير: انهيار الأثر.</strong> بالرغم من جودة العلوم الأساسية، معامل التنفيذ [E] الضعيف يدمر التجربة. العلم الجاف بدون لمسة بشرية احترافية لا يصنع سحراً.";
-            } else if (p > 80 && c < 40) {
-                analysis = "خلل في التفاعل: الفيزياء [P] تعمل بكثافة عالية (إضاءة وامضة، ترددات حادة) لكن الاستجابة الكيميائية [C] ضعيفة. نحتاج لضبط المدخلات لتحفيز الأدرينالين بشكل صحيح.";
-            } else if (impact > 3000) {
-                analysis = "<strong style='color:#FFD700;'>تطابق مثالي (لحظة تسليم الأداة):</strong><br> تفاعل متسلسل مكتمل. صدمة الوزن [M] مع الملمس البارد [P] حفزت إفراز الدوبامين [C] بامتياز. علم النفس [Ψ] قام بتثبيت الشعور بالسيادة والقوة. العميل الآن 'سفير أبدي'.";
-            } else if (psi < 30) {
-                analysis = "استجابة لحظية قوية، لكن المرساة الذهنية [Ψ] مفقودة. التجربة ستُنسى بمجرد خروج العميل لأن النماذج البدائية لم تُفعل لربط الكيمياء بالشعار.";
-            } else {
-                analysis = `المرحلة 0: الخارطة الرياضية محددة بنسبة ${m}%.<br>المرحلة 1: المحفزات المادية تنقل البيانات بقوة ${p}%.<br>المرحلة 2: إفرازات الهرمونات تتطابق بنسبة ${c}%.<br>التشخيص: التجربة في نطاق التطور المستقر، جاهزة للمعايرة والوصول لنقطة التكامل.`;
-            }
-
-            diagEl.innerHTML = analysis;
-        }
-
-        window.addEventListener('load', () => {
-            setTimeout(calculateImpact, 1000);
-        });
-
     </script>
     <script>
     // ==============================================================
@@ -2167,7 +2093,7 @@
         const masterLoader = document.getElementById('ex-master-loader');
         const flashLayer = document.getElementById('loader-flash');
         const textLayer = document.getElementById('loader-text');
-        
+       
         if (masterLoader && typeof THREE !== 'undefined') {
             const canvasContainer = document.createElement('div');
             canvasContainer.style.position = 'absolute';
@@ -2183,11 +2109,12 @@
             scene.fog = new THREE.FogExp2(0x050505, 0.0008);
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 6000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            
+           
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             canvasContainer.appendChild(renderer.domElement);
 
+            // زيادة وضوح الشبكة الزرقاء (كانت 0.15 أصبحت 0.3)
             const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.3;
             gridHelper.material.transparent = true;
@@ -2201,31 +2128,33 @@
                 posArray[i] = (Math.random() - 0.5) * 5000;
             }
             particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            
+           
+            // زيادة وضوح النقاط (كانت 0.5 أصبحت 0.8)
             const particlesMat = new THREE.PointsMaterial({
                 size: 3, color: 0x0A84FF, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
             });
             const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
             scene.add(particlesMesh);
 
+            // إضافة المجسمات (الصناديق الشبكية) التي طلبها حسام لتشبه قسم الكروت
             const wireframes = [];
             const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
-            
-            for(let i=0; i<10; i++) {
+           
+            for(let i=0; i<10; i++) { // رسم 10 مجسمات
                 const color = i % 2 === 0 ? 0x0A84FF : 0xffffff;
-                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 });
+                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 }); // وضوح المجسمات
                 const wireframeBox = new THREE.LineSegments(edges, lineMat);
-                
+               
                 wireframeBox.position.set(
                     (Math.random() - 0.5) * 3000,
                     (Math.random() - 0.5) * 1000,
                     (Math.random() - 0.5) * 3000
                 );
-                
+               
                 const scale = Math.random() * 1.2 + 0.5;
                 wireframeBox.scale.set(scale, scale, scale);
-                
+               
                 wireframes.push({
                     mesh: wireframeBox,
                     rotationSpeedX: (Math.random() - 0.5) * 0.01,
@@ -2245,7 +2174,8 @@
                 camera.position.z = Math.cos(time * 0.05) * 1500;
                 camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
                 particlesMesh.rotation.y = time * 0.02;
-                
+               
+                // تدوير المجسمات
                 wireframes.forEach(obj => {
                     obj.mesh.rotation.x += obj.rotationSpeedX;
                     obj.mesh.rotation.y += obj.rotationSpeedY;
@@ -2255,14 +2185,22 @@
             }
             animate();
 
+            // ---------------------------------------------------------
+            // التوقيتات الجديدة (تم التأخير لضمان الاستمتاع بالمشهد 3D)
+            // ---------------------------------------------------------
+
+            // إخفاء النص بعد 3.5 ثانية (كانت 2 ثانية)
             setTimeout(() => {
                 if(textLayer) textLayer.style.opacity = '0';
             }, 3500);
 
+            // بدء الوميض الأبيض بعد 4 ثوانٍ (كانت 2 ثانية)
             setTimeout(() => {
                 if(flashLayer) flashLayer.classList.add('flash-active');
             }, 4000);
 
+            // إخفاء اللودينج بالكامل والانتقال للموقع بعد 5.5 ثانية (كانت 2.7 ثانية)
+            // في هذه اللحظة يكون الوميض في قمة البياض، فيتم الانتقال بسلاسة
             setTimeout(() => {
                 masterLoader.style.opacity = '0';
                 masterLoader.style.visibility = 'hidden';
