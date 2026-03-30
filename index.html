@@ -39,9 +39,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    
     <script>
         // Firebase Configuration
@@ -164,6 +164,75 @@
         .list-clean li::before { content: '—'; position: absolute; left: 0; color: var(--text-main); font-weight: bold;}
         body.lang-ar .list-clean li { padding-left: 0; padding-right: 25px; }
         body.lang-ar .list-clean li::before { left: auto; right: 0; }
+
+        /* ========================================== */
+        /* ENGINEERING LAB STYLES                     */
+        /* ========================================== */
+        .lab-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            padding: 40px;
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            text-align: left;
+        }
+        body.lang-ar .lab-container { text-align: right; }
+        @media (max-width: 768px) {
+            .lab-container { grid-template-columns: 1fr; padding: 20px; }
+        }
+        .slider-group { margin-bottom: 25px; }
+        .slider-label-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+        .hx-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            outline: none;
+            direction: ltr; /* Force LTR for sliders to avoid visual bugs */
+        }
+        .hx-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--text-main);
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .hx-range::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--accent-blue);
+        }
+        .lab-result-box {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .chart-wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            height: 350px;
+            position: relative;
+        }
 
         /* DASHBOARD & FORMS */
         .login-wrapper { display: flex; justify-content: center; align-items: center; padding: 40px 20px;}
@@ -500,77 +569,65 @@
             .matrix-controls-container { align-items: center; width: 100%;}
         }
         #loading-3d-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99998;
-    pointer-events: none;
-    background-color: #050505;
-    transition: opacity 1.5s ease;
-}
-     /* ========================================== */
-/* ========================================== */
-/* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
-/* ========================================== */
-#ex-master-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #050505;
-    z-index: 999999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    /* إبطاء اختفاء الشاشة السوداء في النهاية */
-    transition: opacity 1.5s ease-in-out, visibility 1.5s;
-}
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99998;
+            pointer-events: none;
+            background-color: #050505;
+            transition: opacity 1.5s ease;
+        }
+        /* ========================================== */
+        /* EX-MASTER LOADER (BLACK TO WHITE SEQUENCE) */
+        /* ========================================== */
+        #ex-master-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #050505;
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s;
+        }
 
-/* طبقة الوميض الأبيض الانتقالي */
-.ex-loader-flash {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #ffffff;
-    opacity: 0;
-    z-index: 2;
-    pointer-events: none;
-}
+        .ex-loader-flash {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #ffffff;
+            opacity: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
 
-/* تبطيء الوميض ليكون ناعماً وليس كالفلاش المزعج */
-.flash-active {
-    animation: flashToWhite 2s forwards ease-in-out;
-}
+        .flash-active {
+            animation: flashToWhite 2s forwards ease-in-out;
+        }
 
-.ex-loader-content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    /* إبطاء اختفاء النص */
-    transition: opacity 1s;
-}
+        .ex-loader-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            transition: opacity 1s;
+        }
 
-@keyframes flashToWhite {
-    0% { opacity: 0; }
-    40% { opacity: 1; } /* يثبت اللون الأبيض قليلاً */
-    60% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-@keyframes flashToWhite {
-    0% { opacity: 0; }
-    50% { opacity: 1; } /* تصبح الشاشة بيضاء بالكامل */
-    100% { opacity: 0; } /* تختفي لتكشف الموقع الأساسي */
-}  
+        @keyframes flashToWhite {
+            0% { opacity: 0; }
+            40% { opacity: 1; } 
+            60% { opacity: 1; }
+            100% { opacity: 0; }
+        }  
     </style>
 </head>
 <body class="lang-en">
-<!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
     <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
@@ -578,9 +635,7 @@
         <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
     </div>
 </div>
-<!-- نهاية شاشة التحميل السينمائية -->
-
-    <nav class="top-nav" id="navbar" aria-label="Main Navigation">
+<nav class="top-nav" id="navbar" aria-label="Main Navigation">
         <a href="#" class="logo-text mono-text glitch-anim" aria-label="Hussam Experience Home">フサム | experience™</a>
         <div class="nav-icons">
             <button class="nav-icon" onclick="document.getElementById('portal').scrollIntoView();" title="Account" aria-label="Go to Dashboard">
@@ -690,7 +745,39 @@
                     <p class="text-body en-only" style="margin:0;">The ultimate metric of success. We do not measure the duration of the event, but the “emotional residue” left behind. Impact is the lasting memory and the long-term cognitive imprint that transforms a temporary interaction into a permanent brand legacy.</p>
                     <p class="text-body ar-only" style="margin:0;">المقياس النهائي للنجاح. لا نقيس مدة الحدث، بل "الأثر العاطفي" المتبقي. الأثر هو الذاكرة والبصمة المعرفية التي تحول التفاعل المؤقت إلى إرث دائم.</p>
                 </article>
-            </div>
+
+                <div class="divider mt-10" style="margin-top: 60px;">
+                    <span class="ar-only">مختبر هندسة التجربة</span>
+                    <span class="en-only">Experience Engineering Lab</span>
+                </div>
+
+                <div class="text-center mb-10">
+                    <p class="text-body ar-only" style="margin: 0 auto;">قم بمحاكاة بناء تجربة. عدّل مستويات الركائز الخمس لترى كيف يتشكل التوازن الهندسي والبصمة العاطفية.</p>
+                    <p class="text-body en-only" style="margin: 0 auto;">Simulate an experience build. Adjust the 5 pillars to see the engineering footprint and emotional balance.</p>
+                </div>
+
+                <div class="lab-container">
+                    <div class="lab-controls">
+                        <h3 class="heading-md ar-only" style="font-size: 1.2rem; margin-bottom: 25px;">متغيرات النظام (System Variables)</h3>
+                        <h3 class="heading-md en-only" style="font-size: 1.2rem; margin-bottom: 25px;">System Variables</h3>
+                        
+                        <div id="sliders-container">
+                            </div>
+
+                        <div class="lab-result-box">
+                            <span class="ar-only" style="color: var(--text-muted);">تحليل فوري للحالة:</span>
+                            <span class="en-only" style="color: var(--text-muted);">Live State Analysis:</span>
+                            <span id="analysis-result" style="font-weight: 600; color: var(--text-main); font-family: 'Space Mono', monospace;">...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-visuals flex justify-center items-center">
+                        <div class="chart-wrapper">
+                            <canvas id="hxRadarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                </div>
         </section>
 
         <section class="content-section">
@@ -971,7 +1058,7 @@
 
                     <div class="archive-card" style="border-color: rgba(39, 201, 63, 0.2);" onclick="focusArchiveCard(this)">
                         <span class="archive-status" style="color:#27c93f; border: 1px solid rgba(39,201,63,0.3); background: rgba(39,201,63,0.05);">ENCRYPTED // FILE 03</span>
-                        <h3 class="archive-title">System:   iNSTUDIO</h3>
+                        <h3 class="archive-title">System:  iNSTUDIO</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
 
                         <div class="archive-lock-ui" onclick="event.stopPropagation()">
@@ -1241,11 +1328,13 @@
             container.addEventListener('pointerdown', onMatrixTap, false);
 
             const syncBtn = document.getElementById('syncBtn');
-            syncBtn.addEventListener('mousedown', startSync);
-            syncBtn.addEventListener('touchstart', startSync);
-            syncBtn.addEventListener('mouseup', stopSync);
-            syncBtn.addEventListener('touchend', stopSync);
-            syncBtn.addEventListener('mouseleave', stopSync);
+            if (syncBtn) {
+                syncBtn.addEventListener('mousedown', startSync);
+                syncBtn.addEventListener('touchstart', startSync);
+                syncBtn.addEventListener('mouseup', stopSync);
+                syncBtn.addEventListener('touchend', stopSync);
+                syncBtn.addEventListener('mouseleave', stopSync);
+            }
 
             window.addEventListener('resize', onHXResize, false);
             animateHX();
@@ -1269,8 +1358,10 @@
                 targetNode.visible = false;
             } else if(stageNum === 5) {
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
-                document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
-                document.getElementById('matrixStatus').style.color = "#FFD700";
+                if (document.getElementById('matrixStatus')) {
+                    document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
+                    document.getElementById('matrixStatus').style.color = "#FFD700";
+                }
             }
         }
 
@@ -1313,7 +1404,6 @@
             syncInterval = setInterval(() => {
                 syncProgress += 2;
                 btn.style.background = `rgba(39, 201, 63, ${syncProgress/100})`;
-                const isAr = document.body.classList.contains('lang-ar');
                 btn.innerText = `${syncProgress}%`;
                 if (navigator.vibrate) navigator.vibrate(15);
 
@@ -1528,6 +1618,13 @@
             const syncBtn = document.getElementById('syncBtn');
             if (syncBtn && syncProgress < 100) {
                  syncBtn.innerHTML = isAr ? "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>" : "<span class='ar-only'>اضغط للتوحيد</span><span class='en-only'>HOLD<br>TO SYNC</span>";
+            }
+
+            // Update Lab Chart labels on language toggle
+            if (window.hxRadarChart) {
+                window.hxRadarChart.data.labels = labPillars.map(p => isAr ? p.ar : p.en);
+                window.hxRadarChart.update();
+                analyzeLabState();
             }
         }
 
@@ -2083,6 +2180,148 @@
                 if (navigator.vibrate) navigator.vibrate(200);
             }
         }
+
+        /**
+         * ==============================================================================
+         * PART 8: ENGINEERING LAB LOGIC (HX-5 RADAR)
+         * ==============================================================================
+         */
+        const labPillars = [
+            { en: 'Intent', ar: 'الغاية' },
+            { en: 'Context', ar: 'السياق' },
+            { en: 'Stimuli', ar: 'المحفزات' },
+            { en: 'Interaction', ar: 'التفاعل' },
+            { en: 'Impact', ar: 'الأثر' }
+        ];
+        let chartDataState = [80, 70, 85, 60, 90];
+        window.hxRadarChart = null;
+
+        function initLabSliders() {
+            const container = document.getElementById('sliders-container');
+            if(!container) return;
+            container.innerHTML = ''; 
+            
+            labPillars.forEach((pillar, index) => {
+                const sliderHTML = `
+                    <div class="slider-group">
+                        <div class="slider-label-row">
+                            <span>
+                                <span class="en-only">${pillar.en}</span>
+                                <span class="ar-only">${pillar.ar}</span>
+                            </span>
+                            <span id="val-${index}" style="color: var(--accent-blue); font-family: 'Space Mono', monospace;">${chartDataState[index]}%</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="${chartDataState[index]}" 
+                               class="hx-range" oninput="updateLabChart(${index}, this.value)">
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', sliderHTML);
+            });
+        }
+
+        function initLabChart() {
+            const ctxEl = document.getElementById('hxRadarChart');
+            if(!ctxEl) return;
+            const ctx = ctxEl.getContext('2d');
+            
+            const isAr = document.body.classList.contains('lang-ar');
+            const currentLabels = labPillars.map(p => isAr ? p.ar : p.en);
+
+            Chart.defaults.font.family = "'Inter', 'Space Mono', monospace";
+            Chart.defaults.color = '#888';
+
+            window.hxRadarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: currentLabels,
+                    datasets: [{
+                        label: 'Experience Footprint',
+                        data: chartDataState,
+                        backgroundColor: 'rgba(10, 132, 255, 0.1)',
+                        borderColor: '#0A84FF',
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#0A84FF',
+                        pointHoverBackgroundColor: '#0A84FF',
+                        pointHoverBorderColor: '#fff',
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.05)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                            pointLabels: {
+                                font: { size: 12, weight: '600' },
+                                color: '#171a20'
+                            },
+                            ticks: { display: false, min: 0, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(23, 26, 32, 0.9)',
+                            titleFont: { size: 13 },
+                            bodyFont: { size: 13 },
+                            padding: 10,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + '% Power';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateLabChart(index, value) {
+            document.getElementById(`val-${index}`).innerText = value + '%';
+            chartDataState[index] = parseInt(value);
+            
+            if(window.hxRadarChart) {
+                window.hxRadarChart.data.datasets[0].data = chartDataState;
+                window.hxRadarChart.update();
+            }
+            analyzeLabState();
+        }
+
+        function analyzeLabState() {
+            const avg = chartDataState.reduce((a, b) => a + b, 0) / 5;
+            const min = Math.min(...chartDataState);
+            const max = Math.max(...chartDataState);
+            const resultSpan = document.getElementById('analysis-result');
+            const isAr = document.body.classList.contains('lang-ar');
+            
+            if(!resultSpan) return;
+
+            if (avg > 85 && (max - min) < 20) {
+                resultSpan.innerText = isAr ? "تجربة متعالية (مثالية)" : "Transcendent (Optimal)";
+                resultSpan.style.color = "#27c93f"; 
+            } else if (avg < 40) {
+                resultSpan.innerText = isAr ? "تجربة سطحية (تحتاج هندسة)" : "Superficial (Needs Re-engineering)";
+                resultSpan.style.color = "#ff5f56"; 
+            } else if ((max - min) > 50) {
+                resultSpan.innerText = isAr ? "غير متوازنة (فجوة إدراكية)" : "Unbalanced (Cognitive Gap)";
+                resultSpan.style.color = "#ffbd2e"; 
+            } else {
+                resultSpan.innerText = isAr ? "تفاعلية اعتيادية" : "Standard Interaction";
+                resultSpan.style.color = "var(--accent-blue)";
+            }
+        }
+
+        window.addEventListener('load', () => {
+            initLabSliders();
+            initLabChart();
+            analyzeLabState();
+        });
+
     </script>
     <script>
     // ==============================================================
@@ -2114,7 +2353,6 @@
             renderer.setPixelRatio(window.devicePixelRatio);
             canvasContainer.appendChild(renderer.domElement);
 
-            // زيادة وضوح الشبكة الزرقاء (كانت 0.15 أصبحت 0.3)
             const gridHelper = new THREE.GridHelper(5000, 150, 0x0A84FF, 0x0A84FF);
             gridHelper.material.opacity = 0.3;
             gridHelper.material.transparent = true;
@@ -2129,21 +2367,19 @@
             }
             particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
            
-            // زيادة وضوح النقاط (كانت 0.5 أصبحت 0.8)
             const particlesMat = new THREE.PointsMaterial({
                 size: 3, color: 0x0A84FF, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
             });
             const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
             scene.add(particlesMesh);
 
-            // إضافة المجسمات (الصناديق الشبكية) التي طلبها حسام لتشبه قسم الكروت
             const wireframes = [];
             const boxGeo = new THREE.BoxGeometry(600, 600, 600);
             const edges = new THREE.EdgesGeometry(boxGeo);
            
-            for(let i=0; i<10; i++) { // رسم 10 مجسمات
+            for(let i=0; i<10; i++) {
                 const color = i % 2 === 0 ? 0x0A84FF : 0xffffff;
-                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 }); // وضوح المجسمات
+                const lineMat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.2 });
                 const wireframeBox = new THREE.LineSegments(edges, lineMat);
                
                 wireframeBox.position.set(
@@ -2175,7 +2411,6 @@
                 camera.lookAt(Math.sin(time * 0.07) * 500, Math.cos(time * 0.06) * 200, Math.cos(time * 0.07) * 500);
                 particlesMesh.rotation.y = time * 0.02;
                
-                // تدوير المجسمات
                 wireframes.forEach(obj => {
                     obj.mesh.rotation.x += obj.rotationSpeedX;
                     obj.mesh.rotation.y += obj.rotationSpeedY;
@@ -2185,22 +2420,14 @@
             }
             animate();
 
-            // ---------------------------------------------------------
-            // التوقيتات الجديدة (تم التأخير لضمان الاستمتاع بالمشهد 3D)
-            // ---------------------------------------------------------
-
-            // إخفاء النص بعد 3.5 ثانية (كانت 2 ثانية)
             setTimeout(() => {
                 if(textLayer) textLayer.style.opacity = '0';
             }, 3500);
 
-            // بدء الوميض الأبيض بعد 4 ثوانٍ (كانت 2 ثانية)
             setTimeout(() => {
                 if(flashLayer) flashLayer.classList.add('flash-active');
             }, 4000);
 
-            // إخفاء اللودينج بالكامل والانتقال للموقع بعد 5.5 ثانية (كانت 2.7 ثانية)
-            // في هذه اللحظة يكون الوميض في قمة البياض، فيتم الانتقال بسلاسة
             setTimeout(() => {
                 masterLoader.style.opacity = '0';
                 masterLoader.style.visibility = 'hidden';
