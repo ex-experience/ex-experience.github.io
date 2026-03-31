@@ -1,0 +1,12 @@
+# منع جميع المحركات من الدخول أو الفهرسة
+User-agent: *
+Disallow: /
+
+# منع عناكب الذكاء الاصطناعي (ChatGPT, CCBot) من سحب البيانات لتطوير النماذج
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+
+# تحديد مسار خريطة الموقع الوهمية (اختياري لزيادة التمويه)
+Sitemap: https://ex-experience.github.io/404

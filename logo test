@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フサム | experience ™ - Nexus Command</title>
+    
+    <!-- استدعاء خطوط العلامة التجارية (EX015 & EX016) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Mono&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* [EX014] لوحة الألوان الأساسية */
+        :root {
+            --obsidian-black: #020202;
+            --stark-white: #FFFFFF;
+            --executive-gray: #F9F9F9;
+            --nexus-blue: #0A84FF;
+            --glitch-red: #ff003c;
+            --glitch-cyan: #00e5ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: var(--obsidian-black);
+            overflow: hidden; /* يمنع التمرير للتركيز على السيادة */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--stark-white);
+            font-family: 'Inter', sans-serif;
+            cursor: crosshair; /* طابع تقني */
+        }
+
+        /* [EX018] التوجيه السينمائي - Film Grain & Vignette */
+        .cinematic-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            background: radial-gradient(circle at center, transparent 0%, rgba(2, 2, 2, 0.8) 100%);
+        }
+
+        .film-grain {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 49;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* [EX033] توقيع العلامة - النمط الخلفي (Pattern) */
+        .brand-pattern {
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            opacity: 0.03; /* شفافية عالية جداً للفخامة */
+            font-family: 'Space Mono', monospace; /* [EX016] الطباعة التقنية */
+            font-size: 11px;
+            line-height: 2;
+            color: var(--stark-white);
+            z-index: 1;
+            transform: rotate(-5deg) scale(1.1);
+            mask-image: radial-gradient(circle at center, transparent 20%, black 80%);
+            -webkit-mask-image: radial-gradient(circle at center, transparent 20%, black 80%);
+            pointer-events: none;
+            transition: transform 0.1s ease-out;
+        }
+
+        .pattern-text {
+            white-space: pre;
+            padding: 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* المركز السيادي للشعار */
+        .nexus-core {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* [EX012] تشريح الشعار */
+        .master-logo {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            font-size: 4.5vw; /* متجاوب مع الشاشة */
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            position: relative;
+            color: var(--stark-white);
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .master-logo .tm {
+            font-size: 0.4em;
+            vertical-align: super;
+            margin-left: -0.5em; /* القاعدة الثانية: TM ملتصقة */
+            letter-spacing: 0;
+            color: var(--glitch-red); /* لمسة تقنية بسيطة قبل الجليتش */
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        /* [EX013] الميزة التفاعلية (الجليتش - الاختلاج الرقمي) */
+        /* القاعدة: ثابت 95% من الوقت، يختلج لكسر النمط */
+        .glitch-effect {
+            position: relative;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--obsidian-black);
+            opacity: 0; /* مخفي في الحالة الطبيعية 95% */
+            pointer-events: none;
+        }
+
+        .glitch-effect.is-glitching::before {
+            opacity: 1;
+            left: -3px;
+            text-shadow: 2px 0 var(--glitch-red);
+            animation: glitch-anim-1 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .glitch-effect.is-glitching::after {
+            opacity: 1;
+            left: 3px;
+            text-shadow: -2px 0 var(--glitch-cyan);
+            animation: glitch-anim-2 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+
+        /* ومضة كهربائية لعقل المبتكر */
+        .spark {
+            position: absolute;
+            width: 120%;
+            height: 2px;
+            background: var(--stark-white);
+            box-shadow: 0 0 15px var(--nexus-blue), 0 0 30px var(--stark-white);
+            top: 50%;
+            left: -10%;
+            opacity: 0;
+            pointer-events: none;
+            transform: scaleX(0);
+        }
+
+        .glitch-effect.is-glitching .spark {
+            animation: spark-strike 0.3s ease-out forwards;
+        }
+
+        /* الركيزة التقنية السفلية (Oracle Terminal Text) */
+        .system-status {
+            margin-top: 30px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--executive-gray);
+            opacity: 0.4;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 6px; height: 6px;
+            background-color: var(--nexus-blue);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 8px var(--nexus-blue);
+            animation: pulse 2s infinite;
+        }
+
+        /* رسوم الحركة (Animations) */
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+            40% { clip-path: inset(40% 0 50% 0); transform: translate(-2px, 2px); }
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+            80% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 1px); }
+            100% { clip-path: inset(30% 0 50% 0); transform: translate(1px, -1px); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -1px); }
+            20% { clip-path: inset(30% 0 20% 0); transform: translate(-2px, 1px); }
+            40% { clip-path: inset(70% 0 10% 0); transform: translate(2px, -2px); }
+            60% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 2px); }
+            80% { clip-path: inset(50% 0 30% 0); transform: translate(1px, -1px); }
+            100% { clip-path: inset(5% 0 80% 0); transform: translate(-1px, 1px); }
+        }
+
+        @keyframes spark-strike {
+            0% { opacity: 1; transform: scaleX(0); }
+            50% { opacity: 1; transform: scaleX(1); }
+            100% { opacity: 0; transform: scaleX(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; filter: blur(10px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* تجاوب الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .master-logo { font-size: 8vw; }
+            .brand-pattern { font-size: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- التوجيه السينمائي -->
+    <div class="film-grain"></div>
+    <div class="cinematic-overlay"></div>
+
+    <!-- النمط الخلفي (المنتجات والتوقيعات) -->
+    <div class="brand-pattern" id="bg-pattern"></div>
+
+    <!-- المركز السيادي -->
+    <div class="nexus-core fade-in">
+        <!-- الشعار مع خاصية الجليتش -->
+        <!-- النص مدخل في data-text لنسخه في الطبقات الوهمية للحصول على تأثير الانحراف اللوني -->
+        <h1 class="master-logo glitch-effect" id="main-logo" data-text="フサム | experience™">
+            フサム | experience<span class="tm">™</span>
+            <div class="spark"></div>
+        </h1>
+        
+        <!-- سطر حالة النظام (Ex Oracle) -->
+        <div class="system-status">
+            <span class="status-dot"></span>NEXUS COMMAND // HX-5™ ACTIVE
+        </div>
+    </div>
+
+    <script>
+        // 1. توليد النمط الخلفي بناءً على توقيعات الفصل التاسع [033 GUIDE]
+        const patternContainer = document.getElementById('bg-pattern');
+        const signatures = [
+            "HX-5™ x 33GUIDE™", "INSTUDIO™", "DROPzero™", "INSIDE™",
+            "PRO | LAB™", "CONcept house 1991™", "Fearless, Relentless, True to you.",
+            "Engineering Human Experiences", "フサム フサム フサム"
+        ];
+        
+        let patternHTML = "";
+        // تكرار الكلمات لخلق مصفوفة خلفية ضخمة
+        for(let i=0; i<150; i++) {
+            const randomSig = signatures[Math.floor(Math.random() * signatures.length)];
+            patternHTML += `<span class="pattern-text">${randomSig}</span>`;
+        }
+        patternContainer.innerHTML = patternHTML;
+
+        // 2. التفاعل السينمائي (Parallax Effect) عند تحريك الفأرة
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20; // حركة طفيفة جداً للفخامة
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            patternContainer.style.transform = `rotate(-5deg) scale(1.1) translate(${x}px, ${y}px)`;
+        });
+
+        // 3. هندسة الـ Glitch (EX013)
+        // القاعدة: ثابت 95%، يختلج فجأة.
+        const logo = document.getElementById('main-logo');
+        
+        function triggerGlitch() {
+            // تفعيل الجليتش
+            logo.classList.add('is-glitching');
+            
+            // ومضة صوتية خفيفة جداً (اختياري - يفضل تركه صامت للفخامة أو استخدام تردد منخفض)
+            // إيقاف الجليتش بعد فترة قصيرة جداً (0.2 إلى 0.6 ثانية) ليحاكي الكهرباء أو شورت الدماغ
+            const glitchDuration = Math.random() * 400 + 200; 
+            
+            setTimeout(() => {
+                logo.classList.remove('is-glitching');
+                scheduleNextGlitch(); // جدولة الاختلاج القادم
+            }, glitchDuration);
+        }
+
+        function scheduleNextGlitch() {
+            // بما أن الشعار ثابت 95% من الوقت، فإن الفترة بين الجليتش والآخر يجب أن تكون طويلة (بين 4 و 10 ثواني)
+            const nextGlitchIn = Math.random() * 6000 + 4000;
+            setTimeout(triggerGlitch, nextGlitchIn);
+        }
+
+        // بدء الدورة العصبية
+        setTimeout(scheduleNextGlitch, 2000); // أول جليتش بعد ثانيتين من التحميل
+
+        // جليتش إضافي عند النقر (تفاعل بشري مباشر EX010)
+        logo.addEventListener('mousedown', () => {
+            logo.classList.add('is-glitching');
+        });
+        document.addEventListener('mouseup', () => {
+            logo.classList.remove('is-glitching');
+        });
+    </script>
+</body>
+</html>
