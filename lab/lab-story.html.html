@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FILE: TRACK 35 // DECRYPTED</title>
+    <title>FILE: THE LAB // DECRYPTED</title>
     <style>
         body, html {
             margin: 0; padding: 0; background: #000;
@@ -10,41 +10,35 @@
             color: #fff; overflow: hidden; height: 100vh;
         }
 
-        /* 1. إصلاح طبقة الفيديو (Z-index موجب لضمان ظهوره) */
         #story-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 1; /* تم التعديل هنا */
-            filter: brightness(0.5) contrast(1.2); 
+            object-fit: cover; z-index: 1; 
+            filter: brightness(0.4) contrast(1.2); 
         }
 
-        /* تأثير الغبار السينمائي */
         .noise {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_grain.jpg');
-            opacity: 0.05; pointer-events: none; z-index: 2; /* تم التعديل هنا */
+            opacity: 0.05; pointer-events: none; z-index: 2; 
         }
 
-        /* 2. منطقة السرد السينمائي */
         #narrative-container {
-            position: relative; z-index: 10; /* أعلى طبقة */
+            position: relative; z-index: 10;
             height: 100vh; display: flex; flex-direction: column;
             justify-content: center; padding-left: 10vw;
             background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, transparent 70%);
         }
 
-        /* عنوان الملف */
         .file-header {
             font-size: 1.2rem; letter-spacing: 5px; color: #ff003c;
             margin-bottom: 30px; opacity: 0;
             animation: fadeIn 2s forwards 1s; 
         }
 
-        /* الجمل السردية */
         .story-line {
             font-size: 2.5rem; font-weight: bold; letter-spacing: 2px;
             margin: 10px 0; overflow: hidden; white-space: nowrap;
-            width: 0; 
-            text-shadow: 0 0 15px rgba(0,0,0,0.8); /* ظل أسود لضمان القراءة فوق الفيديو */
+            width: 0; text-shadow: 0 0 15px rgba(0,0,0,0.8); 
         }
 
         .line-1 { animation: typeWriter 3s steps(40, end) forwards 2s; }
@@ -56,29 +50,21 @@
 
         .cursor::after { content: '|'; color: #00f3ff; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
-
-        /* رسالة الخطأ في حال لم يعمل الفيديو */
-        #video-error {
-            position: fixed; top: 20px; right: 20px; z-index: 100;
-            color: red; font-size: 0.8rem; display: none; background: rgba(0,0,0,0.8); padding: 10px;
-        }
     </style>
 </head>
 <body>
     
-    <div id="video-error">>> ERROR: FILE "ex1.mp4" NOT FOUND OR CORRUPTED (CHECK ONEDRIVE SYNC).</div>
-
-    <video id="story-bg" autoplay muted loop playsinline onerror="document.getElementById('video-error').style.display='block'">
-        <source src="ex1.mp4" type="video/mp4">
+    <video id="story-bg" autoplay muted loop playsinline>
+        <source src="ex002.mp4" type="video/mp4">
     </video>
     
     <div class="noise"></div>
 
     <div id="narrative-container">
-        <div class="file-header">>> DECRYPTING FILE: TRACK 35</div>
-        <div class="story-line line-1">Speed is not just velocity.</div>
-        <div class="story-line line-2">It is the silence between thoughts.</div>
-        <div class="story-line line-3 cursor">Welcome to the real experience.</div>
+        <div class="file-header">>> DECRYPTING FILE: THE LAB</div>
+        <div class="story-line line-1">We don't just design.</div>
+        <div class="story-line line-2">We extract the pure essence.</div>
+        <div class="story-line line-3 cursor">Engineering the Human Experience.</div>
     </div>
 
 </body>
