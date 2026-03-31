@@ -2,73 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FILE: TRACK 35 // DECRYPTED</title>
     <style>
-        body, html {
-            margin: 0; padding: 0; background: #000;
-            font-family: 'Courier New', Courier, monospace;
-            color: #fff; overflow: hidden; height: 100vh;
+        :root {
+            --cyan: #00f3ff;
+            --red: #ff003c;
+            --bg: #000;
         }
 
-        /* 1. إصلاح طبقة الفيديو (Z-index موجب لضمان ظهوره) */
+        body, html {
+            margin: 0; padding: 0; background: var(--bg);
+            font-family: 'Courier New', Courier, monospace;
+            color: #fff; overflow-x: hidden; height: 100vh;
+        }
+
+        /* طبقة الفيديو بخاصية التكيف التام */
         #story-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 1; /* تم التعديل هنا */
-            filter: brightness(0.5) contrast(1.2); 
+            object-fit: cover; z-index: 1;
+            filter: brightness(0.4) contrast(1.3);
         }
 
-        /* تأثير الغبار السينمائي */
+        /* الغبار السينمائي */
         .noise {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_grain.jpg');
-            opacity: 0.05; pointer-events: none; z-index: 2; /* تم التعديل هنا */
+            opacity: 0.06; pointer-events: none; z-index: 2;
         }
 
-        /* 2. منطقة السرد السينمائي */
+        /* حاوية السرد - مصممة للتكيف مع الجوال والشاشات العملاقة */
         #narrative-container {
-            position: relative; z-index: 10; /* أعلى طبقة */
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; padding-left: 10vw;
-            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, transparent 70%);
+            position: relative; z-index: 10;
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding: 5vw 10vw;
+            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 100%);
+            box-sizing: border-box;
         }
 
-        /* عنوان الملف */
         .file-header {
-            font-size: 1.2rem; letter-spacing: 5px; color: #ff003c;
-            margin-bottom: 30px; opacity: 0;
-            animation: fadeIn 2s forwards 1s; 
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            letter-spacing: 5px; color: var(--red);
+            margin-bottom: 40px; opacity: 0;
+            animation: fadeIn 2s forwards 1s;
         }
 
-        /* الجمل السردية */
-        .story-line {
-            font-size: 2.5rem; font-weight: bold; letter-spacing: 2px;
-            margin: 10px 0; overflow: hidden; white-space: nowrap;
-            width: 0; 
-            text-shadow: 0 0 15px rgba(0,0,0,0.8); /* ظل أسود لضمان القراءة فوق الفيديو */
+        /* النصوص السينمائية المتكيفة (تتغير أحجامها حسب الشاشة) */
+        .story-text {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: bold; line-height: 1.6;
+            letter-spacing: 2px; max-width: 900px;
+            text-shadow: 0 5px 20px rgba(0,0,0,1);
+            margin-bottom: 30px;
         }
 
-        .line-1 { animation: typeWriter 3s steps(40, end) forwards 2s; }
-        .line-2 { animation: typeWriter 3s steps(40, end) forwards 6s; }
-        .line-3 { animation: typeWriter 3s steps(40, end) forwards 10s; color: #00f3ff; }
+        /* تنسيقات الكلمات المفتاحية */
+        .highlight-cyan { color: var(--cyan); text-shadow: 0 0 15px rgba(0, 243, 255, 0.4); }
+        .highlight-red { color: var(--red); text-shadow: 0 0 15px rgba(255, 0, 60, 0.4); }
+        
+        /* مؤشر الكتابة */
+        .cursor {
+            display: inline-block; width: 10px; height: clamp(1.2rem, 3vw, 2.5rem);
+            background-color: var(--cyan); vertical-align: middle;
+            animation: blink 1s infinite; margin-left: 5px;
+        }
 
         @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes typeWriter { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .cursor::after { content: '|'; color: #00f3ff; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* رسالة الخطأ في حال لم يعمل الفيديو */
-        #video-error {
-            position: fixed; top: 20px; right: 20px; z-index: 100;
-            color: red; font-size: 0.8rem; display: none; background: rgba(0,0,0,0.8); padding: 10px;
+        /* تعديلات خاصة بشاشات الجوال العمودية */
+        @media (max-width: 768px) {
+            #narrative-container { padding: 10vw 5vw; background: rgba(0,0,0,0.7); }
+            .story-text { line-height: 1.8; letter-spacing: 1px; }
         }
     </style>
 </head>
 <body>
-    
-    <div id="video-error">>> ERROR: FILE "ex1.mp4" NOT FOUND OR CORRUPTED (CHECK ONEDRIVE SYNC).</div>
 
-    <video id="story-bg" autoplay muted loop playsinline onerror="document.getElementById('video-error').style.display='block'">
+    <video id="story-bg" autoplay muted loop playsinline>
         <source src="ex1.mp4" type="video/mp4">
     </video>
     
@@ -76,10 +87,76 @@
 
     <div id="narrative-container">
         <div class="file-header">>> DECRYPTING FILE: TRACK 35</div>
-        <div class="story-line line-1">Speed is not just velocity.</div>
-        <div class="story-line line-2">It is the silence between thoughts.</div>
-        <div class="story-line line-3 cursor">Welcome to the real experience.</div>
+        <div id="text-output" class="story-text"></div>
+        <div class="cursor" id="cursor" style="display: none;"></div>
     </div>
 
+    <script>
+        // مصفوفة السرد السينمائي - يمكنك تعديلها أو إضافة سطور جديدة
+        const storyLines = [
+            "Speed is not just velocity. It is the silence between thoughts.",
+            "<br><br>",
+            "The project promises to deliver a first-of-its-kind <span class='highlight-cyan'>\"cinematic visual epic\"</span> to dominate global platforms...",
+            "<br><br>",
+            "Affirming that <span class='highlight-red'>Vision 2030</span> is not just a race, but the birth of a new generation and a national industry that rivals <span class='highlight-cyan'>Hollywood</span> in presentation, the <span class='highlight-cyan'>Nürburgring</span> in performance, and <span class='highlight-cyan'>Japan</span> in technology.",
+            "<br><br>",
+            "Let's break expectations together... Join the world's elite in shaping the future.",
+            "<br><br>",
+            "<span class='highlight-red'>This is real フサム | experience™️</span>"
+        ];
+
+        const textOutput = document.getElementById('text-output');
+        const cursor = document.getElementById('cursor');
+        
+        let lineIndex = 0;
+        let charIndex = 0;
+        let isTag = false;
+        let currentHTML = "";
+
+        // محرك الطباعة الذكي (يتعرف على أكواد HTML لضمان تلوين الكلمات)
+        function typeWriter() {
+            if (lineIndex < storyLines.length) {
+                cursor.style.display = "inline-block";
+                let currentLine = storyLines[lineIndex];
+
+                // إذا كان السطر عبارة عن مسافة (Break)
+                if (currentLine === "<br><br>") {
+                    currentHTML += currentLine;
+                    textOutput.innerHTML = currentHTML;
+                    lineIndex++;
+                    setTimeout(typeWriter, 500); // وقفة درامية بين الفقرات
+                    return;
+                }
+
+                // كتابة الحروف
+                if (charIndex < currentLine.length) {
+                    let char = currentLine.charAt(charIndex);
+                    
+                    // حماية أكواد الـ HTML لكي لا تطبع كحروف
+                    if (char === '<') isTag = true;
+                    if (char === '>') isTag = false;
+
+                    currentHTML += char;
+                    textOutput.innerHTML = currentHTML;
+                    charIndex++;
+
+                    // سرعة الكتابة (أسرع للأكواد، طبيعية للحروف)
+                    let speed = isTag ? 0 : 30; 
+                    setTimeout(typeWriter, speed);
+                } else {
+                    // الانتقال للسطر التالي
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 800); // وقفة بعد كل جملة
+                }
+            } else {
+                // انتهاء السرد
+                cursor.classList.add('blinking');
+            }
+        }
+
+        // بدء السرد بعد ثانيتين من فتح الملف
+        setTimeout(typeWriter, 2000);
+    </script>
 </body>
 </html>
