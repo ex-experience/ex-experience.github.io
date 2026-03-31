@@ -2078,8 +2078,16 @@
                 statusEl.innerText = 'DECRYPTED // VIP ACCESS GRANTED';
                 // كود الانتقال للملف السينمائي بعد ثانية ونصف من إدخال الرمز الصحيح
                 setTimeout(() => {
-                window.location.href = "NEXUS_FINAL/archive.html"; 
-                }, 1500);
+// فحص رقم الكرت لتوجيهه للبعد السينمائي الصحيح
+        if (cardId == 1 || cardId == '01') {
+            window.location.href = "NEXUS_FINAL/archive.html"; // مسار TRACK 35
+        } else if (cardId == 2 || cardId == '02') {
+            window.location.href = "NEXUS_FINAL/lab/lab-archive.html"; // مسار THE LAB
+        } else if (cardId == 3 || cardId == '03') {
+            window.location.href = "NEXUS_FINAL/iN/studio-archive.html"; // مسار iNSTUDIO
+        } else {
+            window.location.href = "NEXUS_FINAL/archive.html"; // مسار احتياطي
+        }                }, 1500);
                 statusEl.style.color = '#FFD700';
                 statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                 statusEl.style.background = 'rgba(255, 215, 0, 0.05)';
