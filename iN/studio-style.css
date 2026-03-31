@@ -1,5 +1,5 @@
 :root {
-    --gold: #d4af37; /* لون ذهب روليكس */
+    --gold: #d4af37;
     --bg: #000000;
 }
 
@@ -9,7 +9,6 @@ body, html {
     color: #fff; overflow: hidden; height: 100vh;
 }
 
-/* فيديو الخلفية لمحرك الـ 3D */
 #drone-bg {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     object-fit: cover; z-index: -2;

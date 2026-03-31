@@ -3,25 +3,20 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#dimension-engine'), alpha: true, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-// المجسم المعملي (شكل ألماسي Octahedron)
 const geometry = new THREE.OctahedronGeometry(2, 0);
 
-// (1D) المرحلة 1: جزيئات الاستخلاص
 const pointsMat = new THREE.PointsMaterial({ color: 0x00f3ff, size: 0.05, transparent: true, opacity: 1 });
 const points = new THREE.Points(geometry, pointsMat);
 scene.add(points);
 
-// (2D) المرحلة 2: الشبكة التحليلية
 const wireMat = new THREE.MeshBasicMaterial({ color: 0x00f3ff, wireframe: true, transparent: true, opacity: 0 });
 const wireframe = new THREE.Mesh(geometry, wireMat);
 scene.add(wireframe);
 
-// (3D) المرحلة 3: المادة المكتملة
 const solidMat = new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0 });
 const solid = new THREE.Mesh(geometry, solidMat);
 scene.add(solid);
 
-// إضاءة تفاعلية للمختبر (أحمر)
 const pointLight = new THREE.PointLight(0xff003c, 5, 50); 
 pointLight.position.set(5, 5, 5);
 scene.add(pointLight);
@@ -31,7 +26,6 @@ scene.add(ambientLight);
 
 camera.position.z = 7;
 
-// دوران المجسم
 function animate() {
     requestAnimationFrame(animate);
     points.rotation.y += 0.002; points.rotation.x += 0.002;
@@ -62,7 +56,6 @@ function evolveDimension() {
         btn.style.pointerEvents = "none";
         currentPhase = 3;
 
-        // الانتقال لملف القصة
         setTimeout(() => {
             gsap.to('body', { backgroundColor: '#000', duration: 1.5 });
             gsap.to('#hud-interface', { opacity: 0, duration: 1.5 });
@@ -75,7 +68,6 @@ function evolveDimension() {
     }
 }
 
-// تعديل الأبعاد عند تغيير حجم الشاشة
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
