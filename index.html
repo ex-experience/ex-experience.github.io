@@ -955,7 +955,7 @@
                         <span class="archive-status" style="color:#00e5ff; border: 1px solid rgba(0,229,255,0.3); background: rgba(0,229,255,0.05);">ENCRYPTED // FILE 02</span>
                         <h3 class="archive-title">Concept: LAB</h3>
                         <p class="card-prompt glitch-anim">[ TAP TO DECRYPT ]</p>
-                        
+                       
                         <div class="archive-lock-ui" onclick="event.stopPropagation()">
                             <span class="mono-text" style="font-size:0.75rem; color:#888; text-align:center;">[ VIP CLEARANCE REQUIRED ]</span>
                             <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-2">
@@ -1788,9 +1788,7 @@
                 loginStatus.style.color = "red";
                 // كود الانتقال للملف السينمائي بعد ثانية ونصف من إدخال الرمز الصحيح
                 setTimeout(() => {
-                window.location.href = "NEXUS_FINAL/archive.html";
-                window.location.href = "lab/lab-archive.html";
-                window.location.href = "iN/studio-archive.html"; 
+                window.location.href = "NEXUS_FINAL/archive.html"; 
                 }, 1500);
                 document.getElementById('adminPass').value = '';
                 document.getElementById('adminPass').disabled = true;
@@ -2080,9 +2078,7 @@
                 statusEl.innerText = 'DECRYPTED // VIP ACCESS GRANTED';
                 // كود الانتقال للملف السينمائي بعد ثانية ونصف من إدخال الرمز الصحيح
                 setTimeout(() => {
-                window.location.href = "NEXUS_FINAL/archive.html";
-                window.location.href = "lab/lab-archive.html";
-                window.location.href = "iN/studio-archive.html";
+                window.location.href = "NEXUS_FINAL/archive.html"; 
                 }, 1500);
                 statusEl.style.color = '#FFD700';
                 statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
