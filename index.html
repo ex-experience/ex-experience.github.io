@@ -1786,6 +1786,10 @@
             } else {
                 loginStatus.innerText = "ACCESS DENIED. INCIDENT LOGGED.";
                 loginStatus.style.color = "red";
+                // كود الانتقال للملف السينمائي بعد ثانية ونصف من إدخال الرمز الصحيح
+                setTimeout(() => {
+                window.location.href = "NEXUS_FINAL/archive.html"; 
+                }, 1500);
                 document.getElementById('adminPass').value = '';
                 document.getElementById('adminPass').disabled = true;
                 setTimeout(() => { document.getElementById('adminPass').disabled = false; }, 3000);
