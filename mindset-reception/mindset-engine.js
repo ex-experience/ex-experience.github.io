@@ -102,3 +102,11 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
+// الانتقال السينمائي من واجهة العقلية إلى واجهة البطاقات القديمة
+document.querySelector('.scroll-indicator').addEventListener('click', () => {
+    // تأثير تلاشي للشاشة قبل الانتقال
+    gsap.to('body', { opacity: 0, duration: 1, onComplete: () => {
+        // هنا نضع اسم ملف واجهتك القديمة (الباسوردات) كما هو بالضبط
+        window.location.href = "index.html"; 
+    }});
+});
