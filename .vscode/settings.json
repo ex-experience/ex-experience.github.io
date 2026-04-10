@@ -1,0 +1,6 @@
+"git.autofetch": false,
+  "git.confirmSync": true,
+  "git.enableSmartCommit": false,
+  "git.suggestSmartCommit": false,
+  "git.requireGitUserConfig": true
+  
