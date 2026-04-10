@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>フサム | The Mindset</title>
     
-    <link rel="stylesheet" href="mindset-style.css">
+    <link rel="stylesheet" href="style.css">
     
     <style>
         .honeypot-field { position: absolute; left: -9999px; }
@@ -39,7 +39,6 @@
             <h2 class="story-line line-1">This is not just a brand.</h2>
             <h2 class="story-line line-2">It's a state of mind.</h2>
             <h2 class="story-line line-3">Welcome to the hustle.</h2>
-            <h2 class="story-line line-4">フサム | experience™</h2>
         </div>
 
         <div class="scroll-indicator">
@@ -51,12 +50,12 @@
     <script src="mindset-engine.js"></script>
     
     <script type="module">
-        // استيراد المكتبات مباشرة عبر الإنترنت 
+        // استيراد المكتبات مباشرة عبر الإنترنت (CDN) لتجاوز أي مشاكل في المسارات
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import fpPromise from 'https://openfpcdn.io/fingerprintjs/v4';
 
-        // مفاتيح الربط الخاصة بمشروعك
+        // مفاتيح الربط الخاصة بمشروع Nexus Security Logs
         const firebaseConfig = {
           apiKey: "AIzaSyAwjmFj10znbvlf6EUKS2RGuMy_FqZdtJY",
           authDomain: "nexus-security-logs.firebaseapp.com",
@@ -67,43 +66,44 @@
           measurementId: "G-09271PKTR6"
         };
 
-        // تشغيل فايربيس
+        // تهيئة فايربيس
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // الدالة الأمنية الصامتة
+        // الدالة الأمنية
         async function captureAndLogVisitor() {
+          console.log("[Nexus Security] جاري استخراج البصمة من صفحة The Mindset...");
           try {
             const fp = await fpPromise.load();
             const result = await fp.get();
             const visitorHash = result.visitorId;
             
+            console.log("🔑 تم التقاط البصمة:", visitorHash);
+
             const visitorData = {
               fingerprintId: visitorHash,
               userAgent: navigator.userAgent,
               screenResolution: `${window.screen.width}x${window.screen.height}`,
               language: navigator.language,
               timeOfVisit: serverTimestamp(),
-              pageVisited: "The Mindset (Hero Page)",
+              pageVisited: "The Mindset (Hero Page)", // لمعرفة من أي صفحة دخل
               suspiciousActivity: "None"
             };
 
-            // إرسال البيانات
-            await addDoc(collection(db, "SecurityLogs"), visitorData);
-            console.log("[Nexus] تمت العملية بنجاح. البصمة المكتشفة:", visitorHash);
+            const docRef = await addDoc(collection(db, "SecurityLogs"), visitorData);
+            console.log("🎯 تمت العملية بنجاح! تم الحفظ في قاعدة البيانات برقم:", docRef.id);
             
+            // تنبيه مؤقت للتأكد من عمل الكود (يمكنك مسح هذا السطر لاحقاً)
+            alert("نظام Nexus الأمني متصل ويعمل بنجاح على صفحة The Mindset!");
+
           } catch (error) {
-            console.error("[Nexus] خطأ في الإرسال:", error);
+            console.error("❌ حدث خطأ في النظام الأمني:", error);
           }
         }
 
-        // إطلاق الفخ فوراً عند فتح الموقع
+        // تشغيل العملية فوراً
         captureAndLogVisitor();
     </script>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html> 
->>>>>>> 8a42914d9301a51d2227c4c28e144e457304f69e
