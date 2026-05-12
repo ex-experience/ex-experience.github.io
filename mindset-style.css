@@ -8,3 +8,7 @@
     overflow-wrap: break-word;
     max-width: 100%;
 }
+
+/* MOBILE RESPONSIVE PATCH */
+.main-title, .text-body, .story-line { white-space: normal !important; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; }
+

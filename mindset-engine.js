@@ -21,3 +21,8 @@ async function submitRating() {
     alert('Thank you for your feedback.');
     document.getElementById('ratingModal').style.display = 'none';
 }
+
+/* FIREBASE MODALS */
+async function submitToCommunity() { const n = document.getElementById('comm-name').value; const e = document.getElementById('comm-email').value; if(n && e) { await db.collection('Community_Family').add({ Name: n, Email: e, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }); alert('Welcome to the Elite.'); document.getElementById('community-modal').style.display='none'; } else alert('Please fill all fields.'); }
+async function submitToRating() { const n = document.getElementById('rate-name').value; const e = document.getElementById('rate-email').value; const s = document.getElementById('rate-stars').value; if(n && e) { await db.collection('Experience_Ratings').add({ Name: n, Email: e, Rating: parseInt(s), Timestamp: firebase.firestore.FieldValue.serverTimestamp() }); alert('Thank you for rating.'); document.getElementById('rating-modal').style.display='none'; } else alert('Please fill all fields.'); }
+
