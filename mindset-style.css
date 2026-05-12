@@ -1,0 +1,10 @@
+
+/* ========================================= */
+/* NEXUS MOBILE PATCH */
+/* ========================================= */
+.main-title, .text-body, .story-line {
+    white-space: normal !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
