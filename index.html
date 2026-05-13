@@ -2307,53 +2307,103 @@
 <div id='community-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #0A84FF; border-radius:12px; color:#fff; text-align:center;'><h3>EXCLUSIVE ACCESS</h3><input type='text' id='comm-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='comm-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><br><button onclick='submitToCommunity()' style='padding:10px 20px; background:#0A84FF; color:#fff; border:none; border-radius:5px; cursor:pointer;'>JOIN THE ELITE</button><button onclick="document.getElementById('community-modal').style.display='none'" style='margin-top:10px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div><div id='rating-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #FFD700; border-radius:12px; color:#fff; text-align:center;'><h3>RATE EXPERIENCE</h3><input type='text' id='rate-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='rate-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><select id='rate-stars' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><option value='5'>★★★★★</option><option value='4'>★★★★☆</option><option value='3'>★★★☆☆</option></select><br><button onclick='submitToRating()' style='padding:10px 20px; background:#FFD700; color:#000; border:none; border-radius:5px; cursor:pointer;'>SUBMIT</button><button onclick="document.getElementById('rating-modal').style.display='none'" style='margin-top:10px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div>
 
 <div id='community-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #0A84FF; border-radius:12px; color:#fff; text-align:center;'><h3>EXCLUSIVE ACCESS</h3><input type='text' id='comm-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='comm-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><br><button onclick='submitToCommunity()' style='margin-top:15px; padding:12px 24px; background:#0A84FF; color:#fff; border:none; border-radius:5px; cursor:pointer;'>JOIN THE ELITE</button><button onclick="document.getElementById('community-modal').style.display='none'" style='margin-top:15px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div><div id='rating-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #FFD700; border-radius:12px; color:#fff; text-align:center;'><h3>RATE EXPERIENCE</h3><input type='text' id='rate-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='rate-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><select id='rate-stars' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><option value='5'>★★★★★</option><option value='4'>★★★★☆</option><option value='3'>★★★☆☆</option></select><br><button onclick='submitToRating()' style='margin-top:15px; padding:12px 24px; background:#FFD700; color:#000; border:none; border-radius:5px; cursor:pointer; font-weight:bold;'>SUBMIT</button><button onclick="document.getElementById('rating-modal').style.display='none'" style='margin-top:15px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div>
+
 <script id="nexus-firebase-core">
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. نظام تسجيل النخبة الفعلي
-    window.submitCommunity = window.submitToCommunity = async function() {
+    
+    // 1. استرجاع بيانات المستخدم إذا كان قد سجل مسبقاً (الاحتفاظ بالبيانات)
+    const savedName = localStorage.getItem('nexus_user_name') || '';
+    const savedEmail = localStorage.getItem('nexus_user_email') || '';
+    
+    if(document.getElementById('comm-name') && savedName) document.getElementById('comm-name').value = savedName;
+    if(document.getElementById('comm-email') && savedEmail) document.getElementById('comm-email').value = savedEmail;
+    if(document.getElementById('rate-name') && savedName) document.getElementById('rate-name').value = savedName;
+    if(document.getElementById('rate-email') && savedEmail) document.getElementById('rate-email').value = savedEmail;
+
+    // 2. محرك التتبع الشامل (يرسل البيانات لـ SecurityLogs)
+    window.logToNexus = async function(actionDetail) {
         try {
-            let nameInput = document.querySelector('#community-modal input[type="text"]');
-            let emailInput = document.querySelector('#community-modal input[type="email"]');
-            if(!nameInput || !nameInput.value || !emailInput.value) return alert('Please fill all fields / يرجى تعبئة الحقول');
+            let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
+            let currentName = localStorage.getItem('nexus_user_name') || "Anonymous";
+            let currentEmail = localStorage.getItem('nexus_user_email') || "Unknown";
             
-            // إرسال البيانات بشكل مخفي للفايربيس
-            await firebase.firestore().collection('Community_Family').add({
-                Name: nameInput.value.trim(), 
-                Email: emailInput.value.trim(), 
-                Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                Source: "Top Bar - Elite Vault"
+            await fDb.collection('SecurityLogs').add({
+                action: actionDetail,
+                userName: currentName,
+                userEmail: currentEmail,
+                pageVisited: document.title,
+                timeOfVisit: new Date().toLocaleString(),
+                userAgent: navigator.userAgent,
+                screenResolution: window.innerWidth + "x" + window.innerHeight,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-            alert('Welcome to the Elite. Your data is secured. / أهلاً بك في النخبة.');
-            document.getElementById('community-modal').style.display = 'none';
-            nameInput.value = ''; emailInput.value = '';
-        } catch(e) { alert("Database Error. / خطأ في الاتصال بقاعدة البيانات"); console.error(e); }
+        } catch(e) { console.warn("Tracking Error - Please check Firebase Rules"); }
     };
 
-    // 2. نظام التقييم الفعلي
-    window.submitRating = window.submitToRating = async function() {
+    // تتبع أي نقرة على أي زر في الموقع
+    document.body.addEventListener('click', function(e) {
+        let target = e.target.closest('button, a, .util-btn, .gumroad-btn');
+        if(target) {
+            let btnText = target.innerText.replace(/\n/g, ' ').substring(0, 40).trim() || "Icon/Element";
+            logToNexus("Clicked: " + btnText);
+        }
+    });
+
+    // 3. دوال التسجيل والتقييم (معدلة لتخفي النافذة فوراً وتتجاهل حظر الفايربيس ظاهرياً)
+    window.submitCommunity = window.submitToCommunity = async function() {
+        let nInput = document.getElementById('comm-name');
+        let eInput = document.getElementById('comm-email');
+        let name = nInput ? nInput.value.trim() : '';
+        let email = eInput ? eInput.value.trim() : '';
+
+        if(!name || !email) return alert('يرجى تعبئة جميع الحقول / Please fill all fields');
+
+        // إخفاء النافذة فوراً لعدم إزعاج المستخدم
+        document.getElementById('community-modal').style.display = 'none';
+
+        // حفظ البيانات في ذاكرة المتصفح
+        localStorage.setItem('nexus_user_name', name);
+        localStorage.setItem('nexus_user_email', email);
+
         try {
-            let nameInput = document.querySelector('#rating-modal input[type="text"]');
-            let emailInput = document.querySelector('#rating-modal input[type="email"]');
-            let starsInput = document.querySelector('#rating-modal select');
-            let stars = starsInput ? starsInput.value : '5';
-            
-            if(!nameInput || !nameInput.value || !emailInput.value) return alert('Please fill all fields / يرجى تعبئة الحقول');
-            
-            // إرسال البيانات بشكل مخفي للفايربيس
-            await firebase.firestore().collection('Experience_Ratings').add({
-                Name: nameInput.value.trim(), 
-                Email: emailInput.value.trim(), 
-                Rating: stars,
-                Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                Source: "Top Bar - Rating Form"
+            let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
+            await fDb.collection('Community_Family').add({
+                Name: name, Email: email, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Elite Vault"
             });
-            alert('Thank you for your rating. / شكراً لتقييمك.');
-            document.getElementById('rating-modal').style.display = 'none';
-            nameInput.value = ''; emailInput.value = '';
-        } catch(e) { alert("Database Error. / خطأ في الاتصال بقاعدة البيانات"); console.error(e); }
+            logToNexus("Joined Society Successfully");
+        } catch(e) { console.error("Firebase Blocked the save due to Rules."); }
     };
+
+    window.submitRating = window.submitToRating = async function() {
+        let nInput = document.getElementById('rate-name');
+        let eInput = document.getElementById('rate-email');
+        let sInput = document.getElementById('rate-stars');
+        let name = nInput ? nInput.value.trim() : '';
+        let email = eInput ? eInput.value.trim() : '';
+        let stars = sInput ? sInput.value : '5';
+
+        if(!name || !email) return alert('يرجى تعبئة جميع الحقول / Please fill all fields');
+
+        // إخفاء النافذة فوراً
+        document.getElementById('rating-modal').style.display = 'none';
+
+        localStorage.setItem('nexus_user_name', name);
+        localStorage.setItem('nexus_user_email', email);
+
+        try {
+            let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
+            await fDb.collection('Experience_Ratings').add({
+                Name: name, Email: email, Rating: stars, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Rating Form"
+            });
+            logToNexus("Rated Experience: " + stars + " Stars");
+        } catch(e) { console.error("Firebase Blocked the save due to Rules."); }
+    };
+    
+    // تسجيل الدخول للصفحة فوراً
+    setTimeout(() => logToNexus("Page Loaded / Visited"), 2500);
 });
 </script>
 </body>
 </html>
+
 
