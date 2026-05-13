@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FILE: iNSTUDIO // DECRYPTED</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; background: #000;
+            font-family: 'Courier New', Courier, monospace;
+            color: #fff; overflow: hidden; height: 100vh;
+        }
+
+        #story-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1; 
+            filter: brightness(0.4) contrast(1.2); 
+        }
+
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_grain.jpg');
+            opacity: 0.05; pointer-events: none; z-index: 2; 
+        }
+
+        #narrative-container {
+            position: relative; z-index: 10;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding-left: 10vw;
+            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, transparent 70%);
+        }
+
+        .file-header {
+            font-size: 1.2rem; letter-spacing: 5px; color: #d4af37;
+            margin-bottom: 30px; opacity: 0;
+            animation: fadeIn 2s forwards 1s; 
+        }
+
+        .story-line {
+            font-size: 2.5rem; font-weight: bold; letter-spacing: 2px;
+            margin: 10px 0; overflow: hidden; white-space: nowrap;
+            width: 0; text-shadow: 0 0 15px rgba(0,0,0,0.8); 
+        }
+
+        .line-1 { animation: typeWriter 3s steps(40, end) forwards 2s; }
+        .line-2 { animation: typeWriter 3s steps(40, end) forwards 6s; }
+        .line-3 { animation: typeWriter 3s steps(40, end) forwards 10s; color: #d4af37; } 
+
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes typeWriter { from { width: 0; } to { width: 100%; } }
+
+        .cursor::after { content: '|'; color: #d4af37; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <video id="story-bg" autoplay muted loop playsinline>
+        <source src="ex001.mp4" type="video/mp4">
+    </video>
+    
+    <div class="noise"></div>
+
+    <div id="narrative-container">
+        <div class="file-header">>> DECRYPTING FILE: iNSTUDIO</div>
+        <div class="story-line line-1">Time is the ultimate canvas.</div>
+        <div class="story-line line-2">Every frame is engineered.</div>
+        <div class="story-line line-3 cursor">Welcome to iNSTUDIO.</div>
+    </div>
+</body>
+</html>
