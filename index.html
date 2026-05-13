@@ -621,6 +621,26 @@
     .hero, .video-wrapper, #ex-master-loader { background-color: #000000 !important; background: #000000 !important; }
     body { background-color: #000000 !important; }
 </style>
+<style id="nexus-final-polish">
+    /* إزالة التشوه البصري أسفل الموقع بالكامل وإغلاق أي تسريب أبيض */
+    body, html { background-color: #000000 !important; overflow-x: hidden !important; }
+    footer, .footer-section, #footer, .bottom-bar { 
+        background: #000000 !important; 
+        color: #ffffff !important; 
+        border-top: 1px solid rgba(255,255,255,0.05) !important; 
+        margin: 0 !important; 
+        box-shadow: none !important;
+    }
+    
+    /* إنهاء مشكلة تشوه وتمطيط أيقونة اللغة للأبد */
+    .icon-btn svg, .nav-icon svg { 
+        width: 22px !important; 
+        height: 22px !important; 
+        fill: #ffffff !important; 
+        flex-shrink: 0 !important; 
+        display: block !important; 
+    }
+</style>
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
@@ -1195,25 +1215,115 @@
 
 
 
-<section id="exclusive-vault" style="padding:120px 5%; background:linear-gradient(to bottom, #050505, #0a0000); text-align:center; border-top:1px solid rgba(255, 0, 60, 0.2); position:relative; z-index:10;">
-    <div style="font-family:Space Mono,monospace; font-size:0.85rem; color:#ff003c; letter-spacing:4px; margin-bottom:20px; text-transform:uppercase;">フサム | experience™ EXCLUSIVE</div>
-    <h2 style="color:#fff; font-size:clamp(2rem, 4vw, 3.5rem); font-weight:600; margin-bottom:30px; text-shadow:0 0 20px rgba(255,0,60,0.3);">THE ELITE VAULT</h2>
-    <div style="max-width:800px; margin:0 auto; background:rgba(255,0,60,0.02); border:1px solid rgba(255,0,60,0.1); padding:40px; border-radius:8px; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
-        <p class="en-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">
+<section id="exclusive-vault" style="position: relative; padding: 120px 5%; background: #050505; text-align: center; border-top: 1px solid rgba(255, 0, 60, 0.2); overflow: hidden; z-index: 10; min-height: 80vh; display: flex; align-items: center; justify-content: center;">
+    
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 180vw; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 900; color: rgba(255, 255, 255, 0.02); z-index: 0; pointer-events: none; line-height: 0.8; margin-top:-5%;">G</div>
+
+    <div id="gumroad-parallax-coins" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden;"></div>
+
+    <div style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto; background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.08); padding: 60px 40px; border-radius: 16px; box-shadow: 0 40px 100px rgba(0,0,0,0.9);">
+        
+        <div class="glitch-anim" style="font-family: 'Space Mono', monospace; font-size: 1rem; color: #ff003c; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; font-weight: bold;">フサム | experience™ EXCLUSIVE</div>
+        
+        <h2 style="color: #fff; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; margin-bottom: 30px; font-family: 'Helvetica Neue', Arial, sans-serif;">THE ELITE VAULT</h2>
+
+        <p class="en-only" style="color: #e0e0e0; font-size: 1.1rem; line-height: 1.9; margin-bottom: 20px;">
             Our most classified frameworks, proprietary <strong style="color:#ff003c;">HX-5™ methodologies</strong>, and high-tier activations are strictly isolated. They are never published on public channels.
         </p>
-        <p class="en-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">
+        <p class="en-only" style="color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 40px;">
             This vault is dedicated exclusively to our private society, elite investors, and global brand partners. Here, you gain direct access to raw architectural blueprints, sensory engineering kits, and uncensored strategic doctrines that dictate the future of human experience.
         </p>
-        <p class="ar-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">
-            أطر عملنا الأكثر سرية، منهجيات <strong style="color:#ff003c;">HX-5™</strong> الخاصة بنا، وتفعيلاتنا عالية المستوى معزولة بصرامة. ولا يتم نشرها أبداً على أي قنوات عامة.
-        </p>
-        <p class="ar-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">
-            هذه الخزنة مخصصة حصرياً لمجتمعنا الخاص، نخبة المستثمرين، وشركائنا من العلامات التجارية العالمية. من هنا، ستحصل على وصول مباشر للخرائط المعمارية الخام، أدوات الهندسة الحسية، والعقائد الاستراتيجية غير المفلترة التي تصيغ مستقبل التجربة الإنسانية.
-        </p>
-        <a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display:inline-block; padding:18px 50px; background:#ff003c; color:#fff; text-decoration:none; font-family:Space Mono,monospace; font-weight:bold; letter-spacing:2px; border-radius:4px; transition:all 0.4s ease; box-shadow:0 10px 30px rgba(255,0,60,0.3);" onmouseover="this.style.background='#fff'; this.style.color='#ff003c';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';">JOIN OUR SOCIETY</a>
+        
+        <a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #000000; color: #ffffff; text-decoration: none; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.25rem; font-weight: 600; padding: 18px 45px; border-radius: 6px; border: 1px solid #333; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.5);" onmouseover="this.style.background='#1a1a1a'; this.style.transform='translateY(-3px) scale(1.02)';" onmouseout="this.style.background='#000000'; this.style.transform='translateY(0) scale(1)';">
+            Start selling
+            <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
     </div>
 </section>
+
+<style id="gumroad-interactive-style">
+    .gumroad-coin {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: #ff90e8; /* لون Gumroad الوردي الشهير */
+        border-radius: 50%;
+        border: 4px solid #000;
+        box-shadow: inset -6px -6px 0px rgba(0,0,0,0.15), 6px 6px 0px #000; /* تصميم الـ 3D الكرتوني */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 900;
+        font-size: 45px;
+        color: #000;
+        z-index: 1;
+        transition: transform 0.1s linear;
+        animation: floatAnim 5s infinite ease-in-out alternate;
+    }
+    @keyframes floatAnim {
+        0% { margin-top: 0px; }
+        100% { margin-top: -25px; }
+    }
+</style>
+
+<script id="gumroad-parallax-script">
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById('gumroad-parallax-coins');
+        if(!container) return;
+        container.innerHTML = ''; 
+        
+        // هندسة توزيع الكوينز بزوايا مائلة ومقاسات متنوعة في الخلفية
+        const coinsData = [
+            {top: '10%', left: '10%', size: 1.3, delay: '0s', rotation: '15deg'},
+            {top: '25%', left: '85%', size: 0.8, delay: '1s', rotation: '-25deg'},
+            {top: '75%', left: '15%', size: 1.5, delay: '2s', rotation: '35deg'},
+            {top: '80%', left: '80%', size: 1.1, delay: '0.5s', rotation: '-15deg'},
+            {top: '40%', left: '90%', size: 0.7, delay: '1.5s', rotation: '50deg'},
+            {top: '55%', left: '5%', size: 0.9, delay: '2.5s', rotation: '-40deg'}
+        ];
+
+        coinsData.forEach(pos => {
+            let coin = document.createElement('div');
+            coin.className = 'gumroad-coin';
+            coin.innerText = 'G';
+            coin.style.top = pos.top;
+            coin.style.left = pos.left;
+            
+            // تخزين بيانات الزاوية والحجم لاستخدامها في حسابات الاهتزاز
+            coin.dataset.bScale = pos.size;
+            coin.dataset.bRot = pos.rotation;
+            
+            coin.style.transform = scale( + pos.size + ) rotate( + pos.rotation + );
+            coin.style.animationDelay = pos.delay;
+            container.appendChild(coin);
+        });
+
+        const coins = document.querySelectorAll('.gumroad-coin');
+        
+        // 1. التفاعل مع حركة الماوس (لأجهزة الكمبيوتر)
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.clientX) * 0.04;
+            const y = (window.innerHeight / 2 - e.clientY) * 0.04;
+            applyParallax(x, y);
+        });
+
+        // 2. التفاعل الفيزيائي مع الجيروسكوب (لاحترافية اهتزاز الجوال)
+        window.addEventListener('deviceorientation', (e) => {
+            if(!e.gamma || !e.beta) return;
+            const x = e.gamma * 1.5; 
+            const y = e.beta * 1.5;
+            applyParallax(x, y);
+        });
+
+        function applyParallax(x, y) {
+            coins.forEach((coin, index) => {
+                const speed = (index + 1) * 0.4;
+                coin.style.transform = 	ranslate( + (x * speed) + px,  + (y * speed) + px) scale( + coin.dataset.bScale + ) rotate( + coin.dataset.bRot + );
+            });
+        }
+    });
+</script>
 </main>
 
     <footer class="site-footer">
