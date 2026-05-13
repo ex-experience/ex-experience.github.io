@@ -1,6 +1,23 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+<style id="nexus-force-fix">
+    /* LOCK UTILITY BAR TO TOP */
+    #nexus-utility-bar {
+        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important;
+        height: 40px !important; z-index: 2147483647 !important; background: #050505 !important;
+        margin: 0 !important; transform: none !important; display: flex !important; align-items: center !important;
+    }
+    /* LOCK MAIN NAV JUST BELOW IT */
+    .top-nav {
+        position: fixed !important; top: 40px !important; z-index: 2147483646 !important;
+        margin: 0 !important; transform: none !important;
+    }
+    .top-nav.scrolled {
+        top: 40px !important; background: rgba(255, 255, 255, 0.95) !important; transform: none !important;
+    }
+    body { padding-top: 40px !important; }
+</style>
     <meta property="og:image" content="https://ex-experience.github.io/og-image.png">
     <meta property="og:image:secure_url" content="https://ex-experience.github.io/og-image.png">
     <meta property="og:image:type" content="image/png">
@@ -614,7 +631,7 @@
 </head>
 <body class="lang-en">
 <nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom:1px solid rgba(255,255,255,0.1);'><div style='cursor:pointer; color:#0A84FF; transition:0.3s;' onclick="document.getElementById('community-modal').style.display='flex'"><span class='en-only'>JOIN THE ELITE</span><span class='ar-only'>انضم لمجتمعنا</span></div><div style='cursor:pointer; color:#FFD700; transition:0.3s;' onclick="document.getElementById('rating-modal').style.display='flex'"><span class='en-only'>RATE EXPERIENCE ★★★★★</span><span class='ar-only'>قيّم التجربة ★★★★★</span></div></nav>
-<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom:1px solid rgba(255,255,255,0.1);'><div style='cursor:pointer; color:#0A84FF;' onclick="document.getElementById('community-modal').style.display='flex'">JOIN OUR SOCIETY</div><div style='cursor:pointer; color:#FFD700;' onclick="document.getElementById('rating-modal').style.display='flex'">RATE EXPERIENCE ★★★★★</div></nav>
+<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom:1px solid rgba(255,255,255,0.1);'><div style='cursor:pointer; color:#0A84FF;' onclick="document.getElementById('community-modal').style.display='flex'">[ UNLOCK EXCLUSIVE ACCESS ]</div><div style='cursor:pointer; color:#FFD700;' onclick="document.getElementById('rating-modal').style.display='flex'">RATE EXPERIENCE ★★★★★</div></nav>
 <!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
