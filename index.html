@@ -644,81 +644,23 @@
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
-    :root { --nav-h: 75px; }
-    body { padding-top: var(--nav-h) !important; background-color: #000000 !important; }
-    
-    /* الصندوق الأسود الصلب الذي يمنع أي لون أبيض من الظهور */
-    #ultimate-navbar {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: var(--nav-h) !important;
-        background: #000000 !important;
-        z-index: 2147483647 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-evenly !important;
-        transition: all 0.4s ease !important;
-        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-        box-sizing: border-box !important;
-    }
-
-    #ultimate-navbar.scrolled {
-        background: rgba(5, 5, 5, 0.95) !important;
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-    }
-
-    /* طابق التقييم والانضمام */
-    .nav-row-1 {
-        display: flex !important;
-        justify-content: space-between !important;
-        padding: 0 5% !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    /* طابق الشعار والأيقونات الأصلية */
-    .nav-row-2 {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 0 5% !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    /* نصوص حمراء دقيقة جداً لا تغطي الأيقونات */
-    .action-txt {
-        color: #ff003c !important;
-        font-family: 'Space Mono', monospace !important;
-        font-size: clamp(9px, 2.5vw, 11px) !important;
-        font-weight: bold !important;
-        cursor: pointer !important;
-        letter-spacing: 1px !important;
-        white-space: nowrap !important;
-    }
-
-    /* الشعار الأصلي (يسار) */
-    .main-logo-txt {
-        color: #ffffff !important;
-        text-decoration: none !important;
-        font-size: clamp(1rem, 4vw, 1.2rem) !important;
-        font-weight: 500 !important;
-    }
-
-    /* مجموعة الأيقونات (يمين) */
-    .icons-group {
-        display: flex !important;
-        gap: 15px !important;
-        align-items: center !important;
-    }
-
-    .icon-btn {
-        background: none !important; border: none !important; cursor: pointer !important; padding: 0 !important; color: #ffffff !important; display: flex !important; align-items: center !important;
-    }
+    body { padding-top: 70px !important; background-color: #000000 !important; }
+    #ultimate-navbar { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #000000 !important; z-index: 2147483647 !important; display: flex !important; flex-direction: column !important; justify-content: space-evenly !important; border-bottom: 1px solid rgba(255,255,255,0.05) !important; box-sizing: border-box !important; margin: 0 !important; }
+    #ultimate-navbar.scrolled { background: rgba(5, 5, 5, 0.95) !important; backdrop-filter: blur(15px) !important; -webkit-backdrop-filter: blur(15px) !important; }
+    .nav-row-1 { display: flex !important; justify-content: space-between !important; padding: 0 5% !important; width: 100% !important; box-sizing: border-box !important; }
+    .nav-row-2 { display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 0 5% !important; width: 100% !important; box-sizing: border-box !important; }
+    .action-txt { color: #ff003c !important; font-family: 'Space Mono', monospace !important; font-size: clamp(9px, 2.5vw, 11px) !important; font-weight: bold !important; cursor: pointer !important; letter-spacing: 1px !important; }
+    .main-logo-txt { color: #ffffff !important; text-decoration: none !important; font-size: clamp(1rem, 4vw, 1.2rem) !important; font-weight: 500 !important; }
+    .icons-group { display: flex !important; gap: 15px !important; align-items: center !important; }
+    .icon-btn { background: none !important; border: none !important; cursor: pointer !important; padding: 0 !important; color: #ffffff !important; display: flex !important; align-items: center !important; }
     .icon-btn svg { width: 22px !important; height: 22px !important; fill: currentColor !important; }
+    
+    /* النوافذ السوداء الفخمة */
+    .ex-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999999; justify-content:center; align-items:center; backdrop-filter:blur(5px); }
+    .ex-modal-content { border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9); padding:30px; border-radius:8px; text-align:center; width:90%; max-width:400px; font-family:'Space Mono',monospace; }
+    .ex-input { width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box; }
+    .ex-btn-submit { width:100%; padding:12px; margin-top:15px; background:#ff003c; border:none; color:#fff; font-weight:bold; cursor:pointer; letter-spacing:1px; text-transform:uppercase; transition: 0.3s; }
+    .ex-btn-submit:hover { background:#fff; color:#000; }
 </style>
 
 <nav id="ultimate-navbar">
@@ -735,6 +677,44 @@
         </div>
     </div>
 </nav>
+
+<div id="community-modal" class="ex-modal">
+    <div class="ex-modal-content">
+        <h3 style="margin-top:0; color:#fff; letter-spacing: 2px;">JOIN OUR SOCIETY</h3>
+        <input type="text" id="comm-name" class="ex-input" placeholder="Full Name">
+        <input type="email" id="comm-email" class="ex-input" placeholder="Email Address">
+        <button class="ex-btn-submit" onclick="submitCommunity()">JOIN THE ELITE</button>
+        <button onclick="document.getElementById('community-modal').style.display='none'" style="margin-top:15px; background:none; border:none; color:#666; cursor:pointer;">Close</button>
+    </div>
+</div>
+
+<div id="rating-modal" class="ex-modal">
+    <div class="ex-modal-content">
+        <h3 style="margin-top:0; color:#fff; letter-spacing: 2px;">RATE US</h3>
+        <input type="text" id="rate-name" class="ex-input" placeholder="Full Name">
+        <input type="email" id="rate-email" class="ex-input" placeholder="Email Address">
+        <select id="rate-stars" class="ex-input">
+            <option value="5">★★★★★ - Exceptional</option>
+            <option value="4">★★★★☆ - Great</option>
+            <option value="3">★★★☆☆ - Good</option>
+        </select>
+        <button class="ex-btn-submit" onclick="submitRating()">SUBMIT RATING</button>
+        <button onclick="document.getElementById('rating-modal').style.display='none'" style="margin-top:15px; background:none; border:none; color:#666; cursor:pointer;">Close</button>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('scroll', () => { 
+        let nav = document.getElementById('ultimate-navbar');
+        if (nav) {
+            if (window.scrollY > 50) nav.classList.add('scrolled'); 
+            else nav.classList.remove('scrolled'); 
+        }
+    });
+</script>
+
+
+
 <script>
     // تفعيل الخلفية الزجاجية عند النزول للأسفل
     window.addEventListener('scroll', () => { 
@@ -1215,29 +1195,13 @@
 
 
 
-<section id="exclusive-vault" style="position: relative; padding: 120px 5%; background: #050505; text-align: center; border-top: 1px solid rgba(255, 0, 60, 0.2); overflow: hidden; z-index: 10; min-height: 80vh; display: flex; align-items: center; justify-content: center;">
-    
-    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 180vw; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 900; color: rgba(255, 255, 255, 0.02); z-index: 0; pointer-events: none; line-height: 0.8; margin-top:-5%;">G</div>
-
-    <div id="gumroad-parallax-coins" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden;"></div>
-
-    <div style="position: relative; z-index: 2; max-width: 800px; margin: 0 auto; background: rgba(5, 5, 5, 0.75); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.08); padding: 60px 40px; border-radius: 16px; box-shadow: 0 40px 100px rgba(0,0,0,0.9);">
-        
-        <div class="glitch-anim" style="font-family: 'Space Mono', monospace; font-size: 1rem; color: #ff003c; letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; font-weight: bold;">フサム | experience™ EXCLUSIVE</div>
-        
-        <h2 style="color: #fff; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; margin-bottom: 30px; font-family: 'Helvetica Neue', Arial, sans-serif;">THE ELITE VAULT</h2>
-
-        <p class="en-only" style="color: #e0e0e0; font-size: 1.1rem; line-height: 1.9; margin-bottom: 20px;">
-            Our most classified frameworks, proprietary <strong style="color:#ff003c;">HX-5™ methodologies</strong>, and high-tier activations are strictly isolated. They are never published on public channels.
-        </p>
-        <p class="en-only" style="color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 40px;">
-            This vault is dedicated exclusively to our private society, elite investors, and global brand partners. Here, you gain direct access to raw architectural blueprints, sensory engineering kits, and uncensored strategic doctrines that dictate the future of human experience.
-        </p>
-        
-        <a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #000000; color: #ffffff; text-decoration: none; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.25rem; font-weight: 600; padding: 18px 45px; border-radius: 6px; border: 1px solid #333; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.5);" onmouseover="this.style.background='#1a1a1a'; this.style.transform='translateY(-3px) scale(1.02)';" onmouseout="this.style.background='#000000'; this.style.transform='translateY(0) scale(1)';">
-            Start selling
-            <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
+<section id="exclusive-vault" style="padding:120px 5%; background:linear-gradient(to bottom, #050505, #0a0000); text-align:center; position:relative; z-index:10;">
+    <div style="font-family:Space Mono,monospace; font-size:0.85rem; color:#ff003c; letter-spacing:4px; margin-bottom:20px; text-transform:uppercase;">フサム | experience™ EXCLUSIVE</div>
+    <h2 style="color:#fff; font-size:clamp(2rem, 4vw, 3.5rem); font-weight:600; margin-bottom:30px;">THE ELITE VAULT</h2>
+    <div style="max-width:800px; margin:0 auto; background:rgba(255,0,60,0.02); border:1px solid rgba(255,0,60,0.1); padding:40px; border-radius:8px; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+        <p class="en-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">Our most classified frameworks, proprietary <strong style="color:#ff003c;">HX-5™ methodologies</strong>, and high-tier activations are strictly isolated. They are never published on public channels.</p>
+        <p class="en-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">This vault is dedicated exclusively to our private society, elite investors, and global brand partners.</p>
+        <button onclick="window.open('https://exexperience.gumroad.com/subscribe', '_blank')" style="display:inline-block; padding:15px 40px; background:#ff003c; color:#fff; border:none; font-family:'Space Mono',monospace; font-weight:bold; font-size:clamp(12px, 3vw, 16px); letter-spacing:2px; border-radius:4px; cursor:pointer; transition:all 0.4s ease; box-shadow:0 10px 30px rgba(255,0,60,0.3);">JOIN OUR SOCIETY</button>
     </div>
 </section>
 
@@ -2627,32 +2591,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-<div id="community-modal" class="ex-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999999; justify-content:center; align-items:center; backdrop-filter:blur(5px);">
-    <div class="ex-modal-content" style="border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9); padding:30px; border-radius:8px; text-align:center; width:90%; max-width:400px; font-family:'Space Mono',monospace;">
-        <h3 style="margin-top:0; color:#fff; letter-spacing: 2px;">JOIN OUR SOCIETY</h3>
-        <input type="text" id="comm-name" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
-        <input type="email" id="comm-email" placeholder="Email Address" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
-        <button style="width:100%; padding:12px; margin-top:15px; background:#ff003c; border:none; color:#fff; font-weight:bold; cursor:pointer; letter-spacing:1px; transition:0.3s; text-transform:uppercase;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';" onclick="submitCommunity()">JOIN THE ELITE</button>
-        <button onclick="document.getElementById('community-modal').style.display='none'" style="margin-top:15px; background:none; border:none; color:#666; cursor:pointer;">Close</button>
-    </div>
-</div>
 
-<div id="rating-modal" class="ex-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999999; justify-content:center; align-items:center; backdrop-filter:blur(5px);">
-    <div class="ex-modal-content" style="border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9); padding:30px; border-radius:8px; text-align:center; width:90%; max-width:400px; font-family:'Space Mono',monospace;">
-        <h3 style="margin-top:0; color:#fff; letter-spacing: 2px;">RATE US</h3>
-        <input type="text" id="rate-name" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
-        <input type="email" id="rate-email" placeholder="Email Address" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
-        <select id="rate-stars" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
-            <option value="5">★★★★★ - Exceptional</option>
-            <option value="4">★★★★☆ - Great</option>
-            <option value="3">★★★☆☆ - Good</option>
-        </select>
-        <button style="width:100%; padding:12px; margin-top:15px; background:#ff003c; border:none; color:#fff; font-weight:bold; cursor:pointer; letter-spacing:1px; transition:0.3s; text-transform:uppercase;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';" onclick="submitRating()">SUBMIT RATING</button>
-        <button onclick="document.getElementById('rating-modal').style.display='none'" style="margin-top:15px; background:none; border:none; color:#666; cursor:pointer;">Close</button>
-    </div>
-</div>
+
+
 </body>
 </html>
+
 
 
 
