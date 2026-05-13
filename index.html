@@ -613,20 +613,57 @@
         padding-top: 40px !important; 
     }
 </style>
-<style id="anti-overlap-fix">
-    /* FORCE FIX FOR TOP BARS OVERLAP */
+
+<style id="mobile-strict-fixes">
+    /* ========================================= */
+    /* STRICT MOBILE PORTRAIT FIXES */
+    /* ========================================= */
+    
+    /* 1. لحام الشريط العلوي وإزالة الخط الأبيض البشع (إغلاق شق البكسل) */
     #nexus-utility-bar {
         position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important;
-        height: 40px !important; z-index: 100005 !important; box-sizing: border-box !important;
-        background: rgba(5,5,5,0.98) !important; display: flex !important; align-items: center !important;
+        height: 35px !important; z-index: 2147483647 !important;
+        background: #050505 !important; /* لون أسود صلب لمنع التسريب */
+        border: none !important; /* إزالة أي حدود سفلية */
+        box-shadow: none !important;
+        display: flex !important; justify-content: space-between !important; align-items: center !important;
+        padding: 0 4% !important; box-sizing: border-box !important;
     }
-    .top-nav {
-        position: fixed !important; top: 40px !important; z-index: 100000 !important;
+    
+    /* ضبط الشريط الثاني ليلتصق تماماً بالأول بدون فواصل */
+    header, .top-nav, #navbar { 
+        top: 35px !important; 
+        margin-top: 0 !important;
+        border-top: none !important;
     }
-    .top-nav.scrolled {
-        top: 40px !important; background: rgba(255, 255, 255, 0.95) !important;
+    body { padding-top: 35px !important; }
+
+    /* 2. تصغير نصوص التقييم والتسجيل، إجبارها على سطر واحد، وتلوينها بالأحمر */
+    #nexus-utility-bar .util-btn, #nexus-utility-bar span {
+        color: #ff003c !important; /* اللون الأحمر المطلوب */
+        white-space: nowrap !important; /* يمنع النزول لسطر جديد نهائياً */
+        font-size: clamp(8px, 2.5vw, 11px) !important; /* تصغير ديناميكي للجوال */
+        letter-spacing: 0px !important;
+        margin: 0 !important; padding: 0 !important;
+        display: inline-block !important;
     }
-    body { padding-top: 40px !important; }
+
+    /* 3. تصغير نص زر الدخول (Gumroad) ومنع تكسره في الجوال */
+    #exclusive-vault a, .gumroad-btn {
+        white-space: nowrap !important; /* يمنع نزول النص لسطرين */
+        font-size: clamp(9px, 3vw, 13px) !important; /* تصغير الخط ليتسع */
+        padding: 12px 20px !important; /* تقليل الحواف الجانبية للزر */
+        width: auto !important;
+        max-width: 90vw !important; /* يمنع الزر من الخروج عن حواف الشاشة */
+        display: inline-block !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* حماية إضافية للشاشات الصغيرة جداً (مثل iPhone SE) */
+    @media (max-width: 380px) {
+        #nexus-utility-bar .util-btn, #nexus-utility-bar span { font-size: 7.5px !important; }
+        #exclusive-vault a, .gumroad-btn { font-size: 8.5px !important; padding: 10px 15px !important; }
+    }
 </style>
 </head>
 <body class="lang-en">
@@ -2406,6 +2443,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
 
 
 
