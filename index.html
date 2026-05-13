@@ -665,10 +665,39 @@
         #exclusive-vault a, .gumroad-btn { font-size: 8.5px !important; padding: 10px 15px !important; }
     }
 </style>
+<style id="nav-black-fix">
+    /* تحويل الشريط الأبيض إلى أسود شفاف فخم عند النزول */
+    .top-nav.scrolled {
+        background: rgba(5, 5, 5, 0.90) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+    }
+    /* إجبار الأيقونات واللوجو على البقاء باللون الأبيض */
+    .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icon {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+    }
+    
+    /* اللحام النهائي للشريطين بدون أي فواصل بيضاء */
+    #nexus-utility-bar { 
+        height: 35px !important; 
+        background: #000000 !important; /* أسود صلب لمنع أي تسريب ضوئي */
+        border: none !important; 
+    }
+    .top-nav { 
+        top: 35px !important; 
+        margin-top: 0 !important; 
+    }
+    body { 
+        padding-top: 35px !important; 
+    }
+</style>
 </head>
 <body class="lang-en">
-<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom: none;'><div style='cursor:pointer; color:#0A84FF; transition:0.3s;' onclick="document.getElementById('community-modal').style.display='flex'"><span class='en-only'>JOIN THE ELITE</span><span class='ar-only'>انضم لمجتمعنا</span></div><div style='cursor:pointer; color:#FFD700; transition:0.3s;' onclick="document.getElementById('rating-modal').style.display='flex'"><span class='en-only'>RATE EXPERIENCE ★★★★★</span><span class='ar-only'>قيّم التجربة ★★★★★</span></div></nav>
-<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom: none;'><div style='cursor:pointer; color:#0A84FF;' onclick="document.getElementById('community-modal').style.display='flex'">[ UNLOCK EXCLUSIVE ACCESS ]</div><div style='cursor:pointer; color:#FFD700;' onclick="document.getElementById('rating-modal').style.display='flex'">RATE EXPERIENCE ★★★★★</div></nav>
+<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom: none;'><div style='cursor:pointer; color:#0A84FF; transition:0.3s;' onclick="document.getElementById('community-modal').style.display='flex'"><span class='en-only'>JOIN THE ELITE</span><span class='ar-only'>انضم لمجتمعنا</span></div><div style='cursor:pointer; color:#FFD700; transition:0.3s;' onclick="document.getElementById('rating-modal').style.display='flex'"><span class='en-only'>RATE US ★★★★★</span><span class='ar-only'>قيّمنا ★★★★★</span></div></nav>
+<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom: none;'><div style='cursor:pointer; color:#0A84FF;' onclick="document.getElementById('community-modal').style.display='flex'">JOIN OUR SOCIETY</div><div style='cursor:pointer; color:#FFD700;' onclick="document.getElementById('rating-modal').style.display='flex'">RATE US ★★★★★</div></nav>
 <!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
@@ -1141,7 +1170,7 @@
         <p class="ar-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">
             هذه الخزنة مخصصة حصرياً لمجتمعنا الخاص، نخبة المستثمرين، وشركائنا من العلامات التجارية العالمية. من هنا، ستحصل على وصول مباشر للخرائط المعمارية الخام، أدوات الهندسة الحسية، والعقائد الاستراتيجية غير المفلترة التي تصيغ مستقبل التجربة الإنسانية.
         </p>
-        <a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display:inline-block; padding:18px 50px; background:#ff003c; color:#fff; text-decoration:none; font-family:Space Mono,monospace; font-weight:bold; letter-spacing:2px; border-radius:4px; transition:all 0.4s ease; box-shadow:0 10px 30px rgba(255,0,60,0.3);" onmouseover="this.style.background='#fff'; this.style.color='#ff003c';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';">[ UNLOCK EXCLUSIVE ACCESS ]</a>
+        <a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display:inline-block; padding:18px 50px; background:#ff003c; color:#fff; text-decoration:none; font-family:Space Mono,monospace; font-weight:bold; letter-spacing:2px; border-radius:4px; transition:all 0.4s ease; box-shadow:0 10px 30px rgba(255,0,60,0.3);" onmouseover="this.style.background='#fff'; this.style.color='#ff003c';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';">JOIN OUR SOCIETY</a>
     </div>
 </section>
 </main>
@@ -2443,6 +2472,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
 
 
 
