@@ -641,6 +641,10 @@
         display: block !important; 
     }
 </style>
+<style id="hide-init-text">
+    /* إخفاء أي نصوص تحميل متبقية أسفل الشعار */
+    #ex-master-loader p, .init-text, #loader-text p { display: none !important; }
+</style>
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
@@ -757,7 +761,7 @@
     <div class="ex-loader-flash" id="loader-flash"></div>
     <div class="ex-loader-content" id="loader-text" style="position: relative; z-index: 10;">
         <h1 class="glitch-anim" style="font-size: 1.5rem; letter-spacing: 2px; color: #fff;">フサム | experience™</h1>
-        <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;">INITIALIZING SYSTEM...</p>
+        <p style="font-size: 0.8rem; color: #0A84FF; letter-spacing: 4px; margin-top: 10px;"></p>
     </div>
 </div>
 <!-- نهاية شاشة التحميل السينمائية -->
