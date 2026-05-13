@@ -224,7 +224,7 @@
 
         /* NEXUS COMMAND TERMINAL */
         .nexus-window { background: rgba(15, 20, 25, 0.98); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 25px; font-family: 'Space Mono', monospace; color: #fff; height: 320px; display: flex; flex-direction: column; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);}
-        .nexus-header { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;}
+        .nexus-header { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: none; padding-bottom: 12px;}
         .nexus-dot { width: 12px; height: 12px; border-radius: 50%; background: #444; }
         .nexus-dot.red { background: #ff5f56; } .nexus-dot.yel { background: #ffbd2e; } .nexus-dot.grn { background: #27c93f; }
         .nexus-output { flex: 1; overflow-y: auto; font-size: 0.85rem; line-height: 1.6; color: #a1b2c3; direction: ltr; text-align: left; scrollbar-width: thin;}
@@ -601,7 +601,7 @@
         -webkit-backdrop-filter: blur(10px) !important;
         display: flex !important;
         align-items: center !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-bottom: none; !important;
     }
     .top-nav, .top-nav.scrolled {
         position: fixed !important;
@@ -630,8 +630,8 @@
 </style>
 </head>
 <body class="lang-en">
-<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom:1px solid rgba(255,255,255,0.1);'><div style='cursor:pointer; color:#0A84FF; transition:0.3s;' onclick="document.getElementById('community-modal').style.display='flex'"><span class='en-only'>JOIN THE ELITE</span><span class='ar-only'>انضم لمجتمعنا</span></div><div style='cursor:pointer; color:#FFD700; transition:0.3s;' onclick="document.getElementById('rating-modal').style.display='flex'"><span class='en-only'>RATE EXPERIENCE ★★★★★</span><span class='ar-only'>قيّم التجربة ★★★★★</span></div></nav>
-<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom:1px solid rgba(255,255,255,0.1);'><div style='cursor:pointer; color:#0A84FF;' onclick="document.getElementById('community-modal').style.display='flex'">[ UNLOCK EXCLUSIVE ACCESS ]</div><div style='cursor:pointer; color:#FFD700;' onclick="document.getElementById('rating-modal').style.display='flex'">RATE EXPERIENCE ★★★★★</div></nav>
+<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom: none;'><div style='cursor:pointer; color:#0A84FF; transition:0.3s;' onclick="document.getElementById('community-modal').style.display='flex'"><span class='en-only'>JOIN THE ELITE</span><span class='ar-only'>انضم لمجتمعنا</span></div><div style='cursor:pointer; color:#FFD700; transition:0.3s;' onclick="document.getElementById('rating-modal').style.display='flex'"><span class='en-only'>RATE EXPERIENCE ★★★★★</span><span class='ar-only'>قيّم التجربة ★★★★★</span></div></nav>
+<nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom: none;'><div style='cursor:pointer; color:#0A84FF;' onclick="document.getElementById('community-modal').style.display='flex'">[ UNLOCK EXCLUSIVE ACCESS ]</div><div style='cursor:pointer; color:#FFD700;' onclick="document.getElementById('rating-modal').style.display='flex'">RATE EXPERIENCE ★★★★★</div></nav>
 <!-- بداية شاشة التحميل السينمائية -->
 <div id="ex-master-loader">
     <div class="ex-loader-flash" id="loader-flash"></div>
@@ -2307,5 +2307,53 @@
 <div id='community-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #0A84FF; border-radius:12px; color:#fff; text-align:center;'><h3>EXCLUSIVE ACCESS</h3><input type='text' id='comm-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='comm-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><br><button onclick='submitToCommunity()' style='padding:10px 20px; background:#0A84FF; color:#fff; border:none; border-radius:5px; cursor:pointer;'>JOIN THE ELITE</button><button onclick="document.getElementById('community-modal').style.display='none'" style='margin-top:10px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div><div id='rating-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #FFD700; border-radius:12px; color:#fff; text-align:center;'><h3>RATE EXPERIENCE</h3><input type='text' id='rate-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='rate-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><select id='rate-stars' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><option value='5'>★★★★★</option><option value='4'>★★★★☆</option><option value='3'>★★★☆☆</option></select><br><button onclick='submitToRating()' style='padding:10px 20px; background:#FFD700; color:#000; border:none; border-radius:5px; cursor:pointer;'>SUBMIT</button><button onclick="document.getElementById('rating-modal').style.display='none'" style='margin-top:10px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div>
 
 <div id='community-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #0A84FF; border-radius:12px; color:#fff; text-align:center;'><h3>EXCLUSIVE ACCESS</h3><input type='text' id='comm-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='comm-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><br><button onclick='submitToCommunity()' style='margin-top:15px; padding:12px 24px; background:#0A84FF; color:#fff; border:none; border-radius:5px; cursor:pointer;'>JOIN THE ELITE</button><button onclick="document.getElementById('community-modal').style.display='none'" style='margin-top:15px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div><div id='rating-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #FFD700; border-radius:12px; color:#fff; text-align:center;'><h3>RATE EXPERIENCE</h3><input type='text' id='rate-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='rate-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><select id='rate-stars' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><option value='5'>★★★★★</option><option value='4'>★★★★☆</option><option value='3'>★★★☆☆</option></select><br><button onclick='submitToRating()' style='margin-top:15px; padding:12px 24px; background:#FFD700; color:#000; border:none; border-radius:5px; cursor:pointer; font-weight:bold;'>SUBMIT</button><button onclick="document.getElementById('rating-modal').style.display='none'" style='margin-top:15px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div>
+<script id="nexus-firebase-core">
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. نظام تسجيل النخبة الفعلي
+    window.submitCommunity = window.submitToCommunity = async function() {
+        try {
+            let nameInput = document.querySelector('#community-modal input[type="text"]');
+            let emailInput = document.querySelector('#community-modal input[type="email"]');
+            if(!nameInput || !nameInput.value || !emailInput.value) return alert('Please fill all fields / يرجى تعبئة الحقول');
+            
+            // إرسال البيانات بشكل مخفي للفايربيس
+            await firebase.firestore().collection('Community_Family').add({
+                Name: nameInput.value.trim(), 
+                Email: emailInput.value.trim(), 
+                Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                Source: "Top Bar - Elite Vault"
+            });
+            alert('Welcome to the Elite. Your data is secured. / أهلاً بك في النخبة.');
+            document.getElementById('community-modal').style.display = 'none';
+            nameInput.value = ''; emailInput.value = '';
+        } catch(e) { alert("Database Error. / خطأ في الاتصال بقاعدة البيانات"); console.error(e); }
+    };
+
+    // 2. نظام التقييم الفعلي
+    window.submitRating = window.submitToRating = async function() {
+        try {
+            let nameInput = document.querySelector('#rating-modal input[type="text"]');
+            let emailInput = document.querySelector('#rating-modal input[type="email"]');
+            let starsInput = document.querySelector('#rating-modal select');
+            let stars = starsInput ? starsInput.value : '5';
+            
+            if(!nameInput || !nameInput.value || !emailInput.value) return alert('Please fill all fields / يرجى تعبئة الحقول');
+            
+            // إرسال البيانات بشكل مخفي للفايربيس
+            await firebase.firestore().collection('Experience_Ratings').add({
+                Name: nameInput.value.trim(), 
+                Email: emailInput.value.trim(), 
+                Rating: stars,
+                Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                Source: "Top Bar - Rating Form"
+            });
+            alert('Thank you for your rating. / شكراً لتقييمك.');
+            document.getElementById('rating-modal').style.display = 'none';
+            nameInput.value = ''; emailInput.value = '';
+        } catch(e) { alert("Database Error. / خطأ في الاتصال بقاعدة البيانات"); console.error(e); }
+    };
+});
+</script>
 </body>
 </html>
+

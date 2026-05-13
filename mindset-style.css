@@ -171,3 +171,37 @@ body, html {
     40% { transform: translateY(-15px); text-shadow: 0 0 10px var(--red-glow); }
     60% { transform: translateY(-7px); }
 }
+
+/* ========================================= */
+/* FINAL MOBILE UI & BUG FIXES (5 REQUESTS) */
+/* ========================================= */
+
+/* 1 & 3: Top Bar Alignment & White Line Removal */
+#nexus-utility-bar {
+    border-bottom: none !important;
+    padding: 0 3% !important;
+}
+#nexus-utility-bar .util-btn, #nexus-utility-bar div {
+    font-size: clamp(0.40rem, 2.5vw, 0.70rem) !important; /* تصغير تناسبي دقيق */
+    white-space: nowrap !important; /* إجبار النص على سطر واحد دائماً */
+    letter-spacing: 0px !important;
+    margin: 0 2px !important;
+}
+
+/* 4: Gumroad Button Mobile Fix */
+#exclusive-vault a, .gumroad-btn {
+    font-size: clamp(0.6rem, 3.5vw, 0.85rem) !important; /* تصغير النص */
+    padding: 12px 18px !important; /* تقليل الحشوة */
+    white-space: nowrap !important; /* منع نزول سطر جديد */
+    letter-spacing: 1px !important;
+    display: inline-block !important;
+    max-width: 90vw !important; /* يمنع الزر من الخروج عن الشاشة */
+}
+
+/* 5: THE MINDSET Loader Mobile Fix */
+#ex-master-loader h1, #loader-text h1, .glitch-anim, .main-title {
+    white-space: nowrap !important; /* منع التشوه ونزول سطر جديد */
+    font-size: clamp(1.2rem, 6vw, 3.5rem) !important; /* مقاس ديناميكي يتكيف مع الجوال */
+    width: 100% !important;
+    text-align: center !important;
+}
