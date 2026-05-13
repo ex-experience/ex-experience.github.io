@@ -596,6 +596,21 @@
         padding-top: 40px !important; 
     }
 </style>
+<style id="anti-overlap-fix">
+    /* FORCE FIX FOR TOP BARS OVERLAP */
+    #nexus-utility-bar {
+        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important;
+        height: 40px !important; z-index: 100005 !important; box-sizing: border-box !important;
+        background: rgba(5,5,5,0.98) !important; display: flex !important; align-items: center !important;
+    }
+    .top-nav {
+        position: fixed !important; top: 40px !important; z-index: 100000 !important;
+    }
+    .top-nav.scrolled {
+        top: 40px !important; background: rgba(255, 255, 255, 0.95) !important;
+    }
+    body { padding-top: 40px !important; }
+</style>
 </head>
 <body class="lang-en">
 <nav id='nexus-utility-bar' style='position:fixed; top:0; left:0; width:100%; height:35px; background:#050505; display:flex; justify-content:space-between; align-items:center; padding:0 5%; font-family:Space Mono,monospace; font-size:0.75rem; letter-spacing:1px; z-index:10001; border-bottom:1px solid rgba(255,255,255,0.1);'><div style='cursor:pointer; color:#0A84FF; transition:0.3s;' onclick="document.getElementById('community-modal').style.display='flex'"><span class='en-only'>JOIN THE ELITE</span><span class='ar-only'>انضم لمجتمعنا</span></div><div style='cursor:pointer; color:#FFD700; transition:0.3s;' onclick="document.getElementById('rating-modal').style.display='flex'"><span class='en-only'>RATE EXPERIENCE ★★★★★</span><span class='ar-only'>قيّم التجربة ★★★★★</span></div></nav>
@@ -1056,8 +1071,25 @@
 
 
 
-<section id="exclusive-vault" style="padding:120px 5%; background:linear-gradient(to bottom, #050505, #0a0000); text-align:center; border-top:1px solid rgba(255, 0, 60, 0.2); position:relative; z-index:10;"><div style="font-family:Space Mono,monospace; font-size:0.85rem; color:#ff003c; letter-spacing:4px; margin-bottom:20px; text-transform:uppercase;">NEXUS SOCIETY EXCLUSIVE</div><h2 style="color:#fff; font-size:clamp(2rem, 4vw, 3.5rem); font-weight:600; margin-bottom:30px; text-shadow:0 0 20px rgba(255,0,60,0.3);">THE ELITE VAULT</h2><div style="max-width:800px; margin:0 auto; background:rgba(255,0,60,0.02); border:1px solid rgba(255,0,60,0.1); padding:40px; border-radius:8px; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.5);"><p class="en-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">Our most classified frameworks, proprietary <strong style="color:#ff003c;">HX-5™ methodologies</strong>, and high-tier activations are strictly isolated. They are never published on public channels.</p><p class="en-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">This vault is dedicated exclusively to our private society, elite investors, and global brand partners. Here, you gain direct access to raw architectural blueprints, sensory engineering kits, and uncensored strategic doctrines that dictate the future of human experience.</p><p class="ar-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">أطر عملنا الأكثر سرية، منهجيات <strong style="color:#ff003c;">HX-5™</strong> الخاصة بنا، وتفعيلاتنا عالية المستوى معزولة بصرامة. ولا يتم نشرها أبداً على أي قنوات عامة.</p><p class="ar-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">هذه الخزنة مخصصة حصرياً لمجتمعنا الخاص، نخبة المستثمرين، وشركائنا من العلامات التجارية العالمية. من هنا، ستحصل على وصول مباشر للخرائط المعمارية الخام، أدوات الهندسة الحسية، والعقائد الاستراتيجية غير المفلترة التي تصيغ مستقبل التجربة الإنسانية.</p><a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display:inline-block; padding:18px 50px; background:#ff003c; color:#fff; text-decoration:none; font-family:Space Mono,monospace; font-weight:bold; letter-spacing:2px; border-radius:4px; transition:all 0.4s ease; box-shadow:0 10px 30px rgba(255,0,60,0.3);" onmouseover="this.style.background='#fff'; this.style.color='#ff003c';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';">JOIN OUR SOCIETY</a></div></section>
-
+<section id="exclusive-vault" style="padding:120px 5%; background:linear-gradient(to bottom, #050505, #0a0000); text-align:center; border-top:1px solid rgba(255, 0, 60, 0.2); position:relative; z-index:10;">
+    <div style="font-family:Space Mono,monospace; font-size:0.85rem; color:#ff003c; letter-spacing:4px; margin-bottom:20px; text-transform:uppercase;">フサム | experience™ EXCLUSIVE</div>
+    <h2 style="color:#fff; font-size:clamp(2rem, 4vw, 3.5rem); font-weight:600; margin-bottom:30px; text-shadow:0 0 20px rgba(255,0,60,0.3);">THE ELITE VAULT</h2>
+    <div style="max-width:800px; margin:0 auto; background:rgba(255,0,60,0.02); border:1px solid rgba(255,0,60,0.1); padding:40px; border-radius:8px; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+        <p class="en-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">
+            Our most classified frameworks, proprietary <strong style="color:#ff003c;">HX-5™ methodologies</strong>, and high-tier activations are strictly isolated. They are never published on public channels.
+        </p>
+        <p class="en-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">
+            This vault is dedicated exclusively to our private society, elite investors, and global brand partners. Here, you gain direct access to raw architectural blueprints, sensory engineering kits, and uncensored strategic doctrines that dictate the future of human experience.
+        </p>
+        <p class="ar-only" style="color:#e0e0e0; font-size:1.1rem; line-height:1.9; margin-bottom:20px;">
+            أطر عملنا الأكثر سرية، منهجيات <strong style="color:#ff003c;">HX-5™</strong> الخاصة بنا، وتفعيلاتنا عالية المستوى معزولة بصرامة. ولا يتم نشرها أبداً على أي قنوات عامة.
+        </p>
+        <p class="ar-only" style="color:#aaa; font-size:0.95rem; line-height:1.8; margin-bottom:40px;">
+            هذه الخزنة مخصصة حصرياً لمجتمعنا الخاص، نخبة المستثمرين، وشركائنا من العلامات التجارية العالمية. من هنا، ستحصل على وصول مباشر للخرائط المعمارية الخام، أدوات الهندسة الحسية، والعقائد الاستراتيجية غير المفلترة التي تصيغ مستقبل التجربة الإنسانية.
+        </p>
+        <a href="https://exexperience.gumroad.com/subscribe" target="_blank" style="display:inline-block; padding:18px 50px; background:#ff003c; color:#fff; text-decoration:none; font-family:Space Mono,monospace; font-weight:bold; letter-spacing:2px; border-radius:4px; transition:all 0.4s ease; box-shadow:0 10px 30px rgba(255,0,60,0.3);" onmouseover="this.style.background='#fff'; this.style.color='#ff003c';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';">[ UNLOCK EXCLUSIVE ACCESS ]</a>
+    </div>
+</section>
 </main>
 
     <footer class="site-footer">
