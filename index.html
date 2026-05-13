@@ -614,59 +614,29 @@
     }
 </style>
 
-<style id="mobile-strict-fixes">
-    /* ========================================= */
-    /* STRICT MOBILE PORTRAIT FIXES */
-    /* ========================================= */
+
+
+<style id="unified-nav-engine">
+    /* إخفاء أي شريط علوي منفصل متبقي لتنظيف الشاشة */
+    #nexus-utility-bar { display: none !important; }
     
-    /* 1. لحام الشريط العلوي وإزالة الخط الأبيض البشع (إغلاق شق البكسل) */
-    #nexus-utility-bar {
-        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important;
-        height: 35px !important; z-index: 2147483647 !important;
-        background: #050505 !important; /* لون أسود صلب لمنع التسريب */
-        border: none !important; /* إزالة أي حدود سفلية */
-        box-shadow: none !important;
-        display: flex !important; justify-content: space-between !important; align-items: center !important;
-        padding: 0 4% !important; box-sizing: border-box !important;
+    /* تصميم الكيان المدمج */
+    .top-nav {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important; /* ترتيب الطوابق فوق بعضها */
+        background: #000000 !important; /* أسود صلب بالبداية */
+        z-index: 2147483647 !important;
+        padding: 10px 5% 15px 5% !important;
+        border-bottom: none !important;
+        transition: background 0.4s, backdrop-filter 0.4s !important;
+        box-sizing: border-box !important;
     }
     
-    /* ضبط الشريط الثاني ليلتصق تماماً بالأول بدون فواصل */
-    header, .top-nav, #navbar { 
-        top: 35px !important; 
-        margin-top: 0 !important;
-        border-top: none !important;
-    }
-    body { padding-top: 35px !important; }
-
-    /* 2. تصغير نصوص التقييم والتسجيل، إجبارها على سطر واحد، وتلوينها بالأحمر */
-    #nexus-utility-bar .util-btn, #nexus-utility-bar span {
-        color: #ff003c !important; /* اللون الأحمر المطلوب */
-        white-space: nowrap !important; /* يمنع النزول لسطر جديد نهائياً */
-        font-size: clamp(8px, 2.5vw, 11px) !important; /* تصغير ديناميكي للجوال */
-        letter-spacing: 0px !important;
-        margin: 0 !important; padding: 0 !important;
-        display: inline-block !important;
-    }
-
-    /* 3. تصغير نص زر الدخول (Gumroad) ومنع تكسره في الجوال */
-    #exclusive-vault a, .gumroad-btn {
-        white-space: nowrap !important; /* يمنع نزول النص لسطرين */
-        font-size: clamp(9px, 3vw, 13px) !important; /* تصغير الخط ليتسع */
-        padding: 12px 20px !important; /* تقليل الحواف الجانبية للزر */
-        width: auto !important;
-        max-width: 90vw !important; /* يمنع الزر من الخروج عن حواف الشاشة */
-        display: inline-block !important;
-        letter-spacing: 1px !important;
-    }
-
-    /* حماية إضافية للشاشات الصغيرة جداً (مثل iPhone SE) */
-    @media (max-width: 380px) {
-        #nexus-utility-bar .util-btn, #nexus-utility-bar span { font-size: 7.5px !important; }
-        #exclusive-vault a, .gumroad-btn { font-size: 8.5px !important; padding: 10px 15px !important; }
-    }
-</style>
-<style id="nav-black-fix">
-    /* تحويل الشريط الأبيض إلى أسود شفاف فخم عند النزول */
+    /* عند النزول يتحول لأسود شفاف (بدون خطوط بيضاء نهائياً) */
     .top-nav.scrolled {
         background: rgba(5, 5, 5, 0.90) !important;
         backdrop-filter: blur(15px) !important;
@@ -674,25 +644,14 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
         box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
     }
-    /* إجبار الأيقونات واللوجو على البقاء باللون الأبيض */
-    .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icon {
-        color: #ffffff !important;
-        fill: #ffffff !important;
+    
+    /* الحفاظ على لون اللوجو والأيقونات أبيض دائماً */
+    .top-nav.scrolled .logo-text, .top-nav.scrolled .nav-icon svg {
+        color: #ffffff !important; fill: #ffffff !important;
     }
     
-    /* اللحام النهائي للشريطين بدون أي فواصل بيضاء */
-    #nexus-utility-bar { 
-        height: 35px !important; 
-        background: #000000 !important; /* أسود صلب لمنع أي تسريب ضوئي */
-        border: none !important; 
-    }
-    .top-nav { 
-        top: 35px !important; 
-        margin-top: 0 !important; 
-    }
-    body { 
-        padding-top: 35px !important; 
-    }
+    /* إزاحة الموقع للأسفل ليتنفس أسفل الشريط المدمج */
+    body { padding-top: 80px !important; }
 </style>
 </head>
 <body class="lang-en">
@@ -2472,6 +2431,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
 
 
 
