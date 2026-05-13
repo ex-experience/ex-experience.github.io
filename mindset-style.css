@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-
+﻿
 /* ========================================= */
 /* NEXUS MOBILE PATCH */
 /* ========================================= */
@@ -57,7 +56,7 @@
     z-index: 10000 !important;
 }
 .top-nav.scrolled {
-    top: 40px !important; /* يمنع الشريط من القفز للأعلى عند النزول */
+    top: 40px !important; /* ÙŠÙ…Ù†Ø¹ Ø§Ù„Ø´Ø±ÙŠØ· Ù…Ù† Ø§Ù„Ù‚ÙØ² Ù„Ù„Ø£Ø¹Ù„Ù‰ Ø¹Ù†Ø¯ Ø§Ù„Ù†Ø²ÙˆÙ„ */
 }
 
 /* ========================================= */
@@ -78,9 +77,8 @@
     z-index: 10000 !important;
 }
 .top-nav.scrolled {
-    top: 40px !important; /* يمنع الشريط من القفز للأعلى عند النزول */
+    top: 40px !important; /* ÙŠÙ…Ù†Ø¹ Ø§Ù„Ø´Ø±ÙŠØ· Ù…Ù† Ø§Ù„Ù‚ÙØ² Ù„Ù„Ø£Ø¹Ù„Ù‰ Ø¹Ù†Ø¯ Ø§Ù„Ù†Ø²ÙˆÙ„ */
 }
-=======
 :root {
     --red-glow: #ff003c;
     --cyan: #00f3ff;
@@ -105,7 +103,7 @@ body, html {
 
 .loader-ui {
     position: relative; z-index: 10; text-align: center;
-    pointer-events: none; /* يمنع الضغط اليدوي لتكون التجربة سينمائية تلقائية */
+    pointer-events: none; /* ÙŠÙ…Ù†Ø¹ Ø§Ù„Ø¶ØºØ· Ø§Ù„ÙŠØ¯ÙˆÙŠ Ù„ØªÙƒÙˆÙ† Ø§Ù„ØªØ¬Ø±Ø¨Ø© Ø³ÙŠÙ†Ù…Ø§Ø¦ÙŠØ© ØªÙ„Ù‚Ø§Ø¦ÙŠØ© */
 }
 
 .loader-subtitle {
@@ -132,7 +130,7 @@ body, html {
 
 #main-site {
     position: relative; width: 100%; height: 100vh;
-    opacity: 0; visibility: hidden; /* نخفي الموقع تماماً حتى ينتهي الدماغ من التطور */
+    opacity: 0; visibility: hidden; /* Ù†Ø®ÙÙŠ Ø§Ù„Ù…ÙˆÙ‚Ø¹ ØªÙ…Ø§Ù…Ø§Ù‹ Ø­ØªÙ‰ ÙŠÙ†ØªÙ‡ÙŠ Ø§Ù„Ø¯Ù…Ø§Øº Ù…Ù† Ø§Ù„ØªØ·ÙˆØ± */
 }
 
 #hero-video {
@@ -154,7 +152,7 @@ body, html {
 
 .story-line {
     font-size: 3rem; letter-spacing: 2px; margin: 10px 0;
-    overflow: hidden; white-space: nowrap; width: 0; /* للآلة الكاتبة */
+    overflow: hidden; white-space: nowrap; width: 0; /* Ù„Ù„Ø¢Ù„Ø© Ø§Ù„ÙƒØ§ØªØ¨Ø© */
 }
 
 .scroll-indicator {
@@ -173,4 +171,3 @@ body, html {
     40% { transform: translateY(-15px); text-shadow: 0 0 10px var(--red-glow); }
     60% { transform: translateY(-7px); }
 }
->>>>>>> dd887a052cef4d92b6b8bf302537c018d6cbc641
