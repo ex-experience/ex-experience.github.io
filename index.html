@@ -2624,27 +2624,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-<div id="community-modal" class="ex-modal">
-    <div class="ex-modal-content" style="border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9);">
+
+
+
+<div id="community-modal" class="ex-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999999; justify-content:center; align-items:center; backdrop-filter:blur(5px);">
+    <div class="ex-modal-content" style="border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9); padding:30px; border-radius:8px; text-align:center; width:90%; max-width:400px; font-family:'Space Mono',monospace;">
         <h3 style="margin-top:0; color:#fff; letter-spacing: 2px;">JOIN OUR SOCIETY</h3>
-        <input type="text" id="comm-name" class="ex-input" placeholder="Full Name" style="background:#111; border:1px solid #444; color:#fff;">
-        <input type="email" id="comm-email" class="ex-input" placeholder="Email Address" style="background:#111; border:1px solid #444; color:#fff;">
-        <button class="ex-btn" style="background:#000; border:1px solid #fff; color:#fff; text-transform:uppercase;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='#000'; this.style.color='#fff';" onclick="submitCommunity()">JOIN</button>
+        <input type="text" id="comm-name" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
+        <input type="email" id="comm-email" placeholder="Email Address" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
+        <button style="width:100%; padding:12px; margin-top:15px; background:#ff003c; border:none; color:#fff; font-weight:bold; cursor:pointer; letter-spacing:1px; transition:0.3s; text-transform:uppercase;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';" onclick="submitCommunity()">JOIN THE ELITE</button>
         <button onclick="document.getElementById('community-modal').style.display='none'" style="margin-top:15px; background:none; border:none; color:#666; cursor:pointer;">Close</button>
     </div>
 </div>
 
-<div id="rating-modal" class="ex-modal">
-    <div class="ex-modal-content" style="border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9);">
+<div id="rating-modal" class="ex-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999999; justify-content:center; align-items:center; backdrop-filter:blur(5px);">
+    <div class="ex-modal-content" style="border: 1px solid #333; background: #050505; box-shadow: 0 10px 40px rgba(0,0,0,0.9); padding:30px; border-radius:8px; text-align:center; width:90%; max-width:400px; font-family:'Space Mono',monospace;">
         <h3 style="margin-top:0; color:#fff; letter-spacing: 2px;">RATE US</h3>
-        <input type="text" id="rate-name" class="ex-input" placeholder="Full Name" style="background:#111; border:1px solid #444; color:#fff;">
-        <input type="email" id="rate-email" class="ex-input" placeholder="Email Address" style="background:#111; border:1px solid #444; color:#fff;">
-        <select id="rate-stars" class="ex-input" style="background:#111; border:1px solid #444; color:#fff;">
+        <input type="text" id="rate-name" placeholder="Full Name" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
+        <input type="email" id="rate-email" placeholder="Email Address" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
+        <select id="rate-stars" style="width:100%; padding:12px; margin:10px 0; background:#111; border:1px solid #444; color:#fff; outline:none; box-sizing:border-box;">
             <option value="5">★★★★★ - Exceptional</option>
             <option value="4">★★★★☆ - Great</option>
             <option value="3">★★★☆☆ - Good</option>
         </select>
-        <button class="ex-btn" style="background:#000; border:1px solid #fff; color:#fff; text-transform:uppercase;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='#000'; this.style.color='#fff';" onclick="submitRating()">SUBMIT</button>
+        <button style="width:100%; padding:12px; margin-top:15px; background:#ff003c; border:none; color:#fff; font-weight:bold; cursor:pointer; letter-spacing:1px; transition:0.3s; text-transform:uppercase;" onmouseover="this.style.background='#fff'; this.style.color='#000';" onmouseout="this.style.background='#ff003c'; this.style.color='#fff';" onclick="submitRating()">SUBMIT RATING</button>
         <button onclick="document.getElementById('rating-modal').style.display='none'" style="margin-top:15px; background:none; border:none; color:#666; cursor:pointer;">Close</button>
     </div>
 </div>
