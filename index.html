@@ -2308,6 +2308,7 @@
 
 <div id='community-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #0A84FF; border-radius:12px; color:#fff; text-align:center;'><h3>EXCLUSIVE ACCESS</h3><input type='text' id='comm-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='comm-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><br><button onclick='submitToCommunity()' style='margin-top:15px; padding:12px 24px; background:#0A84FF; color:#fff; border:none; border-radius:5px; cursor:pointer;'>JOIN THE ELITE</button><button onclick="document.getElementById('community-modal').style.display='none'" style='margin-top:15px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div><div id='rating-modal' style='display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100000; justify-content:center; align-items:center;'><div style='background:#050505; padding:40px; border:1px solid #FFD700; border-radius:12px; color:#fff; text-align:center;'><h3>RATE EXPERIENCE</h3><input type='text' id='rate-name' placeholder='Name' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><input type='email' id='rate-email' placeholder='Email' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><select id='rate-stars' style='margin:10px; padding:10px; width:80%; background:#111; color:#fff; border:1px solid #333;'><option value='5'>★★★★★</option><option value='4'>★★★★☆</option><option value='3'>★★★☆☆</option></select><br><button onclick='submitToRating()' style='margin-top:15px; padding:12px 24px; background:#FFD700; color:#000; border:none; border-radius:5px; cursor:pointer; font-weight:bold;'>SUBMIT</button><button onclick="document.getElementById('rating-modal').style.display='none'" style='margin-top:15px; background:none; border:none; color:#888; cursor:pointer; display:block; width:100%;'>Close</button></div></div>
 
+
 <script id="nexus-firebase-core">
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -2405,5 +2406,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
 
 
