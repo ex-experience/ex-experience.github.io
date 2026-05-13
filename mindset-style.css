@@ -12,3 +12,28 @@
 /* MOBILE RESPONSIVE PATCH */
 .main-title, .text-body, .story-line { white-space: normal !important; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; }
 
+
+/* ========================================= */
+/* TOP UTILITY BAR & NAV FIXES */
+/* ========================================= */
+#nexus-utility-bar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 40px !important;
+    background: rgba(5, 5, 5, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 5% !important;
+    z-index: 10005 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+}
+.top-nav {
+    top: 40px !important; /* Push down to avoid overlap */
+    z-index: 10000 !important;
+}
