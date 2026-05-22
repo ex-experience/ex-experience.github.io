@@ -5966,47 +5966,80 @@
     </script>
 
     
-  <script id="nexus-cinematic-core">
-window.addEventListener('load', function() {
-    try {
-        let hero = document.querySelector('.hero') || document.getElementById('hero-section') || document.querySelector('.video-wrapper');
-        if(!hero) return;
+  
+<script id="nexus-clean-engine">
+(function() {
+    window.addEventListener('load', function() {
+        const wrapper = document.querySelector('.video-wrapper');
+        if (!wrapper) return;
+
+        // إفراغ الحاوية
+        wrapper.innerHTML = '';
+
+        // إنشاء الفيديو
+        const v = document.createElement('video');
+        v.autoplay = true;
+        v.loop = true;
+        v.muted = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline', '');
+        v.style.width = '100%';
+        v.style.height = '100%';
+        v.style.objectFit = 'cover';
+        v.style.opacity = '0.5';
         
-        // Purge old elements securely
-        hero.querySelectorAll('video').forEach(v => v.remove());
-        hero.style.cssText += 'background: transparent !important; background-color: transparent !important;';
-        
-        // Inject strictly configured video element
-        let v = document.createElement('video');
-        v.muted = true; v.autoplay = true; v.playsInline = true;
-        v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
-        v.style.cssText = 'position: absolute !important; top: 50% !important; left: 50% !important; min-width: 100% !important; min-height: 100% !important; width: auto !important; height: auto !important; transform: translate(-50%, -50%) !important; object-fit: cover !important; z-index: 0 !important; opacity: 0.35 !important; pointer-events: none !important; border: none !important; outline: none !important; background: transparent !important;';
-        
-        // Protect Text Layer
-        let content = hero.querySelector('.content') || hero.querySelector('.hero-content');
-        if(content) { content.style.position = 'relative'; content.style.zIndex = '2'; }
-        
-        hero.insertBefore(v, hero.firstChild);
-        
-        // Execution Playlist
-        let list = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
+        // قائمة الفيديوهات
+        const list = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
         let idx = 0;
-        
-        function playNext() {
-            v.src = list[idx];
-            let p = v.play();
-            if(p !== undefined) p.catch(e => skip());
-        }
-        function skip() {
+
+        v.src = list[idx];
+        v.addEventListener('ended', () => {
             idx = (idx + 1) % list.length;
-            playNext();
-        }
+            v.src = list[idx];
+            v.play();
+        });
+
+        wrapper.appendChild(v);
+        v.play().catch(e => console.log("Autoplay blocked, user interaction required."));
+    });
+})();
+</script>
+<script id="nexus-clean-engine">
+(function() {
+    window.addEventListener('load', function() {
+        const wrapper = document.querySelector('.video-wrapper');
+        if (!wrapper) return;
+
+        // إفراغ الحاوية
+        wrapper.innerHTML = '';
+
+        // إنشاء الفيديو
+        const v = document.createElement('video');
+        v.autoplay = true;
+        v.loop = true;
+        v.muted = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline', '');
+        v.style.width = '100%';
+        v.style.height = '100%';
+        v.style.objectFit = 'cover';
+        v.style.opacity = '0.5';
         
-        v.addEventListener('ended', skip);
-        v.addEventListener('error', skip);
-        playNext();
-    } catch(err) { console.error("Nexus Video Core Error", err); }
-});
+        // قائمة الفيديوهات
+        const list = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
+        let idx = 0;
+
+        v.src = list[idx];
+        v.addEventListener('ended', () => {
+            idx = (idx + 1) % list.length;
+            v.src = list[idx];
+            v.play();
+        });
+
+        wrapper.appendChild(v);
+        v.play().catch(e => console.log("Autoplay blocked, user interaction required."));
+    });
+})();
 </script>
 </body>
 </html>
