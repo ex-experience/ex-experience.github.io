@@ -645,6 +645,35 @@
     /* إخفاء أي نصوص تحميل متبقية أسفل الشعار */
     #ex-master-loader p, .init-text, #loader-text p { display: none !important; }
 </style>
+<style id="cinematic-video-restore">
+    /* Ensure the wrapper maintains positioning */
+    .hero, .video-wrapper {
+        position: relative !important;
+        overflow: hidden !important;
+        background-color: #000000 !important; /* Fallback */
+    }
+
+    /* Force the video to display, cover the background, and sit above the black fallback but below text */
+    .hero video, .video-wrapper video, video.hero-video, video.bg-video {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 0.85 !important; /* Slight opacity to maintain cinematic dark feel, adjust to 1 if you want full brightness */
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* Ensure text and other content inside the hero section sits above the video */
+    .hero .content, .hero .hero-content, .video-wrapper .content, .hero > div:not(video):not(.video-wrapper) {
+        position: relative !important;
+        z-index: 2 !important;
+    }
+</style>
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
@@ -2622,6 +2651,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<script id="cinematic-video-autoplay">
+document.addEventListener("DOMContentLoaded", function() {
+    // Select all potential hero background videos
+    let heroVideos = document.querySelectorAll('.hero video, .video-wrapper video, video.hero-video, video.bg-video');
+    
+    heroVideos.forEach(video => {
+        // Force HTML5 attributes required by modern browsers for autoplay
+        video.muted = true;
+        video.loop = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+        video.autoplay = true;
+        
+        // Force play promise execution
+        let playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Autoplay started successfully
+                console.log("Cinematic video playback initiated.");
+            }).catch(error => {
+                // Auto-play was prevented. Retry forcefully.
+                console.warn("Autoplay prevented by browser. Forcing playback...", error);
+                video.play();
+            });
+        }
+    });
+});
+</script>
 </body>
 </html>
 
