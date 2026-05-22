@@ -832,7 +832,7 @@
         <a href="#" class="main-logo-txt mono-text glitch-anim">フサム | experience™</a>
         <div class="icons-group">
             <button class="icon-btn" onclick="document.getElementById('portal').scrollIntoView();"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></button>
-            <button class="icon-btn" onclick="toggleLanguage()" style="background:none; border:none; cursor:pointer; padding:0; display:flex; align-items:center;"><svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:currentColor; stroke:none !important;"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm1.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM18.92 16h-2.95a15.65 15.65 0 0 0 1.38-3.56c1.84.63 3.37 1.9 4.33 3.56z"/></svg></button>
+            <button class="icon-btn" onclick="toggleLanguage()" style="background:none; border:none; cursor:pointer; padding:0; display:flex; align-items:center;"><svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; shape-rendering:geometricPrecision;"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg></button>
             <button class="icon-btn" onclick="alert('Privacy & Policy');"><svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg></button>
         </div>
     </div>
@@ -2779,47 +2779,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-<script id="cinematic-playlist-engine">
+
+<script id="cinematic-playlist-engine-v2">
 document.addEventListener("DOMContentLoaded", function() {
-    let heroSection = document.querySelector('.hero') || document.getElementById('hero-section');
+    let heroSection = document.querySelector('.hero') || document.getElementById('hero-section') || document.querySelector('.video-wrapper');
     if (!heroSection) return;
 
-    // Purge old video layers
-    let oldVideos = heroSection.querySelectorAll('video');
-    oldVideos.forEach(v => v.remove());
+    // 1. Purge old layers
+    heroSection.querySelectorAll('video').forEach(v => v.remove());
 
-    // Initialize cinematic element
-    let videoElement = document.createElement('video');
+    // 2. Force Hero Background Transparency (Crucial for video visibility)
+    heroSection.style.setProperty('background-color', 'transparent', 'important');
+    heroSection.style.setProperty('background', 'transparent', 'important');
+
+    // 3. Inject Video with Strict Autoplay Attributes (Bypasses iOS blocks)
+    const videoElement = document.createElement('video');
     videoElement.id = 'cinematic-playlist-video';
-    videoElement.muted = true;
+    videoElement.setAttribute('autoplay', 'autoplay');
+    videoElement.setAttribute('muted', 'muted');
     videoElement.setAttribute('playsinline', '');
     videoElement.setAttribute('webkit-playsinline', '');
+    videoElement.muted = true; // Double enforcement
     
-    // Dimmed cinematic configuration (opacity: 0.3) & Absolute Background Anchor
-    videoElement.style.cssText = 'position: absolute !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; object-fit: cover !important; z-index: 0 !important; opacity: 0.3 !important; pointer-events: none !important; margin: 0 !important; padding: 0 !important; border: none !important;';
+    // Absolute cinematic positioning
+    videoElement.style.cssText = 'position: absolute !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; min-width: 100% !important; min-height: 100% !important; object-fit: cover !important; z-index: 0 !important; opacity: 0.35 !important; pointer-events: none !important; margin: 0 !important; padding: 0 !important; border: none !important;';
 
-    // Protect text layer z-index
+    // 4. Elevate Text Layer
     let content = heroSection.querySelector('.content') || heroSection.querySelector('.hero-content');
     if(content) {
-        content.style.position = 'relative';
-        content.style.zIndex = '2';
+        content.style.setProperty('position', 'relative', 'important');
+        content.style.setProperty('z-index', '2', 'important');
     }
 
     heroSection.insertBefore(videoElement, heroSection.firstChild);
 
-    // Sequential repository files list (including fallback variants)
+    // 5. Sequential Engine (ex1 to ex11)
     const videoList = [
         'ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 
-        'ex6.mp4', 'ex7.mp4', 'ex8.mp4', 'ex9.mp4', 'ex10.mp4', 
-        'ex11.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4'
+        'ex6.mp4', 'ex7.mp4', 'ex8.mp4', 'ex9.mp4', 'ex10.mp4', 'ex11.mp4'
     ];
     let currentIndex = 0;
 
     function playNext() {
         videoElement.src = videoList[currentIndex];
+        videoElement.load(); // Force buffer load
         let playPromise = videoElement.play();
         if (playPromise !== undefined) {
-            playPromise.catch(e => skipToNext());
+            playPromise.catch(e => {
+                console.warn("[NEXUS] Playback blocked or missing file. Skipping to next...", e);
+                skipToNext();
+            });
         }
     }
 
@@ -2828,12 +2837,10 @@ document.addEventListener("DOMContentLoaded", function() {
         playNext();
     }
 
-    // Auto-advance sequence natively
     videoElement.addEventListener('ended', skipToNext);
-    // Fault tolerance: skip instantly if a specific file number is missing
     videoElement.addEventListener('error', skipToNext);
 
-    playNext();
+    playNext(); // Ignite engine
 });
 </script>
 </body>
