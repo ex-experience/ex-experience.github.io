@@ -759,6 +759,48 @@
         text-align: center !important;
     }
 </style>
+<style id="restore-hero-center">
+    /* 1. Reset Hero Container to Perfect Full Screen */
+    .hero, #hero-section, .video-wrapper {
+        position: relative !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* 2. Lock Video to Background */
+    .hero video, .video-wrapper video, video.hero-video, video.bg-video {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 100% !important;
+        min-height: 100% !important;
+        transform: translate(-50%, -50%) !important;
+        object-fit: cover !important;
+        z-index: 0 !important;
+        opacity: 0.85 !important;
+        pointer-events: none !important;
+        display: block !important;
+    }
+
+    /* 3. Lock Text Content to Dead Center (Overriding any previous padding rules) */
+    .hero .content, .hero-content, .video-wrapper .content {
+        position: relative !important;
+        z-index: 2 !important;
+        width: 100% !important;
+        max-width: 900px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 0 5% !important; /* Keep side padding only */
+    }
+</style>
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
