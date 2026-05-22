@@ -674,6 +674,91 @@
         z-index: 2 !important;
     }
 </style>
+<style id="omni-device-responsive-engine">
+    /* 1. GLOBAL VIEWPORT & OVERFLOW PROTECTION */
+    html, body {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        -webkit-text-size-adjust: 100% !important; /* Prevents auto-zoom on orientation change */
+        box-sizing: border-box !important;
+    }
+
+    *, *:before, *:after {
+        box-sizing: inherit !important;
+    }
+
+    /* 2. FLAWLESS FULL-SCREEN HERO & VIDEO CONTAINERS (WEB/TABLET/MOBILE) */
+    .hero, .video-wrapper, #hero-section, .hero-container {
+        position: relative !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100svh !important; /* Modern mobile dynamic viewport fix (iOS Safari/Chrome) */
+        min-height: -webkit-fill-available !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* 3. CINEMATIC VIDEO SCALING ALGORITHM (ADAPTS TO ANY ASPECT RATIO) */
+    .hero video, .video-wrapper video, video.hero-video, video.bg-video {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        min-width: 100% !important;
+        min-height: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        transform: translate(-50%, -50%) !important; /* Absolute dead-center anchor */
+        object-fit: cover !important; /* Forces aspect ratio preservation without distortion */
+        z-index: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* 4. FLUID TYPOGRAPHY & NAVBAR SCALING */
+    #ultimate-navbar {
+        width: 100vw !important;
+        max-width: 100% !important;
+    }
+    
+    .nav-row-1, .nav-row-2 {
+        padding: 0 clamp(10px, 4vw, 5%) !important; /* Scales padding based on screen width */
+    }
+
+    .action-txt {
+        font-size: clamp(8px, 2.5vw, 12px) !important; /* Web: 12px, Mobile: down to 8px */
+    }
+
+    .main-logo-txt {
+        font-size: clamp(14px, 4vw, 20px) !important;
+    }
+
+    /* 5. MODAL RESPONSIVENESS */
+    .ex-modal-content {
+        width: 90vw !important;
+        max-width: 450px !important;
+        padding: clamp(20px, 5vw, 35px) !important;
+    }
+
+    /* 6. CONTENT SECTIONS ADAPTABILITY */
+    section, .content-block, .container {
+        width: 100% !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+        padding: clamp(30px, 8vw, 80px) clamp(15px, 5vw, 50px) !important;
+    }
+    
+    /* Ensure content inside hero is above the video and responsive */
+    .hero .content, .video-wrapper .content {
+        position: relative !important;
+        z-index: 2 !important;
+        width: 90% !important;
+        max-width: 800px !important;
+        text-align: center !important;
+    }
+</style>
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
