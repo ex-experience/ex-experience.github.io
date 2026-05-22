@@ -5967,79 +5967,17 @@
 
     
   
-<script id="nexus-clean-engine">
-(function() {
-    window.addEventListener('load', function() {
-        const wrapper = document.querySelector('.video-wrapper');
-        if (!wrapper) return;
 
-        // إفراغ الحاوية
-        wrapper.innerHTML = '';
 
-        // إنشاء الفيديو
-        const v = document.createElement('video');
-        v.autoplay = true;
-        v.loop = true;
-        v.muted = true;
-        v.playsInline = true;
-        v.setAttribute('playsinline', '');
-        v.style.width = '100%';
-        v.style.height = '100%';
-        v.style.objectFit = 'cover';
-        v.style.opacity = '0.5';
-        
-        // قائمة الفيديوهات
-        const list = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
-        let idx = 0;
-
-        v.src = list[idx];
-        v.addEventListener('ended', () => {
-            idx = (idx + 1) % list.length;
-            v.src = list[idx];
-            v.play();
-        });
-
-        wrapper.appendChild(v);
-        v.play().catch(e => console.log("Autoplay blocked, user interaction required."));
+<script>
+    const videos = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
+    let vIdx = 0;
+    const v = document.getElementById('heroVideo');
+    v.addEventListener('ended', () => {
+        vIdx = (vIdx + 1) % videos.length;
+        v.src = videos[vIdx];
+        v.play();
     });
-})();
-</script>
-<script id="nexus-clean-engine">
-(function() {
-    window.addEventListener('load', function() {
-        const wrapper = document.querySelector('.video-wrapper');
-        if (!wrapper) return;
-
-        // إفراغ الحاوية
-        wrapper.innerHTML = '';
-
-        // إنشاء الفيديو
-        const v = document.createElement('video');
-        v.autoplay = true;
-        v.loop = true;
-        v.muted = true;
-        v.playsInline = true;
-        v.setAttribute('playsinline', '');
-        v.style.width = '100%';
-        v.style.height = '100%';
-        v.style.objectFit = 'cover';
-        v.style.opacity = '0.5';
-        
-        // قائمة الفيديوهات
-        const list = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
-        let idx = 0;
-
-        v.src = list[idx];
-        v.addEventListener('ended', () => {
-            idx = (idx + 1) % list.length;
-            v.src = list[idx];
-            v.play();
-        });
-
-        wrapper.appendChild(v);
-        v.play().catch(e => console.log("Autoplay blocked, user interaction required."));
-    });
-})();
 </script>
 </body>
 </html>
