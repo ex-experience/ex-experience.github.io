@@ -801,6 +801,15 @@
         padding: 0 5% !important; /* Keep side padding only */
     }
 </style>
+<style id="nexus-loader-failsafe">
+    #loader, #preloader, .preloader, #ex-master-loader, .loader-wrapper {
+        animation: forceKillLoader 0.5s ease forwards !important;
+        animation-delay: 2s !important;
+    }
+    @keyframes forceKillLoader {
+        100% { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; z-index: -9999; }
+    }
+</style>
 </head>
 <body class="lang-en">
 <style id="ultimate-nav-css">
@@ -832,7 +841,7 @@
         <a href="#" class="main-logo-txt mono-text glitch-anim">フサム | experience™</a>
         <div class="icons-group">
             <button class="icon-btn" onclick="document.getElementById('portal').scrollIntoView();"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></button>
-            <button class="icon-btn" onclick="toggleLanguage()" style="background:none; border:none; cursor:pointer; padding:0; display:flex; align-items:center;"><svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; shape-rendering:geometricPrecision;"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg></button>
+            <button class="icon-btn" onclick="toggleLanguage()" style="background:none; border:none; cursor:pointer; padding:0; display:flex; align-items:center; z-index:10;"><svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:none !important; stroke:#ffffff !important; stroke-width:1.5;"><circle cx="12" cy="12" r="10" fill="transparent"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="transparent"></path><path d="M2 12h20" fill="transparent"></path></svg></button>
             <button class="icon-btn" onclick="alert('Privacy & Policy');"><svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg></button>
         </div>
     </div>
@@ -2781,67 +2790,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-<script id="cinematic-playlist-engine-v2">
-document.addEventListener("DOMContentLoaded", function() {
-    let heroSection = document.querySelector('.hero') || document.getElementById('hero-section') || document.querySelector('.video-wrapper');
-    if (!heroSection) return;
 
-    // 1. Purge old layers
-    heroSection.querySelectorAll('video').forEach(v => v.remove());
-
-    // 2. Force Hero Background Transparency (Crucial for video visibility)
-    heroSection.style.setProperty('background-color', 'transparent', 'important');
-    heroSection.style.setProperty('background', 'transparent', 'important');
-
-    // 3. Inject Video with Strict Autoplay Attributes (Bypasses iOS blocks)
-    const videoElement = document.createElement('video');
-    videoElement.id = 'cinematic-playlist-video';
-    videoElement.setAttribute('autoplay', 'autoplay');
-    videoElement.setAttribute('muted', 'muted');
-    videoElement.setAttribute('playsinline', '');
-    videoElement.setAttribute('webkit-playsinline', '');
-    videoElement.muted = true; // Double enforcement
-    
-    // Absolute cinematic positioning
-    videoElement.style.cssText = 'position: absolute !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; min-width: 100% !important; min-height: 100% !important; object-fit: cover !important; z-index: 0 !important; opacity: 0.35 !important; pointer-events: none !important; margin: 0 !important; padding: 0 !important; border: none !important;';
-
-    // 4. Elevate Text Layer
-    let content = heroSection.querySelector('.content') || heroSection.querySelector('.hero-content');
-    if(content) {
-        content.style.setProperty('position', 'relative', 'important');
-        content.style.setProperty('z-index', '2', 'important');
-    }
-
-    heroSection.insertBefore(videoElement, heroSection.firstChild);
-
-    // 5. Sequential Engine (ex1 to ex11)
-    const videoList = [
-        'ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 
-        'ex6.mp4', 'ex7.mp4', 'ex8.mp4', 'ex9.mp4', 'ex10.mp4', 'ex11.mp4'
-    ];
-    let currentIndex = 0;
-
-    function playNext() {
-        videoElement.src = videoList[currentIndex];
-        videoElement.load(); // Force buffer load
-        let playPromise = videoElement.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(e => {
-                console.warn("[NEXUS] Playback blocked or missing file. Skipping to next...", e);
-                skipToNext();
-            });
+<script id="nexus-cinematic-core">
+window.addEventListener('load', function() {
+    try {
+        let hero = document.querySelector('.hero') || document.getElementById('hero-section') || document.querySelector('.video-wrapper');
+        if(!hero) return;
+        
+        // Purge old elements securely
+        hero.querySelectorAll('video').forEach(v => v.remove());
+        hero.style.cssText += 'background: transparent !important; background-color: transparent !important;';
+        
+        // Inject strictly configured video element
+        let v = document.createElement('video');
+        v.muted = true; v.autoplay = true; v.playsInline = true;
+        v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+        v.style.cssText = 'position: absolute !important; top: 50% !important; left: 50% !important; min-width: 100% !important; min-height: 100% !important; width: auto !important; height: auto !important; transform: translate(-50%, -50%) !important; object-fit: cover !important; z-index: 0 !important; opacity: 0.35 !important; pointer-events: none !important; border: none !important; outline: none !important; background: transparent !important;';
+        
+        // Protect Text Layer
+        let content = hero.querySelector('.content') || hero.querySelector('.hero-content');
+        if(content) { content.style.position = 'relative'; content.style.zIndex = '2'; }
+        
+        hero.insertBefore(v, hero.firstChild);
+        
+        // Execution Playlist
+        let list = ['ex1.mp4','ex2.mp4','ex3.mp4','ex4.mp4','ex5.mp4','ex6.mp4','ex7.mp4','ex8.mp4','ex9.mp4','ex10.mp4','ex11.mp4'];
+        let idx = 0;
+        
+        function playNext() {
+            v.src = list[idx];
+            let p = v.play();
+            if(p !== undefined) p.catch(e => skip());
         }
-    }
-
-    function skipToNext() {
-        currentIndex = (currentIndex + 1) % videoList.length;
+        function skip() {
+            idx = (idx + 1) % list.length;
+            playNext();
+        }
+        
+        v.addEventListener('ended', skip);
+        v.addEventListener('error', skip);
         playNext();
-    }
-
-    videoElement.addEventListener('ended', skipToNext);
-    videoElement.addEventListener('error', skipToNext);
-
-    playNext(); // Ignite engine
+    } catch(err) { console.error("Nexus Video Core Error", err); }
 });
 </script>
 </body>
