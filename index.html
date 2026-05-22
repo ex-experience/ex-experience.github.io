@@ -2497,7 +2497,7 @@
 <script id="nexus-firebase-core">
 document.addEventListener("DOMContentLoaded", function() {
     
-    // 1. استرجاع بيانات المستخدم إذا كان قد سجل مسبقاً (الاحتفاظ بالبيانات)
+    // 1. Session Persistence
     const savedName = localStorage.getItem('nexus_user_name') || '';
     const savedEmail = localStorage.getItem('nexus_user_email') || '';
     
@@ -2506,13 +2506,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if(document.getElementById('rate-name') && savedName) document.getElementById('rate-name').value = savedName;
     if(document.getElementById('rate-email') && savedEmail) document.getElementById('rate-email').value = savedEmail;
 
-    // 2. محرك التتبع الشامل (يرسل البيانات لـ SecurityLogs)
+    // 2. High-Precision Tracking & Infinite Counter Engine
     window.logToNexus = async function(actionDetail) {
         try {
             let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
             let currentName = localStorage.getItem('nexus_user_name') || "Anonymous";
             let currentEmail = localStorage.getItem('nexus_user_email') || "Unknown";
             
+            // Log raw activity to SecurityLogs
             await fDb.collection('SecurityLogs').add({
                 action: actionDetail,
                 userName: currentName,
@@ -2523,19 +2524,43 @@ document.addEventListener("DOMContentLoaded", function() {
                 screenResolution: window.innerWidth + "x" + window.innerHeight,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
-        } catch(e) { console.warn("Tracking Error - Please check Firebase Rules"); }
+
+            // Initialize and execute absolute atomic counter for page visits
+            if(actionDetail === "Page Loaded / Visited") {
+                let visitorRef = fDb.collection('visitors').doc('total');
+                let docSnap = await visitorRef.get();
+
+                if (!docSnap.exists) {
+                    // Phase 1: Historical Sync - Calculate all existing logs before starting
+                    let logsSnap = await fDb.collection('SecurityLogs').get();
+                    let historicalCount = logsSnap.size; // Exact count of previous logs
+                    
+                    await visitorRef.set({
+                        count: historicalCount + 1,
+                        status: "Active Infinity Counter",
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                } else {
+                    // Phase 2: Atomic Increment - Server-side exact addition (Zero Race Conditions)
+                    await visitorRef.update({
+                        count: firebase.firestore.FieldValue.increment(1),
+                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+            }
+        } catch(e) { console.warn("Firestore Check: Ensure database read/write rules are active."); }
     };
 
-    // تتبع أي نقرة على أي زر في الموقع
+    // 3. UI Interaction Listeners
     document.body.addEventListener('click', function(e) {
-        let target = e.target.closest('button, a, .util-btn, .gumroad-btn');
+        let target = e.target.closest('button, a, .util-btn, .gumroad-btn, .action-txt');
         if(target) {
             let btnText = target.innerText.replace(/\n/g, ' ').substring(0, 40).trim() || "Icon/Element";
             logToNexus("Clicked: " + btnText);
         }
     });
 
-    // 3. دوال التسجيل والتقييم (معدلة لتخفي النافذة فوراً وتتجاهل حظر الفايربيس ظاهرياً)
+    // 4. Modals Execution Logic
     window.submitCommunity = window.submitToCommunity = async function() {
         let nInput = document.getElementById('comm-name');
         let eInput = document.getElementById('comm-email');
@@ -2544,10 +2569,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if(!name || !email) return alert('يرجى تعبئة جميع الحقول / Please fill all fields');
 
-        // إخفاء النافذة فوراً لعدم إزعاج المستخدم
-        document.getElementById('community-modal').style.display = 'none';
+        let modal = document.getElementById('community-modal');
+        if(modal) modal.style.display = 'none';
 
-        // حفظ البيانات في ذاكرة المتصفح
         localStorage.setItem('nexus_user_name', name);
         localStorage.setItem('nexus_user_email', email);
 
@@ -2557,7 +2581,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 Name: name, Email: email, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Elite Vault"
             });
             logToNexus("Joined Society Successfully");
-        } catch(e) { console.error("Firebase Blocked the save due to Rules."); }
+        } catch(e) { console.error("Database connection refused."); }
     };
 
     window.submitRating = window.submitToRating = async function() {
@@ -2570,8 +2594,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if(!name || !email) return alert('يرجى تعبئة جميع الحقول / Please fill all fields');
 
-        // إخفاء النافذة فوراً
-        document.getElementById('rating-modal').style.display = 'none';
+        let modal = document.getElementById('rating-modal');
+        if(modal) modal.style.display = 'none';
 
         localStorage.setItem('nexus_user_name', name);
         localStorage.setItem('nexus_user_email', email);
@@ -2582,10 +2606,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 Name: name, Email: email, Rating: stars, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Rating Form"
             });
             logToNexus("Rated Experience: " + stars + " Stars");
-        } catch(e) { console.error("Firebase Blocked the save due to Rules."); }
+        } catch(e) { console.error("Database connection refused."); }
     };
     
-    // تسجيل الدخول للصفحة فوراً
+    // Trigger initial visit counter sequence
     setTimeout(() => logToNexus("Page Loaded / Visited"), 2500);
 });
 </script>
