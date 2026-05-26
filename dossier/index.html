@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hussam Tahiri | Sovereign Experience Architect. Specialized in sensory-focused brand design, AI-assisted ecosystems, and strategic architecture.">
-    <meta property="og:title" content="Hussam Tahiri | Executive Dossier">
-    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://ex-experience.github.io/dossier/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/png" href="favicon.png">
     <title>HUSSAM TAHIRI | SOVEREIGN ARCHITECT</title>
     
     <style>
@@ -15,64 +16,82 @@
             --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: var(--font); margin: 0; padding: 40px 20px; line-height: 1.6; display: flex; justify-content: center; }
-        .container { max-width: 800px; width: 100%; }
+        body { background: var(--bg); color: var(--text); font-family: var(--font); margin: 0; padding: 80px 20px; display: flex; justify-content: center; min-height: 100vh; }
+        .container { max-width: 700px; width: 100%; animation: fadeInUp 1.2s ease-out forwards; }
         
-        /* Typography */
-        h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: -0.05em; color: var(--highlight); margin: 0; }
-        h2 { font-size: 0.9rem; font-weight: 400; color: #888; text-transform: uppercase; letter-spacing: 3px; margin: 15px 0 50px 0; }
-        h3 { font-size: 1rem; color: var(--highlight); margin-top: 40px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; }
-        p { font-size: 1rem; color: #a0a0a0; margin-bottom: 20px; }
-        
-        /* Branding & Legal */
-        .legal-note { font-size: 0.65rem; color: #555; margin-top: 80px; text-transform: uppercase; letter-spacing: 1px; }
-        .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 30px; margin: 40px 0; }
-        .brand-item { width: 80px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .brand-item img { max-width: 100%; max-height: 100%; filter: grayscale(1) brightness(0.6); transition: 0.4s; }
-        .brand-item:hover img { filter: grayscale(0) brightness(1); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        .btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s; }
-        .btn:hover { border-color: var(--highlight); color: var(--highlight); }
+        h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: -0.05em; color: var(--highlight); margin: 0; }
+        h2 { font-size: 0.8rem; font-weight: 400; color: #888; text-transform: uppercase; letter-spacing: 3px; margin: 15px 0 60px 0; }
+        h3 { font-size: 0.9rem; color: var(--highlight); margin-top: 60px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        p { font-size: 1rem; color: #a0a0a0; margin-bottom: 30px; line-height: 1.7; }
+        
+        .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 25px; margin-top: 40px; }
+        .brand-item { width: 80px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .brand-item img { max-width: 100%; max-height: 100%; filter: grayscale(100%) opacity(0.4); transition: 0.4s; }
+        .brand-item:hover img { filter: grayscale(0%) opacity(1); }
+
+        .legal-note { font-size: 0.6rem; color: #444; margin-top: 100px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+        .lang-switcher { position: fixed; top: 20px; left: 20px; font-size: 0.7rem; }
+        .lang-switcher a { color: #555; text-decoration: none; margin: 0 5px; cursor: pointer; }
     </style>
 </head>
 <body>
+<div class="lang-switcher">
+    <a onclick="setLang('en')">EN</a> | <a onclick="setLang('ar')">AR</a>
+</div>
+
 <div class="container">
     <h1>HUSSAM TAHIRI</h1>
-    <h2>Architecting Sovereign Experience Frameworks</h2>
+    <h2>Designing Systems of Perception, Identity, and Experience</h2>
 
     <h3>[ PHILOSOPHY ]</h3>
     <p>Specialized in cinematic digital systems, AI-assisted workflows, experience architecture, and strategic brand ecosystems. Focused on deconstructing traditional consumption rituals to engineer human-centric, minimalist luxury environments.</p>
 
-    <h3>[ DOMAINS OF EXPERTISE ]</h3>
-    <p>• <strong>Brand Architecture:</strong> Exploring frameworks for sensory-focused identity and DNA modeling.</p>
-    <p>• <strong>System Engineering:</strong> Developing infrastructure architectures and workflow automation.</p>
-    <p>• <strong>Visual Intelligence:</strong> Cinematic direction and strategic brand storytelling.</p>
+    <h3>[ STRATEGIC DOMAINS ]</h3>
+    <p><strong>Brand Architecture:</strong> Exploring frameworks for sensory-focused identity and DNA modeling.<br>
+    <strong>System Engineering:</strong> Developing infrastructure architectures and workflow automation.<br>
+    <strong>Visual Intelligence:</strong> Cinematic direction and strategic brand storytelling.</p>
 
-    <h3>[ INDUSTRY INFLUENCE ]</h3>
+    <h3>[ STRATEGIC PARTNERSHIPS ]</h3>
     <div class="brand-grid">
-        <div class="brand-item"><img src="logos/ex.puma.png.webp" alt="Puma"></div>
-        <div class="brand-item"><img src="logos/ex.nike.png.webp" alt="Nike"></div>
-        <div class="brand-item"><img src="logos/ex.adidas.png.png" alt="Adidas"></div>
-        <div class="brand-item"><img src="logos/ex.umbro.png.jpg" alt="Umbro"></div>
-        <div class="brand-item"><img src="logos/ex.macron.png" alt="Macron"></div>
-        <div class="brand-item"><img src="logos/ex.a6.png.webp" alt="ASICS"></div>
-        <div class="brand-item"><img src="logos/ex.soccerscene.png.jpeg" alt="Soccer Scene"></div>
-        <div class="brand-item"><img src="logos/ex.alahli.png.png" alt="Alahli FC"></div>
-        <div class="brand-item"><img src="logos/ex.ittihad.png.jpg" alt="Ittihad FC"></div>
-        <div class="brand-item"><img src="logos/ex.crkd.png.jpg" alt="Crkd.guru"></div>
-        <div class="brand-item"><img src="logos/ex.caffienelab.png.jpg" alt="Caffeine Lab"></div>
-        <div class="brand-item"><img src="logos/ex.brew92.png.jpg" alt="Brew92"></div>
-        <div class="brand-item"><img src="logos/ex.sanremo.png.webp" alt="Sanremo"></div>
-        <div class="brand-item"><img src="logos/ex.victoria.png.webp" alt="Victoria Arduino"></div>
-        <div class="brand-item"><img src="logos/ex.lamarzocco.png.png" alt="La Marzocco"></div>
-        <div class="brand-item"><img src="logos/ex.slayer.png.jpeg" alt="Slayer"></div>
-        <div class="brand-item"><img src="logos/ex.kvdw.png.png" alt="Kees Van Der Westen"></div>
-        <div class="brand-item"><img src="logos/ex.fitbit.webp.webp" alt="Fitbit"></div>
+        <div class="brand-item"><img src="logos/puma.webp" alt="Puma" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/nike.webp" alt="Nike" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/adidas.png" alt="Adidas" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/umbro.jpg" alt="Umbro" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/macron.png" alt="Macron" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/asics.webp" alt="ASICS" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/soccer.jpeg" alt="Soccer Scene" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/alahli.png" alt="Alahli FC" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/ittihad.jpg" alt="Ittihad FC" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/crkd.jpg" alt="Crkd.guru" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/caffeine.jpg" alt="Caffeine Lab" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/brew92.jpg" alt="Brew92" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/sanremo.webp" alt="Sanremo" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/victoria.webp" alt="Victoria Arduino" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/lamarzocco.png" alt="La Marzocco" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/slayer.jpeg" alt="Slayer" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/kvdw.png" alt="Kees Van Der Westen" loading="lazy" decoding="async"></div>
+        <div class="brand-item"><img src="logos/fitbit.webp" alt="Fitbit" loading="lazy" decoding="async"></div>
     </div>
 
     <footer class="legal-note">
-        Logos displayed are for visual reference and represent past market research, industry inspiration, cultural influence, or publicly referenced ecosystems. No official endorsement or partnership is claimed unless explicitly stated.
+        No affiliation, endorsement, sponsorship, or official partnership is implied or claimed unless formally disclosed. Logos are for visual reference and represent industry inspiration or cultural influence.
     </footer>
 </div>
+<script>
+    const data = {
+        en: { name: "HUSSAM TAHIRI", role: "DESIGNING SYSTEMS OF PERCEPTION, IDENTITY, AND EXPERIENCE" },
+        ar: { name: "حسام طاهري", role: "هندسة أنظمة الإدراك، الهوية، والتجربة" }
+    };
+    function setLang(l) {
+        document.body.dir = (l==='ar')?'rtl':'ltr';
+        document.getElementById('name').innerText = data[l].name;
+        document.getElementById('role').innerText = data[l].role;
+    }
+</script>
 </body>
 </html>
