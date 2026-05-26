@@ -16,15 +16,30 @@
             --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: var(--font); margin: 0; padding: 80px 20px; display: flex; justify-content: center; min-height: 100vh; }
-        .container { max-width: 700px; width: 100%; animation: fadeInUp 1.2s ease-out forwards; }
+        
+        body { 
+            background: var(--bg); color: var(--text); font-family: var(--font); 
+            margin: 0; padding: 80px 20px; display: flex; justify-content: center; 
+            min-height: 100vh; position: relative;
+        }
+
+        /* Ambient Layer */
+        body::before {
+            content: ""; position: fixed; inset: 0; pointer-events: none;
+            background: radial-gradient(circle at top center, rgba(255,255,255,0.04), transparent 60%);
+        }
+
+        .container { 
+            max-width: 700px; width: 100%; 
+            animation: fadeInUp 1.4s cubic-bezier(.16,1,.3,1) forwards;
+        }
         
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: -0.05em; color: var(--highlight); margin: 0; }
+        h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: -0.05em; color: var(--highlight); margin: 0; line-height: 0.9; }
         h2 { font-size: 0.8rem; font-weight: 400; color: #888; text-transform: uppercase; letter-spacing: 3px; margin: 15px 0 60px 0; }
         h3 { font-size: 0.9rem; color: var(--highlight); margin-top: 60px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
         p { font-size: 1rem; color: #a0a0a0; margin-bottom: 30px; line-height: 1.7; }
@@ -45,8 +60,8 @@
 </div>
 
 <div class="container">
-    <h1>HUSSAM TAHIRI</h1>
-    <h2>Designing Systems of Perception, Identity, and Experience</h2>
+    <h1 id="name">HUSSAM TAHIRI</h1>
+    <h2 id="role">Designing Systems of Perception, Identity, and Experience</h2>
 
     <h3>[ PHILOSOPHY ]</h3>
     <p>Specialized in cinematic digital systems, AI-assisted workflows, experience architecture, and strategic brand ecosystems. Focused on deconstructing traditional consumption rituals to engineer human-centric, minimalist luxury environments.</p>
@@ -56,7 +71,7 @@
     <strong>System Engineering:</strong> Developing infrastructure architectures and workflow automation.<br>
     <strong>Visual Intelligence:</strong> Cinematic direction and strategic brand storytelling.</p>
 
-    <h3>[ STRATEGIC PARTNERSHIPS ]</h3>
+    <h3>[ SELECTED ECOSYSTEMS ]</h3>
     <div class="brand-grid">
         <div class="brand-item"><img src="logos/puma.webp" alt="Puma" loading="lazy" decoding="async"></div>
         <div class="brand-item"><img src="logos/nike.webp" alt="Nike" loading="lazy" decoding="async"></div>
@@ -84,7 +99,7 @@
 </div>
 <script>
     const data = {
-        en: { name: "HUSSAM TAHIRI", role: "DESIGNING SYSTEMS OF PERCEPTION, IDENTITY, AND EXPERIENCE" },
+        en: { name: "HUSSAM TAHIRI", role: "Designing Systems of Perception, Identity, and Experience" },
         ar: { name: "حسام طاهري", role: "هندسة أنظمة الإدراك، الهوية، والتجربة" }
     };
     function setLang(l) {
