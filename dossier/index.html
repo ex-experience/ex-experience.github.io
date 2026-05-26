@@ -2,44 +2,1372 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUSSAM TAHIRI | EXECUTIVE DOSSIER</title>
     <style>
-        :root { --bg: #121212; --text: #E0E0E0; --highlight: #FFFFFF; }
-        body { background: var(--bg); color: var(--text); font-family: monospace; padding: 40px; }
-        .container { max-width: 900px; margin: auto; }
-        .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 20px; }
-        .brand-item { width: 100px; height: 60px; object-fit: contain; filter: grayscale(1) brightness(2); }
-        .sys-log { color: #333; font-size: 8px; }
+        :root { --bg: #121212; --text: #E0E0E0; --highlight: #FFFFFF; --accent: #333333; --border: #555; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); background-size: 60px 60px; overflow-x: hidden; }
+        .container { width: 90%; max-width: 900px; padding: clamp(30px, 5vw, 60px) 15px; opacity: 0; animation: fadeIn 2s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .lang-switcher { position: fixed; top: 20px; left: 20px; font-family: 'Courier New', monospace; z-index: 100; background: rgba(18,18,18,0.8); padding: 5px 10px; border: 1px solid var(--accent); backdrop-filter: blur(5px); }
+        .lang-switcher a { color: #888; text-decoration: none; margin: 0 5px; cursor: pointer; transition: 0.3s; }
+        .lang-switcher a:hover { color: var(--highlight); }
+        .sys-header { font-family: 'Courier New', monospace; font-size: clamp(0.55rem, 1.5vw, 0.85rem); color: #888; border-bottom: 1px solid var(--accent); padding-bottom: 10px; margin-bottom: 40px; letter-spacing: 2px; text-transform: uppercase; }
+        h1 { font-size: clamp(1.8rem, 6vw, 3.5rem); color: var(--highlight); margin: 0; font-weight: 300; letter-spacing: -1px;}
+        h2 { font-size: clamp(0.65rem, 2.5vw, 1rem); color: #aaa; margin: 10px 0 40px 0; font-family: 'Courier New', monospace; letter-spacing: 1px;}
+        .section { margin-bottom: 50px; border-left: 2px solid var(--accent); padding-left: 20px; }
+        [dir="rtl"] .section { border-left: none; border-right: 2px solid var(--accent); padding-left: 0; padding-right: 20px; }
+        .section-title { font-family: 'Courier New', monospace; font-size: clamp(0.8rem, 2.5vw, 1.2rem); color: var(--highlight); margin-bottom: 20px; letter-spacing: 1.5px; }
+        .section-content p, .section-content li { font-size: clamp(0.9rem, 2vw, 1.05rem); line-height: 1.8; color: #ccc; }
+        .section-content ul { list-style: none; padding: 0; margin: 0; }
+        .section-content li { margin-bottom: 15px; position: relative; padding-left: 20px; }
+        [dir="rtl"] .section-content li { padding-left: 0; padding-right: 20px; }
+        .section-content li::before { content: '■'; position: absolute; left: 0; color: var(--border); font-size: 0.8rem; top: 5px; }
+        [dir="rtl"] .section-content li::before { left: auto; right: 0; }
+        
+        /* BRAND GRID (LOGOS ONLY) */
+        .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 20px; margin-top: 30px; align-items: center; justify-items: center; }
+        .brand-item { width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; padding: 10px; border: 1px solid transparent; transition: 0.4s; }
+        .brand-item img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: 0.4s; }
+        .brand-item:hover { border-color: var(--accent); background: rgba(255,255,255,0.02); transform: translateY(-3px); }
+        .brand-item:hover img { filter: grayscale(0%) opacity(1); }
+        
+        .service-card { border: 1px solid var(--accent); padding: 20px; margin-bottom: 15px; background: rgba(0,0,0,0.2); transition: 0.3s; }
+        .service-card:hover { border-color: #666; }
+        .service-card h4 { margin: 0 0 10px 0; color: #fff; font-family: 'Courier New', monospace; }
+        .service-card p { margin: 0; font-size: 0.85rem; color: #aaa; line-height: 1.6;}
+        .bridge-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--accent); text-align: center; }
+        .btn-sovereign { display: inline-block; padding: 15px 30px; border: 1px solid var(--border); color: var(--highlight); text-decoration: none; font-family: 'Courier New', monospace; transition: 0.3s; letter-spacing: 2px;}
+        .btn-sovereign:hover { background-color: var(--highlight); color: var(--bg); }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>HUSSAM TAHIRI</h1>
-    <div class="brand-grid">
-        <img src="logos/ex.puma.png.webp" class="brand-item">
-        <img src="logos/ex.nike.png.webp" class="brand-item">
-        <img src="logos/ex.adidas.png.png" class="brand-item">
-        <img src="logos/ex.umbro.png.jpg" class="brand-item">
-        <img src="logos/ex.macron.png" class="brand-item">
-        <img src="logos/ex.a6.png.webp" class="brand-item">
-        <img src="logos/ex.soccerscene.png.jpeg" class="brand-item">
-        <img src="logos/ex.alahli.png.png" class="brand-item">
-        <img src="logos/ex.ittihad.png.jpg" class="brand-item">
-        <img src="logos/ex.crkd.png.jpg" class="brand-item">
-        <img src="logos/ex.caffienelab.png.jpg" class="brand-item">
-        <img src="logos/ex.brew92.png.jpg" class="brand-item">
-        <img src="logos/ex.sanremo.png.webp" class="brand-item">
-        <img src="logos/ex.victoria.png.webp" class="brand-item">
-        <img src="logos/ex.lamarzocco.png.png" class="brand-item">
-        <img src="logos/ex.slayer.png.jpeg" class="brand-item">
-        <img src="logos/ex.kvdw.png.png" class="brand-item">
-        <img src="logos/ex.fitbit.png.webp" class="brand-item">
-    </div>
-    <div class="sys-log" id="logs"></div>
+<div class="lang-switcher">
+    <a onclick="setLang('en')">EN</a> | <a onclick="setLang('ar')">AR</a> | <a onclick="setLang('fr')">FR</a> | <a onclick="setLang('jp')">JP</a>
 </div>
+<div class="container">
+    <div class="sys-header">[ SYSTEM INITIATION ] PROTOCOL: HX-5 VERIFIED.</div>
+    <h1 id="name"></h1>
+    <h2 id="role"></h2>
+    
+    <div class="section">
+        <div class="section-title" id="p1-title"></div>
+        <div class="section-content"><p id="p1-desc"></p></div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title" id="p2-title"></div>
+        <div class="section-content"><ul id="p2-list"></ul></div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title" id="p3-title"></div>
+        <div class="section-content"><ul id="p3-list"></ul></div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title" id="services-title"></div>
+        <div class="section-content" id="services-list"></div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title" id="brands-title"></div>
+        <div class="brand-grid">
+            <div class="brand-item"><img src="logos/ex.puma.png.webp" alt="Puma"></div>
+            <div class="brand-item"><img src="logos/ex.nike.png.webp" alt="Nike"></div>
+            <div class="brand-item"><img src="logos/ex.adidas.png.png" alt="Adidas"></div>
+            <div class="brand-item"><img src="logos/ex.umbro.png.jpg" alt="Umbro"></div>
+            <div class="brand-item"><img src="logos/ex.macron.png" alt="Macron"></div>
+            <div class="brand-item"><img src="logos/ex.a6.png.webp" alt="ASICS"></div>
+            <div class="brand-item"><img src="logos/ex.soccerscene.png.jpeg" alt="Soccer Scene"></div>
+            <div class="brand-item"><img src="logos/ex.alahli.png.png" alt="Alahli FC"></div>
+            <div class="brand-item"><img src="logos/ex.ittihad.png.jpg" alt="Ittihad FC"></div>
+            <div class="brand-item"><img src="logos/ex.crkd.png.jpg" alt="Crkd.guru"></div>
+            <div class="brand-item"><img src="logos/ex.caffienelab.png.jpg" alt="Caffeine Lab"></div>
+            <div class="brand-item"><img src="logos/ex.brew92.png.jpg" alt="Brew92"></div>
+            <div class="brand-item"><img src="logos/ex.sanremo.png.webp" alt="Sanremo"></div>
+            <div class="brand-item"><img src="logos/ex.victoria.png.webp" alt="Victoria Arduino"></div>
+            <div class="brand-item"><img src="logos/ex.lamarzocco.png.png" alt="La Marzocco"></div>
+            <div class="brand-item"><img src="logos/ex.slayer.png.jpeg" alt="Slayer"></div>
+            <div class="brand-item"><img src="logos/ex.kvdw.png.png" alt="Kees Van Der Westen"></div>
+            <div class="brand-item"><img src="logos/ex.fitbit.png.webp" alt="Fitbit"></div>
+        </div>
+    </div>
+    
+    <div class="bridge-section"><a href="https://ex-experience.github.io" class="btn-sovereign" id="btn-text"></a></div>
+</div>
+
 <script>
-    const logDiv = document.getElementById('logs');
-    for(let i=0; i<1000; i++) { logDiv.innerHTML += "SYSTEM_SECURE_NODE_" + i + "<br>"; }
+    const data = {
+        en: { 
+            name: "HUSSAM TAHIRI", role: "[ EXECUTIVE ARCHITECT & SENSORY STRATEGIST ]", 
+            p1t: "[ PHASE 01 : THE NEGATIVE AUDIT ]", 
+            p1d: "This is not a traditional CV; this is a Negative Audit. I deconstruct the relationship between human, entity, and space, reprogramming them to create unforgettable consumption rituals. I merge operational rigor, AI precision, and cinematic aesthetics to build integrated ecosystems of minimalist luxury.", 
+            p2t: "[ PHASE 02 : CORE MECHANICS ]",
+            p2l: "<li><b>Sensory Design:</b> Engineering sensory labs and art direction.</li><li><b>Cinematic Production:</b> Strategic planning for TRACK 35.</li><li><b>Digital Sovereignty:</b> Autonomous ecosystems using AI.</li><li><b>Operational Intelligence:</b> Audit protocols for system robustness.</li><li><b>Logistical Mechanics:</b> Operations and supply chains with global leaders.</li>",
+            p3t: "[ PHASE 03 : OPERATIONAL DEPLOYMENTS ]",
+            p3l: "<li><b>[ v.2025 - PRESENT ]</b> Founder & CEO - フサム | experience™</li><li><b>[ v.2022 - 2026 ]</b> Strategic Consultant (Hospitality, Fashion & Creative Direction)</li><li><b>[ v.2018 - 2021 ]</b> Strategic Marketing & Brand Engineering</li><li><b>[ v.2012 - 2017 ]</b> Full Operations Management</li>",
+            svt: "[ LIVE CAPABILITY : ENTERPRISE SERVICES ]",
+            svl: "<div class='service-card'><h4>Brand Genesis & DNA Architecture</h4><p>Strategic positioning, Sensory Identity, and Psychological Profiling.</p></div><div class='service-card'><h4>Infrastructure & Digital Architecture</h4><p>Zero-Trust Architecture, Cloud Infrastructure, DNS Engineering.</p></div><div class='service-card'><h4>Deep Intelligence & Predictive Analytics</h4><p>Comprehensive Negative Auditing, Stress Testing, and Behavioral Mapping.</p></div>",
+            brt: "[ STRATEGIC BRAND PARTNERSHIPS ]", btn: "[ INITIATE SOVEREIGN PORTAL ]", dir: "ltr" 
+        },
+        ar: { 
+            name: "حسام طاهري", role: "[ مهندس تنفيذي ومستشار حسي ]", 
+            p1t: "[ المرحلة 01 : التدقيق العكسي ]", 
+            p1d: "هذه ليست سيرة ذاتية تقليدية؛ هذا تدقيق عكسي. أقوم بتفكيك العلاقة بين الإنسان والكيان والمساحة، لإعادة برمجتها وخلق طقوس استهلاكية لا تُنسى. أدمج الصرامة التشغيلية، دقة الذكاء الاصطناعي، والجماليات السينمائية لبناء أنظمة ذات فخامة بسيطة.", 
+            p2t: "[ المرحلة 02 : الميكانيكا الأساسية ]",
+            p2l: "<li><b>التصميم الحسي:</b> هندسة المختبرات الحسية وإدارة التوجه الفني.</li><li><b>الإنتاج السينمائي:</b> التخطيط لمشروع TRACK 35.</li><li><b>السيادة الرقمية:</b> بناء النظم المستقلة بالذكاء الاصطناعي.</li><li><b>الاستخبارات التشغيلية:</b> التدقيق الأمني لضمان متانة الأنظمة.</li><li><b>الميكانيكا اللوجستية:</b> إدارة العمليات وسلاسل الإمداد.</li>",
+            p3t: "[ المرحلة 03 : العمليات التشغيلية ]",
+            p3l: "<li><b>[ v.2025 - PRESENT ]</b> المؤسس والمدير التنفيذي - フサム | experience™</li><li><b>[ v.2022 - 2026 ]</b> مستشار استراتيجي مستقل</li><li><b>[ v.2018 - 2021 ]</b> التوجيه الاستراتيجي وهندسة العلامات التجارية</li><li><b>[ v.2012 - 2017 ]</b> الإدارة التشغيلية الشاملة</li>",
+            svt: "[ برهان مادي : حزم خدمات المؤسسات ]",
+            svl: "<div class='service-card'><h4>تأسيس وهندسة الحمض النووي للعلامة</h4><p>التموضع الاستراتيجي، الهوية الحسية، والتنميط السلوكي.</p></div><div class='service-card'><h4>البنية التحتية والسيادة الرقمية</h4><p>بنية الثقة المعدومة وأنظمة DNS.</p></div><div class='service-card'><h4>الاستخبارات العميقة والتحليلات التنبؤية</h4><p>التدقيق العكسي الشامل واختبارات الإجهاد.</p></div>",
+            brt: "[ الشراكات الاستراتيجية ]", btn: "[ العبور للبوابة السيادية ]", dir: "rtl" 
+        },
+        fr: { 
+            name: "HUSSAM TAHIRI", role: "[ ARCHITECTE EXÉCUTIF & STRATÈGE ]", 
+            p1t: "[ PHASE 01 : L'AUDIT NÉGATIF ]", 
+            p1d: "Ce n'est pas un CV traditionnel ; c'est un audit négatif. Je déconstruis la relation entre l'humain, l'entité et l'espace pour créer des rituels inoubliables.", 
+            p2t: "[ PHASE 02 : MÉCANIQUES PRINCIPALES ]",
+            p2l: "<li><b>Design Sensoriel:</b> Ingénierie des laboratoires sensoriels.</li><li><b>Production:</b> Planification pour TRACK 35.</li><li><b>Souveraineté Numérique:</b> Écosystèmes autonomes.</li><li><b>Intelligence Opérationnelle:</b> Protocoles d'audit.</li><li><b>Mécanique Logistique:</b> Gestion des opérations.</li>",
+            p3t: "[ PHASE 03 : DÉPLOIEMENTS OPÉRATIONNELS ]",
+            p3l: "<li><b>[ v.2025 - PRÉSENT ]</b> Fondateur & PDG - フサム | experience™</li><li><b>[ v.2022 - 2026 ]</b> Consultant Stratégique</li><li><b>[ v.2018 - 2021 ]</b> Ingénierie de Marque</li><li><b>[ v.2012 - 2017 ]</b> Gestion des Opérations</li>",
+            svt: "[ CAPACITÉ EN DIRECT : SERVICES D'ENTREPRISE ]",
+            svl: "<div class='service-card'><h4>Architecture ADN</h4><p>Positionnement stratégique.</p></div><div class='service-card'><h4>Architecture Numérique</h4><p>Architecture Zero-Trust.</p></div><div class='service-card'><h4>Intelligence Profonde</h4><p>Audit négatif complet.</p></div>",
+            brt: "[ PARTENARIATS STRATÉGIQUES ]", btn: "[ ACCÉDER AU PORTAIL ]", dir: "ltr" 
+        },
+        jp: { 
+            name: "フサム・タヒリ", role: "[ エグゼクティブ・アーキテクト ]", 
+            p1t: "[ フェーズ 01 : ネガティブ・オーディット ]", 
+            p1d: "これは従来の履歴書ではなく、ネガティブ・オーディットです。人間、存在、空間の間の関係を解体し、消費の儀式を再構築します。", 
+            p2t: "[ フェーズ 02 : 基本メカニクス ]",
+            p2l: "<li><b>感覚的デザイン:</b> 感覚ラボのエンジニアリング。</li><li><b>映画製作:</b> TRACK 35の戦略的計画。</li><li><b>デジタル主権:</b> AIを利用した自律型エコシステム。</li><li><b>インテリジェンス:</b> セキュリティ監査。</li><li><b>ロジスティクス:</b> サプライチェーン管理。</li>",
+            p3t: "[ フェーズ 03 : オペレーショナル展開 ]",
+            p3l: "<li><b>[ v.2025 - 現在 ]</b> 創設者兼CEO - フサム | experience™</li><li><b>[ v.2022 - 2026 ]</b> 戦略コンサルタント</li><li><b>[ v.2018 - 2021 ]</b> ブランドエンジニアリング</li><li><b>[ v.2012 - 2017 ]</b> オペレーション管理</li>",
+            svt: "[ ライブ機能：エンタープライズサービス ]",
+            svl: "<div class='service-card'><h4>ブランドDNAアーキテクチャ</h4><p>戦略的ポジショニング。</p></div><div class='service-card'><h4>デジタルアーキテクチャ</h4><p>ゼロトラストアーキテクチャ。</p></div><div class='service-card'><h4>予測分析</h4><p>ネガティブ監査。</p></div>",
+            brt: "[ 戦略的ブランドパートナーシップ ]", btn: "[ ソブリンポータルへ ]", dir: "ltr" 
+        }
+    };
+
+    function setLang(lang) {
+        const d = data[lang];
+        document.body.dir = d.dir;
+        document.getElementById('name').innerHTML = d.name;
+        document.getElementById('role').innerHTML = d.role;
+        document.getElementById('p1-title').innerHTML = d.p1t;
+        document.getElementById('p1-desc').innerHTML = d.p1d;
+        document.getElementById('p2-title').innerHTML = d.p2t;
+        document.getElementById('p3-title').innerHTML = d.p3t;
+        document.getElementById('services-title').innerHTML = d.svt;
+        document.getElementById('brands-title').innerHTML = d.brt;
+        document.getElementById('btn-text').innerHTML = d.btn;
+        document.getElementById('p2-list').innerHTML = d.p2l;
+        document.getElementById('p3-list').innerHTML = d.p3l;
+        document.getElementById('services-list').innerHTML = d.svl;
+    }
+    window.onload = function() { setLang('en'); };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
