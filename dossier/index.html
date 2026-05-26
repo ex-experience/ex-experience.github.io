@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="البوابة التنفيذية المتقدمة لحسام طاهري. مستشار استراتيجي ومبتكر منهجية ™HX-5 لهندسة التجربة البشرية والتصميم الحسي.">
+    <meta name="description" content="The Executive Dossier of Hussam Tahiri. Strategic Architect, Creative Director, and Founder of the HX-5™ Human Experience Engineering Methodology.">
     <title>HUSSAM TAHIRI | EXECUTIVE DOSSIER</title>
     <style>
         :root {
@@ -26,17 +26,26 @@
         .container {
             width: 90%;
             max-width: 800px;
-            /* هوامش مرنة تتغير مع حجم الشاشة */
             padding: clamp(20px, 5vw, 40px) 15px;
             opacity: 0;
             animation: fadeIn 2s ease-in forwards;
         }
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            color: #555;
+            z-index: 100;
         }
+        .lang-switcher a { color: #888; text-decoration: none; transition: 0.3s; }
+        .lang-switcher a:hover { color: #FFFFFF; }
+
         .sys-header {
             font-family: 'Courier New', Courier, monospace;
-            /* حجم خط مرن للشريط العلوي لمنع الانقسام */
             font-size: clamp(0.55rem, 1.5vw, 0.85rem);
             color: #888;
             border-bottom: 1px solid var(--accent-color);
@@ -46,114 +55,23 @@
             letter-spacing: clamp(1px, 2vw, 2px);
             white-space: nowrap; 
         }
-        .title-block h1 {
-            /* حجم مرن للاسم يضمن بقاءه في سطر واحد دائماً */
-            font-size: clamp(1.4rem, 5vw, 2.5rem);
-            color: var(--text-highlight);
-            margin: 0 0 10px 0;
-            font-weight: 300;
-            letter-spacing: 1px;
-            white-space: nowrap; 
-        }
-        .title-block h2 {
-            font-size: clamp(0.65rem, 2.5vw, 1rem);
-            font-family: 'Courier New', Courier, monospace;
-            color: #aaa;
-            margin: 0 0 30px 0;
-            font-weight: normal;
-            white-space: nowrap;
-        }
-        .section {
-            margin-bottom: clamp(25px, 5vw, 40px);
-            border-right: 2px solid var(--accent-color);
-            padding-right: clamp(10px, 3vw, 20px);
-        }
-        .section-title {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: clamp(0.75rem, 2.5vw, 1.1rem);
-            color: var(--text-highlight);
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            white-space: nowrap; /* قفل السطر لمنع انقسام الأقواس */
-        }
-        .section-content p {
-            line-height: 1.8;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            color: #bbb;
-        }
-        .section-content ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .section-content li {
-            margin-bottom: 15px;
-            line-height: 1.7;
-            position: relative;
-            padding-right: 15px;
-            color: #ccc;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-        }
-        .section-content li::before {
-            content: '■';
-            position: absolute;
-            right: 0;
-            color: var(--accent-color);
-            font-size: 0.8rem;
-            top: 5px;
-        }
-        .highlight {
-            color: var(--text-highlight);
-            font-weight: bold;
-        }
-        .bridge-section {
-            text-align: center;
-            margin-top: clamp(40px, 8vw, 60px);
-            padding-top: clamp(20px, 5vw, 40px);
-            border-top: 1px solid var(--accent-color);
-        }
-        .bridge-text {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: clamp(0.7rem, 2vw, 0.9rem);
-            color: #888;
-            margin-bottom: 30px;
-        }
-        .btn-sovereign {
-            display: inline-block;
-            padding: clamp(10px, 2vw, 15px) clamp(15px, 4vw, 30px);
-            background-color: transparent;
-            color: var(--text-highlight);
-            border: 1px solid #555;
-            text-decoration: none;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: clamp(0.75rem, 2vw, 1rem);
-            letter-spacing: clamp(1px, 2vw, 2px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            white-space: nowrap; /* قفل السطر لضمان بقاء الزر متماسكاً */
-        }
-        .btn-sovereign:hover {
-            background-color: var(--text-highlight);
-            color: var(--bg-color);
-            border-color: var(--text-highlight);
-        }
-        #typewriter {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-left: 2px solid var(--text-highlight);
-            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--text-highlight); }
-        }
+        .title-block h1 { font-size: clamp(1.4rem, 5vw, 2.5rem); color: var(--text-highlight); margin: 0 0 10px 0; font-weight: 300; letter-spacing: 1px; white-space: nowrap; }
+        .title-block h2 { font-size: clamp(0.65rem, 2.5vw, 1rem); font-family: 'Courier New', Courier, monospace; color: #aaa; margin: 0 0 30px 0; font-weight: normal; white-space: nowrap; }
+        
+        .section { margin-bottom: clamp(25px, 5vw, 40px); border-left: 2px solid var(--accent-color); padding-left: clamp(10px, 3vw, 20px); }
+        .section-title { font-family: 'Courier New', Courier, monospace; font-size: clamp(0.75rem, 2.5vw, 1.1rem); color: var(--text-highlight); margin-bottom: 15px; letter-spacing: 1px; white-space: nowrap; }
+        .section-content p { line-height: 1.8; font-size: clamp(0.85rem, 2vw, 1rem); color: #bbb; }
+        .section-content li { margin-bottom: 15px; line-height: 1.7; position: relative; padding-left: 15px; color: #ccc; font-size: clamp(0.85rem, 2vw, 1rem); }
+        .section-content li::before { content: '■'; position: absolute; left: 0; color: var(--accent-color); font-size: 0.8rem; top: 5px; }
+        
+        .btn-sovereign { display: inline-block; padding: 15px 30px; border: 1px solid #555; color: white; text-decoration: none; font-family: 'Courier New', monospace; white-space: nowrap; }
     </style>
 </head>
 <body>
+
+<div class="lang-switcher">
+    <a href="#">EN</a> | <a href="#">AR</a> | <a href="#">FR</a> | <a href="#">JP</a>
+</div>
 
 <div class="container">
     <div class="sys-header">
@@ -161,14 +79,14 @@
     </div>
 
     <div class="title-block">
-        <h1>HUSSAM TAHIRI | حسام طهيري</h1>
+        <h1>HUSSAM TAHIRI</h1>
         <h2>[ EXECUTIVE ARCHITECT & SENSORY STRATEGIST ]</h2>
     </div>
 
     <div class="section">
         <div class="section-title">[ PHASE 01 : THE NEGATIVE AUDIT ]</div>
         <div class="section-content">
-            <p>هذه ليست سيرة ذاتية تقليدية؛ هذا <span class="highlight">تدقيق عكسي للأنظمة (Negative Audit)</span>. بصفتي المبتكر لمنهجية <span class="highlight">™HX-5</span> لهندسة التجربة البشرية، أقوم بتفكيك العلاقة بين الإنسان، الكيان، والمساحة، لإعادة برمجتها وخلق طقوس استهلاكية لا تُنسى. أدمج بين الصرامة التشغيلية، دقة الذكاء الاصطناعي، والجماليات السينمائية لبناء أنظمة بيئية متكاملة ذات فخامة بسيطة (Minimalist Luxury).</p>
+            <p>This is not a traditional CV; this is a <span class="highlight">Negative Audit</span>. As the creator of the <span class="highlight">™HX-5</span> methodology for Human Experience Engineering, I deconstruct the relationship between human, entity, and space, reprogramming them to create unforgettable consumption rituals. I merge operational rigor, AI precision, and cinematic aesthetics to build integrated ecosystems of minimalist luxury.</p>
         </div>
     </div>
 
@@ -176,32 +94,16 @@
         <div class="section-title">[ PHASE 02 : CORE MECHANICS ]</div>
         <div class="section-content">
             <ul>
-                <li><span class="highlight">التصميم الحسي (Sensory Design):</span> هندسة المختبرات الحسية وإدارة التوجه الفني للعلامات بأسلوب (Concrete Narrative).</li>
-                <li><span class="highlight">الإنتاج السينمائي:</span> التخطيط الاستراتيجي لمشروع <span class="highlight">TRACK 35</span> لكسر احتكار الإنتاج وتصدير صورة سينمائية بمقاييس عالية.</li>
-                <li><span class="highlight">السيادة الرقمية (AI & Digital):</span> بناء النظم البيئية المستقلة وتدفقات العمل باستخدام (Mistral AI, Google AI Pro, GitHub Copilot).</li>
-                <li><span class="highlight">الاستخبارات التشغيلية:</span> استخدام بروتوكولات الفحص (Kali Linux, PortSwigger) لضمان متانة النظم التشغيلية والتسويقية.</li>
-                <li><span class="highlight">الميكانيكا اللوجستية:</span> إدارة العمليات وسلاسل الإمداد بمعايير دولية مع أقطاب الصناعة (Puma, Nike, Adidas).</li>
+                <li><span class="highlight">Sensory Design:</span> Engineering sensory labs and managing art direction for brands using the Concrete Narrative style.</li>
+                <li><span class="highlight">Cinematic Production:</span> Strategic planning for the TRACK 35 project to break production monopolies and export high-standard cinematic content.</li>
+                <li><span class="highlight">Digital Sovereignty:</span> Building autonomous ecosystems and workflows using Mistral AI, Google AI Pro, and GitHub Copilot.</li>
+                <li><span class="highlight">Operational Intelligence:</span> Using audit protocols (Kali Linux, PortSwigger) to ensure operational and marketing system robustness.</li>
+                <li><span class="highlight">Logistical Mechanics:</span> Managing operations and supply chains with international standards alongside industry leaders (Puma, Nike, Adidas).</li>
             </ul>
         </div>
     </div>
 
-    <div class="section">
-        <div class="section-title">[ PHASE 03 : OPERATIONAL DEPLOYMENTS ]</div>
-        <div class="section-content">
-            <ul>
-                <li><span class="highlight">[ v.2025 - PRESENT ]</span> المؤسس والمدير التنفيذي - フサム | experience™</li>
-                <li><span class="highlight">[ v.2022 - 2026 ]</span>مستشار استراتيجي مستقل (مشاريع الضيافة والازياء والتقنية والاخراج الابداعي ، المختبرات الحسية)(MBC SHAHID / NETFLEX)</li>
-                <li><span class="highlight">[ v.2018 - 2021 ]</span> التوجيه الاستراتيجي للتسويق والمبيعات وهندسة المبيعات والعلامة التجارية (SBTC / CAFFEINE LAB)</li>
-                <li><span class="highlight">[ v.2012 - 2017 ]</span> الإدارة التشغيلية الشاملة للعلامات العالمية NIKE ADIDAS PUMA (YAB GROUP)</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="bridge-section">
-        <div class="bridge-text">
-            [ END OF PROTOCOL ]<br>
-            DATA INGESTION COMPLETE. PROCEED TO SOVEREIGN PORTAL FOR VISUAL ARCHIVES & DNA ASSETS.
-        </div>
+    <div class="bridge-section" style="text-align: center; margin-top: 40px; border-top: 1px solid #333; padding-top: 40px;">
         <a href="https://ex-experience.github.io" class="btn-sovereign">[ INITIATE SOVEREIGN PORTAL ]</a>
     </div>
 </div>
