@@ -1,102 +1,1032 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HUSSAM TAHIRI | SOVEREIGN ARCHITECT</title>
-    <meta name="description" content="Architecting Human-Centric Luxury Systems">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/split-type"></script>
-    
-    <style>
-        *, *::before, *::after { box-sizing: border-box; }
-        :root { --bg: #050505; --text: #f5f5f5; --highlight: #ffffff; }
-        html { scroll-behavior: auto; -webkit-font-smoothing: antialiased; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 120px 20px; display: flex; justify-content: center; min-height: 100vh; position: relative; overflow-x: hidden; }
-        
-        /* Depth System */
-        .depth-layer { position: fixed; inset: 0; pointer-events: none; z-index: -2; opacity: .4; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.05), transparent 25%), radial-gradient(circle at 70% 60%, rgba(255,255,255,.03), transparent 35%); transform: translateZ(0); will-change: transform; }
-        .film-grain { position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E"); opacity: 0.035; mix-blend-mode: soft-light; pointer-events: none; z-index: -1; }
-        
-        .container { max-width: 700px; width: 100%; transform: translateZ(0); }
-        .hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        
-        .display-xl { font-size: clamp(4rem, 10vw, 8rem); font-weight: 300; line-height: 0.78; letter-spacing: -0.06em; color: var(--highlight); margin-bottom: 20px; background: linear-gradient(180deg, #fff 0%, #cfcfcf 45%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; text-wrap: balance; font-feature-settings: "liga" 1, "kern" 1; }
-        .body-lg { font-size: 1.2rem; line-height: 1.9; color: #a0a0a0; margin-bottom: 40px; }
-        .caption { font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 4px; opacity: 0.55; margin-left: 4px; }
-        
-        .glass-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(24px) saturate(140%); border-radius: 28px; padding: 50px; margin: 60px 0; position: relative; overflow: hidden; }
-        .glass-panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%); }
-        
-        .reveal { opacity: 0; transform: translateY(40px); transition: transform 1.2s cubic-bezier(.16,1,.3,1), opacity 1.2s cubic-bezier(.16,1,.3,1); will-change: transform, opacity; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        .brand-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-top: 60px; }
-        .brand-item { width: 100%; height: 45px; transition: transform 0.3s ease; }
-        .brand-item img { width: 100%; height: 34px; object-fit: contain; opacity: 0.45; filter: grayscale(1) brightness(0.9); transition: 0.8s cubic-bezier(.16,1,.3,1); }
-        
-        @media(max-width:768px){ .brand-grid{ grid-template-columns: repeat(2,1fr); } }
-        body[dir="rtl"] { font-family: "Tajawal", sans-serif; text-align: right; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HUSSAM TAHIRI — Sovereign Architect</title>
+
+  <meta
+    name="description"
+    content="Architecting cinematic digital ecosystems, intelligent luxury systems, and sovereign brand experiences."
+  />
+
+  <meta name="theme-color" content="#050505" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- GSAP -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis -->
+  <script defer src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js"></script>
+
+  <!-- SplitType -->
+  <script defer src="https://unpkg.com/split-type"></script>
+
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-soft: #0c0c0c;
+      --panel: rgba(255,255,255,0.04);
+      --panel-border: rgba(255,255,255,0.08);
+
+      --text: #f5f5f5;
+      --muted: #9d9d9d;
+
+      --white: #ffffff;
+
+      --radius: 28px;
+
+      --transition:
+        cubic-bezier(.16,1,.3,1);
+
+      --container: 1320px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    *::selection {
+      background: rgba(255,255,255,.15);
+      color: #fff;
+    }
+
+    html {
+      scroll-behavior: auto;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body[dir="rtl"] {
+      font-family: "Tajawal", sans-serif;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* =========================
+       BACKGROUND SYSTEM
+    ========================= */
+
+    .bg-base {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.06), transparent 30%),
+        radial-gradient(circle at 80% 40%, rgba(255,255,255,.04), transparent 35%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,.03), transparent 40%),
+        linear-gradient(to bottom, #050505 0%, #080808 100%);
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -9;
+      opacity: .04;
+
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+
+      background-size: 80px 80px;
+      mask-image: radial-gradient(circle at center, white, transparent 90%);
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -8;
+      pointer-events: none;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+
+      opacity: .03;
+      mix-blend-mode: soft-light;
+    }
+
+    .orb {
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      z-index: -7;
+      pointer-events: none;
+
+      background:
+        radial-gradient(circle, rgba(255,255,255,.06), transparent 70%);
+
+      filter: blur(80px);
+      mix-blend-mode: screen;
+
+      will-change: transform;
+    }
+
+    /* =========================
+       LOADER
+    ========================= */
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: #050505;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      gap: 30px;
+    }
+
+    .loader-line {
+      width: 220px;
+      height: 1px;
+      background: rgba(255,255,255,.12);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loader-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background: #fff;
+
+      transform: scaleX(0);
+      transform-origin: left;
+
+      animation: loading 2.2s var(--transition) forwards;
+    }
+
+    @keyframes loading {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .loader-text {
+      font-size: .75rem;
+      letter-spacing: .45em;
+      text-transform: uppercase;
+      opacity: .55;
+    }
+
+    /* =========================
+       PROGRESS BAR
+    ========================= */
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: #fff;
+      z-index: 9999;
+    }
+
+    /* =========================
+       LANGUAGE SWITCHER
+    ========================= */
+
+    .lang-switch {
+      position: fixed;
+      top: 32px;
+      left: 32px;
+      z-index: 1000;
+
+      display: flex;
+      gap: 12px;
+
+      backdrop-filter: blur(14px);
+
+      background: rgba(255,255,255,.03);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      border-radius: 999px;
+
+      padding: 10px 14px;
+    }
+
+    .lang-btn {
+      font-size: .75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+
+      opacity: .45;
+      transition: .5s var(--transition);
+    }
+
+    .lang-btn.active,
+    .lang-btn:hover {
+      opacity: 1;
+    }
+
+    /* =========================
+       MAIN LAYOUT
+    ========================= */
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding-inline: 28px;
+    }
+
+    section {
+      position: relative;
+    }
+
+    .section-space {
+      padding: 140px 0;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: .72rem;
+      letter-spacing: .45em;
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,.55);
+
+      margin-bottom: 28px;
+    }
+
+    .display {
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: .84;
+      letter-spacing: -.07em;
+      font-weight: 300;
+
+      text-transform: uppercase;
+
+      margin-bottom: 28px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #d6d6d6 45%,
+          #6d6d6d 100%
+        );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      position: relative;
+    }
+
+    .display::after {
+      content: attr(data-text);
+
+      position: absolute;
+      inset: 0;
+
+      z-index: -1;
+
+      color: rgba(255,255,255,.18);
+
+      filter: blur(40px);
+
+      opacity: .18;
+    }
+
+    .char {
+      display: inline-block;
+      transform-origin: center bottom;
+    }
+
+    .hero-description {
+      max-width: 760px;
+
+      font-size: 1.12rem;
+      line-height: 1.9;
+
+      color: var(--muted);
+    }
+
+    /* =========================
+       GLASS PANEL
+    ========================= */
+
+    .glass {
+      position: relative;
+
+      background: var(--panel);
+
+      border: 1px solid var(--panel-border);
+
+      backdrop-filter: blur(24px) saturate(160%);
+
+      border-radius: var(--radius);
+
+      overflow: hidden;
+    }
+
+    .glass::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.08),
+          transparent 45%
+        );
+
+      pointer-events: none;
+    }
+
+    /* =========================
+       PHILOSOPHY
+    ========================= */
+
+    .philosophy {
+      padding: 70px;
+    }
+
+    .section-label {
+      font-size: .78rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,.5);
+
+      margin-bottom: 34px;
+    }
+
+    .philosophy-text {
+      max-width: 900px;
+
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      line-height: 1.9;
+
+      color: #b7b7b7;
+    }
+
+    /* =========================
+       ECOSYSTEMS
+    ========================= */
+
+    .ecosystems-head {
+      margin-bottom: 70px;
+    }
+
+    .ecosystems-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .ecosystem-item {
+      height: 90px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+
+      border-radius: 24px;
+
+      background: rgba(255,255,255,.02);
+
+      border: 1px solid rgba(255,255,255,.05);
+
+      overflow: hidden;
+
+      transition:
+        transform .7s var(--transition),
+        border-color .7s var(--transition),
+        background .7s var(--transition);
+
+      will-change: transform;
+    }
+
+    .ecosystem-item::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.08),
+          transparent 55%
+        );
+
+      opacity: 0;
+
+      transition: opacity .7s var(--transition);
+    }
+
+    .ecosystem-item:hover {
+      transform:
+        translateY(-10px)
+        scale(1.03);
+
+      border-color: rgba(255,255,255,.12);
+
+      background: rgba(255,255,255,.04);
+    }
+
+    .ecosystem-item:hover::before {
+      opacity: 1;
+    }
+
+    .ecosystem-item img {
+      width: 110px;
+      height: 42px;
+
+      object-fit: contain;
+
+      opacity: .42;
+
+      filter:
+        grayscale(1)
+        brightness(.9);
+
+      transition:
+        transform .7s var(--transition),
+        opacity .7s var(--transition),
+        filter .7s var(--transition);
+    }
+
+    .ecosystem-item:hover img {
+      opacity: 1;
+
+      filter:
+        grayscale(0)
+        brightness(1.2);
+
+      transform:
+        translateY(-3px)
+        scale(1.03);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 120px 0 60px;
+    }
+
+    .footer-line {
+      width: 100%;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          to right,
+          transparent,
+          rgba(255,255,255,.12),
+          transparent
+        );
+
+      margin-bottom: 40px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      color: rgba(255,255,255,.4);
+
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       REVEAL
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(70px);
+      will-change: transform, opacity;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 980px) {
+      .ecosystems-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .philosophy {
+        padding: 42px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      body {
+        overflow-x: hidden;
+      }
+
+      .container {
+        padding-inline: 22px;
+      }
+
+      .hero {
+        min-height: 90vh;
+      }
+
+      .display {
+        font-size: 3.2rem;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+        line-height: 1.85;
+      }
+
+      .philosophy {
+        padding: 34px 28px;
+      }
+
+      .philosophy-text {
+        font-size: 1.02rem;
+      }
+
+      .ecosystems-grid {
+        gap: 18px;
+      }
+
+      .ecosystem-item {
+        height: 78px;
+      }
+
+      .lang-switch {
+        top: 18px;
+        left: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="depth-layer"></div>
-    <div class="film-grain"></div>
 
-    <main class="container">
-        <section class="hero reveal">
-            <h1 id="name" class="display-xl" data-text="HUSSAM TAHIRI">HUSSAM TAHIRI</h1>
-            <p id="role" class="caption">Architecting Human-Centric Luxury Systems</p>
-        </section>
+  <!-- BACKGROUND -->
+  <div class="bg-base"></div>
+  <div class="bg-grid"></div>
+  <div class="noise"></div>
+  <div class="orb"></div>
 
-        <section class="reveal glass-panel">
-            <h3>[ OPERATING PHILOSOPHY ]</h3>
-            <p class="body-lg">Specialized in cinematic digital systems and strategic brand ecosystems. Focused on deconstructing traditional consumption rituals to engineer human-centric luxury environments.</p>
-        </section>
+  <!-- LOADER -->
+  <div class="loader">
+    <div class="loader-line"></div>
+    <div class="loader-text">Initializing Experience</div>
+  </div>
 
-        <section class="reveal">
-            <h3>[ SELECTED ECOSYSTEMS ]</h3>
-            <div class="brand-grid">
-                <div class="brand-item"><img src="./logos/puma.webp" alt="Puma" loading="lazy"></div>
-                <div class="brand-item"><img src="./logos/nike.webp" alt="Nike" loading="lazy"></div>
-                <div class="brand-item"><img src="./logos/adidas.png" alt="Adidas" loading="lazy"></div>
-                <div class="brand-item"><img src="./logos/umbro.jpg" alt="Umbro" loading="lazy"></div>
-                <div class="brand-item"><img src="./logos/macron.png" alt="Macron" loading="lazy"></div>
-            </div>
-        </section>
-    </main>
+  <!-- SCROLL PROGRESS -->
+  <div class="progress"></div>
 
-    <script>
-        // Init Lenis
-        const lenis = new Lenis();
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  <!-- LANGUAGE -->
+  <div class="lang-switch glass">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="ar">AR</button>
+  </div>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div
+          class="eyebrow reveal"
+          data-en="SOVEREIGN DIGITAL ARCHITECT"
+          data-ar="مهندس الأنظمة السيادية"
+        >
+          SOVEREIGN DIGITAL ARCHITECT
+        </div>
+
+        <h1
+          id="hero-title"
+          class="display"
+          data-text="HUSSAM TAHIRI"
+        >
+          HUSSAM TAHIRI
+        </h1>
+
+        <p
+          class="hero-description reveal"
+          data-en="Architecting cinematic ecosystems where intelligent systems, luxury psychology, and digital experiences converge into sovereign human-centered environments."
+          data-ar="هندسة أنظمة سينمائية تدمج الذكاء الاصطناعي وعلم نفس الفخامة والتجارب الرقمية لصناعة بيئات سيادية تتمحور حول الإنسان."
+        >
+          Architecting cinematic ecosystems where intelligent systems, luxury psychology, and digital experiences converge into sovereign human-centered environments.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="section-space reveal">
+
+      <div class="glass philosophy">
+
+        <div
+          class="section-label"
+          data-en="[ OPERATING PHILOSOPHY ]"
+          data-ar="[ الفلسفة التشغيلية ]"
+        >
+          [ OPERATING PHILOSOPHY ]
+        </div>
+
+        <p
+          class="philosophy-text"
+          data-en="Specialized in cinematic digital systems, AI-assisted infrastructures, strategic brand ecosystems, and behavioral experience engineering. Focused on transforming traditional consumption rituals into emotionally intelligent luxury environments."
+          data-ar="متخصص في الأنظمة الرقمية السينمائية والبنى التحتية المدعومة بالذكاء الاصطناعي والأنظمة البيئية الاستراتيجية للعلامات التجارية وهندسة التجارب السلوكية. أركز على تحويل طقوس الاستهلاك التقليدية إلى بيئات فاخرة ذكية عاطفيًا."
+        >
+          Specialized in cinematic digital systems, AI-assisted infrastructures, strategic brand ecosystems, and behavioral experience engineering. Focused on transforming traditional consumption rituals into emotionally intelligent luxury environments.
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- ECOSYSTEMS -->
+    <section class="section-space reveal">
+
+      <div class="ecosystems-head">
+
+        <div
+          class="section-label"
+          data-en="[ SELECTED ECOSYSTEMS ]"
+          data-ar="[ الأنظمة المختارة ]"
+        >
+          [ SELECTED ECOSYSTEMS ]
+        </div>
+
+      </div>
+
+      <div class="ecosystems-grid">
+
+        <div class="ecosystem-item">
+          <img src="./logos/puma.webp" alt="Puma" loading="lazy" />
+        </div>
+
+        <div class="ecosystem-item">
+          <img src="./logos/nike.webp" alt="Nike" loading="lazy" />
+        </div>
+
+        <div class="ecosystem-item">
+          <img src="./logos/adidas.png" alt="Adidas" loading="lazy" />
+        </div>
+
+        <div class="ecosystem-item">
+          <img src="./logos/umbro.jpg" alt="Umbro" loading="lazy" />
+        </div>
+
+        <div class="ecosystem-item">
+          <img src="./logos/macron.png" alt="Macron" loading="lazy" />
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+
+      <div class="footer-line"></div>
+
+      <div class="footer-content">
+
+        <div>HUSSAM TAHIRI</div>
+
+        <div>© 2026</div>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+
+      // =========================
+      // LENIS
+      // =========================
+
+      const lenis = new Lenis({
+        duration: 1.1,
+        smoothWheel: true,
+        smoothTouch: false,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
         requestAnimationFrame(raf);
+      }
 
-        // Cinematic Typography
-        const split = new SplitType('#name', { types: 'chars' });
-        gsap.from('.char', { y: 120, rotateX: 90, opacity: 0, stagger: 0.05, duration: 1.4, ease: "power4.out" });
+      requestAnimationFrame(raf);
 
-        // Parallax & Reveal
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.to('.depth-layer', { yPercent: 20, ease: "none", scrollTrigger: { trigger: "body", scrub: true } });
-        
-        const observer = new IntersectionObserver((e) => { e.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.15 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      // =========================
+      // GSAP
+      // =========================
 
-        // Magnetic Grid
-        document.querySelectorAll('.brand-item').forEach(item => {
-            item.addEventListener('mousemove', e => {
-                const rect = item.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(item, { x: x * 0.15, y: y * 0.15, scale: 1.05, duration: 0.5 });
-            });
-            item.addEventListener('mouseleave', () => gsap.to(item, { x: 0, y: 0, scale: 1, duration: 0.5 }));
+      gsap.registerPlugin(ScrollTrigger);
+
+      // =========================
+      // LOADER
+      // =========================
+
+      window.addEventListener("load", () => {
+        gsap.to(".loader", {
+          opacity: 0,
+          duration: 1.2,
+          delay: 2,
+          ease: "power3.out",
+          onComplete: () => {
+            document.querySelector(".loader").remove();
+          }
         });
-    </script>
+      });
+
+      // =========================
+      // SPLIT TEXT
+      // =========================
+
+      const split = new SplitType("#hero-title", {
+        types: "chars"
+      });
+
+      gsap.from(".char", {
+        y: 180,
+        opacity: 0,
+        rotateX: 90,
+        stagger: 0.035,
+        duration: 1.6,
+        ease: "power4.out",
+        delay: .2
+      });
+
+      // =========================
+      // REVEALS
+      // =========================
+
+      gsap.utils.toArray(".reveal").forEach((element) => {
+
+        gsap.to(element, {
+          opacity: 1,
+          y: 0,
+          duration: 1.4,
+          ease: "power4.out",
+
+          scrollTrigger: {
+            trigger: element,
+            start: "top 88%",
+          }
+        });
+
+      });
+
+      // =========================
+      // ORB FOLLOW
+      // =========================
+
+      const orb = document.querySelector(".orb");
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      window.addEventListener("mousemove", (e) => {
+
+        mouseX = e.clientX - 350;
+        mouseY = e.clientY - 350;
+
+        gsap.to(orb, {
+          x: mouseX,
+          y: mouseY,
+          duration: 1.2,
+          ease: "power3.out"
+        });
+
+      });
+
+      // =========================
+      // PARALLAX BACKGROUND
+      // =========================
+
+      gsap.to(".bg-base", {
+        yPercent: 10,
+        ease: "none",
+        scrollTrigger: {
+          scrub: true
+        }
+      });
+
+      // =========================
+      // PROGRESS BAR
+      // =========================
+
+      const progress = document.querySelector(".progress");
+
+      window.addEventListener("scroll", () => {
+
+        const scrollTop = window.scrollY;
+
+        const docHeight =
+          document.documentElement.scrollHeight -
+          window.innerHeight;
+
+        const progressWidth =
+          (scrollTop / docHeight) * 100;
+
+        progress.style.width = progressWidth + "%";
+      });
+
+      // =========================
+      // MAGNETIC ITEMS
+      // =========================
+
+      document.querySelectorAll(".ecosystem-item").forEach(item => {
+
+        item.addEventListener("mousemove", e => {
+
+          const rect = item.getBoundingClientRect();
+
+          const x =
+            (e.clientX - rect.left - rect.width / 2) * 0.18;
+
+          const y =
+            (e.clientY - rect.top - rect.height / 2) * 0.18;
+
+          gsap.to(item, {
+            x,
+            y,
+            duration: .6,
+            ease: "power3.out"
+          });
+
+        });
+
+        item.addEventListener("mouseleave", () => {
+
+          gsap.to(item, {
+            x: 0,
+            y: 0,
+            duration: .8,
+            ease: "elastic.out(1,0.4)"
+          });
+
+        });
+
+      });
+
+      // =========================
+      // LANGUAGE SYSTEM
+      // =========================
+
+      const langButtons =
+        document.querySelectorAll(".lang-btn");
+
+      function setLanguage(lang) {
+
+        document.documentElement.lang = lang;
+
+        if (lang === "ar") {
+          document.body.setAttribute("dir", "rtl");
+        } else {
+          document.body.setAttribute("dir", "ltr");
+        }
+
+        document.querySelectorAll("[data-en]").forEach(el => {
+
+          el.innerHTML =
+            lang === "ar"
+            ? el.dataset.ar
+            : el.dataset.en;
+
+        });
+
+        // Hero Title
+        const heroTitle =
+          document.getElementById("hero-title");
+
+        if (lang === "ar") {
+
+          heroTitle.innerHTML = "حسام طاهري";
+          heroTitle.setAttribute(
+            "data-text",
+            "حسام طاهري"
+          );
+
+        } else {
+
+          heroTitle.innerHTML = "HUSSAM TAHIRI";
+          heroTitle.setAttribute(
+            "data-text",
+            "HUSSAM TAHIRI"
+          );
+
+        }
+
+        // Re-split text after language change
+        split.revert();
+
+        new SplitType("#hero-title", {
+          types: "chars"
+        });
+
+        gsap.from(".char", {
+          y: 120,
+          opacity: 0,
+          stagger: 0.03,
+          duration: 1,
+          ease: "power3.out"
+        });
+
+      }
+
+      langButtons.forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+          langButtons.forEach(b =>
+            b.classList.remove("active")
+          );
+
+          btn.classList.add("active");
+
+          setLanguage(btn.dataset.lang);
+
+        });
+
+      });
+
+    });
+  </script>
+
 </body>
 </html>
