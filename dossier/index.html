@@ -3,93 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sovereign Experience Architecture Portfolio.">
-    <link rel="canonical" href="https://ex-experience.github.io/dossier/">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>HUSSAM TAHIRI | SOVEREIGN ARCHITECT</title>
+    <meta property="og:title" content="HUSSAM TAHIRI">
+    <meta property="og:description" content="Architecting Human-Centric Luxury Systems">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root { 
-            --bg: #0a0a0a; --text: #d1d1d1; --highlight: #ffffff; 
-            --accent: #222; --border: #444;
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --bg-primary: #050505; --bg-secondary: #0d0d0d;
+            --text-primary: #f5f5f5; --text-secondary: #a0a0a0;
+            --highlight: #ffffff; --accent: #222;
         }
-        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+        body { background: var(--bg-primary); color: var(--text-primary); font-family: 'Inter', sans-serif; padding: 80px 20px; display: flex; justify-content: center; min-height: 100vh; position: relative; }
         
-        body { 
-            background: var(--bg); color: var(--text); font-family: var(--font); 
-            margin: 0; padding: 80px 20px; display: flex; justify-content: center; 
-            min-height: 100vh; position: relative;
-        }
-
-        /* Atmospheric Depth */
-        body::before {
-            content: ""; position: fixed; inset: 0; pointer-events: none;
-            background: radial-gradient(circle at top center, rgba(255,255,255,0.04), transparent 60%);
-        }
-
-        .container { 
-            max-width: 700px; width: 100%; 
-            animation: fadeInUp 1.4s cubic-bezier(.16,1,.3,1) forwards;
-        }
+        /* Atmospheric Layers */
+        body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.07), transparent 60%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03), transparent 40%); z-index: -2; pointer-events: none; }
+        body::after { content: ""; position: fixed; inset: 0; background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); opacity: 0.04; pointer-events: none; z-index: -1; }
         
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .container { max-width: 700px; width: 100%; animation: fadeUp 1.5s cubic-bezier(.16,1,.3,1); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 { font-size: 2.8rem; font-weight: 300; letter-spacing: -0.05em; color: var(--highlight); margin: 0; line-height: 0.9; }
-        h2 { font-size: 0.8rem; font-weight: 400; color: #888; text-transform: uppercase; letter-spacing: 3px; margin: 15px 0 60px 0; }
-        h3 { font-size: 0.9rem; color: var(--highlight); margin-top: 60px; border-bottom: 1px solid var(--accent); padding-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        p { font-size: 1rem; color: #a0a0a0; margin-bottom: 30px; line-height: 1.7; }
+        .hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        .hero::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 180px; background: linear-gradient(to top, #050505, transparent); pointer-events: none; }
+        
+        .display-xl { font-size: clamp(4rem, 10vw, 8rem); font-weight: 300; line-height: 0.85; letter-spacing: -0.08em; color: var(--highlight); margin-bottom: 20px; background: linear-gradient(180deg, #fff 0%, #cfcfcf 45%, #707070 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; position: relative; }
+        .display-xl::after { content: attr(data-text); position: absolute; left: 0; top: 0; z-index: -1; filter: blur(40px); opacity: 0.08; color: #fff; }
+        
+        .body-lg { font-size: 1.2rem; line-height: 1.9; color: var(--text-secondary); margin-bottom: 40px; }
+        .caption { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: #666; }
+        
+        .section-line { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); margin: 80px 0; }
+        
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); filter: blur(10px); transition: transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1), opacity 1s cubic-bezier(.16,1,.3,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
         
         /* Grid */
-        .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 25px; margin-top: 40px; }
-        .brand-item { width: 80px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .brand-item img { max-width: 100%; max-height: 100%; filter: grayscale(100%) opacity(0.4); transition: 0.4s; }
-        .brand-item:hover img { filter: grayscale(0%) opacity(1); }
-
-        .legal-note { font-size: 0.6rem; color: #444; margin-top: 100px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+        .brand-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 60px 40px; align-items: center; margin-top: 70px; }
+        .brand-item img { width: 100%; height: 45px; object-fit: contain; opacity: 0.45; filter: grayscale(1) brightness(0.9); transition: transform 1s cubic-bezier(.16,1,.3,1), opacity 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1); }
+        .brand-item:hover img { opacity: 1; filter: grayscale(0) brightness(1.2); transform: translateY(-6px) scale(1.04); }
+        
+        /* Lang & Cursor */
+        .lang-switcher { position: fixed; top: 25px; left: 25px; display: flex; gap: 10px; z-index: 1000; }
+        .lang-switcher button { background: none; border: none; color: #666; cursor: pointer; font-size: .75rem; transition: .3s; }
+        .lang-switcher button:hover { color: #fff; }
+        .cursor-glow { position: fixed; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.035), transparent 70%); pointer-events: none; transform: translate(-50%,-50%); z-index: -1; }
+        
+        @media(max-width:768px){ .display-xl { font-size: 3rem; } .brand-grid { grid-template-columns: repeat(2, 1fr); gap: 35px; } }
+        body[dir="rtl"] { font-family: "Tajawal", sans-serif; text-align: right; }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>HUSSAM TAHIRI</h1>
-    <h2>Architecting Human-Centric Luxury Systems</h2>
-
-    <h3>[ PHILOSOPHY ]</h3>
-    <p>Specialized in cinematic digital systems, AI-assisted workflows, and strategic brand ecosystems. Designing systems of perception, identity, and experience to engineer human-centric luxury environments.</p>
-
-    <h3>[ STRATEGIC DOMAINS ]</h3>
-    <p><strong>Brand Genesis:</strong> Developing frameworks for sensory-focused identity and DNA modeling.<br>
-    <strong>Infrastructure:</strong> Engineering zero-trust architectures and intelligent workflow automation.<br>
-    <strong>Visual Intelligence:</strong> Cinematic direction and strategic brand storytelling.</p>
-
-    <h3>[ SELECTED ECOSYSTEMS ]</h3>
-    <div class="brand-grid">
-        <div class="brand-item"><img src="logos/ex.puma.png.webp" alt="Puma" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.nike.png.webp" alt="Nike" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.adidas.png.png" alt="Adidas" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.umbro.png.jpg" alt="Umbro" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.macron.png" alt="Macron" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.a6.png.webp" alt="ASICS" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.soccerscene.png.jpeg" alt="Soccer Scene" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.alahli.png.png" alt="Alahli FC" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.ittihad.png.jpg" alt="Ittihad FC" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.crkd.png.jpg" alt="Crkd.guru" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.caffienelab.png.jpg" alt="Caffeine Lab" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.brew92.png.jpg" alt="Brew92" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.sanremo.png.webp" alt="Sanremo" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.victoria.png.webp" alt="Victoria Arduino" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.lamarzocco.png.png" alt="La Marzocco" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.slayer.png.jpeg" alt="Slayer" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.kvdw.png.png" alt="Kees Van Der Westen" loading="lazy" decoding="async"></div>
-        <div class="brand-item"><img src="logos/ex.fitbit.png.webp" alt="Fitbit" loading="lazy" decoding="async"></div>
-    </div>
-
-    <footer class="legal-note">
-        No affiliation, endorsement, sponsorship, or official partnership is implied or claimed unless formally disclosed. Logos are for visual reference and represent industry inspiration or cultural influence.
-    </footer>
+<div class="cursor-glow"></div>
+<div class="loader" style="position:fixed; inset:0; background:#050505; z-index:9999; transition:opacity 1s ease;"></div>
+<div class="lang-switcher">
+    <button onclick="setLang('en')">EN</button><button onclick="setLang('ar')">AR</button>
 </div>
+
+<div class="container">
+    <section class="hero reveal">
+        <h1 id="name" class="display-xl" data-text="HUSSAM TAHIRI">HUSSAM TAHIRI</h1>
+        <h2 id="role" class="caption">Architecting Human-Centric Luxury Systems</h2>
+    </section>
+
+    <section class="reveal">
+        <h3 data-en="[ PHILOSOPHY ]" data-ar="[ الفلسفة ]"></h3>
+        <p class="body-lg" data-en="Specialized in cinematic digital systems, AI-assisted workflows, and strategic brand ecosystems. Focused on deconstructing traditional consumption rituals to engineer human-centric luxury environments." data-ar="متخصص في الأنظمة الرقمية السينمائية، سير العمل المدعوم بالذكاء الاصطناعي، والنظم البيئية للعلامات التجارية الاستراتيجية. أركز على تفكيك طقوس الاستهلاك التقليدية لهندسة بيئات فاخرة تتمحور حول الإنسان."></p>
+    </section>
+
+    <div class="section-line"></div>
+
+    <section class="reveal">
+        <h3 data-en="[ SELECTED ECOSYSTEMS ]" data-ar="[ الأنظمة المختارة ]"></h3>
+        <div class="brand-grid">
+            <div class="brand-item"><img src="./logos/puma.webp" alt="Puma" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+            <div class="brand-item"><img src="./logos/nike.webp" alt="Nike" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+            <div class="brand-item"><img src="./logos/adidas.png" alt="Adidas" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+            <div class="brand-item"><img src="./logos/umbro.jpg" alt="Umbro" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+            <div class="brand-item"><img src="./logos/macron.png" alt="Macron" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+            <div class="brand-item"><img src="./logos/asics.webp" alt="ASICS" loading="lazy" decoding="async" onerror="this.style.display='none'"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Reveal Observer
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    // Mouse Glow
+    const glow = document.querySelector('.cursor-glow');
+    window.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+    
+    // Loader
+    window.addEventListener('load', () => { const l = document.querySelector('.loader'); l.style.opacity = '0'; setTimeout(() => l.remove(), 1000); });
+    
+    // Lang
+    function setLang(lang) { document.body.dir = lang === "ar" ? "rtl" : "ltr"; document.querySelectorAll("[data-en]").forEach(el => { el.innerHTML = lang === "ar" ? el.dataset.ar : el.dataset.en; }); }
+</script>
 </body>
 </html>
