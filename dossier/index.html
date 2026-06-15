@@ -3460,26 +3460,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
   function $(s,r){return (r||document).querySelector(s)}
   function safeText(v){return String(v||'').replace(/[<>]/g,'').trim()}
   function isArabic(){return document.body.classList.contains('lang-ar') || document.documentElement.lang === 'ar'}
-  function botReply(msg){
-    var m = String(msg||'').toLowerCase();
-    var ar = isArabic();
-    if(/hx|method|منهج|منهجية|intent|context|stimuli|interaction|impact/.test(m)){
-      return ar ? 'قراءة HX-5 جاهزة:\nالنية: لماذا يوجد الطلب؟\nالسياق: أين يحدث؟\nالمحفزات: ما الشعور المطلوب؟\nالتفاعل: كيف يشارك الإنسان؟\nالأثر: ما الذي سيبقى؟' : 'HX-5 scan ready:\nIntent: why should this exist?\nContext: where does it unfold?\nStimuli: what should be felt?\nInteraction: how does the human participate?\nImpact: what remains?';
-    }
-    if(/service|b2b|business|شركة|شركات|استشارة|استشارات|عقد|عقود/.test(m)){
-      return ar ? 'المسار التجاري المقترح: Diagnostic → Blueprint → Build → Operate → Legacy. ابدأ بتحديد المشكلة والغاية، ثم أطلق عرضاً لا يبيع خدمة فقط بل يبيع انتقالاً واضحاً.' : 'Recommended commercial path: Diagnostic → Blueprint → Build → Operate → Legacy. Start with the problem and purpose, then build an offer that sells transformation, not tasks.';
-    }
-    if(/community|crew|1991|مجتمع|الشباب|انضمام/.test(m)){
-      return ar ? 'CREW1991™ ليس جمهوراً؛ هو مجتمع بناء. الرسالة المناسبة: لا تدخل لتشاهد المستقبل، ادخل لتبنيه.' : 'CREW1991™ is not an audience; it is a builder community. Use this message: do not enter to watch the future, enter to build it.';
-    }
-    if(/drop|zero|منتج|منتجات|إصدار|اصدار/.test(m)){
-      return ar ? 'DROPzero™ يحتاج خمسة شروط قبل الإطلاق: قصة، سبب، ندرة، جودة، وأثر. المنتج لا يطلق لأنه جميل؛ يطلق لأنه يمثل فكرة.' : 'DROPzero™ needs five launch conditions: story, reason, scarcity, quality, and impact. A product is not launched because it looks good; it launches because it represents an idea.';
-    }
-    if(/hello|hi|مرحبا|هلا|سلام/.test(m)){
-      return ar ? 'الأوراكل متصل الآن ويعمل بثبات. اكتب طلبك وسأحوله إلى قراءة استراتيجية داخل منظومة EX.' : 'Oracle is online and stable. Type your request and I will translate it into an EX strategic reading.';
-    }
-    return ar ? 'تم استلام الطلب. القراءة المبدئية: حدد النية، افهم السياق، صمم الشعور، افتح مسار المشاركة، ثم قِس الأثر المتبقي.' : 'Request received. Initial reading: define the intent, understand the context, design the feeling, open participation, then measure the remaining impact.';
-  }
+  
   function addMsg(body, text, who){
     if(!body) return;
     var div = document.createElement('div');
@@ -3488,6 +3469,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
     body.appendChild(div);
     body.scrollTop = body.scrollHeight;
   }
+
   function buildWindow(previousMessages){
     var old = $('#aiWindow');
     if(old) old.remove();
@@ -3513,6 +3495,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
     }
     return win;
   }
+
   function buildFab(){
     var old = $('#oracle-toggle');
     if(old) old.remove();
@@ -3525,11 +3508,13 @@ body.lang-ar .hero-title{background-position:right center!important;}
     document.body.appendChild(fab);
     return fab;
   }
+
   function collectMessages(){
     var body = $('#chatBody');
     if(!body) return [];
     return Array.prototype.slice.call(body.children).map(function(el){return {who:el.classList.contains('user')?'user':'bot', text:el.textContent||''}}).filter(function(x){return x.text});
   }
+
   function install(force){
     bootCount++;
     var wasOpen = $('#aiWindow') && ($('#aiWindow').classList.contains('open') || $('#aiWindow').classList.contains('ex-open'));
@@ -3552,19 +3537,64 @@ body.lang-ar .hero-title{background-position:right center!important;}
       }
       setTimeout(function(){ input && input.focus(); }, 80);
     };
+
     window.closeOracle = function(){
       win.classList.remove('ex-open','ex-minimized','open','minimized');
       document.body.classList.remove('ex-oracle-active','oracle-open');
     };
+
     window.toggleOracle = function(){ win.classList.contains('ex-open') ? window.closeOracle() : window.openOracle(); };
-    window.sendChatMessage = function(){
+
+    // 🔥 دالة الإرسال المحدثة (API Fetch)
+    window.sendChatMessage = async function(){
       var raw = input ? input.value.trim() : '';
       if(!raw) return;
+      
+      // 1. عرض رسالة العميل
       addMsg(body, safeText(raw), 'user');
       input.value = '';
       send.disabled = true;
-      setTimeout(function(){ addMsg(body, botReply(raw), 'bot'); send.disabled = false; input.focus(); }, 260);
+
+      // 2. عرض مؤشر التحميل
+      var loadingId = 'loading-' + Date.now();
+      var loadingDiv = document.createElement('div');
+      loadingDiv.className = 'msg bot';
+      loadingDiv.id = loadingId;
+      loadingDiv.style.opacity = '0.7';
+      loadingDiv.textContent = isArabic() ? 'يتم التحليل...' : 'Analyzing...';
+      body.appendChild(loadingDiv);
+      body.scrollTop = body.scrollHeight;
+
+      try {
+        // 3. الاتصال بسيرفر Google Apps Script (عقل ديما)
+        // 🔴 ضع الرابط الخاص بك هنا مكان "ضع_الرابط_الخاص_بك_هنا"
+        var scriptUrl = "https://script.google.com/macros/s/ضع_الرابط_الخاص_بك_هنا/exec"; 
+        var secureToken = "EX_SHIELD_99X"; 
+        
+        var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Message=" + encodeURIComponent(raw));
+        var data = await response.json();
+
+        // 4. إزالة مؤشر التحميل
+        var loadEl = document.getElementById(loadingId);
+        if(loadEl) loadEl.remove();
+
+        // 5. عرض رد الذكاء الاصطناعي
+        if(data.reply) {
+          addMsg(body, data.reply, 'bot');
+        } else {
+          addMsg(body, isArabic() ? 'حدث خطأ في معالجة البيانات.' : 'Error processing data.', 'bot');
+        }
+
+      } catch (err) {
+        var loadEl = document.getElementById(loadingId);
+        if(loadEl) loadEl.remove();
+        addMsg(body, isArabic() ? 'فشل الاتصال بالسيرفر.' : 'Connection failed.', 'bot');
+      }
+
+      send.disabled = false;
+      input.focus();
     };
+
     window.handleChatEnter = function(e){ if(e && e.key === 'Enter'){ e.preventDefault(); window.sendChatMessage(); } };
 
     fab.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); window.toggleOracle(); });
@@ -3573,9 +3603,11 @@ body.lang-ar .hero-title{background-position:right center!important;}
     send.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); window.sendChatMessage(); });
     input.addEventListener('keydown', window.handleChatEnter);
     document.addEventListener('keydown', function esc(e){ if(e.key === 'Escape') window.closeOracle(); }, {passive:true});
+    
     if(wasOpen) window.openOracle();
     if(wasMin) win.classList.add('ex-minimized');
   }
+
   function boot(){ install(true); setTimeout(function(){install(true)}, 1150); }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
