@@ -3546,16 +3546,28 @@ body.lang-ar .hero-title{background-position:right center!important;}
     window.toggleOracle = function(){ win.classList.contains('ex-open') ? window.closeOracle() : window.openOracle(); };
 
     // 🔥 دالة الإرسال المحدثة (API Fetch)
-    window.sendChatMessage = async function(){
+   window.sendChatMessage = async function(){
       var raw = input ? input.value.trim() : '';
       if(!raw) return;
       
-      // 1. عرض رسالة العميل
+      // 1. عرض رسالة العميل (ديما)
       addMsg(body, safeText(raw), 'user');
       input.value = '';
       send.disabled = true;
 
-      // 2. عرض مؤشر التحميل
+      // 👁️ 2. حفظ ما كتبته ديما في الفايربيس لكي تراقبه
+      try {
+        if(typeof db !== 'undefined') {
+          await db.collection('MatrixLogs').add({
+            Action: "Deema Agent Test (User Input)",
+            Message: raw,
+            Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            Source: "Dossier Test Site"
+          });
+        }
+      } catch(e) { console.warn("Firebase logging skipped"); }
+
+      // 3. عرض مؤشر التحميل
       var loadingId = 'loading-' + Date.now();
       var loadingDiv = document.createElement('div');
       loadingDiv.className = 'msg bot';
@@ -3566,21 +3578,33 @@ body.lang-ar .hero-title{background-position:right center!important;}
       body.scrollTop = body.scrollHeight;
 
       try {
-        // 3. الاتصال بسيرفر Google Apps Script (عقل ديما)
-        // 🔴 ضع الرابط الخاص بك هنا مكان "ضع_الرابط_الخاص_بك_هنا"
+        // 🔴 ضع الرابط الفعلي الخاص بك هنا
         var scriptUrl = "https://script.google.com/macros/s/ضع_الرابط_الخاص_بك_هنا/exec"; 
         var secureToken = "EX_SHIELD_99X"; 
         
-        var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Message=" + encodeURIComponent(raw));
+        // لاحظ إضافة &Agent=deema للاتصال بشخصية مرزام
+        var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Agent=deema&Message=" + encodeURIComponent(raw));
         var data = await response.json();
 
-        // 4. إزالة مؤشر التحميل
         var loadEl = document.getElementById(loadingId);
         if(loadEl) loadEl.remove();
 
-        // 5. عرض رد الذكاء الاصطناعي
         if(data.reply) {
+          // 4. عرض رد الذكاء الاصطناعي
           addMsg(body, data.reply, 'bot');
+          
+          // 👁️ 5. حفظ رد البوت في الفايربيس أيضاً لتعرف بماذا أجابها
+          try {
+            if(typeof db !== 'undefined') {
+              await db.collection('MatrixLogs').add({
+                Action: "Deema Agent Test (AI Reply)",
+                Message: data.reply,
+                Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                Source: "Dossier Test Site"
+              });
+            }
+          } catch(e) {}
+
         } else {
           addMsg(body, isArabic() ? 'حدث خطأ في معالجة البيانات.' : 'Error processing data.', 'bot');
         }
