@@ -3480,13 +3480,13 @@ body.lang-ar .hero-title{background-position:right center!important;}
     win.setAttribute('aria-label','EX Oracle Chat Interface');
     win.innerHTML = ''+
       '<div class="oracle-header">'+
-        '<div class="oracle-title"><strong>Ex Oracle</strong><span>Interactive Intelligence Console</span></div>'+
+        '<div class="oracle-title"><strong>Mirzam AI</strong><span>Deema Agent Testing</span></div>'+
         '<div class="oracle-control-row"><button type="button" class="oracle-mini" aria-label="Minimize Oracle">–</button><button type="button" class="oracle-close" aria-label="Close Oracle">×</button></div>'+
       '</div>'+
       '<div class="oracle-body" id="chatBody" aria-live="polite"></div>'+
       '<div class="oracle-foot">'+
-        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="Type message to Oracle"><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
-        '<div class="oracle-foot-note">Ex Oracle can make mistakes. Use it as a strategic interface, not as legal or professional advice.</div>'+
+        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="اكتب رسالتك هنا..."><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
+        '<div class="oracle-foot-note">Testing Environment - Mirzam & Lady Unique</div>'+
       '</div>';
     document.body.appendChild(win);
     var body = $('#chatBody', win);
@@ -3503,7 +3503,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
     fab.id = 'oracle-toggle';
     fab.type = 'button';
     fab.className = 'oracle-fab ex-oracle-v3-fab';
-    fab.setAttribute('aria-label','Open Ex Oracle');
+    fab.setAttribute('aria-label','Open AI');
     fab.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 4 6v6c0 5.55 3.85 10.74 8 11 4.15-.26 8-5.45 8-11V6Zm0 18c-2.65-.26-6-5.45-6-11V7.24L12 4l6 3.24V11c0 5.55-3.85 10.74-6 11Z"/><path d="M11 10h2v6h-2z"/><circle cx="12" cy="8" r="1"/></svg>';
     document.body.appendChild(fab);
     return fab;
@@ -3533,7 +3533,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
       win.classList.remove('ex-minimized','minimized');
       document.body.classList.add('ex-oracle-active','oracle-open');
       if(body && !body.children.length){
-        addMsg(body, isArabic() ? 'الأوراكل متصل الآن. اكتب طلبك، وسأقرأه عبر نية، سياق، محفزات، تفاعل، وأثر.' : 'Oracle is online. Type your request and I will read it through intent, context, stimuli, interaction, and impact.', 'bot');
+        addMsg(body, 'أهلاً بك، معك المساعد الذكي لمرزام. كيف أقدر أساعدك في مشروعك اليوم؟', 'bot');
       }
       setTimeout(function(){ input && input.focus(); }, 80);
     };
@@ -3545,44 +3545,42 @@ body.lang-ar .hero-title{background-position:right center!important;}
 
     window.toggleOracle = function(){ win.classList.contains('ex-open') ? window.closeOracle() : window.openOracle(); };
 
-    // 🔥 دالة الإرسال المحدثة (API Fetch)
-   window.sendChatMessage = async function(){
+    window.sendChatMessage = async function(){
       var raw = input ? input.value.trim() : '';
       if(!raw) return;
       
-      // 1. عرض رسالة العميل (ديما)
+      // 1. عرض الرسالة وإرسالها للفايربيس (تجسس)
       addMsg(body, safeText(raw), 'user');
       input.value = '';
       send.disabled = true;
 
-      // 👁️ 2. حفظ ما كتبته ديما في الفايربيس لكي تراقبه
       try {
         if(typeof db !== 'undefined') {
           await db.collection('MatrixLogs').add({
-            Action: "Deema Agent Test (User Input)",
+            Action: "Deema Test - User Asked",
             Message: raw,
             Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            Source: "Dossier Test Site"
+            Source: "Dossier Site"
           });
         }
-      } catch(e) { console.warn("Firebase logging skipped"); }
+      } catch(e) {}
 
-      // 3. عرض مؤشر التحميل
+      // 2. مؤشر التحميل
       var loadingId = 'loading-' + Date.now();
       var loadingDiv = document.createElement('div');
       loadingDiv.className = 'msg bot';
       loadingDiv.id = loadingId;
       loadingDiv.style.opacity = '0.7';
-      loadingDiv.textContent = isArabic() ? 'يتم التحليل...' : 'Analyzing...';
+      loadingDiv.textContent = 'جاري الرد...';
       body.appendChild(loadingDiv);
       body.scrollTop = body.scrollHeight;
 
       try {
-        // 🔴 ضع الرابط الفعلي الخاص بك هنا
-        var scriptUrl = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec"; 
+        // 🔴🔴 ضع الرابط الجديد (Web App URL) الخاص بجوجل سكربت هنا 🔴🔴
+        var scriptUrl = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/execا"; 
         var secureToken = "EX_SHIELD_99X"; 
         
-        // لاحظ إضافة &Agent=deema للاتصال بشخصية مرزام
+        // تم إضافة Agent=deema لتوجيه الشخصية
         var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Agent=deema&Message=" + encodeURIComponent(raw));
         var data = await response.json();
 
@@ -3590,29 +3588,28 @@ body.lang-ar .hero-title{background-position:right center!important;}
         if(loadEl) loadEl.remove();
 
         if(data.reply) {
-          // 4. عرض رد الذكاء الاصطناعي
           addMsg(body, data.reply, 'bot');
           
-          // 👁️ 5. حفظ رد البوت في الفايربيس أيضاً لتعرف بماذا أجابها
+          // حفظ رد البوت في الفايربيس (DOLCEEE)
           try {
             if(typeof db !== 'undefined') {
               await db.collection('MatrixLogs').add({
-                Action: "Deema Agent Test (AI Reply)",
+                Action: "Deema Test - AI Replied",
                 Message: data.reply,
                 Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                Source: "Dossier Test Site"
+                Source: "Dossier Site"
               });
             }
           } catch(e) {}
 
         } else {
-          addMsg(body, isArabic() ? 'حدث خطأ في معالجة البيانات.' : 'Error processing data.', 'bot');
+          addMsg(body, 'عذراً، حدث خطأ في النظام.', 'bot');
         }
 
       } catch (err) {
         var loadEl = document.getElementById(loadingId);
         if(loadEl) loadEl.remove();
-        addMsg(body, isArabic() ? 'فشل الاتصال بالسيرفر.' : 'Connection failed.', 'bot');
+        addMsg(body, 'فشل الاتصال بالخادم.', 'bot');
       }
 
       send.disabled = false;
