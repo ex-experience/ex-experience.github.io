@@ -3235,156 +3235,133 @@ body.lang-ar .hero-title{background-position:right center!important;}
 </script>
 
 
-<script id="ex-oracle-hard-reset-v3-js">
+<script id="ex-oracle-nuclear-core">
 (function(){
-  var bootCount = 0;
-  function $(s,r){return (r||document).querySelector(s)}
-  function safeText(v){return String(v||'').replace(/[<>]/g,'').trim()}
-  function isArabic(){return document.body.classList.contains('lang-ar') || document.documentElement.lang === 'ar'}
-  
-  function addMsg(body, text, who){
-    if(!body) return;
+  // 1. مسح أي أزرار أو نوافذ قديمة متضاربة
+  document.querySelectorAll('.oracle-window, .oracle-fab, #oracle-toggle').forEach(el => el.remove());
+
+  // 2. بناء نافذة الأوراكل
+  var win = document.createElement('div');
+  win.id = 'aiWindow';
+  win.className = 'oracle-window ex-oracle-v3';
+  win.innerHTML = `
+    <div class="oracle-header">
+      <div class="oracle-title"><strong>Ex Oracle</strong><span>Customer Experience</span></div>
+      <div class="oracle-control-row">
+        <button class="oracle-mini" type="button">–</button>
+        <button class="oracle-close" type="button">×</button>
+      </div>
+    </div>
+    <div class="oracle-body" id="chatBody"></div>
+    <div class="oracle-foot">
+      <div class="oracle-input-row">
+        <input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="اكتب رسالتك هنا... / Type here...">
+        <button class="oracle-send" type="button">➤</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(win);
+
+  // 3. بناء زر الأوراكل (FAB)
+  var fab = document.createElement('button');
+  fab.id = 'oracle-toggle';
+  fab.className = 'oracle-fab ex-oracle-v3-fab';
+  fab.type = 'button';
+  fab.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v6c0 5.55 3.85 10.74 8 11 4.15-.26 8-5.45 8-11V6Zm0 18c-2.65-.26-6-5.45-6-11V7.24L12 4l6 3.24V11c0 5.55-3.85 10.74-6 11Z"/><path d="M11 10h2v6h-2z"/><circle cx="12" cy="8" r="1"/></svg>';
+  document.body.appendChild(fab);
+
+  // 4. ربط العناصر
+  var input = win.querySelector('#aiInput');
+  var send = win.querySelector('.oracle-send');
+  var body = win.querySelector('#chatBody');
+  var isAr = document.body.classList.contains('lang-ar') || document.documentElement.lang === 'ar';
+
+  function addMsg(text, who){
     var div = document.createElement('div');
-    div.className = 'msg ' + (who || 'bot');
+    div.className = 'msg ' + who; 
     div.textContent = text;
-    body.appendChild(div);
+    body.appendChild(div); 
     body.scrollTop = body.scrollHeight;
   }
 
-  function buildWindow(previousMessages){
-    var old = $('#aiWindow');
-    if(old) old.remove();
-    var win = document.createElement('div');
-    win.id = 'aiWindow';
-    win.className = 'oracle-window ex-oracle-v3';
-    win.setAttribute('role','complementary');
-    win.setAttribute('aria-label','EX Oracle Chat Interface');
-    win.innerHTML = ''+
-      '<div class="oracle-header">'+
-        '<div class="oracle-title"><strong>Ex Oracle</strong><span>Customer Experience Intelligence</span></div>'+
-        '<div class="oracle-control-row"><button type="button" class="oracle-mini" aria-label="Minimize Oracle">–</button><button type="button" class="oracle-close" aria-label="Close Oracle">×</button></div>'+
-      '</div>'+
-      '<div class="oracle-body" id="chatBody" aria-live="polite"></div>'+
-      '<div class="oracle-foot">'+
-        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="اكتب رسالتك هنا... / Type here..."><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
-        '<div class="oracle-foot-note">Ex Oracle can make mistakes. Terms of Use apply.</div>'+
-      '</div>';
-    document.body.appendChild(win);
-    var body = $('#chatBody', win);
-    if(previousMessages && previousMessages.length){
-      previousMessages.forEach(function(item){ addMsg(body, item.text, item.who); });
-    }
-    return win;
-  }
-
-  function buildFab(){
-    var old = $('#oracle-toggle');
-    if(old) old.remove();
-    var fab = document.createElement('button');
-    fab.id = 'oracle-toggle';
-    fab.type = 'button';
-    fab.className = 'oracle-fab ex-oracle-v3-fab';
-    fab.setAttribute('aria-label','Open AI');
-    fab.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 4 6v6c0 5.55 3.85 10.74 8 11 4.15-.26 8-5.45 8-11V6Zm0 18c-2.65-.26-6-5.45-6-11V7.24L12 4l6 3.24V11c0 5.55-3.85 10.74-6 11Z"/><path d="M11 10h2v6h-2z"/><circle cx="12" cy="8" r="1"/></svg>';
-    document.body.appendChild(fab);
-    return fab;
-  }
-
-  function collectMessages(){
-    var body = $('#chatBody');
-    if(!body) return [];
-    return Array.prototype.slice.call(body.children).map(function(el){return {who:el.classList.contains('user')?'user':'bot', text:el.textContent||''}}).filter(function(x){return x.text});
-  }
-
-  function install(){
-    bootCount++;
-    var wasOpen = $('#aiWindow') && ($('#aiWindow').classList.contains('open') || $('#aiWindow').classList.contains('ex-open'));
-    var wasMin = $('#aiWindow') && ($('#aiWindow').classList.contains('minimized') || $('#aiWindow').classList.contains('ex-minimized'));
-    var messages = collectMessages();
-    var win = buildWindow(messages);
-    var fab = buildFab();
-    var input = $('#aiInput', win);
-    var send = $('.oracle-send', win);
-    var mini = $('.oracle-mini', win);
-    var close = $('.oracle-close', win);
-    var body = $('#chatBody', win);
-
-    window.openOracle = function(){
-      win.classList.add('ex-open');
-      win.classList.remove('ex-minimized','minimized');
-      document.body.classList.add('ex-oracle-active','oracle-open');
-      if(body && !body.children.length){
-        addMsg(body, isArabic() ? 'أهلاً بك في フサム | experience™. كيف يمكنني مساعدتك اليوم؟' : 'Welcome to フサム | experience™. How can I help you today?', 'bot');
-      }
-      setTimeout(function(){ input && input.focus(); }, 80);
-    };
-
-    window.closeOracle = function(){
-      win.classList.remove('ex-open','ex-minimized','open','minimized');
-      document.body.classList.remove('ex-oracle-active','oracle-open');
-    };
-
-    window.toggleOracle = function(){ win.classList.contains('ex-open') ? window.closeOracle() : window.openOracle(); };
-
-    window.sendChatMessage = async function(){
-      var raw = input ? input.value.trim() : '';
-      if(!raw) return;
-      
-      addMsg(body, safeText(raw), 'user');
-      input.value = '';
-      send.disabled = true;
-
-      var loadingId = 'loading-' + Date.now();
-      var loadingDiv = document.createElement('div');
-      loadingDiv.className = 'msg bot';
-      loadingDiv.id = loadingId;
-      loadingDiv.style.opacity = '0.7';
-      loadingDiv.textContent = isArabic() ? 'يتم التحليل...' : 'Analyzing...';
-      body.appendChild(loadingDiv);
-      body.scrollTop = body.scrollHeight;
-
-      try {
-        // 🔴 ضع الرابط الجديد الخاص بجوجل سكربت هنا
-        var scriptUrl = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec"; 
-        var secureToken = "EX_SHIELD_99X"; 
-        
-        var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Agent=oracle&Message=" + encodeURIComponent(raw));
-        var data = await response.json();
-
-        var loadEl = document.getElementById(loadingId);
-        if(loadEl) loadEl.remove();
-
-        if(data.reply) {
-          addMsg(body, data.reply, 'bot');
-        } else {
-          addMsg(body, isArabic() ? 'حدث خطأ في النظام.' : 'System Error.', 'bot');
-        }
-
-      } catch (err) {
-        var loadEl = document.getElementById(loadingId);
-        if(loadEl) loadEl.remove();
-        addMsg(body, isArabic() ? 'فشل الاتصال بالخادم.' : 'Connection failed.', 'bot');
-      }
-
-      send.disabled = false;
-      input.focus();
-    };
-
-    window.handleChatEnter = function(e){ if(e && e.key === 'Enter'){ e.preventDefault(); window.sendChatMessage(); } };
-
-    fab.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); window.toggleOracle(); });
-    close.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); window.closeOracle(); });
-    mini.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); win.classList.toggle('ex-minimized'); });
-    send.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); window.sendChatMessage(); });
-    input.addEventListener('keydown', window.handleChatEnter);
-    document.addEventListener('keydown', function esc(e){ if(e.key === 'Escape') window.closeOracle(); }, {passive:true});
+  // التحكم بفتح وإغلاق النافذة
+  function toggleOracle(){
+    win.classList.toggle('ex-open');
+    win.classList.remove('ex-minimized');
     
-    if(wasOpen) window.openOracle();
-    if(wasMin) win.classList.add('ex-minimized');
+    // إرسال الرسالة الافتتاحية (الموجودة في ملف الخدمة) عند الفتح الأول
+    if(win.classList.contains('ex-open') && !body.children.length){
+       addMsg(isAr 
+         ? 'أهلاً بك في フサム | experience™.\nنساعدك تدخل المسار المناسب: مجتمع البراند، خدمة، استشارة، تعاون، مبيعات، أو دعم.\nما الذي تبحث عنه اليوم؟' 
+         : 'Welcome to フサム | experience™.\nWe’ll help you find the right path: community, service, consultation, collaboration, sales, or support.\nWhat are you looking for today?', 
+       'bot');
+    }
   }
 
-  function boot(){ install(); setTimeout(function(){install()}, 1150); }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  fab.addEventListener('click', function(e) { e.preventDefault(); toggleOracle(); });
+  win.querySelector('.oracle-close').addEventListener('click', function(e) { e.preventDefault(); win.classList.remove('ex-open', 'ex-minimized'); });
+  win.querySelector('.oracle-mini').addEventListener('click', function(e) { e.preventDefault(); win.classList.toggle('ex-minimized'); });
+
+  // 5. الإرسال للسيرفر
+  async function sendMsg(){
+    var raw = input.value.trim();
+    if(!raw) return;
+    
+    addMsg(raw, 'user');
+    input.value = '';
+    send.disabled = true;
+
+    // حفظ في الفايربيس للذاكرة (إن وجد)
+    try {
+      if(typeof db !== 'undefined') {
+        db.collection('MatrixLogs').add({
+          Action: "Customer Request", Message: raw, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+    } catch(e) {}
+
+    var loadId = 'load-' + Date.now();
+    var loadDiv = document.createElement('div');
+    loadDiv.className = 'msg bot'; 
+    loadDiv.id = loadId; 
+    loadDiv.style.opacity = '0.7';
+    loadDiv.textContent = isAr ? 'يتم التحليل...' : 'Analyzing...';
+    body.appendChild(loadDiv); 
+    body.scrollTop = body.scrollHeight;
+
+    try {
+      // 🔴🔴 استبدل هذا بالرابط المستخرج من جوجل سكربت 🔴🔴
+      var url = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec"; 
+      
+      var res = await fetch(url + "?Token=EX_SHIELD_99X&Agent=oracle&Message=" + encodeURIComponent(raw));
+      var data = await res.json();
+      
+      document.getElementById(loadId).remove();
+      if(data.reply) {
+        addMsg(data.reply, 'bot');
+        try {
+          if(typeof db !== 'undefined') {
+            db.collection('MatrixLogs').add({
+              Action: "Oracle Reply", Message: data.reply, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          }
+        } catch(e) {}
+      } else {
+        addMsg(isAr ? 'حدث خطأ في النظام.' : 'System Error.', 'bot');
+      }
+    } catch(e) {
+      var el = document.getElementById(loadId);
+      if(el) el.remove();
+      addMsg(isAr ? 'فشل الاتصال بالخادم.' : 'Connection failed.', 'bot');
+    }
+    
+    send.disabled = false; 
+    input.focus();
+  }
+
+  send.addEventListener('click', function(e){ e.preventDefault(); sendMsg(); });
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') { e.preventDefault(); sendMsg(); } });
+
 })();
 </script>
 
