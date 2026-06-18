@@ -3261,13 +3261,13 @@ body.lang-ar .hero-title{background-position:right center!important;}
     win.setAttribute('aria-label','EX Oracle Chat Interface');
     win.innerHTML = ''+
       '<div class="oracle-header">'+
-        '<div class="oracle-title"><strong>Ex Oracle</strong><span>Interactive Intelligence Console</span></div>'+
+        '<div class="oracle-title"><strong>Ex Oracle</strong><span>Customer Experience Intelligence</span></div>'+
         '<div class="oracle-control-row"><button type="button" class="oracle-mini" aria-label="Minimize Oracle">–</button><button type="button" class="oracle-close" aria-label="Close Oracle">×</button></div>'+
       '</div>'+
       '<div class="oracle-body" id="chatBody" aria-live="polite"></div>'+
       '<div class="oracle-foot">'+
-        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="Type message to Oracle"><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
-        '<div class="oracle-foot-note">Ex Oracle can make mistakes. Terms of Use</div>'+
+        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="اكتب رسالتك هنا... / Type here..."><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
+        '<div class="oracle-foot-note">Ex Oracle can make mistakes. Terms of Use apply.</div>'+
       '</div>';
     document.body.appendChild(win);
     var body = $('#chatBody', win);
@@ -3296,7 +3296,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
     return Array.prototype.slice.call(body.children).map(function(el){return {who:el.classList.contains('user')?'user':'bot', text:el.textContent||''}}).filter(function(x){return x.text});
   }
 
-  function install(force){
+  function install(){
     bootCount++;
     var wasOpen = $('#aiWindow') && ($('#aiWindow').classList.contains('open') || $('#aiWindow').classList.contains('ex-open'));
     var wasMin = $('#aiWindow') && ($('#aiWindow').classList.contains('minimized') || $('#aiWindow').classList.contains('ex-minimized'));
@@ -3314,7 +3314,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
       win.classList.remove('ex-minimized','minimized');
       document.body.classList.add('ex-oracle-active','oracle-open');
       if(body && !body.children.length){
-        addMsg(body, isArabic() ? 'الأوراكل متصل. اكتب طلبك الاستراتيجي أو اختر إحدى بوابات التجربة.' : 'Oracle is online. Type a strategic request or choose one of the experience portals.', 'bot');
+        addMsg(body, isArabic() ? 'أهلاً بك في フサム | experience™. كيف يمكنني مساعدتك اليوم؟' : 'Welcome to フサム | experience™. How can I help you today?', 'bot');
       }
       setTimeout(function(){ input && input.focus(); }, 80);
     };
@@ -3334,18 +3334,6 @@ body.lang-ar .hero-title{background-position:right center!important;}
       input.value = '';
       send.disabled = true;
 
-      // حفظ ما يكتبه الزائر أثناء الاختبار
-      try {
-        if(typeof db !== 'undefined') {
-          await db.collection('MatrixLogs').add({
-            Action: "Oracle Dossier Test - User Asked",
-            Message: raw,
-            Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            Source: "Dossier Site"
-          });
-        }
-      } catch(e) {}
-
       var loadingId = 'loading-' + Date.now();
       var loadingDiv = document.createElement('div');
       loadingDiv.className = 'msg bot';
@@ -3356,7 +3344,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
       body.scrollTop = body.scrollHeight;
 
       try {
-        // 🔴🔴 ضع الرابط الجديد (Web App URL) الخاص بجوجل سكربت هنا 🔴🔴
+        // 🔴 ضع الرابط الجديد الخاص بجوجل سكربت هنا
         var scriptUrl = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec"; 
         var secureToken = "EX_SHIELD_99X"; 
         
@@ -3368,19 +3356,6 @@ body.lang-ar .hero-title{background-position:right center!important;}
 
         if(data.reply) {
           addMsg(body, data.reply, 'bot');
-          
-          // حفظ رد الأوراكل
-          try {
-            if(typeof db !== 'undefined') {
-              await db.collection('MatrixLogs').add({
-                Action: "Oracle Dossier Test - AI Replied",
-                Message: data.reply,
-                Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                Source: "Dossier Site"
-              });
-            }
-          } catch(e) {}
-
         } else {
           addMsg(body, isArabic() ? 'حدث خطأ في النظام.' : 'System Error.', 'bot');
         }
@@ -3408,7 +3383,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
     if(wasMin) win.classList.add('ex-minimized');
   }
 
-  function boot(){ install(true); setTimeout(function(){install(true)}, 1150); }
+  function boot(){ install(); setTimeout(function(){install()}, 1150); }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
 </script>
