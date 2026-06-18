@@ -1840,7 +1840,7 @@
             currentUser.Email = user.email || "Verified_Link";
             db.collection("Users").doc(currentUser.Email).set({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
             showDashboard();
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec';
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
         }
 
