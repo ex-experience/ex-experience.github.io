@@ -3235,225 +3235,6 @@ body.lang-ar .hero-title{background-position:right center!important;}
 </script>
 
 
-<script id="ex-oracle-control-repair-v2">
-(function(){
-  function qs(sel, root){return (root||document).querySelector(sel)}
-  function qsa(sel, root){return Array.prototype.slice.call((root||document).querySelectorAll(sel))}
-  function addMsg(body, text, who){
-    if(!body) return;
-    var div=document.createElement('div');
-    div.className='msg '+(who||'bot');
-    div.textContent=text;
-    body.appendChild(div);
-    body.scrollTop=body.scrollHeight;
-  }
-  function makeDraggable(el, handle, key){
-    if(!el || el.__exDragBound) return;
-    el.__exDragBound=true;
-    handle = handle || el;
-    var startX=0,startY=0,origX=0,origY=0,dragging=false,moved=false;
-    try{
-      var saved=key && JSON.parse(localStorage.getItem(key)||'null');
-      if(saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)){
-        el.style.left=saved.x+'px'; el.style.top=saved.y+'px'; el.style.right='auto'; el.style.bottom='auto';
-      }
-    }catch(e){}
-    handle.addEventListener('pointerdown', function(e){
-      if(e.target.closest('input,textarea,button,a')) return;
-      dragging=true; moved=false; startX=e.clientX; startY=e.clientY;
-      var r=el.getBoundingClientRect(); origX=r.left; origY=r.top;
-      try{handle.setPointerCapture(e.pointerId)}catch(_e){}
-    });
-    window.addEventListener('pointermove', function(e){
-      if(!dragging) return;
-      var dx=e.clientX-startX, dy=e.clientY-startY;
-      if(Math.abs(dx)+Math.abs(dy)>5) moved=true;
-      var x=Math.max(8, Math.min(window.innerWidth-el.offsetWidth-8, origX+dx));
-      var y=Math.max(8, Math.min(window.innerHeight-el.offsetHeight-8, origY+dy));
-      el.style.left=x+'px'; el.style.top=y+'px'; el.style.right='auto'; el.style.bottom='auto';
-      el.__dragMoved=moved;
-    }, {passive:true});
-    window.addEventListener('pointerup', function(){
-      if(!dragging) return;
-      dragging=false;
-      if(key){
-        try{localStorage.setItem(key, JSON.stringify({x:parseFloat(el.style.left)||0,y:parseFloat(el.style.top)||0}))}catch(e){}
-      }
-      setTimeout(function(){el.__dragMoved=false;},0);
-    }, {passive:true});
-  }
-  function normalizeOracle(){
-    var win=qs('#aiWindow') || qs('.oracle-window');
-    var oldFab=qs('#oracle-toggle') || qs('.oracle-fab');
-    if(!win || !oldFab) return;
-
-    // Clone the FAB to remove old inline onclick + duplicate listeners causing open/close flicker.
-    var fab=oldFab;
-    if(!oldFab.__exCleanFab){
-      fab=oldFab.cloneNode(true);
-      fab.id='oracle-toggle';
-      fab.classList.add('oracle-fab');
-      fab.removeAttribute('onclick');
-      oldFab.parentNode.replaceChild(fab, oldFab);
-      fab.__exCleanFab=true;
-    }
-
-    var header=qs('.oracle-header', win);
-    if(header){
-      qsa('.oracle-control-row', header).forEach(function(row, i){ if(i>0) row.remove(); });
-      qsa(':scope > .oracle-close', header).forEach(function(btn){ btn.remove(); });
-      var row=qs('.oracle-control-row', header);
-      if(!row){
-        row=document.createElement('div'); row.className='oracle-control-row'; header.appendChild(row);
-      }
-      row.innerHTML='';
-      var mini=document.createElement('button'); mini.type='button'; mini.className='oracle-mini'; mini.setAttribute('aria-label','Minimize Oracle'); mini.textContent='–';
-      var close=document.createElement('button'); close.type='button'; close.className='oracle-close'; close.setAttribute('aria-label','Close Oracle'); close.textContent='×';
-      row.appendChild(mini); row.appendChild(close);
-      mini.addEventListener('click', function(e){e.preventDefault(); e.stopPropagation(); win.classList.toggle('minimized');});
-      close.addEventListener('click', function(e){e.preventDefault(); e.stopPropagation(); window.closeOracle();});
-      makeDraggable(win, header, 'exOracleWindowV2');
-    }
-
-    window.openOracle=function(){
-      win.classList.add('open'); win.classList.remove('minimized'); document.body.classList.add('oracle-open');
-      var body=qs('#chatBody', win) || qs('.oracle-body', win);
-      if(body && !body.children.length){
-        addMsg(body, document.body.classList.contains('lang-ar') ? 'الأوراكل متصل. اكتب طلبك الاستراتيجي أو اختر إحدى بوابات التجربة.' : 'Oracle is online. Type a strategic request or choose one of the experience portals.', 'bot');
-      }
-      setTimeout(function(){var input=qs('#aiInput', win)||qs('.oracle-input', win); if(input) input.focus();},120);
-    };
-    window.closeOracle=function(){ win.classList.remove('open','minimized'); document.body.classList.remove('oracle-open'); };
-    window.toggleOracle=function(){ win.classList.contains('open') ? window.closeOracle() : window.openOracle(); };
-
-    fab.addEventListener('click', function(e){
-      e.preventDefault();
-      if(fab.__dragMoved) return;
-      window.toggleOracle();
-    });
-    makeDraggable(fab, fab, 'exOracleFabV2');
-
-    // Repair send behavior if previous handlers were duplicated or missing.
-    var send=qs('.oracle-send', win), input=qs('#aiInput', win)||qs('.oracle-input', win), body=qs('#chatBody', win)||qs('.oracle-body', win);
-    if(input && !input.__exInputClean){
-      input.__exInputClean=true;
-      input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); window.sendChatMessage && window.sendChatMessage(); }});
-    }
-    if(send && !send.__exSendClean){ send.__exSendClean=true; send.addEventListener('click', function(e){e.preventDefault(); window.sendChatMessage && window.sendChatMessage();}); }
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', normalizeOracle); else normalizeOracle();
-  setTimeout(normalizeOracle, 80);
-  setTimeout(normalizeOracle, 900);
-})();
-</script>
-
-
-<!-- =========================================================
-     EX ORACLE HARD RESET V3 — stable, non-conflicting console
-     Fixes: open/close/minimize/input/send/overlap with intent rail
-     ========================================================= -->
-<style id="ex-oracle-hard-reset-v3-css">
-  body.ex-oracle-active #hx-intent-rail,
-  body.ex-oracle-active #hx-sovereign-hud{
-    opacity:0!important;visibility:hidden!important;pointer-events:none!important;display:none!important;
-  }
-  #aiWindow.ex-oracle-v3{
-    position:fixed!important;
-    right:24px!important;
-    left:auto!important;
-    bottom:96px!important;
-    top:auto!important;
-    width:min(430px, calc(100vw - 32px))!important;
-    height:min(640px, calc(100vh - 132px))!important;
-    min-width:0!important;
-    min-height:0!important;
-    max-width:430px!important;
-    max-height:640px!important;
-    resize:none!important;
-    z-index:2147483200!important;
-    display:flex!important;
-    flex-direction:column!important;
-    opacity:0!important;
-    visibility:hidden!important;
-    pointer-events:none!important;
-    transform:translateY(18px) scale(.985)!important;
-    background:rgba(9,10,14,.94)!important;
-    border:1px solid rgba(255,255,255,.13)!important;
-    border-radius:28px!important;
-    overflow:hidden!important;
-    box-shadow:0 34px 120px rgba(0,0,0,.62),0 0 0 1px rgba(110,231,255,.07),0 0 52px rgba(110,231,255,.13)!important;
-    backdrop-filter:blur(26px) saturate(130%)!important;
-    -webkit-backdrop-filter:blur(26px) saturate(130%)!important;
-    transition:opacity .22s ease, visibility .22s ease, transform .22s cubic-bezier(.16,1,.3,1)!important;
-  }
-  #aiWindow.ex-oracle-v3.ex-open{
-    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
-    transform:translateY(0) scale(1)!important;
-  }
-  #aiWindow.ex-oracle-v3.ex-minimized{
-    height:74px!important;bottom:96px!important;
-  }
-  #aiWindow.ex-oracle-v3.ex-minimized .oracle-body,
-  #aiWindow.ex-oracle-v3.ex-minimized .oracle-foot{display:none!important;}
-  #aiWindow.ex-oracle-v3 .oracle-header{
-    display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;
-    padding:18px 18px 15px!important;border-bottom:1px solid rgba(255,255,255,.08)!important;
-    cursor:default!important;user-select:none!important;touch-action:auto!important;background:rgba(255,255,255,.025)!important;
-  }
-  #aiWindow.ex-oracle-v3 .oracle-title{display:flex!important;flex-direction:column!important;gap:4px!important;min-width:0!important;}
-  #aiWindow.ex-oracle-v3 .oracle-title strong{font-size:1.05rem!important;line-height:1.15!important;color:#fff!important;font-weight:800!important;letter-spacing:-.02em!important;}
-  #aiWindow.ex-oracle-v3 .oracle-title span{font-family:var(--font-mono,'Space Mono',monospace)!important;font-size:.68rem!important;letter-spacing:.2em!important;text-transform:uppercase!important;color:#6ee7ff!important;text-shadow:0 0 18px rgba(110,231,255,.28)!important;}
-  #aiWindow.ex-oracle-v3 .oracle-control-row{display:flex!important;align-items:center!important;gap:8px!important;flex:0 0 auto!important;margin:0!important;}
-  #aiWindow.ex-oracle-v3 .oracle-mini,
-  #aiWindow.ex-oracle-v3 .oracle-close{
-    width:38px!important;height:38px!important;display:grid!important;place-items:center!important;border-radius:50%!important;
-    border:1px solid rgba(255,255,255,.14)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;
-    cursor:pointer!important;font-size:1.35rem!important;line-height:1!important;box-shadow:none!important;transition:.18s ease!important;
-  }
-  #aiWindow.ex-oracle-v3 .oracle-mini:hover,
-  #aiWindow.ex-oracle-v3 .oracle-close:hover{background:rgba(110,231,255,.14)!important;border-color:rgba(110,231,255,.46)!important;transform:translateY(-1px)!important;}
-  #aiWindow.ex-oracle-v3 .oracle-body{
-    flex:1 1 auto!important;min-height:0!important;height:auto!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;gap:12px!important;
-    padding:16px!important;background:rgba(0,0,0,.08)!important;scroll-behavior:smooth!important;
-  }
-  #aiWindow.ex-oracle-v3 .msg{max-width:88%!important;padding:12px 15px!important;border-radius:18px!important;line-height:1.65!important;font-size:.94rem!important;white-space:pre-wrap!important;word-break:break-word!important;}
-  #aiWindow.ex-oracle-v3 .msg.bot{align-self:flex-start!important;background:rgba(255,255,255,.065)!important;border:1px solid rgba(255,255,255,.09)!important;color:#fff!important;border-bottom-left-radius:6px!important;}
-  #aiWindow.ex-oracle-v3 .msg.user{align-self:flex-end!important;background:linear-gradient(135deg,#6ee7ff,#6d7cff)!important;color:#041017!important;font-weight:700!important;border-bottom-right-radius:6px!important;}
-  #aiWindow.ex-oracle-v3 .oracle-foot{
-    flex:0 0 auto!important;padding:14px 16px 15px!important;border-top:1px solid rgba(255,255,255,.08)!important;background:rgba(255,255,255,.025)!important;
-  }
-  #aiWindow.ex-oracle-v3 .oracle-input-row{display:flex!important;align-items:center!important;gap:10px!important;}
-  #aiWindow.ex-oracle-v3 .oracle-input{
-    flex:1 1 auto!important;width:auto!important;min-width:0!important;height:48px!important;border-radius:999px!important;
-    border:1px solid rgba(255,255,255,.14)!important;background:rgba(255,255,255,.08)!important;color:#fff!important;
-    padding:0 16px!important;outline:none!important;font-size:1rem!important;box-shadow:none!important;
-  }
-  #aiWindow.ex-oracle-v3 .oracle-input:focus{border-color:rgba(110,231,255,.56)!important;box-shadow:0 0 0 3px rgba(110,231,255,.18)!important;background:rgba(255,255,255,.105)!important;}
-  #aiWindow.ex-oracle-v3 .oracle-send{
-    flex:0 0 48px!important;width:48px!important;height:48px!important;border-radius:50%!important;border:0!important;
-    display:grid!important;place-items:center!important;cursor:pointer!important;background:linear-gradient(135deg,#fff,#c9f4ff 55%,#8eeaff)!important;color:#050505!important;
-    box-shadow:0 10px 30px rgba(110,231,255,.16)!important;
-  }
-  #aiWindow.ex-oracle-v3 .oracle-send:hover{transform:translateY(-1px) scale(1.02)!important;}
-  #aiWindow.ex-oracle-v3 .oracle-foot-note{margin-top:10px!important;text-align:center!important;font-size:.72rem!important;color:rgba(255,255,255,.58)!important;line-height:1.55!important;}
-  #oracle-toggle.ex-oracle-v3-fab{
-    position:fixed!important;right:24px!important;left:auto!important;bottom:24px!important;top:auto!important;
-    width:64px!important;height:64px!important;border-radius:50%!important;border:1px solid rgba(255,255,255,.13)!important;
-    display:grid!important;place-items:center!important;z-index:2147483300!important;cursor:pointer!important;
-    background:radial-gradient(circle at 35% 30%,#fff,#9af0ff 20%,#506cff 58%,#0b0d15 88%)!important;color:#061019!important;
-    box-shadow:0 18px 50px rgba(0,0,0,.42),0 0 34px rgba(110,231,255,.22)!important;
-    transition:transform .18s ease, box-shadow .18s ease!important;touch-action:manipulation!important;user-select:none!important;
-  }
-  #oracle-toggle.ex-oracle-v3-fab:hover{transform:translateY(-2px) scale(1.035)!important;}
-  body.lang-ar #oracle-toggle.ex-oracle-v3-fab{right:auto!important;left:24px!important;}
-  body.lang-ar #aiWindow.ex-oracle-v3{right:auto!important;left:24px!important;}
-  @media(max-width:740px){
-    #aiWindow.ex-oracle-v3{right:10px!important;left:10px!important;bottom:86px!important;width:auto!important;height:min(620px, calc(100vh - 106px))!important;max-width:none!important;border-radius:24px!important;}
-    body.lang-ar #aiWindow.ex-oracle-v3{right:10px!important;left:10px!important;}
-    #oracle-toggle.ex-oracle-v3-fab{right:16px!important;bottom:14px!important;width:58px!important;height:58px!important;}
-    body.lang-ar #oracle-toggle.ex-oracle-v3-fab{right:auto!important;left:16px!important;}
-  }
-</style>
 <script id="ex-oracle-hard-reset-v3-js">
 (function(){
   var bootCount = 0;
@@ -3480,13 +3261,13 @@ body.lang-ar .hero-title{background-position:right center!important;}
     win.setAttribute('aria-label','EX Oracle Chat Interface');
     win.innerHTML = ''+
       '<div class="oracle-header">'+
-        '<div class="oracle-title"><strong>Mirzam AI</strong><span>Deema Agent Testing</span></div>'+
+        '<div class="oracle-title"><strong>Ex Oracle</strong><span>Interactive Intelligence Console</span></div>'+
         '<div class="oracle-control-row"><button type="button" class="oracle-mini" aria-label="Minimize Oracle">–</button><button type="button" class="oracle-close" aria-label="Close Oracle">×</button></div>'+
       '</div>'+
       '<div class="oracle-body" id="chatBody" aria-live="polite"></div>'+
       '<div class="oracle-foot">'+
-        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="اكتب رسالتك هنا..."><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
-        '<div class="oracle-foot-note">Testing Environment - Mirzam & Lady Unique</div>'+
+        '<div class="oracle-input-row"><input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="Type message to Oracle"><button type="button" class="oracle-send" aria-label="Send message">➤</button></div>'+
+        '<div class="oracle-foot-note">Ex Oracle can make mistakes. Terms of Use</div>'+
       '</div>';
     document.body.appendChild(win);
     var body = $('#chatBody', win);
@@ -3533,7 +3314,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
       win.classList.remove('ex-minimized','minimized');
       document.body.classList.add('ex-oracle-active','oracle-open');
       if(body && !body.children.length){
-        addMsg(body, 'أهلاً بك، معك المساعد الذكي لمرزام. كيف أقدر أساعدك في مشروعك اليوم؟', 'bot');
+        addMsg(body, isArabic() ? 'الأوراكل متصل. اكتب طلبك الاستراتيجي أو اختر إحدى بوابات التجربة.' : 'Oracle is online. Type a strategic request or choose one of the experience portals.', 'bot');
       }
       setTimeout(function(){ input && input.focus(); }, 80);
     };
@@ -3549,15 +3330,15 @@ body.lang-ar .hero-title{background-position:right center!important;}
       var raw = input ? input.value.trim() : '';
       if(!raw) return;
       
-      // 1. عرض الرسالة وإرسالها للفايربيس (تجسس)
       addMsg(body, safeText(raw), 'user');
       input.value = '';
       send.disabled = true;
 
+      // حفظ ما يكتبه الزائر أثناء الاختبار
       try {
         if(typeof db !== 'undefined') {
           await db.collection('MatrixLogs').add({
-            Action: "Deema Test - User Asked",
+            Action: "Oracle Dossier Test - User Asked",
             Message: raw,
             Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             Source: "Dossier Site"
@@ -3565,23 +3346,21 @@ body.lang-ar .hero-title{background-position:right center!important;}
         }
       } catch(e) {}
 
-      // 2. مؤشر التحميل
       var loadingId = 'loading-' + Date.now();
       var loadingDiv = document.createElement('div');
       loadingDiv.className = 'msg bot';
       loadingDiv.id = loadingId;
       loadingDiv.style.opacity = '0.7';
-      loadingDiv.textContent = 'جاري الرد...';
+      loadingDiv.textContent = isArabic() ? 'يتم التحليل...' : 'Analyzing...';
       body.appendChild(loadingDiv);
       body.scrollTop = body.scrollHeight;
 
       try {
         // 🔴🔴 ضع الرابط الجديد (Web App URL) الخاص بجوجل سكربت هنا 🔴🔴
-        var scriptUrl = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec"; 
+        var scriptUrl = "ضع_رابط_سكربت_جوجل_هنا"; 
         var secureToken = "EX_SHIELD_99X"; 
         
-        // تم إضافة Agent=deema لتوجيه الشخصية
-        var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Agent=deema&Message=" + encodeURIComponent(raw));
+        var response = await fetch(scriptUrl + "?Token=" + secureToken + "&Agent=oracle&Message=" + encodeURIComponent(raw));
         var data = await response.json();
 
         var loadEl = document.getElementById(loadingId);
@@ -3590,11 +3369,11 @@ body.lang-ar .hero-title{background-position:right center!important;}
         if(data.reply) {
           addMsg(body, data.reply, 'bot');
           
-          // حفظ رد البوت في الفايربيس (تجسس)
+          // حفظ رد الأوراكل
           try {
             if(typeof db !== 'undefined') {
               await db.collection('MatrixLogs').add({
-                Action: "Deema Test - AI Replied",
+                Action: "Oracle Dossier Test - AI Replied",
                 Message: data.reply,
                 Timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 Source: "Dossier Site"
@@ -3603,13 +3382,13 @@ body.lang-ar .hero-title{background-position:right center!important;}
           } catch(e) {}
 
         } else {
-          addMsg(body, 'عذراً، حدث خطأ في النظام.', 'bot');
+          addMsg(body, isArabic() ? 'حدث خطأ في النظام.' : 'System Error.', 'bot');
         }
 
       } catch (err) {
         var loadEl = document.getElementById(loadingId);
         if(loadEl) loadEl.remove();
-        addMsg(body, 'فشل الاتصال بالخادم.', 'bot');
+        addMsg(body, isArabic() ? 'فشل الاتصال بالخادم.' : 'Connection failed.', 'bot');
       }
 
       send.disabled = false;
