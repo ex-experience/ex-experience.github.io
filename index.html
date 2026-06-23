@@ -2359,7 +2359,7 @@ body.lang-ar .gate-status {
             const provider = new firebase.auth.GoogleAuthProvider();
             try {
                 const result = await auth.signInWithPopup(provider);
-                finalizeAuth(result.user);
+                await finalizeAuth(result.user);
             } catch (error) { console.error("Auth Interrupted", error); }
         }
 
@@ -2367,14 +2367,28 @@ body.lang-ar .gate-status {
             const provider = new firebase.auth.OAuthProvider('apple.com');
             try {
                 const result = await auth.signInWithPopup(provider);
-                finalizeAuth(result.user);
+                await finalizeAuth(result.user);
             } catch (error) { console.error("Apple Auth Interrupted", error); }
         }
 
-        function finalizeAuth(user) {
+        async function ensureClientIdentity() {
+            if (auth.currentUser) return auth.currentUser;
+            const credential = await auth.signInAnonymously();
+            return credential.user;
+        }
+
+        async function finalizeAuth(user) {
             currentUser.Name = user.displayName || "Executive";
-            currentUser.Email = user.email || "Verified_Link";
-            db.collection("Users").doc(currentUser.Email).set({ Name: currentUser.Name, Email: currentUser.Email, Timestamp: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+            currentUser.Email = user.email || "private-user@ex.local";
+            currentUser.Phone = currentUser.Phone || "";
+            await db.collection("Users").doc(user.uid).set({
+                Name: currentUser.Name,
+                Email: currentUser.Email,
+                Phone: currentUser.Phone,
+                OwnerUid: user.uid,
+                AuthProvider: user.isAnonymous ? 'anonymous' : (user.providerData[0]?.providerId === 'apple.com' ? 'apple' : 'google'),
+                Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }, { merge: true });
             showDashboard();
             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec';
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Executive Auth Access', Name: currentUser.Name, Email: currentUser.Email }), mode: 'no-cors' });
@@ -2385,18 +2399,27 @@ body.lang-ar .gate-status {
             const btn = document.getElementById('loginBtn');
             const isAr = document.body.classList.contains('lang-ar');
             btn.innerHTML = isAr ? 'جاري الاتصال...' : 'Connecting...'; btn.disabled = true;
-           
+
             currentUser.Name = sanitizeInput(document.getElementById('userName').value);
             currentUser.Email = sanitizeInput(document.getElementById('userEmail').value);
             currentUser.Phone = sanitizeInput(document.getElementById('userPhone').value);
-           
+
             try {
-                await db.collection("Users").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+                const user = await ensureClientIdentity();
+                await db.collection("Users").doc(user.uid).set({
+                    Name: currentUser.Name,
+                    Email: currentUser.Email,
+                    Phone: currentUser.Phone,
+                    OwnerUid: user.uid,
+                    AuthProvider: user.isAnonymous ? 'anonymous' : 'direct',
+                    Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Direct Inquiry Access', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone }), mode: 'no-cors' });
                 showDashboard();
             } catch (error) {
-                alert(isAr ? "فشل الاتصال." : "Connection failed.");
+                console.error('Secure session error:', error);
+                alert(isAr ? "تعذر إنشاء جلسة آمنة. يرجى المحاولة لاحقاً." : "A secure session could not be started. Please try again.");
                 btn.innerHTML = isAr ? 'تسجيل الدخول' : 'Sign In'; btn.disabled = false;
             }
         }
@@ -2407,11 +2430,13 @@ body.lang-ar .gate-status {
             switchService('history');
         }
 
-        function switchService(serviceId) {
+        function switchService(serviceId, trigger) {
             document.querySelectorAll('.dash-tab').forEach(c => c.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            const activeTab = trigger || document.querySelector(`.dash-tab[onclick*="switchService('${serviceId}')"]`);
+            if (activeTab) activeTab.classList.add('active');
             document.querySelectorAll('.service-form').forEach(f => f.classList.remove('active'));
-            document.getElementById('form-' + serviceId).classList.add('active');
+            const targetForm = document.getElementById('form-' + serviceId);
+            if (targetForm) targetForm.classList.add('active');
             if(serviceId === 'history') fetchUserHistory();
         }
 
@@ -2420,7 +2445,8 @@ body.lang-ar .gate-status {
             const isAr = document.body.classList.contains('lang-ar');
             historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'جاري استرجاع السجلات المشفرة...' : 'Retrieving encrypted logs...'}</p>`;
             try {
-                const querySnapshot = await db.collection("Consultations").where("Email", "==", currentUser.Email).get();
+                const owner = await ensureClientIdentity();
+                const querySnapshot = await db.collection("Consultations").where("OwnerUid", "==", owner.uid).get();
                 if (querySnapshot.empty) { historyContainer.innerHTML = `<p class="text-body" style="text-align:center;">${isAr ? 'لا توجد سجلات سابقة.' : 'No previous records found.'}</p>`; return; }
                
                 let html = '';
@@ -2455,7 +2481,8 @@ body.lang-ar .gate-status {
             btn.innerHTML = isAr ? 'جاري الإرسال...' : 'Transmitting...'; btn.disabled = true;
            
             try {
-                await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+                const owner = await ensureClientIdentity();
+                await db.collection("Consultations").add({ Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message, Status: "Pending", OwnerUid: owner.uid, Timestamp: firebase.firestore.FieldValue.serverTimestamp() });
                 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec';
                 fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: new URLSearchParams({ Token: SECURE_TOKEN, Type: 'Strategic Inquiry', Name: currentUser.Name, Email: currentUser.Email, Phone: currentUser.Phone, Message: message }), mode: 'no-cors' });
                 alert(isAr ? 'تم الإرسال بنجاح.' : 'Transmission Successful.');
@@ -2488,8 +2515,9 @@ body.lang-ar .gate-status {
                 if(isTerminal) printNexus(`> ${sanitizeInput(finalOutput)}`); else appendMsg(finalOutput, 'bot');
 
                 try {
+                    const owner = await ensureClientIdentity();
                     await db.collection("MatrixLogs").add({
-                        Name: currentUser?.Name || "Unknown", Email: currentUser?.Email || "Unknown", Type: isTerminal ? "Nexus Command" : "Oracle Chat", Input: text, Output: finalOutput, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                        Name: currentUser?.Name || "Unknown", Email: currentUser?.Email || "Unknown", Type: isTerminal ? "Nexus Command" : "Oracle Chat", Input: text, Output: finalOutput, OwnerUid: owner.uid, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
                 } catch(e) { console.warn("Log Sync Error"); }
 
@@ -3046,6 +3074,7 @@ document.addEventListener("DOMContentLoaded", function() {
    window.logToNexus = async function(actionDetail) {
         try {
             let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
+            const owner = await ensureClientIdentity();
             let currentName = localStorage.getItem('nexus_user_name') || "Anonymous";
             let currentEmail = localStorage.getItem('nexus_user_email') || "Unknown";
             
@@ -3058,6 +3087,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 timeOfVisit: new Date().toLocaleString(),
                 userAgent: navigator.userAgent,
                 screenResolution: window.innerWidth + "x" + window.innerHeight,
+                OwnerUid: owner.uid,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
 
@@ -3099,8 +3129,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
+            const owner = await ensureClientIdentity();
             await fDb.collection('Community_Family').add({
-                Name: name, Email: email, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Elite Vault"
+                Name: name, Email: email, OwnerUid: owner.uid, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Elite Vault"
             });
             logToNexus("Joined Society Successfully");
         } catch(e) { console.error("Firebase Blocked the save due to Rules."); }
@@ -3124,8 +3155,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
+            const owner = await ensureClientIdentity();
             await fDb.collection('Experience_Ratings').add({
-                Name: name, Email: email, Rating: stars, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Rating Form"
+                Name: name, Email: email, Rating: stars, OwnerUid: owner.uid, Timestamp: firebase.firestore.FieldValue.serverTimestamp(), Source: "Top Bar - Rating Form"
             });
             logToNexus("Rated Experience: " + stars + " Stars");
         } catch(e) { console.error("Firebase Blocked the save due to Rules."); }
