@@ -9,6 +9,7 @@
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="theme-color" content="#000000">
    
+    <!-- Firebase Core -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
@@ -63,8 +64,17 @@
             z-index: 2; pointer-events: none;
         }
 
-        /* Glitch Logo */
-        .brand-logo { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: 4px; margin-bottom: 20px; z-index: 10; text-transform: uppercase; }
+        /* Glitch Logo - تم التصغير وتعديل الخصائص ليكون مينيمال ونخبوي */
+        .brand-logo { 
+            font-size: clamp(1rem, 2.2vw, 1.25rem); 
+            font-weight: 500; 
+            letter-spacing: 3px; 
+            margin-bottom: 35px; 
+            z-index: 10; 
+            text-transform: none; 
+            opacity: 0.9;
+        }
+        
         .glitch-anim { display: inline-block; animation: random-glitch 5s infinite; direction: ltr !important; }
         @keyframes random-glitch {
             0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; }
@@ -115,14 +125,19 @@
 </head>
 <body>
 
+    <!-- =========================================================
+         THE GATEKEEPER (EARLY ACCESS VIP SCREEN)
+         ========================================================= -->
     <div class="gatekeeper-wrapper" id="gatekeeper">
         
+        <!-- 🎥 مشغل الفيديوهات المتتابعة في الخلفية -->
         <video id="bg-video-player" class="video-bg" autoplay muted playsinline></video>
         <div class="vignette-overlay"></div>
 
         <div class="content-box">
             <div class="brand-logo mono-text glitch-anim">フサム | experience™</div>
             
+            <!-- ⏳ العداد التنازلي -->
             <div class="countdown" id="countdown-timer">
                 <div class="time-box"><span id="days">00</span><small>Days</small></div>
                 <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
@@ -130,6 +145,7 @@
                 <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
             </div>
 
+            <!-- 🎁 طلب الوصول المبكر (تجميع البيانات) -->
             <div id="email-section">
                 <p class="hype-text">The architecture is currently sealed. Our next strategic release is loading.</p>
                 <p class="reward-text mono-text">Register for 24H Early Access</p>
@@ -142,6 +158,7 @@
                 <button class="form-switch" onclick="toggleForms()">[ I HAVE A PASSCODE ]</button>
             </div>
 
+            <!-- 🔒 إدخال كلمة المرور السكرية لفتح الموقع -->
             <div id="password-section">
                 <p class="hype-text">Enter your VIP Passcode to unlock the experience infrastructure.</p>
                 <div class="input-group">
@@ -155,11 +172,14 @@
     </div>
 
 
+    <!-- =========================================================
+         الموقع المخفي (سيظهر فقط بعد إدخال كلمة السر)
+         ========================================================= -->
     <div id="main-site-content">
+        
         <h1 style="color:white; text-align:center; padding-top:200px;">WELCOME TO THE MAIN SITE</h1>
         <p style="color:white; text-align:center;">This content is revealed only after the VIP password is entered.</p>
-        
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <style id="nexus-force-fix">
@@ -2761,12 +2781,17 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+
+
+
 </body>
-    
 </html>
         
-</div>
-    
+    </div>
+
+    <!-- =========================================================
+         GATEKEEPER SCRIPTS (الفيديوهات المتتابعة + العداد + الفتح)
+         ========================================================= -->
     <script>
         // 1. نظام تشغيل 4 فيديوهات سينمائية متتابعة في الخلفية
         const videoPlayer = document.getElementById('bg-video-player');
@@ -2846,6 +2871,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h3 style="color:#0f0; margin-bottom:15px; font-family:'Space Mono'; letter-spacing:2px;">PASS SECURED</h3>
                     <p style="color:#a1a1a1; line-height:1.8;">Thank you, ${name}.<br>Your early access clearance will be emailed to <b>${email}</b> 24 hours before the global drop.</p>
                 `;
+                
+                // حفظ السجل في نظام التتبع لديك
+                if(typeof window.logToNexus === 'function') window.logToNexus("Lead Captured: " + email);
+                
             } catch(e) {
                 console.error("Firebase Error:", e);
                 alert("SYSTEM ERROR. Please try again later.");
