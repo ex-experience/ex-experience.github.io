@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="theme-color" content="#050505">
+<title>EX™ — Gate Registry</title>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+:root { --bg:#050505; --panel:#0c0c0c; --line:rgba(255,255,255,.12); --muted:rgba(255,255,255,.6); --gold:#cfaa68; --text:#f7f7f7; --danger:#ff7b7b; --ok:#86d7a3; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100vh; background:radial-gradient(circle at 50% 0, rgba(207,170,104,.08), transparent 31%), var(--bg); color:var(--text); font:15px/1.55 Inter,system-ui,sans-serif; }
+.shell { width:min(1120px, calc(100% - 32px)); margin:0 auto; padding:38px 0 72px; }
+.top { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; margin-bottom:30px; }
+.kicker { margin:0 0 8px; color:var(--gold); font:700 10px/1.2 'Space Mono',monospace; letter-spacing:.18em; text-transform:uppercase; }
+h1 { margin:0; font-size:clamp(22px,3vw,34px); letter-spacing:-.04em; }
+.brand { color:var(--muted); font:700 12px/1.4 'Space Mono',monospace; letter-spacing:.12em; white-space:nowrap; }
+.panel { background:rgba(12,12,12,.9); border:1px solid var(--line); border-radius:22px; box-shadow:0 24px 70px rgba(0,0,0,.35); }
+#login-panel { width:min(100%,420px); margin:12vh auto; padding:30px; }
+#login-panel h2 { margin:0 0 6px; font-size:20px; }
+.help, #auth-status { color:var(--muted); margin:0 0 22px; }
+.form { display:grid; gap:12px; }
+input { min-height:48px; width:100%; padding:0 14px; background:#151515; color:#fff; border:1px solid rgba(255,255,255,.16); border-radius:11px; font:inherit; outline:none; }
+input:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(207,170,104,.14); }
+button { min-height:48px; border:1px solid rgba(255,255,255,.4); border-radius:11px; background:#f7f7f7; color:#111; cursor:pointer; font:700 11px/1 'Space Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+button:disabled { cursor:wait; opacity:.65; }
+button.ghost { background:transparent; color:#fff; border-color:var(--line); }
+#admin-panel { display:none; }
+.summary { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-bottom:18px; }
+.card { padding:20px; }
+.card .label { display:block; color:var(--muted); font:700 9px/1.25 'Space Mono',monospace; letter-spacing:.14em; text-transform:uppercase; }
+.card .value { display:block; margin-top:10px; font-size:18px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.card.latest { grid-column:span 2; }
+.feed { overflow:hidden; }
+.feed-head { display:flex; justify-content:space-between; gap:14px; align-items:center; padding:20px; border-bottom:1px solid var(--line); }
+.feed-head h2 { margin:0; font-size:18px; }
+.feed-head p { margin:4px 0 0; color:var(--muted); font-size:13px; }
+.table-wrap { overflow:auto; }
+table { width:100%; border-collapse:collapse; min-width:740px; }
+th,td { padding:15px 20px; text-align:left; border-bottom:1px solid rgba(255,255,255,.07); }
+th { color:var(--muted); font:700 9px/1.25 'Space Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+td { font-size:14px; }
+.empty { padding:34px 20px; color:var(--muted); text-align:center; }
+.ok { color:var(--ok); }
+.error { color:var(--danger); }
+#dashboard-status { color:var(--muted); font-size:13px; }
+@media (max-width:700px) { .shell { width:min(100% - 24px,1120px); padding-top:24px; } .top { align-items:center; } .brand { font-size:9px; } .summary { grid-template-columns:1fr 1fr; } .card.latest { grid-column:span 2; } .card { padding:16px; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <section id="login-panel" class="panel">
+    <p class="kicker">Private operations</p>
+    <h2>Gate Registry</h2>
+    <p class="help">Sign in with the Firebase administrator account to view the latest access requests.</p>
+    <form id="login-form" class="form" novalidate>
+      <input id="admin-email" type="email" autocomplete="username" placeholder="ADMIN EMAIL" required>
+      <input id="admin-password" type="password" autocomplete="current-password" placeholder="PASSWORD" required>
+      <button id="login-button" type="submit">Sign in securely</button>
+    </form>
+    <p id="auth-status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="admin-panel">
+    <header class="top">
+      <div><p class="kicker">Private operations</p><h1>Gate Registrations</h1></div>
+      <div style="display:flex;align-items:center;gap:12px;"><span class="brand">フサム | experience™</span><button id="signout-button" class="ghost" type="button">Sign out</button></div>
+    </header>
+    <div class="summary">
+      <article class="panel card latest"><span class="label">Latest registration</span><span id="latest-name" class="value">—</span></article>
+      <article class="panel card"><span class="label">Email</span><span id="latest-email" class="value">—</span></article>
+      <article class="panel card"><span class="label">Mobile</span><span id="latest-phone" class="value">—</span></article>
+    </div>
+    <section class="panel feed">
+      <div class="feed-head"><div><h2>Newest requests</h2><p>Live, newest first. Records remain private to the authenticated administrator.</p></div><span id="dashboard-status">Waiting for secure session…</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Language</th><th>Received</th><th>Status</th></tr></thead><tbody id="registration-body"><tr><td colspan="6" class="empty">No registration data loaded.</td></tr></tbody></table></div>
+    </section>
+  </section>
+</div>
+<script>
+(() => {
+  'use strict';
+  const firebaseConfig = {
+    apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
+    authDomain: "ex-experience-962ca.firebaseapp.com",
+    projectId: "ex-experience-962ca",
+    storageBucket: "ex-experience-962ca.firebasestorage.app",
+    messagingSenderId: "560048472801",
+    appId: "1:560048472801:web:1c8d71c863fc23b41ceda0"
+  };
+  const ADMIN_EMAIL = 'hussambinhassan92@gmail.com';
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const $ = id => document.getElementById(id);
+  let unsubscribe = null;
+
+  function escapeHtml(value) { return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char])); }
+  function dateText(value) {
+    if (!value || typeof value.toDate !== 'function') return 'Processing…';
+    return new Intl.DateTimeFormat(undefined, { dateStyle:'medium', timeStyle:'short' }).format(value.toDate());
+  }
+  function setAuthStatus(message, isError = false) { const node = $('auth-status'); node.textContent = message || ''; node.className = isError ? 'error' : ''; }
+  function render(rows) {
+    const tbody = $('registration-body');
+    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty">No registrations have been received yet.</td></tr>'; return; }
+    const latest = rows[0];
+    $('latest-name').textContent = latest.Name || '—'; $('latest-email').textContent = latest.Email || '—'; $('latest-phone').textContent = latest.Phone || '—';
+    tbody.innerHTML = rows.map(row => `<tr><td>${escapeHtml(row.Name)}</td><td>${escapeHtml(row.Email)}</td><td>${escapeHtml(row.Phone)}</td><td>${escapeHtml((row.Language || '').toUpperCase())}</td><td>${escapeHtml(dateText(row.CreatedAt))}</td><td class="ok">${escapeHtml(row.Status || 'New')}</td></tr>`).join('');
+  }
+  function startFeed() {
+    if (unsubscribe) unsubscribe();
+    $('dashboard-status').textContent = 'Connecting to live registry…';
+    unsubscribe = db.collection('Gate_Registrations').orderBy('CreatedAt', 'desc').limit(30).onSnapshot(snapshot => {
+      render(snapshot.docs.map(doc => doc.data()));
+      $('dashboard-status').textContent = `Live · ${snapshot.size} recent request${snapshot.size === 1 ? '' : 's'}`;
+    }, error => {
+      console.error(error);
+      $('dashboard-status').textContent = 'Unable to read registry.';
+      $('dashboard-status').className = 'error';
+    });
+  }
+  auth.onAuthStateChanged(user => {
+    if (!user) { $('admin-panel').style.display = 'none'; $('login-panel').style.display = 'block'; if (unsubscribe) { unsubscribe(); unsubscribe = null; } return; }
+    if ((user.email || '').toLowerCase() !== ADMIN_EMAIL) { setAuthStatus('This account is not authorised for the Gate Registry.', true); auth.signOut(); return; }
+    $('login-panel').style.display = 'none'; $('admin-panel').style.display = 'block'; startFeed();
+  });
+  $('login-form').addEventListener('submit', async event => {
+    event.preventDefault(); setAuthStatus('Signing in…'); const button = $('login-button'); button.disabled = true;
+    try { await auth.signInWithEmailAndPassword($('admin-email').value.trim(), $('admin-password').value); }
+    catch (error) { console.error(error); setAuthStatus('Sign-in failed. Check the email, password and Firebase Authentication settings.', true); }
+    finally { button.disabled = false; }
+  });
+  $('signout-button').addEventListener('click', () => auth.signOut());
+})();
+</script>
+</body>
+</html>
