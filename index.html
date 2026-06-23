@@ -1,187 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="フサム | experience™ - Early Access">
-    <title>フサム | experience™ - VIP ACCESS</title>
-   
-    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
-    <meta name="theme-color" content="#000000">
-   
-    <!-- Firebase Core -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="フサム | experience™ — Engineering Human Experiences">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#000000">
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
-            authDomain: "ex-experience-962ca.firebaseapp.com",
-            projectId: "ex-experience-962ca",
-            storageBucket: "ex-experience-962ca.firebasestorage.app",
-            messagingSenderId: "560048472801",
-            appId: "1:560048472801:web:1c8d71c863fc23b41ceda0"
-        };
-        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-        const db = firebase.firestore();
-    </script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
-
-        :root {
-            --bg-primary: #000000;
-            --text-main: #ffffff;
-            --accent-color: #FF003C;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg-primary); color: var(--text-main); font-family: 'Inter', sans-serif; overflow: hidden; }
-        .mono-text { font-family: 'Space Mono', monospace; }
-
-        /* =========================================================
-           THE GATEKEEPER UI - HYPE & SCARCITY
-           ========================================================= */
-        .gatekeeper-wrapper {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 9999999;
-            background-color: #000;
-            transition: opacity 1.2s ease-in-out;
-        }
-
-        /* Cinematic Background Video Sequence */
-        .video-bg {
-            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-            object-fit: cover; opacity: 0.4; filter: grayscale(50%) contrast(120%); z-index: 1;
-            transition: opacity 1s ease-in-out;
-        }
-        
-        .vignette-overlay {
-            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at center, transparent 15%, #000000 95%);
-            z-index: 2; pointer-events: none;
-        }
-
-        /* Glitch Logo - تم التصغير وتعديل الخصائص ليكون مينيمال ونخبوي */
-        .brand-logo { 
-            font-size: clamp(1rem, 2.2vw, 1.25rem); 
-            font-weight: 500; 
-            letter-spacing: 3px; 
-            margin-bottom: 35px; 
-            z-index: 10; 
-            text-transform: none; 
-            opacity: 0.9;
-        }
-        
-        .glitch-anim { display: inline-block; animation: random-glitch 5s infinite; direction: ltr !important; }
-        @keyframes random-glitch {
-            0%, 94%, 100% { transform: translate(0); text-shadow: none; clip-path: none; }
-            95% { transform: translate(-2px, 1px); text-shadow: 2px 0 var(--accent-color), -2px 0 #0f0; clip-path: inset(10% 0 30% 0); }
-            96% { transform: translate(2px, -1px); text-shadow: -2px 0 var(--accent-color), 2px 0 #0f0; clip-path: inset(40% 0 10% 0); }
-        }
-
-        /* Central Content Box */
-        .content-box {
-            text-align: center; width: 90%; max-width: 500px; padding: 50px 40px; 
-            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; z-index: 10;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9);
-        }
-
-        .hype-text { font-size: 1rem; line-height: 1.8; margin-bottom: 25px; color: #a1a1a1; }
-        .reward-text { font-size: 0.85rem; color: var(--accent-color); font-weight: bold; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
-
-        /* Countdown Timer */
-        .countdown { display: flex; justify-content: center; gap: 20px; margin-bottom: 35px; font-family: 'Space Mono', monospace; }
-        .time-box { display: flex; flex-direction: column; align-items: center; }
-        .time-box span { font-size: 2.2rem; font-weight: 700; color: #fff; line-height: 1; }
-        .time-box small { font-size: 0.65rem; color: #666; text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; }
-
-        /* Inputs & Buttons */
-        .input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .ex-input {
-            width: 100%; padding: 18px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff; outline: none; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.9rem; text-align: center; transition: 0.3s;
-        }
-        .ex-input:focus { border-color: var(--accent-color); background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
-        
-        .ex-btn {
-            width: 100%; padding: 18px; background: #fff; color: #000; border: none;
-            border-radius: 8px; font-weight: 700; font-family: 'Space Mono', monospace; font-size: 0.95rem;
-            cursor: pointer; letter-spacing: 3px; text-transform: uppercase; transition: 0.4s;
-        }
-        .ex-btn:hover { background: var(--accent-color); color: #fff; box-shadow: 0 10px 30px rgba(255, 0, 60, 0.3); transform: translateY(-2px); }
-
-        .form-switch { margin-top: 25px; font-size: 0.75rem; color: #666; cursor: pointer; text-decoration: none; background: none; border: none; font-family: 'Space Mono', monospace; letter-spacing: 1px; transition: 0.3s;}
-        .form-switch:hover { color: #fff; }
-
-        #password-section { display: none; }
-        
-        /* The Hidden Main Site */
-        #main-site-content { display: none; opacity: 0; transition: opacity 1s ease-in; }
-    </style>
-</head>
-<body>
-
-    <!-- =========================================================
-         THE GATEKEEPER (EARLY ACCESS VIP SCREEN)
-         ========================================================= -->
-    <div class="gatekeeper-wrapper" id="gatekeeper">
-        
-        <!-- 🎥 مشغل الفيديوهات المتتابعة في الخلفية -->
-        <video id="bg-video-player" class="video-bg" autoplay muted playsinline></video>
-        <div class="vignette-overlay"></div>
-
-        <div class="content-box">
-            <div class="brand-logo mono-text glitch-anim">フサム | experience™</div>
-            
-            <!-- ⏳ العداد التنازلي -->
-            <div class="countdown" id="countdown-timer">
-                <div class="time-box"><span id="days">00</span><small>Days</small></div>
-                <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
-                <div class="time-box"><span id="mins">00</span><small>Mins</small></div>
-                <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
-            </div>
-
-            <!-- 🎁 طلب الوصول المبكر (تجميع البيانات) -->
-            <div id="email-section">
-                <p class="hype-text">The architecture is currently sealed. Our next strategic release is loading.</p>
-                <p class="reward-text mono-text">Register for 24H Early Access</p>
-                
-                <div class="input-group">
-                    <input type="text" id="lead-name" class="ex-input" placeholder="FULL NAME" required>
-                    <input type="email" id="lead-email" class="ex-input" placeholder="EMAIL ADDRESS" required>
-                </div>
-                <button class="ex-btn" onclick="captureLead()" id="lead-btn">REQUEST VIP ACCESS</button>
-                <button class="form-switch" onclick="toggleForms()">[ I HAVE A PASSCODE ]</button>
-            </div>
-
-            <!-- 🔒 إدخال كلمة المرور السكرية لفتح الموقع -->
-            <div id="password-section">
-                <p class="hype-text">Enter your VIP Passcode to unlock the experience infrastructure.</p>
-                <div class="input-group">
-                    <input type="password" id="vip-password" class="ex-input" placeholder="ENTER VIP PASSCODE" autocomplete="new-password">
-                </div>
-                <button class="ex-btn" onclick="checkPassword()" id="pass-btn">UNLOCK VAULT</button>
-                <button class="form-switch" onclick="toggleForms()">[ REQUEST AN ACCESS PASS ]</button>
-                <div id="pass-error" class="mono-text" style="color:var(--accent-color); font-size:0.75rem; margin-top:15px; display:none; letter-spacing: 2px;">ACCESS DENIED.</div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- =========================================================
-         الموقع المخفي (سيظهر فقط بعد إدخال كلمة السر)
-         ========================================================= -->
-    <div id="main-site-content">
-        
-        <h1 style="color:white; text-align:center; padding-top:200px;">WELCOME TO THE MAIN SITE</h1>
-        <p style="color:white; text-align:center;">This content is revealed only after the VIP password is entered.</p>
-        <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
 <style id="nexus-force-fix">
     /* LOCK UTILITY BAR TO TOP */
     #nexus-utility-bar {
@@ -206,15 +32,15 @@
     <meta property="og:image:height" content="630">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://[https://ex-experience.github.io/]/">
+    <meta name="twitter:url" content="https://ex-experience.github.io/">
     <meta name="twitter:title" content="フサム | experience™">
     <meta name="twitter:description" content="Engineering Human Experiences">
-    <meta name="twitter:image" content="https://[https://ex-experience.github.io/]/assets/og-image.png">
+    <meta name="twitter:image" content="https://ex-experience.github.io/assets/og-image.png">
    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="フサム | experience™ - Engineering Human Experiences">
-    <title>フサム | experience™</title>
+    <title>フサム | experience™ — Private Access</title>
    
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="googlebot" content="noindex, nofollow">
@@ -223,7 +49,7 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#000000">
     <link rel="apple-touch-icon" href="icon.png">
    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
@@ -826,8 +652,537 @@
     /* إخفاء أي نصوص تحميل متبقية أسفل الشعار */
     #ex-master-loader p, .init-text, #loader-text p { display: none !important; }
 </style>
+
+
+<!-- =========================================================
+     EX™ PRIVATE ACCESS GATE — REBUILT, ISOLATED, RESPONSIVE
+     ========================================================= -->
+<style id="ex-private-access-theme">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+:root {
+  --gate-void: #050505;
+  --gate-panel: rgba(8, 8, 8, .86);
+  --gate-line: rgba(255, 255, 255, .10);
+  --gate-line-strong: rgba(255, 255, 255, .16);
+  --gate-text: #f4f4f4;
+  --gate-muted: rgba(255, 255, 255, .64);
+  --gate-muted-soft: rgba(255, 255, 255, .44);
+  --gate-gold: #cfaa68;
+  --gate-danger: #ff7373;
+  --gate-success: #7fd49d;
+  --gate-focus: 0 0 0 3px rgba(207, 170, 104, .22);
+  --gate-font: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --gate-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --gate-ar: "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+}
+
+html:has(.gatekeeper-wrapper) { background: #000; }
+body.gate-active {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  padding-top: 0 !important;
+}
+
+.gatekeeper-wrapper,
+.gatekeeper-wrapper * { box-sizing: border-box; }
+
+.gatekeeper-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  padding: clamp(22px, 4.3vw, 64px);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .045), transparent 33%),
+    linear-gradient(130deg, rgba(0,0,0,.78), rgba(0,0,0,.38) 52%, rgba(0,0,0,.83)),
+    #030303;
+  color: var(--gate-text);
+  font-family: var(--gate-font);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .62s ease, visibility .62s ease;
+}
+.gatekeeper-wrapper.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.gatekeeper-wrapper[hidden] { display: none !important; }
+
+.gate-video {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .27;
+  filter: grayscale(1) contrast(1.12) brightness(.55);
+  transform: scale(1.015);
+  transition: opacity .72s ease;
+}
+.gate-video.is-loading { opacity: 0; }
+.gate-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 48%, transparent 0 11%, rgba(0,0,0,.14) 39%, rgba(0,0,0,.90) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.55), transparent 37%, transparent 63%, rgba(0,0,0,.55));
+}
+.gate-grain {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: .055;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.gate-language {
+  position: absolute;
+  top: 24px;
+  inset-inline-end: 28px;
+  z-index: 2;
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 999px;
+  background: rgba(0,0,0,.34);
+  color: rgba(255,255,255,.72);
+  font: 700 10px/1 var(--gate-mono);
+  letter-spacing: .12em;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+}
+.gate-language:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.08);
+  transform: translateY(-1px);
+}
+.gate-language:focus-visible,
+.gate-submit:focus-visible,
+.gate-switch:focus-visible,
+.gate-input:focus-visible { outline: none; box-shadow: var(--gate-focus); }
+
+.gate-panel {
+  width: min(100%, 680px);
+  min-height: 616px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(36px, 4.8vw, 76px) clamp(30px, 5.3vw, 64px);
+  border: 1px solid var(--gate-line);
+  border-radius: clamp(26px, 3vw, 36px);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.025), transparent 35%),
+    var(--gate-panel);
+  box-shadow:
+    0 28px 84px rgba(0,0,0,.72),
+    inset 0 1px 0 rgba(255,255,255,.028);
+  text-align: center;
+  backdrop-filter: blur(24px) saturate(.9);
+  -webkit-backdrop-filter: blur(24px) saturate(.9);
+}
+.gate-brand {
+  margin: 0 0 clamp(42px, 5.2vw, 58px);
+  color: #f7f7f7;
+  font: 700 clamp(19px, 2.2vw, 28px)/1.1 var(--gate-font);
+  letter-spacing: .105em;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.gate-brand .gate-brand-jp { letter-spacing: .06em; }
+.gate-brand sup {
+  position: relative;
+  top: -.48em;
+  margin-inline-start: .14em;
+  font: 700 .37em/1 var(--gate-font);
+  letter-spacing: .02em;
+}
+.gate-form[hidden] { display: none !important; }
+.gate-copy {
+  max-width: 480px;
+  margin: 0 auto 22px;
+  color: var(--gate-muted);
+  font-size: clamp(18px, 1.75vw, 23px);
+  font-weight: 500;
+  line-height: 1.68;
+  letter-spacing: -.02em;
+}
+html[lang="ar"] .gate-copy,
+body.lang-ar .gate-copy {
+  font-family: var(--gate-ar);
+  font-weight: 500;
+  line-height: 1.95;
+  letter-spacing: 0;
+}
+.gate-eyebrow {
+  margin: 0 0 42px;
+  color: var(--gate-gold);
+  font: 400 clamp(11px, 1.12vw, 13px)/1.5 var(--gate-mono);
+  letter-spacing: .19em;
+  text-transform: uppercase;
+}
+html[lang="ar"] .gate-eyebrow,
+body.lang-ar .gate-eyebrow {
+  font-family: var(--gate-ar);
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: none;
+}
+.gate-fields {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 18px;
+}
+.gate-input {
+  width: 100%;
+  min-height: 78px;
+  padding: 0 22px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  background: #e8f0ff;
+  color: #161a20;
+  font: 400 clamp(17px, 1.6vw, 21px)/1.2 var(--gate-font);
+  text-align: start;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background .2s ease;
+}
+.gate-input::placeholder { color: rgba(22,26,32,.51); }
+.gate-input:hover { border-color: rgba(255,255,255,.31); }
+.gate-input:focus {
+  border-color: rgba(207,170,104,.78);
+  background: #f1f5ff;
+  box-shadow: var(--gate-focus);
+}
+.gate-password-form .gate-input {
+  background: rgba(17,17,17,.96);
+  color: #fff;
+  border-color: rgba(128,191,211,.38);
+  text-align: center;
+  letter-spacing: .18em;
+}
+.gate-password-form .gate-input::placeholder { color: rgba(255,255,255,.38); letter-spacing: .08em; }
+.gate-password-form .gate-input:focus {
+  border-color: rgba(128,191,211,.78);
+  background: rgba(20,20,20,.98);
+  box-shadow: 0 0 0 3px rgba(128,191,211,.13);
+}
+.gate-submit {
+  width: 100%;
+  min-height: 74px;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 16px;
+  background: #fafafa;
+  color: #111;
+  font: 700 clamp(13px, 1.15vw, 15px)/1 var(--gate-mono);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.gate-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: #e8d1a4;
+  border-color: #e8d1a4;
+  box-shadow: 0 13px 35px rgba(0,0,0,.28);
+}
+.gate-submit:disabled {
+  cursor: wait;
+  opacity: .66;
+}
+.gate-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 29px auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--gate-muted-soft);
+  font: 400 clamp(11px, 1vw, 13px)/1.3 var(--gate-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .2s ease, transform .2s ease;
+}
+.gate-switch:hover { color: #fff; transform: translateY(-1px); }
+html[lang="ar"] .gate-switch,
+body.lang-ar .gate-switch {
+  font-family: var(--gate-ar);
+  font-size: 13px;
+  letter-spacing: .03em;
+  text-transform: none;
+}
+.gate-status {
+  min-height: 20px;
+  margin-top: 18px;
+  color: var(--gate-danger);
+  font: 400 14px/1.55 var(--gate-font);
+}
+.gate-status:empty { display: none; }
+.gate-status.success { color: var(--gate-success); }
+html[lang="ar"] .gate-status,
+body.lang-ar .gate-status {
+  font-family: var(--gate-ar);
+  font-size: 14px;
+}
+
+#main-site-content {
+  display: none;
+  opacity: 0;
+  transition: opacity .64s ease;
+}
+#main-site-content.is-visible {
+  display: block;
+  opacity: 1;
+}
+
+@media (max-width: 620px) {
+  .gatekeeper-wrapper { padding: 18px; }
+  .gate-panel {
+    min-height: min(690px, calc(100vh - 36px));
+    padding: 42px 24px 36px;
+    border-radius: 28px;
+  }
+  .gate-brand { margin-bottom: 38px; }
+  .gate-copy { font-size: 18px; }
+  .gate-eyebrow { margin-bottom: 31px; }
+  .gate-input, .gate-submit { min-height: 64px; border-radius: 14px; }
+  .gate-input { padding: 0 17px; font-size: 16px; }
+  .gate-language { top: 14px; inset-inline-end: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gatekeeper-wrapper, .gate-video, .gate-submit, .gate-switch, .gate-language { transition: none !important; }
+}
+</style>
+
+
+<!-- =========================================================
+     EX™ GATE V2 PATCH — MOBILE, REGISTRATION & HANDOFF FIXES
+     Retains the developed site; only overrides conflicting legacy output.
+     ========================================================= -->
+<style id="ex-gate-v2-patch">
+/* Keep the original main experience intact, but prevent its legacy preloader
+   from taking over after the private gateway has already completed. */
+#main-site-content #ex-master-loader,
+#main-site-content #loading-screen {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* The original nested-era utility bar exists twice in retained markup.
+   The compact ultimate navbar remains as the single visible navigation. */
+#main-site-content #nexus-utility-bar { display: none !important; }
+
+/* Eliminate the post-unlock black void: the hero begins directly below nav. */
+#main-site-content {
+  min-height: 100vh;
+  padding: 0 !important;
+}
+#main-site-content > main { margin-top: 0 !important; }
+#main-site-content .hero {
+  height: calc(100svh - 70px) !important;
+  min-height: 520px !important;
+  margin: 0 !important;
+}
+#main-site-content #ultimate-navbar {
+  height: 70px !important;
+  overflow: hidden;
+}
+#main-site-content .nav-row-1,
+#main-site-content .nav-row-2 { min-width: 0; }
+#main-site-content .action-txt,
+#main-site-content .main-logo-txt { white-space: nowrap; }
+
+/* Registration collection marker is intentionally visible only in the secured
+   admin console. This public page never renders registrant data. */
+.gate-registration-hint { display: none; }
+
+@media (max-width: 620px) {
+  .gatekeeper-wrapper { padding: 12px; }
+  .gate-panel {
+    width: min(100%, 470px);
+    min-height: 0;
+    padding: 30px 20px 24px;
+    border-radius: 24px;
+  }
+  .gate-brand {
+    margin-bottom: 24px;
+    font-size: clamp(16px, 5vw, 20px);
+    letter-spacing: .08em;
+  }
+  .gate-copy {
+    max-width: 315px;
+    margin-bottom: 12px;
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1.48;
+  }
+  .gate-eyebrow {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-size: clamp(9px, 2.9vw, 10.5px);
+    letter-spacing: .12em;
+  }
+  .gate-fields { gap: 10px; margin-bottom: 14px; }
+  .gate-input,
+  .gate-submit {
+    min-height: 54px;
+    border-radius: 12px;
+  }
+  .gate-input { padding: 0 15px; font-size: 15px; }
+  .gate-submit { font-size: 11px; letter-spacing: .13em; }
+  .gate-switch { margin-top: 15px; font-size: 10px; letter-spacing: .1em; }
+  .gate-status { min-height: 18px; margin-top: 12px; font-size: 12px; }
+
+  /* Keep navigation labels single-line and proportioned on narrow iPhones. */
+  #main-site-content #ultimate-navbar { height: 62px !important; }
+  #main-site-content .nav-row-1 {
+    min-height: 19px;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px !important;
+  }
+  #main-site-content .nav-row-2 {
+    min-height: 38px;
+    padding: 0 12px !important;
+  }
+  #main-site-content .action-txt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 7px !important;
+    letter-spacing: .055em !important;
+    line-height: 1 !important;
+  }
+  #main-site-content .main-logo-txt {
+    max-width: calc(100vw - 135px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(12px, 4vw, 14px) !important;
+    letter-spacing: .035em !important;
+    line-height: 1 !important;
+  }
+  #main-site-content .icons-group { gap: 10px !important; }
+  #main-site-content .icon-btn svg { width: 17px !important; height: 17px !important; }
+  #main-site-content .hero {
+    height: calc(100svh - 62px) !important;
+    min-height: 430px !important;
+  }
+  #main-site-content .hero-content { padding: 0 18px !important; }
+  #main-site-content .tagline {
+    margin-bottom: 12px !important;
+    font-size: clamp(8px, 2.5vw, 10px) !important;
+    letter-spacing: .12em !important;
+    white-space: nowrap;
+  }
+  #main-site-content .main-title {
+    max-width: 340px;
+    margin-inline: auto;
+    font-size: clamp(25px, 8vw, 31px) !important;
+    line-height: 1.08 !important;
+  }
+  #main-site-content .sub-title {
+    max-width: 305px;
+    margin-inline: auto;
+    font-size: 12px !important;
+    line-height: 1.52 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .gate-panel { padding-inline: 17px; }
+  .gate-brand { font-size: 15px; }
+  .gate-copy { font-size: 13px; }
+  .gate-eyebrow { font-size: 8.5px; letter-spacing: .1em; }
+  .gate-input { font-size: 14px; }
+  #main-site-content .action-txt { font-size: 6.5px !important; }
+  #main-site-content .main-logo-txt { font-size: 11px !important; }
+}
+</style>
+
 </head>
 <body class="lang-en">
+
+<!-- =========================================================
+     PRIVATE ACCESS GATE
+     Rebuilt from the original access, countdown, lead capture,
+     video rotation and unlock flows without nested HTML documents.
+     ========================================================= -->
+<section class="gatekeeper-wrapper" id="gatekeeper" aria-label="Private access">
+  <video id="gate-video" class="gate-video" autoplay muted playsinline preload="metadata" aria-hidden="true"></video>
+  <div class="gate-atmosphere" aria-hidden="true"></div>
+  <div class="gate-grain" aria-hidden="true"></div>
+
+  <button class="gate-language" id="gate-language-toggle" type="button" aria-label="Change language">
+    <span aria-hidden="true">◎</span>
+    <span id="gate-language-label">AR</span>
+  </button>
+
+  <div class="gate-panel">
+    <div class="gate-brand" aria-label="フサム | experience™">
+      <span class="gate-brand-jp">フサム</span> | experience<sup>™</sup>
+    </div>
+
+    <form class="gate-form" id="gate-lead-form" novalidate>
+      <p class="gate-copy" data-i18n="leadCopy">Early access is reserved for approved society members and partners.</p>
+      <p class="gate-eyebrow" data-i18n="leadEyebrow">Request access clearance</p>
+
+      <div class="gate-fields">
+        <input id="gate-name" class="gate-input" type="text" autocomplete="name" required
+          data-placeholder="namePlaceholder" placeholder="FULL NAME">
+        <input id="gate-email" class="gate-input" type="email" inputmode="email" autocomplete="email" required
+          data-placeholder="emailPlaceholder" placeholder="EMAIL ADDRESS">
+        <input id="gate-phone" class="gate-input" type="tel" inputmode="tel" autocomplete="tel" required
+          data-placeholder="phonePlaceholder" placeholder="PHONE NUMBER">
+      </div>
+
+      <button id="gate-lead-submit" class="gate-submit" type="submit" data-i18n="leadButton">Request access</button>
+      <p id="gate-lead-status" class="gate-status" role="status" aria-live="polite"></p>
+      <button id="gate-show-passcode" class="gate-switch" type="button" data-i18n="havePasscode">[ I have a passcode ]</button>
+    </form>
+
+    <form class="gate-form gate-password-form" id="gate-passcode-form" novalidate hidden>
+      <p class="gate-copy" data-i18n="passCopy">Enter your approved passcode to verify access.</p>
+      <p class="gate-eyebrow" data-i18n="passEyebrow">Secure access verification</p>
+
+      <div class="gate-fields">
+        <input id="gate-passcode" class="gate-input" type="password" autocomplete="one-time-code" required
+          data-placeholder="passPlaceholder" placeholder="PASSCODE" aria-describedby="gate-pass-status">
+      </div>
+
+      <button id="gate-pass-submit" class="gate-submit" type="submit" data-i18n="passButton">Verify and enter</button>
+      <p id="gate-pass-status" class="gate-status" role="status" aria-live="polite"></p>
+      <button id="gate-show-lead" class="gate-switch" type="button" data-i18n="requestPass">[ request an access pass ]</button>
+    </form>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     RETAINED MAIN EXPERIENCE
+     The original developed body has been moved here without its
+     invalid nested document shell. Its visual, Oracle, Firebase,
+     dashboard, archive, video and interaction logic are retained.
+     ========================================================= -->
+<main id="main-site-content" aria-hidden="true">
+
 <style id="ultimate-nav-css">
     body { padding-top: 70px !important; background-color: #000000 !important; }
     #ultimate-navbar { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background: #000000 !important; z-index: 2147483647 !important; display: flex !important; flex-direction: column !important; justify-content: space-evenly !important; border-bottom: 1px solid rgba(255,255,255,0.05) !important; box-sizing: border-box !important; margin: 0 !important; }
@@ -1443,7 +1798,7 @@
             coin.dataset.bScale = pos.size;
             coin.dataset.bRot = pos.rotation;
             
-            coin.style.transform = scale( + pos.size + ) rotate( + pos.rotation + );
+            coin.style.transform = `scale(${pos.size}) rotate(${pos.rotation})`;
             coin.style.animationDelay = pos.delay;
             container.appendChild(coin);
         });
@@ -1468,7 +1823,7 @@
         function applyParallax(x, y) {
             coins.forEach((coin, index) => {
                 const speed = (index + 1) * 0.4;
-                coin.style.transform = 	ranslate( + (x * speed) + px,  + (y * speed) + px) scale( + coin.dataset.bScale + ) rotate( + coin.dataset.bRot + );
+                coin.style.transform = `translate(${x * speed}px, ${y * speed}px) scale(${coin.dataset.bScale}) rotate(${coin.dataset.bRot})`;
             });
         }
     });
@@ -2784,147 +3139,352 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-</body>
-</html>
-        
-    </div>
 
-    <!-- =========================================================
-         GATEKEEPER SCRIPTS (الفيديوهات المتتابعة + العداد + الفتح)
-         ========================================================= -->
-    <script>
-        // 1. نظام تشغيل 4 فيديوهات سينمائية متتابعة في الخلفية
-        const videoPlayer = document.getElementById('bg-video-player');
-        const playlist = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4']; // قم بتغيير أسماء الفيديوهات لتطابق ملفاتك المرفوعة
-        let currentVideoIndex = 0;
+</main>
 
-        function playNextVideo() {
-            videoPlayer.style.opacity = 0; // تأثير انتقال ناعم
-            setTimeout(() => {
-                videoPlayer.src = playlist[currentVideoIndex];
-                videoPlayer.load();
-                videoPlayer.play().catch(e => console.log("Video auto-play blocked by browser."));
-                videoPlayer.style.opacity = 0.4;
-                currentVideoIndex = (currentVideoIndex + 1) % playlist.length;
-            }, 500); // نصف ثانية انتقال أسود
-        }
-        videoPlayer.addEventListener('ended', playNextVideo);
-        playNextVideo(); // تشغيل أول فيديو فوراً
+<script id="ex-language-bridge">
+(() => {
+  const originalToggleLanguage = window.toggleLanguage;
+  if (typeof originalToggleLanguage !== 'function') return;
 
-        // 2. نظام العداد التنازلي الحصري
-        const dropDate = new Date();
-        dropDate.setDate(dropDate.getDate() + 7); // مبرمج ليفتح تلقائياً بعد 7 أيام (يمكنك تعديلها)
-        
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = dropDate - now;
+  window.toggleLanguage = function exSyncedToggleLanguage(...args) {
+    const result = originalToggleLanguage.apply(this, args);
+    const language = document.body.classList.contains('lang-ar') ? 'ar' : 'en';
+    window.dispatchEvent(new CustomEvent('ex:languagechange', { detail: { language } }));
+    return result;
+  };
+})();
+</script>
 
-            if (distance < 0) {
-                document.getElementById("countdown-timer").innerHTML = "<div class='time-box'><span>SYSTEM UNLOCKED</span></div>";
-                return;
-            }
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("mins").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("secs").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+<!-- =========================================================
+     PRIVATE ACCESS GATE CONTROLLER
+     - Browser language detection and explicit Arabic / English sync
+     - Firebase lead capture retained
+     - Server endpoint supported when configured
+     - Local hashed fallback retained for static development hosting
+     ========================================================= -->
+<script>
+(() => {
+  'use strict';
 
-        // 3. التبديل بين النماذج
-        function toggleForms() {
-            const emailSec = document.getElementById('email-section');
-            const passSec = document.getElementById('password-section');
-            if (emailSec.style.display === 'none') {
-                emailSec.style.display = 'block'; passSec.style.display = 'none';
-            } else {
-                emailSec.style.display = 'none'; passSec.style.display = 'block';
-            }
-        }
+  const GATE_CONFIG = Object.freeze({
+    leadCollection: 'Gate_Registrations',
+    videoPlaylist: ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4'],
+    // Optional: set this to a HTTPS endpoint returning { approved: true }.
+    // Empty keeps the present static deployment operational through its existing
+    // locally hashed access fallback. Never use that fallback for confidential content.
+    verificationEndpoint: window.EX_ACCESS_VERIFY_ENDPOINT || '',
+    // SHA-256 comparison for the original private access path; no raw passcode is exposed.
+    localPasscodeHash: '092aeb59765ab0982ae58684a5fecf3feb091e7c0347a889cfb4442f9f0f73f3'
+  });
 
-        // 4. التقاط إيميلات النخبة وتخزينها
-        async function captureLead() {
-            const name = document.getElementById('lead-name').value.trim();
-            const email = document.getElementById('lead-email').value.trim();
-            const btn = document.getElementById('lead-btn');
+  const COPY = {
+    en: {
+      leadCopy: 'Early access is reserved for approved society members and partners.',
+      leadEyebrow: 'Request access clearance',
+      namePlaceholder: 'FULL NAME',
+      emailPlaceholder: 'EMAIL ADDRESS',
+      phonePlaceholder: 'PHONE NUMBER',
+      leadButton: 'Request access',
+      havePasscode: '[ I have a passcode ]',
+      passCopy: 'Enter your approved passcode to verify access.',
+      passEyebrow: 'Secure access verification',
+      passPlaceholder: 'PASSCODE',
+      passButton: 'Verify and enter',
+      requestPass: '[ request an access pass ]',
+      working: 'Submitting request…',
+      verifying: 'Verifying access…',
+      required: 'Please complete your name, email and mobile number.',
+      emailInvalid: 'Please enter a valid email address.',
+      requestSaved: 'Registration received. Your access request is now under review.',
+      requestFailed: 'We are unable to receive registrations right now. Please try again shortly.',
+      denied: 'The passcode could not be verified.',
+      label: 'AR',
+      success: 'Access verified. Entering experience…'
+    },
+    ar: {
+      leadCopy: 'الوصول المبكر مخصّص للأعضاء والشركاء المعتمدين.',
+      leadEyebrow: 'طلب تصريح الوصول',
+      namePlaceholder: 'الاسم الكامل',
+      emailPlaceholder: 'البريد الإلكتروني',
+      phonePlaceholder: 'رقم الجوال',
+      leadButton: 'طلب الوصول',
+      havePasscode: '[ لدي رمز مرور ]',
+      passCopy: 'أدخل رمز المرور المعتمد للتحقق من الوصول.',
+      passEyebrow: 'تحقق آمن من الوصول',
+      passPlaceholder: 'رمز المرور',
+      passButton: 'تحقق وادخل',
+      requestPass: '[ طلب تصريح وصول ]',
+      working: 'جارٍ إرسال الطلب…',
+      verifying: 'جارٍ التحقق من الوصول…',
+      required: 'يرجى إدخال الاسم والبريد الإلكتروني ورقم الجوال.',
+      emailInvalid: 'يرجى إدخال بريد إلكتروني صحيح.',
+      requestSaved: 'تم تسجيل طلبك بنجاح. ستتم مراجعة تصريح الوصول.',
+      requestFailed: 'يتعذر استقبال طلبات التسجيل حالياً. حاول مرة أخرى بعد قليل.',
+      denied: 'تعذر التحقق من رمز المرور.',
+      label: 'EN',
+      success: 'تم التحقق من الوصول. جارٍ الدخول…'
+    }
+  };
 
-            if(!name || !email) return alert("All fields are required to secure your pass.");
+  const $ = (id) => document.getElementById(id);
+  const gate = $('gatekeeper');
+  const leadForm = $('gate-lead-form');
+  const passcodeForm = $('gate-passcode-form');
+  const leadStatus = $('gate-lead-status');
+  const passStatus = $('gate-pass-status');
+  const languageToggle = $('gate-language-toggle');
+  const languageLabel = $('gate-language-label');
+  const video = $('gate-video');
+  const mainSite = $('main-site-content');
+  let activeLanguage = 'en';
+  let videoIndex = 0;
 
-            btn.innerText = "SECURING PASS...";
-            btn.disabled = true;
+  const safeText = (value) => String(value || '').replace(/[<>"'`]/g, '').trim();
 
-            try {
-                if(typeof db !== 'undefined') {
-                    await db.collection('VIP_Early_Access').add({
-                        Name: name, 
-                        Email: email, 
-                        Timestamp: firebase.firestore.FieldValue.serverTimestamp(), 
-                        Status: "Waiting for Drop"
-                    });
-                }
-                document.getElementById('email-section').innerHTML = `
-                    <h3 style="color:#0f0; margin-bottom:15px; font-family:'Space Mono'; letter-spacing:2px;">PASS SECURED</h3>
-                    <p style="color:#a1a1a1; line-height:1.8;">Thank you, ${name}.<br>Your early access clearance will be emailed to <b>${email}</b> 24 hours before the global drop.</p>
-                `;
-                
-                // حفظ السجل في نظام التتبع لديك
-                if(typeof window.logToNexus === 'function') window.logToNexus("Lead Captured: " + email);
-                
-            } catch(e) {
-                console.error("Firebase Error:", e);
-                alert("SYSTEM ERROR. Please try again later.");
-                btn.innerText = "REQUEST VIP ACCESS";
-                btn.disabled = false;
-            }
-        }
+  function preferredLanguage() {
+    const saved = localStorage.getItem('ex-language');
+    if (saved === 'ar' || saved === 'en') return saved;
+    return (navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('ar') ? 'ar' : 'en';
+  }
 
-        // 5. فتح البوابة (فتح الموقع السري)
-        function checkPassword() {
-            const pass = document.getElementById('vip-password').value.trim();
-            const err = document.getElementById('pass-error');
-            const btn = document.getElementById('pass-btn');
-            
-            // 🔴 الكلمة السرية لفتح الموقع بالكامل (قم بتغييرها إن أردت)
-            const SECRET_PASSCODE = "HX1991"; 
+  function setLanguage(language, persist = true) {
+    activeLanguage = language === 'ar' ? 'ar' : 'en';
+    document.documentElement.lang = activeLanguage;
+    document.documentElement.dir = activeLanguage === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('lang-ar', activeLanguage === 'ar');
+    document.body.classList.toggle('lang-en', activeLanguage !== 'ar');
 
-            if(pass.toUpperCase() === SECRET_PASSCODE) {
-                btn.innerText = "DECRYPTING SYSTEM...";
-                err.style.display = 'none';
-                if(navigator.vibrate) navigator.vibrate([50, 100, 50]);
-                
-                // عملية الذوبان وفتح الموقع الأساسي
-                setTimeout(() => {
-                    const gate = document.getElementById('gatekeeper');
-                    const mainSite = document.getElementById('main-site-content');
-                    
-                    gate.style.opacity = '0';
-                    setTimeout(() => {
-                        gate.style.display = 'none';
-                        document.body.style.overflow = 'auto'; // السماح بالتمرير
-                        mainSite.style.display = 'block';
-                        
-                        // تأثير ظهور ناعم للموقع الأساسي
-                        setTimeout(() => {
-                            mainSite.style.opacity = '1';
-                        }, 100);
-                        
-                    }, 1200);
-                }, 800);
-            } else {
-                err.style.display = 'block';
-                if(navigator.vibrate) navigator.vibrate(200); // هزة عنيفة للرفض
-            }
-        }
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const key = element.dataset.i18n;
+      if (COPY[activeLanguage][key]) element.textContent = COPY[activeLanguage][key];
+    });
+    document.querySelectorAll('[data-placeholder]').forEach((element) => {
+      const key = element.dataset.placeholder;
+      if (COPY[activeLanguage][key]) element.placeholder = COPY[activeLanguage][key];
+    });
 
-        // السماح بالضغط على Enter للفتح
-        document.getElementById('vip-password').addEventListener('keydown', function(e) {
-            if(e.key === 'Enter') checkPassword();
-        });
-    </script>
+    languageLabel.textContent = COPY[activeLanguage].label;
+    languageToggle.setAttribute('aria-label', activeLanguage === 'ar' ? 'Change language to English' : 'تغيير اللغة إلى العربية');
+    if (persist) localStorage.setItem('ex-language', activeLanguage);
+
+    // Keeps the existing retained site and its Oracle aligned with the selected language.
+    window.dispatchEvent(new CustomEvent('ex:languagechange', { detail: { language: activeLanguage } }));
+  }
+
+  function resetStatus(element) {
+    element.textContent = '';
+    element.classList.remove('success');
+  }
+  function setStatus(element, message, success = false) {
+    element.textContent = message || '';
+    element.classList.toggle('success', Boolean(success));
+  }
+  function showForm(formName) {
+    const leadMode = formName === 'lead';
+    leadForm.hidden = !leadMode;
+    passcodeForm.hidden = leadMode;
+    resetStatus(leadStatus);
+    resetStatus(passStatus);
+    requestAnimationFrame(() => (leadMode ? $('gate-name') : $('gate-passcode')).focus());
+  }
+  function setButtonState(button, isBusy, text) {
+    button.disabled = isBusy;
+    if (text) button.textContent = text;
+  }
+
+  async function sha256(value) {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  function constantTimeEqual(left, right) {
+    if (left.length !== right.length) return false;
+    let mismatch = 0;
+    for (let index = 0; index < left.length; index += 1) mismatch |= left.charCodeAt(index) ^ right.charCodeAt(index);
+    return mismatch === 0;
+  }
+
+  async function verifyPasscode(passcode) {
+    if (GATE_CONFIG.verificationEndpoint) {
+      const response = await fetch(GATE_CONFIG.verificationEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'omit',
+        body: JSON.stringify({ passcode })
+      });
+      if (!response.ok) return false;
+      const data = await response.json().catch(() => ({}));
+      return data && data.approved === true;
+    }
+
+    const hash = await sha256(passcode.trim().toUpperCase());
+    return constantTimeEqual(hash, GATE_CONFIG.localPasscodeHash);
+  }
+
+  async function saveLead(payload) {
+    // Firebase is retained from the original development. Each successful record is
+    // written to Gate_Registrations, which is the secure source for the admin feed.
+    if (typeof db === 'undefined' || !db || typeof firebase === 'undefined') {
+      throw new Error('Firestore is unavailable.');
+    }
+
+    const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+    return db.collection(GATE_CONFIG.leadCollection).add({
+      Name: payload.name,
+      Email: payload.email,
+      Phone: payload.phone,
+      Language: activeLanguage,
+      Source: 'private-access-gate',
+      Status: 'New',
+      Site: window.location.hostname || 'local',
+      CreatedAt: serverTimestamp,
+      UpdatedAt: serverTimestamp
+    });
+  }
+
+  function registrationFailureMessage(error) {
+    const code = String(error && error.code || '');
+    if (code.includes('permission-denied')) return COPY[activeLanguage].requestFailed;
+    if (code.includes('unavailable') || code.includes('network')) return COPY[activeLanguage].requestFailed;
+    return COPY[activeLanguage].requestFailed;
+  }
+
+  function unlockSite() {
+    sessionStorage.setItem('ex-private-access', 'granted');
+    setStatus(passStatus, COPY[activeLanguage].success, true);
+    const passButton = $('gate-pass-submit');
+    setButtonState(passButton, true, COPY[activeLanguage].success);
+
+    if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+    window.setTimeout(() => {
+      gate.classList.add('is-leaving');
+      // The retained legacy preloader is intentionally neutralized by the v2 patch.
+      // This prevents a second full-screen black sequence after access is granted.
+      const retainedLoader = mainSite.querySelector('#ex-master-loader');
+      if (retainedLoader) {
+        retainedLoader.style.display = 'none';
+        retainedLoader.style.opacity = '0';
+        retainedLoader.style.visibility = 'hidden';
+      }
+      mainSite.classList.add('is-visible');
+      document.body.classList.remove('gate-active');
+      mainSite.removeAttribute('aria-hidden');
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      window.setTimeout(() => {
+        gate.hidden = true;
+        window.dispatchEvent(new Event('ex:site-unlocked'));
+      }, 680);
+    }, 520);
+  }
+
+  function startVideoPlaylist() {
+    if (!video || !GATE_CONFIG.videoPlaylist.length) return;
+    const playNext = () => {
+      video.classList.add('is-loading');
+      window.setTimeout(() => {
+        video.src = GATE_CONFIG.videoPlaylist[videoIndex];
+        video.load();
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+        videoIndex = (videoIndex + 1) % GATE_CONFIG.videoPlaylist.length;
+        video.classList.remove('is-loading');
+      }, 260);
+    };
+    video.addEventListener('ended', playNext);
+    video.addEventListener('error', () => { video.style.opacity = '0'; }, { once: true });
+    playNext();
+  }
+
+  $('gate-show-passcode').addEventListener('click', () => showForm('passcode'));
+  $('gate-show-lead').addEventListener('click', () => showForm('lead'));
+  languageToggle.addEventListener('click', () => setLanguage(activeLanguage === 'ar' ? 'en' : 'ar'));
+
+  leadForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    resetStatus(leadStatus);
+
+    const name = safeText($('gate-name').value);
+    const email = safeText($('gate-email').value).toLowerCase();
+    const phone = safeText($('gate-phone').value);
+    const button = $('gate-lead-submit');
+
+    if (!name || !email || !phone) {
+      setStatus(leadStatus, COPY[activeLanguage].required);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus(leadStatus, COPY[activeLanguage].emailInvalid);
+      return;
+    }
+
+    const defaultLabel = COPY[activeLanguage].leadButton;
+    setButtonState(button, true, COPY[activeLanguage].working);
+    try {
+      await saveLead({ name, email, phone });
+      const profile = { name, email, phone, language: activeLanguage, savedAt: new Date().toISOString() };
+      sessionStorage.setItem('ex-access-profile', JSON.stringify(profile));
+      window.EX_ACCESS_PROFILE = profile;
+      if (typeof window.logToNexus === 'function') window.logToNexus(`Early access request: ${email}`);
+      setStatus(leadStatus, COPY[activeLanguage].requestSaved, true);
+      leadForm.reset();
+    } catch (error) {
+      console.error('Early-access submission failed.', error);
+      setStatus(leadStatus, registrationFailureMessage(error));
+    } finally {
+      setButtonState(button, false, defaultLabel);
+    }
+  });
+
+  passcodeForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    resetStatus(passStatus);
+
+    const passcode = $('gate-passcode').value;
+    const button = $('gate-pass-submit');
+    if (!passcode) {
+      setStatus(passStatus, COPY[activeLanguage].denied);
+      return;
+    }
+
+    const defaultLabel = COPY[activeLanguage].passButton;
+    setButtonState(button, true, COPY[activeLanguage].verifying);
+    try {
+      const approved = await verifyPasscode(passcode);
+      if (!approved) {
+        setStatus(passStatus, COPY[activeLanguage].denied);
+        if (navigator.vibrate) navigator.vibrate(120);
+        return;
+      }
+      unlockSite();
+    } catch (error) {
+      console.error('Access verification failed.', error);
+      setStatus(passStatus, COPY[activeLanguage].denied);
+    } finally {
+      if (!gate.hidden) setButtonState(button, false, defaultLabel);
+    }
+  });
+
+  // The original developed site owns its detailed translation function. This listener keeps
+  // gate selection in sync when the retained navigation changes language after unlock.
+  window.addEventListener('ex:languagechange', (event) => {
+    const requested = event.detail && event.detail.language;
+    if (requested && requested !== activeLanguage) setLanguage(requested, true);
+  });
+
+  setLanguage(preferredLanguage(), false);
+  startVideoPlaylist();
+  mainSite.setAttribute('aria-hidden', 'true');
+  document.body.classList.add('gate-active');
+
+  // Useful during the same browser session without creating a permanent public bypass.
+  if (sessionStorage.getItem('ex-private-access') === 'granted') {
+    unlockSite();
+  }
+})();
+</script>
+
 </body>
 </html>
