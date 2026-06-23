@@ -41,6 +41,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="フサム | experience™ - Engineering Human Experiences">
     <title>フサム | experience™ — Private Access</title>
+<meta name="ex-build" content="gateway-v4-mobile-firestore-fix">
    
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="googlebot" content="noindex, nofollow">
@@ -1116,6 +1117,223 @@ body.lang-ar .gate-status {
   #main-site-content .main-logo-txt { font-size: 11px !important; }
 }
 </style>
+
+<!-- =========================================================
+     EX™ GATEWAY V4 HOTFIX
+     Mobile hero spacing, one-line microcopy, safer Firestore UX,
+     and post-unlock black gap reduction.
+     ========================================================= -->
+<style id="ex-gateway-v4-hotfix">
+/* V4 build marker: confirms GitHub Pages is serving the corrected file. */
+html::before {
+  content: "";
+  position: fixed;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Keep all gate copy elegant on compact iPhones without cutting words. */
+.gate-copy,
+.gate-eyebrow,
+.gate-submit,
+.gate-switch,
+.gate-input {
+  text-rendering: geometricPrecision;
+}
+.gate-copy,
+#main-site-content .main-title,
+#main-site-content .tagline,
+#main-site-content .text-body {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+/* Stronger public-registration feedback: no browser alert, no ugly system popup. */
+.gate-status {
+  text-align: center;
+  border-radius: 999px;
+  padding-inline: 6px;
+}
+.gate-status:not(:empty):not(.success) {
+  color: #ff9a9a;
+}
+.gate-status.success {
+  color: #b9f6c9;
+}
+
+/* After the passcode, remove the dead black vertical area and bring the official hero forward. */
+#main-site-content.is-visible {
+  background: #000 !important;
+}
+#main-site-content > main,
+#main-site-content main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+#main-site-content .hero {
+  height: min(78svh, 720px) !important;
+  min-height: 500px !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+#main-site-content .hero-content {
+  transform: translateY(-8svh) !important;
+  will-change: transform;
+}
+#main-site-content .main-title {
+  max-width: min(96vw, 760px) !important;
+  margin-inline: auto !important;
+  text-wrap: balance;
+}
+#main-site-content .sub-title,
+#main-site-content .text-body {
+  max-width: min(92vw, 760px) !important;
+}
+
+/* Make the small navigation professional on mobile and prevent logo/title fractures. */
+#main-site-content .main-logo-txt,
+#main-site-content .action-txt {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+
+@media (max-width: 620px) {
+  .gatekeeper-wrapper { padding: 10px !important; }
+  .gate-panel {
+    width: min(100%, 452px) !important;
+    padding: 28px 18px 22px !important;
+    border-radius: 22px !important;
+  }
+  .gate-brand {
+    margin-bottom: 18px !important;
+    font-size: clamp(14px, 4.6vw, 18px) !important;
+    letter-spacing: .075em !important;
+  }
+  .gate-copy {
+    max-width: 300px !important;
+    margin-bottom: 10px !important;
+    font-size: clamp(13px, 3.65vw, 15px) !important;
+    line-height: 1.42 !important;
+  }
+  html[lang="ar"] .gate-copy,
+  body.lang-ar .gate-copy {
+    line-height: 1.62 !important;
+  }
+  .gate-eyebrow {
+    margin-bottom: 16px !important;
+    white-space: nowrap !important;
+    font-size: clamp(8px, 2.55vw, 9.5px) !important;
+    letter-spacing: .10em !important;
+  }
+  html[lang="ar"] .gate-eyebrow,
+  body.lang-ar .gate-eyebrow {
+    font-size: clamp(10px, 3vw, 12px) !important;
+    letter-spacing: 0 !important;
+  }
+  .gate-fields {
+    gap: 9px !important;
+    margin-bottom: 12px !important;
+  }
+  .gate-input,
+  .gate-submit {
+    min-height: 50px !important;
+    border-radius: 11px !important;
+  }
+  .gate-input {
+    padding: 0 14px !important;
+    font-size: 13px !important;
+    letter-spacing: .03em !important;
+  }
+  .gate-password-form .gate-input {
+    letter-spacing: .12em !important;
+  }
+  .gate-submit {
+    font-size: 9.5px !important;
+    letter-spacing: .145em !important;
+  }
+  .gate-switch {
+    margin-top: 12px !important;
+    min-height: 26px !important;
+    font-size: 9px !important;
+    letter-spacing: .09em !important;
+  }
+  .gate-status {
+    min-height: 16px !important;
+    margin-top: 9px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  #main-site-content #ultimate-navbar {
+    height: 56px !important;
+  }
+  #main-site-content .nav-row-1 {
+    min-height: 17px !important;
+    padding: 0 10px !important;
+  }
+  #main-site-content .nav-row-2 {
+    min-height: 35px !important;
+    padding: 0 10px !important;
+  }
+  #main-site-content .action-txt {
+    font-size: 6px !important;
+    letter-spacing: .045em !important;
+  }
+  #main-site-content .main-logo-txt {
+    max-width: calc(100vw - 118px) !important;
+    font-size: clamp(10px, 3.45vw, 12.5px) !important;
+    letter-spacing: .025em !important;
+  }
+  #main-site-content .icons-group { gap: 8px !important; }
+  #main-site-content .icon-btn svg { width: 15px !important; height: 15px !important; }
+
+  #main-site-content .hero {
+    height: 62svh !important;
+    min-height: 360px !important;
+    max-height: 520px !important;
+  }
+  #main-site-content .hero-content {
+    transform: translateY(-5.2svh) !important;
+    padding-inline: 12px !important;
+  }
+  #main-site-content .tagline {
+    margin-bottom: 8px !important;
+    font-size: clamp(7px, 2.05vw, 8.5px) !important;
+    letter-spacing: .085em !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+  }
+  #main-site-content .main-title {
+    max-width: 96vw !important;
+    font-size: clamp(22px, 6.65vw, 27px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.045em !important;
+  }
+  #main-site-content .text-body,
+  #main-site-content .sub-title {
+    max-width: 88vw !important;
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+  }
+  #main-site-content .content-section:first-of-type {
+    padding-top: 54px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .gate-panel { padding-inline: 15px !important; }
+  .gate-copy { font-size: 12.5px !important; max-width: 280px !important; }
+  .gate-eyebrow { font-size: 7.8px !important; }
+  .gate-input { min-height: 48px !important; font-size: 12px !important; }
+  .gate-submit { min-height: 48px !important; font-size: 8.8px !important; letter-spacing: .13em !important; }
+  #main-site-content .main-title { font-size: clamp(20px, 6.35vw, 24px) !important; }
+  #main-site-content .main-logo-txt { font-size: 10px !important; }
+}
+</style>
+
 
 </head>
 <body class="lang-en">
@@ -3230,7 +3448,7 @@ document.addEventListener("DOMContentLoaded", function() {
       required: 'Please complete your name, email and mobile number.',
       emailInvalid: 'Please enter a valid email address.',
       requestSaved: 'Registration received. Your access request is now under review.',
-      requestFailed: 'We are unable to receive registrations right now. Please try again shortly.',
+      requestFailed: 'Registration service is being updated. Please refresh once, then try again.',
       denied: 'The passcode could not be verified.',
       label: 'AR',
       success: 'Access verified. Entering experience…'
@@ -3253,7 +3471,7 @@ document.addEventListener("DOMContentLoaded", function() {
       required: 'يرجى إدخال الاسم والبريد الإلكتروني ورقم الجوال.',
       emailInvalid: 'يرجى إدخال بريد إلكتروني صحيح.',
       requestSaved: 'تم تسجيل طلبك بنجاح. ستتم مراجعة تصريح الوصول.',
-      requestFailed: 'يتعذر استقبال طلبات التسجيل حالياً. حاول مرة أخرى بعد قليل.',
+      requestFailed: 'يتم تحديث خدمة التسجيل. حدّث الصفحة مرة واحدة ثم حاول مجدداً.',
       denied: 'تعذر التحقق من رمز المرور.',
       label: 'EN',
       success: 'تم التحقق من الوصول. جارٍ الدخول…'
@@ -3361,6 +3579,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // written to Gate_Registrations, which is the secure source for the admin feed.
     if (typeof db === 'undefined' || !db || typeof firebase === 'undefined') {
       throw new Error('Firestore is unavailable.');
+    }
+
+    // Some Firebase projects enforce authenticated writes at project level.
+    // Anonymous auth is attempted silently; Firestore rules still validate every field.
+    if (typeof auth !== 'undefined' && auth && !auth.currentUser) {
+      try { await auth.signInAnonymously(); } catch (authError) { console.warn('Anonymous auth skipped.', authError); }
     }
 
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
@@ -3506,6 +3730,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (requested && requested !== activeLanguage) setLanguage(requested, true);
   });
 
+  console.info('EX gateway build: V4 mobile-firestore hotfix');
   setLanguage(preferredLanguage(), false);
   startVideoPlaylist();
   mainSite.setAttribute('aria-hidden', 'true');
