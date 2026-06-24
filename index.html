@@ -7,6 +7,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#000000">
+    <!-- EX gateway build: V5 auth-resilience and mobile-console hotfix -->
 
 <style id="nexus-force-fix">
     /* LOCK UTILITY BAR TO TOP */
@@ -81,6 +82,15 @@
         if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.firestore();
         const auth = firebase.auth();
+
+        // V5: avoid browser intervention warnings. Vibration is permitted only while
+        // the browser still considers the current JavaScript turn a user gesture.
+        function safeVibrate(pattern) {
+            const supported = typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function';
+            const gestureActive = Boolean(navigator.userActivation && navigator.userActivation.isActive);
+            if (!supported || !gestureActive) return false;
+            try { return navigator.vibrate(pattern); } catch (_) { return false; }
+        }
     </script>
 
     <style>
@@ -2283,7 +2293,7 @@ html::before {
 
         function advanceStage(stageNum) {
             currentStage = stageNum;
-            if (navigator.vibrate) navigator.vibrate(50);
+            safeVibrate(50);
 
             document.querySelectorAll('.hx-stage-ui').forEach(el => el.classList.remove('active'));
            
@@ -2298,7 +2308,7 @@ html::before {
             } else if(stageNum === 3) {
                 targetNode.visible = false;
             } else if(stageNum === 5) {
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 200]);
+                safeVibrate([100, 50, 100, 50, 200]);
                 document.getElementById('matrixStatus').innerText = "SYSTEM: HX-5 ARCHITECTURE DEPLOYED";
                 document.getElementById('matrixStatus').style.color = "#FFD700";
             }
@@ -2314,7 +2324,7 @@ html::before {
             const intersects = hxRaycaster.intersectObject(targetNode);
 
             if (intersects.length > 0) {
-                if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+                safeVibrate([50, 100, 50]);
                 targetNode.material.color.setHex(0xffffff);
                 setTimeout(() => { advanceStage(3); }, 500);
             }
@@ -2330,7 +2340,7 @@ html::before {
 
             if (stimuliLevel >= 0.99) {
                 slider.disabled = true;
-                if (navigator.vibrate) navigator.vibrate(200);
+                safeVibrate(200);
                 advanceStage(4);
             }
         }
@@ -2345,7 +2355,7 @@ html::before {
                 btn.style.background = `rgba(39, 201, 63, ${syncProgress/100})`;
                 const isAr = document.body.classList.contains('lang-ar');
                 btn.innerText = `${syncProgress}%`;
-                if (navigator.vibrate) navigator.vibrate(15);
+                safeVibrate(15);
 
                 if(syncProgress >= 100) {
                     stopSync(e);
@@ -2589,10 +2599,32 @@ html::before {
             } catch (error) { console.error("Apple Auth Interrupted", error); }
         }
 
-        async function ensureClientIdentity() {
+        // V5: the public gateway itself does not require Authentication.
+        // Protected dashboard features still use Firebase Authentication, while passive
+        // telemetry exits quietly if an administrator has disabled end-user account creation.
+        let anonymousAuthUnavailable = false;
+        async function ensureClientIdentity(options = {}) {
+            const silent = Boolean(options.silent);
             if (auth.currentUser) return auth.currentUser;
-            const credential = await auth.signInAnonymously();
-            return credential.user;
+
+            if (anonymousAuthUnavailable) {
+                if (silent) return null;
+                const configurationError = new Error('A secure visitor session is unavailable.');
+                configurationError.code = 'auth/admin-restricted-operation';
+                throw configurationError;
+            }
+
+            try {
+                const credential = await auth.signInAnonymously();
+                return credential.user;
+            } catch (error) {
+                const code = String(error && error.code || '');
+                if (code === 'auth/admin-restricted-operation' || code === 'auth/operation-not-allowed') {
+                    anonymousAuthUnavailable = true;
+                    if (silent) return null;
+                }
+                throw error;
+            }
         }
 
         async function finalizeAuth(user) {
@@ -3095,7 +3127,7 @@ html::before {
                 grid.classList.add('has-focus');
                 clickedCard.classList.add('focused');
                 clickedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                if (navigator.vibrate) navigator.vibrate(40);
+                safeVibrate(40);
             } else {
                 grid.classList.remove('has-focus');
             }
@@ -3134,11 +3166,11 @@ html::before {
                 statusEl.style.borderColor = 'rgba(255, 215, 0, 0.3)';
                 statusEl.style.background = 'rgba(255, 215, 0, 0.05)';
                
-                if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+                safeVibrate([50, 100, 50]);
             } else {
                 errorEl.style.display = 'block';
                 inputEl.value = '';
-                if (navigator.vibrate) navigator.vibrate(200);
+                safeVibrate(200);
             }
         }
     </script>
@@ -3292,7 +3324,8 @@ document.addEventListener("DOMContentLoaded", function() {
    window.logToNexus = async function(actionDetail) {
         try {
             let fDb = (typeof db !== 'undefined') ? db : firebase.firestore();
-            const owner = await ensureClientIdentity();
+            const owner = await ensureClientIdentity({ silent: true });
+            if (!owner) return;
             let currentName = localStorage.getItem('nexus_user_name') || "Anonymous";
             let currentEmail = localStorage.getItem('nexus_user_email') || "Unknown";
             
@@ -3581,11 +3614,9 @@ document.addEventListener("DOMContentLoaded", function() {
       throw new Error('Firestore is unavailable.');
     }
 
-    // Some Firebase projects enforce authenticated writes at project level.
-    // Anonymous auth is attempted silently; Firestore rules still validate every field.
-    if (typeof auth !== 'undefined' && auth && !auth.currentUser) {
-      try { await auth.signInAnonymously(); } catch (authError) { console.warn('Anonymous auth skipped.', authError); }
-    }
+    // Gate_Registrations is intentionally create-only for public visitors under
+    // firestore.rules. Do not create an anonymous Auth account here: a visitor must
+    // be able to submit an access request even when dashboard authentication is disabled.
 
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
     return db.collection(GATE_CONFIG.leadCollection).add({
@@ -3614,7 +3645,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const passButton = $('gate-pass-submit');
     setButtonState(passButton, true, COPY[activeLanguage].success);
 
-    if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+    safeVibrate([30, 50, 30]);
     window.setTimeout(() => {
       gate.classList.add('is-leaving');
       // The retained legacy preloader is intentionally neutralized by the v2 patch.
@@ -3711,7 +3742,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const approved = await verifyPasscode(passcode);
       if (!approved) {
         setStatus(passStatus, COPY[activeLanguage].denied);
-        if (navigator.vibrate) navigator.vibrate(120);
+        safeVibrate(120);
         return;
       }
       unlockSite();
@@ -3730,7 +3761,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (requested && requested !== activeLanguage) setLanguage(requested, true);
   });
 
-  console.info('EX gateway build: V4 mobile-firestore hotfix');
+  console.info('EX gateway build: V5 auth-resilience and mobile-console hotfix');
   setLanguage(preferredLanguage(), false);
   startVideoPlaylist();
   mainSite.setAttribute('aria-hidden', 'true');
@@ -3743,5 +3774,7 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+
+<!-- deployment-marker: gateway-v5-auth-resilience -->
 </body>
 </html>
