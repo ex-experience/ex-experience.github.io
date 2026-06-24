@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#000000">
-    <!-- EX gateway build: V5 auth-resilience and mobile-console hotfix -->
+    <!-- EX gateway build: V6 hero-loop and responsive-icon system -->
 
 <style id="nexus-force-fix">
     /* LOCK UTILITY BAR TO TOP */
@@ -1438,10 +1438,28 @@ html::before {
     </div>
     <div class="nav-row-2">
         <a href="#" class="main-logo-txt mono-text glitch-anim">フサム | experience™</a>
-        <div class="icons-group">
-            <button class="icon-btn" onclick="document.getElementById('portal').scrollIntoView();"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></button>
-            <button class="icon-btn" onclick="toggleLanguage()"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.9 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8z"/></svg></button>
-            <button class="icon-btn" onclick="alert('Privacy & Policy');"><svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg></button>
+        <div class="icons-group" aria-label="Site controls">
+            <button class="icon-btn icon-btn--portal" type="button" aria-label="Open executive portal" data-tooltip="Portal" onclick="document.getElementById('portal')?.scrollIntoView({ behavior: 'smooth', block: 'start' });">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4.5 4.5h9v15h-9z"/>
+                    <path d="M9.25 12h10.25"/>
+                    <path d="m15.75 8.25 3.75 3.75-3.75 3.75"/>
+                </svg>
+            </button>
+            <button class="icon-btn icon-btn--language" type="button" aria-label="Change language" data-tooltip="Language" onclick="toggleLanguage()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="8.75"/>
+                    <path d="M3.25 12h17.5"/>
+                    <path d="M12 3.25c2.45 2.4 3.7 5.32 3.7 8.75S14.45 18.35 12 20.75C9.55 18.35 8.3 15.43 8.3 12S9.55 5.65 12 3.25Z"/>
+                </svg>
+            </button>
+            <button class="icon-btn icon-btn--policy" type="button" aria-label="Open privacy and policy" data-tooltip="Privacy" onclick="alert('Privacy & Policy');">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 3.3 19 6v5.1c0 4.55-2.85 7.6-7 9.6-4.15-2-7-5.05-7-9.6V6l7-2.7Z"/>
+                    <path d="M9.6 10.05a2.4 2.4 0 0 1 4.8 0c0 2.22-2.4 2.15-2.4 4"/>
+                    <path d="M12 17.1h.01"/>
+                </svg>
+            </button>
         </div>
     </div>
 </nav>
@@ -1542,8 +1560,18 @@ html::before {
                 <span class="tagline ar-only">الخط الفاصل بين العادي والاستثنائي</span>
                 <span class="tagline en-only">The line between ordinary and extraordinary</span>
                
-                <h1 class="main-title ar-only">هندسة التجربة الإنسانية</h1>
-                <h1 class="main-title en-only">Engineering Human Experiences</h1>
+                <h1 class="main-title hero-title-loop ar-only" aria-label="هندسة التجربة الإنسانية">
+                    <span class="hero-title-loop-track" aria-hidden="true">
+                        <span class="hero-title-loop-sequence"><span class="hero-title-loop-item">هندسة التجربة الإنسانية</span></span>
+                        <span class="hero-title-loop-sequence"><span class="hero-title-loop-item">هندسة التجربة الإنسانية</span></span>
+                    </span>
+                </h1>
+                <h1 class="main-title hero-title-loop en-only" aria-label="Engineering Human Experiences">
+                    <span class="hero-title-loop-track" aria-hidden="true">
+                        <span class="hero-title-loop-sequence"><span class="hero-title-loop-item">Engineering Human Experiences</span></span>
+                        <span class="hero-title-loop-sequence"><span class="hero-title-loop-item">Engineering Human Experiences</span></span>
+                    </span>
+                </h1>
                
                 <p class="text-body ar-only" style="margin: 0 auto; color:#fff;">نحن لا نصمم منتجات..<br>نحن نهندس التجارب الإنسانية.. من الإحساس الأول إلى الذاكرة الخالدة.</p>
                 <p class="text-body en-only" style="margin: 0 auto; color:#fff;">We do not design products..<br>We engineer human experiences..from first sensation to lasting memory.</p>
@@ -3774,6 +3802,207 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+
+
+<!-- =========================================================
+     EX™ HERO LOOP + RESPONSIVE NAVIGATION SYSTEM — V6
+     Calibrated to the supplied reference: continuous linear text motion,
+     with static upper copy and stable hero geometry.
+     ========================================================= -->
+<style id="ex-hero-loop-navigation-v6">
+  :root {
+    --ex-title-loop-duration: 29s;
+    --ex-title-loop-gap: clamp(2.5rem, 6vw, 6.25rem);
+    --ex-nav-control-size: 36px;
+    --ex-nav-control-gap: 10px;
+  }
+
+  /* Remove retained duplicate utility bars without touching original site content/data. */
+  #main-site-content #nexus-utility-bar { display: none !important; }
+
+  /* A seamless title loop. The allocated height equals the previous two-line title,
+     keeping the upper tagline and body copy in the same visual position. */
+  #main-site-content .main-title.hero-title-loop {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: min(96vw, 1200px) !important;
+    min-height: 2.16em !important;
+    height: 2.16em !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    margin-inline: auto !important;
+    contain: paint;
+    text-wrap: nowrap !important;
+  }
+
+  #main-site-content .hero-title-loop-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    animation: ex-title-loop var(--ex-title-loop-duration) linear infinite;
+  }
+
+  #main-site-content .hero-title-loop-sequence {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    padding-right: var(--ex-title-loop-gap);
+  }
+
+  #main-site-content .hero-title-loop-item {
+    display: inline-block;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  @keyframes ex-title-loop {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
+  body.lang-en #main-site-content .hero-title-loop.en-only,
+  body.lang-ar #main-site-content .hero-title-loop.ar-only { display: flex !important; }
+  body.lang-en #main-site-content .hero-title-loop.ar-only,
+  body.lang-ar #main-site-content .hero-title-loop.en-only { display: none !important; }
+
+  /* Three equal, touch-safe, outlined controls: portal, language, privacy. */
+  #main-site-content #ultimate-navbar { isolation: isolate; }
+  #main-site-content #ultimate-navbar .nav-row-2 { gap: clamp(10px, 2vw, 24px); }
+  #main-site-content #ultimate-navbar .main-logo-txt { min-width: 0; flex: 1 1 auto; }
+  #main-site-content #ultimate-navbar .icons-group {
+    flex: 0 0 auto;
+    display: flex !important;
+    align-items: center !important;
+    gap: var(--ex-nav-control-gap) !important;
+    min-width: max-content;
+  }
+  #main-site-content #ultimate-navbar .icon-btn {
+    position: relative;
+    width: var(--ex-nav-control-size) !important;
+    height: var(--ex-nav-control-size) !important;
+    min-width: var(--ex-nav-control-size) !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: visible !important;
+    border: 1px solid transparent !important;
+    border-radius: 10px !important;
+    color: rgba(255, 255, 255, .94) !important;
+    background: transparent !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: color .22s ease, background-color .22s ease, border-color .22s ease, transform .22s ease, box-shadow .22s ease;
+  }
+  #main-site-content #ultimate-navbar .icon-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+    display: block !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.65 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    vector-effect: non-scaling-stroke;
+  }
+  #main-site-content #ultimate-navbar .icon-btn:hover,
+  #main-site-content #ultimate-navbar .icon-btn:focus-visible {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, .22) !important;
+    background: rgba(255, 255, 255, .06) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .32), inset 0 0 0 1px rgba(255, 255, 255, .035);
+    transform: translateY(-1px);
+    outline: none !important;
+  }
+  #main-site-content #ultimate-navbar .icon-btn:active { transform: translateY(0) scale(.96); }
+
+  @media (hover: hover) and (pointer: fine) {
+    #main-site-content #ultimate-navbar .icon-btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: calc(100% + 7px);
+      right: 50%;
+      transform: translateX(50%) translateY(-2px);
+      padding: 5px 7px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 6px;
+      color: rgba(255, 255, 255, .78);
+      background: rgba(4, 4, 4, .92);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, .34);
+      font: 8px/1 'Space Mono', monospace;
+      letter-spacing: .05em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    #main-site-content #ultimate-navbar .icon-btn:hover::after,
+    #main-site-content #ultimate-navbar .icon-btn:focus-visible::after {
+      opacity: 1;
+      transform: translateX(50%) translateY(0);
+    }
+  }
+
+  @media (max-width: 620px) {
+    :root {
+      --ex-nav-control-size: 32px;
+      --ex-nav-control-gap: 6px;
+      --ex-title-loop-duration: 29s;
+      --ex-title-loop-gap: 2.85rem;
+    }
+    #main-site-content #ultimate-navbar { height: 58px !important; }
+    #main-site-content #ultimate-navbar .nav-row-1 {
+      min-height: 18px !important;
+      padding-inline: max(10px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-right)) !important;
+    }
+    #main-site-content #ultimate-navbar .nav-row-2 {
+      min-height: 40px !important;
+      padding-inline: max(10px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-right)) !important;
+      gap: 10px !important;
+    }
+    #main-site-content #ultimate-navbar .action-txt {
+      min-width: 0;
+      max-width: 46vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap !important;
+      font-size: 6.4px !important;
+      letter-spacing: .055em !important;
+    }
+    #main-site-content #ultimate-navbar .main-logo-txt {
+      max-width: calc(100vw - 138px) !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap !important;
+      font-size: clamp(10px, 3.5vw, 13px) !important;
+      letter-spacing: .03em !important;
+    }
+    #main-site-content #ultimate-navbar .icon-btn { border-radius: 9px !important; }
+    #main-site-content #ultimate-navbar .icon-btn svg { width: 16px !important; height: 16px !important; }
+    #main-site-content .main-title.hero-title-loop {
+      max-width: 96vw !important;
+      min-height: 2.16em !important;
+      height: 2.16em !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    :root { --ex-nav-control-size: 30px; --ex-nav-control-gap: 5px; --ex-title-loop-gap: 2.3rem; }
+    #main-site-content #ultimate-navbar .main-logo-txt { max-width: calc(100vw - 132px) !important; }
+    #main-site-content #ultimate-navbar .action-txt { font-size: 5.8px !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #main-site-content .hero-title-loop-track { animation: none !important; }
+    #main-site-content #ultimate-navbar .icon-btn { transition: none !important; }
+  }
+</style>
+<script>
+  console.info('EX experience build: V6 hero-title loop and responsive icon system');
+</script>
+<!-- deployment-marker: ex-v6-hero-loop-responsive-icons -->
 
 <!-- deployment-marker: gateway-v5-auth-resilience -->
 </body>
