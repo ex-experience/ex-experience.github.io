@@ -2,16 +2,13 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="フサム | experience™ - Engineering Human Experiences">
     <meta name="theme-color" content="#050505">
     <meta name="ex-interface" content="HX Sovereign Interface V1 - Cognitive UI, sensory feedback, spatial navigation, generative workflows">
     <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
     <meta name="googlebot" content="noindex, nofollow">
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
 
     <meta property="og:image" content="https://ex-experience.github.io/og-image.png">
     <meta property="og:image:secure_url" content="https://ex-experience.github.io/og-image.png">
@@ -23,31 +20,11 @@
     <meta name="twitter:url" content="https://ex-experience.github.io/">
     <meta name="twitter:title" content="フサム | experience™">
     <meta name="twitter:description" content="Engineering Human Experiences">
-    <meta name="twitter:image" content="https://ex-experience.github.io/assets/og-image.png">
+    <meta name="twitter:image" content="https://ex-experience.github.io/og-image.png">
 
     <title>フサム | experience™</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="ex-release" content="V11 luxury-loader-command-icons">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Noto+Sans+Arabic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q36518VXCZ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Q36518VXCZ');
-    </script>
-
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root{
@@ -606,6 +583,83 @@ body.lang-ar .hero-title{background-position:right center!important;}
 .hx5-loader-sub{max-width:660px!important;}
 </style>
 
+
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no, email=no, address=no">
+<meta name="application-name" content="フサム | experience™">
+<!-- ex-v11-luxury-loader-command-icons -->
+<link rel="icon" type="image/png" sizes="128x128" href="data:image/png;base64,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">
+
+
+<style id="ex-production-hardening-v10">
+/* EX V10 — production hardening, accessibility and responsive stability. */
+:root{--ex-safe-bottom:env(safe-area-inset-bottom,0px);--ex-safe-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:118px}
+body{min-width:320px}
+button,input,textarea,select{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--blue,#6ee7ff);outline-offset:3px;box-shadow:0 0 0 5px rgba(110,231,255,.16)}
+[hidden]{display:none!important}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+/* All action controls remain a reliable 44px target without changing their visual language. */
+.nav-icon,.nav-btn,.btn,.utility-link,.oracle-fab,.modal-close{min-height:44px;min-width:44px}
+.utility-link{display:inline-flex;align-items:center}
+@media(max-width:800px){
+  html{scroll-padding-top:96px}
+  .utility-bar,#nexus-utility-bar{padding-inline:16px;height:30px;font-size:.58rem;letter-spacing:.12em}
+  .utility-chip{display:none}
+  .top-nav,#ultimate-navbar{top:30px;padding:12px 16px;gap:10px}
+  .brand{min-width:0;max-width:calc(100vw - 188px)}
+  .brand .logo{font-size:.92rem;white-space:nowrap}.brand .sub{display:none}
+  .nav-actions{gap:7px;flex-wrap:nowrap}.nav-btn{display:none}.nav-icon{width:42px;height:42px}
+  .hero{padding-top:112px!important}.hero-layout{gap:38px}.hero-visual{min-height:280px}
+  .story-strip{grid-template-columns:1fr!important}.hero-note{padding:14px!important}
+  .section{padding:82px 0}.section.tight{padding:66px 0}
+  .modal-content{width:min(94vw,520px)!important;max-height:calc(100svh - 36px);overflow:auto}
+}
+@media(max-width:430px){.brand .logo small{display:none}.hero-track{gap:7px}.track-pill{font-size:.56rem!important;letter-spacing:.11em!important}.hero-actions{gap:9px}.hero-actions .btn{width:100%;justify-content:center}}
+/* no unexpected motion while the tab is hidden */
+@media(prefers-reduced-motion:reduce){.bg-grid,.bg-noise,.orb-glow{animation:none!important}.video-bg{display:none!important}.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 60% 28%,rgba(110,231,255,.12),transparent 34%),linear-gradient(180deg,#08090d,#050505)}}
+/* Unified production Oracle, created only after a user action. */
+.ex-oracle-fab{position:fixed;right:20px;bottom:calc(20px + var(--ex-safe-bottom));z-index:16050;width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:linear-gradient(145deg,#171b26,#07080a);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 18px 50px rgba(0,0,0,.42),0 0 0 1px rgba(110,231,255,.08);transition:transform .24s var(--hx-ease,ease),border-color .24s ease,box-shadow .24s ease}
+.ex-oracle-fab:hover{transform:translateY(-2px);border-color:rgba(110,231,255,.56);box-shadow:0 22px 64px rgba(0,0,0,.48),0 0 30px rgba(110,231,255,.22)}
+.ex-oracle{position:fixed;right:20px;bottom:calc(88px + var(--ex-safe-bottom));z-index:16040;width:min(420px,calc(100vw - 32px));max-height:min(640px,calc(100svh - 120px));display:grid;grid-template-rows:auto 1fr auto;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:rgba(7,8,10,.94);backdrop-filter:blur(24px) saturate(130%);box-shadow:0 34px 100px rgba(0,0,0,.55);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(14px) scale(.98);pointer-events:none;transition:opacity .24s ease,visibility .24s ease,transform .24s var(--hx-ease,ease)}
+.ex-oracle[data-open="true"]{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:auto}
+.ex-oracle__header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 16px;border-bottom:1px solid rgba(255,255,255,.08);cursor:default}
+.ex-oracle__eyebrow{font-family:var(--font-mono,monospace);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue,#6ee7ff)}
+.ex-oracle__title{font-weight:800;font-size:1rem;margin-top:2px}.ex-oracle__controls{display:flex;gap:8px}.ex-oracle__control{height:34px;width:34px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);color:#fff;cursor:pointer}
+.ex-oracle__body{min-height:240px;overflow:auto;overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:11px}.ex-oracle__msg{max-width:84%;padding:11px 13px;border-radius:15px;line-height:1.65;font-size:.91rem;white-space:pre-wrap}.ex-oracle__msg[data-role="bot"]{align-self:flex-start;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.88)}.ex-oracle__msg[data-role="user"]{align-self:flex-end;background:rgba(110,231,255,.12);border:1px solid rgba(110,231,255,.18);color:#fff}.ex-oracle__typing{opacity:.62;font-family:var(--font-mono,monospace);font-size:.68rem;letter-spacing:.14em}
+.ex-oracle__form{padding:12px;border-top:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:1fr auto;gap:9px}.ex-oracle__input{min-width:0;height:46px;border-radius:14px;padding:0 13px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.035);color:#fff}.ex-oracle__send{height:46px;padding:0 15px;border-radius:14px;border:1px solid rgba(110,231,255,.28);background:rgba(110,231,255,.12);color:#fff;cursor:pointer;font-family:var(--font-mono,monospace);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}.ex-oracle__send:disabled{opacity:.56;cursor:wait}
+.ex-status{margin-top:13px;font-size:.82rem;line-height:1.6;color:var(--muted,#b7bbc4)}.ex-status[data-state="success"]{color:#aaf2ba}.ex-status[data-state="error"]{color:#ff9d9d}
+.ex-consent{position:fixed;left:18px;bottom:calc(18px + var(--ex-safe-bottom));z-index:16020;width:min(420px,calc(100vw - 36px));padding:16px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:rgba(8,10,14,.92);backdrop-filter:blur(20px);box-shadow:0 26px 74px rgba(0,0,0,.42);display:grid;gap:12px}.ex-consent p{font-size:.83rem;line-height:1.65;color:rgba(255,255,255,.72)}.ex-consent__actions{display:flex;flex-wrap:wrap;gap:9px}.ex-consent button{min-height:40px;border-radius:999px;padding:0 13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);color:#fff;cursor:pointer;font-family:var(--font-mono,monospace);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase}.ex-consent button[data-consent="accept"]{border-color:rgba(110,231,255,.34);background:rgba(110,231,255,.11)}
+body.lang-ar .ex-oracle{right:auto;left:20px}body.lang-ar .ex-oracle-fab{right:auto;left:20px}body.lang-ar .ex-consent{left:auto;right:18px}
+@media(max-width:740px){.ex-oracle{right:10px;left:10px;width:auto;bottom:calc(82px + var(--ex-safe-bottom));max-height:calc(100svh - 104px)}body.lang-ar .ex-oracle{right:10px;left:10px}.ex-oracle-fab{right:14px;bottom:calc(14px + var(--ex-safe-bottom))}body.lang-ar .ex-oracle-fab{right:auto;left:14px}.ex-consent{left:10px;bottom:calc(10px + var(--ex-safe-bottom));width:calc(100vw - 20px)}body.lang-ar .ex-consent{left:10px;right:auto}.ex-consent p{font-size:.78rem}}
+</style>
+
+<style id="ex-v11-luxury-loader-command-icons">
+:root{--ex-cyan:#6ee7ff;--ex-gold:#c5a46d;--ex-void:#050505;--ex-panel:rgba(7,9,13,.84);--ex-line:rgba(255,255,255,.11);--ex-ease:cubic-bezier(.16,1,.3,1)}
+html,body{background:#050505!important}
+#ex-master-loader{position:fixed!important;inset:0!important;z-index:2147483646!important;display:grid!important;place-items:center!important;overflow:hidden!important;background:#020203!important;color:#fff!important;opacity:1;visibility:visible;transition:opacity 1.25s var(--ex-ease),visibility 1.25s var(--ex-ease)!important}
+#ex-master-loader.hx5-hide{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#ex-master-loader:before{content:"";position:absolute;inset:-25%;background:radial-gradient(circle at 50% 48%,rgba(110,231,255,.14),transparent 12%),radial-gradient(circle at 62% 54%,rgba(197,164,109,.08),transparent 32%),linear-gradient(120deg,transparent 33%,rgba(255,255,255,.035) 49%,transparent 64%);filter:blur(18px);animation:exV11Atmos 10s ease-in-out infinite alternate}
+@keyframes exV11Atmos{from{transform:scale(1) rotate(-1deg)}to{transform:scale(1.08) rotate(2deg)}}
+.ex-loader-grid{position:absolute;inset:0;opacity:.15;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(circle at center,#000 0%,transparent 70%)}
+.ex-loader-axis{position:absolute;background:linear-gradient(90deg,transparent,rgba(110,231,255,.45),rgba(255,255,255,.34),rgba(197,164,109,.32),transparent);opacity:.45}.ex-loader-axis--vertical{width:1px;height:100%;left:50%;top:0}.ex-loader-axis--horizontal{height:1px;width:100%;top:50%;left:0}
+.ex-loader-orbits{position:absolute;width:min(68vw,760px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 0 90px rgba(110,231,255,.06),0 0 80px rgba(110,231,255,.05);animation:exV11Orbit 18s linear infinite}.ex-loader-orbits span{position:absolute;inset:12%;border:1px solid rgba(110,231,255,.15);border-radius:50%;transform:rotateX(68deg)}.ex-loader-orbits span:nth-child(2){inset:24%;border-color:rgba(197,164,109,.17);transform:rotateY(68deg) rotateZ(22deg)}.ex-loader-orbits span:nth-child(3){inset:38%;border-color:rgba(255,255,255,.15);transform:rotateX(78deg) rotateZ(62deg)}@keyframes exV11Orbit{to{transform:rotate(360deg)}}
+.ex-loader-sweep{position:absolute;width:min(72vw,880px);height:min(72vw,880px);border-radius:50%;background:conic-gradient(from 0deg,transparent 0 76%,rgba(110,231,255,.3) 82%,rgba(255,255,255,.55) 84%,rgba(197,164,109,.26) 87%,transparent 93%);mask:radial-gradient(circle,transparent 0 61%,#000 62% 63%,transparent 64%);animation:exV11Sweep 4.8s linear infinite;opacity:.68}@keyframes exV11Sweep{to{transform:rotate(360deg)}}
+.hx5-loader-stage{position:relative!important;z-index:5!important;width:min(920px,92vw)!important;text-align:center!important;padding:34px!important}.ex-loader-meta{display:flex;justify-content:space-between;gap:12px;align-items:center;font-family:var(--font-mono,monospace);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:28px}.hx5-loader-kicker{font-family:var(--font-mono,monospace)!important;font-size:.72rem!important;letter-spacing:.42em!important;text-transform:uppercase!important;color:var(--ex-gold)!important;margin-bottom:22px!important}.hx5-loader-title{font-size:clamp(2.2rem,7vw,6.2rem)!important;line-height:.92!important;font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important;margin-bottom:18px!important;text-shadow:0 0 44px rgba(110,231,255,.22)!important}.hx5-loader-sub{max-width:680px!important;margin:0 auto!important;font-size:clamp(1rem,1.8vw,1.24rem)!important;color:rgba(255,255,255,.78)!important;line-height:1.75!important}.hx5-loader-progress{height:2px!important;width:min(500px,74vw)!important;margin:34px auto 0!important;background:rgba(255,255,255,.11)!important;overflow:hidden!important;border-radius:999px!important}.hx5-loader-progress span{width:100%!important;height:100%!important;display:block!important;transform-origin:left!important;transform:scaleX(.18);background:linear-gradient(90deg,var(--ex-cyan),#fff,var(--ex-gold))!important;transition:transform .8s var(--ex-ease)!important}.ex-loader-caption{margin-top:18px;font-family:var(--font-mono,monospace);font-size:.57rem;letter-spacing:.2em;color:rgba(255,255,255,.38)}.ex-loader-flash{position:absolute!important;inset:0!important;background:#fff!important;opacity:0!important;pointer-events:none!important;z-index:8!important}.ex-loader-flash.hx5-flash{animation:exV11Flash 1.45s var(--ex-ease) forwards}@keyframes exV11Flash{0%{opacity:0}25%{opacity:.9}52%{opacity:.55}100%{opacity:0}}
+.ex-command-actions{gap:9px!important}.ex-command-icon{position:relative;isolation:isolate;width:48px;height:48px;padding:0;border-radius:14px;border:1px solid rgba(255,255,255,.11);background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.018));color:#fff;display:grid;place-items:center;cursor:pointer;overflow:hidden;box-shadow:0 15px 35px rgba(0,0,0,.22);transition:transform .28s var(--ex-ease),border-color .28s ease,box-shadow .28s ease,background .28s ease}.ex-command-icon:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(110,231,255,.16),transparent 48%,rgba(197,164,109,.11));opacity:0;transition:opacity .28s ease}.ex-command-icon:hover,.ex-command-icon:focus-visible{outline:none;transform:translateY(-2px);border-color:rgba(110,231,255,.56);background:rgba(110,231,255,.1);box-shadow:0 18px 44px rgba(0,0,0,.36),0 0 26px rgba(110,231,255,.13)}.ex-command-icon:hover:before,.ex-command-icon:focus-visible:before{opacity:1}.ex-command-icon svg{position:relative;z-index:1;width:21px;height:21px;fill:none!important;stroke:currentColor!important;stroke-width:1.45!important;stroke-linecap:round;stroke-linejoin:round}.ex-command-index{position:absolute;right:6px;bottom:4px;z-index:2;font-family:var(--font-mono,monospace);font-size:.48rem;letter-spacing:.08em;color:rgba(255,255,255,.48)}body.lang-ar .ex-command-index{right:auto;left:6px}.ex-command-icon[data-ex-command="matrix"]{border-color:rgba(197,164,109,.21)}.ex-command-icon[data-ex-command="privacy"]{border-color:rgba(110,231,255,.19)}
+.ex-command-deck{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .32s var(--ex-ease),visibility .32s ease}.ex-command-deck[data-open="true"]{opacity:1;visibility:visible;pointer-events:auto}.ex-command-backdrop{position:absolute;inset:0;border:0;background:rgba(0,0,0,.77);backdrop-filter:blur(15px);cursor:pointer}.ex-command-panel{position:relative;z-index:1;width:min(720px,94vw);min-height:365px;padding:38px;border-radius:30px;border:1px solid rgba(255,255,255,.13);background:radial-gradient(circle at 85% 16%,rgba(110,231,255,.12),transparent 28%),radial-gradient(circle at 10% 88%,rgba(197,164,109,.08),transparent 30%),rgba(7,9,13,.96);box-shadow:0 42px 120px rgba(0,0,0,.6);overflow:hidden;transform:translateY(18px) scale(.98);transition:transform .32s var(--ex-ease)}.ex-command-deck[data-open="true"] .ex-command-panel{transform:translateY(0) scale(1)}.ex-command-panel:before{content:"";position:absolute;inset:0;opacity:.24;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(90deg,#000,transparent 70%)}.ex-command-panel__axis{position:absolute;top:0;bottom:0;left:44%;width:1px;background:linear-gradient(transparent,rgba(110,231,255,.64),rgba(197,164,109,.55),transparent);opacity:.65}.ex-command-panel__glyph{position:absolute;right:9%;top:50%;transform:translateY(-50%);width:210px;height:210px;color:var(--ex-cyan);opacity:.42}.ex-command-panel__glyph svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:.82}.ex-command-panel__content{position:relative;z-index:2;width:min(420px,100%)}.ex-command-panel__eyebrow,.ex-command-panel__kicker{font-family:var(--font-mono,monospace);font-size:.65rem;letter-spacing:.23em;text-transform:uppercase}.ex-command-panel__eyebrow{color:var(--ex-gold);margin-bottom:12px}.ex-command-panel__kicker{color:rgba(255,255,255,.48);margin-bottom:18px}.ex-command-panel h2{font-size:clamp(2rem,5vw,4rem);letter-spacing:-.06em;line-height:.95;margin:0 0 16px}.ex-command-panel p{max-width:48ch;color:rgba(255,255,255,.7);line-height:1.85}.ex-command-panel__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.ex-command-enter,.ex-command-exit{min-height:48px;border-radius:999px;padding:0 20px;font-family:var(--font-mono,monospace);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.25s var(--ex-ease)}.ex-command-enter{border:1px solid rgba(110,231,255,.55);background:linear-gradient(135deg,rgba(110,231,255,.96),rgba(183,247,255,.78));color:#051015;box-shadow:0 14px 36px rgba(110,231,255,.16)}.ex-command-exit{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#fff}.ex-command-enter:hover,.ex-command-enter:focus-visible{transform:translateY(-2px);outline:none;box-shadow:0 18px 42px rgba(110,231,255,.27)}.ex-command-exit:hover,.ex-command-exit:focus-visible{outline:none;border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.1)}
+.ex-oracle-fab{width:56px!important;height:56px!important;border:1px solid rgba(110,231,255,.28)!important;background:radial-gradient(circle at 34% 30%,#fff,rgba(110,231,255,.9) 16%,rgba(17,26,54,.97) 62%,#050505 100%)!important;box-shadow:0 18px 54px rgba(0,0,0,.38),0 0 28px rgba(110,231,255,.16)!important}.ex-oracle-fab svg{width:22px!important;height:22px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.45!important}
+@media(max-width:840px){.ex-command-icon{width:43px;height:43px;border-radius:13px}.ex-command-icon svg{width:19px;height:19px}.ex-command-index{font-size:.43rem}.ex-command-panel{padding:28px;min-height:400px}.ex-command-panel__axis{left:auto;right:16%;opacity:.35}.ex-command-panel__glyph{right:-26px;top:22px;transform:none;width:178px;height:178px;opacity:.2}.ex-command-panel__content{padding-top:124px}.hx5-loader-stage{padding:24px!important}.ex-loader-meta{font-size:.52rem;letter-spacing:.15em}.ex-loader-caption{font-size:.48rem;letter-spacing:.15em}.ex-loader-orbits{width:88vw}.ex-loader-sweep{width:96vw;height:96vw}}
+@media(prefers-reduced-motion:reduce){#ex-master-loader:before,.ex-loader-orbits,.ex-loader-sweep{animation:none!important}.ex-command-icon,.ex-command-panel,.hx5-loader-progress span{transition:none!important}}
+</style>
+<style id="ex-v11-layout-safety">
+html,body{width:100%;overflow-x:clip!important}
+.hero{overflow:hidden!important}.hero>.video-shell{position:absolute!important;inset:0!important;z-index:0!important;display:block!important;width:100%!important;height:100%!important;overflow:hidden!important}.hero>.video-shell .video-bg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;transform:scale(1.035)!important}.hero>.shell{position:relative!important;z-index:2!important;flex:0 0 auto!important;width:min(var(--container),calc(100% - 4vw))!important;margin-inline:auto!important}.hero>.video-shell.video-fallback{background:radial-gradient(circle at 68% 32%,rgba(110,231,255,.12),transparent 30%),linear-gradient(150deg,#07090e,#020203 65%,#070707)!important}.archive-bar{overflow:hidden!important}
+body.nav-hidden #ultimate-navbar,body.nav-hidden .top-nav{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}
+@media(max-width:840px){.top-nav,#ultimate-navbar{padding:13px 4vw!important}.brand{min-width:0!important}.brand .sub{display:none!important}.ex-command-actions{gap:6px!important}.hero>.shell{width:calc(100% - 8vw)!important}.hero{padding-top:170px!important}}
+.ex-oracle [data-oracle-min]{display:none!important}
+@media(max-width:430px){.utility-chip{display:none!important}.utility-bar{padding-inline:4vw!important}.utility-right{gap:8px!important}.ex-command-icon{width:40px!important;height:40px!important}.ex-command-actions{gap:4px!important}.brand .logo{font-size:.93rem!important;gap:5px!important}.brand .logo small{font-size:.5rem!important}}
+</style>
 </head>
 
 <body class="lang-en">
@@ -1263,38 +1317,62 @@ body.lang-ar .hero-title{background-position:right center!important;}
         </div>
     </div>
 
-    <nav id="ultimate-navbar" class="top-nav">
-        <a href="#" class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-            <div class="logo glitch-anim">
-                フサム | experience™
-                <small>HX-5</small>
-            </div>
+    <nav id="ultimate-navbar" class="top-nav" aria-label="Primary navigation">
+        <a href="#" class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="フサム | experience™ home">
+            <div class="logo">フサム | experience™ <small>HX-5</small></div>
             <div class="sub">Engineering Human Experiences</div>
         </a>
-        <div class="nav-actions">
-            <button class="nav-btn matrix-trigger" onclick="openMatrixOverlay()">MATRIX</button>
-            <button class="nav-btn" onclick="document.getElementById('portal').scrollIntoView({behavior:'smooth'})">PORTAL</button>
-           <button class="nav-icon" onclick="toggleLanguage()" aria-label="Toggle language">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="fill: none; width: 18px; height: 18px;">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="2" y1="12" x2="22" y2="12"></line>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-    </svg>
-</button>
+        <div class="nav-actions ex-command-actions" aria-label="Experience commands">
+            <button class="ex-command-icon" type="button" data-ex-command="matrix" aria-label="Open Matrix command" aria-controls="ex-command-deck" aria-haspopup="dialog" aria-expanded="false">
+                <span class="ex-command-index" aria-hidden="true">01</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 20.3 7v10L12 21.5 3.7 17V7L12 2.5Z"/><path d="m12 7.1 4.1 2.25v5.3L12 16.9l-4.1-2.25v-5.3L12 7.1Z"/><path d="M12 2.5v4.6M20.3 7l-4.2 2.35M3.7 7l4.2 2.35M12 16.9v4.6"/></svg>
             </button>
-            <button class="nav-icon" onclick="openLegal('privacy')" aria-label="Privacy">
-                <svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.55 3.85 10.74 8 11 4.15-.26 8-5.45 8-11V5Zm0 18c-2.65-.21-6-4.41-6-9V7.24L12 4l6 3.24V11c0 4.59-3.35 8.79-6 9Z"/><path d="M12 11a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>
+            <button class="ex-command-icon" type="button" data-ex-command="portal" aria-label="Open Portal command" aria-controls="ex-command-deck" aria-haspopup="dialog" aria-expanded="false">
+                <span class="ex-command-index" aria-hidden="true">02</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.2h9.8L19 7.4v13.4H5z"/><path d="M14.8 3.2v4.4H19"/><path d="M8 11.5h8M8 15h5.3"/><path d="m14.2 18.2 2.7 2.6 2.6-2.6"/></svg>
+            </button>
+            <button class="ex-command-icon" type="button" data-ex-command="language" aria-label="Open Language command" aria-controls="ex-command-deck" aria-haspopup="dialog" aria-expanded="false">
+                <span class="ex-command-index" aria-hidden="true">03</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5h8.2M7.6 3v2.5c0 4.1-1.17 7.17-3.2 9.42"/><path d="M5.7 11.8c1.25 1.23 2.78 2.24 4.6 3.04"/><path d="M14.3 7.3h6.2M17.4 4.5v2.9c0 4.3 1.14 7.3 3.2 9.7"/><path d="m14.7 15.4 2.7 2.7 2.7-2.7"/></svg>
+            </button>
+            <button class="ex-command-icon" type="button" data-ex-command="privacy" aria-label="Open Privacy command" aria-controls="ex-command-deck" aria-haspopup="dialog" aria-expanded="false">
+                <span class="ex-command-index" aria-hidden="true">04</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.7 19.2 5.9v5.2c0 4.55-3.1 8.68-7.2 9.9-4.1-1.22-7.2-5.35-7.2-9.9V5.9z"/><path d="M12 7.15v7.2M8.9 10.65 12 7.5l3.1 3.15"/><path d="M9.3 16.55h5.4"/></svg>
             </button>
         </div>
     </nav>
 
-    
+    <section id="ex-command-deck" class="ex-command-deck" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="ex-command-title" hidden>
+    <button class="ex-command-backdrop" type="button" data-ex-command-exit aria-label="Exit command"></button>
+    <div class="ex-command-panel" role="document">
+        <div class="ex-command-panel__axis" aria-hidden="true"></div>
+        <div class="ex-command-panel__glyph" id="ex-command-glyph" aria-hidden="true"></div>
+        <div class="ex-command-panel__content">
+            <div class="ex-command-panel__eyebrow" id="ex-command-eyebrow">EX / COMMAND</div>
+            <div class="ex-command-panel__kicker" id="ex-command-kicker">ACCESS</div>
+            <h2 id="ex-command-title">Enter</h2>
+            <p id="ex-command-copy">Choose a controlled route into the experience.</p>
+            <div class="ex-command-panel__actions">
+                <button class="ex-command-enter" id="ex-command-enter" type="button">ENTER</button>
+                <button class="ex-command-exit" type="button" data-ex-command-exit>EXIT</button>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div id="ex-master-loader" aria-live="polite" aria-label="Cinematic loading sequence">
+    <div class="ex-loader-grid" aria-hidden="true"></div>
+    <div class="ex-loader-axis ex-loader-axis--vertical" aria-hidden="true"></div>
+    <div class="ex-loader-axis ex-loader-axis--horizontal" aria-hidden="true"></div>
+    <div class="ex-loader-orbits" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="ex-loader-sweep" aria-hidden="true"></div>
     <div class="hx5-loader-stage" id="loader-text">
-        <div class="hx5-loader-kicker" id="loader-kicker">BLACK VOID</div>
+        <div class="ex-loader-meta"><span id="loader-index">01 / 04</span><span id="loader-status">SYSTEM CALIBRATION</span><span id="loader-percent">18%</span></div>
+        <div class="hx5-loader-kicker" id="loader-kicker">SIGNAL ACQUIRED</div>
         <h1 class="hx5-loader-title" id="loader-title">フサム | experience™</h1>
-        <p class="hx5-loader-sub" id="loader-sub">The line between ordinary and extraordinary.</p>
-        <div class="hx5-loader-progress"><span></span></div>
+        <p class="hx5-loader-sub" id="loader-sub">Calibrating a private human experience interface.</p>
+        <div class="hx5-loader-progress" aria-hidden="true"><span id="loader-progress-fill"></span></div>
+        <div class="ex-loader-caption">PRIVATE INTERFACE / HUMAN EXPERIENCE ENGINEERING</div>
     </div>
     <div class="ex-loader-flash" id="loader-flash"></div>
 </div>
@@ -1302,8 +1380,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
     <main>
         <section class="hero section" aria-label="Hero Section">
             <div class="video-shell" aria-hidden="true">
-                <video id="heroVideo" class="video-bg" autoplay muted loop playsinline>
-                    <source src="ex1.mp4" type="video/mp4">
+                <video id="heroVideo" class="video-bg" muted loop playsinline preload="metadata" data-primary-video="ex1.mp4">
+                    <source data-src="ex1.mp4" type="video/mp4">
                 </video>
                 <div class="hero-overlay"></div>
                 <div class="hero-vignette"></div>
@@ -1337,7 +1415,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
                                 <span class="ar-only">ادخل المختبر</span>
                                 <svg viewBox="0 0 24 24"><path d="M12 3 11.3 4.7 7 6.2v7l4.3 1.5L12 16l.7-1.3 4.3-1.5v-7l-4.3-1.5Zm-1 5.1 1-.4 1 .4v1.7l-1 1-1-1Z"/><path d="M5 18h14v2H5z"/></svg>
                             </button>
-                            <button class="btn btn-secondary" onclick="document.getElementById('oracle-toggle').click()">
+                            <button class="btn btn-secondary" onclick="window.EXIconCommand && window.EXIconCommand.open('oracle', this)">
                                 <span class="en-only">OPEN ORACLE</span>
                                 <span class="ar-only">افتح الأوراكل</span>
                             </button>
@@ -1965,29 +2043,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
                 </p>
             </div>
 
-            <div class="oracle-window reveal" id="aiWindow" role="complementary" aria-label="Oracle Chat Interface">
-                <div class="oracle-header">
-                    <div class="oracle-title">
-                        <strong>Ex Oracle</strong>
-                        <span>interactive intelligence console</span>
-                    </div>
-                    <button class="oracle-close" onclick="toggleOracle()" aria-label="Close oracle">×</button>
-                </div>
-                <div class="oracle-body" id="chatBody" aria-live="polite"></div>
-                <div class="oracle-foot">
-                    <div class="oracle-input-row">
-                        <label for="aiInput" class="sr-only">Type message to Oracle</label>
-                        <input type="text" id="aiInput" class="oracle-input" placeholder="Type message to Oracle" onkeydown="handleChatEnter(event)">
-                        <button class="oracle-send" onclick="sendChatMessage()" aria-label="Send message">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        </button>
-                    </div>
-                    <div class="oracle-foot-note">
-                        <span class="en-only">Ex Oracle can make mistakes. <button style="background:none;border:none;color:var(--blue);cursor:pointer;text-decoration:underline" onclick="openLegal('oracle')">Terms of Use</button></span>
-                        <span class="ar-only">قد يخطئ الأوراكل. <button style="background:none;border:none;color:var(--blue);cursor:pointer;text-decoration:underline" onclick="openLegal('oracle')">شروط الاستخدام</button></span>
-                    </div>
-                </div>
-            </div>
+            
+
         </div>
     </section>
 
@@ -2011,8 +2068,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
                     <p class="card-prompt">[ TAP TO DECRYPT ]</p>
                     <div class="archive-lock-ui" onclick="event.stopPropagation()">
                         <span class="sticky-note">[ VIP CLEARANCE REQUIRED ]</span>
-                        <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-1">
-                        <button class="archive-decrypt-btn" onclick="unlockArchiveFile(1, 'VFJLMzUtVklQLTk5', this)">DECRYPT FILE</button>
+                        <input type="password" class="archive-pass-input" placeholder="Enter access reference" id="pass-card-1">
+                        <button class="archive-decrypt-btn" onclick="requestArchiveAccess(1, this)">REQUEST ACCESS</button>
                         <div id="error-card-1" class="sticky-note" style="color:var(--crimson);display:none">ACCESS DENIED.</div>
                     </div>
                     <div class="archive-desc">
@@ -2030,8 +2087,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
                     <p class="card-prompt">[ TAP TO DECRYPT ]</p>
                     <div class="archive-lock-ui" onclick="event.stopPropagation()">
                         <span class="sticky-note">[ VIP CLEARANCE REQUIRED ]</span>
-                        <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-2">
-                        <button class="archive-decrypt-btn" onclick="unlockArchiveFile(2, 'TEFCLVNFTlNPUlktMDA=', this)">DECRYPT FILE</button>
+                        <input type="password" class="archive-pass-input" placeholder="Enter access reference" id="pass-card-2">
+                        <button class="archive-decrypt-btn" onclick="requestArchiveAccess(2, this)">REQUEST ACCESS</button>
                         <div id="error-card-2" class="sticky-note" style="color:var(--crimson);display:none">ACCESS DENIED.</div>
                     </div>
                     <div class="archive-desc">
@@ -2049,8 +2106,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
                     <p class="card-prompt">[ TAP TO DECRYPT ]</p>
                     <div class="archive-lock-ui" onclick="event.stopPropagation()">
                         <span class="sticky-note">[ VIP CLEARANCE REQUIRED ]</span>
-                        <input type="password" class="archive-pass-input" placeholder="Enter File Passcode" id="pass-card-3">
-                        <button class="archive-decrypt-btn" onclick="unlockArchiveFile(3, 'SU5TVFVESU8tTFVYLVg=', this)">DECRYPT FILE</button>
+                        <input type="password" class="archive-pass-input" placeholder="Enter access reference" id="pass-card-3">
+                        <button class="archive-decrypt-btn" onclick="requestArchiveAccess(3, this)">REQUEST ACCESS</button>
                         <div id="error-card-3" class="sticky-note" style="color:var(--crimson);display:none">ACCESS DENIED.</div>
                     </div>
                     <div class="archive-desc">
@@ -2138,9 +2195,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
     </section>
 </main>
 
-<button class="oracle-fab" id="oracle-toggle" onclick="toggleOracle()" aria-label="Open Ex Oracle">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v6c0 5.55 3.85 10.74 8 11 4.15-.26 8-5.45 8-11V6Zm0 18c-2.65-.26-6-5.45-6-11V7.24L12 4l6 3.24V11c0 5.55-3.85 10.74-6 11Z"/><path d="M11 10h2v6h-2z"/><circle cx="12" cy="8" r="1"/></svg>
-</button>
+
+
 
 <div id="community-modal" class="modal-overlay" aria-hidden="true">
     <div class="modal-content glass">
@@ -2267,6 +2323,12 @@ body.lang-ar .hero-title{background-position:right center!important;}
 </div>
 
     <script>
+        const exStorage = {
+            get(key, fallback=''){ try { const value = window.localStorage.getItem(key); return value ?? fallback; } catch(_){ return fallback; } },
+            set(key, value){ try { window.localStorage.setItem(key, value); return true; } catch(_){ return false; } },
+            remove(key){ try { window.localStorage.removeItem(key); } catch(_){} }
+        };
+        window.exStorage = exStorage;
         const firebaseConfig = {
             apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
             authDomain: "ex-experience-962ca.firebaseapp.com",
@@ -2275,16 +2337,39 @@ body.lang-ar .hero-title{background-position:right center!important;}
             messagingSenderId: "560048472801",
             appId: "1:560048472801:web:1c8d71c863fc23b41ceda0"
         };
-
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
+        let db = null;
+        let auth = null;
+        const loadExternalScript = (src) => new Promise((resolve, reject) => {
+            const existing = [...document.scripts].find(s => s.src === src);
+            if(existing){ existing.addEventListener('load', resolve, {once:true}); existing.addEventListener('error', reject, {once:true}); return; }
+            const script = document.createElement('script');
+            script.src = src; script.async = true; script.onload = resolve; script.onerror = () => reject(new Error('Unable to load '+src));
+            document.head.appendChild(script);
+        });
+        window.ensureFirebase = async function(){
+            if(db) return db;
+            if(window.__exFirebasePromise) return window.__exFirebasePromise;
+            const version = (window.EX_CONFIG && window.EX_CONFIG.firebaseVersion) || '10.8.1';
+            window.__exFirebasePromise = (async ()=>{
+                if(!window.firebase){
+                    await loadExternalScript(`https://www.gstatic.com/firebasejs/${version}/firebase-app-compat.js`);
+                    await loadExternalScript(`https://www.gstatic.com/firebasejs/${version}/firebase-firestore-compat.js`);
+                }
+                if(!window.firebase) throw new Error('Firebase is unavailable.');
+                if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                window.EX_FIRESTORE = db;
+                return db;
+            })().catch(error => { window.__exFirebasePromise = null; throw error; });
+            return window.__exFirebasePromise;
+        };
+        window.EX_FIRESTORE = null;
 
         const videos = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4'];
         let currentVideoIndex = 0;
         let oracleOpen = false;
         let matrixStage = 1;
-        let userLang = localStorage.getItem('hx_lang') || 'en';
+        let userLang = exStorage.get('hx_lang') || 'en';
 
         function sanitizeInput(input){
             if(typeof input !== 'string') return '';
@@ -2303,26 +2388,27 @@ body.lang-ar .hero-title{background-position:right center!important;}
             document.body.classList.add(lang === 'ar' ? 'lang-ar' : 'lang-en');
             document.documentElement.lang = lang === 'ar' ? 'ar' : 'en';
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            localStorage.setItem('hx_lang', lang);
+            exStorage.set('hx_lang', lang);
             userLang = lang;
             logToNexus(lang === 'ar' ? 'Language switched to Arabic' : 'Language switched to English');
         }
 
         function toggleLanguage(){ setLanguage(userLang === 'en' ? 'ar' : 'en'); }
 
-        function setVideo(index){
+        async function setVideo(index){
             currentVideoIndex = index;
             const video = document.getElementById('heroVideo');
             const chipBtns = document.querySelectorAll('.video-chip');
+            const src = videos[index] || videos[0];
             if(video){
-                const src = videos[index] || videos[0];
                 const source = video.querySelector('source');
-                if(source) source.src = src;
-                video.load();
-                video.play().catch(()=>{});
+                try{
+                    if(window.EXVideoRouter) await window.EXVideoRouter.load(video, source, src);
+                    else if(source){ source.src=src; video.load(); await video.play().catch(()=>{}); }
+                }catch(_){ video.closest('.video-shell')?.classList.add('video-fallback'); }
             }
-            chipBtns.forEach((btn,i)=>btn.classList.toggle('active', i === index));
-            logToNexus(`Hero video switched to ${videos[index] || videos[0]}`);
+            chipBtns.forEach((btn,i)=>btn.classList.toggle('active',i===index));
+            window.logToNexus?.(`Hero video switched to ${src}`);
         }
 
         function toggleOracle(){
@@ -2427,30 +2513,12 @@ body.lang-ar .hero-title{background-position:right center!important;}
             document.getElementById('legalModal').style.display = 'flex';
         }
         function closeLegal(){ document.getElementById('legalModal').style.display='none'; }
-
-        async function logToNexus(actionDetail){
-            try{
-                const currentName = localStorage.getItem('hx_name') || localStorage.getItem('nexus_user_name') || 'Anonymous';
-                const currentEmail = localStorage.getItem('hx_email') || localStorage.getItem('nexus_user_email') || 'Unknown';
-                await db.collection('SecurityLogs').add({
-                    action: actionDetail,
-                    userName: currentName,
-                    userEmail: currentEmail,
-                    pageVisited: document.title,
-                    timeOfVisit: new Date().toLocaleString(),
-                    userAgent: navigator.userAgent,
-                    screenResolution: `${window.innerWidth}x${window.innerHeight}`,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                if(actionDetail === 'Page Loaded / Visited'){
-                    const counterRef = db.collection('visitors').doc('total');
-                    await counterRef.set({
-                        count: firebase.firestore.FieldValue.increment(1),
-                        lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-                    }, { merge: true });
-                }
-            }catch(e){
-                console.warn('Tracking/Counter Error:', e);
+        function logToNexus(actionDetail){
+            // Event-only telemetry by default: no PII and no automatic Firestore write.
+            document.dispatchEvent(new CustomEvent('ex:interaction', { detail:{ action:String(actionDetail || ''), at:Date.now() } }));
+            const endpoint = window.EX_CONFIG && window.EX_CONFIG.telemetryEndpoint;
+            if(endpoint && window.EX_CONFIG.allowTelemetry){
+                try { fetch(endpoint, { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ action:String(actionDetail || ''), page:location.pathname }), keepalive:true }); } catch(_){}
             }
         }
 
@@ -2466,9 +2534,9 @@ body.lang-ar .hero-title{background-position:right center!important;}
                 return;
             }
             closeCommunityModal();
-            localStorage.setItem('hx_name', name);
-            localStorage.setItem('hx_email', email);
-            localStorage.setItem('hx_phone', phone);
+            exStorage.set('hx_name', name);
+            exStorage.set('hx_email', email);
+            exStorage.set('hx_phone', phone);
             try{
                 await db.collection('Community_Family').add({
                     Name: name,
@@ -2494,8 +2562,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
                 return;
             }
             closeRatingModal();
-            localStorage.setItem('hx_name', name);
-            localStorage.setItem('hx_email', email);
+            exStorage.set('hx_name', name);
+            exStorage.set('hx_email', email);
             try{
                 await db.collection('Experience_Ratings').add({
                     Name: name,
@@ -2624,93 +2692,12 @@ body.lang-ar .hero-title{background-position:right center!important;}
             });
         }
 
-        function initThree(){
-            const canvas = document.getElementById('brain-engine');
-            const hasWebGL = !!window.WebGLRenderingContext;
-            if(!canvas || !hasWebGL) return;
-
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true, powerPreference:'high-performance' });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
-            camera.position.z = 7;
-
-            const group = new THREE.Group();
-            scene.add(group);
-
-            const geo = new THREE.IcosahedronGeometry(1.65, 5);
-            const mat = new THREE.MeshStandardMaterial({
-                color:0x0a0a0a,
-                emissive:0x112a55,
-                emissiveIntensity:1.1,
-                roughness:.15,
-                metalness:.96,
-                wireframe:true
-            });
-            const orb = new THREE.Mesh(geo, mat);
-            group.add(orb);
-
-            const particlesGeo = new THREE.BufferGeometry();
-            const count = 1600;
-            const positions = new Float32Array(count * 3);
-            for(let i=0;i<count;i++){
-                const r = 3.4 + Math.random()*2.7;
-                const theta = Math.random() * Math.PI * 2;
-                const phi = Math.acos((Math.random()*2)-1);
-                positions[i*3] = r * Math.sin(phi) * Math.cos(theta);
-                positions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
-                positions[i*3+2] = r * Math.cos(phi);
-            }
-            particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const particlesMat = new THREE.PointsMaterial({
-                color:0x6ee7ff,
-                size:0.022,
-                transparent:true,
-                opacity:0.9,
-                depthWrite:false
-            });
-            const cloud = new THREE.Points(particlesGeo, particlesMat);
-            group.add(cloud);
-
-            const light1 = new THREE.DirectionalLight(0xffffff, 1.6);
-            light1.position.set(5, 5, 6);
-            scene.add(light1);
-            const ambient = new THREE.AmbientLight(0x6ee7ff, 0.8);
-            scene.add(ambient);
-
-            const mouse = {x:0, y:0};
-            window.addEventListener('mousemove', (e)=>{
-                mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-                mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-            }, {passive:true});
-
-            window.addEventListener('resize', ()=>{
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            function animate(){
-                group.rotation.y += 0.0018;
-                group.rotation.x += 0.0008;
-                orb.rotation.y += 0.0016;
-                orb.rotation.x += 0.0011;
-
-                group.rotation.y += mouse.x * 0.002;
-                group.rotation.x += mouse.y * 0.0015;
-
-                renderer.render(scene, camera);
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
+        function initThree(){ /* V11: no continuous WebGL loop on first paint. */ }
 
         function populateDashUser(){
-            const name = localStorage.getItem('hx_name') || localStorage.getItem('nexus_user_name') || '';
-            const email = localStorage.getItem('hx_email') || localStorage.getItem('nexus_user_email') || '';
-            const phone = localStorage.getItem('hx_phone') || '';
+            const name = exStorage.get('hx_name') || exStorage.get('nexus_user_name') || '';
+            const email = exStorage.get('hx_email') || exStorage.get('nexus_user_email') || '';
+            const phone = exStorage.get('hx_phone') || '';
             if(document.getElementById('comm-name') && name) document.getElementById('comm-name').value = name;
             if(document.getElementById('comm-email') && email) document.getElementById('comm-email').value = email;
             if(document.getElementById('comm-phone') && phone) document.getElementById('comm-phone').value = phone;
@@ -2750,15 +2737,14 @@ body.lang-ar .hero-title{background-position:right center!important;}
             initVideoControls();
             initScrollNav();
             initReveal();
-            initLoader();
-            initThree();
+            // Production loader owns the entrance; 3D background initializes only on demand.
             initDashboardTabs();
             initArchiveFocusCleanup();
             bindModalHandlers();
-            initGsap();
+            // CSS / Web Animations replace the former GSAP dependency.
             populateDashUser();
             hydrateDashboard();
-            setTimeout(()=>logToNexus('Page Loaded / Visited'), 2400);
+            // No passive visitor logging before explicit consent.
 
             const heroVideo = document.getElementById('heroVideo');
             if(heroVideo){
@@ -2783,9 +2769,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
     cleanNumericArtifacts();
     setupSmartNav();
     setupModalControl();
-    setupOracleControl();
     setupBlueprintOrbit();
-    setupThreeBlueprintCore();
+    // Hero blueprint uses the static CSS layer in production.
     setupRevealFallback();
   });
 
@@ -2797,38 +2782,48 @@ body.lang-ar .hero-title{background-position:right center!important;}
     const title = $('#loader-title');
     const sub = $('#loader-sub');
     const flash = $('#loader-flash');
+    const index = $('#loader-index');
+    const status = $('#loader-status');
+    const percent = $('#loader-percent');
+    const fill = $('#loader-progress-fill');
     const steps = [
-      {k:'BLACK VOID', t:'フサム | experience™', s:'A cinematic experience architecture is initializing.'},
-      {k:'OPENING SEQUENCE', t:'The line between ordinary and extraordinary', s:'Entering a human experience engineering lab.'},
-      {k:'HX-5 BLUEPRINT', t:'Intent · Context · Stimuli · Interaction · Impact', s:'Five pillars aligning into one living orbit.'},
-      {k:'ARRIVAL', t:'Engineering Human Experiences', s:'From first sensation to lasting memory.'}
+      {k:'SIGNAL ACQUIRED', t:'フサム | experience™', s:'Calibrating a private human experience interface.', status:'SYSTEM CALIBRATION', p:18},
+      {k:'MATERIAL / MOTION', t:'フサム | experience™', s:'Aligning precision, atmosphere, and human presence.', status:'VISUAL SYSTEM ALIGNMENT', p:44},
+      {k:'HX-5 / ORBIT', t:'フサム | experience™', s:'Mapping intent, context, stimuli, interaction, and impact.', status:'COGNITIVE PATHWAY READY', p:72},
+      {k:'ARRIVAL', t:'フサム | experience™', s:'The line between ordinary and extraordinary is open.', status:'EXPERIENCE READY', p:100}
     ];
-    let i = 0;
     const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const duration = reduced ? 450 : 1420;
-    function render(step){
-      if(!kicker || !title || !sub) return;
-      kicker.style.opacity = title.style.opacity = sub.style.opacity = '0';
-      kicker.style.transform = title.style.transform = sub.style.transform = 'translateY(18px)';
+    const cadence = reduced ? 90 : 980;
+    let stepIndex = 0, finished = false;
+    const finish = () => {
+      if(finished) return;
+      finished = true;
+      clearInterval(timer);
+      loader.dataset.phase = 'complete';
+      if(flash && !reduced) flash.classList.add('hx5-flash');
       setTimeout(()=>{
-        kicker.textContent = step.k; title.textContent = step.t; sub.textContent = step.s;
-        [kicker,title,sub].forEach((el,idx)=>{
-          el.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1)';
-          setTimeout(()=>{ el.style.opacity='1'; el.style.transform='translateY(0)'; }, idx*90);
-        });
-      }, 120);
+        loader.classList.add('hx5-hide');
+        document.body.classList.remove('no-scroll');
+        document.documentElement.dataset.exLoader = 'complete';
+      }, reduced ? 80 : 680);
+      setTimeout(()=>loader.remove(), reduced ? 340 : 1860);
+    };
+    function render(step, position){
+      if(!kicker || !title || !sub) return;
+      loader.dataset.phase = String(position + 1);
+      [kicker,title,sub].forEach(el=>{el.style.opacity='0';el.style.transform='translateY(14px)'});
+      setTimeout(()=>{
+        kicker.textContent=step.k; title.textContent=step.t; sub.textContent=step.s;
+        if(index) index.textContent=`${String(position+1).padStart(2,'0')} / ${String(steps.length).padStart(2,'0')}`;
+        if(status) status.textContent=step.status;
+        if(percent) percent.textContent=`${String(step.p).padStart(2,'0')}%`;
+        if(fill) fill.style.transform=`scaleX(${step.p/100})`;
+        [kicker,title,sub].forEach((el,order)=>setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)'},order*96));
+      }, reduced?0:120);
     }
-    render(steps[0]);
-    const timer = setInterval(()=>{
-      i++;
-      if(i < steps.length) render(steps[i]);
-      else {
-        clearInterval(timer);
-        if(flash) flash.classList.add('hx5-flash');
-        setTimeout(()=>{loader.classList.add('hx5-hide'); document.body.classList.remove('no-scroll');}, reduced ? 250 : 1300);
-        setTimeout(()=>{loader.remove();}, reduced ? 900 : 2800);
-      }
-    }, duration);
+    render(steps[0],0);
+    const timer = setInterval(()=>{stepIndex+=1;if(stepIndex<steps.length)render(steps[stepIndex],stepIndex);else finish();},cadence);
+    setTimeout(finish,reduced?700:7300);
   }
 
   function cleanNumericArtifacts(){
@@ -2889,90 +2884,8 @@ body.lang-ar .hero-title{background-position:right center!important;}
     });
   }
 
-  function setupOracleControl(){
-    const fab = $('#oracle-toggle') || $('.oracle-fab') || $('.ai-btn');
-    let win = $('.oracle-window') || $('.ai-window');
-    if(!fab || !win) return;
-    fab.classList.add('oracle-fab');
-    win.classList.add('oracle-window');
-    // enforce ids for old inline calls
-    if(!fab.id) fab.id = 'oracle-toggle';
-    // Add controls if not present
-    const header = $('.oracle-header', win) || $('.ai-header', win);
-    if(header && !$('.oracle-control-row', header)){
-      const row = document.createElement('div');
-      row.className = 'oracle-control-row';
-      const mini = document.createElement('button'); mini.className='oracle-mini'; mini.type='button'; mini.innerHTML='–'; mini.title='Minimize';
-      const close = document.createElement('button'); close.className='oracle-close'; close.type='button'; close.innerHTML='×'; close.title='Close';
-      row.append(mini, close); header.append(row);
-      mini.addEventListener('click', e=>{e.stopPropagation(); win.classList.toggle('minimized');});
-      close.addEventListener('click', e=>{e.stopPropagation(); win.classList.remove('open'); win.classList.remove('minimized');});
-    }
-    function toggleOracle(){ win.classList.toggle('open'); win.classList.remove('minimized'); if(win.classList.contains('open')) setTimeout(()=>($('.oracle-input',win)||$('.ai-input',win)||$('input',win))?.focus(),120); }
-    fab.addEventListener('click', e=>{ if(fab.__dragged){ fab.__dragged=false; return; } e.preventDefault(); toggleOracle(); });
-
-    // Draggable FAB position
-    const saved = (()=>{try{return JSON.parse(localStorage.getItem('hx5OracleFab')||'null')}catch(e){return null}})();
-    if(saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)){
-      fab.style.left = saved.x+'px'; fab.style.top = saved.y+'px'; fab.style.right='auto'; fab.style.bottom='auto';
-    }
-    dragElement(fab, {saveKey:'hx5OracleFab', clickTolerance:6});
-    if(header) dragWindow(win, header);
-
-    // Make old send functions still work; if absent, create fallback.
-    if(typeof window.sendChatMessage !== 'function'){
-      window.sendChatMessage = function(){
-        const input = $('.oracle-input', win) || $('.ai-input', win) || $('input', win);
-        const body = $('.oracle-body', win) || $('.ai-body', win);
-        if(!input || !body || !input.value.trim()) return;
-        addMsg(body, input.value, 'user');
-        const val = input.value; input.value='';
-        setTimeout(()=>addMsg(body, 'Oracle scan complete: '+val+'\n\nIntent mapped. Context detected. Stimuli layer active. Interaction pathway ready. Impact residue model initialized.', 'bot'), 420);
-      }
-    }
-    const send = $('.oracle-send', win) || $('.ai-send', win);
-    const input = $('.oracle-input', win) || $('.ai-input', win) || $('input', win);
-    if(send && !send.__hxBound){send.addEventListener('click',()=>window.sendChatMessage()); send.__hxBound=true;}
-    if(input && !input.__hxBound){input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();window.sendChatMessage();}}); input.__hxBound=true;}
-  }
-
   function addMsg(body, text, who){
     const div = document.createElement('div'); div.className='msg '+who; div.textContent=text; body.appendChild(div); body.scrollTop=body.scrollHeight;
-  }
-
-  function dragElement(el, opts={}){
-    let sx=0, sy=0, ox=0, oy=0, dragging=false;
-    el.addEventListener('pointerdown', e=>{
-      dragging=true; el.setPointerCapture?.(e.pointerId); sx=e.clientX; sy=e.clientY;
-      const r=el.getBoundingClientRect(); ox=r.left; oy=r.top; el.__dragged=false;
-    });
-    window.addEventListener('pointermove', e=>{
-      if(!dragging) return;
-      const dx=e.clientX-sx, dy=e.clientY-sy;
-      if(Math.abs(dx)+Math.abs(dy) > (opts.clickTolerance||4)) el.__dragged=true;
-      const x=Math.max(8, Math.min(window.innerWidth-el.offsetWidth-8, ox+dx));
-      const y=Math.max(8, Math.min(window.innerHeight-el.offsetHeight-8, oy+dy));
-      el.style.left=x+'px'; el.style.top=y+'px'; el.style.right='auto'; el.style.bottom='auto';
-    }, {passive:true});
-    window.addEventListener('pointerup', ()=>{
-      if(!dragging) return; dragging=false;
-      if(opts.saveKey){ const r=el.getBoundingClientRect(); try{localStorage.setItem(opts.saveKey, JSON.stringify({x:r.left,y:r.top}))}catch(e){} }
-      setTimeout(()=>{el.__dragged=false},60);
-    });
-  }
-  function dragWindow(win, handle){
-    let sx=0, sy=0, ox=0, oy=0, dragging=false;
-    handle.addEventListener('pointerdown', e=>{
-      if(e.target.closest('button')) return;
-      dragging=true; handle.setPointerCapture?.(e.pointerId); sx=e.clientX; sy=e.clientY; const r=win.getBoundingClientRect(); ox=r.left; oy=r.top;
-    });
-    window.addEventListener('pointermove', e=>{
-      if(!dragging) return; const dx=e.clientX-sx, dy=e.clientY-sy;
-      const x=Math.max(6, Math.min(window.innerWidth-win.offsetWidth-6, ox+dx));
-      const y=Math.max(6, Math.min(window.innerHeight-win.offsetHeight-6, oy+dy));
-      win.style.left=x+'px'; win.style.top=y+'px'; win.style.right='auto'; win.style.bottom='auto';
-    }, {passive:true});
-    window.addEventListener('pointerup',()=>dragging=false);
   }
 
   function setupBlueprintOrbit(){
@@ -3012,7 +2925,7 @@ body.lang-ar .hero-title{background-position:right center!important;}
     const ctx = canvas.getContext('2d');
     let w=0,h=0,t=0, dpr=1;
     const points = Array.from({length:90}, (_,i)=>({a:Math.random()*Math.PI*2, r:.14+Math.random()*.42, z:Math.random(), s:.2+Math.random()*.6}));
-    function resize(){ const rect=canvas.getBoundingClientRect(); dpr=Math.min(2, window.devicePixelRatio||1); w=canvas.width=Math.max(1,Math.floor(rect.width*dpr)); h=canvas.height=Math.max(1,Math.floor(rect.height*dpr)); }
+    function resize(){ const rect=canvas.getBoundingClientRect(); dpr=Math.min(1.5, window.devicePixelRatio||1); w=canvas.width=Math.max(1,Math.floor(rect.width*dpr)); h=canvas.height=Math.max(1,Math.floor(rect.height*dpr)); }
     function draw(){
       t+=0.006; ctx.clearRect(0,0,w,h); const cx=w/2, cy=h/2, R=Math.min(w,h)*.36;
       ctx.save(); ctx.translate(cx,cy); ctx.strokeStyle='rgba(110,231,255,.16)'; ctx.lineWidth=1*dpr;
@@ -3034,341 +2947,273 @@ body.lang-ar .hero-title{background-position:right center!important;}
 
 
 
-<script id="ex-hx-sovereign-runtime-v1">
-(function(){
+<script id="ex-production-config">
+/* EX Production Configuration — no secret belongs in this file. */
+window.EX_CONFIG = Object.freeze({
+  version: '11.0.0',
+  analyticsMeasurementId: 'G-Q36518VXCZ',
+  analyticsEnabled: false,
+  // Deploy a server-side endpoint (Cloudflare Worker / Firebase Function) here.
+  // It must keep provider keys and any Oracle credentials on the server.
+  oracleEndpoint: '',
+  // Optional same-origin form endpoint. Firebase is loaded only at submit time if left blank.
+  formEndpoint: '',
+  firebaseVersion: '10.8.1',
+  allowTelemetry: false
+});
+</script>
+
+
+
+<script id="ex-production-runtime-v10">
+(()=>{
   'use strict';
-  const $ = (s, r=document) => r.querySelector(s);
-  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-  const state = {
-    sensory:true, focus:false, lastScroll:window.scrollY, velocity:0, lastMove:Date.now(),
-    metrics:{intent:42,context:37,stimuli:58,interaction:51,impact:46},
-    audio:null, panner:null, current:'initializing', interactions:0
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
+  const config = window.EX_CONFIG || {};
+  const storage = window.exStorage || {
+    get:(key,fallback='')=>{try{return localStorage.getItem(key) ?? fallback}catch(_){return fallback}},
+    set:(key,value)=>{try{localStorage.setItem(key,value);return true}catch(_){return false}}
   };
-
-  const offerData = {
-    b2b:[
-      ['Business Experience Management','Convert scattered operations into a coherent human-centered operating experience.',['Executive workflow map','Contract and decision control','Performance rhythm design']],
-      ['Institutional Development','Build culture, systems, teams and internal rituals that improve the way an organization feels and performs.',['Culture architecture','Leadership enablement','Internal experience standards']],
-      ['Strategic Advisory','Translate market pressure into clear positioning, growth decisions and long-term value.',['Market intelligence','Brand positioning','Expansion pathways']],
-      ['Media & Experience Production','Turn strategy into cinematic memory across campaigns, conferences, launches and signature moments.',['Film direction','Event narrative','Experience documentation']]
-    ],
-    b2c:[
-      ['Life Experience Advisory','Private guidance for individuals who want to redesign their routine, identity, lifestyle, and next stage.',['Lifestyle audit','Personal direction','Action architecture']],
-      ['Creative Path Development','For creators, artists, athletes and technologists who need a sharper path, stronger story and higher standard.',['Identity clarity','Portfolio direction','Opportunity map']],
-      ['Private Experience Design','Custom personal experiences for important transitions, milestones and high-meaning moments.',['Intent session','Sensory plan','Memory design']],
-      ['Lifestyle Interests Advisory','Specialized guidance across art, sport, fashion, technology, cars, content and culture.',['Interest map','Community access','Skill pathway']]
-    ],
-    community:[
-      ['17–21 // Discovery','A path for identity formation, first skills, belonging and exposure to meaningful experiences.',['Orientation labs','Peer rituals','Starter challenges']],
-      ['22–26 // Build','A path for skill depth, network growth, project building and proof of capability.',['Builder circles','Portfolio sprints','Mentor reviews']],
-      ['27–30 // Acceleration','A path for professional leverage, collaborations, visibility and leadership readiness.',['Growth rooms','Deal literacy','Cultural projects']],
-      ['31–34 // Leadership','A path for impact, systems, legacy, mentoring and long-term contribution.',['Council sessions','Legacy projects','Community stewardship']]
-    ],
-    dropzero:[
-      ['Drop Zero Protocol','Every release begins from a concept, not a product category.',['Story','Scarcity','Utility']],
-      ['Future Consumables','Quality physical products that serve ritual, energy, focus, taste or personal identity.',['Food concepts','Lifestyle goods','Limited editions']],
-      ['Digital Tools','Micro-products that help people decide, create, organize, analyze or improve their life experience.',['Templates','Dashboards','AI agents']],
-      ['Cultural Objects','Wearables and objects that carry the EX philosophy into daily life.',['Apparel','Accessories','Collectibles']]
-    ],
-    systems:[
-      ['Automation Architecture','Remove repeated friction from organizations and replace it with reliable flows.',['Workflow design','Task routing','Reporting loops']],
-      ['AI Operating Layer','Private AI systems that support decisions, documentation, service requests and knowledge retrieval.',['Prompt systems','Knowledge base','Assistant workflows']],
-      ['Data Governance','Control access, structure records, protect sensitive flows and clarify responsibility.',['Access logic','Risk review','Audit trails']],
-      ['Executive Dashboards','Transform operational signals into clear visual decision rooms.',['KPI surfaces','Live status','Impact views']]
-    ]
-  };
-
-  function setupAudio(){
-    if(state.audio) return;
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if(!Ctx) return;
-    state.audio = new Ctx();
-  }
-  function sensory(kind='tap', x=0){
-    if(!state.sensory) return;
-    try{ if(navigator.vibrate) navigator.vibrate(kind==='commit'?[14,18,22]:8); }catch(e){}
-    try{
-      setupAudio(); if(!state.audio) return;
-      if(state.audio.state === 'suspended') state.audio.resume();
-      const osc = state.audio.createOscillator();
-      const gain = state.audio.createGain();
-      const pan = state.audio.createStereoPanner ? state.audio.createStereoPanner() : null;
-      const f = kind==='commit' ? 432 : kind==='hover' ? 520 : 640;
-      osc.frequency.setValueAtTime(f, state.audio.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(f*1.28, state.audio.currentTime + .07);
-      gain.gain.setValueAtTime(.0001, state.audio.currentTime);
-      gain.gain.exponentialRampToValueAtTime(kind==='hover'?0.018:0.035, state.audio.currentTime + .015);
-      gain.gain.exponentialRampToValueAtTime(.0001, state.audio.currentTime + .16);
-      if(pan){ pan.pan.value = Math.max(-1, Math.min(1, (x/window.innerWidth)*2-1)); osc.connect(gain); gain.connect(pan); pan.connect(state.audio.destination); }
-      else { osc.connect(gain); gain.connect(state.audio.destination); }
-      osc.start(); osc.stop(state.audio.currentTime + .17);
-    }catch(e){}
-  }
-  function ripple(e){
-    const target = e.currentTarget;
-    if(!target || getComputedStyle(target).position === 'static') target.style.position='relative';
-    const r = document.createElement('span'); r.className='ex-ripple';
-    const rect = target.getBoundingClientRect();
-    r.style.left = (e.clientX - rect.left)+'px'; r.style.top = (e.clientY - rect.top)+'px';
-    target.appendChild(r); setTimeout(()=>r.remove(), 700);
-  }
-  function bindMicroInteractions(){
-    const interactive = 'button,.btn,.nav-btn,.nav-icon,.social-link,.ex-portal-card,.archive-card,.dash-tab,.video-chip,.spatial-node,.intent-node,.ex-gen-btn,a[href]';
-    $$(interactive).forEach(el=>{
-      if(el.dataset.exBound) return; el.dataset.exBound='1';
-      el.addEventListener('pointerenter', e=>{ sensory('hover', e.clientX||0); });
-      el.addEventListener('click', e=>{ state.interactions++; updateMetric('interaction', 6); sensory(el.dataset.sensory || 'tap', e.clientX||0); ripple(e); }, {passive:true});
-    });
-  }
-  function updateMetric(key, delta){
-    state.metrics[key] = Math.max(8, Math.min(98, (state.metrics[key]||50)+delta));
-    drawMetrics();
-  }
-  function cognitiveState(){
-    const now = Date.now();
-    const idle = now - state.lastMove;
-    let mode = 'exploring';
-    if(Math.abs(state.velocity) > 18) mode = 'scanning';
-    if(idle > 4500) mode = 'deep';
-    if(state.interactions > 3 || window.scrollY > document.body.scrollHeight*.46) mode = 'deciding';
-    if(mode !== state.current){
-      state.current = mode;
-      document.body.dataset.cognitiveState = mode;
-      const label = $('#hx-cognitive-state-label'); if(label) label.textContent = 'STATE: '+mode.toUpperCase();
-      $$('.intent-node').forEach(n=>n.classList.remove('active'));
-      const active = mode==='deciding' ? '[data-go="#portal"]' : mode==='deep' ? '[data-go="#hx-generative-engine"]' : '[data-go="#hx-sovereign-interface"]';
-      const node = $('.intent-node'+active); if(node) node.classList.add('active');
+  const text = {
+    en:{
+      oracle:'EX Oracle', caption:'Private experience guide', placeholder:'Ask about a service, collaboration, or private briefing…', send:'Send', open:'Open EX Oracle', close:'Close Oracle', minimize:'Minimize Oracle',
+      greeting:'Welcome to フサム | experience™.\nChoose a path and I will orient the next step: services, consultation, collaboration, community, or support.', thinking:'Mapping your request…',
+      local:'I can help route this request. For a private briefing, select “Request a private briefing” or share your objective, timeline, and preferred contact method.',
+      saved:'Thank you. Your request has been received. We will review it through the appropriate private channel.',
+      unavailable:'The secure registration service is unavailable right now. Please try again shortly.',
+      invalid:'Please provide a valid name and email address.',
+      access:'Access request recorded. A private clearance response is required before any protected material is released.',
+      consent:'We use optional analytics only when you allow it. Essential functionality remains available either way.',
+      allow:'Allow analytics', essential:'Essential only'
+    },
+    ar:{
+      oracle:'أوراكل EX', caption:'دليلك الخاص للتجربة', placeholder:'اسأل عن خدمة أو تعاون أو إحاطة خاصة…', send:'إرسال', open:'فتح أوراكل EX', close:'إغلاق الأوراكل', minimize:'تصغير الأوراكل',
+      greeting:'أهلاً بك في フサム | experience™.\nاختر مسارك وسأوجه الخطوة التالية: خدمات، استشارة، تعاون، مجتمع، أو دعم.', thinking:'يتم تنظيم طلبك…',
+      local:'يمكنني توجيه طلبك للمسار الأنسب. للإحاطة الخاصة، اختر “طلب إحاطة خاصة” أو اكتب هدفك والموعد المقترح وطريقة التواصل المفضلة.',
+      saved:'شكراً لك. تم استلام طلبك وسيتم مراجعته عبر القناة الخاصة المناسبة.',
+      unavailable:'خدمة التسجيل الآمنة غير متاحة حالياً. حاول مرة أخرى بعد قليل.',
+      invalid:'يرجى إدخال اسم وبريد إلكتروني صحيحين.',
+      access:'تم تسجيل طلب الوصول. لا يتم الإفراج عن المواد المحمية إلا بعد اعتماد خاص.',
+      consent:'نستخدم التحليلات الاختيارية فقط بعد موافقتك. تبقى الوظائف الأساسية متاحة في كل الأحوال.',
+      allow:'السماح بالتحليلات', essential:'الأساسية فقط'
     }
+  };
+  const lang = () => document.documentElement.lang === 'ar' || document.body.classList.contains('lang-ar') ? 'ar' : 'en';
+  const copy = () => text[lang()];
+  const safeText = (value,max=1500) => String(value || '').replace(/[\u0000-\u001F\u007F]/g,' ').trim().slice(0,max);
+  const emailOK = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
+
+  // Consent-first analytics: no gtag or Firebase storage during the initial view.
+  function loadAnalytics(){
+    if(!config.analyticsMeasurementId || window.__exAnalyticsLoaded) return;
+    window.__exAnalyticsLoaded = true;
+    const script = document.createElement('script'); script.async=true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(config.analyticsMeasurementId)}`;
+    document.head.appendChild(script);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){window.dataLayer.push(arguments)};
+    window.gtag('js', new Date());
+    window.gtag('consent','default',{analytics_storage:'granted',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+    window.gtag('config',config.analyticsMeasurementId,{anonymize_ip:true});
   }
-  function bindCognitive(){
-    window.addEventListener('scroll', ()=>{
-      const y = window.scrollY; state.velocity = y - state.lastScroll; state.lastScroll = y;
-      updateMetric('context', Math.abs(state.velocity)>.2 ? .35 : -.08);
-      updateMetric('impact', y > 900 ? .08 : 0);
-      cognitiveState();
-    }, {passive:true});
-    window.addEventListener('pointermove', e=>{
-      state.lastMove = Date.now();
-      updateMetric('stimuli', .06);
-      const vessel = $('#hx-spatial-vessel');
-      if(vessel){
-        const rect = vessel.getBoundingClientRect();
-        const rx = ((e.clientY - rect.top) / rect.height - .5) * -12;
-        const ry = ((e.clientX - rect.left) / rect.width - .5) * 12;
-        if(e.clientX > rect.left && e.clientX < rect.right && e.clientY > rect.top && e.clientY < rect.bottom){ vessel.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; }
-      }
-      cognitiveState();
-    }, {passive:true});
-    setInterval(cognitiveState, 1600);
-  }
-  function bindIntentRail(){
-    $$('.intent-node').forEach(n=>n.addEventListener('click',()=>{ const el=$(n.dataset.go); if(el) el.scrollIntoView({behavior:'smooth'}); }));
-    $$('.spatial-node').forEach(n=>n.addEventListener('click',()=>{ const el=$(n.dataset.target); if(el) el.scrollIntoView({behavior:'smooth'}); }));
-  }
-  function renderOffers(type='b2b'){
-    const output = $('#ex-generated-output'); if(!output) return;
-    output.innerHTML = (offerData[type]||offerData.b2b).map((item,i)=>`<article class="ex-offer-card"><div class="ex-offer-tag">Generated Path 0${i+1}</div><h3>${item[0]}</h3><p>${item[1]}</p><ul>${item[2].map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
-    bindMicroInteractions(); updateMetric('intent', 5); updateMetric('impact', 3);
-  }
-  function bindGenerator(){
-    $$('.ex-gen-btn').forEach(btn=>btn.addEventListener('click',()=>{
-      $$('.ex-gen-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderOffers(btn.dataset.gen);
+  function consentBanner(){
+    const key='ex_v10_analytics_consent';
+    const saved=storage.get(key,'');
+    if(saved==='granted'){ loadAnalytics(); return; }
+    if(saved==='essential'){ return; }
+    const c=copy();
+    const box=document.createElement('aside'); box.className='ex-consent'; box.setAttribute('role','dialog'); box.setAttribute('aria-label','Privacy preferences');
+    box.innerHTML=`<p>${c.consent}</p><div class="ex-consent__actions"><button type="button" data-consent="accept">${c.allow}</button><button type="button" data-consent="essential">${c.essential}</button></div>`;
+    box.querySelectorAll('[data-consent]').forEach(btn=>btn.addEventListener('click',()=>{
+      const value=btn.dataset.consent==='accept'?'granted':'essential'; storage.set(key,value); if(value==='granted') loadAnalytics(); box.remove();
     }));
-    renderOffers('b2b');
+    document.body.appendChild(box);
   }
-  function anticipatory(){
-    // Prepares next likely destinations without moving the visitor.
-    ['#portal','#community-modal','#rating-modal','#archive','#exclusive-vault'].forEach(sel=>{ const el=$(sel); if(el) el.dataset.prepared='true'; });
-    const links = ['https://www.instagram.com','https://www.tiktok.com','https://snapchat.com'];
-    links.forEach(h=>{ const l=document.createElement('link'); l.rel='preconnect'; l.href=h; document.head.appendChild(l); });
-    if('requestIdleCallback' in window){ requestIdleCallback(()=>bindMicroInteractions()); } else setTimeout(bindMicroInteractions, 600);
+
+  function setModalState(modal, open){
+    if(!modal) return;
+    modal.style.display=open?'flex':'none'; modal.classList.toggle('open',open); modal.setAttribute('aria-hidden',String(!open));
+    document.body.classList.toggle('hx5-modal-open',open);
+    if(open){ const target=$('input,button,[tabindex]:not([tabindex="-1"])',modal); setTimeout(()=>target?.focus(),50); }
   }
-  function bindToggles(){
-    const sens = $('#hx-sensory-toggle');
-    if(sens) sens.addEventListener('click',()=>{ state.sensory=!state.sensory; sens.classList.toggle('active', state.sensory); sens.textContent = state.sensory?'Sensory ON':'Sensory OFF'; if(state.sensory) sensory('commit', innerWidth/2); });
-    const focus = $('#hx-focus-toggle');
-    if(focus) focus.addEventListener('click',()=>{ state.focus=!state.focus; focus.classList.toggle('active', state.focus); document.body.classList.toggle('ex-cognitive-scan', state.focus); focus.textContent=state.focus?'Focus ON':'Focus Mode'; updateMetric('intent', state.focus?8:-4); });
+  window.openCommunityModal=()=>setModalState($('#community-modal'),true);
+  window.closeCommunityModal=()=>setModalState($('#community-modal'),false);
+  window.openRatingModal=()=>setModalState($('#rating-modal'),true);
+  window.closeRatingModal=()=>setModalState($('#rating-modal'),false);
+  const originalOpenLegal = window.openLegal;
+  window.openLegal = function(docType){ originalOpenLegal?.(docType); setModalState($('#legalModal'),true); };
+  window.closeLegal = ()=>setModalState($('#legalModal'),false);
+  $$('.modal-overlay').forEach(modal=>{
+    modal.setAttribute('aria-hidden','true');
+    modal.addEventListener('click',event=>{if(event.target===modal) setModalState(modal,false)});
+  });
+
+  function showStatus(modal, message, state='info'){
+    const node=$('.ex-status',modal) || document.createElement('p');
+    node.className='ex-status'; node.dataset.state=state; node.textContent=message; node.setAttribute('role','status');
+    if(!node.parentNode) $('.modal-content',modal)?.appendChild(node);
   }
-  function drawMetrics(){
-    ['intent','context','stimuli','interaction','impact'].forEach(k=>{
-      const label = $('#m-'+k), meter = $('[data-metric="'+k+'"]');
-      if(label) label.textContent = Math.round(state.metrics[k]);
-      if(meter) meter.style.width = Math.round(state.metrics[k])+'%';
-    });
-  }
-  function setupSculpture(){
-    const c = $('#ex-data-sculpture-canvas'); if(!c) return;
-    const ctx = c.getContext('2d');
-    function resize(){ const r=c.getBoundingClientRect(); c.width=Math.max(320, Math.floor(r.width*devicePixelRatio)); c.height=Math.max(260, Math.floor(r.height*devicePixelRatio)); }
-    resize(); addEventListener('resize', resize, {passive:true});
-    let t=0;
-    function loop(){
-      t += .014; const w=c.width,h=c.height; ctx.clearRect(0,0,w,h); ctx.save(); ctx.scale(devicePixelRatio,devicePixelRatio);
-      const rw=w/devicePixelRatio,rh=h/devicePixelRatio,cx=rw/2,cy=rh/2;
-      ctx.globalCompositeOperation='lighter';
-      const keys=['intent','context','stimuli','interaction','impact'];
-      keys.forEach((k,i)=>{
-        const v=state.metrics[k]/100; const r=48 + i*30 + Math.sin(t+i)*8 + v*34;
-        ctx.beginPath();
-        for(let a=0;a<Math.PI*2+.05;a+=.055){
-          const wave=Math.sin(a*(3+i)+t*(1+i*.22))*10*v;
-          const x=cx+Math.cos(a)*(r+wave), y=cy+Math.sin(a)*(r+wave);
-          if(a===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-        }
-        ctx.closePath();
-        ctx.strokeStyle = i%2 ? 'rgba(197,164,109,.45)' : 'rgba(110,231,255,.52)'; ctx.lineWidth = 1.2; ctx.stroke();
-      });
-      ctx.fillStyle='rgba(255,255,255,.86)'; ctx.font='700 12px Space Mono, monospace'; ctx.textAlign='center'; ctx.fillText('LIVE HX SIGNAL SCULPTURE',cx,cy+4);
-      ctx.restore(); requestAnimationFrame(loop);
+  async function persist(collection,payload){
+    if(config.formEndpoint){
+      const response=await fetch(config.formEndpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({collection,payload}),credentials:'omit'});
+      if(!response.ok) throw new Error('Form endpoint rejected request'); return;
     }
-    drawMetrics(); loop();
+    const firestore=await window.ensureFirebase();
+    const stamp=window.firebase?.firestore?.FieldValue?.serverTimestamp?.();
+    await firestore.collection(collection).add({...payload,CreatedAt:stamp,UpdatedAt:stamp,Source:'EX V10 production interface'});
   }
-  function preserveOracleState(){
-    const orig = window.toggleOracle;
-    window.toggleOracle = function(){
-      if(typeof orig === 'function') orig.apply(this, arguments);
-      setTimeout(()=>{ const open = $('#aiWindow') && $('#aiWindow').classList.contains('open'); document.body.classList.toggle('oracle-open', !!open); }, 80);
+  window.submitCommunity=async()=>{
+    const modal=$('#community-modal'); const name=safeText($('#comm-name-modal')?.value,100); const email=safeText($('#comm-email-modal')?.value,254); const phone=safeText($('#comm-phone-modal')?.value,32);
+    if(name.length<2 || !emailOK(email)){showStatus(modal,copy().invalid,'error');return;}
+    const button=$('button[onclick*="submitCommunity"]',modal); if(button) button.disabled=true;
+    try{await persist('Community_Family',{Name:name,Email:email,Phone:phone,Language:lang(),Status:'New'});storage.set('hx_name',name);storage.set('hx_email',email);showStatus(modal,copy().saved,'success');window.logToNexus?.('Community form submitted');setTimeout(()=>window.closeCommunityModal(),1200);}catch(error){console.warn('Community request was not saved:',error);showStatus(modal,copy().unavailable,'error');}finally{if(button)button.disabled=false;}
+  };
+  window.submitRating=async()=>{
+    const modal=$('#rating-modal'); const name=safeText($('#rate-name')?.value,100); const email=safeText($('#rate-email')?.value,254); const rating=Math.max(1,Math.min(5,Number($('#rate-stars')?.value||5)));
+    if(name.length<2 || !emailOK(email)){showStatus(modal,copy().invalid,'error');return;}
+    const button=$('button[onclick*="submitRating"]',modal); if(button)button.disabled=true;
+    try{await persist('Experience_Ratings',{Name:name,Email:email,Rating:rating,Language:lang(),Status:'New'});showStatus(modal,copy().saved,'success');window.logToNexus?.('Experience rating submitted');setTimeout(()=>window.closeRatingModal(),1200);}catch(error){console.warn('Rating request was not saved:',error);showStatus(modal,copy().unavailable,'error');}finally{if(button)button.disabled=false;}
+  };
+  window.requestArchiveAccess=(index,button)=>{
+    const modal=$('#community-modal'); window.openCommunityModal(); const status=copy().access; showStatus(modal,status,'info');
+    const subject=$('#comm-name-modal'); if(subject) subject.dataset.archiveRequest=String(index||'');
+    if(button){button.textContent=lang()==='ar'?'تم تسجيل الطلب':'REQUEST RECORDED';button.disabled=true;}
+    window.logToNexus?.(`Archive access request ${Number(index)||0}`);
+  };
+  // Never pretend a client-side passcode protects confidential material.
+  window.unlockArchiveFile=(index,_,button)=>window.requestArchiveAccess(index,button);
+  window.logToNexus=(action)=>document.dispatchEvent(new CustomEvent('ex:interaction',{detail:{action:safeText(action,120),at:Date.now()}}));
+
+  let oracle=null, oracleBody=null, oracleInput=null, oracleSend=null;
+  function appendOracle(message,role='bot'){
+    const el=document.createElement('div'); el.className='ex-oracle__msg';el.dataset.role=role;el.textContent=message;oracleBody.appendChild(el);oracleBody.scrollTop=oracleBody.scrollHeight;return el;
+  }
+  async function reply(message){
+    const c=copy(); const pending=appendOracle(c.thinking,'bot');pending.classList.add('ex-oracle__typing');oracleSend.disabled=true;
+    try{
+      let responseText='';
+      if(config.oracleEndpoint){
+        const response=await fetch(config.oracleEndpoint,{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify({message,language:lang(),channel:'website'}),credentials:'omit'});
+        if(!response.ok) throw new Error('Oracle endpoint failed');
+        const data=await response.json(); responseText=safeText(data.reply || data.message || '',1800);
+      }
+      pending.remove(); appendOracle(responseText || c.local,'bot');
+    }catch(error){pending.remove();appendOracle(c.local,'bot');}
+    finally{oracleSend.disabled=false;oracleInput.focus();}
+  }
+  function buildOracle(){
+    if(oracle) return;
+    const c=copy(); oracle=document.createElement('section');oracle.className='ex-oracle';oracle.dataset.open='false';oracle.setAttribute('role','dialog');oracle.setAttribute('aria-modal','false');oracle.setAttribute('aria-label',c.oracle);
+    oracle.innerHTML=`<header class="ex-oracle__header"><div><div class="ex-oracle__eyebrow">${c.caption}</div><div class="ex-oracle__title">${c.oracle}</div></div><div class="ex-oracle__controls"><button type="button" class="ex-oracle__control" data-oracle-min aria-label="${c.minimize}">–</button><button type="button" class="ex-oracle__control" data-oracle-close aria-label="${c.close}">×</button></div></header><div class="ex-oracle__body" aria-live="polite"></div><form class="ex-oracle__form"><input class="ex-oracle__input" maxlength="1500" autocomplete="off" placeholder="${c.placeholder}" aria-label="${c.placeholder}"><button class="ex-oracle__send" type="submit">${c.send}</button></form>`;
+    document.body.appendChild(oracle);oracleBody=$('.ex-oracle__body',oracle);oracleInput=$('.ex-oracle__input',oracle);oracleSend=$('.ex-oracle__send',oracle);
+    appendOracle(c.greeting,'bot');
+    $('[data-oracle-close]',oracle).addEventListener('click',()=>window.toggleOracle(false));
+    $('[data-oracle-min]',oracle).addEventListener('click',()=>{oracle.hidden=!oracle.hidden;});
+    $('.ex-oracle__form',oracle).addEventListener('submit',event=>{event.preventDefault();const message=safeText(oracleInput.value,1500);if(!message)return;appendOracle(message,'user');oracleInput.value='';window.logToNexus?.('Oracle message submitted');reply(message);});
+  }
+  function buildOracleFab(){
+    const fab=document.createElement('button');fab.className='ex-oracle-fab';fab.type='button';fab.setAttribute('aria-label',copy().open);fab.innerHTML='<svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5a8 8 0 0 1-8.4 8A8.2 8.2 0 0 1 4 12a8 8 0 0 1 8-8 8 8 0 0 1 8 7.5Z"/><path d="M8.5 12h7M12 8.5v7"/></svg>';
+    fab.addEventListener('click',()=>window.toggleOracle());document.body.appendChild(fab);return fab;
+  }
+  window.toggleOracle=(force)=>{buildOracle();const open=typeof force==='boolean'?force:oracle.dataset.open!=='true';oracle.dataset.open=String(open);document.body.classList.toggle('oracle-open',open);if(open)setTimeout(()=>oracleInput.focus(),80)};
+
+  // Modal keyboard behavior, guarded focus, and a sane Escape route.
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){if(oracle?.dataset.open==='true')window.toggleOracle(false);$$('.modal-overlay.open').forEach(modal=>setModalState(modal,false));}
+  });
+  document.addEventListener('ex:languagechange',()=>{ if(oracle){ const wasOpen=oracle.dataset.open==='true';oracle.remove();oracle=null;buildOracle();oracle.dataset.open=String(wasOpen); } });
+  const priorToggleLanguage=window.toggleLanguage;
+  window.toggleLanguage=function(){priorToggleLanguage?.();document.dispatchEvent(new Event('ex:languagechange'));};
+
+  // Pause/restore media while offscreen and ensure the hero never blocks a mobile interaction.
+  const video=$('#heroVideo');
+  if(video){video.preload='metadata';video.addEventListener('error',()=>video.closest('.video-shell')?.classList.add('video-fallback'),{once:true});}
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  if(reduce.matches && video){video.pause();}
+  reduce.addEventListener?.('change',event=>{if(event.matches)video?.pause(); else video?.play?.().catch(()=>{});});
+  // This is the only production oracle control. Old markup was removed above.
+  buildOracleFab();
+  requestAnimationFrame(consentBanner);
+})();
+</script>
+
+<script id="ex-v11-command-runtime">
+(()=>{
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s);
+  const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  window.hydrateDashboard = window.hydrateDashboard || (()=>{});
+  const glyphs={
+    matrix:'<svg viewBox="0 0 24 24"><path d="M12 2.5 20.3 7v10L12 21.5 3.7 17V7L12 2.5Z"/><path d="m12 7.1 4.1 2.25v5.3L12 16.9l-4.1-2.25v-5.3L12 7.1Z"/></svg>',
+    portal:'<svg viewBox="0 0 24 24"><path d="M5 3.2h9.8L19 7.4v13.4H5z"/><path d="M14.8 3.2v4.4H19"/><path d="M8 11.5h8M8 15h5.3"/><path d="m14.2 18.2 2.7 2.6 2.6-2.6"/></svg>',
+    language:'<svg viewBox="0 0 24 24"><path d="M3.5 5.5h8.2M7.6 3v2.5c0 4.1-1.17 7.17-3.2 9.42"/><path d="M5.7 11.8c1.25 1.23 2.78 2.24 4.6 3.04"/><path d="M14.3 7.3h6.2M17.4 4.5v2.9c0 4.3 1.14 7.3 3.2 9.7"/></svg>',
+    privacy:'<svg viewBox="0 0 24 24"><path d="M12 2.7 19.2 5.9v5.2c0 4.55-3.1 8.68-7.2 9.9-4.1-1.22-7.2-5.35-7.2-9.9V5.9z"/><path d="M12 7.15v7.2M8.9 10.65 12 7.5l3.1 3.15"/></svg>',
+    oracle:'<svg viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 1 0 9.2 9.2"/><path d="M12 7.1a4.9 4.9 0 1 0 4.9 4.9"/><path d="M12 2.8v4.3M21.2 12h-4.3M12 21.2v-4.3M2.8 12h4.3"/><circle cx="12" cy="12" r="1.3"/></svg>'
+  };
+  const copy={
+    en:{matrix:{e:'HX-5 / SPATIAL GATE',k:'MATRIX CLEARANCE',t:'Enter the Matrix',b:'Open the five-stage HX-5 environment. A visible exit control remains available at every stage.',i:'ENTER MATRIX',x:'EXIT'},portal:{e:'EX / EXECUTIVE ROUTE',k:'PORTAL ACCESS',t:'Enter the Portal',b:'Move directly to executive services and private request routes without losing your place.',i:'ENTER PORTAL',x:'EXIT'},language:{e:'EX / LANGUAGE AXIS',k:'LANGUAGE SWITCH',t:'Enter Language',b:'Switch the entire interface between English and Arabic through one controlled action.',i:'SWITCH LANGUAGE',x:'EXIT'},privacy:{e:'EX / TRUST LAYER',k:'PRIVACY VAULT',t:'Enter Privacy',b:'Review the privacy layer before sharing any details. You remain in control of the next action.',i:'OPEN PRIVACY',x:'EXIT'},oracle:{e:'EX / PRIVATE GUIDE',k:'ORACLE SIGNAL',t:'Enter Oracle',b:'Open the private guide for briefing, collaboration, service, or access questions. Exit remains available inside the console.',i:'ENTER ORACLE',x:'EXIT'}},
+    ar:{matrix:{e:'HX-5 / البوابة المكانية',k:'تصريح المصفوفة',t:'دخول المصفوفة',b:'افتح بيئة HX-5 ذات المراحل الخمس. يبقى زر الخروج واضحاً في كل مرحلة.',i:'دخول المصفوفة',x:'خروج'},portal:{e:'EX / المسار التنفيذي',k:'دخول البوابة',t:'دخول البوابة',b:'انتقل إلى الخدمات التنفيذية ومسارات الطلب الخاصة مع الحفاظ على موقعك.',i:'دخول البوابة',x:'خروج'},language:{e:'EX / محور اللغة',k:'تغيير اللغة',t:'دخول اللغة',b:'بدّل الواجهة كاملة بين العربية والإنجليزية عبر إجراء واحد ومحكوم.',i:'تبديل اللغة',x:'خروج'},privacy:{e:'EX / طبقة الثقة',k:'خزنة الخصوصية',t:'دخول الخصوصية',b:'راجع طبقة الخصوصية قبل مشاركة أي تفاصيل. أنت تتحكم دائماً بالخطوة التالية.',i:'فتح الخصوصية',x:'خروج'},oracle:{e:'EX / الدليل الخاص',k:'إشارة الأوراكل',t:'دخول الأوراكل',b:'افتح الدليل الخاص لطلبات الإحاطة والتعاون والخدمات. زر الخروج متاح داخل وحدة التحكم.',i:'دخول الأوراكل',x:'خروج'}}
+  };
+  const deck=$('#ex-command-deck');
+  const triggers=$$('[data-ex-command]');
+  const fields={eyebrow:$('#ex-command-eyebrow'),kicker:$('#ex-command-kicker'),title:$('#ex-command-title'),body:$('#ex-command-copy'),glyph:$('#ex-command-glyph'),enter:$('#ex-command-enter')};
+  let current='matrix',lastTrigger=null;
+  const lang=()=>document.documentElement.lang==='ar'||document.body.classList.contains('lang-ar')?'ar':'en';
+  function close(returnFocus=true){
+    if(!deck)return;deck.dataset.open='false';deck.setAttribute('aria-hidden','true');document.body.classList.remove('ex-command-open');
+    setTimeout(()=>{if(deck.dataset.open!=='true')deck.hidden=true;},320);
+    triggers.forEach(n=>n.setAttribute('aria-expanded','false'));if(returnFocus)setTimeout(()=>lastTrigger?.focus?.(),60);
+  }
+  function open(command,trigger=null){
+    const item=copy[lang()][command];if(!deck||!item)return;current=command;lastTrigger=trigger||document.activeElement;
+    deck.hidden=false;deck.dataset.command=command;deck.dataset.open='true';deck.setAttribute('aria-hidden','false');document.body.classList.add('ex-command-open');
+    fields.eyebrow.textContent=item.e;fields.kicker.textContent=item.k;fields.title.textContent=item.t;fields.body.textContent=item.b;fields.enter.textContent=item.i;fields.glyph.innerHTML=glyphs[command];
+    triggers.forEach(n=>n.setAttribute('aria-expanded',String(n===trigger)));setTimeout(()=>fields.enter.focus(),50);
+  }
+  function enter(){
+    const actions={matrix:()=>window.openMatrixOverlay?.(),portal:()=>$('#portal')?.scrollIntoView({behavior:'smooth',block:'start'}),language:()=>window.toggleLanguage?.(),privacy:()=>window.openLegal?.('privacy'),oracle:()=>window.toggleOracle?.(true)};
+    const action=actions[current];close(false);setTimeout(()=>action?.(),260);
+  }
+  window.EXIconCommand=Object.freeze({open,close});
+  triggers.forEach(el=>el.addEventListener('click',event=>{event.preventDefault();open(el.dataset.exCommand,el)}));
+  deck?.addEventListener('click',event=>{if(event.target===deck)close()});
+  $$('[data-ex-command-exit]',deck).forEach(el=>el.addEventListener('click',()=>close()));
+  fields.enter?.addEventListener('click',enter);
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&deck?.dataset.open==='true'){event.preventDefault();close()}});
+  document.addEventListener('ex:languagechange',()=>{if(deck?.dataset.open==='true')open(current,lastTrigger)});
+
+  function retrofitOracle(){
+    const fab=$('.ex-oracle-fab');if(!fab||fab.dataset.exV11Ready==='true')return;
+    fab.dataset.exV11Ready='true';fab.setAttribute('aria-label',lang()==='ar'?'فتح بوابة الأوراكل':'Open Oracle command');fab.setAttribute('aria-controls','ex-command-deck');fab.setAttribute('aria-haspopup','dialog');fab.setAttribute('aria-expanded','false');fab.innerHTML=glyphs.oracle;
+    fab.addEventListener('click',event=>{event.preventDefault();event.stopImmediatePropagation();open('oracle',fab)},true);
+  }
+  retrofitOracle();setTimeout(retrofitOracle,0);
+
+  const cache=new Map();
+  async function probe(src){if(cache.has(src))return cache.get(src);const control=window.AbortController?new AbortController():null;const timeout=setTimeout(()=>control?.abort(),4200);try{const r=await fetch(src,{method:'HEAD',cache:'no-store',signal:control?.signal});cache.set(src,r.ok);return r.ok}catch(_){cache.set(src,false);return false}finally{clearTimeout(timeout)}}
+  window.EXVideoRouter={async load(video,source,src){if(!video||!source||!src)return false;const exists=await probe(src);if(!exists){video.closest('.video-shell')?.classList.add('video-fallback');return false}video.closest('.video-shell')?.classList.remove('video-fallback');if(source.src.endsWith(src))return true;source.src=src;video.load();await video.play().catch(()=>{});return true;}};
+
+  function initLeanInterface(){
+    const hudState=$('#hx-cognitive-state-label');if(hudState)hudState.textContent=lang()==='ar'?'الحالة: استكشاف':'STATE: EXPLORING';
+    $$('.intent-node').forEach(node=>{if(node.dataset.exLean)return;node.dataset.exLean='1';node.addEventListener('click',()=>$(node.dataset.go)?.scrollIntoView({behavior:'smooth',block:'start'}));});
+    $$('.spatial-node').forEach(node=>{if(node.dataset.exLean)return;node.dataset.exLean='1';node.addEventListener('click',()=>$(node.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'}));});
+    const sensory=$('#hx-sensory-toggle');if(sensory){sensory.addEventListener('click',()=>{const enabled=sensory.getAttribute('aria-pressed')!=='true';sensory.setAttribute('aria-pressed',String(enabled));sensory.classList.toggle('active',enabled);sensory.textContent=enabled?'Sensory ON':'Sensory OFF';});sensory.setAttribute('aria-pressed','true');}
+    const focus=$('#hx-focus-toggle');if(focus){focus.addEventListener('click',()=>{const on=!document.body.classList.contains('ex-cognitive-scan');document.body.classList.toggle('ex-cognitive-scan',on);focus.classList.toggle('active',on);focus.setAttribute('aria-pressed',String(on));focus.textContent=on?'Focus ON':'Focus Mode';});}
+    const offers={
+      b2b:{en:[['Business Experience Management','Convert scattered operations into a coherent human-centred operating experience.'],['Strategic Advisory','Translate market pressure into clear positioning and long-term value.']],ar:[['إدارة تجربة الأعمال','تحويل العمليات المتفرقة إلى تجربة تشغيلية متماسكة ومحورها الإنسان.'],['استشارة استراتيجية','ترجمة ضغط السوق إلى تموضع واضح وقيمة طويلة الأجل.']]},
+      b2c:{en:[['Life Experience Advisory','Private guidance for lifestyle, identity, and next-stage direction.'],['Creative Path Development','A sharper path and stronger story for creators and operators.']],ar:[['استشارة تجربة الحياة','توجيه خاص لأسلوب الحياة والهوية واتجاه المرحلة القادمة.'],['تطوير المسار الإبداعي','مسار أوضح وقصة أقوى للمبدعين ورواد التنفيذ.']]},
+      community:{en:[['CREW1991™ / Build','A community route for skill depth, project proof, and cultural contribution.'],['Leadership Readiness','Systems for long-term impact, mentoring, and contribution.']],ar:[['CREW1991™ / البناء','مسار مجتمع لعمق المهارة وإثبات المشاريع والمساهمة الثقافية.'],['جاهزية القيادة','أنظمة للأثر طويل المدى والإرشاد والمساهمة.']]},
+      dropzero:{en:[['Drop Zero Protocol','Every release begins from a concept, not a product category.'],['Cultural Objects','Wearables and objects that carry EX philosophy into daily life.']],ar:[['بروتوكول Drop Zero','كل إطلاق يبدأ من مفهوم، لا من فئة منتج.'],['كائنات ثقافية','ملابس وأشياء تحمل فلسفة EX إلى الحياة اليومية.']]},
+      systems:{en:[['Automation Architecture','Replace recurring friction with reliable decision and delivery flows.'],['Executive Dashboards','Turn operating signals into clear visual decision rooms.']],ar:[['هندسة الأتمتة','استبدال الاحتكاك المتكرر بتدفقات قرار وتنفيذ موثوقة.'],['لوحات تنفيذية','تحويل إشارات التشغيل إلى غرف قرار بصرية واضحة.']]}
     };
+    const output=$('#ex-generated-output');
+    function renderOffers(key='b2b'){if(!output)return;const language=lang();const items=(offers[key]||offers.b2b)[language];output.innerHTML=items.map((item,i)=>`<article class="ex-offer-card"><div class="ex-offer-tag">${language==='ar'?'مسار خاص':'PRIVATE PATH'} 0${i+1}</div><h3>${item[0]}</h3><p>${item[1]}</p><ul><li>${language==='ar'?'توجيه واضح ومحكوم':'Clear, controlled direction'}</li><li>${language==='ar'?'خطوة تنفيذية محددة':'A defined execution step'}</li></ul></article>`).join('');}
+    $$('.ex-gen-btn').forEach(btn=>{if(btn.dataset.exLean)return;btn.dataset.exLean='1';btn.addEventListener('click',()=>{$$('.ex-gen-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderOffers(btn.dataset.gen)});});renderOffers('b2b');
+    const canvas=$('#ex-data-sculpture-canvas');if(canvas){let redraw;const draw=()=>{const rect=canvas.getBoundingClientRect();const dpr=Math.min(window.devicePixelRatio||1,1.35);canvas.width=Math.max(280,Math.floor(rect.width*dpr));canvas.height=Math.max(220,Math.floor(rect.height*dpr));const ctx=canvas.getContext('2d');const w=canvas.width/dpr,h=canvas.height/dpr,cx=w/2,cy=h/2;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.globalCompositeOperation='lighter';for(let i=0;i<5;i++){ctx.beginPath();ctx.ellipse(cx,cy,54+i*29,(54+i*29)*.4,i*.52,0,Math.PI*2);ctx.strokeStyle=i%2?'rgba(197,164,109,.28)':'rgba(110,231,255,.34)';ctx.lineWidth=1;ctx.stroke()}ctx.fillStyle='rgba(255,255,255,.82)';ctx.font='700 11px monospace';ctx.textAlign='center';ctx.fillText('HX SIGNAL SCULPTURE',cx,cy+4)};draw();window.addEventListener('resize',()=>{clearTimeout(redraw);redraw=setTimeout(draw,160)},{passive:true});}
   }
-  function boot(){
-    document.body.dataset.cognitiveState='initializing';
-    bindCognitive(); bindIntentRail(); bindGenerator(); bindToggles(); setupSculpture(); anticipatory(); preserveOracleState(); bindMicroInteractions(); cognitiveState();
-    setTimeout(()=>{ document.body.dataset.cognitiveState='exploring'; const label=$('#hx-cognitive-state-label'); if(label) label.textContent='STATE: EXPLORING'; }, 600);
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  document.addEventListener('DOMContentLoaded',()=>{initLeanInterface();const video=$('#heroVideo'),source=video?.querySelector('source'),primary=video?.dataset.primaryVideo||source?.dataset.src;if(video&&source&&primary)window.EXVideoRouter.load(video,source,primary);},{once:true});
 })();
 </script>
-
-
-<script id="ex-oracle-nuclear-core">
-(function(){
-  // 1. مسح أي أزرار أو نوافذ قديمة متضاربة
-  document.querySelectorAll('.oracle-window, .oracle-fab, #oracle-toggle').forEach(el => el.remove());
-
-  // 2. بناء نافذة الأوراكل
-  var win = document.createElement('div');
-  win.id = 'aiWindow';
-  win.className = 'oracle-window ex-oracle-v3';
-  win.innerHTML = `
-    <div class="oracle-header">
-      <div class="oracle-title"><strong>Ex Oracle</strong><span>Customer Experience</span></div>
-      <div class="oracle-control-row">
-        <button class="oracle-mini" type="button">–</button>
-        <button class="oracle-close" type="button">×</button>
-      </div>
-    </div>
-    <div class="oracle-body" id="chatBody"></div>
-    <div class="oracle-foot">
-      <div class="oracle-input-row">
-        <input type="text" id="aiInput" class="oracle-input" autocomplete="off" placeholder="اكتب رسالتك هنا... / Type here...">
-        <button class="oracle-send" type="button">➤</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(win);
-
-  // 3. بناء زر الأوراكل (FAB)
-  var fab = document.createElement('button');
-  fab.id = 'oracle-toggle';
-  fab.className = 'oracle-fab ex-oracle-v3-fab';
-  fab.type = 'button';
-  fab.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 6v6c0 5.55 3.85 10.74 8 11 4.15-.26 8-5.45 8-11V6Zm0 18c-2.65-.26-6-5.45-6-11V7.24L12 4l6 3.24V11c0 5.55-3.85 10.74-6 11Z"/><path d="M11 10h2v6h-2z"/><circle cx="12" cy="8" r="1"/></svg>';
-  document.body.appendChild(fab);
-
-  // 4. ربط العناصر
-  var input = win.querySelector('#aiInput');
-  var send = win.querySelector('.oracle-send');
-  var body = win.querySelector('#chatBody');
-  var isAr = document.body.classList.contains('lang-ar') || document.documentElement.lang === 'ar';
-
-  function addMsg(text, who){
-    var div = document.createElement('div');
-    div.className = 'msg ' + who; 
-    div.textContent = text;
-    body.appendChild(div); 
-    body.scrollTop = body.scrollHeight;
-  }
-
-  // التحكم بفتح وإغلاق النافذة
-  function toggleOracle(){
-    win.classList.toggle('ex-open');
-    win.classList.remove('ex-minimized');
-    
-    // إرسال الرسالة الافتتاحية (الموجودة في ملف الخدمة) عند الفتح الأول
-    if(win.classList.contains('ex-open') && !body.children.length){
-       addMsg(isAr 
-         ? 'أهلاً بك في フサム | experience™.\nنساعدك تدخل المسار المناسب: مجتمع البراند، خدمة، استشارة، تعاون، مبيعات، أو دعم.\nما الذي تبحث عنه اليوم؟' 
-         : 'Welcome to フサム | experience™.\nWe’ll help you find the right path: community, service, consultation, collaboration, sales, or support.\nWhat are you looking for today?', 
-       'bot');
-    }
-  }
-
-  fab.addEventListener('click', function(e) { e.preventDefault(); toggleOracle(); });
-  win.querySelector('.oracle-close').addEventListener('click', function(e) { e.preventDefault(); win.classList.remove('ex-open', 'ex-minimized'); });
-  win.querySelector('.oracle-mini').addEventListener('click', function(e) { e.preventDefault(); win.classList.toggle('ex-minimized'); });
-
-  // 5. الإرسال للسيرفر
-  async function sendMsg(){
-    var raw = input.value.trim();
-    if(!raw) return;
-    
-    addMsg(raw, 'user');
-    input.value = '';
-    send.disabled = true;
-
-    // حفظ في الفايربيس للذاكرة (إن وجد)
-    try {
-      if(typeof db !== 'undefined') {
-        db.collection('MatrixLogs').add({
-          Action: "Customer Request", Message: raw, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-      }
-    } catch(e) {}
-
-    var loadId = 'load-' + Date.now();
-    var loadDiv = document.createElement('div');
-    loadDiv.className = 'msg bot'; 
-    loadDiv.id = loadId; 
-    loadDiv.style.opacity = '0.7';
-    loadDiv.textContent = isAr ? 'يتم التحليل...' : 'Analyzing...';
-    body.appendChild(loadDiv); 
-    body.scrollTop = body.scrollHeight;
-
-    try {
-      // 🔴🔴 استبدل هذا بالرابط المستخرج من جوجل سكربت 🔴🔴
-      var url = "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec"; 
-      
-      var activeLang = isAr ? 'ar' : 'en';
-var res = await fetch(url + "?Token=EX_SHIELD_99X&Agent=oracle&Lang=" + activeLang + "&Message=" + encodeURIComponent(raw));
-      
-      document.getElementById(loadId).remove();
-      if(data.reply) {
-        addMsg(data.reply, 'bot');
-        try {
-          if(typeof db !== 'undefined') {
-            db.collection('MatrixLogs').add({
-              Action: "Oracle Reply", Message: data.reply, Timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-          }
-        } catch(e) {}
-      } else {
-        addMsg(isAr ? 'حدث خطأ في النظام.' : 'System Error.', 'bot');
-      }
-    } catch(e) {
-      var el = document.getElementById(loadId);
-      if(el) el.remove();
-      addMsg(isAr ? 'فشل الاتصال بالخادم.' : 'Connection failed.', 'bot');
-    }
-    
-    send.disabled = false; 
-    input.focus();
-  }
-
-  send.addEventListener('click', function(e){ e.preventDefault(); sendMsg(); });
-  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') { e.preventDefault(); sendMsg(); } });
-
-})();
-</script>
-
 </body>
 </html>
