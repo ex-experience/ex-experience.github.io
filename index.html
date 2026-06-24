@@ -1632,14 +1632,29 @@ html::before {
                             across campaigns, executive films, launches, and cultural moments.
                         </p>
 
-                        <a href="#portal" class="ex-vs-cta">
-                            <span class="ar-only">اطلب إحاطة خاصة</span>
-                            <span class="en-only">Request a private briefing</span>
+                        <a
+                            href="assets/private/HEX_PRO_VIS_2030.pdf"
+                            class="ex-vs-cta"
+                            target="_blank"
+                            rel="noopener"
+                            title="Open the EX Visual System dossier"
+                            data-ex-direct-dossier="HEX_PRO_VIS_2030.pdf"
+                        >
+                            <span class="ar-only">تصفّح الملف الخاص مباشرة</span>
+                            <span class="en-only">Open the private visual dossier</span>
                             <span aria-hidden="true">↗</span>
                         </a>
                     </div>
 
-                    <div class="ex-vs-signal" aria-label="EX Visual System signal">
+                    <a
+                        href="assets/private/HEX_PRO_VIS_2030.pdf"
+                        class="ex-vs-signal ex-vs-deck-link"
+                        target="_blank"
+                        rel="noopener"
+                        title="Open the EX Visual System dossier"
+                        aria-label="Open the EX Visual System private dossier PDF"
+                        data-ex-direct-dossier="HEX_PRO_VIS_2030.pdf"
+                    >
                         <div class="ex-vs-ring ex-vs-ring-a"></div>
                         <div class="ex-vs-ring ex-vs-ring-b"></div>
                         <div class="ex-vs-axis ex-vs-axis-x"></div>
@@ -1653,7 +1668,8 @@ html::before {
                         <div class="ex-vs-signal-label ex-vs-label-ne">02 / FRAME</div>
                         <div class="ex-vs-signal-label ex-vs-label-sw">03 / MATERIAL</div>
                         <div class="ex-vs-signal-label ex-vs-label-se">04 / IMPACT</div>
-                    </div>
+                        <span class="ex-vs-open-hint" aria-hidden="true">OPEN DOSSIER ↗</span>
+                    </a>
                 </div>
 
                 <div class="ex-vs-principles">
@@ -4098,14 +4114,14 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 </style>
 <script>
-  console.info('EX experience build: V6 hero-title loop and responsive icon system');
+  console.info('EX experience build: V8 direct visual dossier link and responsive icon system');
 </script>
 <!-- deployment-marker: ex-v6-hero-loop-responsive-icons -->
 
 <!-- deployment-marker: gateway-v5-auth-resilience -->
 
 
-<!-- EX V7: Private Visual System section — sourced from HEX PRO VIS 2030, public-safe presentation. -->
+<!-- EX V8: Direct clickable private dossier for the EX Visual System. -->
 <style id="ex-private-visual-system-v7">
   :root {
     --ex-vs-gold: #c19a62;
@@ -4388,11 +4404,59 @@ document.addEventListener("DOMContentLoaded", function() {
     #main-site-content .ex-vs-principle:first-child { border-top: 0; }
     #main-site-content .ex-vs-index { margin-bottom: 13px; }
   }
+  #main-site-content .ex-vs-deck-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+  }
+  #main-site-content .ex-vs-deck-link:hover {
+    transform: translateY(-5px);
+    border-color: rgba(193,154,98,.72);
+    box-shadow: 0 20px 54px rgba(0,0,0,.30), 0 0 40px rgba(193,154,98,.10);
+  }
+  #main-site-content .ex-vs-deck-link:focus-visible,
+  #main-site-content .ex-vs-cta:focus-visible {
+    outline: 2px solid var(--ex-vs-gold);
+    outline-offset: 8px;
+  }
+  #main-site-content .ex-vs-open-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+    padding: 7px 9px;
+    border: 1px solid rgba(193,154,98,.38);
+    background: rgba(5,5,5,.72);
+    color: rgba(255,255,255,.78);
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    letter-spacing: .14em;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .24s ease, transform .24s ease;
+  }
+  #main-site-content .ex-vs-deck-link:hover .ex-vs-open-hint,
+  #main-site-content .ex-vs-deck-link:focus-visible .ex-vs-open-hint {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-3px);
+  }
+  @media (hover: none) {
+    #main-site-content .ex-vs-open-hint { opacity: .74; }
+  }
+  @media (max-width: 560px) {
+    #main-site-content .ex-vs-open-hint { font-size: 6px; bottom: 7%; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #main-site-content .ex-vs-beam { box-shadow: none; }
+    #main-site-content .ex-vs-deck-link,
+    #main-site-content .ex-vs-open-hint { transition: none; }
   }
 </style>
-<!-- deployment-marker: ex-v7-private-visual-system -->
+<!-- deployment-marker: ex-v8-direct-private-dossier -->
 
 </body>
 </html>
