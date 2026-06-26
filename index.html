@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#000000">
-    <!-- EX gateway build: V9 self-contained photo icon -->
+    <!-- EX gateway build: V12 exwelcome gate film + deferred main playlist -->
 
 <style id="nexus-force-fix">
     /* LOCK UTILITY BAR TO TOP */
@@ -741,6 +741,30 @@ body.gate-active {
   transition: opacity .72s ease;
 }
 .gate-video.is-loading { opacity: 0; }
+.gate-video.is-ready {
+  opacity: .40;
+  filter: grayscale(.42) contrast(1.14) brightness(.52) saturate(.78);
+}
+.gate-video.is-unavailable { opacity: 0; }
+.gatekeeper-wrapper.is-leaving .gate-video {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity .62s ease, transform .62s cubic-bezier(.16,1,.3,1);
+}
+
+/* The main experience film crossfades only after the gateway handoff. */
+#main-site-content #heroVideo {
+  opacity: 1;
+  transition: opacity .28s ease, transform .9s cubic-bezier(.16,1,.3,1);
+}
+#main-site-content #heroVideo.is-loading {
+  opacity: .32;
+  transform: scale(1.012);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gatekeeper-wrapper.is-leaving .gate-video,
+  #main-site-content #heroVideo { transition: none !important; }
+}
 .gate-atmosphere {
   position: absolute;
   inset: 0;
@@ -1359,7 +1383,7 @@ html::before {
      video rotation and unlock flows without nested HTML documents.
      ========================================================= -->
 <section class="gatekeeper-wrapper" id="gatekeeper" aria-label="Private access">
-  <video id="gate-video" class="gate-video" autoplay muted playsinline preload="metadata" aria-hidden="true"></video>
+  <video id="gate-video" class="gate-video" autoplay muted playsinline loop preload="auto" aria-hidden="true"></video>
   <div class="gate-atmosphere" aria-hidden="true"></div>
   <div class="gate-grain" aria-hidden="true"></div>
 
@@ -2668,27 +2692,101 @@ html::before {
                 try { if (typeof THREE !== 'undefined') init3DBlueprint(); } catch(err) { console.error(err); }
             });
 
-            const allVids = ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4', 'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'];
+            /*
+             * EX™ MAIN EXPERIENCE VIDEO SEQUENCE
+             * The hero films are deliberately not requested while the private gateway
+             * is active. This keeps exwelcome.mp4 exclusive to the first screen and
+             * releases network/decoder capacity for the access handoff.
+             */
+            const allVids = Object.freeze([
+                'ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4',
+                'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'
+            ]);
             const heroVidEl = document.getElementById('heroVideo');
             const heroControls = document.getElementById('heroControls');
-           
-            if(heroVidEl && heroControls) {
+            let heroVideoIndex = 0;
+            let heroVideoFailures = 0;
+
+            function setActiveHeroControl(index) {
+                if (!heroControls) return;
+                heroControls.querySelectorAll('.vid-dot').forEach((dot, dotIndex) => {
+                    const active = dotIndex === index;
+                    dot.classList.toggle('active', active);
+                    dot.setAttribute('aria-pressed', String(active));
+                });
+            }
+
+            function setHeroExperienceVideo(nextIndex) {
+                if (!heroVidEl || !allVids.length) return;
+
+                heroVideoIndex = (nextIndex + allVids.length) % allVids.length;
+                heroVidEl.classList.add('is-loading');
+                heroVidEl.pause();
+                heroVidEl.removeAttribute('src');
+                heroVidEl.src = allVids[heroVideoIndex];
+                heroVidEl.load();
+                setActiveHeroControl(heroVideoIndex);
+
+                const attempt = heroVidEl.play();
+                if (attempt && typeof attempt.catch === 'function') {
+                    attempt.catch(() => {
+                        // iOS/Safari can defer autoplay until the access gesture completes.
+                        // The selected film remains fully prepared for the next interaction.
+                    });
+                }
+
+                window.setTimeout(() => heroVidEl.classList.remove('is-loading'), 180);
+            }
+
+            function buildHeroVideoControls() {
+                if (!heroVidEl || !heroControls || heroControls.dataset.exBound === 'true') return;
+                heroControls.replaceChildren();
+
                 allVids.forEach((vid, idx) => {
                     const dot = document.createElement('button');
-                    dot.className = 'vid-dot' + (idx === 0 ? ' active' : '');
-                    dot.setAttribute('aria-label', 'Play video ' + (idx + 1));
-                    dot.onclick = () => {
-                        document.querySelectorAll('.vid-dot').forEach(d => d.classList.remove('active'));
-                        dot.classList.add('active');
-                        heroVidEl.innerHTML = `<source src="${vid}" type="video/mp4">`;
-                        heroVidEl.load();
-                        heroVidEl.play();
-                    };
+                    dot.type = 'button';
+                    dot.className = 'vid-dot';
+                    dot.dataset.videoIndex = String(idx);
+                    dot.setAttribute('aria-label', 'Play experience film ' + (idx + 1));
+                    dot.setAttribute('aria-pressed', 'false');
+                    dot.addEventListener('click', () => {
+                        heroVideoFailures = 0;
+                        setHeroExperienceVideo(idx);
+                    });
                     heroControls.appendChild(dot);
                 });
-                heroVidEl.innerHTML = `<source src="${allVids[0]}" type="video/mp4">`;
-                heroVidEl.load();
+
+                heroControls.dataset.exBound = 'true';
+                heroVidEl.muted = true;
+                heroVidEl.defaultMuted = true;
+                heroVidEl.playsInline = true;
+                heroVidEl.autoplay = true;
+                heroVidEl.loop = false;
+                heroVidEl.preload = 'metadata';
+
+                heroVidEl.addEventListener('ended', () => {
+                    heroVideoFailures = 0;
+                    setHeroExperienceVideo(heroVideoIndex + 1);
+                });
+
+                heroVidEl.addEventListener('error', () => {
+                    heroVideoFailures += 1;
+                    if (heroVideoFailures < allVids.length) {
+                        window.setTimeout(() => setHeroExperienceVideo(heroVideoIndex + 1), 240);
+                    } else {
+                        heroVidEl.classList.remove('is-loading');
+                        console.warn('EX™ main video playlist could not find a playable file.');
+                    }
+                });
             }
+
+            window.EX_MAIN_VIDEO_PLAYLIST = allVids;
+            window.EX_START_MAIN_VIDEO_PLAYLIST = function EX_START_MAIN_VIDEO_PLAYLIST() {
+                if (!heroVidEl || !allVids.length) return;
+                buildHeroVideoControls();
+                heroVideoFailures = 0;
+                setHeroExperienceVideo(0);
+            };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -3598,13 +3696,26 @@ document.addEventListener("DOMContentLoaded", function() {
 (() => {
   'use strict';
 
+  // EX gateway build: V12 welcome-film handoff
   const GATE_CONFIG = Object.freeze({
     leadCollection: 'Gate_Registrations',
-    videoPlaylist: ['ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4'],
+
+    // Root-level welcome film for the private-access gateway.
+    // Keep exwelcome.mp4 beside index.html in the GitHub Pages repository.
+    welcomeVideo: 'exwelcome.mp4',
+
+    // The previously developed experience films. They remain deferred until a
+    // verified access handoff, then play as a continuous hero sequence.
+    mainVideoPlaylist: [
+      'ex1.mp4', 'ex2.mp4', 'ex3.mp4', 'ex4.mp4', 'ex5.mp4',
+      'ex6.mp4', 'ex10.mp4.mp4', 'ex11.mp4.mp4', 'ex12.mp4.mp4'
+    ],
+
     // Optional: set this to a HTTPS endpoint returning { approved: true }.
     // Empty keeps the present static deployment operational through its existing
     // locally hashed access fallback. Never use that fallback for confidential content.
     verificationEndpoint: window.EX_ACCESS_VERIFY_ENDPOINT || '',
+
     // SHA-256 comparison for the original private access path; no raw passcode is exposed.
     localPasscodeHash: '092aeb59765ab0982ae58684a5fecf3feb091e7c0347a889cfb4442f9f0f73f3'
   });
@@ -3669,7 +3780,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const video = $('gate-video');
   const mainSite = $('main-site-content');
   let activeLanguage = 'en';
-  let videoIndex = 0;
 
   const safeText = (value) => String(value || '').replace(/[<>"'`]/g, '').trim();
 
@@ -3803,6 +3913,13 @@ document.addEventListener("DOMContentLoaded", function() {
         retainedLoader.style.opacity = '0';
         retainedLoader.style.visibility = 'hidden';
       }
+      // Release the welcome decoder before the experience films begin.
+      if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+
       mainSite.classList.add('is-visible');
       document.body.classList.remove('gate-active');
       mainSite.removeAttribute('aria-hidden');
@@ -3810,26 +3927,46 @@ document.addEventListener("DOMContentLoaded", function() {
       window.setTimeout(() => {
         gate.hidden = true;
         window.dispatchEvent(new Event('ex:site-unlocked'));
+        if (typeof window.EX_START_MAIN_VIDEO_PLAYLIST === 'function') {
+          window.EX_START_MAIN_VIDEO_PLAYLIST();
+        }
       }, 680);
     }, 520);
   }
 
   function startVideoPlaylist() {
-    if (!video || !GATE_CONFIG.videoPlaylist.length) return;
-    const playNext = () => {
-      video.classList.add('is-loading');
-      window.setTimeout(() => {
-        video.src = GATE_CONFIG.videoPlaylist[videoIndex];
-        video.load();
-        const attempt = video.play();
-        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
-        videoIndex = (videoIndex + 1) % GATE_CONFIG.videoPlaylist.length;
-        video.classList.remove('is-loading');
-      }, 260);
-    };
-    video.addEventListener('ended', playNext);
-    video.addEventListener('error', () => { video.style.opacity = '0'; }, { once: true });
-    playNext();
+    /*
+     * exwelcome.mp4 is exclusive to the private-access screen. It is muted and
+     * loops only while the gate is visible. The main sequence begins after access.
+     */
+    if (!video || !GATE_CONFIG.welcomeVideo) return;
+
+    video.classList.add('is-loading');
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.loop = true;
+    video.preload = 'auto';
+    video.src = GATE_CONFIG.welcomeVideo;
+    video.load();
+
+    const attempt = video.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(() => {
+        // Safari/iOS may wait for the first user interaction; the film remains ready.
+      });
+    }
+
+    video.addEventListener('canplay', () => {
+      video.classList.remove('is-loading');
+      video.classList.add('is-ready');
+    }, { once: true });
+
+    video.addEventListener('error', () => {
+      video.classList.remove('is-loading');
+      video.classList.add('is-unavailable');
+      console.warn('EX™ welcome video could not be loaded: exwelcome.mp4');
+    }, { once: true });
   }
 
   $('gate-show-passcode').addEventListener('click', () => showForm('passcode'));
