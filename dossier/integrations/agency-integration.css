@@ -1,0 +1,46 @@
+/* EX Agency isolated runtime configuration.
+ * Public Firebase web configuration is safe to expose; private AI/API keys are not.
+ */
+window.EX_AGENCY_CONFIG = Object.freeze({
+  version: "2.0.0",
+  siteId: "agency-dossier",
+  sitePath: "/dossier/",
+  firebase: Object.freeze({
+    apiKey: "AIzaSyCmuzwRyRSr7ILB2P74_dVKCKR4gFzKEeY",
+    authDomain: "ex-experience-962ca.firebaseapp.com",
+    projectId: "ex-experience-962ca",
+    storageBucket: "ex-experience-962ca.firebasestorage.app",
+    messagingSenderId: "560048472801",
+    appId: "1:560048472801:web:1c8d71c863fc23b41ceda0"
+  }),
+  collections: Object.freeze({
+    registrations: "Gate_Registrations",
+    users: "Users",
+    consultations: "Consultations",
+    creativeIntakes: "CreativeIntakes",
+    community: "Community_Family",
+    ratings: "Experience_Ratings",
+    oracleLogs: "MatrixLogs",
+    activityLogs: "SecurityLogs",
+    metrics: "visitors",
+    clientProjects: "ClientProjects"
+  }),
+  appsScript: Object.freeze({
+    // Live contracts extracted from the official site. Replace both URLs after
+    // deploying apps-script/Code.gs when a physically isolated backend is desired.
+    oracleUrl: "https://script.google.com/macros/s/AKfycbyN-oS8qX4AlDbnf8pzPzS9jVwwW_ACImaY4Dsjrm3yuGv62jUQYJ8WZ7c1umG94Y7t/exec",
+    operationsUrl: "https://script.google.com/macros/s/AKfycbzKNS2AFP82knbl6zy_si091fw_KUne8ZHyCj2PkGr9oGLN0Pb_UECnRw-R1mMYnlfq/exec",
+    compatibilityToken: "EX_SHIELD_99X"
+  }),
+  social: Object.freeze({
+    instagram: "https://www.instagram.com/ex_experience.sa",
+    tiktok: "https://www.tiktok.com/@ex_experience.sa",
+    snapchat: "https://snapchat.com/t/w3omS0EV",
+    whatsapp: "https://chat.whatsapp.com/J8OCw7zg9td5PzbsNZfK2Z"
+  }),
+  // Add a Firebase App Check reCAPTCHA v3 public site key before enforcement.
+  appCheckSiteKey: "",
+  maxUploadBytes: 12 * 1024 * 1024,
+  maxUploadFiles: 6,
+  oracleTimeoutMs: 22000
+});

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-ex-agency-site="agency-dossier">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -9,14 +9,14 @@
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ex-experience.github.io/">
+<meta property="og:url" content="https://ex-experience.github.io/dossier/">
 <meta property="og:title" content="フサム | experience™ — Creative Experience Agency">
 <meta property="og:description" content="Engineering Human Experiences through strategy, visual systems, cinematic campaigns and experience architecture.">
-<meta property="og:image" content="https://ex-experience.github.io/og-image.png">
+<meta property="og:image" content="https://ex-experience.github.io/dossier/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="フサム | experience™">
 <meta name="twitter:description" content="Engineering Human Experiences">
-<meta name="twitter:image" content="https://ex-experience.github.io/og-image.png">
+<meta name="twitter:image" content="https://ex-experience.github.io/dossier/og-image.png">
 <title>フサム | experience™ — Creative Experience Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,6 +165,11 @@ body{background:var(--white)}
   .capability-pills{grid-template-columns:1fr 1fr}.mag-cover-story .cover-actions{gap:8px}
 }
 </style>
+<!-- EX_AGENCY_INTEGRATION:HEAD -->
+<link rel="stylesheet" href="integrations/agency-integration.css?v=2.0.2">
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-check-compat.js"></script>
+<script src="integrations/agency-config.js?v=2.0.2"></script>
+<!-- /EX_AGENCY_INTEGRATION:HEAD -->
 </head>
 <body>
 
@@ -439,7 +444,7 @@ body{background:var(--white)}
   <div class="footer-mark">EX</div>
   <p><span class="ar-only">نحن لا نصمم منتجات فقط. نحن نهندس التجارب الإنسانية.</span><span class="en-only">We do not merely design products. We engineer human experiences.</span></p>
   <div class="footer-links">
-    <a href="https://instagram.com/hussamex" rel="noopener" target="_blank">Instagram</a>
+    <a href="https://www.instagram.com/ex_experience.sa" rel="noopener" target="_blank">Instagram</a>
     <button class="icon-btn" data-modal-open="privacyModal" style="width:auto;padding:0 16px;border-radius:999px" type="button"><span class="ar-only">الخصوصية</span><span class="en-only">Privacy</span></button>
     <button class="icon-btn" data-modal-open="termsModal" style="width:auto;padding:0 16px;border-radius:999px" type="button"><span class="ar-only">شروط المشاركة</span><span class="en-only">Engagement Terms</span></button>
   </div>
@@ -726,5 +731,8 @@ FIREBASE PRODUCTION NOTES
 5) ClientProjects documents must contain OwnerUid matching the client's Google UID.
 -->
 
+<!-- EX_AGENCY_INTEGRATION:BODY -->
+<script src="integrations/agency-integration.js?v=2.0.2" defer></script>
+<!-- /EX_AGENCY_INTEGRATION:BODY -->
 </body>
 </html>
